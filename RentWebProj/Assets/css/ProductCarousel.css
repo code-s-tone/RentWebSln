@@ -1,0 +1,164 @@
+nav {
+    height: 10vh;
+}
+
+.container-xl {
+    padding: 0;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+    .container-xl h2 {
+        font-size: 24px;
+        text-align: left;
+        letter-spacing: normal;
+        color: #3f3f3fa1;
+    }
+
+    .container-xl .Top_Title {
+        position: relative;
+        display: flex;
+        width: 100%;
+    }
+
+        .container-xl .Top_Title .Zip {
+            vertical-align: middle;
+            display: flex;
+        }
+
+        .container-xl .Top_Title .ZipContent {
+            display: flex;
+        }
+
+        .container-xl .Top_Title .Zip .ZipContent h5 {
+            font-size: 12px;
+            line-height: 16px;
+            color: #3f3f3f;
+        }
+
+        .container-xl .Top_Title .Zip .ZipContent span {
+            font-size: 12px;
+            text-align: left;
+            color: #3F3F3F;
+        }
+
+        .container-xl .Top_Title .Zip .ZipContent i {
+            font-size: 12px;
+            text-align: left;
+            color: #000000;
+        }
+
+
+        .container-xl .Top_Title .Zip .ZipSocial {
+            position: absolute;
+            display: flex;
+            right: 0;
+        }
+
+            .container-xl .Top_Title .Zip .ZipSocial i {
+                font-size: 14px;
+                line-height: 14px;
+            }
+
+            .container-xl .Top_Title .Zip .ZipSocial span {
+                font-size: 14px;
+                color: #3f3f3f;
+            }
+
+    .container-xl .row {
+    }
+
+        .container-xl .row .col-12 {
+            height: 45vh;
+        }
+
+        .container-xl .row img {
+            border-radius: 20px;
+            border: 2px solid #dddddd;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+.col-sm-5 {
+    position: relative;
+}
+
+.container-xl .row .SeeMore {
+    position: absolute;
+    font-size: 15px;
+    padding: 2px;
+    background-color: #2e2d2de5;
+    color: #dddddd;
+    border-radius: 20px;
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    text-align: center;
+    width: 80px;
+    cursor: pointer;
+}
+/* swiper */
+.swiper-container {
+    --swiper-theme-color: #fc8d61;
+}
+
+
+@media screen and (max-width:768px) {
+    .ZipSocial i, .ZipSocial span {
+        display: none;
+    }
+}
+
+.modal.fade {
+    display: block !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease 0s;
+}
+
+    .modal.fade.show {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+        transition: all 0.3s ease 0s;
+    }
+
+.modal-dialog {
+    min-width: 90vh;
+    min-height: 50vh;
+}
+
+.modal-content {
+}
+
+.swiper-container .swiper-wrapper .swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width:768px) {
+    .col-12 {
+        width: 100%;
+    }
+
+
+    .modal {
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .modal-dialog {
+        min-width: 20vh;
+        min-height: 20vh;
+    }
+
+    .col-12:nth-child(2) {
+        display: none;
+    }
+}

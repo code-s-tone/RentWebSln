@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     @RenderSection("topCSS", required: false)
     @RenderSection("topJS", required: false)
+<link href="~/Assets/css/Login-Sign.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -30,11 +31,18 @@
                     <li>@Html.ActionLink("關於", "About", "Home")</li>
                     <li>@Html.ActionLink("連絡人", "Contact", "Home")</li>
                 </ul>
+                <button type="button" class="btn btn-primary m-5" data-bs-toggle="modal" data-bs-target="#LoginModal">
+                    Sign-in
+                </button>
+                <button type="button" class="btn btn-primary m-5" data-bs-toggle="modal" data-bs-target="#SignModal2">
+                    Login
+                </button>
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
+        @Html.Partial("Login-Sign")
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
