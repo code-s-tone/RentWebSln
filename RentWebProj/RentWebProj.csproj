@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DoraTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SocialMediaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,6 +140,7 @@
     <Content Include="Assets\css\Login-Sign.css" />
     <Content Include="Assets\css\ProductCarousel.css" />
     <Content Include="Assets\css\ProductCarousel.js" />
+    <Content Include="Assets\css\ProductCategory.css" />
     <Content Include="Assets\css\swiper.css" />
     <Content Include="Assets\css\whyChoose.css" />
     <Content Include="Assets\images\Banner.jpg" />
@@ -161,6 +163,7 @@
     <Content Include="Assets\images\Why_Icons_Protection-120x120.png" />
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\countUp.js" />
+    <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\swiperInHtml.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -180,11 +183,19 @@
     <Content Include="Layout_Rent\JS\header.js" />
     <Content Include="Layout_Rent\JS\sidebar.js" />
     <Content Include="HtmlPages\treeProject.html" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Assets\css\index.css.map" />
     <Content Include="Assets\css\index.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -220,6 +231,7 @@
     <Content Include="Views\Shared\Login-Sign.cshtml" />
     <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Product\ProductCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -227,14 +239,6 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
