@@ -13,5 +13,10 @@ namespace RentWebProj.Controllers
         {
             return View();
         }
+
+        public ActionResult ProductSubCategory()
+        {
+            return View();
+        }
     }
 }

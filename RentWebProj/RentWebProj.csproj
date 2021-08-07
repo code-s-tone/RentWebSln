@@ -141,6 +141,7 @@
     <Content Include="Assets\css\ProductCarousel.css" />
     <Content Include="Assets\css\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />
+    <Content Include="Assets\css\ProductSubCategory.css" />
     <Content Include="Assets\css\swiper.css" />
     <Content Include="Assets\css\whyChoose.css" />
     <Content Include="Assets\images\Banner.jpg" />
@@ -157,6 +158,12 @@
     <Content Include="Assets\images\Madagascar_2012_Malagasy-woman-holding-propagules-scaled.jpg" />
     <Content Include="Assets\images\Mad_worker-profile-2-with-watermark-scaled.jpg" />
     <Content Include="Assets\images\Phone_Mockup.png" />
+    <Content Include="Assets\images\Products\1.jpg" />
+    <Content Include="Assets\images\Products\2.jpg" />
+    <Content Include="Assets\images\Products\3.jpg" />
+    <Content Include="Assets\images\Products\4.jpg" />
+    <Content Include="Assets\images\Products\5.jpg" />
+    <Content Include="Assets\images\Products\6.jpg" />
     <Content Include="Assets\images\Trees_Banner.jpg" />
     <Content Include="Assets\images\Why_Icons_Customer-Service-120x120.png" />
     <Content Include="Assets\images\Why_Icons_Happy-120x120.png" />
@@ -232,6 +239,7 @@
     <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Product\ProductCategory.cshtml" />
+    <Content Include="Views\Product\ProductSubCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
