@@ -1,0 +1,151 @@
+﻿
+.banner {
+    background-image: url(https://cdn.ruckify.com/pages/uploads/2021/06/14152932/iStock-1043560968.jpg);
+    height: 700px;
+    /* 透明度 0.6 的黑色半透明遮罩 */
+    background-color: rgba(0, 0, 0, .3);
+    /* 設置背景混和模式為相乘模式 */
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: 50%;
+    transition: 0.5s;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 70px;
+    font-weight: bolder;
+    line-height: 700px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.nav-link {
+    color: black;
+}
+
+    .nav-link:hover {
+        color: orange;
+        text-decoration: none;
+        border-bottom: 3px solid orange;
+    }
+
+    .nav-link:active {
+        color: orange;
+        text-decoration: none;
+        border-bottom: 3px solid orange;
+    }
+
+.we {
+    color: orange;
+    text-decoration: none;
+    border-bottom: 3px solid orange;
+}
+
+.banner, .div, .container h1 {
+    font-weight: bold;
+    font-size: 38px;
+}
+
+
+.black {
+    display: flex;
+    /* height: 400px; */
+    margin: 100px 0;
+    padding: 100px 300px;
+    justify-content: center;
+}
+
+.black-text {
+    max-width: 1000px;
+    border-left: 2px solid orange;
+    padding-left: 80px;
+}
+
+    .black-text p {
+        color: white;
+        font-size: 20px;
+        font-weight: bolder;
+    }
+
+.swiper-container {
+    width: 100%;
+    height: 400px;
+    --swiper-theme-color: #fc8d61;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+.swiper-slide .row h4 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #FC8D61;
+}
+
+@media screen and (max-width:768px) {
+    .black {
+        padding: 30px;
+    }
+
+    .banner {
+        height: 300px;
+    }
+
+        .banner h1 {
+            font-size: 25px;
+            line-height: 300px;
+        }
+
+    .swiper-container .row {
+        max-width: 300px;
+    }
+
+    .swiper-slide .row h4 {
+        font-size: 25px;
+    }
+
+    .swiper-slide .row p {
+        font-size: 15px;
+    }
+}
+
