@@ -3,5 +3,799 @@
     ViewBag.Title = "HowToRent";
 }
 
-<h2>HowToRent</h2>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+
+<!-- Font Awesome -->
+<script src="https://kit.fontawesome.com/217f09c56f.js" crossorigin="anonymous"></script>
+
+<!-- Google font-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+<style>
+    * {
+        font-family: 'Poppins', sans-serif;
+        /* outline: red 1px solid; */
+    }
+
+    .btn {
+        background-color: #FC8D61;
+        padding: 12px 24px;
+    }
+
+    .banner {
+        background: url("img/banner.png") no-repeat center / cover;
+        min-height: 288px;
+        padding: 29px;
+        color: white;
+    }
+    
+    .banner h1, h2 {
+        font-weight: 700;
+
+    }
+    
+    .banner h1 {
+        font-size: 38px;
+        margin-bottom: 0px 0px 28px;
+        line-height: 1.2em;
+    }
+    
+    .banner h2 {
+        font-size: 36px;
+        margin: 0px 0px 8px;
+        line-height: 1.6em;
+    }
+
+    .YouNeed {
+        margin: 60px auto;
+        padding: 0px 10px;
+    }
+
+    .YouNeed-text {
+        margin-bottom: 15px;
+    }
+    
+    .YouNeed-text h2 {
+        font-size: 36px;
+        font-weight: 800;
+        margin: 0px 0px 8px;
+        line-height: 1.6em;
+    }
+    
+    .YouNeed-text p {
+        font-size: 16px;
+        line-height: 1.5em;
+        margin: 0px 0px 8px;
+    }
+
+    .YouNeed-btn .btn-primary {
+        font-size: 12.8px;
+        margin-top: 30px;
+    }
+
+    .SixReasons {
+        margin-top: 90px;
+    }
+
+    .SixReasons-title {
+        margin-bottom: 20px;
+    }
+    
+    .SixReasons-title h2 {
+        font-size: 38px;
+        line-height: 1.4em;
+        font-weight: 800;
+        margin: 0px 0px 8px;
+    }
+
+    .SixReasons .card {
+        width: 100%;
+        padding: 30px;
+    }
+    
+    .SixReasons .card .card-body {
+        margin-top: 25px;
+        padding: 0px !important;
+    }
+
+    .SixReasons .card-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0px 0px 8px;
+    }
+
+    .SixReasons .card-text {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+    }
+
+    .GoToMarkplace {
+        margin-top: 10px;
+    }
+    
+    .GoToMarkplace .row {
+        padding: 30px;
+    }
+    
+    .GoToMarkplace .card-body {
+        text-align: center;
+    }
+    
+    .GoToMarkplace .card-title {
+        font-size: 32px;
+        margin: 0px 0px 8px;
+    }
+    
+    .GoToMarkplace .card-text {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+    }
+    
+    .GoToMarkplace .btn {
+        font-size: 12.8px;
+        margin-top: 15px;
+    }
+
+    .FightsClimate-container-xl {
+        width: 100%;
+        background-color: #f2f2f2;
+    }
+
+    .FightsClimate {
+        padding: 30px;
+    }
+    
+    .FightsClimate .card-body {
+        background-color: #f2f2f2;
+    }
+
+    .FightsClimate-title {
+        margin-bottom: 50px;
+    }
+    
+    .FightsClimate-title h2 {
+        font-size: 32px;
+        font-weight: 600;
+        margin: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .FightsClimate .card-title {
+        font-size: 38px;
+        font-weight: 900;
+        margin: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .FightsClimate .card-text {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .InYourLife {
+        padding: 30px;
+    }
+    
+    .InYourLife .col {
+        padding: 10px;
+    }
+    
+    .InYourLife .card-title {
+        font-size: 32px;
+        font-weight: 600;
+        margin: 0px 0px 8px;
+        text-align: center;
+    }
+    
+    .InYourLife .card-text {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .Profiles-title {
+        padding: 50px;
+    }
+    
+    .Profiles-title h2 {
+        font-size: 38px;
+        margin: 0px 0px 8px;
+        text-align: center;
+    }
+    
+    .Profiles-title p {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .Profiles .row {
+        padding: 30px;
+    }
+
+    .Profiles .row .col {
+        padding: 10px;
+    }
+
+    .Profiles .card-body {
+        padding: 0px;
+    }
+
+        .Profiles .card-body .card-title {
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .Profiles .card-body .card-text {
+            font-size: 16px;
+            margin: 0px 0px 8px;
+            padding: 0px 0px 8px;
+            text-align: center;
+        }
+
+    /* Swiper - Infinite Loop */
+
+    .Swiper {
+        width: 100%;
+        background: #f2f2f2;
+    }
+
+    .swiper-container {
+        width: auto;
+    }
+
+    .swiper-wrapper {
+        width: auto;
+        height: 500px;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        height: auto;
+        width: auto;
+        padding: 70px;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    /* .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        } */
+    .swiper-button-next, .swiper-button-prev {
+        color: #FC8D61;
+    }
+
+    .ChooseUs {
+        margin: 50px 0px;
+    }
+
+    .ChooseUs-title h2 {
+        font-size: 38px;
+        margin: 0px 0px 28px;
+        text-align: center;
+    }
+
+    .ChooseUs .row {
+        padding: 30px;
+    }
+
+    .ChooseUs .card img {
+        width: 120px;
+        height: 120px;
+        margin: auto;
+    }
+
+    .ChooseUs .card .card-title {
+        font-size: 22px;
+        margin: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .ChooseUs .card .card-text {
+        font-size: 16px;
+        margin: 0px 0px 8px;
+        padding: 0px 0px 8px;
+        text-align: center;
+    }
+
+    .ChooseUs-btn {
+        display: none;
+    }
+
+    .LearnMore {
+        padding: 30px;
+    }
+
+    .LearnMore-title {
+        padding: 10px;
+    }
+
+        .LearnMore-title h2 {
+            font-size: 38px;
+            margin: 0px 0px 8px;
+        }
+
+    .LearnMore-btn {
+        padding: 10px;
+        text-align: center;
+    }
+
+    @@media screen and (min-width:768px) {
+        .banner {
+            min-height: 700px;
+            padding: 192px;
+        }
+
+            .banner h1 {
+                font-size: 94px;
+                margin-bottom: 0px 0px 34px;
+                line-height: 1.1em;
+            }
+
+        .GoToMarkplace .card-body {
+            text-align: left;
+        }
+
+        .FightsClimate-title h2 {
+            text-align: left;
+        }
+
+        .FightsClimate .card-body .card-title {
+            text-align: left;
+        }
+
+        .FightsClimate .card-body .card-text {
+            text-align: left;
+        }
+
+        .InYourLife .card-body .card-title {
+            text-align: left;
+        }
+
+        .InYourLife .card-body .card-text {
+            text-align: left;
+        }
+
+        .Profiles .card-body .card-title {
+            text-align: left;
+        }
+
+        .Profiles .card-body .card-text {
+            text-align: left;
+        }
+
+        .Profiles-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+            .Profiles-content .row:nth-child(even) {
+                direction: rtl;
+            }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            height: 500px;
+            width: auto;
+            padding: 0px 250px;
+        }
+
+        .LearnMore-btn-group {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    @@media screen and (min-width:1025px) {
+        .ChooseUs-btn {
+            display: block;
+        }
+
+            .ChooseUs-btn .btn {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                margin: 15px;
+                padding: 10px;
+            }
+    }
+</style>
+
+<div class="banner container-fluid">
+    <h1>Ruckify</h1>
+    <h2>verb</h2>
+    <h2>rent anything simply and sustainably</h2>
+</div>
+
+<div class="container-xl">
+    <div class="YouNeed">
+        <div class="YouNeed-text">
+            <h2>It’s easy to Ruckify what you need.</h2>
+            <p>Need a tool to complete a DIY or a pool to elevate your party? What about a set of roller skates, a movie night projector set, and a popcorn maker for that date you’ve been planning? Ruckifying your next rental starts with a search in your area.</p>
+        </div>
+        <div class="YouNeed-btn">
+            <button type="button" class="btn btn-primary border-0">Search My Area Now</button>
+        </div>
+    </div>
+
+    <div class="SixReasons">
+        <div class="SixReasons-title">
+            <h2>
+                There are a Million Reasons to Ruckify. Here are Six:
+            </h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Declutter Your Life.png" class="card-img-top" alt="Declutter Your Life">
+                    <div class="card-body">
+                        <h3 class="card-title">Declutter Your Life</h3>
+                        <p class="card-text">Possess less. Ruckify more.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Save Your Money.png" class="card-img-top" alt="Save Your Money">
+                    <div class="card-body">
+                        <h3 class="card-title">Save Your Money</h3>
+                        <p class="card-text">Only gonna use it twice? Don’t buy, Ruckify.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Join The Community.png" class="card-img-top" alt="Join The Community">
+                    <div class="card-body">
+                        <h3 class="card-title">Join The Community</h3>
+                        <p class="card-text">Our sustainable rental marketplace is one of the fastest growing online communities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Easy Cancellation.png" class="card-img-top" alt="Easy Cancellation">
+                    <div class="card-body">
+                        <h3 class="card-title">Easy Cancellation</h3>
+                        <p class="card-text">Things happen, don’t stress, we get it!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Do More, Don’t Buy More.png" class="card-img-top" alt="Do More, Don’t Buy More">
+                    <div class="card-body">
+                        <h3 class="card-title">Do More, Don’t Buy More</h3>
+                        <p class="card-text">Most stuff ends up in landfill. Keep it in circulation with Ruckify.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 border-0">
+                    <img src="~/Assets/img/Reduce Global Warming.png" class="card-img-top" alt="Reduce Global Warming">
+                    <div class="card-body">
+                        <h3 class="card-title">Reduce Global Warming</h3>
+                        <p class="card-text">The average Ruckify transaction saves one ton of CO2.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="GoToMarkplace">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col d-flex justify-content-center align-items-center">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">Don’t Buy, Ruckify!</h3>
+                        <p class="card-text">You want more experiences, not more things. Keep your life streamlined and sustainable by Ruckifying instead of buying. Ruckify makes it cheap, safe and easy to rent anything you can think of: just search for an item, request, enjoy and repeat!</p>
+                        <button type="button" class="btn btn-primary border-0">Go To Markplace</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-0">
+                    <img src="~/Assets/img/GoToMarkplace.png" class="card-img-top" alt="Go To Markplace">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="FightsClimate-container-xl">
+    <div class="container-xl">
+        <div class="FightsClimate">
+            <div class="FightsClimate-title">
+                <h2>How Ruckify Fights Climate Change: By The Numbers</h2>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">90%</h3>
+                            <p class="card-text">of the things in our homes are used less than once a month.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">80%</h3>
+                            <p class="card-text">of the things we buy end up in landfills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title"></h3>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">10 Days</h3>
+                            <p class="card-text">It takes the same energy to produce a single ladder as it does to power an average home for 10 days.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">1,000</h3>
+                            <p class="card-text">If 1,000 people Ruckified one ladder each, it would prevent 127 tons of greenhouse gas emissions from being produced.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">One Ton</h3>
+                            <p class="card-text">The average Ruckify transaction prevents one ton of greenhouse gas emissions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xl">
+    <div class="InYourLife">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card border-0">
+                    <img src="~/Assets/img/InYourLife.png" alt="In Your Life">
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">Ruckify Your Life</h3>
+                        <p class="card-text">Net Zero doesn’t mean zero fun. By renting experiences instead of buying objects you join one of the fastest-growing global communities; a community that understands our buying decisions affect our environment, and that the decision not to buy is one of the most sustainable choices we can make. Ruckify your life by signing up for a Ruckify Adventure today!</p>
+                        <p class="card-text">*No bubbles were harmed in the undertaking of this Ruckify Adventure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Profiles">
+        <div class="Profiles-title">
+            <h2>Ruckify Profiles</h2>
+            <p>Meet Jane. (Yes, Jane is a real person. Here is her Instagram.) Jane needed a way to spice up the week for her kids in a sustainable, fun and affordable way.</p>
+        </div>
+
+        <div class="Profiles-content">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card border-0">
+                        <img src="~/Assets/img/Sign-Up.png" class="card-img-top" alt="Sign-Up">
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">Sign-Up</h3>
+                            <p class="card-text">First, Jane downloaded the Ruckify app and joined the #1 rent anything marketplace. Bonus: Ruckify immediately planted a tree on her behalf (we’ve planted 60,000 so far). Then she used her friend’s referral code and got $35 RuckBucks to spend before she even started exploring the Ruckify universe!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card border-0">
+                        <img src="~/Assets/img/Sign-Up.png" class="card-img-top" alt="Discover">
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">Discover</h3>
+                            <p class="card-text">On her quest for the ideal no-buy experience Jane discovered things she wanted to try, things she would need for an upcoming home project, and things she never imagined she could rent, like a mini chocolate fountain!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card border-0">
+                        <img src="~/Assets/img/Book & Enjoy.png" class="card-img-top" alt="Book & Enjoy">
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">Book</h3>
+                            <p class="card-text">With Instant booking all Jane had to do was plug in her desired dates, book delivery, and pay. And behold: Ruckify planted another tree in celebration of her transaction! (Make it 60,001.)</p>
+                            <br>
+                            <h3 class="card-title">Enjoy</h3>
+                            <p class="card-text">Since she booked hassle-free delivery with RuckifyExpress the chocolate fountain arrived at her home in sanitized reusable packaging, ready for delicious fun.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <div class="card border-0">
+                        <img src="~/Assets/img/Return & Review.png" class="card-img-top" alt="Return & Review">
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <h3 class="card-title">Return & Review</h3>
+                            <p class="card-text">Jane’s experience was even better than she expected. From the ease of delivery and pickup with RuckifyExpress, to the fun of trying something new, to her children’s smiles, she found out how good it can be to Ruckify. She expressed her gratitude by leaving reviews for both the item and the owner, and—you guessed it—two additional trees were planted on behalf of her reviews. (So, 60,003. But who’s counting?)</p>
+                            <button type="button" class="btn btn-primary border-0">Go To Markplace</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Swiper -->
+<div class="Swiper">
+    <div class="swiper-container mySwiper container-xl">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo reprehenderit corporis, placeat alias omnis commodi atum ducimus voluptatum libero.
+                </p>
+            </div>
+            <div class="swiper-slide">
+                <p>
+                    夏天包括作出笑容證件常見大人人生，接收買賣設置明確法人請求商業每一個，基金當前位置勝利圖像化透明好處毫不設置即可笑話許可也沒攝影，全市新手一定士兵一張笑話不太總結消失怎樣，預防會員職位免費版，國內做。
+                </p>
+            </div>
+            <div class="swiper-slide">
+                <p>
+                    斷網頁小組透明採購緊急如下工程回憶執行字體只要，房屋歡迎永遠經驗化學種種提示今後印度檢索屏幕坐在提示請您，通信全文上升夥伴執行環境深刻辦公室穩過居民笑着話題聯合，一番輸出可以房東畢竟開發者大會免費路線拒絶成就，物流培養報紙改變一眼您是整合尚未也在今天，隊伍最重要，看了首次義務總部情形主。
+                </p>
+            </div>
+            <div class="swiper-slide">
+                <p>
+                    可以用幸福這麼多技能制定情感推廣安全人家顧客按鈕此處用戶名，把你傢伙，信用堅持代表現場公斤吸引還能熱情身後預覽指數福這麼多技能制定情感推廣安全人家顧客按鈕此處用戶名，把你傢伙，信用堅持代表現場公斤吸引還能熱情身後預覽指數女生國務院給我們，享受程式和平島常用健康就業生存動畫，停止社區發貼衝擊積極處，取但他，原創特別漸漸權利動漫恐怕不可能，營銷把它禁止錯誤我國充滿階段進一步國內指導女兒星座留學表演。
+                </p>
+            </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+
+<div class="container-xl">
+    <div class="ChooseUs">
+        <div class="ChooseUs-title">
+            <h2>Why Ruckify?</h2>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card border-0">
+                    <img src="~/Assets/img/Secure&Trusted.png" class="card-img-top" alt="Secure & Trusted">
+                    <div class="card-body">
+                        <h5 class="card-title">Secure & Trusted</h5>
+                        <p class="card-text">Your safety is our top priority</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-0">
+                    <img src="~/Assets/img/24-7 Support.png" class="card-img-top" alt="24/7 Support">
+                    <div class="card-body">
+                        <h5 class="card-title">24/7 Support</h5>
+                        <p class="card-text">No question or concern is too small</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-0">
+                    <img src="~/Assets/img/Passionate Owners.png" class="card-img-top" alt="Passionate Owners">
+                    <div class="card-body">
+                        <h5 class="card-title">Passionate Owners</h5>
+                        <p class="card-text">Rent directly from the experts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ChooseUs-btn text-center">
+            <button type="button" class="btn btn-primary text-center border-0"><i class="fab fa-instagram"></i></button>
+            <button type="button" class="btn btn-primary text-center border-0"><i class="fab fa-facebook"></i></button>
+            <button type="button" class="btn btn-primary border-0"><i class="fab fa-twitter"></i></button>
+            <button type="button" class="btn btn-primary border-0"><i class="fab fa-pinterest"></i></button>
+            <button type="button" class="btn btn-primary border-0"><i class="fab fa-linkedin"></i></button>
+            <button type="button" class="btn btn-primary border-0"><i class="fab fa-tiktok"></i></button>
+        </div>
+    </div>
+
+    <div class="LearnMore">
+        <div class="LearnMore-title text-center">
+            <h2>Ready To Learn More?</h2>
+        </div>
+        <div class="LearnMore-btn-group">
+            <div class="LearnMore-btn">
+                <button type="button" class="btn btn-primary border-0">Let's Post</button>
+            </div>
+            <div class="LearnMore-btn">
+                <button type="button" class="btn btn-primary border-0">Sign-Up First</button>
+            </div>
+            <div class="LearnMore-btn">
+                <button type="button" class="btn btn-primary border-0">Learn About Renting</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
 
