@@ -129,6 +129,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\about.css" />
     <Content Include="Assets\css\doThing.css" />
     <Content Include="Assets\css\economy.css" />
     <Content Include="Assets\css\helpTo.css" />
@@ -158,6 +159,7 @@
     <Content Include="Assets\images\Why_Icons_Customer-Service-120x120.png" />
     <Content Include="Assets\images\Why_Icons_Happy-120x120.png" />
     <Content Include="Assets\images\Why_Icons_Protection-120x120.png" />
+    <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\countUp.js" />
     <Content Include="Assets\js\swiper.js" />
     <Content Include="Assets\js\swiperInHtml.js" />
@@ -218,6 +220,7 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
     <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
