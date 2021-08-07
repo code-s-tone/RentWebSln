@@ -128,6 +128,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\doThing.css" />
+    <Content Include="Assets\css\helpTo.css" />
+    <Content Include="Assets\css\howTo.css" />
+    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\css\swiper.css" />
+    <Content Include="Assets\css\whyChoose.css" />
+    <Content Include="Assets\images\Banner.jpg" />
+    <Content Include="Assets\images\Banner_change.jpg" />
+    <Content Include="Assets\images\Banner_change_rev.jpg" />
+    <Content Include="Assets\images\girl-planting.jpg" />
+    <Content Include="Assets\images\Haiti_2018_Seedlings-2.jpg" />
+    <Content Include="Assets\images\Howto_Earth.png" />
+    <Content Include="Assets\images\Howto_leaf.png" />
+    <Content Include="Assets\images\Howto_Sprout.png" />
+    <Content Include="Assets\images\Howto_Sun.png" />
+    <Content Include="Assets\images\Howto_Tree.png" />
+    <Content Include="Assets\images\IMG_4847-scaled.jpg" />
+    <Content Include="Assets\images\Madagascar_2012_Malagasy-woman-holding-propagules-scaled.jpg" />
+    <Content Include="Assets\images\Mad_worker-profile-2-with-watermark-scaled.jpg" />
+    <Content Include="Assets\images\Phone_Mockup.png" />
+    <Content Include="Assets\images\Trees_Banner.jpg" />
+    <Content Include="Assets\images\Why_Icons_Customer-Service-120x120.png" />
+    <Content Include="Assets\images\Why_Icons_Happy-120x120.png" />
+    <Content Include="Assets\images\Why_Icons_Protection-120x120.png" />
+    <Content Include="Assets\js\countUp.js" />
+    <Content Include="Assets\js\swiper.js" />
+    <Content Include="Assets\js\swiperInHtml.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -169,12 +196,10 @@
     <Content Include="Views\Home\ContributionProgram.cshtml" />
     <Content Include="Views\Home\OurStory.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\css\" />
-    <Folder Include="Assets\images\" />
-    <Folder Include="Assets\js\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
