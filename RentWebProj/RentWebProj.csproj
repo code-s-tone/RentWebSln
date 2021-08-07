@@ -130,9 +130,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\doThing.css" />
+    <Content Include="Assets\css\economy.css" />
     <Content Include="Assets\css\helpTo.css" />
     <Content Include="Assets\css\howTo.css" />
     <Content Include="Assets\css\conrtibution.css" />
+    <Content Include="Assets\css\index.css" />
+    <Content Include="Assets\css\Login-Sign.css" />
+    <Content Include="Assets\css\ProductCarousel.css" />
+    <Content Include="Assets\css\ProductCarousel.js" />
     <Content Include="Assets\css\swiper.css" />
     <Content Include="Assets\css\whyChoose.css" />
     <Content Include="Assets\images\Banner.jpg" />
@@ -176,6 +181,8 @@
     <Content Include="HtmlPages\treeProject.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Assets\css\index.css.map" />
+    <Content Include="Assets\css\index.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -214,9 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\css\" />
-    <Folder Include="Assets\images\" />
-    <Folder Include="Assets\js\" />
     <Folder Include="Layout_Rent\img\" />
     <Folder Include="Models\" />
   </ItemGroup>
