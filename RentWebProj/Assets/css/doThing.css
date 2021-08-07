@@ -35,7 +35,7 @@
 }
 
 .do-thing-num-dynamic{
-    font-size: 50px;
+    font-size: 70px;
     color:#FC8D61;
     font-weight: 700;
 }
@@ -43,7 +43,7 @@
 .do-thing-num-description{
     text-transform: uppercase;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 16px;
     color: #5BBDC5;
 }
 
@@ -67,11 +67,11 @@
     }
 
     .do-thing-num-dynamic{
-        font-size: 4.5em;
+        font-size: 5.5em;
     }
 
     .do-thing-num-description{
-        font-size: 1.1em;
+        font-size: 1.3em;
     }
 }
 

@@ -131,7 +131,7 @@
     <Content Include="Assets\css\doThing.css" />
     <Content Include="Assets\css\helpTo.css" />
     <Content Include="Assets\css\howTo.css" />
-    <Content Include="Assets\css\style.css" />
+    <Content Include="Assets\css\conrtibution.css" />
     <Content Include="Assets\css\swiper.css" />
     <Content Include="Assets\css\whyChoose.css" />
     <Content Include="Assets\images\Banner.jpg" />
