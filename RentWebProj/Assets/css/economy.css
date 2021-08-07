@@ -1,0 +1,151 @@
+* {
+    letter-spacing: initial !important;
+    font-family: Roboto,sans-serif;
+
+}
+.banner{
+    position: relative;      
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.397), rgba(0, 0, 0, 0.376)),url(https://soulkey373.github.io/WorkFinalblock/image/Post_Header.jpg);
+    background-size: cover;
+    background-position: center;
+    /* min-height: 74vh; */
+    padding: 250px;
+    width: 100%;
+
+}
+
+    .banner .banner_text h1 {
+        font-family: "Montserrat", Sans-serif;
+        color: #ffffff;
+        font-size: 100px;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1em;
+        transition: 1s;
+    }
+.wrap{
+  box-sizing: border-box;
+}
+/* 中間的內容區域 */
+.wrap .container-xl{
+  display: flex;
+  max-width: 1200px;
+}
+.wrap .container-xl h2{
+  font-size: 38px;
+  color: #fc8d61;
+  font-weight: bold;
+
+}
+.wrap .container-xl h5{
+  color: #000000;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.5em;
+}
+.wrap .container-xl p{
+  padding:0px 110px;
+
+}
+/* 第二個banner區 */
+.wrap .container-fluid{
+  background-image: url(https://soulkey373.github.io/WorkFinalblock/image/iStock-176819706-scaled-1.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 100px 400px;
+  display: flex;
+  justify-content: center;
+}
+.wrap .container-fluid .main_content {
+  background-color: rgba(255, 255, 255, 0.904);
+  min-width: 340px;
+  transition: 1s;
+}
+.wrap .container-fluid .main_content p{
+  font-size: 16px;
+  color: #3e3e3e;
+  word-break: keep-all;
+}
+.col-6{
+  text-align: center;
+}
+.col-sm-6 a{
+  color: #fc8d61;
+  text-decoration: none;
+}
+.down{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.down span{
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 20px;
+  background-color:#fc8d61 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.8s;
+}
+.down span:hover{
+  background-color:#61effc ;
+}
+.down span i{
+  display: block;
+ color: blanchedalmond;
+
+}
+
+/* 右下角的對話框 */
+.messagebox{
+  position: fixed;
+  right: 0;
+  bottom:0;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#message{
+
+  width: 60px;
+  height: 60px;
+}
+@media screen and (max-width:768px){
+  h1{
+  font-size: 38px;
+  line-height: 1.2em;
+}
+.banner{
+    /* min-height: 35vh; */
+    padding: 29px;
+    min-height: 288px;
+}
+nav{
+  display: flex;
+  justify-content: space-around;
+}
+/* 中間的內容區域 */
+.wrap .container-xl p{
+  padding:0px 0px;
+
+}
+.wrap .container-fluid{
+
+  padding: 40px 20px;
+}
+/* 下面五個icon */
+.down{
+  display: none;
+}
+
+
+}
