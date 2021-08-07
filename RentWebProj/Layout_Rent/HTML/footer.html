@@ -1,0 +1,95 @@
+﻿<footer class="site-footer">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-12 col-md-12 d-flex">
+                <h2>JUST RENT</h2>
+                <p class="ms-3 my-auto">© 2021 All Rights Reserved.</p>
+            </div>
+            <div class="col-6 col-md-2">
+                <ul class="footer-links">
+                    <li>0912345678</li>
+                    <li>codestone@gmail.com</li>
+                    <li>© 2021 All Rights Reserved.</li>
+                </ul>
+                <ul class="social-icons">
+                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2">
+                <ul class="footer-links">
+                    <li><a href="#">Marketplace</a></li>
+                    <li><a href="#">Referral Program</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Help Articles</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2">
+
+                <ul class="footer-links">
+                    <li><a href="#">How to Post</a></li>
+                    <li><a href="#">How to Rent</a></li>
+                    <li><a href="#">TreeProject</a></li>
+                    <li><a href="#">Side-Hustle</a></li>
+                    <li><a href="#">RuckifyStore</a></li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2">
+                <ul class="footer-links">
+                    <li><a href="#">Investment Inquiries</a></li>
+                    <li><a href="#">Ruckify RV</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Rent Anything Group</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-2">
+
+                <ul class="footer-links">
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Insurance</a></li>
+                    <li><a href="#">Cancellations</a></li>
+                    <li><a href="#">Payment Payouts</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md-2">
+                <ul class="footer-links appDownload">
+                    <li><a href="#"><img src="img/googleplay.png" alt="" style="width: 110px;"></a></li>
+                    <li><a href="#"><img src="img/applestore.png" alt="" style="width: 110px;"></a></li>
+
+                </ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+</footer>
+<div class="chatIcon">
+    <!-- <i class="fas fa-sms"></i> -->
+    <img src="img/chatIcon3.png" alt="">
+    <div class="chatBox">聊天室</div>
+</div>
+<script>
+    document.getElementsByClassName("chatIcon")[0].addEventListener("click", () => {
+        var chatBox = document.getElementsByClassName("chatBox")[0];
+        var chatImg = document.querySelector(".chatIcon img");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+            chatImg.src="img/close2.png"
+        }
+        else {
+            chatBox.style.display = "none";
+            chatImg.src="img/chatIcon3.png"
+        }
+    })
+</script>

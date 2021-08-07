@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/160bae148b.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+TC:wght@300&family=Permanent+Marker&family=Ubuntu:ital,wght@0,300;1,500&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+    <link href="~/Layout_Rent/CSS/footer.css" rel="stylesheet" />
+    <link href="~/Layout_Rent/CSS/header.css" rel="stylesheet" />
+    <link href="~/Layout_Rent/CSS/sidebar.css" rel="stylesheet" />
+
+    <title>知租網</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    @RenderSection("topCSS", required: false)
+    @RenderSection("topJS", required: false)
+
+</head>
+
+<body>
+    <!-- overlayMobile為了讓側邊導覽出來時畫面變暗 -->
+    <div class="overlayMobile"></div>
+
+    <header-top>
+
+
+        <div class="container-xl">
+            <input type="checkbox" id="menu-control">
+
+            <div class="header-nav">
+                <div class="logo d-grid">
+                    <a class="m-auto" href="#">JUST RENT</a>
+                </div>
+
+
+                <div class="header-function-box">
+
+                    <!-- 屆時MVC記得在input寫name 對應到action的參數 submit按鈕先hidden掉 待測試靠按enter可否行 -->
+                    <div class="header-search-box d-grid">
+                        <form class="m-auto">
+                            <label class="header-search d-grid" for="header-search-input">
+                                <input id="header-search-input" class="m-auto" type="text" placeholder=" 想租什麼呢?" />
+                            </label>
+                            <button type="submit"></button>
+                        </form>
+                    </div>
+
+                    <div class="header-member-box d-flex">
+
+                        <img src="~/Layout_Rent/img/cart.png" alt="" id="shoppingCart-icon" title="購物車" />
+                        <div class="member-dropdown">
+
+                            <img src="~/Layout_Rent/img/member.png" alt="" id="member-icon" title="會員中心">
+                            <ul class="member-subMenu">
+                                <div class="profileBox d-flex">
+                                    <div class="profileImg d-grid"><img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt=""></div>
+                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">庭安</p></div>
+                                </div>
+                                <li><a href="#">通知</a></li>
+                                <li><a href="#">我的訂單</a></li>
+                                <li><a href="#">會員資料/修改</a></li>
+                                <li><a href="#" class="signOutBtn">登出</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!-- 註冊登入鈕 -->
+                    <nav class="nav-btn">
+                        <a href="#" class="loginBtn">登入</a>
+                        <a href="#" class="signUpBtn">註冊</a>
+                    </nav>
+                </div>
+
+                <label for="menu-control" class="hb my-auto">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <nav class="dropdown-nav">
+                <div class="navbar">
+
+                    <ul class="links">
+
+                        <li>
+                            <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
+
+                            <ul class="sub-menu">
+                                <li><a href="#">租狗狗</a></li>
+                                <li><a href="#">租女友</a></li>
+                                <li><a href="https://www.yahoo.com.tw">Card Design</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">如何租借</a></li>
+                                <!-- <li><a href="#"></a></li> -->
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">關於我們<i class="fas fa-chevron-down arrow"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">我們的故事</a></li>
+                                <li><a href="#">回饋計畫</a></li>
+                                <li><a href="#">聯繫我們</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">葉配一下<i class="fas fa-chevron-down arrow"></i></a>
+                            <ul class="sub-menu">
+                                <li><a href="#">共享經濟</a></li>
+                                <li><a href="#">蘋果報導</a></li>
+                                <li><a href="#">網紅推推</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header-top>
+
+    <div id="sidebarContent">
+        <div class="sidenav">
+
+            <div class="logoBox d-grid">
+                <span class="ms-3 my-auto">JUST RENT</span>
+            </div>
+
+            <div class="sidebar-btn d-flex">
+                <a href="#" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
+                <a href="#" class="signUpBtn d-grid"><span class="m-auto">註冊</span></a>
+            </div>
+
+            <div class="linkBox">
+                <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-container">
+                    <a href="#">租狗狗</a>
+                    <a href="#">租女友</a>
+                </div>
+                <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-container">
+                    <a href="#">如何租借</a>
+                </div>
+                <a href="#" class="dropdown-btn"> 關於我們 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-container">
+                    <a href="#">我們的故事</a>
+                    <a href="#">你租我喝飲料計畫</a>
+                    <a href="#">聯繫我們</a>
+                </div>
+                <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
+                <div class="dropdown-container">
+                    <a href="#">共享經濟</a>
+                    <a href="#">蘋果報導</a>
+                    <a href="#">網紅推薦</a>
+                </div>
+            </div>
+            <hr>
+
+            <p class="text-center mt-3">download the free<br>mobile app</p>
+            <div class="appDownload d-flex justify-content-center">
+                <img src="~/Layout_Rent/img/googlePlay_white.jpg" style="height: 30px;" class="mx-1" alt="">
+                <img src="~/Layout_Rent/img/appleStore_white.jpg" style="height: 30px;" class="mx-1" alt="">
+            </div>
+
+            <div class="social-media d-flex mt-4 justify-content-center">
+                <a href="#" class="my-auto mx-2"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="my-auto mx-2"><i class="fa fa-twitter"></i></a>
+                <a href="#" class="my-auto mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+        @RenderBody()
+
+        <footer class="site-footer">
+            <div class="container-xl">
+                <div class="row">
+                    <div class="col-12 col-md-12 d-flex">
+                        <h2>JUST RENT</h2>
+                        <p class="ms-3 my-auto">© 2021 All Rights Reserved.</p>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <ul class="footer-links">
+                            <li>0912345678</li>
+                            <li>codestone@gmail.com</li>
+                            <li>© 2021 All Rights Reserved.</li>
+                        </ul>
+                        <ul class="social-icons">
+                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <ul class="footer-links">
+                            <li><a href="#">Marketplace</a></li>
+                            <li><a href="#">Referral Program</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Help Articles</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+
+                        <ul class="footer-links">
+                            <li><a href="#">How to Post</a></li>
+                            <li><a href="#">How to Rent</a></li>
+                            <li><a href="#">TreeProject</a></li>
+                            <li><a href="#">Side-Hustle</a></li>
+                            <li><a href="#">RuckifyStore</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-6 col-md-2">
+                        <ul class="footer-links">
+                            <li><a href="#">Investment Inquiries</a></li>
+                            <li><a href="#">Ruckify RV</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Rent Anything Group</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2">
+
+                        <ul class="footer-links">
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Insurance</a></li>
+                            <li><a href="#">Cancellations</a></li>
+                            <li><a href="#">Payment Payouts</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <ul class="footer-links appDownload">
+                            <li><a href="#"><img src="~/Layout_Rent/img/googleplay.png" alt="" style="width: 110px;"></a></li>
+                            <li><a href="#"><img src="~/Layout_Rent/img/applestore.png" alt="" style="width: 110px;"></a></li>
+
+                        </ul>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </footer>
+        <div class="chatIcon">
+            <!-- <i class="fas fa-sms"></i> -->
+            <img src="~/Layout_Rent/img/chatIcon3.png" alt="">
+            <div class="chatBox">聊天室</div>
+        </div>
+
+
+        <script src="~/Layout_Rent/JS/header.js"></script>
+        <script src="~/Layout_Rent/JS/sidebar.js"></script>
+        <script src="~/Layout_Rent/JS/footer.js"></script>
+
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        @RenderSection("endCSS", required: false)
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+        @RenderSection("endJS", required: false)
+</body>
+</html>

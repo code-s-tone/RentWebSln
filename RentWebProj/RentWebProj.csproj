@@ -137,6 +137,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Layout_Rent\CSS\footer.css" />
+    <Content Include="Layout_Rent\CSS\header.css" />
+    <Content Include="Layout_Rent\CSS\sidebar.css" />
+    <Content Include="Layout_Rent\HTML\footer.html" />
+    <Content Include="Layout_Rent\HTML\header.html" />
+    <Content Include="Layout_Rent\HTML\sidebar.html" />
+    <Content Include="Layout_Rent\JS\footer.js" />
+    <Content Include="Layout_Rent\JS\header.js" />
+    <Content Include="Layout_Rent\JS\sidebar.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -169,14 +178,16 @@
     <Content Include="Views\Home\ContributionProgram.cshtml" />
     <Content Include="Views\Home\OurStory.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\DoraTest\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_Rent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\css\" />
     <Folder Include="Assets\images\" />
     <Folder Include="Assets\js\" />
+    <Folder Include="Layout_Rent\img\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\DoraTest\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

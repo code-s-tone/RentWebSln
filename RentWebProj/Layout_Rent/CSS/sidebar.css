@@ -1,0 +1,134 @@
+﻿/* Fixed sidenav, full height */
+
+.sidenav {
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: -260px;
+    box-shadow: 2px 2px 5px rgb(150, 150, 150);
+    /* overflow: hidden; */
+    overflow-y: auto;
+    display: block;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+    .sidenav.show {
+        background-color: #ffffff;
+        opacity: 1;
+        left: 0;
+    }
+
+.linkBox {
+    background-color: #eaeaea;
+}
+
+    /* Style the sidenav links and the dropdown button */
+
+    .linkBox a {
+        padding: 6px 0 6px 16px;
+        text-decoration: none;
+        font-size: 19px;
+        color: #818181;
+        display: block;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        outline: none;
+        font-family: "Ubuntu", sans-serif;
+    }
+
+        .linkBox a:hover,
+        .dropdown-btn:hover {
+            background-color: #ffffff;
+        }
+
+/* Add an active class to the active dropdown button */
+
+a.active {
+    background-color: rgb(105, 105, 105);
+    color: white;
+}
+
+    a.active:hover {
+        color: rgb(70, 70, 70);
+        background-color: white;
+    }
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
+.dropdown-container {
+    display: none;
+}
+
+    .dropdown-container a {
+        padding: 6px 0px 6px 30px;
+        font-size: 17px;
+    }
+
+/* 倒三角 */
+
+.fa-caret-down {
+    float: right;
+    padding-right: 15px;
+}
+
+hr {
+    padding: 0;
+    margin: 0;
+    opacity: 0.6;
+}
+
+.logoBox {
+    width: 100%;
+    height: 70px;
+    color: cornflowerblue;
+    font-size: 30px;
+    line-height: 2;
+}
+
+.sidenav p {
+    color: rgb(107, 107, 107);
+    font-weight: bolder;
+    font-size: 23px;
+}
+
+.social-media {
+    background-color: #fe8b5a;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+}
+
+    .social-media i {
+        font-size: 22px;
+        color: white;
+    }
+
+.sidebar-btn {
+    height: 45px;
+    background-color: cornflowerblue;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+}
+
+    .sidebar-btn a {
+        width: 50%;
+        text-decoration: none;
+        color: white;
+        font-size: 17px;
+        margin: 0 auto;
+        padding: 5px;
+        color: white;
+        box-sizing: border-box;
+    }
+
+    .sidebar-btn .loginBtn {
+        border-right: 1px solid white;
+    }
+
