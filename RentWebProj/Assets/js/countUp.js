@@ -1,4 +1,3 @@
-
 let options = {
     useEasing: true, 		// 使用缓和
     useGrouping: true, 		// 使用分组(是否显示千位分隔符,一般为 true)
