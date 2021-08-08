@@ -3,430 +3,6 @@
     ViewBag.Title = "HowToRent";
 }
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
-
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/217f09c56f.js" crossorigin="anonymous"></script>
-
-<!-- Google font-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-<!-- Link Swiper's CSS -->
-<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-<style>
-    * {
-        font-family: 'Poppins', sans-serif;
-        /* outline: red 1px solid; */
-    }
-
-    .btn {
-        background-color: #FC8D61;
-        padding: 12px 24px;
-    }
-
-    .banner {
-        background: url("img/banner.png") no-repeat center / cover;
-        min-height: 288px;
-        padding: 29px;
-        color: white;
-    }
-    
-    .banner h1, h2 {
-        font-weight: 700;
-
-    }
-    
-    .banner h1 {
-        font-size: 38px;
-        margin-bottom: 0px 0px 28px;
-        line-height: 1.2em;
-    }
-    
-    .banner h2 {
-        font-size: 36px;
-        margin: 0px 0px 8px;
-        line-height: 1.6em;
-    }
-
-    .YouNeed {
-        margin: 60px auto;
-        padding: 0px 10px;
-    }
-
-    .YouNeed-text {
-        margin-bottom: 15px;
-    }
-    
-    .YouNeed-text h2 {
-        font-size: 36px;
-        font-weight: 800;
-        margin: 0px 0px 8px;
-        line-height: 1.6em;
-    }
-    
-    .YouNeed-text p {
-        font-size: 16px;
-        line-height: 1.5em;
-        margin: 0px 0px 8px;
-    }
-
-    .YouNeed-btn .btn-primary {
-        font-size: 12.8px;
-        margin-top: 30px;
-    }
-
-    .SixReasons {
-        margin-top: 90px;
-    }
-
-    .SixReasons-title {
-        margin-bottom: 20px;
-    }
-    
-    .SixReasons-title h2 {
-        font-size: 38px;
-        line-height: 1.4em;
-        font-weight: 800;
-        margin: 0px 0px 8px;
-    }
-
-    .SixReasons .card {
-        width: 100%;
-        padding: 30px;
-    }
-    
-    .SixReasons .card .card-body {
-        margin-top: 25px;
-        padding: 0px !important;
-    }
-
-    .SixReasons .card-title {
-        font-size: 22px;
-        font-weight: 700;
-        margin: 0px 0px 8px;
-    }
-
-    .SixReasons .card-text {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-    }
-
-    .GoToMarkplace {
-        margin-top: 10px;
-    }
-    
-    .GoToMarkplace .row {
-        padding: 30px;
-    }
-    
-    .GoToMarkplace .card-body {
-        text-align: center;
-    }
-    
-    .GoToMarkplace .card-title {
-        font-size: 32px;
-        margin: 0px 0px 8px;
-    }
-    
-    .GoToMarkplace .card-text {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-    }
-    
-    .GoToMarkplace .btn {
-        font-size: 12.8px;
-        margin-top: 15px;
-    }
-
-    .FightsClimate-container-xl {
-        width: 100%;
-        background-color: #f2f2f2;
-    }
-
-    .FightsClimate {
-        padding: 30px;
-    }
-    
-    .FightsClimate .card-body {
-        background-color: #f2f2f2;
-    }
-
-    .FightsClimate-title {
-        margin-bottom: 50px;
-    }
-    
-    .FightsClimate-title h2 {
-        font-size: 32px;
-        font-weight: 600;
-        margin: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .FightsClimate .card-title {
-        font-size: 38px;
-        font-weight: 900;
-        margin: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .FightsClimate .card-text {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .InYourLife {
-        padding: 30px;
-    }
-    
-    .InYourLife .col {
-        padding: 10px;
-    }
-    
-    .InYourLife .card-title {
-        font-size: 32px;
-        font-weight: 600;
-        margin: 0px 0px 8px;
-        text-align: center;
-    }
-    
-    .InYourLife .card-text {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .Profiles-title {
-        padding: 50px;
-    }
-    
-    .Profiles-title h2 {
-        font-size: 38px;
-        margin: 0px 0px 8px;
-        text-align: center;
-    }
-    
-    .Profiles-title p {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .Profiles .row {
-        padding: 30px;
-    }
-
-    .Profiles .row .col {
-        padding: 10px;
-    }
-
-    .Profiles .card-body {
-        padding: 0px;
-    }
-
-        .Profiles .card-body .card-title {
-            font-size: 32px;
-            text-align: center;
-        }
-
-        .Profiles .card-body .card-text {
-            font-size: 16px;
-            margin: 0px 0px 8px;
-            padding: 0px 0px 8px;
-            text-align: center;
-        }
-
-    /* Swiper - Infinite Loop */
-
-    .Swiper {
-        width: 100%;
-        background: #f2f2f2;
-    }
-
-    .swiper-container {
-        width: auto;
-    }
-
-    .swiper-wrapper {
-        width: auto;
-        height: 500px;
-    }
-
-    .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        height: auto;
-        width: auto;
-        padding: 70px;
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-    }
-    /* .swiper-slide img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        } */
-    .swiper-button-next, .swiper-button-prev {
-        color: #FC8D61;
-    }
-
-    .ChooseUs {
-        margin: 50px 0px;
-    }
-
-    .ChooseUs-title h2 {
-        font-size: 38px;
-        margin: 0px 0px 28px;
-        text-align: center;
-    }
-
-    .ChooseUs .row {
-        padding: 30px;
-    }
-
-    .ChooseUs .card img {
-        width: 120px;
-        height: 120px;
-        margin: auto;
-    }
-
-    .ChooseUs .card .card-title {
-        font-size: 22px;
-        margin: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .ChooseUs .card .card-text {
-        font-size: 16px;
-        margin: 0px 0px 8px;
-        padding: 0px 0px 8px;
-        text-align: center;
-    }
-
-    .ChooseUs-btn {
-        display: none;
-    }
-
-    .LearnMore {
-        padding: 30px;
-    }
-
-    .LearnMore-title {
-        padding: 10px;
-    }
-
-        .LearnMore-title h2 {
-            font-size: 38px;
-            margin: 0px 0px 8px;
-        }
-
-    .LearnMore-btn {
-        padding: 10px;
-        text-align: center;
-    }
-
-    @@media screen and (min-width:768px) {
-        .banner {
-            min-height: 700px;
-            padding: 192px;
-        }
-
-            .banner h1 {
-                font-size: 94px;
-                margin-bottom: 0px 0px 34px;
-                line-height: 1.1em;
-            }
-
-        .GoToMarkplace .card-body {
-            text-align: left;
-        }
-
-        .FightsClimate-title h2 {
-            text-align: left;
-        }
-
-        .FightsClimate .card-body .card-title {
-            text-align: left;
-        }
-
-        .FightsClimate .card-body .card-text {
-            text-align: left;
-        }
-
-        .InYourLife .card-body .card-title {
-            text-align: left;
-        }
-
-        .InYourLife .card-body .card-text {
-            text-align: left;
-        }
-
-        .Profiles .card-body .card-title {
-            text-align: left;
-        }
-
-        .Profiles .card-body .card-text {
-            text-align: left;
-        }
-
-        .Profiles-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-            .Profiles-content .row:nth-child(even) {
-                direction: rtl;
-            }
-
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            height: 500px;
-            width: auto;
-            padding: 0px 250px;
-        }
-
-        .LearnMore-btn-group {
-            display: flex;
-            justify-content: space-around;
-        }
-    }
-
-    @@media screen and (min-width:1025px) {
-        .ChooseUs-btn {
-            display: block;
-        }
-
-            .ChooseUs-btn .btn {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                margin: 15px;
-                padding: 10px;
-            }
-    }
-</style>
 
 <div class="banner container-fluid">
     <h1>Ruckify</h1>
@@ -454,7 +30,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Declutter Your Life.png" class="card-img-top" alt="Declutter Your Life">
+                    <img src="~/Assets/images/howtorent/Declutter Your Life.png" class="card-img-top" alt="Declutter Your Life">
                     <div class="card-body">
                         <h3 class="card-title">Declutter Your Life</h3>
                         <p class="card-text">Possess less. Ruckify more.</p>
@@ -463,7 +39,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Save Your Money.png" class="card-img-top" alt="Save Your Money">
+                    <img src="~/Assets/images/howtorent/Save Your Money.png" class="card-img-top" alt="Save Your Money">
                     <div class="card-body">
                         <h3 class="card-title">Save Your Money</h3>
                         <p class="card-text">Only gonna use it twice? Don’t buy, Ruckify.</p>
@@ -472,7 +48,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Join The Community.png" class="card-img-top" alt="Join The Community">
+                    <img src="~/Assets/images/howtorent/Join The Community.png" class="card-img-top" alt="Join The Community">
                     <div class="card-body">
                         <h3 class="card-title">Join The Community</h3>
                         <p class="card-text">Our sustainable rental marketplace is one of the fastest growing online communities.</p>
@@ -481,7 +57,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Easy Cancellation.png" class="card-img-top" alt="Easy Cancellation">
+                    <img src="~/Assets/images/howtorent/Easy Cancellation.png" class="card-img-top" alt="Easy Cancellation">
                     <div class="card-body">
                         <h3 class="card-title">Easy Cancellation</h3>
                         <p class="card-text">Things happen, don’t stress, we get it!</p>
@@ -490,7 +66,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Do More, Don’t Buy More.png" class="card-img-top" alt="Do More, Don’t Buy More">
+                    <img src="~/Assets/images/howtorent/Do More, Don’t Buy More.png" class="card-img-top" alt="Do More, Don’t Buy More">
                     <div class="card-body">
                         <h3 class="card-title">Do More, Don’t Buy More</h3>
                         <p class="card-text">Most stuff ends up in landfill. Keep it in circulation with Ruckify.</p>
@@ -499,7 +75,7 @@
             </div>
             <div class="col">
                 <div class="card h-100 border-0">
-                    <img src="~/Assets/img/Reduce Global Warming.png" class="card-img-top" alt="Reduce Global Warming">
+                    <img src="~/Assets/images/howtorent/Reduce Global Warming.png" class="card-img-top" alt="Reduce Global Warming">
                     <div class="card-body">
                         <h3 class="card-title">Reduce Global Warming</h3>
                         <p class="card-text">The average Ruckify transaction saves one ton of CO2.</p>
@@ -522,7 +98,7 @@
             </div>
             <div class="col">
                 <div class="card border-0">
-                    <img src="~/Assets/img/GoToMarkplace.png" class="card-img-top" alt="Go To Markplace">
+                    <img src="~/Assets/images/howtorent/GoToMarkplace.png" class="card-img-top" alt="Go To Markplace">
                 </div>
             </div>
         </div>
@@ -594,7 +170,7 @@
         <div class="row row-cols-1 row-cols-md-2 g-4">
             <div class="col">
                 <div class="card border-0">
-                    <img src="~/Assets/img/InYourLife.png" alt="In Your Life">
+                    <img src="~/Assets/images/howtorent/InYourLife.png" alt="In Your Life">
                 </div>
             </div>
             <div class="col d-flex justify-content-center align-items-center">
@@ -619,7 +195,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div class="card border-0">
-                        <img src="~/Assets/img/Sign-Up.png" class="card-img-top" alt="Sign-Up">
+                        <img src="~/Assets/images/howtorent/Sign-Up.png" class="card-img-top" alt="Sign-Up">
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
@@ -635,7 +211,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div class="card border-0">
-                        <img src="~/Assets/img/Sign-Up.png" class="card-img-top" alt="Discover">
+                        <img src="~/Assets/images/howtorent/Sign-Up.png" class="card-img-top" alt="Discover">
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
@@ -651,7 +227,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div class="card border-0">
-                        <img src="~/Assets/img/Book & Enjoy.png" class="card-img-top" alt="Book & Enjoy">
+                        <img src="~/Assets/images/howtorent/Book & Enjoy.png" class="card-img-top" alt="Book & Enjoy">
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
@@ -670,7 +246,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
                     <div class="card border-0">
-                        <img src="~/Assets/img/Return & Review.png" class="card-img-top" alt="Return & Review">
+                        <img src="~/Assets/images/howtorent/Return & Review.png" class="card-img-top" alt="Return & Review">
                     </div>
                 </div>
                 <div class="col d-flex justify-content-center align-items-center">
@@ -726,7 +302,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <div class="card border-0">
-                    <img src="~/Assets/img/Secure&Trusted.png" class="card-img-top" alt="Secure & Trusted">
+                    <img src="~/Assets/images/howtorent/Secure&Trusted.png" class="card-img-top" alt="Secure & Trusted">
                     <div class="card-body">
                         <h5 class="card-title">Secure & Trusted</h5>
                         <p class="card-text">Your safety is our top priority</p>
@@ -735,7 +311,7 @@
             </div>
             <div class="col">
                 <div class="card border-0">
-                    <img src="~/Assets/img/24-7 Support.png" class="card-img-top" alt="24/7 Support">
+                    <img src="~/Assets/images/howtorent/24-7 Support.png" class="card-img-top" alt="24/7 Support">
                     <div class="card-body">
                         <h5 class="card-title">24/7 Support</h5>
                         <p class="card-text">No question or concern is too small</p>
@@ -744,7 +320,7 @@
             </div>
             <div class="col">
                 <div class="card border-0">
-                    <img src="~/Assets/img/Passionate Owners.png" class="card-img-top" alt="Passionate Owners">
+                    <img src="~/Assets/images/howtorent/Passionate Owners.png" class="card-img-top" alt="Passionate Owners">
                     <div class="card-body">
                         <h5 class="card-title">Passionate Owners</h5>
                         <p class="card-text">Rent directly from the experts</p>
@@ -780,22 +356,35 @@
     </div>
 </div>
 
-<!-- Swiper JS -->
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<!-- Initialize Swiper -->
-<script>
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-    });
-</script>
+
+@section topCSS{
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <!-- Link CSS -->
+    <link href="~/Assets/css/howtorent.css" rel="stylesheet" />
+
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+}
+@section endJS{
+    <!-- Bootstrap JS-->
+    @*<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/217f09c56f.js" crossorigin="anonymous"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script src="~/Assets/js/howtorent.js"></script>
+}
 
