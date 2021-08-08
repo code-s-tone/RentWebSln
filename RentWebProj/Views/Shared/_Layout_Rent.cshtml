@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Assets/css/Layout_rent/reset.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/160bae148b.js" crossorigin="anonymous"></script>
@@ -21,9 +22,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
-    <link href="~/Layout_Rent/CSS/footer.css" rel="stylesheet" />
-    <link href="~/Layout_Rent/CSS/header.css" rel="stylesheet" />
-    <link href="~/Layout_Rent/CSS/sidebar.css" rel="stylesheet" />
+    <link href="~/Assets/css/Layout_rent/header.css" rel="stylesheet" />
+    <link href="~/Assets/css/Layout_rent/sidebar.css" rel="stylesheet" />
+    <link href="~/Assets/css/Layout_rent/footer.css" rel="stylesheet" />
 
     <title>知租網</title>
 
@@ -48,7 +49,7 @@
 
             <div class="header-nav">
                 <div class="logo d-grid">
-                    <a class="m-auto" href="#">JUST RENT</a>
+                    <a class="m-auto" href="#">知租網</a>
                 </div>
 
 
@@ -64,14 +65,14 @@
                         </form>
                     </div>
 
-                    <div class="header-member-box d-flex">
+                    <div class="header-member-box">
 
-                        <img src="~/Layout_Rent/img/cart.png" alt="" id="shoppingCart-icon" title="購物車" />
+                        <img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon" title="購物車">
+                        
                         <div class="member-dropdown">
-
-                            <img src="~/Layout_Rent/img/member.png" alt="" id="member-icon" title="會員中心">
+                            <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
                             <ul class="member-subMenu">
-                                <div class="profileBox d-flex">
+                                <div class="profileBox">
                                     <div class="profileImg d-grid"><img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt=""></div>
                                     <div class="profileWelcome"><span>Hello</span><p class="profile-name">庭安</p></div>
                                 </div>
@@ -107,9 +108,11 @@
                             <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
 
                             <ul class="sub-menu">
-                                <li><a href="#">租狗狗</a></li>
-                                <li><a href="#">租女友</a></li>
-                                <li><a href="https://www.yahoo.com.tw">Card Design</a></li>
+                                <li><a href="#">所有種類</a></li>
+                                <li><a href="#">想租車車</a></li>
+                                <li><a href="#">想租配件</a></li>
+                                <li><a href="#">想租女友</a></li>
+                                <li><a href="#">想租狗狗</a></li>
                             </ul>
                         </li>
                         <li>
@@ -131,7 +134,7 @@
                             <a href="#">葉配一下<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
                                 <li><a href="#">共享經濟</a></li>
-                                <li><a href="#">蘋果報導</a></li>
+                                <li><a href="#">上新聞了</a></li>
                                 <li><a href="#">網紅推推</a></li>
                             </ul>
                         </li>
@@ -145,20 +148,44 @@
     <div id="sidebarContent">
         <div class="sidenav">
 
-            <div class="logoBox d-grid">
-                <span class="ms-3 my-auto">JUST RENT</span>
+            <div class="logoBox">
+                <a href="#" class="ms-3 my-auto">知租網</a>
             </div>
 
-            <div class="sidebar-btn d-flex">
+            <!-- 登入後秀出名字 -->
+            <div class="profileBox">
+                <div class="profileImg d-grid">
+                    <img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt="">
+                </div>
+                <div class="profileWelcome">
+                    <span>Hello</span><p class="profile-name">庭安</p>
+                </div>
+            </div>
+
+
+            <div class="sidebar-btn">
                 <a href="#" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
                 <a href="#" class="signUpBtn d-grid"><span class="m-auto">註冊</span></a>
             </div>
 
             <div class="linkBox">
+                <div class="sidebar-member-link">
+                    <a href="#" class="dropdown-btn"> 會員中心 <i class="fas fa-caret-down"></i></a>
+                    <div class="dropdown-container">
+                        <a href="#">通知</a>
+                        <a href="#">我的訂單</a>
+                        <a href="#">會員資料/修改</a>
+                        <a href="#" class="signOutBtn">登出</a>
+                    </div>
+                </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">租狗狗</a>
-                    <a href="#">租女友</a>
+                    <a href="#">所有種類</a>
+                    <a href="#">想租車車</a>
+                    <a href="#">想租配件</a>
+                    <a href="#">想租女友</a>
+                    <a href="#">想租狗狗</a>
+                    <a href="#">想租車車</a>
                 </div>
                 <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
@@ -167,13 +194,13 @@
                 <a href="#" class="dropdown-btn"> 關於我們 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     <a href="#">我們的故事</a>
-                    <a href="#">你租我喝飲料計畫</a>
+                    <a href="#">回饋計畫</a>
                     <a href="#">聯繫我們</a>
                 </div>
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     <a href="#">共享經濟</a>
-                    <a href="#">蘋果報導</a>
+                    <a href="#">上新聞了</a>
                     <a href="#">網紅推薦</a>
                 </div>
             </div>
@@ -181,8 +208,8 @@
 
             <p class="text-center mt-3">download the free<br>mobile app</p>
             <div class="appDownload d-flex justify-content-center">
-                <img src="~/Layout_Rent/img/googlePlay_white.jpg" style="height: 30px;" class="mx-1" alt="">
-                <img src="~/Layout_Rent/img/appleStore_white.jpg" style="height: 30px;" class="mx-1" alt="">
+                <img src="~/Assets/images/Layout_Rent/googlePlay_white.jpg" style="height: 30px;" class="mx-1" alt="">
+                <img src="~/Assets/images/Layout_Rent/appleStore_white.jpg" style="height: 30px;" class="mx-1" alt="">
             </div>
 
             <div class="social-media d-flex mt-4 justify-content-center">
@@ -193,103 +220,103 @@
         </div>
     </div>
 
-        @RenderBody()
+    @RenderBody()
 
-        <footer class="site-footer">
-            <div class="container-xl">
-                <div class="row">
-                    <div class="col-12 col-md-12 d-flex">
-                        <h2>JUST RENT</h2>
-                        <p class="ms-3 my-auto">© 2021 All Rights Reserved.</p>
-                    </div>
-                    <div class="col-6 col-md-2">
-                        <ul class="footer-links">
-                            <li>0912345678</li>
-                            <li>codestone@gmail.com</li>
-                            <li>© 2021 All Rights Reserved.</li>
-                        </ul>
-                        <ul class="social-icons">
-                            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-                        </ul>
-                    </div>
+    <footer class="site-footer">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-12 col-md-12 d-flex">
+                    <h2>JUST RENT</h2>
+                    <p class="ms-3 my-auto">© 2021 All Rights Reserved.</p>
+                </div>
+                <div class="col-6 col-md-2">
+                    <ul class="footer-links">
+                        <li>0912345678</li>
+                        <li>codestone@gmail.com</li>
+                        <li>© 2021 All Rights Reserved.</li>
+                    </ul>
+                    <ul class="social-icons">
+                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </div>
 
-                    <div class="col-6 col-md-2">
-                        <ul class="footer-links">
-                            <li><a href="#">Marketplace</a></li>
-                            <li><a href="#">Referral Program</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">Help Articles</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
-                    </div>
+                <div class="col-6 col-md-2">
+                    <ul class="footer-links">
+                        <li><a href="#">Marketplace</a></li>
+                        <li><a href="#">Referral Program</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Help Articles</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
 
-                    <div class="col-6 col-md-2">
+                <div class="col-6 col-md-2">
 
-                        <ul class="footer-links">
-                            <li><a href="#">How to Post</a></li>
-                            <li><a href="#">How to Rent</a></li>
-                            <li><a href="#">TreeProject</a></li>
-                            <li><a href="#">Side-Hustle</a></li>
-                            <li><a href="#">RuckifyStore</a></li>
-                        </ul>
-                    </div>
+                    <ul class="footer-links">
+                        <li><a href="#">How to Post</a></li>
+                        <li><a href="#">How to Rent</a></li>
+                        <li><a href="#">TreeProject</a></li>
+                        <li><a href="#">Side-Hustle</a></li>
+                        <li><a href="#">RuckifyStore</a></li>
+                    </ul>
+                </div>
 
-                    <div class="col-6 col-md-2">
-                        <ul class="footer-links">
-                            <li><a href="#">Investment Inquiries</a></li>
-                            <li><a href="#">Ruckify RV</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Rent Anything Group</a></li>
-                            <li><a href="#">About</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md-2">
+                <div class="col-6 col-md-2">
+                    <ul class="footer-links">
+                        <li><a href="#">Investment Inquiries</a></li>
+                        <li><a href="#">Ruckify RV</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Rent Anything Group</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2">
 
-                        <ul class="footer-links">
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Privacy</a></li>
-                            <li><a href="#">Insurance</a></li>
-                            <li><a href="#">Cancellations</a></li>
-                            <li><a href="#">Payment Payouts</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-6 col-md-2">
-                        <ul class="footer-links appDownload">
-                            <li><a href="#"><img src="~/Layout_Rent/img/googleplay.png" alt="" style="width: 110px;"></a></li>
-                            <li><a href="#"><img src="~/Layout_Rent/img/applestore.png" alt="" style="width: 110px;"></a></li>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Insurance</a></li>
+                        <li><a href="#">Cancellations</a></li>
+                        <li><a href="#">Payment Payouts</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2">
+                    <ul class="footer-links appDownload">
+                        <li><a href="#"><img src="~/Assets/images/Layout_Rent/googleplay.png" alt="" style="width: 110px;"></a></li>
+                        <li><a href="#"><img src="~/Assets/images/Layout_Rent/applestore.png" alt="" style="width: 110px;"></a></li>
 
-                        </ul>
+                    </ul>
 
-
-                    </div>
 
                 </div>
+
             </div>
-
-
-
-        </footer>
-        <div class="chatIcon">
-            <!-- <i class="fas fa-sms"></i> -->
-            <img src="~/Layout_Rent/img/chatIcon3.png" alt="">
-            <div class="chatBox">聊天室</div>
         </div>
 
 
-        <script src="~/Layout_Rent/JS/header.js"></script>
-        <script src="~/Layout_Rent/JS/sidebar.js"></script>
-        <script src="~/Layout_Rent/JS/footer.js"></script>
+
+    </footer>
+    <div class="chatIcon">
+        <!-- <i class="fas fa-sms"></i> -->
+        <img src="~/Assets/images/Layout_Rent/chatIcon3.png" alt="">
+        <div class="chatBox">聊天室</div>
+    </div>
+
+    <script src="~/Assets/js/Layout_Rent/header.js"></script>
+    <script src="~/Assets/js/Layout_Rent/sidebar.js"></script>
+    <script src="~/Assets/js/Layout_Rent/footer.js"></script>
 
 
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-        @RenderSection("endCSS", required: false)
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
-        @RenderSection("endJS", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("endCSS", required: false)
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    @RenderSection("endJS", required: false)
 </body>
 </html>
