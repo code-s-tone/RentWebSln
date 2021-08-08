@@ -18,13 +18,14 @@ dropdownBtns.forEach(btn => {
 $(document).ready(function () {
 
     $(document).on('click', function (e) {
-        e.preventDefault();
         if (e.target.classList.contains("hb") && !($(".sidenav").hasClass("show"))) {
+            e.preventDefault();
             $(".sidenav").addClass("show");
             $(".overlayMobile").addClass("active");
             $(".hb").addClass("hb_open");
         }
         else if ($(".sidenav").hasClass("show") && ($("#sidebarContent").find(e.target).length == 0 || e.target.classList.contains("hb"))) {
+            e.preventDefault();
             $(".sidenav").removeClass("show");
             $(".overlayMobile").removeClass("active");
             $(".hb").removeClass("hb_open");
