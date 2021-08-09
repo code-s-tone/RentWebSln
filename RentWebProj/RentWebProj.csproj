@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
+    <Content Include="Assets\css\dateTimePicker.css" />
     <Content Include="Assets\css\doThing.css" />
     <Content Include="Assets\css\economy.css" />
     <Content Include="Assets\css\helpTo.css" />
@@ -191,6 +192,7 @@
     <Content Include="Assets\images\Why_Icons_Protection-120x120.png" />
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\countUp.js" />
+    <Content Include="Assets\js\datetimePicker.js" />
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\swiperInHtml.js" />
