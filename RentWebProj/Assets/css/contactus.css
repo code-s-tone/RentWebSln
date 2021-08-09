@@ -68,6 +68,9 @@ a {
     text-decoration: none;
     border-bottom: 3px solid orange;
 }
+.enter{
+    margin-bottom:50px;
+}
 
 @media screen and (max-width:768px) {
     .banner {
