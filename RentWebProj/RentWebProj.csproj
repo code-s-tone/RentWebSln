@@ -153,6 +153,7 @@
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
     <Content Include="Assets\css\dateTimePicker.css" />
+    <Content Include="Assets\css\contactus.css" />
     <Content Include="Assets\css\doThing.css" />
     <Content Include="Assets\css\economy.css" />
     <Content Include="Assets\css\helpTo.css" />
@@ -172,6 +173,7 @@
     <Content Include="Assets\css\ProductSubCategory.css" />
     <Content Include="Assets\css\swiper.css" />
     <Content Include="Assets\css\whyChoose.css" />
+    <Content Include="Assets\images\about_banner.jpg" />
     <Content Include="Assets\images\Banner.jpg" />
     <Content Include="Assets\images\Banner_change.jpg" />
     <Content Include="Assets\images\Banner_change_rev.jpg" />
