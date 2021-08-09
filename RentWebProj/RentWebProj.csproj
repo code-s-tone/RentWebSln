@@ -137,6 +137,7 @@
     <Content Include="Assets\css\conrtibution.css" />
     <Content Include="Assets\css\howtorent.css" />
     <Content Include="Assets\css\index.css" />
+    <Content Include="Assets\css\Index\index.css" />
     <Content Include="Assets\css\Layout_rent\footer.css" />
     <Content Include="Assets\css\Layout_rent\header.css" />
     <Content Include="Assets\css\Layout_rent\reset.css" />
@@ -215,6 +216,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Assets\css\Index\index.css.map" />
+    <Content Include="Assets\css\Index\index.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
