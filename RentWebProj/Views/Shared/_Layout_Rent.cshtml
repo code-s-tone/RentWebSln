@@ -121,7 +121,7 @@
                         <li>
                             <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="#">如何租借</a></li>
+                                @Html.ActionLink("如何租借", "HowToRent","Home")
                                 <!-- <li><a href="#"></a></li> -->
                             </ul>
                         </li>
@@ -192,7 +192,7 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">如何租借</a>
+                    @Html.ActionLink("如何租借", "HowToRent", "Home")
                 </div>
                 <a href="#" class="dropdown-btn"> 關於我們 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
