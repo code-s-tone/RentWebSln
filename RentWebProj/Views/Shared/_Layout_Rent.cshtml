@@ -110,18 +110,19 @@
                             <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
 
                             <ul class="sub-menu">
-                                <li><a href="#">所有種類</a></li>
+                                <li>@Html.ActionLink("所有種類", "ProductCategory", "Product")</li>
                                 <li><a href="#">想租車車</a></li>
                                 <li><a href="#">想租配件</a></li>
                                 <li><a href="#">想租女友</a></li>
                                 <li><a href="#">想租狗狗</a></li>
+                                <li>@Html.ActionLink("想租電動", "ProductSubCategory", "Product")</li>
                                 <li><a href="https://www.yahoo.com.tw">測試雅虎</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="#">如何租借</a></li>
+                                <li>@Html.ActionLink("如何租借", "HowToRent", "Home")</li>
                                 <!-- <li><a href="#"></a></li> -->
                             </ul>
                         </li>
@@ -183,21 +184,21 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">所有種類</a>
+                    @Html.ActionLink("所有種類", "ProductCategory", "Product")
                     <a href="#">想租車車</a>
                     <a href="#">想租配件</a>
                     <a href="#">想租女友</a>
                     <a href="#">想租狗狗</a>
-                    <a href="#">想租車車</a>
+                    @Html.ActionLink("想租電動", "ProductSubCategory", "Product")
                 </div>
                 <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">如何租借</a>
+                    @Html.ActionLink("如何租借", "HowToRent", "Home")
                 </div>
                 <a href="#" class="dropdown-btn"> 關於我們 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     <a href="#">我們的故事</a>
-                    <a href="#">回饋計畫</a>
+                    @Html.ActionLink("回饋計畫", "ContributionProgram", "Home")
                     <a href="#">聯繫我們</a>
                 </div>
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
