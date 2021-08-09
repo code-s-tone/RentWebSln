@@ -1,0 +1,89 @@
+﻿.banner {
+    background-image: url(https://cdn.ruckify.com/pages/uploads/2020/10/30165718/Contact_Us_Header.jpg);
+    height: 700px;
+    /* 透明度 0.6 的黑色半透明遮罩 */
+    background-color: rgba(0, 0, 0, .3);
+    /* 設置背景混和模式為相乘模式 */
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: 50%;
+    transition: 0.5s;
+}
+
+.banner h1 {
+    color: white;
+    font-size: 100px;
+    font-weight: bolder;
+    line-height: 700px;
+    text-align: center;
+    transition: 0.5s;
+}
+
+a {
+    color: #fc8d61;
+    text-decoration: none;
+}
+
+.btn-s {
+    width: 90px;
+    height: 35px;
+    background-color: #fc8d61;
+    color: white;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5%;
+    font-size: 15px;
+}
+
+.container input {
+    background-color: #f5f8fa;
+}
+
+.container textarea {
+    background-color: #f5f8fa;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+.nav-link {
+    color: black;
+}
+
+    .nav-link:hover {
+        color: orange;
+        text-decoration: none;
+        border-bottom: 3px solid orange;
+    }
+
+    .nav-link:active {
+        color: orange;
+        text-decoration: none;
+        border-bottom: 3px solid orange;
+    }
+
+.we {
+    color: orange;
+    text-decoration: none;
+    border-bottom: 3px solid orange;
+}
+
+@media screen and (max-width:768px) {
+    .banner {
+        height: 300px;
+    }
+
+        .banner h1 {
+            font-size: 50px;
+            line-height: 300px;
+        }
+
+    .row p {
+        padding: 20px;
+    }
+
+    .enter {
+        padding: 50px;
+    }
+}
