@@ -120,7 +120,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\DoraTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SocialMediaController.cs" />
@@ -136,7 +135,12 @@
     <Content Include="Assets\css\helpTo.css" />
     <Content Include="Assets\css\howTo.css" />
     <Content Include="Assets\css\conrtibution.css" />
+    <Content Include="Assets\css\howtorent.css" />
     <Content Include="Assets\css\index.css" />
+    <Content Include="Assets\css\Layout_rent\footer.css" />
+    <Content Include="Assets\css\Layout_rent\header.css" />
+    <Content Include="Assets\css\Layout_rent\reset.css" />
+    <Content Include="Assets\css\Layout_rent\sidebar.css" />
     <Content Include="Assets\css\Login-Sign.css" />
     <Content Include="Assets\css\ProductCarousel.css" />
     <Content Include="Assets\css\ProductCarousel.js" />
@@ -147,8 +151,24 @@
     <Content Include="Assets\images\Banner.jpg" />
     <Content Include="Assets\images\Banner_change.jpg" />
     <Content Include="Assets\images\Banner_change_rev.jpg" />
+    <Content Include="Assets\images\cart\A451.jpg" />
     <Content Include="Assets\images\girl-planting.jpg" />
     <Content Include="Assets\images\Haiti_2018_Seedlings-2.jpg" />
+    <Content Include="Assets\images\howtorent\24-7 Support.png" />
+    <Content Include="Assets\images\howtorent\banner.png" />
+    <Content Include="Assets\images\howtorent\Book &amp; Enjoy.png" />
+    <Content Include="Assets\images\howtorent\Declutter Your Life.png" />
+    <Content Include="Assets\images\howtorent\Do More, Don’t Buy More.png" />
+    <Content Include="Assets\images\howtorent\Easy Cancellation.png" />
+    <Content Include="Assets\images\howtorent\GoToMarkplace.png" />
+    <Content Include="Assets\images\howtorent\InYourLife.png" />
+    <Content Include="Assets\images\howtorent\Join The Community.png" />
+    <Content Include="Assets\images\howtorent\Passionate Owners.png" />
+    <Content Include="Assets\images\howtorent\Reduce Global Warming.png" />
+    <Content Include="Assets\images\howtorent\Return &amp; Review.png" />
+    <Content Include="Assets\images\howtorent\Save Your Money.png" />
+    <Content Include="Assets\images\howtorent\Secure&amp;Trusted.png" />
+    <Content Include="Assets\images\howtorent\Sign-Up.png" />
     <Content Include="Assets\images\Howto_Earth.png" />
     <Content Include="Assets\images\Howto_leaf.png" />
     <Content Include="Assets\images\Howto_Sprout.png" />
@@ -170,6 +190,7 @@
     <Content Include="Assets\images\Why_Icons_Protection-120x120.png" />
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\countUp.js" />
+    <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\swiperInHtml.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -180,15 +201,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Layout_Rent\CSS\footer.css" />
-    <Content Include="Layout_Rent\CSS\header.css" />
-    <Content Include="Layout_Rent\CSS\sidebar.css" />
-    <Content Include="Layout_Rent\HTML\footer.html" />
-    <Content Include="Layout_Rent\HTML\header.html" />
-    <Content Include="Layout_Rent\HTML\sidebar.html" />
-    <Content Include="Layout_Rent\JS\footer.js" />
-    <Content Include="Layout_Rent\JS\header.js" />
-    <Content Include="Layout_Rent\JS\sidebar.js" />
+    <Content Include="Assets\js\Layout_Rent\footer.js" />
+    <Content Include="Assets\js\Layout_Rent\header.js" />
+    <Content Include="Assets\js\Layout_Rent\sidebar.js" />
     <Content Include="HtmlPages\treeProject.html" />
     <Content Include="Assets\css\index.css.map" />
     <Content Include="Assets\css\index.scss" />
@@ -232,7 +247,6 @@
     <Content Include="Views\Home\ContributionProgram.cshtml" />
     <Content Include="Views\Home\OurStory.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
-    <Content Include="Views\DoraTest\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
@@ -243,7 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Layout_Rent\img\" />
+    <Folder Include="Assets\images\Layout_Rent\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

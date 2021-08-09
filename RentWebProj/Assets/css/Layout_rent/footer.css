@@ -1,5 +1,4 @@
 ﻿/* Footer Style*/
-
 footer .row {
     max-width: 1200px;
     margin: auto;
@@ -17,7 +16,6 @@ body {
     bottom: 0px;
     right: 0;
     position: fixed;
-    z-index:50;
     /* 就算sidebar彈出 聊天室窗也一直在最上面 */
 }
 
