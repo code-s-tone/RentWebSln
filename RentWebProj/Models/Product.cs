@@ -11,11 +11,12 @@ namespace RentWebProj.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            ProductImages = new HashSet<ProductImage>();
             OrderDetails = new HashSet<OrderDetail>();
+            ProductImages = new HashSet<ProductImage>();
         }
 
-        public int ProductID { get; set; }
+        [StringLength(20)]
+        public string ProductID { get; set; }
 
         [StringLength(50)]
         public string ProductName { get; set; }
@@ -40,9 +41,9 @@ namespace RentWebProj.Models
         public virtual Category Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
     }
 }

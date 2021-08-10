@@ -46,10 +46,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -131,7 +131,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SocialMediaController.cs" />
-    <Compile Include="Controllers\testMemberC.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -160,7 +159,6 @@
     <Content Include="Assets\css\howTo.css" />
     <Content Include="Assets\css\conrtibution.css" />
     <Content Include="Assets\css\howtorent.css" />
-    <Content Include="Assets\css\index.css" />
     <Content Include="Assets\css\Index\index.css" />
     <Content Include="Assets\css\Layout_rent\footer.css" />
     <Content Include="Assets\css\Layout_rent\header.css" />
@@ -224,6 +222,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap5.0.1.min.css" />
+    <Content Include="Content\swiper-bundle.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,8 +232,6 @@
     <Content Include="Assets\js\Layout_Rent\header.js" />
     <Content Include="Assets\js\Layout_Rent\sidebar.js" />
     <Content Include="HtmlPages\treeProject.html" />
-    <Content Include="Assets\css\index.css.map" />
-    <Content Include="Assets\css\index.scss" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -247,6 +245,8 @@
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap5.0.1-bundle.min.js" />
+    <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -257,6 +257,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\swiper-bundle.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -283,11 +284,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Product\ProductCategory.cshtml" />
     <Content Include="Views\Product\ProductSubCategory.cshtml" />
-    <Content Include="Views\testMemberC\Create.cshtml" />
-    <Content Include="Views\testMemberC\Delete.cshtml" />
-    <Content Include="Views\testMemberC\Details.cshtml" />
-    <Content Include="Views\testMemberC\Edit.cshtml" />
-    <Content Include="Views\testMemberC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

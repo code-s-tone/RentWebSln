@@ -9,9 +9,13 @@ namespace RentWebProj.Models
     public partial class ProductImage
     {
         [Key]
+        [Column(Order = 0)]
         public int ImageID { get; set; }
 
-        public int ProductID { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [StringLength(20)]
+        public string ProductID { get; set; }
 
         public string Source { get; set; }
 

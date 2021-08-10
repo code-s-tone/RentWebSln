@@ -14,15 +14,15 @@ namespace RentWebProj.Models
 
         public virtual DbSet<Administer> Administers { get; set; }
         public virtual DbSet<BranchStore> BranchStores { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<DeliveryOption> DeliveryOptions { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SignWay> SignWays { get; set; }
-        public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -41,6 +41,14 @@ namespace RentWebProj.Models
                 .WithRequired(e => e.DeliveryOption)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.DailyRate)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.TotalAmount)
+                .HasPrecision(19, 4);
+
             modelBuilder.Entity<Order>()
                 .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Order)
@@ -51,12 +59,12 @@ namespace RentWebProj.Models
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.ProductImages)
+                .HasMany(e => e.OrderDetails)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
-                .HasMany(e => e.OrderDetails)
+                .HasMany(e => e.ProductImages)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
 
@@ -64,14 +72,6 @@ namespace RentWebProj.Models
                 .HasMany(e => e.Members)
                 .WithRequired(e => e.SignWay)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<OrderDetail>()
-                .Property(e => e.DailyRate)
-                .HasPrecision(19, 4);
-
-            modelBuilder.Entity<OrderDetail>()
-                .Property(e => e.TotalAmount)
-                .HasPrecision(19, 4);
         }
     }
 }

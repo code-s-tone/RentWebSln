@@ -15,8 +15,8 @@ namespace RentWebProj.Models
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ProductID { get; set; }
+        [StringLength(20)]
+        public string ProductID { get; set; }
 
         [Column(TypeName = "money")]
         public decimal? DailyRate { get; set; }
