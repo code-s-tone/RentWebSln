@@ -161,6 +161,7 @@
                     ProductName = x.ProductName,
                     CategoryName =
                     Model.FirstOrDefault(c => c.CategoryID == x.CategoryID).CategoryName
+                    //Model在此頁和db.Category雷同
                 });
 
         //Query Expression
