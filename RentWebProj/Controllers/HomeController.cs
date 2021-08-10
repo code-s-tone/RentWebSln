@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentWebProj.Models;
 
 namespace RentWebProj.Controllers
 {
     public class HomeController : Controller
     {
+        private RentContext db = new RentContext();
         public ActionResult Index()
         {
-            return View();
+            return View(db.Categories.ToList());
         }
 
         public ActionResult ContactUs()
