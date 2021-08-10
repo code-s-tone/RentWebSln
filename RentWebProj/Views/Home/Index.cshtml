@@ -42,6 +42,7 @@
                         </div>
                         <div class="textBox">
                             <div>
+                                @item.CategoryName v.s.
                                 @Html.DisplayFor(modelItem => item.CategoryName)
                             </div>
                         </div>
@@ -144,36 +145,41 @@
         </div>
     </section>
 
+    @{
+        //如果有通用的邏輯可以移植到其他類別檔，放到Services資料夾，例如：
+        //List<Product> ProductItems = new ProductService().getProductData();
 
-    <section class="category-sample">
-        <h3>
-            產品類1
-            <a href="">(see all)</a>
-        </h3>
-        <div class="d-flex">
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-        </div>
-    </section>
+        RentContext db = new RentContext();
 
-    <section class="category-sample">
-        <h3>
-            產品類2
-            <a href="">(see all)</a>
-        </h3>
-        <div class="d-flex">
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-            <div class="card-item"></div>
-        </div>
-    </section>
+        //Method Expression  有join時，這方法很吃邏輯
+        List<Product> ProductItems = db.Products.ToList();
+        var category1 = ProductItems
+                .Where(x => x.CategoryID == 1)
+                .Take(6)
+                .Select(x => new IndexProduct
+                {
+                    ProductName = x.ProductName,
+                    CategoryName =
+                    Model.FirstOrDefault(c => c.CategoryID == x.CategoryID).CategoryName
+                });
+
+        //Query Expression
+        var category2 = (from p in db.Products
+                         join c in db.Categories
+                         on p.CategoryID equals c.CategoryID
+                         where p.CategoryID == 2
+                         select new IndexProduct { ProductName = p.ProductName, CategoryName = c.CategoryName }
+                    ).Take(6);
+
+
+        //dapper法 ORM講義p.29~p.34
+        //連線字串connStr 連線執行個體conn  引數群物件Obj 查詢語法sql字串
+        //var conn  = new SqlConnection (connStr);
+        //conn.Execute(sql,Obj);
+    }
+    @addProduct(category1)
+    @addProduct(category2)
+
 
     <section id="blogPosts" class="Area">
         <h3>
@@ -224,18 +230,36 @@
 
 <div id="cookiePermission"></div>
 
+@helper addProduct(IEnumerable<IndexProduct> items)
+{
+    <section class="category-sample">
+        <h3>
+            產品類
+            @items.FirstOrDefault().CategoryName
+            <a href="">(see all)</a>
+        </h3>
+        <div class="d-flex">
+            @foreach (var item in items)
+            {
+                <div class="card-item">@item.ProductName</div>
+            }
+        </div>
+    </section>
+
+
+}
 
 
 @section topCSS{
     <!-- swiper -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
+    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <link href="~/Assets/css/Index/index.css" rel="stylesheet">
 }
 @section endJS{
     <!-- fontawesome -->
-    <script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/fontawesome.js" crossorigin="anonymous"></script>
     <!-- swiper -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="~/Scripts/swiper-bundle.min.js"></script>
     <script src="~/Assets/js/index.js"></script>
 
 }
