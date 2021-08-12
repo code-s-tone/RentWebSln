@@ -10,12 +10,17 @@ namespace RentWebProj.Services
 {
     public class IndexService
     {
+        private CommonRepository _repository;
+        public IndexService()
+        {
+            _repository = new CommonRepository(new RentContext());
+        }
+
         public IEnumerable<IndexCategoryView> getCategoryData()
         {
             IEnumerable<IndexCategoryView> VMList;
 
-            var repository = new CommonRepository(new RentContext());
-            var DMList = repository.GetAll<Category>();
+            var DMList = _repository.GetAll<Category>();
 
             //篩選、轉型
             //Method Expression  有join時，這方法很吃邏輯
@@ -34,9 +39,8 @@ namespace RentWebProj.Services
         {
             IEnumerable<IndexProductView> VMList;
 
-            var repository = new CommonRepository(new RentContext());
-            var pDMList = repository.GetAll<Product>();
-            var cDMList = repository.GetAll<Category>();
+            var pDMList = _repository.GetAll<Product>();
+            var cDMList = _repository.GetAll<Category>();
 
             //篩選、轉型
             //Method Expression  有join時，這方法很吃邏輯
