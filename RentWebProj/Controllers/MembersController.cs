@@ -128,5 +128,10 @@ namespace RentWebProj.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult MemBerCenter()
+        {
+            return View();
+        }
     }
 }
