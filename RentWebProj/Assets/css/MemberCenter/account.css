@@ -1,0 +1,17 @@
+.member-display-account-detail{
+
+}
+
+.member-display-email-container{
+    
+}
+
+.member-display-new-email-context{
+    display:flex;
+    align-items: center;
+}
+
+.member-display-new-email,
+.member-display-doublecheck-email{
+    max-width: 200px;
+}
