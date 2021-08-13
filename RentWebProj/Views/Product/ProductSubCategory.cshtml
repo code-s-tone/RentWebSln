@@ -1,407 +1,402 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "ProductSubCategory";
 }
 
+<div class="bigbox container-xl">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="row pt-lg-3 px-0">
 
+        <!-- Left -->
+        <div class="col-lg-3 px-2 mx-0 left">
+
+            <form action="">
+                <div class="group">
+                    <label for="Search" class="distence">
+                        <strong>Search</strong>
+                    </label> <br>
+
+                    <input type="text" id="Search" class="btn input_text distence" placeholder="Item Name or Space">
+                    <select name="Category" id="Category" class="input_text distence">
+                        <option value="0">Select a Category</option>
+                        <option value="1">交通工具</option>
+                        <option value="2">人才</option>
+                        <option value="3">寵物</option>
+                        <option value="4">飾品美妝</option>
+                        <option value="5" selected="selected">電視遊戲</option>
+                        <option value="6">桌遊</option>
+                        <option value="7">書本</option>
+                    </select>
+
+                    <select name="SubCategory" id="SubCategory" class="input_text distence">
+                        <option value="0">Select a Sub-Category</option>
+                        <option value="1">PS5-遊戲片</option>
+                        <option value="2">Switch-遊戲片</option>
+                        <option value="3">遊戲主機</option>
+                    </select>
+                </div>
+
+                <div class="group">
+                    <label for="Location" class="distence">
+                        <strong>Location</strong>
+                    </label> <br>
+                    <input type="button" id="Location" class="btn btn-default input_text distence"
+                           value="新竹 Hsinchu" readonly>
+                    <div id="map" class="distence"> </div>
+                </div>
+
+                <div class="group">
+                    <label for="Sort-by" class="distence">
+                        <strong>Sort by</strong>
+                    </label> <br>
+                    <input type="radio" id="relevance" name="Sort-by" value="Relevance">
+                    <label for="relevance">Relevance</label><br>
+
+                    <input type="radio" id="price" name="Sort-by" value="Price">
+                    <label for="price">Price</label><br>
+
+                    <input type="radio" id="distance" name="Sort-by" value="Distance">
+                    <label for="distance">Distance</label><br>
+                </div>
+
+                <div class="group">
+                    <label for="Condition" class="distence">
+                        <strong>Condition</strong>
+                    </label> <br>
+
+                    <input type="checkbox" id="check1" name="check1" value="JustLikeNew">
+                    <label for="check1">Just Like New</label><br>
+
+                    <input type="checkbox" id="check2" name="check2" value="GentlyLoved">
+                    <label for="check2">Gently Loved</label><br>
+
+                    <input type="checkbox" id="check3" name="check3" value="Decent">
+                    <label for="check3">Decent</label><br>
+
+                    <input type="checkbox" id="check4" name="check4" value="HasSomeCharacter">
+                    <label for="check4">Has Some Character</label><br>
+                </div>
+
+                <div class="group">
+                    <label for="Budget" class="distence">
+                        <strong>Budget</strong>
+                    </label> <br>
+                    <select name="Rate" id="Rate" class="input_text distence">
+                        <option value="0">Type of Rate</option>
+                        <option value="1">Hourly</option>
+                        <option value="2">Daily</option>
+                        <option value="3">Weekly</option>
+                        <option value="4">Monthly</option>
+                    </select>
+
+                    <button type="reset" class="btn btn-default clear distence"> Clear Filters </button>
+                    <input type="submit" value="Filter My Results" class="distence filter_result">
+                </div>
+            </form>
+        </div>
+
+        <!-- Right -->
+        <div class="col-lg-9 col-12 px-2 px-lg-4 mb-4 mx-0 right">
+            <div class="col-12 mt-lg-3 px-3">
+                <h2>電視遊戲</h2>
+            </div>
+
+            <div class="box">
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card px">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/1.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>惡魔靈魂</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus distinctio provident rerum? Dolorem velit assumenda earum debitis repellat sequi inventore necessitatibus, sapiente qui voluptate numquam, libero id corporis, minus aut?</p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+                        <select name="rent_price" id="rent_price" class="input_text distence">
+                            <option value="0">$10 Daily</option>
+                            <option value="1">$50 Weekly</option>
+                            <option value="2">$180 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/2.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>Godfall</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus distinctio provident </p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+                        <select name="rent_price" id="rent_price" class="input_text distence">
+                            <option value="0">$10 Daily</option>
+                            <option value="1">$50 Weekly</option>
+                            <option value="2">$180 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/3.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>馬力歐賽車</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+                            <p>(描述...)</p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+                        <select name="rent_price" id="rent_price" class="input_text distence">
+                            <option value="0">$20 Daily</option>
+                            <option value="1">$100 Weekly</option>
+                            <option value="2">$300 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/4.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>動物森友會</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+                            <p>(描述...)</p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+
+                        <select name="rent_price" id="rent_price" class="input_text distence">
+                            <option value="0">$8 Daily</option>
+                            <option value="1">$40 Weekly</option>
+                            <option value="2">$150 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/5.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>PS5盒</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+                            <p>(描述...)</p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+                        <select name="rent_price" id="rent_price" class="input_text">
+                            <option value="0">$4 Daily</option>
+                            <option value="1">$20 Weekly</option>
+                            <option value="2">$70 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
+
+                    <div class="item mx-2">
+
+                        <div class="mile"> 1.53 mi </div>
+
+                        <a href="#">
+                            <div class="img_box">
+                                <img src="~/Assets/images/Products/6.jpg">
+                            </div>
+                        </a>
+
+                        <div class="card-title">
+
+                            <div class="title-name">
+                                <a href="#">
+                                    <h2>Switch盒</h2>
+                                </a>
+                            </div>
+
+                            <div class="star">
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                                <i class="fas fa-star txt-grey"> </i>
+                            </div>
+                        </div>
+
+                        <div class="text">
+                            <p>(描述...)</p>
+                            <!-- <a href="#">Owner</a> -->
+                        </div>
+
+                        <select name="rent_price" id="rent_price" class="input_text distence">
+                            <option value="0">$3 Daily</option>
+                            <option value="1">$15 Weekly</option>
+                            <option value="2">$50 Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section topCSS{
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
           integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
 
-    <!-- map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <link href="~/Assets/css/ProductSubCategory.css" rel="stylesheet" />
+
+}
+
+@section topJS{
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin="">
     </script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
-    <link href="~/Assets/css/ProductSubCategory.css" rel="stylesheet" />
+}
 
-</head>
-
-    <div class="bigbox container-xl">
-
-        <div class="row pt-lg-3 px-0">
-
-            <!-- Left -->
-            <div class="col-lg-3 px-2 mx-0 left">
-
-                <form action="">
-                    <div class="group">
-                        <label for="Search" class="distence">
-                            <strong>Search</strong>
-                        </label> <br>
-
-                        <input type="text" id="Search" class="btn input_text distence" placeholder="Item Name or Space">
-                        <select name="Category" id="Category" class="input_text distence">
-                            <option value="0">Select a Category</option>
-                            <option value="1">交通工具</option>
-                            <option value="2">人才</option>
-                            <option value="3">寵物</option>
-                            <option value="4">飾品美妝</option>
-                            <option value="5" selected="selected">電視遊戲</option>
-                            <option value="6">桌遊</option>
-                            <option value="7">書本</option>
-                        </select>
-
-                        <select name="SubCategory" id="SubCategory" class="input_text distence">
-                            <option value="0">Select a Sub-Category</option>
-                            <option value="1">PS5-遊戲片</option>
-                            <option value="2">Switch-遊戲片</option>
-                            <option value="3">遊戲主機</option>
-                        </select>
-                    </div>
-
-                    <div class="group">
-                        <label for="Location" class="distence">
-                            <strong>Location</strong>
-                        </label> <br>
-
-                        <input type="button" id="Location" class="btn btn-default input_text distence"
-                               value="新竹 Hsinchu" readonly>
-                        <div id="map" class="distence"> </div>
-                    </div>
-
-                    <div class="group">
-                        <label for="Sort-by" class="distence">
-                            <strong>Sort by</strong>
-                        </label> <br>
-                        <input type="radio" id="relevance" name="Sort-by" value="Relevance">
-                        <label for="relevance">Relevance</label><br>
-
-                        <input type="radio" id="price" name="Sort-by" value="Price">
-                        <label for="price">Price</label><br>
-
-                        <input type="radio" id="distance" name="Sort-by" value="Distance">
-                        <label for="distance">Distance</label><br>
-                    </div>
-
-                    <div class="group">
-                        <label for="Condition" class="distence">
-                            <strong>Condition</strong>
-                        </label> <br>
-
-                        <input type="checkbox" id="check1" name="check1" value="JustLikeNew">
-                        <label for="check1">Just Like New</label><br>
-
-                        <input type="checkbox" id="check2" name="check2" value="GentlyLoved">
-                        <label for="check2">Gently Loved</label><br>
-
-                        <input type="checkbox" id="check3" name="check3" value="Decent">
-                        <label for="check3">Decent</label><br>
-
-                        <input type="checkbox" id="check4" name="check4" value="HasSomeCharacter">
-                        <label for="check4">Has Some Character</label><br>
-                    </div>
-
-                    <div class="group">
-                        <label for="Budget" class="distence">
-                            <strong>Budget</strong>
-                        </label> <br>
-                        <select name="Rate" id="Rate" class="input_text distence">
-                            <option value="0">Type of Rate</option>
-                            <option value="1">Hourly</option>
-                            <option value="2">Daily</option>
-                            <option value="3">Weekly</option>
-                            <option value="4">Monthly</option>
-                        </select>
-
-                        <button type="reset" class="btn btn-default clear distence"> Clear Filters </button>
-                        <input type="submit" value="Filter My Results" class="distence filter_result">
-                    </div>
-                </form>
-            </div>
-
-            <!-- Right -->
-            <div class="col-lg-9 col-12 px-2 px-lg-4 mb-4 mx-0 right">
-                <div class="col-12 mt-lg-3 px-3">
-                    <h2>電視遊戲</h2>
-                </div>
-
-                <div class="box">
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card px">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/1.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>惡魔靈魂</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus distinctio provident rerum? Dolorem velit assumenda earum debitis repellat sequi inventore necessitatibus, sapiente qui voluptate numquam, libero id corporis, minus aut?</p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-                            <select name="rent_price" id="rent_price" class="input_text distence">
-                                <option value="0">$10 Daily</option>
-                                <option value="1">$50 Weekly</option>
-                                <option value="2">$180 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/2.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>Godfall</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-
-                                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus distinctio provident </p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-                            <select name="rent_price" id="rent_price" class="input_text distence">
-                                <option value="0">$10 Daily</option>
-                                <option value="1">$50 Weekly</option>
-                                <option value="2">$180 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/3.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>馬力歐賽車</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-                                <p>(描述...)</p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-                            <select name="rent_price" id="rent_price" class="input_text distence">
-                                <option value="0">$20 Daily</option>
-                                <option value="1">$100 Weekly</option>
-                                <option value="2">$300 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/4.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>動物森友會</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-                                <p>(描述...)</p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-
-                            <select name="rent_price" id="rent_price" class="input_text distence">
-                                <option value="0">$8 Daily</option>
-                                <option value="1">$40 Weekly</option>
-                                <option value="2">$150 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/5.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>PS5盒</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-                                <p>(描述...)</p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-                            <select name="rent_price" id="rent_price" class="input_text">
-                                <option value="0">$4 Daily</option>
-                                <option value="1">$20 Weekly</option>
-                                <option value="2">$70 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-md-4 col-lg-3 d-flex my-2 card">
-
-                        <div class="item mx-2">
-
-                            <div class="mile"> 1.53 mi </div>
-
-                            <a href="#">
-                                <div class="img_box">
-                                    <img src="~/Assets/images/Products/6.jpg">
-                                </div>
-                            </a>
-
-                            <div class="card-title">
-
-                                <div class="title-name">
-                                    <a href="#">
-                                        <h2>Switch盒</h2>
-                                    </a>
-                                </div>
-
-                                <div class="star">
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                    <i class="fas fa-star txt-grey"> </i>
-                                </div>
-                            </div>
-
-                            <div class="text">
-                                <p>(描述...)</p>
-                                <!-- <a href="#">Owner</a> -->
-                            </div>
-
-                            <select name="rent_price" id="rent_price" class="input_text distence">
-                                <option value="0">$3 Daily</option>
-                                <option value="1">$15 Weekly</option>
-                                <option value="2">$50 Monthly</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
+@section endJS{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-
-    @section endJS{
-        <script src="~/Assets/js/ProductCategory.js"></script>
-    }
+    <script src="~/Assets/js/ProductCategory.js"></script>
+}
