@@ -1,0 +1,152 @@
+﻿.order-content {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.content-nav {
+    display: flex;
+}
+
+.content-nav li {
+    box-shadow: 0 0 10px  rgba(0, 0, 0, 0.2);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 10px;
+}
+
+.content-nav li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+}
+
+.content-nav .active a {
+    color: #fff;
+    background-color: #FC8D61;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.content {
+    box-shadow: 0px 0px 10px #7a7a7a;
+    border-radius: 4px;
+}
+
+.table tr th {
+    font-size: 16.8px;
+    background: #FC8D61;
+    padding: 7px 12px;
+    
+}
+
+.table tr th span {
+    color: #fff;
+}
+
+.product {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form-check {
+    width: 10px;
+}
+
+.product-img {
+    width: 50px;
+    height: 60.42px;
+    padding: 0px 0px 2px 7px;
+}
+
+.product-img a img {
+    width: 100%;
+    height: auto;
+}
+
+.product-name {
+    width: calc(100% - 80px);
+    padding: 2px 7px;
+}
+
+.product-stock p {
+    color: #999;
+    padding: 2px 7px;
+}
+
+.product-price-qty {
+    display: flex;
+    justify-content: space-between;
+}
+
+.unitprice, .buyqty {
+    padding: 2px 7px;
+}
+
+.qty {
+    width: 38px;
+    text-align: right;
+    padding: 1px 3px;
+}
+
+.product-sub {
+    display: flex;
+    justify-content: flex-end;
+    padding: 2px 7px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-footer {
+    padding: 10px 12px;
+}
+
+.content-footer p {
+    margin: 8px 0px 10px;
+    color: #888;
+}
+
+.checkout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.checkout .btn::after {
+    content: '>>';
+}
+
+.checkout .btn {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0px 0px 10px;
+    padding: 5px 12px 8px;
+}
+
+.checkout .btn:hover {
+    color: #fff;
+    background-color: #FC8D61;
+}
+
+.notice h2 {
+    font-size: 18px;
+    color: #fff;
+    background-color: #FC8D61;
+    margin: 0px 0px 3px;
+    padding: 7px 12px;
+}
+
+.content-inner-block {
+    margin: 10px 12px;
+}
+
+.content-inner-block h3 {
+    font-size: 17px;
+    margin: 17px 0px 10px;
+}
+
+.content-inner-block p {
+    margin: 10px 0px;
+}
