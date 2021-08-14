@@ -151,6 +151,10 @@
     <Compile Include="Models\SignWay.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Services\OperationResultHelper.cs" />
+    <Compile Include="Services\IndexService.cs" />
+    <Compile Include="ViewModels\IndexView.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="ViewModels\Index.cs" />
   </ItemGroup>

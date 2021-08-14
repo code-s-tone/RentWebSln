@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RentWebProj.Models.Category>
+﻿@model IEnumerable<IndexCategoryView>
 
 @{
     ViewBag.Title = "首頁";
@@ -146,40 +146,16 @@
     </section>
 
     @{
-        //如果有通用的邏輯可以移植到其他類別檔，放到Services資料夾，例如：
-        //List<Product> ProductItems = new ProductService().getProductData();
-
-        RentContext db = new RentContext();
-
-        //Method Expression  有join時，這方法很吃邏輯
-        List<Product> ProductItems = db.Products.ToList();
-        var category1 = ProductItems
-                .Where(x => x.CategoryID == 1)
-                .Take(6)
-                .Select(x => new IndexProduct
-                {
-                    ProductName = x.ProductName,
-                    CategoryName =
-                    Model.FirstOrDefault(c => c.CategoryID == x.CategoryID).CategoryName
-                    //Model在此頁和db.Category雷同
-                });
-
-        //Query Expression
-        var category2 = (from p in db.Products
-                         join c in db.Categories
-                         on p.CategoryID equals c.CategoryID
-                         where p.CategoryID == 2
-                         select new IndexProduct { ProductName = p.ProductName, CategoryName = c.CategoryName }
-                    ).Take(6);
-
+        var service = new IndexService();
 
         //dapper法 ORM講義p.29~p.34
         //連線字串connStr 連線執行個體conn  引數群物件Obj 查詢語法sql字串
         //var conn  = new SqlConnection (connStr);
         //conn.Execute(sql,Obj);
+
     }
-    @addProduct(category1)
-    @addProduct(category2)
+    @addProduct(service.getProductData(1) )
+    @addProduct(service.getProductData(2))
 
 
     <section id="blogPosts" class="Area">
@@ -231,7 +207,7 @@
 
 <div id="cookiePermission"></div>
 
-@helper addProduct(IEnumerable<IndexProduct> items)
+@helper addProduct(IEnumerable<IndexProductView> items)
 {
     <section class="category-sample">
         <h3>

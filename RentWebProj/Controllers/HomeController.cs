@@ -4,15 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Services;
 
 namespace RentWebProj.Controllers
 {
     public class HomeController : Controller
     {
-        private RentContext db = new RentContext();
+        private IndexService _service;
+        public HomeController(){
+            _service = new IndexService();
+        }
+
         public ActionResult Index()
-        {
-            return View(db.Categories.ToList());
+        {            
+            return View(_service.getCategoryData() );
         }
 
         public ActionResult ContactUs()
