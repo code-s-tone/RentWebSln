@@ -155,8 +155,6 @@
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
-    <Compile Include="Services\ProductService.cs" />
-    <Compile Include="ViewModels\Index.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
