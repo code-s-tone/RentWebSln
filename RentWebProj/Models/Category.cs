@@ -11,18 +11,18 @@ namespace RentWebProj.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            Products = new HashSet<Product>();
+            SubCategories = new HashSet<SubCategory>();
         }
 
-        public int CategoryID { get; set; }
+        [StringLength(3)]
+        public string CategoryID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(20)]
         public string CategoryName { get; set; }
 
-        [StringLength(100)]
         public string ImageSrc { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

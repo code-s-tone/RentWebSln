@@ -23,6 +23,7 @@ namespace RentWebProj.Models
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SignWay> SignWays { get; set; }
+        public virtual DbSet<SubCategory> SubCategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -32,13 +33,18 @@ namespace RentWebProj.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Category>()
-                .HasMany(e => e.Products)
+                .HasMany(e => e.SubCategories)
                 .WithRequired(e => e.Category)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<DeliveryOption>()
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.DeliveryOption)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(e => e.Carts)
+                .WithRequired(e => e.Member)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OrderDetail>()
@@ -56,7 +62,12 @@ namespace RentWebProj.Models
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.DailyRate)
-                .HasPrecision(18, 0);
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.Carts)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.OrderDetails)

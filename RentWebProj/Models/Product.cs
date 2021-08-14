@@ -11,21 +11,21 @@ namespace RentWebProj.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            Carts = new HashSet<Cart>();
             OrderDetails = new HashSet<OrderDetail>();
             ProductImages = new HashSet<ProductImage>();
         }
 
-        [StringLength(20)]
+        [StringLength(8)]
         public string ProductID { get; set; }
 
         [StringLength(50)]
         public string ProductName { get; set; }
 
-        public int CategoryID { get; set; }
-
         [StringLength(250)]
         public string Description { get; set; }
 
+        [Column(TypeName = "money")]
         public decimal? DailyRate { get; set; }
 
         public bool? Available { get; set; }
@@ -38,7 +38,8 @@ namespace RentWebProj.Models
 
         public DateTime? UpdateTime { get; set; }
 
-        public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

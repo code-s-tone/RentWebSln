@@ -8,6 +8,12 @@ namespace RentWebProj.Models
 
     public partial class Member
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Member()
+        {
+            Carts = new HashSet<Cart>();
+        }
+
         public int MemberID { get; set; }
 
         [StringLength(50)]
@@ -34,6 +40,9 @@ namespace RentWebProj.Models
         public int SignWayID { get; set; }
 
         public bool? active { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cart> Carts { get; set; }
 
         public virtual SignWay SignWay { get; set; }
     }

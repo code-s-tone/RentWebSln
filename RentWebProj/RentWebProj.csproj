@@ -137,7 +137,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administer.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -150,6 +149,7 @@
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\RentContext.cs" />
     <Compile Include="Models\SignWay.cs" />
+    <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="ViewModels\Index.cs" />

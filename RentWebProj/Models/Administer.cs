@@ -11,9 +11,11 @@ namespace RentWebProj.Models
     {
         public int AdministerID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Account { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string PasswordHash { get; set; }
     }

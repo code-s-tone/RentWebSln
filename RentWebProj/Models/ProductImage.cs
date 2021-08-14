@@ -14,7 +14,7 @@ namespace RentWebProj.Models
 
         [Key]
         [Column(Order = 1)]
-        [StringLength(20)]
+        [StringLength(8)]
         public string ProductID { get; set; }
 
         public string Source { get; set; }
