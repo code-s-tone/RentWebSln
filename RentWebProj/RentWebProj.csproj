@@ -158,6 +158,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
+    <Content Include="Assets\css\Cart\navbar.css" />
+    <Content Include="Assets\css\Cart\ordercontent.css" />
+    <Content Include="Assets\css\Cart\orderinfo.css" />
     <Content Include="Assets\css\dateTimePicker.css" />
     <Content Include="Assets\css\contactus.css" />
     <Content Include="Assets\css\Contribution\doThing.css" />
@@ -311,6 +314,7 @@
     <Content Include="Views\Members\_ViewStart.cshtml" />
     <Content Include="Views\Carts\_ViewStart.cshtml" />
     <Content Include="Views\Members\MemBerCenter.cshtml" />
+    <Content Include="Views\Carts\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
