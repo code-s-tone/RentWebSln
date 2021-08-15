@@ -97,9 +97,38 @@
 
         <hr>
 
-        <div class="rectangle">
-            <h2>地圖</h2>
+        <!--------以下 地圖區塊--------------------------------------------------------------------------->>
+          
+        <div class="left-sidebar-container">
+            @*<div class="map-block">*@
+                <h2 class="map-block-title">取件和退貨選項</h2>
+                <span class="map-block-depiction">提供送貨選項。提供您的位置以查看估計的送貨成本。</span>
+                <div class="map-block-distance">
+                    <p class="map-block-distance-text">這距離您所在的位置大約 (動態) 公里</p>
+                    <div class="map-block-input-outside">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input class="map-block-distance-input" type="text" placeholder="總部">
+                    </div>
+                </div>
+
+                <div class="map-block-price">
+                    <div class="map-block-price-col"></div>
+                    <div class="map-block-price-col ">
+                        <div class="map-block-total-price">預計送貨費用（單程）： (動態)新台幣</div>
+                    </div>
+                </div>
+                <div class="map-countainer">
+                    <div id="mapId"></div>
+                    <!-- <div id="map"></div>  google map-->
+
+                </div>
+                <p class="map-block-notice">預訂後提供確切位置</p>
+
+            @*</div>*@
         </div>
+
+
+        <!--------以上 地圖區塊--------------------------------------------------------------------------->>
 
         <hr>
         <Section class="col-12">
@@ -232,79 +261,104 @@
 </div>
 
 
-    <!-- DateModal -->
-    <!--<div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-center w-100" id="exampleModalLabel">設定起訖日</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex justify-content-center">
-                    <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
-                </div>
-                <div class="modal-footer">
-                    <button class=" orange" data-bs-toggle="modal" data-bs-target="#TimeModal">
-                        繼續設定時間
-                    </button>
-                </div>
+<!-- DateModal -->
+<!--<div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center w-100" id="exampleModalLabel">設定起訖日</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex justify-content-center">
+                <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
+            </div>
+            <div class="modal-footer">
+                <button class=" orange" data-bs-toggle="modal" data-bs-target="#TimeModal">
+                    繼續設定時間
+                </button>
             </div>
         </div>
-    </div>-->
-    <!-- TimeModal -->
-    <!--<div class="modal fade" id="TimeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-titl text-center w-100" id="exampleModalLabel">設定時間</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="start"></div>
-                    <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="startTimePicker">
+    </div>
+</div>-->
+<!-- TimeModal -->
+<!--<div class="modal fade" id="TimeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-titl text-center w-100" id="exampleModalLabel">設定時間</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="start"></div>
+                <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="startTimePicker">
 
-                    <div id="end"></div>
-                    <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="endTimePicker">
+                <div id="end"></div>
+                <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="endTimePicker">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="orange" id="complete" data-bs-dismiss="modal">確定</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="orange" id="complete" data-bs-dismiss="modal">確定</button>
 
-                </div>
             </div>
         </div>
-    </div>-->
+    </div>
+</div>-->
 
 
 
 
+@section topCSS{
+    <link href="~/Assets/css/ProductCarousel.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_orange.css">
+
+    <!-- leaf css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <link href="~/Assets/css/leafMap.css" rel="stylesheet" />
+
+    <link href="~/Assets/css/dateTimePicker.css" rel="stylesheet" />
+
+    <link href="~/Assets/css/Product_Detail.css" rel="stylesheet" />
+
+}
 
 
+@section topJS{
+    <script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+}
 
 
+@section endJS{
+    <script src="~/Assets/css/ProductCarousel.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>*@
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    @section topCSS{
-        <link href="~/Assets/css/ProductCarousel.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_orange.css">
-        <link href="~/Assets/css/dateTimePicker.css" rel="stylesheet" />
 
-        <link href="~/Assets/css/Product_Detail.css" rel="stylesheet" />
-    }
-    @section topJS{
-        <script src="https://kit.fontawesome.com/62756de202.js" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <!-- leaf js -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    @*<script src="./index.js"></script>*@
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
 
-    }
-    @section endJS{
-        <script src="~/Assets/css/ProductCarousel.js"></script>
-        @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>*@
-        @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>*@
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script src="~/Assets/js/datetimePicker.js"></script>
+    <script src="~/Assets/js/leaf.js"></script>
 
-        <script src="~/Assets/js/Product_Detail.js"></script>
-    }
+    <script src="~/Assets/js/datetimePicker.js"></script>
+
+    <script src="~/Assets/js/Product_Detail.js"></script>
+
+}
 
 

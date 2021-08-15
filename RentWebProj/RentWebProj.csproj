@@ -174,6 +174,7 @@
     <Content Include="Assets\css\Layout_rent\header.css" />
     <Content Include="Assets\css\Layout_rent\reset.css" />
     <Content Include="Assets\css\Layout_rent\sidebar.css" />
+    <Content Include="Assets\css\leafMap.css" />
     <Content Include="Assets\css\Login-Sign.css" />
     <Content Include="Assets\css\MemberCenter\account.css" />
     <Content Include="Assets\css\MemberCenter\member.css" />
@@ -229,6 +230,7 @@
     <Content Include="Assets\js\Contribution\countUp.js" />
     <Content Include="Assets\js\datetimePicker.js" />
     <Content Include="Assets\js\howtorent.js" />
+    <Content Include="Assets\js\leaf.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />
     <Content Include="Assets\js\Product_Detail.js" />
