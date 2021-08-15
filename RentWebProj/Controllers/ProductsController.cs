@@ -17,8 +17,7 @@ namespace RentWebProj.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Category);
-            return View(products.ToList());
+            return View(db.Products.ToList());
         }
 
         // GET: Products/Details/5
@@ -39,7 +38,6 @@ namespace RentWebProj.Controllers
         // GET: Products/Create
         public ActionResult Create()
         {
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
             return View();
         }
 
@@ -48,7 +46,7 @@ namespace RentWebProj.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductID,ProductName,CategoryID,Description,DailyRate,Available,LaunchDate,WithdrawalDate,Discontinuation,UpdateTime")] Product product)
+        public ActionResult Create([Bind(Include = "ProductID,ProductName,Description,DailyRate,Available,LaunchDate,WithdrawalDate,Discontinuation,UpdateTime")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +55,6 @@ namespace RentWebProj.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
@@ -73,7 +70,6 @@ namespace RentWebProj.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
@@ -82,7 +78,7 @@ namespace RentWebProj.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductID,ProductName,CategoryID,Description,DailyRate,Available,LaunchDate,WithdrawalDate,Discontinuation,UpdateTime")] Product product)
+        public ActionResult Edit([Bind(Include = "ProductID,ProductName,Description,DailyRate,Available,LaunchDate,WithdrawalDate,Discontinuation,UpdateTime")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +86,6 @@ namespace RentWebProj.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", product.CategoryID);
             return View(product);
         }
 
