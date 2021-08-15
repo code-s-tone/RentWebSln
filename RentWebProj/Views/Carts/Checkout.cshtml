@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RentWebProj.Models.Cart>
+﻿@model IEnumerable<ProductCartsView>
 @{
     ViewBag.Title = "Checkout";
 }
@@ -49,7 +49,7 @@
                                 <div class="product-name">
                                     <a href="#">
                                         {JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}
-                                        @Html.DisplayFor(modelItem => item.ProductID)
+                                        @Html.DisplayFor(modelItem => item.StartDate)
                                     </a>
                                 </div>
                             </div>

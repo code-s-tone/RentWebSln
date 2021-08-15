@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Services;
 
 namespace RentWebProj.Controllers
 {
     public class CartsController : Controller
     {
         private RentContext db = new RentContext();
-
+        private IndexService _service;
         // GET: Carts
         public ActionResult Index()
         {
@@ -22,7 +23,8 @@ namespace RentWebProj.Controllers
         }
         public ActionResult Checkout()
         {
-            return View(db.Carts.ToList());
+
+            return View(_service.getCartsData());
         }
 
         // GET: Carts/Details/5
