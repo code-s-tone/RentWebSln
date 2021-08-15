@@ -185,6 +185,7 @@
     <Content Include="Assets\css\ProductSubCategory.css" />
     <Content Include="Assets\css\Contribution\swiper.css" />
     <Content Include="Assets\css\Contribution\whyChoose.css" />
+    <Content Include="Assets\css\Product_Detail.css" />
     <Content Include="Assets\images\about_banner.jpg" />
     <Content Include="Assets\images\Contribution\Banner_change_rev.jpg" />
     <Content Include="Assets\images\cart\A451.jpg" />
@@ -230,6 +231,7 @@
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />
+    <Content Include="Assets\js\Product_Detail.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
