@@ -1,0 +1,57 @@
+﻿.order-footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.left-info, .right-info {
+    box-shadow: 0px 0px 10px #7a7a7a;
+    border-radius: 4px;
+    margin: 30px 10px;
+}
+
+.info-head {
+    font-size: 16.8px;
+    background-color: #FC8D61;
+    padding: 7px 12px;
+    border-radius: 4px;
+}
+
+.sub, .dis, .tol {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 12px;
+}
+
+.dis+hr {
+    margin: 1px;
+    color: #888;
+}
+
+.member-info div{
+    margin: 20px;
+}
+
+#member-name, #member-address {
+    width: 70%;
+}
+
+.dropdown .btn, .dropdown-item {
+    border: 1px solid #ccc
+}
+
+@media screen and (min-width:576px) {
+    .order-footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .left-info {
+        width: 60%;
+    }
+    
+    .right-info {
+        width: 30%;
+    }
+}

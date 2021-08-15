@@ -15,7 +15,15 @@ namespace RentWebProj.Models
 
         [Key]
         [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ProductID { get; set; }
+        [StringLength(8)]
+        public string ProductID { get; set; }
+
+        public DateTime? StartDate { get; set; }
+
+        public DateTime? ExpirationDate { get; set; }
+
+        public virtual Member Member { get; set; }
+
+        public virtual Product Product { get; set; }
     }
 }

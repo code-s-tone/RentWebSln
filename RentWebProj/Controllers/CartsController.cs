@@ -17,6 +17,11 @@ namespace RentWebProj.Controllers
         // GET: Carts
         public ActionResult Index()
         {
+            var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
+            return View(carts.ToList());
+        }
+        public ActionResult Checkout()
+        {
             return View(db.Carts.ToList());
         }
 
@@ -38,6 +43,8 @@ namespace RentWebProj.Controllers
         // GET: Carts/Create
         public ActionResult Create()
         {
+            ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Account");
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
             return View();
         }
 
@@ -46,7 +53,7 @@ namespace RentWebProj.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MemberID,ProductID")] Cart cart)
+        public ActionResult Create([Bind(Include = "MemberID,ProductID,StartDate,ExpirationDate")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +62,8 @@ namespace RentWebProj.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Account", cart.MemberID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", cart.ProductID);
             return View(cart);
         }
 
@@ -70,6 +79,8 @@ namespace RentWebProj.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Account", cart.MemberID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", cart.ProductID);
             return View(cart);
         }
 
@@ -78,7 +89,7 @@ namespace RentWebProj.Controllers
         // 如需詳細資料，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MemberID,ProductID")] Cart cart)
+        public ActionResult Edit([Bind(Include = "MemberID,ProductID,StartDate,ExpirationDate")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +97,8 @@ namespace RentWebProj.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.MemberID = new SelectList(db.Members, "MemberID", "Account", cart.MemberID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", cart.ProductID);
             return View(cart);
         }
 

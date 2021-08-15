@@ -1,0 +1,98 @@
+
+.member-display-order-title,
+.member-display-order-detail{
+    margin-top: 10px;
+    display: flex;
+}
+
+.member-display-order-item,
+.member-display-order-item-show-button,
+.member-display-order-item-display{
+    width: 20%;
+}
+
+.member-display-order-item-show-button,
+.member-display-order-item-display
+{
+    text-align: center;
+}
+
+.member-display-order-item-display{
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.member-display-order-item-show{
+    text-align:center;
+}
+
+.member-display-order-item-show-dynamic-button:hover {
+    color: #FFD1A4;
+    cursor: pointer;
+}
+
+.member-display-order-detail{
+    justify-content: center;
+    align-items: baseline;
+    background-color: #fff;
+    border-bottom: 1px solid #FFEEDD;
+    border-radius: unset;
+}
+
+.member-display-order-detail-list{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #272727;
+    background-color: #F0F0F0;
+    box-shadow:3px 3px 8px #cccccc;
+    /* display: none; */
+}
+
+@media screen and (min-width:312px) {
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list{
+        font-size: 20%;
+    }
+}
+
+@media screen and (min-width:414px) {
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list{
+        transition: 1s;
+        font-size: 20%;
+    }
+}
+
+@media screen and (min-width:568px ) {
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list{
+        transition: 1s;
+        font-size: 50%;
+    }
+}
+
+
+@media screen and (min-width:768px ) {
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list{
+        transition: 1s;
+        font-size: 80%;
+    }
+}
+
+@media screen and (min-width:992px ) {
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list{
+        transition: 1s;
+        font-size: 100%;
+    }
+}
+

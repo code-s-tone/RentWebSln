@@ -1,0 +1,49 @@
+﻿
+* {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    list-style: none;
+    /*outline: 1px solid red;*/
+}
+
+.container-xl {
+    margin-top:50px;
+}
+
+.order-nav {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px #7a7a7a;
+}
+
+.order-nav .title h2 {
+    font-size: 18px;
+    color: #fff;
+    background-color: #FC8D61;
+    margin: 0px 0px 3px;
+    padding: 7px;
+}
+
+.step {
+    padding: 12px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.step li {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.step li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 8px;
+}
+
+.step .active a {
+    color: #fff;
+    background-color: #FC8D61;
+    border-radius: 5px;
+}
