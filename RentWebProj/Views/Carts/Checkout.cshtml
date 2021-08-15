@@ -47,8 +47,8 @@
                                     </a>
                                 </div>
                                 <div class="product-name">
-                                    <a href="#">
-                                        {JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}
+                                    <a href="#" style="text-decoration:none;">
+                                        @*{JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}*@
                                         @Html.DisplayFor(modelItem => item.ProductName)
                                     </a>
                                 </div>
@@ -58,37 +58,39 @@
                             </div>
                             <div class="product-price-qty">
                                 <div class="unitprice">
-                                    <span class="title">價格 :@Html.DisplayFor(modelItem => item.DailyRate)</span>
-                                    <span class="price">利用程式顯示價格</span>
+                                    <span class="title">單日租價 :</span>
+                                    <span class="price">@Html.DisplayFor(modelItem => item.DailyRate)</span>
                                 </div>
                                 <div class="buyqty">
-                                    <span class="title">天數 : @Html.DisplayFor(modelItem => item.ExpirationDate - item.StartDate)</span>
-                                    <input type="number" value="1" class="qty">
+                                    <span class="title">天數 : @Html.DisplayFor(modelItem => new TimeSpan(item.ExpirationDate.Ticks - item.StartDate.Ticks).TotalDays)</span>
+
+                                    @*<input type="number" value="1" class="qty">*@
                                 </div>
                             </div>
                             <div class="product-sub">
-                                <span class="title">小計 :@Html.DisplayFor(modelItem => item.TotalAmount)</span>
-                                <span class="subTotal">利用程式計算小計</span>
+                                <span class="title">小計 : </span>&emsp;
+                                <span class="subTotal"> @Html.DisplayFor(modelItem => item.TotalAmount)</span>
                             </div>
                         </td>
                         @*
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                            </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
                         *@
                     </tr>
+                    <tr>
+                        <td>
+                            <div class="order-total">
+                                <span>總計：</span>
+                                <span class="currency">TWD$</span> &emsp;
+                                <span class="total">@Html.DisplayFor(modelItem => item.TotalAmount)</span>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                <tr>
-                    <td>
-                        <div class="order-total">
-                            <span>總計：</span>
-                            <span class="currency">TWD$</span> &emsp;
-                            <span class="total">利用程式計算總價</span>
-                        </div>
-                    </td>
-                </tr>
+                
             </table>
             <div class="content-footer">
                 <div>
@@ -147,16 +149,16 @@
             <div class="info-body">
                 <div class="sub">
                     <span>小計 :</span>
-                    <span class="subtotal">{NT$458}</span>
+                    <span class="subtotal">{NT$400}</span>
                 </div>
                 <div class="dis">
                     <span>折扣 :</span>
-                    <span class="discount">{-NT$7}</span>
+                    <span class="discount">{-NT$0}</span>
                 </div>
                 <hr>
                 <div class="tol">
                     <span>合計 :</span>
-                    <span class="total">{NT$451}</span>
+                    <span class="total">{NT$400}</span>
                 </div>
                 <div class="checkout">
                     <button type="button" class="btn">進行結帳</button>
