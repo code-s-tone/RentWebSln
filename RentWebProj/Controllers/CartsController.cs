@@ -7,22 +7,29 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Services;
 
 namespace RentWebProj.Controllers
 {
     public class CartsController : Controller
     {
         private RentContext db = new RentContext();
-
+        private IndexService _service;
         // GET: Carts
+
+        public CartsController()
+        {
+            _service = new IndexService();
+        }
+        public ActionResult Checkout()
+        {
+
+            return View(_service.getCartsData());
+        }
         public ActionResult Index()
         {
             var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
             return View(carts.ToList());
-        }
-        public ActionResult Checkout()
-        {
-            return View(db.Carts.ToList());
         }
 
         // GET: Carts/Details/5
