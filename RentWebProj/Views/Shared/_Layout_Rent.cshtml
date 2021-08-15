@@ -6,9 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="~/Assets/css/Layout_rent/reset.css" rel="stylesheet" />
-    <script src="https://kit.fontawesome.com/160bae148b.js" crossorigin="anonymous"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/160bae148b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+TC:wght@300&family=Permanent+Marker&family=Ubuntu:ital,wght@0,300;1,500&display=swap"
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <link href="~/Assets/css/Layout_rent/header.css" rel="stylesheet" />
     <link href="~/Assets/css/Layout_rent/sidebar.css" rel="stylesheet" />
     <link href="~/Assets/css/Layout_rent/footer.css" rel="stylesheet" />
@@ -43,10 +45,16 @@
             <input type="checkbox" id="menu-control">
 
             <div class="header-nav">
+
                 <div class="logo d-grid">
-                    @Html.ActionLink("知租網", "Index", "Home", new { @class = "m-auto" })
+                    <a href='@Url.Action("Index", "Home", new { @class = "m-auto" })'>
+                        <img src="~/Assets/images/Layout_Rent/logo.jpg" />
+                    </a>
                 </div>
 
+                @*<div class="logo d-grid">
+                        @Html.ActionLink("知租網", "Index", "Home", new { @class = "m-auto" })
+                    </div>*@
 
                 <div class="header-function-box">
 
@@ -74,7 +82,7 @@
                                 <li><a href="#">通知</a></li>
                                 <li><a href="#">我的訂單</a></li>
                                 <li><a href="#">會員資料/修改</a></li>
-                                <li><a href="#" class="signOutBtn">登出</a></li>
+                                <li><a href="@Url.Action("LogOut","Members")" class="signOutBtn">登出</a></li>
                             </ul>
                         </div>
 
@@ -109,14 +117,13 @@
                                 <li><a href="#">想租女友</a></li>
                                 <li><a href="#">想租狗狗</a></li>
                                 <li>@Html.ActionLink("想租電動", "ProductSubCategory", "Product")</li>
-                                <li><a href="https://www.yahoo.com.tw">測試雅虎</a></li>
                             </ul>
                         </li>
                         <li>
                             <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
                                 <li>@Html.ActionLink("如何租借", "HowToRent", "Home")</li>
-                                <!-- <li><a href="#"></a></li> -->
+
                             </ul>
                         </li>
                         <li>
@@ -146,7 +153,13 @@
         <div class="sidenav">
 
             <div class="logoBox">
-                <a href="#" class="ms-3 my-auto">知租網</a>
+                <a href='@Url.Action("Index", "Home")'>
+                    <img src="~/Assets/images/Layout_Rent/logo.jpg" />
+                </a>
+                <div class="sidebar-btn">
+                    <a href="#" class="loginBtn d-grid" data-bs-toggle="modal" data-bs-target="#SignModal2"><span class="m-auto">登入</span> </a>
+                    <a href="#" class="signUpBtn d-grid" data-bs-toggle="modal" data-bs-target="#LoginModal"><span class="m-auto">註冊</span></a>
+                </div>
             </div>
 
             <!-- 登入後秀出名字 -->
@@ -159,12 +172,6 @@
                 </div>
             </div>
 
-
-            <div class="sidebar-btn">
-                <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">登入</a>
-                <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">註冊</a>
-            </div>
-
             <div class="linkBox">
                 <div class="sidebar-member-link">
                     <a href="#" class="dropdown-btn"> 會員中心 <i class="fas fa-caret-down"></i></a>
@@ -172,7 +179,7 @@
                         <a href="#">通知</a>
                         <a href="#">我的訂單</a>
                         <a href=@Html.ActionLink("會員資料/修改", "MemBerCenter", "Members")>會員資料/修改</a>
-                        <a href="#" class="signOutBtn">登出</a>
+                        <a href="@Url.Action("LogOut","Members")" class="signOutBtn">登出</a>
                     </div>
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
@@ -222,79 +229,64 @@
     <footer class="site-footer">
         <div class="container-xl">
             <div class="row">
-                <div class="col-12 col-md-12 d-flex">
+                <div class="col-12 col-md-12 d-flex my-2 footer-logo">
                     <h2>JUST RENT</h2>
-                    <p class="ms-3 my-auto">© 2021 All Rights Reserved.</p>
+                    <ul class="social-icons">
+                        <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="instagram" href="#"><i class="fab fa-instagram"></i></a>
+                    </ul>
+
                 </div>
-                <div class="col-6 col-md-2">
-                    <ul class="footer-links">
+                <div class="col-12 col-md-3">
+                    <ul class="footer-links footer-info">
                         <li>0912345678</li>
                         <li>codestone@gmail.com</li>
                         <li>© 2021 All Rights Reserved.</li>
                     </ul>
-                    <ul class="social-icons">
-                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
-                    </ul>
+                    <!--下載APP的圖先拿掉-->
+                    <!-- <ul class="footer-links appDownload">
+                        <li><a href="#"><img src="img/googleplay.png" alt="" style="width: 110px;"></a></li>
+                        <li><a href="#"><img src="img/applestore.png" alt="" style="width: 110px;" ></a></li>
+                    </ul>  -->
+
                 </div>
 
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
                     <ul class="footer-links">
-                        <li><a href="#">Marketplace</a></li>
-                        <li><a href="#">Referral Program</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help Articles</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <a href="#"><li>所有種類</li></a>
+                        <a href="#"><li>想租車車</li></a>
+                        <a href="#"><li>想租配件</li></a>
+                        <a href="#"><li>想租女友</li></a>
+                        <a href="#"><li>想租狗狗</li></a>
                     </ul>
                 </div>
 
-                <div class="col-6 col-md-2">
-
-                    <ul class="footer-links">
-                        <li><a href="#">How to Post</a></li>
-                        <li><a href="#">How to Rent</a></li>
-                        <li><a href="#">TreeProject</a></li>
-                        <li><a href="#">Side-Hustle</a></li>
-                        <li><a href="#">RuckifyStore</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-6 col-md-2">
-                    <ul class="footer-links">
-                        <li><a href="#">Investment Inquiries</a></li>
-                        <li><a href="#">Ruckify RV</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Rent Anything Group</a></li>
-                        <li><a href="#">About</a></li>
-                    </ul>
-                </div>
-                <div class="col-6 col-md-2">
+                <div class="col-6 col-md-3">
 
                     <ul class="footer-links">
-                        <li><a href="#">Terms</a></li>
-                        <li><a href="#">Privacy</a></li>
-                        <li><a href="#">Insurance</a></li>
-                        <li><a href="#">Cancellations</a></li>
-                        <li><a href="#">Payment Payouts</a></li>
+                        <a href="#"><li>如何租借</li></a>
+                        <a href="#"><li>我們的故事</li></a>
+                        <a href="#"><li>回饋計畫</li></a>
+                        <a href="#"><li>聯繫我們</li></a>
                     </ul>
                 </div>
-                <div class="col-6 col-md-2">
-                    <ul class="footer-links appDownload">
-                        <li><a href="#"><img src="~/Assets/images/Layout_Rent/googleplay.png" alt="" style="width: 110px;"></a></li>
-                        <li><a href="#"><img src="~/Assets/images/Layout_Rent/applestore.png" alt="" style="width: 110px;"></a></li>
 
+                <div class="col-6 col-md-3">
+
+                    <ul class="footer-links">
+                        <a href="#"><li>共享經濟</li></a>
+                        <a href="#"><li>上新聞了</li></a>
+                        <a href="#"><li>網紅推推</li></a>
                     </ul>
-
-
                 </div>
+
 
             </div>
         </div>
 
-
-
     </footer>
+    @Html.Partial("Login-Sign")
     <div class="chatIcon">
         <!-- <i class="fas fa-sms"></i> -->
         <img src="~/Assets/images/Layout_Rent/chatIcon3.png" alt="">
@@ -306,13 +298,11 @@
     <script src="~/Assets/js/Layout_Rent/footer.js"></script>
 
 
-    @Html.Partial("Login-Sign")
     <script src="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.umd.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     @RenderSection("endCSS", required: false)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
     @RenderSection("endJS", required: false)
 
 </body>
