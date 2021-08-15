@@ -13,18 +13,18 @@
     background-color:#FF8A65;
     border:none;
 }
-button:not(:disabled):hover{
+.right button:not(:disabled):hover{
     box-shadow: 2px 2px 2px #aaa;
     transform: translate(-3px ,-2px) scaleY(1.05);
 }
 
-.modal-title{
+#DateModal .modal-title{
     margin-right: -30px;
     letter-spacing: 3px;
     text-align: center;
 }
 
-.modal-content{
+#DateModal .modal-content {
     min-width: 340px;
 }
         
@@ -53,7 +53,7 @@ button:not(:disabled):hover{
 }
 
 
-.modal-body>button[data-bs-toggle="collapse"]{
+#DateModal .modal-body > button[data-bs-toggle="collapse"] {
     color: #fff;
     background-color: #FFAD87;
     letter-spacing: 2px;
@@ -61,7 +61,7 @@ button:not(:disabled):hover{
     /* FFAD87 */
     /* FFCFA9 */
 }
-.modal-body>button[data-bs-toggle="collapse"]:disabled{
+#DateModal .modal-body > button[data-bs-toggle="collapse"]:disabled {
     color: #777;
     background-color: #ddd;
 }
@@ -114,13 +114,12 @@ button:not(:disabled):hover{
     width: 260px;
 }
 
-.modal-footer>#complete{
+#DateModal .modal-footer > #complete {
     width: 100%;
     margin: 0 auto;
     letter-spacing: 3px;
 }
-.modal-footer>#complete:disabled{
+#DateModal .modal-footer > #complete:disabled {
     color: #777;
     background-color: #ddd;
 }
-</style
