@@ -228,6 +228,7 @@
     <Content Include="Assets\js\Contribution\countUp.js" />
     <Content Include="Assets\js\datetimePicker.js" />
     <Content Include="Assets\js\howtorent.js" />
+    <Content Include="Assets\js\MemberCenter\script.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -291,7 +292,6 @@
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
-    <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Product\ProductCategory.cshtml" />
     <Content Include="Views\Product\ProductSubCategory.cshtml" />

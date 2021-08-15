@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "MemBerCenter";
     Layout = "~/Views/Shared/_Layout_Rent.cshtml";
-
 }
 
 <div class="member-center-container-outsidestyle">
@@ -185,70 +184,73 @@
                         <span class="member-display-order-item">租期</span>
                         <span class="member-display-order-item">金額</span>
                         <span class="member-display-order-item">交易日期</span>
-                        <span class="member-display-order-item-show">內容</span>
+                        <span class="member-display-order-item member-display-order-item-show">內容</span>
                     </div>
                     <div class="member-display-order-detail-container">
                         <div class="member-display-title member-display-order-detail">
                             <span class="member-display-order-item member-display-order-show">中華大學新竹總店</span>
                             <span class="member-display-order-item
-                                member-display-order-day">3天</span>
+                                    member-display-order-day">3天</span>
                             <span class="member-display-order-item
-                                member-display-order-price">NT$900</span>
+                                    member-display-order-dynamic-total">NT$900</span>
                             <span class="member-display-order-item
-                                member-display-order-data">110/8/1</span>
-                            <span class="member-display-order-item-display">+</span>
+                                    member-display-order-day">110/8/1</span>
+                            <span class="member-display-order-item-show-button member-display-order-item-show-dynamic-button">+</span>
                         </div>
                         <div class="member-display-order-detail-list">
-                            <span class="member-display-order-item member-display-order-show">租賃商品</span>
+                            <span class="member-display-order-item member-display-order-name">租賃商品</span>
                             <span class="member-display-order-item
-                                member-display-order-day">歸還日</span>
+                                    member-display-order-return-day">歸還日</span>
                             <span class="member-display-order-item
-                                member-display-order-price">單價</span>
+                                    member-display-order-price">單價</span>
                             <span class="member-display-order-item
-                                member-display-order-data">數量</span>
+                                    member-display-order-amount">數量</span>
                             <span class="member-display-order-item
-                                member-display-order-data">總計</span>
-                            <span class="member-display-order-item member-display-order-show">PS5 Pro</span>
+                                    member-display-order-total">總計</span>
+                            <span class="member-display-order-item member-display-order-dynamic-name">PS5 Pro</span>
                             <span class="member-display-order-item
-                                member-display-order-day">110/8/4</span>
+                                    member-display-order-dynamic-return-day">110/8/4</span>
                             <span class="member-display-order-item
-                                member-display-order-price">300</span>
+                                    member-display-order-dynamic-price">300</span>
                             <span class="member-display-order-item
-                                member-display-order-data">1</span>
+                                    member-display-order-dynamic-amount">1</span>
                             <span class="member-display-order-item
-                                member-display-order-data">NT$900</span>
+                                    member-display-order-dynamic-total">NT$900</span>
                         </div>
                     </div>
+
+
+
                     <div class="member-display-order-detail-container">
                         <div class="member-display-title member-display-order-detail">
                             <span class="member-display-order-item member-display-order-show">新竹站前分店</span>
                             <span class="member-display-order-item
-                                member-display-order-day">1天</span>
+                                    member-display-order-day">1天</span>
                             <span class="member-display-order-item
-                                member-display-order-price">NT$500</span>
+                                    member-display-order-dynamic-total">NT$500</span>
                             <span class="member-display-order-item
-                                member-display-order-data">110/8/5</span>
-                            <span class="member-display-order-item-display">+</span>
+                                    member-display-order-day">110/8/5</span>
+                            <span class="member-display-order-item-show-button member-display-order-item-show-dynamic-button">+</span>
                         </div>
                         <div class="member-display-order-detail-list">
-                            <span class="member-display-order-item member-display-order-show">租賃商品</span>
+                            <span class="member-display-order-item member-display-order-name">租賃商品</span>
                             <span class="member-display-order-item
-                                member-display-order-day">歸還日</span>
+                                    member-display-order-return-day">歸還日</span>
                             <span class="member-display-order-item
-                                member-display-order-price">單價</span>
+                                    member-display-order-price">單價</span>
                             <span class="member-display-order-item
-                                member-display-order-data">數量</span>
+                                    member-display-order-amount">數量</span>
                             <span class="member-display-order-item
-                                member-display-order-data">總計</span>
-                            <span class="member-display-order-item member-display-order-show">杜卡迪991</span>
+                                    member-display-order-total">總計</span>
+                            <span class="member-display-order-item member-display-order-dynamic-name">杜卡迪991</span>
                             <span class="member-display-order-item
-                                member-display-order-day">110/8/6</span>
+                                    member-display-order-dynamic-return-day">110/8/6</span>
                             <span class="member-display-order-item
-                                member-display-order-price">500</span>
+                                    member-display-order-dynamic-price">500</span>
                             <span class="member-display-order-item
-                                member-display-order-data">1</span>
+                                    member-display-order-dynamic-amount">1</span>
                             <span class="member-display-order-item
-                                member-display-order-data">NT$500</span>
+                                    member-display-order-dynamic-total">NT$500</span>
                         </div>
                     </div>
 
@@ -271,6 +273,7 @@
 }
 
 @section endJS{
+    <script src="~/Assets/js/MemberCenter/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 }
