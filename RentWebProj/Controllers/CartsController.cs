@@ -14,11 +14,6 @@ namespace RentWebProj.Controllers
     {
         private RentContext db = new RentContext();
 
-        public ActionResult Checkout()
-        {
-            return View(db.Carts.ToList());
-        }
-
         // GET: Carts
         public ActionResult Index()
         {

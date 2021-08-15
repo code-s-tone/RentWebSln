@@ -35,7 +35,7 @@ namespace RentWebProj.Services
             return VMList;
         }
 
-        public IEnumerable<IndexProductView> getProductData( int catID)
+        public IEnumerable<IndexProductView> getProductData(string catID)
         {
             IEnumerable<IndexProductView> VMList;
 
@@ -46,7 +46,7 @@ namespace RentWebProj.Services
             //Method Expression  有join時，這方法很吃邏輯
             VMList = pDMList
                 .Take(6)
-                .Where(x => x.CategoryID == catID)
+                .Where(x => x.ProductID.Substring(0, 3) == catID)
                 .Select(x => new IndexProductView{
                     ProductName = x.ProductName,
                     CategoryName =
@@ -54,12 +54,20 @@ namespace RentWebProj.Services
                 });
 
             //Query Expression
+            //VMList = (from p in pDMList
+            //          join c in cDMList
+            //          on p.CategoryID equals c.CategoryID
+            //          where p.CategoryID == catID
+            //          select new IndexProductView
+            //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
+            //).Take(6);
+
             VMList = (from p in pDMList
-                    join c in cDMList
-                    on p.CategoryID equals c.CategoryID
-                    where p.CategoryID == catID
-                    select new IndexProductView
-                    { ProductName = p.ProductName, CategoryName = c.CategoryName }
+                      join c in cDMList
+                      on p.ProductID.Substring(0,3) equals c.CategoryID
+                      where c.CategoryID == catID
+                      select new IndexProductView
+                      { ProductName = p.ProductName, CategoryName = c.CategoryName }
             ).Take(6);
 
 
