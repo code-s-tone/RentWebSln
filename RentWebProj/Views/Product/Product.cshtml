@@ -42,11 +42,6 @@
         </div>
 
     </div>
-    <!-- Button trigger modal -->
-    <!--<button type="button" id="setDate" class="orange" data-bs-toggle="modal" data-bs-target="#DateModal">
-        選擇租期
-    </button>-->
-    <!-- ====================================================================================================== -->
 
     <br>
 
@@ -258,52 +253,54 @@
         </Section>
     </div>
 
+    <div class="right">
+        <!-- Button trigger modal -->
+        <button type="button" id="setDate" class="orange" data-bs-toggle="modal" data-bs-target="#DateModal">
+            設定租借期間
+        </button>
+
+        <!-- DateModal -->
+        <div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column align-items-center">
+
+                        <div id="collapseDatePicker" class="collapse collapseItem show">
+                            <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
+                        </div>
+
+                        <button class="w-100 orange" data-bs-toggle="collapse" data-bs-target=".collapseItem">
+                            繼續設定時間
+                        </button>
+
+                        <div id="collapseTimePicker" class="collapse collapseItem">
+                            <div class="d-flex w-100">
+                                <div class="d-flex">
+                                    <strong>從</strong><div id="start"></div>
+                                    <input class="flatpickr TimePicker" type=text placeholder="選時間" id="startTimePicker">
+                                </div>
+                                <div class="arrow"></div>
+                                <div class="d-flex">
+                                    <strong>到</strong><div id="end"></div>
+                                    <input class="flatpickr TimePicker" type=text placeholder="選時間" id="endTimePicker">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="orange" id="complete" data-bs-dismiss="modal">設定完成</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </div>
-
-
-<!-- DateModal -->
-<!--<div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center w-100" id="exampleModalLabel">設定起訖日</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex justify-content-center">
-                <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
-            </div>
-            <div class="modal-footer">
-                <button class=" orange" data-bs-toggle="modal" data-bs-target="#TimeModal">
-                    繼續設定時間
-                </button>
-            </div>
-        </div>
-    </div>
-</div>-->
-<!-- TimeModal -->
-<!--<div class="modal fade" id="TimeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-titl text-center w-100" id="exampleModalLabel">設定時間</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div id="start"></div>
-                <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="startTimePicker">
-
-                <div id="end"></div>
-                <input class="flatpickr TimePicker" type=text placeholder="選時間..." id="endTimePicker">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="orange" id="complete" data-bs-dismiss="modal">確定</button>
-
-            </div>
-        </div>
-    </div>
-</div>-->
-
 
 
 
@@ -322,9 +319,9 @@
 
     <link href="~/Assets/css/leafMap.css" rel="stylesheet" />
 
-    <link href="~/Assets/css/dateTimePicker.css" rel="stylesheet" />
-
     <link href="~/Assets/css/Product_Detail.css" rel="stylesheet" />
+
+    <link href="~/Assets/css/dateTimePicker.css" rel="stylesheet" />
 
 }
 
@@ -344,7 +341,7 @@
     <script src="~/Assets/css/ProductCarousel.js"></script>
     @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>*@
     @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="~/Scripts/flatpickr.js"></script>
 
 
     <!-- leaf js -->
@@ -355,9 +352,9 @@
 
     <script src="~/Assets/js/leaf.js"></script>
 
-    <script src="~/Assets/js/datetimePicker.js"></script>
-
     <script src="~/Assets/js/Product_Detail.js"></script>
+
+    <script src="~/Assets/js/dateTimePicker.js"></script>
 
 }
 

@@ -255,7 +255,7 @@
     <Content Include="Assets\images\Contribution\Why_Icons_Protection-120x120.png" />
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\Contribution\countUp.js" />
-    <Content Include="Assets\js\datetimePicker.js" />
+    <Content Include="Assets\js\dateTimePicker.js" />
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\leaf.js" />
     <Content Include="Assets\js\ProductCategory.js" />
@@ -333,6 +333,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap5.0.1-bundle.min.js" />
+    <Content Include="Scripts\flatpickr.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

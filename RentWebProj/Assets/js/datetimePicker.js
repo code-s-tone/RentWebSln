@@ -1,22 +1,15 @@
-﻿
 let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
-let TimeModalLauncher = document.querySelector('button[data-bs-target="#TimeModal"]');
+let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
+collapseBtn.disabled = true;
+completeBtn.disabled = true;
 
-DateModalLauncher.addEventListener('click', function () {
-    let sD = datePicker.selectedDates;
-    if (sD.length == 2 && sD[1] > sD[0]) {
-        TimeModalLauncher.disabled = false;
-    } else {
-        TimeModalLauncher.disabled = true;
+collapseBtn.addEventListener('click',function(){
+    if(  collapseBtn.classList.contains('collapsed')  ){
+        collapseBtn.innerText="繼續設定時間";
     }
-});
-
-TimeModalLauncher.addEventListener('click', function () {
-    if (TimePicker[0].selectedDates.length == 1 && TimePicker[1].selectedDates.length == 1) {
-        completeBtn.disabled = false;
-    } else {
-        completeBtn.disabled = true;
+    else{
+        collapseBtn.innerText="返回設定日期";
     }
 });
 
@@ -27,26 +20,36 @@ const datePicker = flatpickr("#datePicker", {
     // altFormat: "F j, Y",
 
     minDate: new Date(),
-    disable: ["2021-08-11", new Date(2021, 7, 19)],
+    disable: ["2021-08-11", new Date(2021, 7, 19) ],
 
-    inline: true,
+    inline:true,
 
+    onChange: function( selectedDates, dateStr, instance) {//固定的參數群
+        if (selectedDates.length == 2 && selectedDates[1]>selectedDates[0]){
+            let s = flatpickr.formatDate(selectedDates[0], instance.config.dateFormat);
+            let e = flatpickr.formatDate(selectedDates[1], instance.config.dateFormat);
 
-    onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (selectedDates.length == 2 && selectedDates[1] > selectedDates[0]) {
-            TimeModalLauncher.disabled = false;
-        } else {
-            TimeModalLauncher.disabled = true;
+            document.querySelector("#start").innerHTML= s;
+            document.querySelector("#end").innerHTML= e;
+        //日期設定好> 才可以按collapseBtn
+            //啟用
+            collapseBtn.disabled = false;
+            if (TimePicker[0].selectedDates.length==1 
+                && TimePicker[1].selectedDates.length==1
+            ){
+                //日期時間都設定好> 才可以按completeBtn
+                completeBtn.disabled =  false;
+            }
+
+        }else{
+            //禁止
+            collapseBtn.disabled = true;
+            completeBtn.disabled =  true;
         }
-        let s = flatpickr.formatDate(selectedDates[0], instance.config.dateFormat);
-        let e = flatpickr.formatDate(selectedDates[1], instance.config.dateFormat);
 
-        document.querySelector("#start").innerHTML = "從：" + s;
-        document.querySelector("#end").innerHTML = "到：" + e;
-    },
+
+    }
 });
-
-
 
 const TimePicker = flatpickr(".TimePicker", {
     enableTime: true,
@@ -56,29 +59,23 @@ const TimePicker = flatpickr(".TimePicker", {
     minTime: "08:00",
     maxTime: "22:30",
 
-    onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (TimePicker[0].selectedDates.length == 1 && TimePicker[1].selectedDates.length == 1) {
-            completeBtn.disabled = false;
-        } else {
-            completeBtn.disabled = true;
+    onChange: function( selectedDates, dateStr, instance) {//固定的參數群
+        if (TimePicker[0].selectedDates.length==1 
+            && TimePicker[1].selectedDates.length==1
+            && datePicker.selectedDates.length==2 
+            && datePicker.selectedDates[1]>datePicker.selectedDates[0]
+        ){
+            //日期時間都設定好> 才可以按completeBtn
+            completeBtn.disabled =  false;
+        }else{
+            completeBtn.disabled =  true;
         }
     }
 });
 
 
-    // const startTimePicker = flatpickr("#startTimePicker", {
-    // });
+// const startTimePicker = flatpickr("#startTimePicker", {
+// });
 
-    // const endTimePicker = flatpickr("#endTimePicker", {
-    // });
-
-completeBtn.addEventListener('click', function () {
-    let DateModalEl = document.getElementById('DateModal');
-    let DateModal = bootstrap.Modal.getInstance(DateModalEl);
-    DateModal.toggle();
-    let a = document.querySelectorAll('.modal-backdrop.fade.show');
-    a.forEach(x => {
-        console.log(x);
-        x.classList.remove('show');
-    });
-});
+// const endTimePicker = flatpickr("#endTimePicker", {
+// });
