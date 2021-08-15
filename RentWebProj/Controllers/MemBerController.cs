@@ -7,10 +7,10 @@ using System.Web.Mvc;
 
 namespace RentWebProj.Controllers
 {
-    public class MemBerController : Controller
+    public class MemberController : Controller
     {
-        // GET: MemBer
-        public ActionResult MemBerCenter()
+        // GET: Member
+        public ActionResult MemberCenter()
         {
             //初始化資料庫
             RentContext db = new RentContext();

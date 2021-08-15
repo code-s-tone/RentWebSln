@@ -40,6 +40,7 @@ body {
     color: #737373;
     background-color: #26272b;
     font-size: 13px;
+    margin-top:50px;
 }
 
     .site-footer h2 {
@@ -173,6 +174,7 @@ body {
     .site-footer {
         width: 100%;
         padding: 20px 0;
+        margin-top:35px;
     }
 
     .chatBox {

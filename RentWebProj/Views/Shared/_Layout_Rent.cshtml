@@ -49,10 +49,6 @@
                     </a>
                 </div>
 
-                @*<div class="logo d-grid">
-                        @Html.ActionLink("知租網", "Index", "Home", new { @class = "m-auto" })
-                    </div>*@
-
                 <div class="header-function-box">
 
                     <!-- 屆時MVC記得在input寫name 對應到action的參數 submit按鈕先hidden掉 待測試靠按enter可否行 -->
@@ -78,8 +74,8 @@
                                 </div>
                                 <a href="#"><li>通知</li></a>
                                 
-                                <a href="@Url.Action("MemBerCenter", "Members")"><li>我的訂單</li></a>
-                                <a href="@Url.Action("MemBerCenter", "Members")"><li>會員管理</li></a>
+                                <a href="@Url.Action("MemberCenter", "Member")"><li>我的訂單</li></a>
+                                <a href="@Url.Action("MemberCenter", "Member")"><li>修改個人資料</li></a>
                                 <a href="#" class="signOutBtn"><li>登出</li></a>
                             </ul>
                         </div>
@@ -175,9 +171,9 @@
                     <a href="#" class="dropdown-btn"> 會員中心 <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-container">
                         <a href="#">通知</a>
-                        <a href="#">我的訂單</a>
-                        <a href="#">會員資料/修改</a>
-                        @*@Url.Action("MemBerCenter", "Member")*@
+                        @Html.ActionLink("我的訂單", "MemberCenter", "Member")
+                        @Html.ActionLink("修改個人資料", "MemberCenter", "Member")
+                        
                         <a href="#" class="signOutBtn">登出</a>
                     </div>
                 </div>

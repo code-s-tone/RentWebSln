@@ -130,7 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MemBerController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -169,6 +169,9 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
+    <Content Include="Assets\css\GeneralProductCards\ProductCards.css" />
+    <Content Include="Assets\css\GeneralProductCards\SearchFilter.css" />
     <Content Include="Assets\css\howtorent.css" />
     <Content Include="Assets\css\Index\index.css" />
     <Content Include="Assets\css\Layout_rent\footer.css" />
@@ -228,6 +231,9 @@
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\Contribution\countUp.js" />
     <Content Include="Assets\js\datetimePicker.js" />
+    <Content Include="Assets\js\GeneralProductCards\GeneralCategories.js" />
+    <Content Include="Assets\js\GeneralProductCards\ProductCards.js" />
+    <Content Include="Assets\js\GeneralProductCards\SearchFilter.js" />
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\MemberCenter\script.js" />
     <Content Include="Assets\js\ProductCategory.js" />
@@ -313,7 +319,9 @@
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Carts\Checkout.cshtml" />
-    <Content Include="Views\MemBer\MemBerCenter.cshtml" />
+    <Content Include="Views\Member\MemberCenter.cshtml" />
+    <Content Include="Views\Product\GeneralCategories.cshtml" />
+    <Content Include="Views\Product\ProductCards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

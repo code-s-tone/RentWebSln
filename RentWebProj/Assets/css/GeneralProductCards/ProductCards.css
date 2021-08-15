@@ -1,0 +1,269 @@
+﻿/* 以下為商品卡片 by庭安 */
+.ProductCardsPage {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.ProductCardsContainer h2 {
+    padding-left: 10px;
+    /* 為配合對齊下面卡片(卡片有左右margin12) */
+}
+
+.product-card a {
+    text-decoration: none;
+}
+
+.product-card {
+    position: relative;
+    box-shadow: 0 2px 7px #dfdfdf;
+    margin: 10px 12px;
+    background-color: rgb(253, 253, 253);
+}
+
+    /* 碰到整張卡片的hover */
+    .product-card:hover .product-cart-icon i {
+        color: #fe8b5a;
+        animation-name: hover-up-down;
+        animation-iteration-count: infinite;
+        animation-duration: .6s;
+    }
+
+    .product-card:hover .checkitOut {
+        display: grid;
+        animation-name: checkitOut;
+        animation-duration: .5s;
+    }
+
+.badge {
+    position: absolute;
+    left: 0;
+    top: 15px;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: #fe8b5a;
+    color: #fff;
+    padding: 2px 5px;
+}
+
+repeat {
+    display: block;
+}
+
+    repeat[n="1"]:before {
+        content: "★";
+    }
+
+    repeat[n="2"]:before {
+        content: "★★";
+    }
+
+    repeat[n="3"]:before {
+        content: "★★★";
+    }
+
+    repeat[n="4"]:before {
+        content: "★★★★";
+    }
+
+    repeat[n="5"]:before {
+        content: "★★★★★";
+    }
+
+.product-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 185px;
+    background-color: white;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+    .product-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* 還是要用contain?? */
+    }
+
+/* 商品卡照片之外的區塊 */
+.product-details {
+    width: 100%;
+    padding: 10px 15px;
+    border-top: 1px solid rgb(238, 238, 238);
+    position: relative;
+    /* 給查看詳情定位 */
+}
+
+.checkitOut {
+    display: none;
+    position: absolute;
+    width: 110px;
+    height: 35px;
+    background-color: #fe8b5a;
+    opacity: .95;
+    top: -8%;
+    right: 0%;
+    color: white;
+}
+
+
+@keyframes checkitOut {
+    from {
+        /* right: 20%; */
+        top: 0%;
+    }
+
+    to {
+        /* right: 0px; */
+        top: -8%;
+    }
+}
+
+@keyframes hover-up-down {
+
+    0%, 100% {
+        transform: translateY(-6px)
+    }
+
+    50% {
+        transform: translateY(-2px)
+    }
+}
+
+
+.product-catagory {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #ccc;
+}
+
+.product-details .product-name {
+    font-weight: bolder;
+    display: block;
+    margin: 8px 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    height: 25px;
+    overflow: hidden;
+}
+
+    .product-details .product-name a {
+        color: #474747;
+        color: black;
+    }
+
+        .product-details .product-name a:hover {
+            color: #fe8b5a;
+        }
+
+.product-description {
+    font-size: 15px;
+    color: rgb(134, 134, 134);
+    margin-bottom: 12px !important;
+    height: 45px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.product-price-cart-box {
+    overflow: hidden;
+    border-top: 1px solid rgb(226, 226, 226);
+    padding: 15px 0 10px 0;
+}
+
+.product-price {
+    font-size: 18px;
+    color: #474747;
+    font-weight: 600;
+}
+
+    .product-price span {
+        font-size: 14px;
+    }
+
+
+.product-cart-icon i {
+    margin-right: 5px;
+    color: #cecece;
+    transition: 0.3s;
+    font-size: 20px;
+}
+
+/* 平板以下不應該有hover */
+@media screen and (max-width: 1024px) {
+
+    .product-cart-icon i {
+        color: #fe8b5a;
+        animation: none;
+    }
+
+    .product-card:hover .checkitOut {
+        display: none;
+        animation-name: none;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .ProductCardsPage {
+        margin: 0 15px;
+    }
+
+    .ProductCardsContainer h2 {
+        margin-top: 20px;
+    }
+
+}
+
+
+
+
+/* 商品卡片手機板 */
+@media screen and (max-width: 767px) {
+    .badge {
+        top: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 2px 4px;
+    }
+
+    .product-img {
+        height: 155px;
+    }
+
+    .product-details .product-name {
+        margin: 5px 0;
+        font-size: 17px;
+        height: 50px;
+        overflow: hidden;
+    }
+
+    .product-description {
+        font-size: 14px;
+        margin-bottom: 10px !important;
+        height: 40px;
+    }
+
+    .product-price-cart-box {
+        padding: 10px 0 0px 0;
+    }
+
+    .product-price {
+        font-size: 17px;
+    }
+
+        .product-price span {
+            font-size: 13px;
+        }
+
+
+    .product-cart-icon i {
+        margin-right: 5px;
+        font-size: 17px;
+    }
+}
