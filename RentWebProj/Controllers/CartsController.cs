@@ -20,6 +20,10 @@ namespace RentWebProj.Controllers
             var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
             return View(carts.ToList());
         }
+        public ActionResult Checkout()
+        {
+            return View(db.Carts.ToList());
+        }
 
         // GET: Carts/Details/5
         public ActionResult Details(int? id)
