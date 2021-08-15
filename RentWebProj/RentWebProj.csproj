@@ -289,7 +289,6 @@
     <Content Include="Views\Home\OurStory.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
-    <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
     <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -312,6 +311,7 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

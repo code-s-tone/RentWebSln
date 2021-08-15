@@ -25,7 +25,8 @@
     <link href="~/Assets/css/Layout_rent/header.css" rel="stylesheet" />
     <link href="~/Assets/css/Layout_rent/sidebar.css" rel="stylesheet" />
     <link href="~/Assets/css/Layout_rent/footer.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.css" />
+    <link href="~/Assets/css/Login-Sign.css" rel="stylesheet" />
     <title>知租網</title>
 
     @Scripts.Render("~/bundles/modernizr")
@@ -48,7 +49,7 @@
 
             <div class="header-nav">
                 <div class="logo d-grid">
-                    @Html.ActionLink("知租網", "Index", "Home",  new { @class = "m-auto" })
+                    @Html.ActionLink("知租網", "Index", "Home", new { @class = "m-auto" })
                 </div>
 
 
@@ -67,7 +68,7 @@
                     <div class="header-member-box">
 
                         <img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon" title="購物車">
-                        
+
                         <div class="member-dropdown">
                             <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
                             <ul class="member-subMenu">
@@ -86,8 +87,8 @@
 
                     <!-- 註冊登入鈕 -->
                     <nav class="nav-btn">
-                        <a href="#" class="loginBtn">登入</a>
-                        <a href="#" class="signUpBtn">註冊</a>
+                        <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">登入</a>
+                        <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">註冊</a>
                     </nav>
                 </div>
 
@@ -134,7 +135,7 @@
                         <li>
                             <a href="#">葉配一下<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <li><a href="#">共享經濟</a></li>
+                                <li>@Html.ActionLink("共享經濟", "SharingEconomy", "SocialMedia")</li>
                                 <li><a href="#">上新聞了</a></li>
                                 <li><a href="#">網紅推推</a></li>
                             </ul>
@@ -165,8 +166,8 @@
 
 
             <div class="sidebar-btn">
-                <a href="#" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
-                <a href="#" class="signUpBtn d-grid"><span class="m-auto">註冊</span></a>
+                <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">登入</a>
+                <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">註冊</a>
             </div>
 
             <div class="linkBox">
@@ -200,7 +201,7 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">共享經濟</a>
+                    @Html.ActionLink("共享經濟", "SharingEconomy", "SocialMedia")
                     <a href="#">上新聞了</a>
                     <a href="#">網紅推薦</a>
                 </div>
@@ -310,8 +311,8 @@
     <script src="~/Assets/js/Layout_Rent/footer.js"></script>
 
 
-
-
+    @Html.Partial("Login-Sign")
+    <script src="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.umd.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     @RenderSection("endCSS", required: false)

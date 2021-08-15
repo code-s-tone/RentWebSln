@@ -70,7 +70,7 @@
   word-break: keep-all;
 }
 .col-6{
-  text-align: center;
+
 }
 .col-sm-6 a{
   color: #fc8d61;
@@ -120,10 +120,10 @@
   height: 60px;
 }
 @media screen and (max-width:768px){
-  h1{
-  font-size: 38px;
-  line-height: 1.2em;
-}
+    .banner .banner_text h1 {
+        font-size: 38px;
+        line-height: 1.2em;
+    }
 .banner{
     /* min-height: 35vh; */
     padding: 29px;
