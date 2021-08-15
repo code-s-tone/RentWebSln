@@ -13,11 +13,6 @@ namespace RentWebProj
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Product",
-                url: "product",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
 
             routes.MapRoute(
                 name: "Default",

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -82,7 +84,7 @@
                                 <li><a href="#">通知</a></li>
                                 <li><a href="#">我的訂單</a></li>
                                 <li><a href="#">會員資料/修改</a></li>
-                                <li><a href="@Url.Action("LogOut","Members")" class="signOutBtn">登出</a></li>
+                                <li><a href="@Url.Action("LogOut","Member")" class="signOutBtn">登出</a></li>
                             </ul>
                         </div>
 
@@ -90,8 +92,8 @@
 
                     <!-- 註冊登入鈕 -->
                     <nav class="nav-btn">
-                        <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">登入</a>
-                        <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">註冊</a>
+                        <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">登入</a>
+                        <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">註冊</a>
                     </nav>
                 </div>
 
@@ -157,8 +159,8 @@
                     <img src="~/Assets/images/Layout_Rent/logo.jpg" />
                 </a>
                 <div class="sidebar-btn">
-                    <a href="#" class="loginBtn d-grid" data-bs-toggle="modal" data-bs-target="#SignModal2"><span class="m-auto">登入</span> </a>
-                    <a href="#" class="signUpBtn d-grid" data-bs-toggle="modal" data-bs-target="#LoginModal"><span class="m-auto">註冊</span></a>
+                    <a href="#" class="loginBtn d-grid" data-bs-toggle="modal" data-bs-target="#LoginModal"><span class="m-auto">登入</span> </a>
+                    <a href="#" class="signUpBtn d-grid" data-bs-toggle="modal" data-bs-target="#SignModal2"><span class="m-auto">註冊</span></a>
                 </div>
             </div>
 
@@ -179,7 +181,7 @@
                         <a href="#">通知</a>
                         <a href="#">我的訂單</a>
                         <a href=@Html.ActionLink("會員資料/修改", "MemBerCenter", "Members")>會員資料/修改</a>
-                        <a href="@Url.Action("LogOut","Members")" class="signOutBtn">登出</a>
+                        <a href="@Url.Action("LogOut","Member")" class="signOutBtn">登出</a>
                     </div>
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>

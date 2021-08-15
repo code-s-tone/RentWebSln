@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -153,9 +154,11 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
+    <Compile Include="ViewModels\MemberView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
@@ -393,6 +396,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="HtmlPages\" />
     <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="Views\Member\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
