@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -153,8 +154,10 @@
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommonRepository.cs" />
+    <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
+    <Compile Include="ViewModels\ProductView .cs" />
     <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +173,9 @@
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
     <Content Include="Assets\css\flatpickr_orange.css" />
+    <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
+    <Content Include="Assets\css\GeneralProductCards\ProductCards.css" />
+    <Content Include="Assets\css\GeneralProductCards\SearchFilter.css" />
     <Content Include="Assets\css\howtorent.css" />
     <Content Include="Assets\css\Index\index.css" />
     <Content Include="Assets\css\Layout_rent\footer.css" />
@@ -257,9 +263,14 @@
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\Contribution\countUp.js" />
     <Content Include="Assets\js\dateTimePicker.js" />
+    <Content Include="Assets\js\datetimePicker.js" />
+    <Content Include="Assets\js\GeneralProductCards\GeneralCategories.js" />
+    <Content Include="Assets\js\GeneralProductCards\ProductCards.js" />
+    <Content Include="Assets\js\GeneralProductCards\SearchFilter.js" />
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\index.js" />
     <Content Include="Assets\js\leaf.js" />
+    <Content Include="Assets\js\MemberCenter\script.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />
     <Content Include="Assets\js\Product_Detail.js" />
@@ -369,7 +380,6 @@
     <Content Include="Views\Home\ContactUs.cshtml" />
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
-    <Content Include="Views\Shared\_Layout_ContributionProgram.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Product\ProductCategory.cshtml" />
     <Content Include="Views\Product\ProductSubCategory.cshtml" />
@@ -379,7 +389,6 @@
     <Content Include="Views\Members\Edit.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Members\_ViewStart.cshtml" />
-    <Content Include="Views\Members\MemBerCenter.cshtml" />
     <Content Include="Views\Carts\Create.cshtml" />
     <Content Include="Views\Carts\Delete.cshtml" />
     <Content Include="Views\Carts\Details.cshtml" />
@@ -390,6 +399,10 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Carts\Checkout.cshtml" />
+    <Content Include="Views\Member\MemberCenter.cshtml" />
+    <Content Include="Views\Product\GeneralCategories.cshtml" />
+    <Content Include="Views\Product\ProductCards.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
   </ItemGroup>
   <ItemGroup>

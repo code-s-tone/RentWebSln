@@ -9,7 +9,7 @@ header-top .container-xl {
 
 
 .header-nav .logo img {
-    width: 80px;
+    width: 135px;
 }
 
 .header-nav {
@@ -36,7 +36,7 @@ header-top .container-xl {
 }
 
 .header-member-box i, .header-member-box img {
-    margin-right: 30px;
+    margin-right: 20px;
     cursor: pointer;
     z-index: 50;
     position: relative;
@@ -91,7 +91,7 @@ header-top .container-xl {
 }
 
 .header-search-box {
-    margin-right: 30px;
+    margin-right: 25px;
     margin-top: -3px;
 }
 
@@ -336,7 +336,7 @@ nav .navbar .links li:hover .sub-menu {
     }
 
     .header-nav .logo img {
-        width: 60px;
+        width: 120px;
     }
 
     .header-nav {

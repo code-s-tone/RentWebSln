@@ -92,11 +92,11 @@
 }
 
 .member-display-title{
-    background-color: #FFEEDD;
+    color: #fff;
+    background-color: #fc8d61;
     padding: 15px 18px; 
     font-size: 15px;
     font-weight: 600;
-    color: #272727;
     border-radius: 5px;
     /* box-shadow: 5px 5px 5px #FFEEDD; */
 }
@@ -222,9 +222,10 @@
 }
 
 .member-display-button-item{
+    color: #fff;
     font-size: 15px;
     font-weight: 600;
-    background-color: #FFDCB9;
+    background-color: #fc8d61;
     border: 1px solid rgb(0, 0, 0, 0);
     border-radius: 5px;
     padding: 10px 20px;

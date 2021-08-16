@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ProductCartsView>
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<div class="container-xl">
+    <div class="order-nav">
+        <div class="title">
+            <h2>
+                購物步驟
+            </h2>
+        </div>
+        <div class="step row">
+            <li class="col-6 col-sm-2"><a href="#">1.確認購物明細</a></li>
+            <li class="col-6 col-sm-2 active"><a href="#">2.確認訂單明細</a></li>
+            <li class="col-6 col-sm-2"><a href="#">3.進行付款</a></li>
+            <li class="col-6 col-sm-2"><a href="#">4.完成訂購</a></li>
+        </div>
+    </div>
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+
+    <div class="order-content">
+        <div class="content-nav">
+            <li class="active"><a href="#">購物明細({X})</a></li>
+            <li><a href="#">追蹤清單({X})</a></li>
+        </div>
+        <div class="content">
+            <table class="table">
+                <tr>
+                    <th>
+                        <span>商品名稱</span>
+                        @*@Html.DisplayNameFor(model => model.ProductID)*@
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="product">
+                                <div class="product-img">
+                                    <a href="#">
+                                        <img src="~/Assets/images/cart/A451.jpg" />
+                                    </a>
+                                </div>
+                                <div class="product-name">
+                                    <a href="#" style="text-decoration:none;">
+                                        @*{JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}*@
+                                        @Html.DisplayFor(modelItem => item.ProductName)
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="product-stock">
+                                <p>利用程式判斷是否有庫存，有的話就顯示立即出貨</p>
+                            </div>
+                            <div class="product-price-qty">
+                                <div class="unitprice">
+                                    <span class="title">單日租價 :</span>
+                                    <span class="price">@Html.DisplayFor(modelItem => item.DailyRate)</span>
+                                </div>
+                                <div class="buyqty">
+                                    <span class="title">天數 : @Html.DisplayFor(modelItem => new TimeSpan(item.ExpirationDate.Ticks - item.StartDate.Ticks).TotalDays)</span>
+
+                                    @*<input type="number" value="1" class="qty">*@
+                                </div>
+                            </div>
+                            <div class="product-sub">
+                                <span class="title">小計 : </span>&emsp;
+                                <span class="subTotal"> @Html.DisplayFor(modelItem => item.TotalAmount)</span>
+                            </div>
+                        </td>
+                        @*
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        *@
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="order-total">
+                                <span>總計：</span>
+                                <span class="currency">TWD$</span> &emsp;
+                                <span class="total">@Html.DisplayFor(modelItem => item.TotalAmount)</span>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <div class="content-footer">
+                <div>
+                    <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
+                </div>
+                <div class="checkout">
+                    <button type="button" class="btn">進行結帳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-footer">
+        <div class="left-info">
+            <div class="info-head">
+                收件人資訊及付款方式
+            </div>
+            <div class="info-body">
+                <div class="member-info">
+                    <div>
+                        <label for="member-name">收件人</label>
+                    </div>
+                    <div>
+                        <input type="text" id="member-name">
+                    </div>
+
+                    <div>
+                        <label for="member-address">地址</label>
+                    </div>
+
+                    <div>
+                        <select class="form-select" aria-label="address select">
+                            <option selected>請選擇分店地址</option>
+                            <option value="1">新竹總店</option>
+                            <option value="2">台北分店</option>
+                            <option value="3">台中分店</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="member-pay">付款方式</label>
+                    </div>
+                    <div>
+                        <select class="form-select" aria-label="pay select">
+                            <option selected>請選擇付款方式</option>
+                            <option value="cash">現金</option>
+                            <option value="card">信用卡</option>
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="right-info">
+            <div class="info-head">訂單詳情</div>
+            <div class="info-body">
+                <div class="sub">
+                    <span>小計 :</span>
+                    <span class="subtotal">{NT$400}</span>
+                </div>
+                <div class="dis">
+                    <span>折扣 :</span>
+                    <span class="discount">{-NT$0}</span>
+                </div>
+                <hr>
+                <div class="tol">
+                    <span>合計 :</span>
+                    <span class="total">{NT$400}</span>
+                </div>
+                <div class="checkout">
+                    <button type="button" class="btn">進行結帳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section topCSS{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link href="~/Assets/css/Cart/navbar.css" rel="stylesheet" />
+    <link href="~/Assets/css/Cart/ordercontent.css" rel="stylesheet" />
+    <link href="~/Assets/css/Cart/orderinfo.css" rel="stylesheet" />
+}
+@section endJS{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+}

@@ -6,13 +6,12 @@
 }
 
 .member-display-order-item,
-.member-display-order-item-show,
-.member-display-order-item-display
-{
+.member-display-order-item-show-button,
+.member-display-order-item-display{
     width: 20%;
 }
 
-.member-display-order-item-show,
+.member-display-order-item-show-button,
 .member-display-order-item-display
 {
     text-align: center;
@@ -22,11 +21,18 @@
     font-size: 25px;
     cursor: pointer;
 }
-.member-display-order-item-display:hover{
-    color:#FFD1A4;
+
+.member-display-order-item-show{
+    text-align:center;
+}
+
+.member-display-order-item-show-dynamic-button:hover {
+    color: #fc8d61;
+    cursor: pointer;
 }
 
 .member-display-order-detail{
+    color:#000;
     justify-content: center;
     align-items: baseline;
     background-color: #fff;

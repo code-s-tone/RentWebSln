@@ -128,17 +128,5 @@ namespace RentWebProj.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult MemBerCenter()
-        {
-            //初始化資料庫
-            RentContext db = new RentContext();
-            var item = db.Members.ToList();
-            ViewData["email"] = item.Find(x => x.Account == "Code123").Email;
-            ViewData["password"] = item.Find(x => x.Account == "Code123").PasswordHash;
-            ViewData["ipone"] = item.Find(x => x.Account == "Code123").Phone;
-            ViewData["fullName"] = item.Find(x => x.Account == "Code123").FullName;
-            return View();
-        }
     }
 }

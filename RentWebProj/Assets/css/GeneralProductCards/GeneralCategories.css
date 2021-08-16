@@ -1,0 +1,149 @@
+﻿/* 以下為商品卡片 by庭安 */
+.CategoriesCardsPage {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+.CategoriesCardsContainer h2 {
+    padding-left: 17px;
+    /* 為配合對齊下面卡片(卡片有左右margin20) */
+}
+
+.category-card a {
+    text-decoration: none;
+}
+
+.category-card {
+    margin: 15px 20px;
+    height: 180px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.frontSide,
+.backSide {
+    box-shadow: 0 2px 7px #dfdfdf;
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    backface-visibility: hidden;
+    display: flex;
+}
+
+.category-card:hover .frontSide,
+.category-card:hover .backSide {
+    transition: transform .7s cubic-bezier(0.4, 0.2, 0.2, 1);
+    /* 翻轉 */
+}
+
+.backSide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.card-3d {
+    transform: translateZ(60px) scale(0.94);
+    /* transform: translateZ(60px) scale(0.94); */
+    /* top: 50%;
+            right: 0%;
+            position: absolute;         */
+    perspective: inherit;
+    width: 30%;
+}
+
+.frontSide .card-3d {
+    margin-left: -10px;
+}
+
+.backSide .card-3d {
+    margin-left: -7.5px;
+}
+
+
+.category-card .backSide {
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+}
+
+.category-card .frontSide {
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+}
+
+.category-card:hover .backSide {
+    transform: rotateY(0deg);
+    transform-style: preserve-3d;
+}
+
+.category-card:hover .frontSide {
+    transform: rotateY(-180deg);
+    transform-style: preserve-3d;
+}
+
+.frontSide .categoryName p {
+    font-size: 25px;
+    position: relative;
+    color: black;
+}
+
+    .frontSide .categoryName p:after {
+        content: '';
+        width: 35px;
+        height: 2px;
+        position: absolute;
+        background: #fc8d61;
+        display: block;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: -.45rem;
+    }
+
+.backSide .checkitOut_ct {
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 1px solid #fc8d61;
+    background-color: white;
+    color: #fc8d61;
+}
+
+    .backSide .checkitOut_ct:hover {
+        background-color: #fc8d61;
+        color: white;
+    }
+
+.category-img {
+    width: 70%;
+    height: 180px;
+}
+
+    .category-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* 還是要用contain?? */
+        cursor: pointer;
+    }
+
+
+@media (max-width: 991px) {
+
+    .CategoriesCardsPage {
+        margin: 0 20px;
+    }
+
+    .CategoriesCardsContainer h2 {
+        margin-top: 20px;
+    }
+}
+
+/* 種類卡片手機板 */
+@media screen and (max-width: 767px) {
+    .backSide .checkitOut_ct {
+        font-size: 16px;
+        padding: 10px 18px;
+    }
+
+    .frontSide .categoryName p {
+        font-size: 22px;
+    }
+}

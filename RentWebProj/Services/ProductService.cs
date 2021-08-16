@@ -8,36 +8,36 @@ using RentWebProj.Repositories;
 
 namespace RentWebProj.Services
 {
-    public class IndexService
+    public class ProductService
     {
         private CommonRepository _repository;
-        public IndexService()
+        public ProductService()
         {
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<IndexCategoryView> getCategoryData()
+        public IEnumerable<ProductCategoryView> getCategoryData()
         {
-            IEnumerable<IndexCategoryView> VMList;
+            IEnumerable<ProductCategoryView> VMList;
 
             var DMList = _repository.GetAll<Category>();
 
             //篩選、轉型
             //Method Expression  有join時，這方法很吃邏輯
-            VMList = DMList.Select(x => new IndexCategoryView
+            VMList = DMList.Select(x => new ProductCategoryView
             { CategoryName = x.CategoryName, ImageSrc = "" });
 
             //Query Expression
             VMList = from c in DMList
-                     select new IndexCategoryView
+                     select new ProductCategoryView
                      { CategoryName = c.CategoryName,  ImageSrc="" };
 
             return VMList;
         }
 
-        public IEnumerable<IndexProductView> getProductData(string catID)
+        public IEnumerable<ProductCardView> getProductData(string catID)
         {
-            IEnumerable<IndexProductView> VMList;
+            IEnumerable<ProductCardView> VMList;
 
             var pDMList = _repository.GetAll<Product>();
             var cDMList = _repository.GetAll<Category>();
@@ -47,7 +47,8 @@ namespace RentWebProj.Services
             VMList = pDMList
                 .Take(6)
                 .Where(x => x.ProductID.Substring(0, 3) == catID)
-                .Select(x => new IndexProductView{
+                .Select(x => new ProductCardView
+                {
                     ProductName = x.ProductName,
                     CategoryName =
                     cDMList.FirstOrDefault(c => c.CategoryID == catID).CategoryName
@@ -66,7 +67,7 @@ namespace RentWebProj.Services
                       join c in cDMList
                       on p.ProductID.Substring(0,3) equals c.CategoryID
                       where c.CategoryID == catID
-                      select new IndexProductView
+                      select new ProductCardView
                       { ProductName = p.ProductName, CategoryName = c.CategoryName }
             ).Take(6);
 
