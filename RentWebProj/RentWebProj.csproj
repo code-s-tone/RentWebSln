@@ -165,7 +165,9 @@
     <Compile Include="Repositories\CommonRepository.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
+    <Compile Include="ViewModels\OrderView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />

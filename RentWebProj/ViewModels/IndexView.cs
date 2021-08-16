@@ -17,18 +17,6 @@ namespace RentWebProj.ViewModels
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
     }
-    public class ProductCartsView
-    {
-        public string ImageSrc { get; set; }
-
-        public string ProductName { get; set; }
-
-        public decimal DailyRate { get; set; } 
-
-        public DateTime StartDate { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public decimal TotalAmount { get; set; }
-
-    }
+    
 
 }

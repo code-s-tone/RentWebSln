@@ -14,10 +14,10 @@ namespace RentWebProj.Controllers
     public class CartsController : Controller
     {
         private RentContext db = new RentContext();
-        private IndexService _service;
+        private OrderService _service;
         public CartsController()
         {
-            _service = new IndexService();
+            _service = new OrderService();
         }
         // GET: Carts
         public ActionResult Index()
@@ -28,7 +28,7 @@ namespace RentWebProj.Controllers
         public ActionResult Checkout()
         {
 
-            return View(_service.getCartsData());
+            return View(_service.getOrderData());
         }
 
         // GET: Carts/Details/5
