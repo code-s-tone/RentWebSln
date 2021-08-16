@@ -1,6 +1,6 @@
-﻿
+﻿@model IEnumerable<ProductCategoryView>
 @{
-    ViewBag.Title = "GeneralCategories";
+    ViewBag.Title = "商品總覽";
 }
 
 <div class="CategoriesCardsPage">
@@ -29,11 +29,11 @@
                     </select>
 
                     <!-- <select name="SubCategory " id="SubCategory" class="input_text distence cell_phone">
-                    <option value="0">Select a Sub-Category</option>
-                    <option value="1">PS5-遊戲片</option>
-                    <option value="2">Switch-遊戲片</option>
-                    <option value="3">遊戲主機</option>
-                </select> -->
+                        <option value="0">Select a Sub-Category</option>
+                        <option value="1">PS5-遊戲片</option>
+                        <option value="2">Switch-遊戲片</option>
+                        <option value="3">遊戲主機</option>
+                    </select> -->
                 </div>
 
                 <div class="group cell_phone">
@@ -101,6 +101,11 @@
                 <h2>所有種類 All Categories</h2>
 
                 <div class=" d-flex flex-wrap">
+
+                    @foreach(var ct in Model)
+            {
+
+            }
                     <div class="col-12 col-md-6">
                         <div class="category-card">
                             <div class="frontSide">
