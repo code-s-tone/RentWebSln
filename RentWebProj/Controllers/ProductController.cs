@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RentWebProj.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,15 +9,21 @@ namespace RentWebProj.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: Product
+        private ProductService _service;
+        public ProductController()
+        {
+            _service = new ProductService();
+        }
 
         //實際頁面
         public ActionResult GeneralCategories()
-        {          
-            return View();
+        {
+
+            return View(_service.getCategoryData()); 
         }
         public ActionResult ProductCards()
         {
+            var selectedProductList = _service.getCategoryData();
             return View();
         }
 

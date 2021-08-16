@@ -45,7 +45,7 @@
 
                 <div class="logo d-grid">
                     <a class="m-auto" href='@Url.Action("Index", "Home")'>
-                        <img src="~/Assets/images/Layout_Rent/logo.jpg" />
+                        <img src="~/Assets/images/Layout_Rent/logo.png" />
                     </a>
                 </div>
 
@@ -105,11 +105,11 @@
                             <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
 
                             <ul class="sub-menu">
-                                <a href="@Url.Action("ProductCategory", "Product")"><li>所有種類</li></a>
-                                <a href="@Url.Action("Product", "Product")"><li>想租車車</li></a>
-                                <a href="@Url.Action("Product", "Product")"><li>想租配件</li></a>
-                                <a href="@Url.Action("Product", "Product")"><li>想租女友</li></a>
-                                <a href="@Url.Action("Product", "Product")"><li>想租狗狗</li></a>
+                                <a href="@Url.Action("GeneralCategories", "Product")"><li>所有種類</li></a>
+                                <a href="@Url.Action("ProductCards", "Product")"><li>想租車車</li></a>
+                                <a href="@Url.Action("ProductCards", "Product")"><li>想租配件</li></a>
+                                <a href="@Url.Action("ProductCards", "Product")"><li>想租女友</li></a>
+                                <a href="@Url.Action("ProductCards", "Product")"><li>想租狗狗</li></a>
                      
                             </ul>
                         </li>
@@ -148,7 +148,7 @@
 
             <div class="logoBox">
                 <a href='@Url.Action("Index", "Home")'>
-                    <img src="~/Assets/images/Layout_Rent/logo.jpg" />
+                    <img src="~/Assets/images/Layout_Rent/logo.png" />
                 </a>
                 <div class="sidebar-btn">
                     <a href="#" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
@@ -179,12 +179,12 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    @Html.ActionLink("所有種類", "ProductCategory", "Product")
-                    <a href="#">想租車車</a>
-                    <a href="#">想租配件</a>
-                    <a href="#">想租女友</a>
-                    <a href="#">想租狗狗</a>
-                    @Html.ActionLink("想租電動", "ProductSubCategory", "Product")
+                    @Html.ActionLink("所有種類", "GeneralCategories", "Product")
+                    @Html.ActionLink("想租車車", "ProductCards", "Product")
+                    @Html.ActionLink("想租配件", "ProductCards", "Product")
+                    @Html.ActionLink("想租女友", "ProductCards", "Product")
+                    @Html.ActionLink("想租狗狗", "ProductCards", "Product")
+                    @Html.ActionLink("想租電動", "ProductCards", "Product")
                 </div>
                 <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
@@ -249,11 +249,14 @@
 
                 <div class="col-6 col-md-3">
                     <ul class="footer-links">
-                        <a href="#"><li>所有種類</li></a>
-                        <a href="#"><li>想租車車</li></a>
-                        <a href="#"><li>想租配件</li></a>
-                        <a href="#"><li>想租女友</li></a>
-                        <a href="#"><li>想租狗狗</li></a>
+
+                        <a href="@Url.Action("GeneralCategories", "Product")"><li>所有種類</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租配件</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租車車</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租女友</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租狗狗</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租電動</li></a>
+                      
                     </ul>
                 </div>
 
