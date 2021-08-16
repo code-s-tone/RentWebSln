@@ -54,14 +54,6 @@ namespace RentWebProj.Services
                     cDMList.FirstOrDefault(c => c.CategoryID == catID).CategoryName
                 });
 
-            //Query Expression
-            //VMList = (from p in pDMList
-            //          join c in cDMList
-            //          on p.CategoryID equals c.CategoryID
-            //          where p.CategoryID == catID
-            //          select new IndexProductView
-            //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            //).Take(6);
 
             VMList = (from p in pDMList
                       join c in cDMList
