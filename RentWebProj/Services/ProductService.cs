@@ -134,5 +134,22 @@ namespace RentWebProj.Services
             return CMList;
         }
 
+        public ProductDetailView getProductDetail(string PID)
+        {
+            ProductDetailView VM;
+
+            var DMList = _repository.GetAll<Product>();
+
+            VM = (from p in DMList
+                  where p.ProductID == PID
+                  select new ProductDetailView
+                  {
+                      ProductName = p.ProductName,
+                      Description = p.Description,
+                      DailyRate = p.DailyRate
+                  }).FirstOrDefault();
+            return VM;
+        }
+
     }
 }

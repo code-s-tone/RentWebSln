@@ -1,10 +1,10 @@
-﻿
+﻿@model ProductDetailView
 @{
     ViewBag.Title = "Product";
 }
 
 <div class="container-xl main">
-    <h2>戶外遮陽加厚防晒棚</h2>
+    <h2>@Model.ProductName</h2>
     <div class="Top_Title mb-3">
         <div class="Zip">
             <div class="ZipContent">
@@ -65,10 +65,7 @@
                     <div class="description_text">
                         <div id="">
                             <p id="p1">
-                                Welcome! This item is an example of one that Ruckify might have available. This is not a
-                                real item but one that acts to help us find what you are looking for. If you wish to
-                                rent
-                                this item or one that is similar, we will do everything to facilitate
+                                @Model.Description
                                 <span id="span1">
                                     ...
                                     <span class="link1" id="link1">
@@ -257,7 +254,7 @@
         <div class="right">
             <div class="RentInfo">
                 <div class="RentSetting">
-                    <div class="price"><span>50</span>元/日</div>
+                    <div class="price"><span>@Model.DailyRate</span>元/日</div>
                     <!-- Button trigger modal -->
                     <button id="setDate" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                         設定租借期間

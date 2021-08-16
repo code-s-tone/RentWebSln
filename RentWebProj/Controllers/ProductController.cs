@@ -1,9 +1,10 @@
-﻿using RentWebProj.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentWebProj.Services;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
@@ -37,9 +38,12 @@ namespace RentWebProj.Controllers
         { //先不刪 名駿說要留著研究
             return View();
         }
-        public ActionResult Product()
+        public ActionResult Product(string PID)
         {
-            return View();
+            //string PID = "PplPg002";//未來放參數
+            ProductDetailView VM = _service.getProductDetail(PID);
+            ViewBag.PID = PID;
+            return View(VM);
         }
     }
 }
