@@ -1,8 +1,10 @@
 let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
+let actionBtns = document.querySelectorAll('.decision-group>.orange')
 collapseBtn.disabled = true;
 completeBtn.disabled = true;
+actionBtns.forEach(x=> x.disabled = true);
 
 collapseBtn.addEventListener('click',function(){
     if(  collapseBtn.classList.contains('collapsed')  ){
@@ -15,7 +17,7 @@ collapseBtn.addEventListener('click',function(){
 
 const datePicker = flatpickr("#datePicker", {
     mode: "range",
-    dateFormat: "Y\\年m\\月d\\日",
+    dateFormat: "Y / m / d",
     // altInput: true,
     // altFormat: "F j, Y",
 
@@ -34,8 +36,8 @@ const datePicker = flatpickr("#datePicker", {
         //日期設定好> 才可以按collapseBtn
             //啟用
             collapseBtn.disabled = false;
-            if (TimePicker[0].selectedDates.length==1 
-                && TimePicker[1].selectedDates.length==1
+            if (timePicker[0].selectedDates.length==1 
+                && timePicker[1].selectedDates.length==1
             ){
                 //日期時間都設定好> 才可以按completeBtn
                 completeBtn.disabled =  false;
@@ -46,12 +48,10 @@ const datePicker = flatpickr("#datePicker", {
             collapseBtn.disabled = true;
             completeBtn.disabled =  true;
         }
-
-
     }
 });
 
-const TimePicker = flatpickr(".TimePicker", {
+const timePicker = flatpickr(".timePicker", {
     enableTime: true,
     noCalendar: true,
     dateFormat: "H:i",
@@ -60,11 +60,10 @@ const TimePicker = flatpickr(".TimePicker", {
     maxTime: "22:30",
 
     onChange: function( selectedDates, dateStr, instance) {//固定的參數群
-        if (TimePicker[0].selectedDates.length==1 
-            && TimePicker[1].selectedDates.length==1
+        if (timePicker[0].selectedDates.length==1 
+            && timePicker[1].selectedDates.length==1
             && datePicker.selectedDates.length==2 
-            && datePicker.selectedDates[1]>datePicker.selectedDates[0]
-        ){
+            && datePicker.selectedDates[1]>datePicker.selectedDates[0]){        
             //日期時間都設定好> 才可以按completeBtn
             completeBtn.disabled =  false;
         }else{
@@ -72,10 +71,37 @@ const TimePicker = flatpickr(".TimePicker", {
         }
     }
 });
-
-
 // const startTimePicker = flatpickr("#startTimePicker", {
 // });
-
 // const endTimePicker = flatpickr("#endTimePicker", {
 // });
+
+let startDateTimeStr;
+let endDateTimeStr;
+let divider = '   ';
+
+completeBtn.addEventListener('click',function(){
+    startDateTimeStr =  combinDateTime(0);
+    endDateTimeStr =  combinDateTime(1);
+
+    DateModalLauncher.classList.add('setted');
+    DateModalLauncher.innerHTML = `<div>${startDateTimeStr}</div>~<div>${endDateTimeStr}</div>`;
+
+    actionBtns.forEach(x=>x.disabled = false);
+    
+
+});
+
+function combinDateTime(i){
+    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat)+
+    divider + timePicker[i].input.value;
+}
+// datePicker.config.dateFormat
+
+
+// flatpickr.parseDate(dateStr, dateFormat)
+// flatpickr.formatDate(dateObj, dateFormat)
+
+
+
+

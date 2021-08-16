@@ -169,6 +169,7 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\flatpickr_orange.css" />
     <Content Include="Assets\css\howtorent.css" />
     <Content Include="Assets\css\Index\index.css" />
     <Content Include="Assets\css\Layout_rent\footer.css" />
@@ -257,6 +258,7 @@
     <Content Include="Assets\js\Contribution\countUp.js" />
     <Content Include="Assets\js\dateTimePicker.js" />
     <Content Include="Assets\js\howtorent.js" />
+    <Content Include="Assets\js\index.js" />
     <Content Include="Assets\js\leaf.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />

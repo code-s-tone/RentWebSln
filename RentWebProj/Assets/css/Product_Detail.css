@@ -1,22 +1,11 @@
-﻿* {
+﻿/** {
     padding: 0;
     margin: 0;
     list-style: none;
-}
-
-.box {
-    max-width: 1140px;
-    margin: auto;
-}
+}*/
 
 .left {
-    max-width: 740px;
-}
-
-.rectangle {
-    border: 1px solid black;
-    width: 600px;
-    height: 380px;
+    flex-shrink: 1;
 }
 
 .title {
