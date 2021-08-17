@@ -75,40 +75,6 @@ namespace RentWebProj.Services
         }
 
 
-        public OperationResult Create(IndexProductView input)
-        {
-            var result = new OperationResult();
-            try//寫入result
-            {
-
-                //if(fakeProducts.Any(x=>x.PartNo == input.PartNo))
-                //{
-                //    throw new ArgumentException($"partNo : {input.PartNo }已存在");
-                //}
-                //else
-                //{
-                //    fakeProducts.Add(input);
-                //    result.IsSuccessful = true;
-                //}
-
-
-                //資料庫若有防呆，不用檢查重複
-                var repository = new CommonRepository(new RentContext());
-                var entity = new Product { };
-                repository.Create(entity);
-                repository.SaveChanges();
-                //寫入資料庫 不需要回傳
-                result.IsSuccessful = true;
-
-            }
-            catch (Exception ex)
-            {
-                result.IsSuccessful = false;
-                result.Exception = ex;
-            }
-
-            return result;
-        }
         public IEnumerable<ProductCartsView> getCartsData()
         {
             IEnumerable<ProductCartsView> CMList;
