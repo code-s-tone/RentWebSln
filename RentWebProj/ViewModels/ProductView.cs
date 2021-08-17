@@ -39,7 +39,7 @@ namespace RentWebProj.ViewModels
 
         public string Description { get; set; }
 
-        public decimal DailyRate { get; set; }
+        public decimal? DailyRate { get; set; }
 
         //圖片群
     }

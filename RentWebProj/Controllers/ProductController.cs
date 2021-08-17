@@ -54,7 +54,7 @@ namespace RentWebProj.Controllers
 
             //收集VM群，傳給service
             //(cartCreate方法 的參數應該是 PID DateTime StartDate , DateTime ExpirationDate)
-            ProductDetailView VM ;
+            //ProductDetailView VM ;
 
             //var result = service.Create(viewModel);
             //if (result.IsSuccessful)
@@ -71,6 +71,7 @@ namespace RentWebProj.Controllers
             //    return View("Product", VM);
             //}
 
+            return null;
 
         }
     }
