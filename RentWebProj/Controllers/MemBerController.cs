@@ -21,7 +21,9 @@ namespace RentWebProj.Controllers
         }
 
         public ActionResult MemberCenter()
-        {  
+        {
+            Session["Message"] = _service.HeadstickerImageData("vivi");
+            
             return View();         
         }
 

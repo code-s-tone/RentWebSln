@@ -18,9 +18,13 @@ namespace RentWebProj.Services
         }
 
 
+        public string HeadstickerImageData(string UserID)
+        {
+            var result = _repository.GetAll<ProductImage>();
 
-
-        public string FileImageData(string blobUrl)
+            return result.ToList().Find(x => x.ProductID == UserID).Source;
+        }
+            public string FileImageData(string blobUrl)
         {
 
                 Account account = new Account(
@@ -43,9 +47,7 @@ namespace RentWebProj.Services
                 _repository.SaveChanges();
             
                 return getResultImgUrl;
-            }
-
-   
+         }
 
     }
 }
