@@ -1,4 +1,7 @@
-﻿using RentWebProj.Models;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using RentWebProj.Models;
+using RentWebProj.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +13,24 @@ namespace RentWebProj.Controllers
     public class MemberController : Controller
     {
         // GET: Member
-        public ActionResult MemberCenter()
+        private FileImageService _service;
+
+        public MemberController()
         {
-            //初始化資料庫
-            RentContext db = new RentContext();
-            var item = db.Members.ToList();
-            ViewData["email"] = item.Find(x => x.Account == "Code123").Email;
-            ViewData["password"] = item.Find(x => x.Account == "Code123").PasswordHash;
-            ViewData["ipone"] = item.Find(x => x.Account == "Code123").Phone;
-            ViewData["fullName"] = item.Find(x => x.Account == "Code123").FullName;
-            return View();
+            _service = new FileImageService();
+        }
+
+        public ActionResult MemberCenter()
+        {  
+            return View();         
+        }
+
+        [HttpPost]
+        public ActionResult MemberCenter(string blobUrl)
+        {
+            var result = _service.FileImageData(blobUrl);
+            Session["Message"] = result.ToString();
+            return RedirectToAction("MemberCenter", "Member");
         }
     }
 }
