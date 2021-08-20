@@ -20,7 +20,9 @@ namespace RentWebProj.Models
         [StringLength(20)]
         public string CategoryName { get; set; }
 
-        public string ImageSrc { get; set; }
+        public string ImageSrcMain { get; set; }
+
+        public string ImageSrcSecond { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SubCategory> SubCategories { get; set; }
