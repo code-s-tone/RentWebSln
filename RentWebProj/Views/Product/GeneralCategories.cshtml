@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProductCategoryView>
+﻿@model IEnumerable<ProductCategoryViewModel>
 @{
     ViewBag.Title = "商品總覽";
 }
@@ -102,34 +102,35 @@
 
                 <div class=" d-flex flex-wrap">
 
-                    @foreach(var ct in Model)
-            {
-
-            }
+               @foreach (var ct in Model)
+               {
                     <div class="col-12 col-md-6">
                         <div class="category-card">
                             <div class="frontSide">
                                 <div class="category-img">
-                                    <img src="https://media.vogue.com.tw/photos/5fe5aaba4663bf91fe312514/master/pass/2021%E9%A6%99%E6%B0%B4%20(1).jpg"
+                                    <img src=@ct.ImageSrcMain
                                          alt="">
                                 </div>
                                 <div class="categoryName d-grid card-3d">
-                                    <p class="m-auto">配件</p>
+                                    <p class="m-auto">@ct.CategoryName</p>
                                 </div>
                             </div>
                             <div class="backSide">
                                 <div class="category-img">
-                                    <img src="https://media.vogue.com.tw/photos/5ff5c24f7fdb36c87cf72cef/master/pass/IMG_9003.JPG"
-                                         alt="">
+                                    <img src=@ct.ImageSrcSecond alt="">
                                 </div>
-                                <div class=" d-grid card-3d">
-                                    <!-- <p class="ctCard-Descpt">參加聚會卻沒東西可以炫?包包 香水 眼鏡出租</p> -->
-                                    <a href="" class="checkitOut_ct m-auto">查看</br>商品</a>
+                                <div class="d-grid card-3d">
+                                    <a href="" class="checkitOut_ct m-auto">
+                                        查看<br>商品
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+
+                }
+
+                    <!--<div class="col-12 col-md-6">
                         <div class="category-card">
                             <div class="frontSide">
                                 <div class="category-img">
@@ -145,9 +146,9 @@
                                     <img src="https://media.vogue.com.tw/photos/5ff5c24f7fdb36c87cf72cef/master/pass/IMG_9003.JPG"
                                          alt="">
                                 </div>
-                                <div class=" d-grid card-3d">
+                                <div class=" d-grid card-3d">-->
                                     <!-- <p class="ctCard-Descpt">參加聚會卻沒東西可以炫?包包 香水 眼鏡出租</p> -->
-                                    <a href="" class="checkitOut_ct m-auto">查看</br>商品</a>
+                                    <!--<a href="" class="checkitOut_ct m-auto">查看</br>商品</a>
                                 </div>
                             </div>
                         </div>
@@ -168,21 +169,21 @@
                                     <img src="https://www.mirrormedia.com.tw/assets/images/20190222160618-bf99ad8608cc4709a626f6801501433d-mobile.jpg"
                                          alt="">
                                 </div>
-                                <div class=" d-grid card-3d">
+                                <div class=" d-grid card-3d">-->
                                     <!-- <p class="ctCard-Descpt">參加聚會卻沒東西可以炫?包包 香水 眼鏡出租</p> -->
-                                    <a href="" class="checkitOut_ct m-auto">查看</br>商品</a>
+                                    <!--<a href="" class="checkitOut_ct m-auto">查看</br>商品</a>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
-
-                </div>
 
             </div>
 
         </div>
+
     </div>
+</div>
 
 </div>
 

@@ -19,22 +19,25 @@ namespace RentWebProj.Controllers
         public ActionResult GeneralCategories()
         {
 
-            return View(_service.getCategoryData()); 
+            return View(_service.GetCategoryData()); 
         }
         public ActionResult ProductCards()
         {
-            var selectedProductList = _service.getCategoryData();
+            var selectedProductList = _service.GetCategoryData();
             return View();
         }
 
+
+        //---------------------------------------------------------------
+        //----------------------以下先不刪 名駿說要留著研究
         public ActionResult ProductCategory()
         {
-            //先不刪 名駿說要留著研究
+           
             return View();
         }
 
         public ActionResult ProductSubCategory()
-        { //先不刪 名駿說要留著研究
+        { 
             return View();
         }
 
