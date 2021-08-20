@@ -23,5 +23,16 @@ namespace RentWebProj.ViewModels
 
     }
 
+    public class ProductDetailView
+    {
+        public string ProductName { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal? DailyRate { get; set; }
+
+        //圖片群
+    }
+
 
 }
