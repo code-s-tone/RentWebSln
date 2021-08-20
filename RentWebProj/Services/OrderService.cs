@@ -18,7 +18,7 @@ namespace RentWebProj.Services
 
         public IEnumerable<OrderView> getOrderData()
         {
-            IEnumerable<OrderView> CMList;
+            IEnumerable<OrderView> VMList;
 
             //var CList = _repository.GetAll<Category>();
             var PList = _repository.GetAll<Product>();
@@ -37,7 +37,7 @@ namespace RentWebProj.Services
             //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
             //).Take(6);
 
-            CMList = (from p in PList
+            VMList = (from p in PList
                       join o in OList
                       on p.ProductID equals o.ProductID
                       select new OrderView
@@ -45,7 +45,7 @@ namespace RentWebProj.Services
             );
 
 
-            return CMList;
+            return VMList;
         }
 
     }
