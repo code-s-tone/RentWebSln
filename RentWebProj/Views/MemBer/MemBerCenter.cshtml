@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RentWebProj.Models.Member>
+﻿@model MemberPersonDataViewModel
 
 @{
     ViewBag.Title = "MemberCenter";
@@ -52,22 +52,22 @@
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header">姓名</div><div class="member-display-point">*</div>
                             <div class="member-display-name-input-box-first">
-                                <input type="text" class="member-display-firstname" name="firstname" value="" placeholder="姓" data-max="5">
+                                <input type="text" class="member-display-firstname" name="firstname" value="@Model.MemberName" placeholder="姓" data-max="5">
                             </div>
                             <div class="member-display-name-input-box-last">
-                                <input type="text" class="member-display-lastname" name="lastname" value="@ViewData["fullName"]" placeholder="名" data-max="5">
+                                <input type="text" class="member-display-lastname" name="lastname" value="" placeholder="名" data-max="5">
                             </div>
                         </div>
                         <div class="member-display-born-container member-display-item">
                             <div class="member-display-header">生日</div><div class="member-display-point">*</div>
                             <div class="member-display-name-input-box-first">
-                                <input type="text" class="member-display-year" name="year" value="" placeholder="年" data-max="10">
+                                <input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">
                             </div>
                             <div class="member-display-name-input-box-first">
-                                <input type="text" class="member-display-month" name="month" value="" placeholder="月份" data-max="10">
+                                <input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">
                             </div>
                             <div class="member-display-name-input-box-first">
-                                <input type="text" class="member-display-date" name="date" value="" placeholder="日期" data-max="10">
+                                <input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">
                             </div>
                         </div>
                         <div class="member-display-phone-container member-display-item">
@@ -76,13 +76,13 @@
                                 <input type="text" class="member-display-block-num" name="block" value="+886" placeholder="區域碼" data-max="10">
                             </div>
                             <div class="member-display-name-input-box-last">
-                                <input type="text" class="member-display-num" name="num" value="@ViewData["ipone"]" placeholder="電話" data-max="10">
+                                <input type="text" class="member-display-num" name="num" value="@Model.MemberPhone" placeholder="電話" data-max="10">
                             </div>
                         </div>
                         <div class="member-display-shop-container member-display-item">
                             <div class="member-display-header">門市</div><div class="member-display-point">*</div>
                             <select class="member-display-shop" name="shop">
-                                <option value="門市選項">門市選項</option>
+                                <option value="門市選項"></option>
                                 <option value="中華大學總店">中華大學總店</option>
                                 <option value="新竹站前分店">新竹站前分店</option>
                                 <option value="新竹高鐵分店">新竹高鐵分店</option>
@@ -105,7 +105,7 @@
                     <div class="member-display-person-detail member-display-account-detail member-display-group">
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header member-display-new-email-context">目前信箱</div>
-                            <div class="member-display-service-email">@ViewData["email"]</div>
+                            <div class="member-display-service-email">@Model.MemberEmail</div>
                         </div>
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-new-email-context">
@@ -143,7 +143,7 @@
                         <!-- 變更密碼 -->
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header member-display-new-email-context">目前密碼</div>
-                            <div class="member-display-service-password">@ViewData["password"]</div>
+                            <div class="member-display-service-password">@Model.MemberPasswordHash</div>
                         </div>
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-new-email-context">
@@ -263,6 +263,9 @@
     </div>
 </div>
 
+
+
+
 @section topCSS{
     <link href="~/Assets/css/MemberCenter/reset.css" rel="stylesheet" />
     <link href="~/Assets/css/MemberCenter/member.css" rel="stylesheet" />
@@ -276,5 +279,17 @@
     <script src="~/Assets/js/MemberCenter/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+
+    @*<script>
+        let a = document.querySelector('#contact-tab');
+
+        a.addEventListener('click', function(){
+            @{ 
+                Model.Account = "abc";
+                int i = 1;
+            }
+        })
+    </script>*@
+
 }
 
