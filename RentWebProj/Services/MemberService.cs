@@ -26,12 +26,12 @@ namespace RentWebProj.Services
             var ProductDMList = _repository.GetAll<Product>();
 
             MemberCenterVM = from m in MemberDMList
-                             //join o in OrderDMList
-                             //on m.MemberID equals o.MemberID
-                             //join od in OrderDetailDMList
-                             //on o.OrderID equals od.OrderID
-                             //join b in BranchDMList
-                             //on o.StoreID equals b.StoreID
+                             join o in OrderDMList
+                             on m.MemberID equals o.MemberID
+                             join od in OrderDetailDMList
+                             on o.OrderID equals od.OrderID
+                             join b in BranchDMList
+                             on o.StoreID equals b.StoreID
                              where m.MemberID == 38
                              select new MemberPersonDataViewModel
                              {   
@@ -41,7 +41,7 @@ namespace RentWebProj.Services
                                  MemberPhone = m.Phone,
                                  MemberEmail = m.Email,
                                  MemberPasswordHash = m.PasswordHash,
-                                 //MemberBranchName = b.StoreName
+                                 MemberBranchName = b.StoreName
                              };
 
             return MemberCenterVM;
