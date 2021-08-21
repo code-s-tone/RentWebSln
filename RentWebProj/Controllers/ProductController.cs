@@ -49,6 +49,7 @@ namespace RentWebProj.Controllers
         }
         [HttpPost]
         public ActionResult Product(ProductDetailToCart PostVM , string ProductName, string PID) {
+            //不使用架構
             //if (ModelState.IsValid)
             //{
             //    RentContext ctx = new RentContext();
@@ -73,9 +74,9 @@ namespace RentWebProj.Controllers
             //    return Content("資料庫寫入成功!");
             //}
 
-            //也可以重新查詢，但比較慢
-            //ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
 
+            //也可以只用ID重新查詢，但比較慢
+            //ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
             return View(PostVM);//回填的體貼。由於共用View、網址，型別必須跟Get方法的一致
         }
 
