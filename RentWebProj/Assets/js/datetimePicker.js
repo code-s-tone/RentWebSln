@@ -1,7 +1,8 @@
 let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
-let actionBtns = document.querySelectorAll('.decision-group>.orange')
+let actionBtns = document.querySelectorAll('.decision-group .orange');
+
 collapseBtn.disabled = true;
 completeBtn.disabled = true;
 actionBtns.forEach(x=> x.disabled = true);
@@ -96,11 +97,6 @@ function combinDateTime(i){
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat)+
     divider + timePicker[i].input.value;
 }
-// datePicker.config.dateFormat
-
-
-// flatpickr.parseDate(dateStr, dateFormat)
-// flatpickr.formatDate(dateObj, dateFormat)
 
 
 

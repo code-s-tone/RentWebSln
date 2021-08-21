@@ -157,6 +157,7 @@
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\ProductView.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <Content Include="Assets\css\MemberCenter\order.css" />
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
+    <Content Include="Assets\js\datetimePicker.js" />
     <Content Include="Assets\js\ProductDetail\dateTimePicker.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />
