@@ -38,16 +38,18 @@
 /* 選取器 */
 
 .decision-group{
+    width: 100%;
+}
+.decision-group>form {
     display: flex;
     width: 100%;
     padding: 10px 0;
 }
-
-.decision-group>button:nth-child(1){
+.decision-group>form>button:nth-child(1){
     margin-right: 10px;
 }
 
-.decision-group>button{
+.decision-group>form>button {
     width: 40%;
     flex-grow: 1;
 }

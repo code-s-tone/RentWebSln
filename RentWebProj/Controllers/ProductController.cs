@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
+using RentWebProj.Models;
 
 namespace RentWebProj.Controllers
 {
@@ -45,15 +46,47 @@ namespace RentWebProj.Controllers
         }
         public ActionResult Product(string PID)
         {
-            //string PID = "PplPg002";//未來放參數
-            ProductDetailView VM = _service.getProductDetail(PID);
-            ViewBag.PID = PID;
+            //取當前登入者?//memberID的取法session["Email"]?
+            ProductDetailToCart VM = _service.getProductDetail(PID,1);
             return View(VM);
+        }
+        [HttpPost]
+        public ActionResult Product(ProductDetailToCart PostVM , string ProductName, string PID) {
+            //不使用架構
+            //if (ModelState.IsValid)
+            //{
+            //    RentContext ctx = new RentContext();
+            //    //VM->DM
+            //    Cart cart = new Cart()
+            //    {
+            //        MemberID = (int)VM.CurrentMemberID,
+            //        ProductID = VM.ProductID,
+            //        StartDate = VM.StartDate,
+            //        ExpirationDate = VM.ExpirationDate
+            //    };
+
+            //    //判斷加入或更新
+            //    if(VM.StartDate !=null && VM.ExpirationDate != null)
+            //    {//更新
+            //    }
+            //    else
+            //    {//加入
+            //        ctx.Carts.Add(cart);
+            //    }
+            //    ctx.SaveChanges();
+            //    return Content("資料庫寫入成功!");
+            //}
+
+
+            //也可以只用ID重新查詢，但比較慢
+            //ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
+            return View(PostVM);//回填的體貼。由於共用View、網址，型別必須跟Get方法的一致
         }
 
         [HttpPost]
         public ActionResult ProductToCart(string PID , DateTime StartDate , DateTime ExpirationDate)
         {
+            //資料庫寫入的程式
 
             //收集VM群，傳給service
             //(cartCreate方法 的參數應該是 PID DateTime StartDate , DateTime ExpirationDate)

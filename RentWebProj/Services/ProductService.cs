@@ -134,20 +134,39 @@ namespace RentWebProj.Services
         //    return CMList;
         //}
 
-        public ProductDetailView getProductDetail(string PID)
+        public ProductDetailToCart getProductDetail(string PID, int? CurrentMemberID)
         {
-            ProductDetailView VM;
+            ProductDetailToCart VM;
 
-            var DMList = _repository.GetAll<Product>();
+            DateTime? StartDate = null;
+            DateTime? ExpirationDate = null;
+            Cart cart = (from c in (_repository.GetAll<Cart>())
+                          where c.MemberID == CurrentMemberID && c.ProductID == PID 
+                          select c
+                          ).SingleOrDefault();
+            if(cart != null)
+            {
+                StartDate = cart.StartDate;
+                ExpirationDate = cart.ExpirationDate;
+            }
 
-            VM = (from p in DMList
+
+            List<string> Pics = new List<string>{ "a","b"};
+
+            VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
-                  select new ProductDetailView
+                  select new ProductDetailToCart
                   {
+                      CurrentMemberID = CurrentMemberID,
+                      //ProductID = PID,
                       ProductName = p.ProductName,
                       Description = p.Description,
-                      DailyRate = p.DailyRate
-                  }).FirstOrDefault();
+                      DailyRate = (decimal)p.DailyRate,
+                      ImgSources = Pics,
+                      StartDate = StartDate,
+                      ExpirationDate = ExpirationDate
+                  }).SingleOrDefault();
+
             return VM;
         }
 

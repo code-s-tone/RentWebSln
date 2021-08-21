@@ -80,21 +80,28 @@ let startDateTimeStr;
 let endDateTimeStr;
 let divider = '   ';
 
-completeBtn.addEventListener('click',function(){
+completeBtn.addEventListener('click', function () {
+    debugger;
     startDateTimeStr =  combinDateTime(0);
     endDateTimeStr =  combinDateTime(1);
 
     DateModalLauncher.classList.add('setted');
     DateModalLauncher.innerHTML = `<div>${startDateTimeStr}</div>~<div>${endDateTimeStr}</div>`;
 
-    actionBtns.forEach(x=>x.disabled = false);
-    
+    //let format = datePicker.config.dateFormat + divider
+    //document.querySelector('#StartDate').value = flatpickr.parseDate(startDateTimeStr, );
+    //document.querySelector('#ExpirationDate').value = endDateTimeStr;
 
+    actionBtns.forEach(x=>x.disabled = false);
 });
 
 function combinDateTime(i){
-    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat)+
-    divider + timePicker[i].input.value;
+    //return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
+    //    divider + timePicker[i].input.value;
+    let dateStr = flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
+        divider + timePicker[i].input.value;
+
+    return flatpickr.parseDate(dateStr, datePicker.config.dateFormat + divider + timePicker[i].config.dateFormat)
 }
 // datePicker.config.dateFormat
 
