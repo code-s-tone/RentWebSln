@@ -138,6 +138,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108161718106_RenameAndAddColumnOfImage.cs" />
+    <Compile Include="Migrations\202108161718106_RenameAndAddColumnOfImage.Designer.cs">
+      <DependentUpon>202108161718106_RenameAndAddColumnOfImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administer.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -415,6 +420,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202108161718106_RenameAndAddColumnOfImage.resx">
+      <DependentUpon>202108161718106_RenameAndAddColumnOfImage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

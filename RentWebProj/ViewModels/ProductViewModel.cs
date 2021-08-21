@@ -5,33 +5,23 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
-    public class ProductCategoryView
+    public class ProductCategoryViewModel
     {
         public string CategoryName { get; set; }
-        public string ImageSrc { get; set; }
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
+
 
     }
-    public class ProductCardView
+    public class ProductCardViewModel
     {
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
         public string SubCategoryName { get; set; }
+        public string Description { get; set; }
+        public string DailyRate { get; set; }
+
     }
-
-    //public class ProductCartsView2 
-    //    //先這樣取名 不確定購物車在indexService要怎麼變動
-    //{
-    //    public string ImageSrc { get; set; }
-
-    //    public string ProductName { get; set; }
-
-    //    public decimal DailyRate { get; set; }
-
-    //    public DateTime StartDate { get; set; }
-    //    public DateTime ExpirationDate { get; set; }
-    //    public decimal TotalAmount { get; set; }
-
-    //}
 
     public class ProductDetailView
     {
@@ -43,5 +33,6 @@ namespace RentWebProj.ViewModels
 
         //圖片群
     }
+
 
 }
