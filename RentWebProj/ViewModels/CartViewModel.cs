@@ -7,8 +7,13 @@ namespace RentWebProj.ViewModels
 {
     public class ProductDetailToCart
     {
-        
-        public int? CurrentMemberID { get; set; }
+        public string dateTimeFormat;
+
+        public ProductDetailToCart()
+        {
+            this.dateTimeFormat = "yyyy / MM / dd HH:mm";
+        }
+
         //public string ProductID { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
@@ -17,9 +22,13 @@ namespace RentWebProj.ViewModels
         //圖片群 來自ProductImage
         public List<string> ImgSources { get; set; }
 
+        public int? CurrentMemberID { get; set; }
         //來自Cart
-        public DateTime? StartDate { get; set; }
-        public DateTime? ExpirationDate { get; set; }
+        public bool isExisted { get; set; }
+
+        //前端無法使用DateTime型別
+        public string StartDate { get; set; }
+        public string ExpirationDate { get; set; }
     }
 
 

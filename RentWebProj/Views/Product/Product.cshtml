@@ -265,8 +265,8 @@
                 <div class="decision-group">
                     @using (Html.BeginForm("Product", "Product"))
                     {
-                        @Html.HiddenFor(M => M.CurrentMemberID)
                         @Html.HiddenFor(M => M.ProductName)
+                        @Html.HiddenFor(M => M.isExisted)
                         @Html.HiddenFor(M => M.Description)
                         @Html.HiddenFor(M => M.DailyRate)
 
@@ -274,7 +274,8 @@
                         {
                             <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
                         }
-                        //for(Model.PictureSources.)
+                        @Html.HiddenFor(M => M.CurrentMemberID)
+                        <input name="dataTimeFormat" type="hidden">
                         @Html.HiddenFor(M => M.StartDate)
                         @Html.HiddenFor(M => M.ExpirationDate)
 
@@ -379,22 +380,6 @@
     <script src="~/Assets/js/ProductDetail/leaf.js"></script>
     <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
     <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
-
-    @*<script>
-            let ToCartBtn = document.getElementById('ToCart');
-            let ToCheckBtn = document.getElementById('ToCheck');
-
-            ToCartBtn.addEventListener('click', function () {
-                alert('@ViewBag.PID ');
-            });
-
-            ToCheckBtn.addEventListener('click', function () {
-                alert('@Model.DailyRate ');
-            });
-
-        </script>*@
-
-
 }
 
 

@@ -68,43 +68,9 @@ namespace RentWebProj.Services
         }
 
 
-        //public OperationResult Create(IndexProductView input)
-        //{
-        //    var result = new OperationResult();
-        //    try//寫入result
-        //    {
-
-        //        //if(fakeProducts.Any(x=>x.PartNo == input.PartNo))
-        //        //{
-        //        //    throw new ArgumentException($"partNo : {input.PartNo }已存在");
-        //        //}
-        //        //else
-        //        //{
-        //        //    fakeProducts.Add(input);
-        //        //    result.IsSuccessful = true;
-        //        //}
-
-
-        //        //資料庫若有防呆，不用檢查重複
-        //        var repository = new CommonRepository(new RentContext());
-        //        var entity = new Product { };
-        //        repository.Create(entity);
-        //        repository.SaveChanges();
-        //        //寫入資料庫 不需要回傳
-        //        result.IsSuccessful = true;
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.IsSuccessful = false;
-        //        result.Exception = ex;
-        //    }
-
-        //    return result;
-        //}
-        //public IEnumerable<ProductCartsView> GetCartsData()
-        //{
-        //    IEnumerable<ProductCartsView> CMList;
+        public IEnumerable<ProductCartsView> getCartsData()
+        {
+            IEnumerable<ProductCartsView> CMList;
 
         //    //var CList = _repository.GetAll<Category>();
         //    var PList = _repository.GetAll<Product>();
@@ -136,33 +102,40 @@ namespace RentWebProj.Services
 
         public ProductDetailToCart getProductDetail(string PID, int? CurrentMemberID)
         {
-            ProductDetailToCart VM;
+            ProductDetailToCart VM = new ProductDetailToCart();
 
-            DateTime? StartDate = null;
-            DateTime? ExpirationDate = null;
-            Cart cart = (from c in (_repository.GetAll<Cart>())
-                          where c.MemberID == CurrentMemberID && c.ProductID == PID 
-                          select c
-                          ).SingleOrDefault();
-            if(cart != null)
+            bool isExisted = false;
+            string StartDate = null;
+            string ExpirationDate = null;
+            if (CurrentMemberID != null)//有登入
             {
-                StartDate = cart.StartDate;
-                ExpirationDate = cart.ExpirationDate;
+                Cart cart = (from c in (_repository.GetAll<Cart>())
+                              where c.MemberID == CurrentMemberID && c.ProductID == PID 
+                              select c
+                              ).SingleOrDefault();
+                if(cart != null)
+                {
+                    isExisted = true;
+                    StartDate = ((DateTime)cart.StartDate).ToString(VM.dateTimeFormat);
+                    ExpirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.dateTimeFormat);
+                }
             }
 
-
-            List<string> Pics = new List<string>{ "a","b"};
+            //查圖片
+            List<string> ImgSources = new List<string>{ "a","b"};
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
                   select new ProductDetailToCart
                   {
-                      CurrentMemberID = CurrentMemberID,
                       //ProductID = PID,
                       ProductName = p.ProductName,
                       Description = p.Description,
                       DailyRate = (decimal)p.DailyRate,
-                      ImgSources = Pics,
+                      ImgSources = ImgSources,
+                      //登入者、購物車
+                      CurrentMemberID = CurrentMemberID,
+                      isExisted = isExisted,
                       StartDate = StartDate,
                       ExpirationDate = ExpirationDate
                   }).SingleOrDefault();
