@@ -1,0 +1,241 @@
+﻿@model IEnumerable<Category_Product_CardViewModel>
+@{
+    ViewBag.Title = "ProductCards";
+}
+@using System.Text.RegularExpressions;
+
+<div class=@ViewBag.Page>
+
+    <div class="row pt-lg-3 px-2">
+
+        <!-- Left filter區-->
+        <div class="col-lg-3 px-2 mx-0 left">
+
+            <form action="">
+                <div class="group">
+                    <label for="Search" class="distence">
+                        <h5>搜尋</h5>
+                    </label> <br>
+
+                    <input type="text" id="Search" class="btn input_text distence" placeholder="想找什麼呢？">
+                    <select name="Category" id="CategoryOptions" class="input_text distence cell_phone">
+                        <option value="0">選擇商品種類</option>
+
+                        @{
+
+                            foreach (var ct in ViewBag.CategoryOptions)
+                            {
+                                <option value=@ct.CategoryID>@ct.CategoryName</option>
+
+                            }
+                        }
+
+                    </select>
+
+                    <select name="SubCategory " id="SubCategoryOptions" class="input_text distence cell_phone">
+                        <option value="0">選擇子分類</option>
+
+                    </select>
+                </div>
+
+
+                <div class="group cell_phone">
+                    <label for="Location" class="distence">
+                        <h6>附近分店</h6>
+                    </label> <br>
+
+                    <input type="button" id="Location" class="btn btn-default input_text distence"
+                           value="新竹 Hsinchu" readonly>
+                    <div id="map" class="distence"> </div>
+                </div>
+
+                <div class="group cell_phone">
+                    <label for="Sort-by" class="distence">
+                        <h6>排序方式</h6>
+                    </label> <br>
+                    <input type="radio" id="relevance" name="SortByRelevance" value="Relevance">
+                    <label for="relevance">最相關不要五四三</label><br>
+
+                    <input type="radio" id="price" name="SortByPrice" value="Price">
+                    <label for="price">甜甜價低到高</label><br>
+
+                    <input type="radio" id="starsForLike" name="SortByStarsForLike" value="starsForLike">
+                    <label for="distance">星星熱門度</label><br>
+                </div>
+
+                @*<div class="group cell_phone">
+                        <label for="Condition" class="distence">
+                            <strong>Condition</strong>
+                        </label> <br>
+
+                        <input type="checkbox" id="check1" name="check1" value="JustLikeNew">
+                        <label for="check1">新舊程度</label><br>
+
+                        <input type="checkbox" id="check2" name="check2" value="GentlyLoved">
+                        <label for="check2">歡迎度</label><br>
+
+                        <input type="checkbox" id="check3" name="check3" value="Decent">
+                        <label for="check3">Decent</label><br>
+
+                        <input type="checkbox" id="check4" name="check4" value="HasSomeCharacter">
+                        <label for="check4">Has Some Character</label><br>
+                    </div>*@
+
+                <div class="group cell_phone">
+                    <label for="Budget" class="distence">
+                        <h6>錢錢決定一切</h6>
+                    </label> <br>
+                    <select name="Rate" id="Rate" class="input_text distence">
+                        <option value="0">日租費預算範圍</option>
+                        <option value="1">$100以下</option>
+                        <option value="2">$101~$500</option>
+                        <option value="3">$501~$1000</option>
+                        <option value="4">$1000以上 價格不是問題</option>
+                    </select>
+
+                    <button type="reset" class="btn btn-default clear distence"> Clear Filters </button>
+                    <input type="submit" value="Filter My Results" class="distence filter_result">
+                </div>
+            </form>
+        </div>
+
+        <!-- Right 商品卡片部分:Dora -->
+        <div class="col-lg-9 col-12 px-2  mb-4 mx-0 ">
+
+            <div class="col-12 px-2 @ViewBag.Container">
+                <h2>@ViewBag.ContainerTitle</h2>
+
+                <div class=" d-flex flex-wrap">
+                    @if (ViewBag.ContainerTitle == "所有種類")
+                    {
+                        foreach (var ct in Model)
+                        {
+                            <div class="col-12 col-md-6">
+                                <div class="category-card">
+                                    <div class="frontSide">
+                                        <div class="category-img">
+                                            <img src=@ct.ImageSrcMain
+                                                 alt="">
+                                        </div>
+                                        <div class="categoryName d-grid card-3d">
+                                            <p class="m-auto">@ct.CategoryName</p>
+                                        </div>
+                                    </div>
+                                    <div class="backSide">
+                                        <div class="category-img">
+                                            <img src=@ct.ImageSrcSecond alt="">
+                                        </div>
+                                        <div class="d-grid card-3d">
+                                            @Html.ActionLink("查看商品", "Category_Product_Cards", "Product", new { categoryID = @ct.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+                    else
+                    {
+                        foreach (var p in Model)
+                        {
+                            <div class="col-6 col-md-4">
+                                <div class="product-card" onmouseover="productCard_Hover2(this);"
+                                     onmouseout="productCard_Unhover2(this);">
+                                    <div class="badge">
+                                        <repeat n="4"></repeat>
+                                    </div>
+                                    <div class="product-img">
+                                        <img src="~/Assets/images/Layout_Rent/Lv01.jpg" alt="">
+                                    </div>
+                                    <div class="product-details">
+                                        <div class="checkitOut"><span class="m-auto">商品詳情</span> </div>
+                                        <span class="product-catagory">@p.CategoryName,@p.SubCategoryName</span>
+                                        <p class="product-name"><a href="">@p.ProductName</a></p>
+                                        <p class="product-description">@p.Description </p>
+                                        <div class="product-price-cart-box d-flex">
+                                            <div class="product-price flex-grow-1">$@Math.Ceiling(p.DailyRate)<span>/日租</span></div>
+                                            <div class="product-cart-icon d-grid">
+                                                <a href="" class="m-auto"><i class="fa fa-shopping-cart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section topCSS
+{
+    <!--map-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <link href="~/Assets/css/GeneralProductCards/GeneralCategories.css" rel="stylesheet" />
+    <link href="~/Assets/css/GeneralProductCards/SearchFilter.css" rel="stylesheet" />
+    <link href="~/Assets/css/GeneralProductCards/ProductCards.css" rel="stylesheet" />
+}
+
+@section topJS
+{
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin="">
+    </script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+}
+
+@section endJS
+{
+    <script src="~/Assets/js/GeneralProductCards/GeneralCategories.js"></script>
+    <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
+    <script src="~/Assets/js/GeneralProductCards/SearchFilter.js"></script>
+    <script>
+        $('#CategoryOptions').on('change', function (e) {
+
+            var optionSelected = $("option:selected", this);
+            //console.log(optionSelected);
+            var valueSelected = this.value;
+            var subSelector = document.querySelector('#SubCategoryOptions');
+            subSelector.innerText = "";
+            let optionIni = document.createElement('option');
+            optionIni.innerText = `從${optionSelected[0].childNodes[0].nodeValue}再細分`;
+            subSelector.appendChild(optionIni);
+
+            //取消Ajax快取
+            $.ajaxSetup({ cache: false });
+
+            $.ajax({
+                type: 'POST',
+                url: "/Product/GetSubCategoryOptions?categoryID=" + valueSelected,
+
+                //data: { categoryID : valueSelected },
+                dataType: "json",
+                success: function (response) {
+                    
+                    response.forEach(sub => {
+                        let option = document.createElement('option');
+                        option.innerText = sub.SubCategoryName;
+                        option.value = sub.SubCategoryID;
+                        subSelector.appendChild(option)
+                    })
+                }
+            });
+        });
+
+    </script>
+}

@@ -16,55 +16,62 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<ProductCategoryViewModel> GetCategoryData()
+        public IEnumerable<Category_Product_CardViewModel> GetCategoryData()
         {
-            IEnumerable<ProductCategoryViewModel> ctVMList;
+            IEnumerable<Category_Product_CardViewModel> ctVMList;
 
             var ctDMList = _repository.GetAll<Category>();
 
-            //篩選、轉型
-            //Method Expression  有join時，這方法很吃邏輯
-            ctVMList = ctDMList.Select(x => new ProductCategoryViewModel
-            { CategoryName = x.CategoryName, ImageSrcMain = x.ImageSrcMain , ImageSrcSecond = x.ImageSrcSecond });
-
             //Query Expression
             ctVMList = from ct in ctDMList
-                     select new ProductCategoryViewModel
-                     { CategoryName = ct.CategoryName,  ImageSrcMain= ct.ImageSrcMain , ImageSrcSecond = ct.ImageSrcSecond };
+                       select new Category_Product_CardViewModel
+                       { CategoryName = ct.CategoryName, CategoryID=ct.CategoryID, ImageSrcMain = ct.ImageSrcMain, ImageSrcSecond = ct.ImageSrcSecond };
 
             return ctVMList;
         }
 
-        public IEnumerable<ProductCardViewModel> GetProductData(string catID)
+        public IEnumerable<Category_Product_CardViewModel> GetProductData(string productID)
         {
-            IEnumerable<ProductCardViewModel> VMList;
-
+            IEnumerable<Category_Product_CardViewModel> VMList;
             var pDMList = _repository.GetAll<Product>();
-            var cDMList = _repository.GetAll<Category>();
-
-            //篩選、轉型
-            //Method Expression  有join時，這方法很吃邏輯
-            VMList = pDMList
-                .Take(6)
-                .Where(x => x.ProductID.Substring(0, 3) == catID)
-                .Select(x => new ProductCardViewModel
-                {
-                    ProductName = x.ProductName,
-                    CategoryName =
-                    cDMList.FirstOrDefault(c => c.CategoryID == catID).CategoryName
-                });
-
+            var ctDMList = _repository.GetAll<Category>();
+            var subCtDMList = _repository.GetAll<SubCategory>();
 
             VMList = (from p in pDMList
-                      join c in cDMList
-                      on p.ProductID.Substring(0,3) equals c.CategoryID
-                      where c.CategoryID == catID
-                      select new ProductCardViewModel
-                      { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            ).Take(6);
+                      join c in ctDMList
+                      on p.ProductID.Substring(0, 3) equals c.CategoryID
+                      join s in subCtDMList
+                      on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+                      where c.CategoryID == productID.Substring(0, 3)
+
+                      select new Category_Product_CardViewModel
+                      {
+                          ProductName = p.ProductName,
+                          CategoryName = c.CategoryName,
+                          Description = p.Description,
+                          DailyRate = (decimal)p.DailyRate,
+                          SubCategoryName = s.SubCategoryName,
+                          SubCategoryID=s.SubCategoryID
+                      });
 
 
             return VMList;
+        }
+        public IEnumerable<Category_Product_CardViewModel> GetSubCategoryOptions(string catID)
+        {
+            var ctDMList = GetCategoryData();
+            var subCtDMList = _repository.GetAll<SubCategory>();
+            var subDMList = from ct in ctDMList
+                            join sub in subCtDMList
+                            on ct.CategoryID equals sub.CategoryID
+                            where ct.CategoryID == catID
+                            select new Category_Product_CardViewModel
+                            {
+                                SubCategoryName = sub.SubCategoryName,
+                                SubCategoryID = sub.SubCategoryID
+                            };
+
+            return subDMList;
         }
 
 
