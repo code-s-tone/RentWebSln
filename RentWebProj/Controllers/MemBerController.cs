@@ -4,22 +4,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentWebProj.Services;
+using RentWebProj.ViewModels;
+using System.Data.Entity;
 
 namespace RentWebProj.Controllers
 {
     public class MemberController : Controller
     {
+
+        private MemberService _service;
+        public MemberController()
+        {
+            _service = new MemberService();
+        }
+
         // GET: Member
         public ActionResult MemberCenter()
         {
-            //初始化資料庫
-            RentContext db = new RentContext();
-            var item = db.Members.ToList();
-            ViewData["email"] = item.Find(x => x.Account == "Code123").Email;
-            ViewData["password"] = item.Find(x => x.Account == "Code123").PasswordHash;
-            ViewData["ipone"] = item.Find(x => x.Account == "Code123").Phone;
-            ViewData["fullName"] = item.Find(x => x.Account == "Code123").FullName;
-            return View();
+            
+
+
+            return View(_service.GetMemberData().FirstOrDefault());//可以強型別
+
+            //單讀取一個表方法
+            
+            //預計搭配Session方法
+            //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
         }
+
+        // Post: Member
+        //[HttpPost]
+        //public ActionResult MemberCenter()
+        //{
+
+
+
+        //    return View();//可以強型別
+
+        //    //單讀取一個表方法
+        //    //ViewData.Model = _service.getMemberData();
+        //    //預計搭配Session方法
+        //    //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
+        //}
     }
 }
