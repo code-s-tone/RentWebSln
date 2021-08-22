@@ -25,25 +25,35 @@ namespace RentWebProj.Controllers
 
             return View(_service.GetMemberData());//可以強型別
 
-            //單讀取一個表方法
-            
-            //預計搭配Session方法
-            //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
         }
+        public ActionResult Login()
+        {
 
-        // Post: Member
-        //[HttpPost]
-        //public ActionResult MemberCenter()
-        //{
+            return View();
 
+        }
+        [HttpPost]
+        public ActionResult Login(MemberLoginDetailViewModel s)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(s);
+            }
 
+            else
+            {   
+                if(_service.getMemberLogintData(s.Email, s.Password))
+                {
+                    TempData["Message2"] = "註冊成功";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    TempData["Message2"] = "無帳號或密碼錯誤";
+                    return View(s);
+                }
+            }
 
-        //    return View();//可以強型別
-
-        //    //單讀取一個表方法
-        //    //ViewData.Model = _service.getMemberData();
-        //    //預計搭配Session方法
-        //    //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
-        //}
+        }
     }
 }

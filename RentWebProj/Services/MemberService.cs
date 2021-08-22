@@ -47,7 +47,17 @@ namespace RentWebProj.Services
             return MemberCenterVM;
         }
 
+        public bool getMemberLogintData(string Email, string Password)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            string email = HttpUtility.HtmlEncode(Email);
+            string password = HttpUtility.HtmlEncode(Password);
 
+                var result = pDMList.Where(x => x.Email == Email && x.PasswordHash == Password).FirstOrDefault() == null ? false : true;
+                return result;
+            
+
+        }
 
         ////單讀取一個表
         //public Member getMemberData()

@@ -10,23 +10,19 @@ namespace RentWebProj.Controllers
 {
     public class ProductController : Controller
     {
-        private ProductService _service;
+   
         //private CartService _CartService;
-        public ProductController()
-        {
-            _service = new ProductService();
-            //_CartService = new ProductService();
-        }
+
 
         //實際頁面
         public ActionResult GeneralCategories()
         {
 
-            return View(_service.GetCategoryData()); 
+            return View(); 
         }
         public ActionResult ProductCards()
         {
-            var selectedProductList = _service.GetCategoryData();
+         
             return View();
         }
 
@@ -46,9 +42,9 @@ namespace RentWebProj.Controllers
         public ActionResult Product(string PID)
         {
             //string PID = "PplPg002";//未來放參數
-            ProductDetailView VM = _service.getProductDetail(PID);
-            ViewBag.PID = PID;
-            return View(VM);
+          
+           
+            return View();
         }
 
         [HttpPost]

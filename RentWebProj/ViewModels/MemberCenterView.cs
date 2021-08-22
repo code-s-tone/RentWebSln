@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -33,5 +34,19 @@ namespace RentWebProj.ViewModels
 
         //public int Available { get; set; }
         //public int TotalAmount { get; set; }
+    }
+    public class MemberLoginDetailViewModel
+    {
+        [Required]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "信箱不得為空白,至少6個字元最多15個字元")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "請輸入正確的電子信箱")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "密碼不得為空白,至少6個字元最多15個字元")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+
     }
 }
