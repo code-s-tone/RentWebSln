@@ -1,7 +1,7 @@
 ﻿/* 以下為商品卡片 by庭安 */
 .CategoriesCardsPage {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .CategoriesCardsContainer h2 {
     padding-left: 17px;
@@ -124,9 +124,12 @@
         cursor: pointer;
     }
 
+.multiline {
+    /*為了讓查看商品換行*/
+    white-space: pre-wrap;
+}
 
 @media (max-width: 991px) {
-
     .CategoriesCardsPage {
         margin: 0 20px;
     }

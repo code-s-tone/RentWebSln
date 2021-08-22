@@ -5,34 +5,26 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
-    public class ProductCategoryView
+    public class ProductCategoryViewModel
     {
         public string CategoryName { get; set; }
-        public string ImageSrc { get; set; }
-
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
     }
-    public class ProductCardView
-    {
+    public class Category_Product_CardViewModel
+    {   
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
+        public string CategoryName { get; set; }
+        public string CategoryID { get; set; }
         public string ProductName { get; set; }
-        public string CategoryName { get; set; }
         public string SubCategoryName { get; set; }
+        public string SubCategoryID { get; set; }
+        public string Description { get; set; }
+        public decimal DailyRate { get; set; }
+        public int StarsForLike { get; set; }   //商品卡片上的星星數待決定如何判斷
+
+        //還有商品卡的兩張照片
+
     }
-
-    //public class ProductCartsView2 
-    //    //先這樣取名 不確定購物車在indexService要怎麼變動
-    //{
-    //    public string ImageSrc { get; set; }
-
-    //    public string ProductName { get; set; }
-
-    //    public decimal DailyRate { get; set; }
-
-    //    public DateTime StartDate { get; set; }
-    //    public DateTime ExpirationDate { get; set; }
-    //    public decimal TotalAmount { get; set; }
-
-    //}
-
-
-
 }

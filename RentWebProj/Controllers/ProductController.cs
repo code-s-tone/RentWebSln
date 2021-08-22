@@ -20,28 +20,51 @@ namespace RentWebProj.Controllers
         //實際頁面
         public ActionResult GeneralCategories()
         {
-
-            return View(_service.GetCategoryData()); 
+            ViewBag.Page = "CategoriesCardsPage";
+            ViewBag.Container = "CategoriesCardsContainer";
+            ViewBag.ContainerTitle = "所有種類";
+            ViewBag.CategoryOptions = _service.GetCategoryData();
+            ViewBag.SubCategoryOptions = _service.GetCategoryData();
+            return View("Category_Product_Cards",_service.GetCategoryData()); 
         }
-        public ActionResult ProductCards()
+        public ActionResult Category_Product_Cards(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
         {
-            var selectedProductList = _service.GetCategoryData();
-            return View();
+            ViewBag.Page = "ProductCardsPage";
+            ViewBag.Container = "ProductCardsContainer";
+            ViewBag.CategoryOptions = _service.GetCategoryData();
+            ViewBag.SubCategoryOptions = _service.GetCategoryData();
+            var selectedCtProductList = _service.GetProductData(categoryID);
+            //ViewBag.ContainerTitle=selectedCtProductList.
+            return View(selectedCtProductList);
+        }
+     
+        [HttpPost] //前端選了主類選項 出現副類
+        public ActionResult GetSubCategoryOptions(string categoryID)
+        {
+            return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost] //前端搜尋篩選
+        public ActionResult GetSelectedProductCards(string categoryID)
+        {
+            var selectedCtProductList = _service.GetSubCategoryOptions(categoryID);
+            return Json(selectedCtProductList,JsonRequestBehavior.AllowGet);
         }
 
 
         //---------------------------------------------------------------
-        //----------------------以下先不刪 名駿說要留著研究
-        public ActionResult ProductCategory()
-        {
-           
+
+        public ActionResult TEST_ProductCategory()
+        {//----------------------以下先不刪 名駿說要留著研究
+
             return View();
         }
 
-        public ActionResult ProductSubCategory()
-        { 
+        public ActionResult TEST_ProductSubCategory()
+        { //----------------------以下先不刪 名駿說要留著研究
             return View();
         }
+        //---------------------------------------------------------------
 
         public ActionResult Product(string PID)
         {
