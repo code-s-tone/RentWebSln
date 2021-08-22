@@ -166,7 +166,6 @@
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterView.cs" />
-    <Compile Include="ViewModels\ProductView.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
   <ItemGroup>
