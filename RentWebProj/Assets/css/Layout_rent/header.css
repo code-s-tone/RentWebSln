@@ -2,28 +2,15 @@
     /* margin: 0; */
 }
 
-header-top {
-    max-width: 1200px;
+header-top .container-xl {
+    max-width: 1200px !important;
     margin: auto;
 }
 
-.logo a {
-    text-decoration: none;
-    color: cornflowerblue;
-    font-size: 45px;
-    font-family: "微軟正黑體";
-    font-weight: bolder;
-    position: relative;
-}
 
-    .logo a::after {
-        content: "RentWeb";
-        font-size: 18px;
-        color: #fc8d61;
-        position: absolute;
-        top: 56px;
-        right: 25px;
-    }
+.header-nav .logo img {
+    width: 135px;
+}
 
 .header-nav {
     display: flex;
@@ -46,38 +33,51 @@ header-top {
 .header-member-box img {
     width: 35px;
     height: 35px;
-    margin-right: 30px;
+}
+
+.header-member-box i, .header-member-box img {
+    margin-right: 20px;
     cursor: pointer;
     z-index: 50;
     position: relative;
 }
 
+.header-member-box i {
+    font-size: 30px;
+    color: gray;
+}
+
 .nav-btn a {
     font-size: 18px;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 5%;
-    margin: 0 8px;
+}
+.nav-btn a:first-child{
+    margin-right:10px;
 }
 
-.nav-btn .loginBtn {
-    color: #fc8d61;
-    background-color: white;
-    border: 1px solid #fc8d61;
-}
+    .nav-btn .loginBtn {
+        color: #fc8d61;
+        background-color: white;
+        border: 1px solid #fc8d61;
+    }
 
 .nav-btn .signUpBtn {
     color: white;
-    background-color: cornflowerblue;
-    border: 1px solid cornflowerblue;
+    background-color: #fc8d61;
+    border: 1px solid #fc8d61;
+    /* color: white;
+  background-color: rgb(119, 119, 119);
+  border: 1px solid rgb(119, 119, 119); */
 }
 
-    .nav-btn .loginBtn:hover,
-    .nav-btn .signUpBtn:hover {
-        color: white;
-        background-color: #fc8d61;
-        border: 1px solid #fc8d61;
-    }
+/* .nav-btn .loginBtn:hover,
+.nav-btn .signUpBtn:hover {
+  color: white;
+  background-color: #fc8d61;
+  border: 1px solid #fc8d61;
+} */
 
 #menu-control {
     display: none;
@@ -93,17 +93,17 @@ header-top {
 }
 
 .header-search-box {
-    margin-right: 30px;
+    margin-right: 25px;
     margin-top: -3px;
 }
 
 .header-search {
     display: inline-block;
     position: relative;
-    height: 31px;
-    width: 31px;
+    height: 28px;
+    width: 28px;
     margin: auto;
-    padding: 1px 12px;
+    padding: 2px 11px;
     border: 3px solid #fc8d61;
     border-radius: 25px;
     transition: all 200ms ease;
@@ -115,9 +115,9 @@ header-top {
         content: "";
         position: absolute;
         width: 3px;
-        height: 19px;
+        height: 16px;
         right: -5px;
-        top: 21px;
+        top: 18px;
         background: #fc8d61;
         border-radius: 3px;
         transform: rotate(-45deg);
@@ -127,9 +127,9 @@ header-top {
     .header-search.active,
     .header-search:hover {
         width: 200px;
-        height: 45px;
+        height: 40px;
         margin-right: 0px;
-        margin-top: 2px;
+        margin-top: 3px;
     }
 
         .header-search.active:after,
@@ -142,18 +142,17 @@ header-top {
         border: none;
         box-sizing: border-box;
         font-family: Helvetica;
-        font-size: 18px;
+        font-size: 17px;
         color: inherit;
         background: transparent;
         outline-width: 0px;
+        padding: 2px 10px;
     }
 
 .header-member-box {
     display: flex;
 }
 /* 會員中心dropdown */
-#member-icon {
-}
 
 .member-dropdown {
     position: relative;
@@ -218,23 +217,23 @@ header-top {
     list-style: none;
 }
 
-    .member-dropdown .member-subMenu li:not(:last-child) {
-        border-bottom: 1px solid rgb(184, 164, 164);
-    }
+.member-dropdown .member-subMenu a:not(:last-child) {
+    border-bottom: 1px solid #fc8d61;
+}
 
 
-    .member-dropdown .member-subMenu li a {
-        color: rgb(119, 119, 119);
-    }
+.member-dropdown .member-subMenu a {
+    color: rgb(119, 119, 119);
+}
 
-    .member-dropdown .member-subMenu li:hover {
-        background-color: cornflowerblue;
+.member-dropdown .member-subMenu li:hover {
+    background-color: #fc8d61;
+    color: white;
+}
+
+    .member-dropdown .member-subMenu li:hover a {
         color: white;
     }
-
-        .member-dropdown .member-subMenu li:hover a {
-            color: white;
-        }
 
 .member-dropdown .member-subMenu a {
     font-size: 16px;
@@ -260,8 +259,11 @@ header-top {
     display: flex;
     padding: 0 !important;
     margin-bottom: 10px;
-
 }
+
+    .links i {
+        font-size: 12px;
+    }
 
     .links li {
         position: relative;
@@ -291,7 +293,7 @@ header-top {
 
     .links .sub-menu {
         position: absolute;
-        width: 170px;
+        width: 160px;
         top: 20px;
         left: -30%;
         line-height: 40px;
@@ -327,10 +329,6 @@ nav .navbar .links li:hover .sub-menu {
     font-size: 16px;
 }
 
-#headerContent > nav > div > ul > li > a > i {
-    font-size: 15px;
-    padding: 0 5px;
-}
 
 @media (max-width: 991px) {
     .dropdown-nav,
@@ -339,16 +337,9 @@ nav .navbar .links li:hover .sub-menu {
         display: none !important;
     }
 
-    .logo a {
-        font-size: 30px;
+    .header-nav .logo img {
+        width: 120px;
     }
-
-        .logo a::after {
-            font-size: 12px;
-            color: #fc8d61;
-            top: 35px;
-            right: 18px;
-        }
 
     .header-nav {
         height: 70px;
@@ -360,21 +351,15 @@ nav .navbar .links li:hover .sub-menu {
         margin-top: -3px;
     }
 
-    .header-search {
-        height: 32px;
-        width: 32px;
-        margin: auto;
-        padding: 1px 10px;
+    .header-search:after {
+        height: 16px;
     }
 
-        .header-search:after {
-            height: 16px;
-        }
+    .header-search.active,
+    .header-search:hover {
+        height: 35px;
+    }
 
-        .header-search.active,
-        .header-search:hover {
-            height: 35px;
-        }
 
     .hb {
         display: block;
@@ -466,16 +451,9 @@ nav .navbar .links li:hover .sub-menu {
             flex-wrap: nowrap;
         }
 
-        .logo a {
-            font-size: 25px;
-            margin-top: 11px !important;
+        .header-member-box img {
+            margin-right: 22px;
         }
-
-            .logo a::after {
-                font-size: 10px;
-                top: 30px;
-                right: 10px;
-            }
 
         .header-search-box {
             margin-right: 22px;
@@ -483,16 +461,16 @@ nav .navbar .links li:hover .sub-menu {
         }
 
         .header-search {
-            height: 27px;
-            width: 27px;
+            height: 25px;
+            width: 25px;
             margin: auto;
             padding: 1px 8px;
         }
 
             .header-search:after {
-                height: 16px;
+                height: 14px;
                 right: -6px;
-                top: 18px;
+                top: 16px;
             }
 
             .header-search input {
@@ -502,6 +480,7 @@ nav .navbar .links li:hover .sub-menu {
             .header-search.active,
             .header-search:hover {
                 width: 135px;
+                height: 32px;
             }
 
         .hb {

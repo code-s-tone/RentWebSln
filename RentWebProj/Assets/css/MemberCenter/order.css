@@ -27,11 +27,12 @@
 }
 
 .member-display-order-item-show-dynamic-button:hover {
-    color: #FFD1A4;
+    color: #fc8d61;
     cursor: pointer;
 }
 
 .member-display-order-detail{
+    color:#000;
     justify-content: center;
     align-items: baseline;
     background-color: #fff;

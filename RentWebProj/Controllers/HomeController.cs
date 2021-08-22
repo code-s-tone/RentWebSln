@@ -37,10 +37,7 @@ namespace RentWebProj.Controllers
         {
             return View();
         }
-        public ActionResult Product()
-        {
-            return View();
-        }
+
         public ActionResult About()
         {
             return View();

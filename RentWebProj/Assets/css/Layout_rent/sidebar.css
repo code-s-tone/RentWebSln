@@ -22,7 +22,7 @@
     }
 
 .linkBox {
-    background-color: #eaeaea;
+    background-color: rgb(243, 243, 243);
 }
 
     /* Style the sidenav links and the dropdown button */
@@ -41,27 +41,16 @@
         font-family: "Ubuntu", sans-serif;
     }
 
-        .linkBox a:hover,
-        .dropdown-btn:hover {
-            background-color: #ffffff;
-        }
-
-/* Add an active class to the active dropdown button */
 
 a.active {
-    background-color: rgb(105, 105, 105);
+    background-color: #fc8d61;
     color: white;
 }
 
-    a.active:hover {
-        color: rgb(70, 70, 70);
-        background-color: white;
-    }
-
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 
 .dropdown-container {
     display: none;
+    background-color: white;
 }
 
     .dropdown-container a {
@@ -83,30 +72,39 @@ a.active {
 }
 
 .logoBox {
-    display: grid;
     width: 100%;
     height: 70px;
     line-height: 2;
+    background-color: white;
+    display: flex;
+    align-items: center;
 }
 
-    .logoBox a {
-        text-decoration: none;
-        color: cornflowerblue;
-        font-size: 30px;
-        font-family: "微軟正黑體";
-        font-weight: bolder;
-        position: relative;
+    .logoBox img {
+        margin: 10px;
+        width: 90px;
     }
 
-        .logoBox a::after {
-            content: "RentWeb";
-            font-size: 16px;
-            color: #fc8d61;
-            position: absolute;
-            top: 18px;
-            right: 110px;
-        }
+.sidebar-btn {
+    display: flex;
+    background-color: white;
+    margin-left: 10px;
+    width: 130px;
+}
 
+    .sidebar-btn a {
+        width: 50%;
+        text-decoration: none;
+        color: white;
+        font-size: 17px;
+        padding: 0px 15px;
+        color: #fc8d61;
+        box-sizing: border-box;
+    }
+
+    .sidebar-btn .loginBtn {
+        border-right: 1px solid #fc8d61;
+    }
 
 .sidenav p {
     color: rgb(107, 107, 107);
@@ -126,34 +124,9 @@ a.active {
         color: white;
     }
 
-.sidebar-btn {
-    display: flex;
-    height: 45px;
-    background-color: cornflowerblue;
-    align-items: center;
-    padding: 0;
-    margin-bottom: 0;
-    box-sizing: border-box;
-}
-
-    .sidebar-btn a {
-        width: 50%;
-        text-decoration: none;
-        color: white;
-        font-size: 17px;
-        margin: 0 auto;
-        padding: 5px;
-        color: white;
-        box-sizing: border-box;
-    }
-
-    .sidebar-btn .loginBtn {
-        border-right: 1px solid white;
-    }
-
 #sidebarContent .profileBox {
     /* display: flex; 登入後才出現 */
-    background-color: rgb(200, 200, 200);
+    background-color: white;
     border-radius: 0;
     height: 105px;
     padding: 5px 0;
@@ -194,14 +167,5 @@ a.active {
 @media screen and (max-width: 767px) {
     .sidenav {
         width: 265px;
-    }
-
-    .logoBox a::after {
-        content: "RentWeb";
-        font-size: 16px;
-        color: #fc8d61;
-        position: absolute;
-        top: 20px;
-        right: 82px;
     }
 }

@@ -54,7 +54,7 @@ document.querySelector(".sidebar-member-link .signOutBtn").addEventListener("cli
 
 function backSidebarCSS_signOut() {
     document.querySelector('.sidebar-btn').style.display = 'flex';
-    document.querySelector('.logoBox').style.display = 'grid';
+    document.querySelector('.logoBox').style.display = 'flex';
     document.querySelector('#sidebarContent .profileBox').style.display = 'none';
     document.querySelector('.sidebar-member-link').style.display = 'none';
 

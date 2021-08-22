@@ -1,0 +1,385 @@
+﻿@model ProductDetailToCart
+@{
+    ViewBag.Title = "Product";
+}
+
+<div class="container-xl main">
+    <h2>@Model.ProductName</h2>
+    <div class="Top_Title mb-3">
+        <div class="Zip">
+            <div class="ZipContent">
+                <h5>CHU</h5>
+                <span class="d-block">,</span>
+                <h5 class="ms-1">Hsinchu</h5>
+                <span class="d-block">,</span>
+                <h5 class="ms-1 me-3">Taiwan</h5>
+                <i class="fas fa-star mx-1"></i>
+                <i class="fas fa-star mx-1"></i>
+                <i class="fas fa-star mx-1"></i>
+                <i class="fas fa-star mx-1"></i>
+                <i class="fas fa-star mx-1"></i>
+            </div>
+            <div class="ZipSocial d-flex">
+                <i class="fab fa-facebook-f mx-1"></i>
+                <i class="fab fa-twitter mx-1"></i>
+                <i class="fas fa-envelope mx-1"></i>
+                <i class="far fa-copy mx-1"></i>
+                <span>Copy link</span>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-between">
+        <div class="col-sm-7 col-12 Product">
+            <img src="https://cdn.ruckify.com/public_regen/51705cc0-f9dd-11ea-b5d2-c3496c2964a7/7bbae040-fe71-11ea-b0ea-511d396a4595/7bc2a500-fe71-11ea-a63e-1d976c5697ec_800x800.jpg"
+                 data-fancybox="gallery"
+                 data-caption="Optional caption">
+        </div>
+        <div class="col-sm-5 col-12 Product">
+            <img src="https://lipsum.app/id/1/1024x768"
+                 data-fancybox="gallery"
+                 data-caption="Optional caption">
+            <span class="SeeMore">See ALL 2</span>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="d-flex">
+
+        <div class="left">
+            <Section class="col-12">
+
+                <hr>
+
+                <div class="">
+                    <div class="">
+                        <h2 class="heading_size">
+                            sold on a monday: a novel
+                            <span> - perfect</span>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="description_text">
+                        <div id="">
+                            <p id="p1">
+                                @Model.Description
+                                <span id="span1">
+                                    ...
+                                    <span class="link1" id="link1">
+                                        <a data-bs-toggle="collapse" href="#collapse_text1"
+                                           aria-controls="collapse_text1">
+                                            Read more
+                                        </a>
+                                    </span>
+                                </span>
+
+                                <span class="collapse" id="collapse_text1" aria-expanded="false">
+                                    your rental request. Submit a request and a member from our Customer Success Team
+                                    will be in
+                                    touch with you.
+                                </span>
+
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </Section>
+
+            <hr>
+
+            <!--------以下 地圖區塊--------------------------------------------------------------------------->
+
+            <div class="left-sidebar-container">
+                @*<div class="map-block">*@
+                <h2 class="map-block-title">取件和退貨選項</h2>
+                <span class="map-block-depiction">提供送貨選項。提供您的位置以查看估計的送貨成本。</span>
+                <div class="map-block-distance">
+                    <p class="map-block-distance-text">這距離您所在的位置大約 (動態) 公里</p>
+                    <div class="map-block-input-outside">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input class="map-block-distance-input" type="text" placeholder="總部">
+                    </div>
+                </div>
+
+                <div class="map-block-price">
+                    <div class="map-block-price-col"></div>
+                    <div class="map-block-price-col ">
+                        <div class="map-block-total-price">預計送貨費用（單程）： (動態)新台幣</div>
+                    </div>
+                </div>
+                <div class="map-countainer">
+                    <div id="mapId"></div>
+                    <!-- <div id="map"></div>  google map-->
+
+                </div>
+                <p class="map-block-notice">預訂後提供確切位置</p>
+
+                @*</div>*@
+            </div>
+
+
+            <!--------以上 地圖區塊--------------------------------------------------------------------------->
+
+            <hr>
+            <Section class="col-12">
+
+                <div class="title">
+                    <div class="title-left">
+                        <h2 class="heading_size">
+                            Available Times
+                        </h2>
+                    </div>
+
+                    <div class="title-right">
+                        <a data-bs-toggle="collapse" href="#collapse_textTwo" aria-expanded="false"
+                           aria-controls="collapse_textTwo">
+                            <i class="fas fa-caret-down rotate" id="arrow1"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="description_text">
+                    <div id="">
+                        <p class="p2">
+
+                            <span id="text2">
+
+                                <span class="link2" id="link2">
+                                    <a data-bs-toggle="collapse" href="#collapse_textTwo" aria-expanded="false"
+                                       aria-controls="collapse_textTwo">
+                                        Read more...
+                                    </a>
+                                </span>
+
+                            </span>
+
+                            <div class="collapse" id="collapse_textTwo" aria-expanded="false">
+                                A Ruckify driver can deliver to and return the item from your location: <br>
+                                Monday to Sunday
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                                &nbsp &nbsp
+                                9:00 am to 9:00 pm<br>
+
+                            </div>
+                        </p>
+                    </div>
+
+                </div>
+
+            </Section>
+            <hr>
+
+            <Section class="col-12">
+
+                <div class="">
+                    <div class="">
+                        <h2 class="heading_size">
+                            Keep in Mind
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="">
+                    <div class="description_text">
+
+                        <div id="">
+                            <p>
+                                You remain fully liable to the Owner for any damage, loss, or theft of the item during
+                                the rental period.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </Section>
+
+            <hr>
+
+            <Section class="col-12">
+
+                <div class="title">
+                    <div class="title-left">
+                        <h2 class="heading_size">
+                            Cancellation
+                        </h2>
+                    </div>
+
+                    <div class="title-right">
+                        <a data-bs-toggle="collapse" href="#collapse_text4" aria-expanded="false"
+                           aria-controls="collapse_text4">
+                            <i class="fas fa-caret-down rotate" id="arrow2"></i>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="description_text">
+                    <div id="">
+                        <p class="p4">
+                            Cancellation policy is <strong>Easy-Going.</strong> <br>
+
+                            Full refund will be issued if cancelled greater than 2 days before <br>
+                            <span id="text4">
+
+                                <span class="link4" id="link4">
+                                    <a data-bs-toggle="collapse" href="#collapse_text4" aria-expanded="false"
+                                       aria-controls="collapse_text4">
+                                        Read more...
+                                    </a>
+                                </span>
+
+                            </span>
+
+                            <span class="collapse" id="collapse_text4" aria-expanded="false">
+                                <br>
+                                If the member booking the item sends a cancellation notification at least 48 hours
+                                before the booking Start Date and Time, they are entitled to a full refund minus the
+                                booking fee, and payment processing fee. The item price and any additional price
+                                including delivery will be refunded.
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+
+            </Section>
+        </div>
+        <div class="right">
+            <div class="RentInfo">
+                <div class="RentSetting">
+                    <div class="price"><span>@Decimal.ToInt32(Model.DailyRate) </span>元/日</div>
+                    <!-- Button trigger modal -->
+                    <button id="setDate" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
+                        設定租借期間
+                    </button>
+                    <!-- 顯示設好的時間 -->
+                    @* 同時有兩個按鈕? *@
+                    @*  *@
+                <div class="decision-group">
+                    @using (Html.BeginForm("Product", "Product"))
+                    {
+                        @Html.HiddenFor(M => M.ProductName)
+                        @Html.HiddenFor(M => M.isExisted)
+                        @Html.HiddenFor(M => M.Description)
+                        @Html.HiddenFor(M => M.DailyRate)
+
+                        for (int i = 0; i < Model.ImgSources.Count(); i++)
+                        {
+                            <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
+                        }
+                        @Html.HiddenFor(M => M.CurrentMemberID)
+                        <input name="dataTimeFormat" type="hidden">
+                        @Html.HiddenFor(M => M.StartDate)
+                        @Html.HiddenFor(M => M.ExpirationDate)
+
+                        <button type="submit" id="ToCart" class="orange">放入購物車</button>
+                        <button type="submit" id="ToCheck" class="orange">直接結帳</button>
+                    }
+
+                    @*<button id="ToCart" class="orange">放入購物車</button>*@
+                </div>
+                </div>
+                <div class="hint">您還不會被收費</div>
+            </div>
+
+            <!-- DateModal -->
+            <div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex flex-column align-items-center">
+
+                            <div id="collapseDatePicker" class="collapse collapseItem show">
+                                <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
+                            </div>
+
+                            <button class="w-100 orange" data-bs-toggle="collapse" data-bs-target=".collapseItem">
+                                繼續設定時間
+                            </button>
+
+                            <div id="collapseTimePicker" class="collapse collapseItem">
+                                <div class="d-flex w-100">
+                                    <div class="d-flex">
+                                        <strong>從</strong><div id="start"></div>
+                                        <input class="flatpickr timePicker" type=text placeholder="選時間" id="startTimePicker">
+                                    </div>
+                                    <div class="arrow"></div>
+                                    <div class="d-flex">
+                                        <strong>到</strong><div id="end"></div>
+                                        <input class="flatpickr timePicker" type=text placeholder="選時間" id="endTimePicker">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="orange" id="complete" data-bs-dismiss="modal">設定完成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+@section topCSS{
+    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
+    <!-- swiper還有用到?? -->
+    <!-- leaf css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <!-- dateTimePicker -->
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/flatpickr_orange.css" />
+
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/ProductCarousel.css" />
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/leafMap.css" />
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/Product_Detail.css" />
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/dateTimePicker.css" />
+
+}
+
+
+@section topJS{
+    <script src="~/Scripts/fontawesome.js" crossorigin="anonymous"></script>
+    <script src="~/Scripts/swiper-bundle.min.js"></script>
+    @* swiper還有用到?? *@
+
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+            crossorigin=""></script>
+
+}
+
+
+@section endJS{
+    @*<script src="./index.js"></script>   這還有作用嗎*@
+
+    <!-- leaf js -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
+    <!-- dateTimePicker -->
+    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
+
+    <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
+    <script src="~/Assets/js/ProductDetail/leaf.js"></script>
+    <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+}
+
+

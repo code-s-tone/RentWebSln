@@ -1,5 +1,4 @@
-﻿/* Footer Style*/
-footer .row {
+﻿footer .row {
     max-width: 1200px;
     margin: auto;
 }
@@ -41,27 +40,29 @@ body {
     color: #737373;
     background-color: #26272b;
     font-size: 13px;
+    margin-top:50px;
 }
 
     .site-footer h2 {
         font-family: "Nanum Pen Script", cursive;
         font-weight: bolder;
+        margin-left: 50px;
     }
+
+
 
     .site-footer a {
         color: #737373;
+        text-decoration: none;
     }
 
-        .site-footer a:hover {
-            color: #3366cc;
-            text-decoration: none;
-        }
 
 .footer-links {
     list-style: none;
     line-height: 1.5;
     padding: 0;
 }
+
 
     .footer-links a {
         color: #737373;
@@ -70,13 +71,8 @@ body {
         .footer-links a:active,
         .footer-links a:focus,
         .footer-links a:hover {
-            color: #3366cc;
-            text-decoration: none;
+            color: #fc8d61;
         }
-
-    .footer-links.inline li {
-        display: inline-block;
-    }
 
 .site-footer .social-icons a {
     width: 35px;
@@ -86,14 +82,11 @@ body {
     background-color: #33353d;
 }
 
-.copyright-text {
-    margin: 0;
-}
-
 .social-icons {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    margin-left: 20px;
 }
 
     .social-icons li {
@@ -120,8 +113,6 @@ body {
         text-align: center;
         margin-right: 8px;
         border-radius: 100%;
-        -webkit-transition: all 0.2s linear;
-        -o-transition: all 0.2s linear;
         transition: all 0.2s linear;
     }
 
@@ -155,37 +146,35 @@ body {
         background-color: rgb(206, 119, 206);
     }
 
-/* --------------------------------------------------------- */
-
-/* APP STORE Style*/
-
-.appDownload li {
-    margin-bottom: 10px;
+.site-footer .row div:not(:first-child) {
+    display: flex;
+    justify-content: center;
 }
 
 /* ------------------------------------------------- */
 
 @media (max-width: 767px) {
+    .site-footer .row div:not(:first-child) {
+        justify-content: flex-start;
+    }
+
     .site-footer .social-icons {
         text-align: center;
         margin-bottom: 5%;
     }
 
     .footer-links li {
-        margin: 0 10%;
-    }
-
-    .appDownload li {
-        margin: 5% 10%;
+        margin: 0 30px;
     }
 
     .site-footer h2 {
-        padding-left: 5%;
+        margin-left: 30px;
     }
 
     .site-footer {
         width: 100%;
         padding: 20px 0;
+        margin-top:35px;
     }
 
     .chatBox {
