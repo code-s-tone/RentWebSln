@@ -75,36 +75,36 @@ namespace RentWebProj.Services
         }
 
 
-        public IEnumerable<ProductCartsView> getCartsData()
-        {
-            IEnumerable<ProductCartsView> CMList;
+        //public IEnumerable<ProductCartsView> getCartsData()
+        //{
+        //    IEnumerable<ProductCartsView> CMList;
 
-        //    //var CList = _repository.GetAll<Category>();
-        //    var PList = _repository.GetAll<Product>();
-        //    var OList = _repository.GetAll<OrderDetail>();
+        //    //var clist = _repository.getall<category>();
+        //    var plist = _repository.GetAll<Product>();
+        //    var olist = _repository.GetAll<OrderDetail>();
 
         //    //篩選、轉型
-        //    //Method Expression  有join時，這方法很吃邏輯
+        //    //method expression  有join時，這方法很吃邏輯
 
 
-        //    //Query Expression
-        //    //VMList = (from p in pDMList
-        //    //          join c in cDMList
-        //    //          on p.CategoryID equals c.CategoryID
-        //    //          where p.CategoryID == catID
-        //    //          select new IndexProductView
-        //    //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-        //    //).Take(6);
+        //    //query expression
+        //    //vmlist = (from p in pdmlist
+        //    //          join c in cdmlist
+        //    //          on p.categoryid equals c.categoryid
+        //    //          where p.categoryid == catid
+        //    //          select new indexproductview
+        //    //          { productname = p.productname, categoryname = c.categoryname }
+        //    //).take(6);
 
-        //    CMList = (from p in PList
-        //              join o in OList
+        //    CMlist = (from p in plist
+        //              join o in olist
         //              on p.ProductID equals o.ProductID
         //              select new ProductCartsView
-        //              { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
+        //              { productname = p.ProductName, dailyrate = (decimal)o.dailyrate, startdate = (datetime)o.startdate, expirationdate = (datetime)o.expirationdate, totalamount = (decimal)o.totalamount }
         //    );
 
 
-        //    return CMList;
+        //    return CMlist;
         //}
 
         public ProductDetailToCart getProductDetail(string PID, int? CurrentMemberID)

@@ -17,30 +17,25 @@ namespace RentWebProj.Controllers
         private IndexService _service;
         // GET: Carts
 
-        private OrderService _service;
-        public CartsController()
-        {
-            _service = new OrderService();
-        }
+
         public CartsController()
         {
             _service = new IndexService();
         }
         public ActionResult Checkout()
         {
+            //var str = Session["TestData"] != null ? Session["TestData"] : string.Empty;
 
             return View(_service.getCartsData());
         }
         public ActionResult Index()
         {
+
+            //Session["TestData"] = "6666666666";
             var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
             return View(carts.ToList());
         }
-        public ActionResult Checkout()
-        {
 
-            return View(_service.getOrderData());
-        }
 
         // GET: Carts/Details/5
         public ActionResult Details(int? id)
