@@ -171,6 +171,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommonRepository.cs" />
     <Compile Include="Services\CartService.cs" />
+    <Compile Include="Services\Category_Product_CardViewModel.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
