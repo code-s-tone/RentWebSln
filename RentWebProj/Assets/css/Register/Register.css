@@ -10,15 +10,15 @@
     padding: 20px;
 }
 
-.Login {
+.Register {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     margin: auto;
     width: 550px;
-    min-height: 460px;
-    background: linear-gradient(to bottom, #fc8d61 33%, white 33%, white 100%);
+    min-height: 700px;
+    background: linear-gradient(to bottom,#fc8d61 33%,white 33%,white 100%);
     border-radius: 20px;
     text-align: center;
     padding-top: 1px;
@@ -27,13 +27,13 @@
     transition: 1s;
 }
 
-    .Login p {
+    .Register p {
         font-size: 25px;
         color: #ffffff;
         font-weight: 900;
     }
 
-    .Login .Login_Logo {
+    .Register .Register_Logo {
         background-color: rgb(255, 255, 255);
         width: 125px;
         height: 120px;
@@ -48,12 +48,12 @@
         margin: auto;
     }
 
-        .Login .Login_Logo img {
+        .Register .Register_Logo img {
             width: 90px;
             height: 80px;
         }
 
-    .Login .Login_content {
+    .Register .Register_content {
         background-color: rgb(255, 255, 255);
         top: 0;
         right: 0;
@@ -70,7 +70,7 @@
     outline: none;
 }
 
-.Login .Login_content .form-group {
+.Register .Register_content .form-group {
     /* border-bottom: 1px solid #000; */
     height: 100%;
     width: 100%;
@@ -79,21 +79,21 @@
     justify-content: center;
 }
 
-    .Login .Login_content .form-group:hover {
+    .Register .Register_content .form-group:hover {
         border-bottom: 1px solid #fc8d61;
     }
 
-.Login .Login_content .Login_content-title {
+.Register .Register_content .Register_content-title {
     font-size: 25px;
     color: #fc8d61;
     font-weight: 900;
 }
 
-.Login .Login_content input {
+.Register .Register_content input {
     font-size: 22px;
 }
 
-    .Login .Login_content input:hover {
+    .Register .Register_content input:hover {
         background-color: #e8f0fe;
     }
 
@@ -108,44 +108,34 @@
     text-decoration: none;
 }
 
-.google {
-    border: 0;
-    background-color: rgb(221, 76, 57)
-}
-
-.login {
+.Register {
     border: 0;
 }
 
-.Login_footer a {
+.Register_footer a {
     text-decoration: none;
 }
-
 /* 手機板設計 */
 @media screen and (max-width:768px) {
-    .back {
 
-        padding: 0;
-    }
-
-    .Login {
+    .Register {
         margin: 0;
         border-radius: 0px;
         width: 100%;
-        min-height: 90vh;
+        height: 100vh;
         text-align: center;
         padding: 20px;
     }
 
-        .Login p {
+        .Register p {
             margin-top: 20px;
         }
 
-        .Login .Login_Logo {
+        .Register .Register_Logo {
             display: none;
         }
 
-        .Login .Login_content {
+        .Register .Register_content {
             width: 100%;
             height: 67vh;
         }

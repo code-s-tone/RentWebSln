@@ -47,15 +47,15 @@ function changeSidebarCSS_login() {
 
 }
 //登出後恢復原狀
-document.querySelector(".sidebar-member-link .signOutBtn").addEventListener("click", function () {
-    backHeaderCSS_signOut();
-    backSidebarCSS_signOut()
-})
+//document.querySelector(".sidebar-member-link .signOutBtn").addEventListener("click", function () {
+//    backHeaderCSS_signOut();
+//    backSidebarCSS_signOut()
+//})
 
-function backSidebarCSS_signOut() {
-    document.querySelector('.sidebar-btn').style.display = 'flex';
-    document.querySelector('.logoBox').style.display = 'flex';
-    document.querySelector('#sidebarContent .profileBox').style.display = 'none';
-    document.querySelector('.sidebar-member-link').style.display = 'none';
+//function backSidebarCSS_signOut() {
+//    document.querySelector('.sidebar-btn').style.display = 'flex';
+//    document.querySelector('.logoBox').style.display = 'flex';
+//    document.querySelector('#sidebarContent .profileBox').style.display = 'none';
+//    document.querySelector('.sidebar-member-link').style.display = 'none';
 
-}
+//}

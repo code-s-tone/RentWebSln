@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,7 +78,7 @@
                                 <li>我的訂單</li></a>
                                 <a href="@Url.Action("MemberCenter", "Member")">
                                 <li>修改個人資料</li></a>
-                                <a href="#" class="signOutBtn">
+                                <a href="@Url.Action("SignOut", "Member")" class="signOutBtn">
                                 <li>登出</li></a>
                             </ul>
                         </div>
@@ -88,8 +87,8 @@
 
                     <!-- 註冊登入鈕 -->
                     <nav class="nav-btn">
-                        <a href="#" class="loginBtn" data-bs-toggle="modal" data-bs-target="#SignModal2">登入</a>
-                        <a href="#" class="signUpBtn" data-bs-toggle="modal" data-bs-target="#LoginModal">註冊</a>
+                        <a href="@Url.Action("Login", "Member")" class="loginBtn">登入</a>
+                        <a href="@Url.Action("Register", "Member")" class="signUpBtn">註冊</a>
                     </nav>
                 </div>
 
@@ -167,8 +166,8 @@
                     <img src="~/Assets/images/Layout_Rent/logo.png" />
                 </a>
                 <div class="sidebar-btn">
-                    <a href="#" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
-                    <a href="#" class="signUpBtn d-grid"><span class="m-auto">註冊</span></a>
+                    <a href="@Url.Action("Login", "Member")" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
+                    <a href="@Url.Action("Register", "Member")" class="signUpBtn d-grid"><span class="m-auto">註冊</span></a>
                 </div>
             </div>
 
@@ -190,7 +189,9 @@
                         @Html.ActionLink("我的訂單", "MemberCenter", "Member")
                         @Html.ActionLink("修改個人資料", "MemberCenter", "Member")
 
-                        <a href="#" class="signOutBtn">登出</a>
+                        <a href="@Url.Action("SignOut", "Member")" class="signOutBtn">登出</a>
+   
+                      
                     </div>
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
@@ -334,3 +335,26 @@
 
 </body>
 </html>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <script>
+        document.querySelector('.nav-btn').style.display = 'none';
+        document.querySelector('.member-dropdown').style.display = 'block';
+        document.querySelector('.sidebar-btn').style.display = 'none';
+        document.querySelector('.logoBox').style.display = 'none';
+        document.querySelector('#sidebarContent .profileBox').style.display = 'flex';
+        document.querySelector('.sidebar-member-link').style.display = 'block';
+    </script>
+}
+else
+{
+    <script>
+        document.querySelector('.nav-btn').style.display = 'block';
+        document.querySelector('.member-dropdown').style.display = 'none';
+        document.querySelector('.sidebar-btn').style.display = 'flex';
+        document.querySelector('.logoBox').style.display = 'flex';
+        document.querySelector('#sidebarContent .profileBox').style.display = 'none';
+        document.querySelector('.sidebar-member-link').style.display = 'none';
+    </script>
+}

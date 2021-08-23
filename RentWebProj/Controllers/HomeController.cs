@@ -8,13 +8,15 @@ using RentWebProj.Services;
 
 namespace RentWebProj.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
+     
         private IndexService _service;
         public HomeController(){
             _service = new IndexService();
         }
-
+      
         public ActionResult Index()
         {            
             return View(_service.getCategoryData() );
@@ -24,15 +26,17 @@ namespace RentWebProj.Controllers
         {
             return View();
         }
-
+  
         public ActionResult ContributionProgram()
         {
             return View();
         }
+   
         public ActionResult HowToRent()
         {
             return View();
         }
+      
         public ActionResult OurStory()
         {
             return View();

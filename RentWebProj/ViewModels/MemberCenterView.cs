@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -47,6 +48,28 @@ namespace RentWebProj.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+    }
+
+    public class MemberRegisterDetailViewModel
+    {
+        [Required]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "信箱不得為空白,至少6個字元最多15個字元")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "請輸入正確的電子信箱")]
+        public string Email { get; set; }
+
+        [Required]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "密碼不得為空白,至少6個字元最多15個字元")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "確認密碼")]
+        [DataType(DataType.Password)]
+        [StringLength(30, MinimumLength = 6, ErrorMessage = "密碼不得為空白,至少6個字元最多15個字元")]
+        [Compare("Password", ErrorMessage = "密碼不一致")]
+        public string ConfirmPassword { get; set; }
+
+  
 
     }
 }

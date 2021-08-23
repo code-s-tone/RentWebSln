@@ -54,11 +54,28 @@ namespace RentWebProj.Services
             string password = HttpUtility.HtmlEncode(Password);
 
                 var result = pDMList.Where(x => x.Email == Email && x.PasswordHash == Password).FirstOrDefault() == null ? false : true;
-                return result;
-            
+                return result;       
 
         }
-
+        public bool getMemberRegistertData(MemberRegisterDetailViewModel s)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            string email = HttpUtility.HtmlEncode(s.Email);
+            string password = HttpUtility.HtmlEncode(s.Password);
+            var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = s.Email, PasswordHash = s.Password, SignWayID = 1 };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+          
+        }
         ////單讀取一個表
         //public Member getMemberData()
         //{

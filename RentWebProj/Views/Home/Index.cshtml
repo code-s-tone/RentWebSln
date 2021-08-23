@@ -3,6 +3,17 @@
 @{
     ViewBag.Title = "首頁";
 }
+這是管理後台，需經驗證授權才能存取
+<br>
+User  Name: @User.Identity.Name
+<br>
+Is Authentication : @User.Identity.IsAuthenticated
+<br>
+Authentication Type : @User.Identity.AuthenticationType
+<br>
+
+<br />
+@Html.ActionLink("登出", "SignOut", "Member", null, new { @class = "btn btn-danger" })
 
 <header>
     <div>
