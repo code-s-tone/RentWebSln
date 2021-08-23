@@ -175,9 +175,7 @@
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
-    <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterView.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
