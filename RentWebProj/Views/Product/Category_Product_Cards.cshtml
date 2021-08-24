@@ -146,17 +146,20 @@
                                     <div class="badge">
                                         <repeat n="4"></repeat>
                                     </div>
+
                                     <div class="product-img">
-                                        <img src="~/Assets/images/Layout_Rent/Lv01.jpg" alt="">
+                                        <a href="@Url.Action("ProductDetail","Product", new { PID = p.ProductID } )">
+                                            <img src="~/Assets/images/Layout_Rent/Lv01.jpg" alt="">
+                                        </a>
                                     </div>
+
                                     <div class="product-details">
                                         <div class="checkitOut"><span class="m-auto">商品詳情</span> </div>
                                         <span class="product-catagory">@p.CategoryName,@p.SubCategoryName</span>
 
                                         <p class="product-name">
                                             @*<a href="">@p.ProductName</a>*@
-                                            @Html.ActionLink( @p.ProductName, "ProductDetail", "Product", new { PID = p.ProductID }, new { @class = "checkitOut_ct m-auto multiline" })
-
+                                            @Html.ActionLink( @p.ProductName , "ProductDetail", "Product", new { PID = p.ProductID }, new { @class = "checkitOut_ct m-auto multiline" })
                                         </p>
 
                                         <p class="product-description">@p.Description </p>
