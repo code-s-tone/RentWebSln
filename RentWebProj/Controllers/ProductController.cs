@@ -78,7 +78,7 @@ namespace RentWebProj.Controllers
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Product([Bind(Include = "CurrentMemberID,isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
+        public ActionResult Product([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
             //紀錄操作種類、成敗
             string OperationType = null;
             OperationResult result = new OperationResult();
@@ -87,13 +87,12 @@ namespace RentWebProj.Controllers
                 result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
             }
             //購物車可能已變動，需重撈
-            ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
+            ProductDetailToCart VM = _service.getProductDetail(PID, 1);
             VM.OperationType = OperationType;
             VM.OperationSuccessful = result.IsSuccessful;
 
 
-            return View(VM);
-            //由於共用View、網址，型別必須跟Get方法的一致
+            return View(VM);//由於共用View，型別必須跟Get方法的一致
         }
     }
 }

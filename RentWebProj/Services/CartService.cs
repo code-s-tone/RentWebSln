@@ -27,7 +27,7 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = (int)VM.CurrentMemberID,//須改
+                    MemberID = 1,
                     ProductID = PID,
                     StartDate = Convert.ToDateTime(VM.StartDate),//如何指定日期格式?
                     ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    

@@ -23,7 +23,7 @@ const datePicker = flatpickr("#datePicker", {
     // altFormat: "F j, Y",
 
     minDate: new Date(),
-    disable: ["2021-08-11", new Date(2021, 7, 19)],
+    disable: ["2021-09-11", new Date(2021, 8, 19)],//需要一個json陣列
 
     inline: true,
 

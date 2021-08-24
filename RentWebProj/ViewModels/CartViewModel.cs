@@ -24,13 +24,17 @@ namespace RentWebProj.ViewModels
         //圖片群 來自ProductImage
         public List<string> ImgSources { get; set; }
 
-        public int? CurrentMemberID { get; set; }
+        //public int? CurrentMemberID { get; set; }
+        //禁用日期
+        public string[] disableDateArray { get; set; }
+
         //來自Cart
         public bool isExisted { get; set; }
 
         //前端無法使用DateTime型別
         public string StartDate { get; set; }
         public string ExpirationDate { get; set; }
+        //操作結果
         public string OperationType { get; set; }
         public bool OperationSuccessful { get; set; }
         

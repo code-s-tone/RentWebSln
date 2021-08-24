@@ -115,6 +115,9 @@ namespace RentWebProj.Services
             string ExpirationDate = null;
             if (CurrentMemberID != null)//有登入
             {
+                //禁用日期陣列
+
+
                 Cart cart = (from c in (_repository.GetAll<Cart>())
                               where c.MemberID == CurrentMemberID && c.ProductID == PID 
                               select c
@@ -139,8 +142,9 @@ namespace RentWebProj.Services
                       Description = p.Description,
                       DailyRate = (decimal)p.DailyRate,
                       ImgSources = ImgSources,
-                      //登入者、購物車
-                      CurrentMemberID = CurrentMemberID,
+                      //CurrentMemberID = CurrentMemberID,
+                      //disableDateArray = ["a"],
+                      //購物車
                       isExisted = isExisted,
                       StartDate = StartDate,
                       ExpirationDate = ExpirationDate,
