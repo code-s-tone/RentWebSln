@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="product-name">
                                     <a href="#">
-                                        {JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}
+                                        @*{JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}*@
                                         @Html.DisplayFor(modelItem => item.ProductID)
                                     </a>
                                 </div>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="checkout">
                     <button type="button" class="btn")">進行結帳</button>
-                    <a href="@Url.Action("Checkout", "Carts")">content</a>
+                    <a href="@Url.Action("Checkout", "Carts")" class="order">content</a>
                 </div>
             </div>
             <div class="notice">
@@ -138,6 +138,40 @@
 }
 
 <script>
+    var checked = [];
 
+    document.querySelectorAll(".form-check-input").forEach(function (x) {
+        if (x.checked == true) {
+            checked.push(x.parentNode.parentNode.children[2].childNodes[1].innerText)
+        }
+    })
+
+    checked.forEach(function (x) {
+        console.log(x);
+    });
+    var jc = JSON.stringify(checked);
+    //傳資料
+
+
+    $(document).ready(function () {
+        $(".order").click(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "/Carts/Checkout",
+                traditional: true,
+                data: { "OrderUrl": jc },
+
+                success: function () {
+                    console.log("傳送成功")
+                },
+                error: function () {
+                    console.log("傳送失敗")
+                }
+            });
+
+
+        });
+    });
 
 </script>

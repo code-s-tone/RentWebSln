@@ -22,11 +22,11 @@ namespace RentWebProj.Controllers
         {
             _service = new IndexService();
         }
-        public ActionResult Checkout()
+        public ActionResult Checkout(string OrderUrl)
         {
             //var str = Session["TestData"] != null ? Session["TestData"] : string.Empty;
-
-            return View(_service.getCartsData());
+            
+            return View(_service.getCartsData(OrderUrl));
         }
         public ActionResult Index()
         {
