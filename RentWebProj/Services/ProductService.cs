@@ -46,6 +46,7 @@ namespace RentWebProj.Services
 
                       select new Category_Product_CardViewModel
                       {
+                          ProductID = p.ProductID,
                           ProductName = p.ProductName,
                           CategoryName = c.CategoryName,
                           Description = p.Description,

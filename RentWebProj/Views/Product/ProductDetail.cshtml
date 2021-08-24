@@ -1,6 +1,6 @@
 ﻿@model ProductDetailToCart
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "ProductDetail";
     //禁招  //一個網址 多個ACtion  一個view  一個強行別Model  
 
     var service = new ProductService();
@@ -9,7 +9,7 @@
 }
 
 <div class="container-xl main">
-    <h2>@Model.ProductName</h2>
+    <h2>商品名稱: @Model.ProductName</h2>
     <div class="Top_Title mb-3">
         <div class="Zip">
             <div class="ZipContent">
@@ -60,8 +60,7 @@
                 <div class="">
                     <div class="">
                         <h2 class="heading_size">
-                            sold on a monday: a novel
-                            <span> - perfect</span>
+                            商品名稱: @Model.ProductName
                         </h2>
                     </div>
                 </div>
@@ -70,8 +69,8 @@
                     <div class="description_text">
                         <div id="">
                             <p id="p1">
-                                @Model.Description
-                                <span id="span1">
+                                商品描述 : @Model.Description
+                                @*<span id="span1">
                                     ...
                                     <span class="link1" id="link1">
                                         <a data-bs-toggle="collapse" href="#collapse_text1"
@@ -85,7 +84,7 @@
                                     your rental request. Submit a request and a member from our Customer Success Team
                                     will be in
                                     touch with you.
-                                </span>
+                                </span>*@
 
                             </p>
                         </div>
