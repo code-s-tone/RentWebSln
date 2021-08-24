@@ -127,7 +127,7 @@ namespace RentWebProj.Services
                 }
             }
 
-            //查圖片
+            //查圖片群
             List<string> ImgSources = new List<string>{ "a","b"};
 
             VM = (from p in (_repository.GetAll<Product>())
@@ -143,7 +143,9 @@ namespace RentWebProj.Services
                       CurrentMemberID = CurrentMemberID,
                       isExisted = isExisted,
                       StartDate = StartDate,
-                      ExpirationDate = ExpirationDate
+                      ExpirationDate = ExpirationDate,
+                      //操作
+                      OperationType = null
                   }).SingleOrDefault();
 
             return VM;

@@ -270,17 +270,17 @@
                 <div class="decision-group">
                     @using (Html.BeginForm("Product", "Product"))
                     {
-                        @Html.HiddenFor(M => M.ProductName)
-                        @Html.HiddenFor(M => M.isExisted)
+                        @*@Html.HiddenFor(M => M.ProductName)
                         @Html.HiddenFor(M => M.Description)
-                        @Html.HiddenFor(M => M.DailyRate)
+                        @Html.HiddenFor(M => M.DailyRate)*@
 
-                        for (int i = 0; i < Model.ImgSources.Count(); i++)
+                                    @*for (int i = 0; i < Model.ImgSources.Count(); i++)
                         {
                             <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
-                        }
+                        }*@
                         @Html.HiddenFor(M => M.CurrentMemberID)
-                        <input name="dataTimeFormat" type="hidden">
+                        @*<input name="dataTimeFormat" type="hidden">*@
+                        @Html.HiddenFor(M => M.isExisted)
                         @Html.HiddenFor(M => M.StartDate)
                         @Html.HiddenFor(M => M.ExpirationDate)
 
@@ -384,6 +384,12 @@
     <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
     <script src="~/Assets/js/ProductDetail/leaf.js"></script>
     <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
+    <script>
+        /*入車提示訊息*/
+        if (!@String.IsNullOrEmpty(Model.OperationType) ) {
+
+        }
+    </script>
     <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
 }
 

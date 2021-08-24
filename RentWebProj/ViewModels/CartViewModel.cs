@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using RentWebProj.Services;
 
 namespace RentWebProj.ViewModels
 {
+
     public class ProductDetailToCart
     {
         public string dateTimeFormat;
@@ -21,7 +23,6 @@ namespace RentWebProj.ViewModels
 
         //圖片群 來自ProductImage
         public List<string> ImgSources { get; set; }
-        public A a { get; set; }
 
         public int? CurrentMemberID { get; set; }
         //來自Cart
@@ -30,13 +31,11 @@ namespace RentWebProj.ViewModels
         //前端無法使用DateTime型別
         public string StartDate { get; set; }
         public string ExpirationDate { get; set; }
+        public string OperationType { get; set; }
+        public bool OperationSuccessful { get; set; }
+        
     }
 
-
-    public class A
-    {
-        //三個屬性
-    }
 
 
 }

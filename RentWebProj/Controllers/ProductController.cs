@@ -80,29 +80,23 @@ namespace RentWebProj.Controllers
         //通過模型驗證=>	呼叫service 寫入資料庫
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
-        public ActionResult Product(ProductDetailToCart PostVM , string ProductName, string PID) {
-            //不使用架構
+        public ActionResult Product(ProductDetailToCart PostVM , string PID) {
+            //紀錄操作種類、成敗
+            string OperationType = null;
+            OperationResult result = new OperationResult();
             if (ModelState.IsValid)
             {
-                CartService service = new CartService();
-                OperationResult result = service.Create(PostVM, PID);
-                //以下是Bill教的錯誤log
-                if (result.IsSuccessful)
-                {
-                    //MessageBox.Show("資料庫寫入成功");
-                }
-                else
-                {
-                    //var path = result.WriteLog();
-                    //MessageBox.Show($"發生錯誤，請參考{path}");
-                }
+                result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
             }
+
             //因為購物車已變動，重新撈，重新顯示 => return View
             ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
-            return View(VM);//由於共用View、網址，型別必須跟Get方法的一致
+            VM.OperationType = OperationType;
+            VM.OperationSuccessful = result.IsSuccessful;
 
 
-            //表單室友指定網址  是分開的 個有一個提交按鈕
+            return View(VM);
+            //由於共用View、網址，型別必須跟Get方法的一致
         }
     }
 }
