@@ -5,6 +5,12 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
+    public class ProductCategoryViewModel
+    {
+        public string CategoryName { get; set; }
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
+    }
     public class Category_Product_CardViewModel
     {   
         public string ImageSrcMain { get; set; }

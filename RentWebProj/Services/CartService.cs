@@ -22,10 +22,10 @@ namespace RentWebProj.Services
             try//寫入result
             {
                 //資料庫若有防呆，不用檢查重複
+                //VM->DM
                 DateTime ExpirationDate = DateTime.Parse(VM.ExpirationDate);
                 DateTime StartDate = Convert.ToDateTime(VM.StartDate);
 
-                //VM->DM
                 Cart entity = new Cart()
                 {
                     MemberID = (int)VM.CurrentMemberID,
