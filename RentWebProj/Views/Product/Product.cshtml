@@ -1,11 +1,11 @@
 ﻿@model ProductDetailToCart
 @{
     ViewBag.Title = "Product";
-    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model  
+    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model
 
     var service = new ProductService();
 
-    //razor會先把 C#語法都編譯完。  先轉成json  並且讓js變數接手 chart範例 接陣列 
+    //razor會先把 C#語法都編譯完。  先轉成json  並且讓js變數接手 chart範例 接陣列
 }
 
 <div class="container-xl main">
@@ -267,36 +267,32 @@
                     <!-- 顯示設好的時間 -->
                     @* 同時有兩個按鈕? *@
                     @*  *@
-                    <div class="decision-group">
-                        @using (Html.BeginForm("Product", "Product"))
-                        {
-                            @*@Html.HiddenFor(M => M.ProductName)
-                        @Html.HiddenFor(M => M.Description)
-                        @Html.HiddenFor(M => M.DailyRate)*@
+                <div class="decision-group">
+                    @using (Html.BeginForm("Product", "Product"))
+                    {
+                        @Html.AntiForgeryToken()
 
-                            @*for (int i = 0; i < Model.ImgSources.Count(); i++)
+                        @*for (int i = 0; i < Model.ImgSources.Count(); i++)
                         {
                             <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
                         }*@
-                            @Html.HiddenFor(M => M.CurrentMemberID)
-                            @*<input name="dataTimeFormat" type="hidden">*@
-                            @Html.HiddenFor(M => M.isExisted)
-                            @Html.HiddenFor(M => M.StartDate)
-                            @Html.HiddenFor(M => M.ExpirationDate)
+                        @Html.HiddenFor(M => M.CurrentMemberID)
+                        @Html.HiddenFor(M => M.isExisted)
+                        @Html.HiddenFor(M => M.StartDate)
+                        @Html.HiddenFor(M => M.ExpirationDate)
 
-                            <button type="submit" id="ToCart" class="orange">放入購物車</button>
-                            <button type="submit" id="ToCheck" class="orange">直接結帳</button>
-                        }
+                        <button id="ToCart" class="orange" type="submit">放入購物車</button>
+                        <button id="ToCheck" class="orange">直接結帳</button>
+                    }
 
-                        @*<button id="ToCart" class="orange">放入購物車</button>*@
-                    </div>
+                </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
             </div>
 
             <!-- DateModal -->
             <div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
@@ -333,29 +329,74 @@
                 </div>
             </div>
 
-            <div class="modal" id="OperationHintModal" tabindex="-1">
-                <div class="modal-dialog">
+            <div class="modal " id="OperationHintModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h5 class="modal-title w-100"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p></p>
-                        </div>
-                        <div class="modal-footer">
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 
+
+
+
+@section endJS{
+    @*<script src="./index.js"></script>   這還有作用嗎*@
+
+    <!-- leaf js -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
+    <!-- dateTimePicker -->
+    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
+
+    <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
+    <script src="~/Assets/js/ProductDetail/leaf.js"></script>
+    <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
+    <script>
+        //未登入的禁用
+        @*if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
+            let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+            DateModalLauncher.disabled = true;
+            DateModalLauncher.innerText = '= 登入後才可租賃商品 =';
+        }*@
+
+        //入車提示訊息
+        if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
+            let OpText = "";
+            if ( @Json.Encode(Model.OperationType == "Create")  )
+                OpText = "加入";
+            else if (@Json.Encode(Model.OperationType == "Update")  )
+                OpText = "更新";
+
+            OpText += "購物車";
+            if (@Json.Encode(Model.OperationSuccessful)) {
+                OpText += "成功";
+            }
+            else {
+                OpText += "失敗";
+            }
+            let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
+            document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
+            OpModal.toggle();
+        }
+    </script>
+
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+}
+
+
 @section topCSS{
-    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <!-- swiper還有用到?? -->
+    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <!-- leaf css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -373,45 +414,11 @@
 
 
 @section topJS{
-    <script src="~/Scripts/fontawesome.js" crossorigin="anonymous"></script>
-    <script src="~/Scripts/swiper-bundle.min.js"></script>
     @* swiper還有用到?? *@
-
+    <script src="~/Scripts/swiper-bundle.min.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 
 }
-
-
-@section endJS{
-    @*<script src="./index.js"></script>   這還有作用嗎*@
-
-    <!-- leaf js -->
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
-    <!-- dateTimePicker -->
-    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
-
-    <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
-    <script src="~/Assets/js/ProductDetail/leaf.js"></script>
-    <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
-    <script>
-        /*入車提示訊息*/
-        if (!@String.IsNullOrEmpty(Model.OperationType) ) {
-            string OpText = "";
-            if (@Model.OperationType == 'Create')
-
-            else if (@Model.OperationType == 'Update') {
-
-            }
-            document.querySelector("#OperationHintModal .modal-body>p").innerText = "";
-
-        }
-    </script>
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
-}
-
-

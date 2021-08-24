@@ -27,11 +27,10 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = (int)VM.CurrentMemberID,
+                    MemberID = (int)VM.CurrentMemberID,//須改
                     ProductID = PID,
-                    StartDate = Convert.ToDateTime(VM.StartDate),
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)
-                    //如何指定格式?
+                    StartDate = Convert.ToDateTime(VM.StartDate),//如何指定日期格式?
+                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
                 };
                 //判斷是否本來就存在
                 if ( VM.isExisted )

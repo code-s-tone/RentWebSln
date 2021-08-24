@@ -1,13 +1,18 @@
-.right{
-    width:0;
+.right {
+    width: 100%;
 }
-
+@media screen and (max-width:991px) {
+    .right {
+        height: 0;
+        position: absolute;
+    }
+}
 .RentInfo {
-    width: 100vw;
+    width: 100%;
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 400;
+    z-index: 1000;
     border-top: 1px solid #000;
     background-color: #fff;
 }

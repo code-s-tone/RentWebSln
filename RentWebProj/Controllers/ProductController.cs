@@ -68,11 +68,8 @@ namespace RentWebProj.Controllers
 
         public ActionResult Product(string PID)
         {
-            //接收路由PID撈產品資料、取MID，傳到View
-
-            //如何取當前登入者?
-            //memberID的取法session["Email"]?
-            //C#如何取session?
+            //接收路由PID撈產品資料、取當前登入者，傳到View
+            //User.Identity.Name
             ProductDetailToCart VM = _service.getProductDetail(PID,1);
             return View(VM);
         }
@@ -80,7 +77,8 @@ namespace RentWebProj.Controllers
         //通過模型驗證=>	呼叫service 寫入資料庫
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
-        public ActionResult Product(ProductDetailToCart PostVM , string PID) {
+        [ValidateAntiForgeryToken]
+        public ActionResult Product([Bind(Include = "CurrentMemberID,isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
             //紀錄操作種類、成敗
             string OperationType = null;
             OperationResult result = new OperationResult();
@@ -88,8 +86,7 @@ namespace RentWebProj.Controllers
             {
                 result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
             }
-
-            //因為購物車已變動，重新撈，重新顯示 => return View
+            //購物車可能已變動，需重撈
             ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
             VM.OperationType = OperationType;
             VM.OperationSuccessful = result.IsSuccessful;
