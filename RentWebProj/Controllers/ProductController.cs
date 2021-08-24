@@ -100,6 +100,9 @@ namespace RentWebProj.Controllers
             //因為購物車已變動，重新撈，重新顯示 => return View
             ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
             return View(VM);//由於共用View、網址，型別必須跟Get方法的一致
+
+
+            //表單室友指定網址  是分開的 個有一個提交按鈕
         }
     }
 }

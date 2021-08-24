@@ -21,6 +21,7 @@ namespace RentWebProj.ViewModels
 
         //圖片群 來自ProductImage
         public List<string> ImgSources { get; set; }
+        public A a { get; set; }
 
         public int? CurrentMemberID { get; set; }
         //來自Cart
@@ -32,8 +33,9 @@ namespace RentWebProj.ViewModels
     }
 
 
-    public class CartViewModel
+    public class A
     {
+        //三個屬性
     }
 
 
