@@ -6,6 +6,7 @@ namespace RentWebProj.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("Member")]
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -40,6 +41,9 @@ namespace RentWebProj.Models
         public int SignWayID { get; set; }
 
         public bool? active { get; set; }
+
+        [StringLength(100)]
+        public string ProfilePhotoUrl { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
