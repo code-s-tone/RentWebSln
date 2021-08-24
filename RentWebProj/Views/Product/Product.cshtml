@@ -267,29 +267,29 @@
                     <!-- 顯示設好的時間 -->
                     @* 同時有兩個按鈕? *@
                     @*  *@
-                <div class="decision-group">
-                    @using (Html.BeginForm("Product", "Product"))
-                    {
-                        @*@Html.HiddenFor(M => M.ProductName)
+                    <div class="decision-group">
+                        @using (Html.BeginForm("Product", "Product"))
+                        {
+                            @*@Html.HiddenFor(M => M.ProductName)
                         @Html.HiddenFor(M => M.Description)
                         @Html.HiddenFor(M => M.DailyRate)*@
 
-                                    @*for (int i = 0; i < Model.ImgSources.Count(); i++)
+                            @*for (int i = 0; i < Model.ImgSources.Count(); i++)
                         {
                             <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
                         }*@
-                        @Html.HiddenFor(M => M.CurrentMemberID)
-                        @*<input name="dataTimeFormat" type="hidden">*@
-                        @Html.HiddenFor(M => M.isExisted)
-                        @Html.HiddenFor(M => M.StartDate)
-                        @Html.HiddenFor(M => M.ExpirationDate)
+                            @Html.HiddenFor(M => M.CurrentMemberID)
+                            @*<input name="dataTimeFormat" type="hidden">*@
+                            @Html.HiddenFor(M => M.isExisted)
+                            @Html.HiddenFor(M => M.StartDate)
+                            @Html.HiddenFor(M => M.ExpirationDate)
 
-                        <button type="submit" id="ToCart" class="orange">放入購物車</button>
-                        <button type="submit" id="ToCheck" class="orange">直接結帳</button>
-                    }
+                            <button type="submit" id="ToCart" class="orange">放入購物車</button>
+                            <button type="submit" id="ToCheck" class="orange">直接結帳</button>
+                        }
 
-                    @*<button id="ToCart" class="orange">放入購物車</button>*@
-                </div>
+                        @*<button id="ToCart" class="orange">放入購物車</button>*@
+                    </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
             </div>
@@ -333,8 +333,22 @@
                 </div>
             </div>
 
+            <div class="modal" id="OperationHintModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
 
@@ -387,6 +401,13 @@
     <script>
         /*入車提示訊息*/
         if (!@String.IsNullOrEmpty(Model.OperationType) ) {
+            string OpText = "";
+            if (@Model.OperationType == 'Create')
+
+            else if (@Model.OperationType == 'Update') {
+
+            }
+            document.querySelector("#OperationHintModal .modal-body>p").innerText = "";
 
         }
     </script>
