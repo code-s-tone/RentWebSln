@@ -69,7 +69,11 @@ namespace RentWebProj.ViewModels
         [Compare("Password", ErrorMessage = "密碼不一致")]
         public string ConfirmPassword { get; set; }
 
-  
-
+    }
+    public class MemberGoogleLoginDetailViewModel
+    {
+        public string UserID { get; set; }
+        public string Picture { get; set; }
+        public string Email { get; set; }
     }
 }

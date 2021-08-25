@@ -6,7 +6,7 @@ namespace RentWebProj.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Administer")]
+
     public partial class Administer
     {
         public int AdministerID { get; set; }

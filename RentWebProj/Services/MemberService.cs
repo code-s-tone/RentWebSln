@@ -76,6 +76,19 @@ namespace RentWebProj.Services
             }
           
         }
+
+        public void getMemberGoogleData(string id,string picture,string email,string name)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            var result = pDMList.Where(x => x.Email == email && x.FullName ==name && x.Account==id).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = email, SignWayID = 1, FullName=name,Account=id,ProfilePhotoUrl=picture};
+                _repository.Create(entity);
+                _repository.SaveChanges();         
+            }          
+
+        }
         ////單讀取一個表
         //public Member getMemberData()
         //{

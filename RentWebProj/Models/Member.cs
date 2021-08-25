@@ -5,7 +5,7 @@ namespace RentWebProj.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
+    [Table("Member")]
     public partial class Member
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -45,5 +45,7 @@ namespace RentWebProj.Models
         public virtual ICollection<Cart> Carts { get; set; }
 
         public virtual SignWay SignWay { get; set; }
+
+        public string ProfilePhotoUrl { get; set; }
     }
 }
