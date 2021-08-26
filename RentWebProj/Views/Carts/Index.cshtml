@@ -102,10 +102,10 @@
                     <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
                 </div>
                 <div class="checkout">
-                    <button type="button" class="btn">
+                    <button type="button" class="btn order">
                         進行結帳
                     </button>
-                    <a href="@Url.Action("Checkout", "Carts")" class="order">content</a>
+                    @*<a href="@Url.Action("Checkout", "Carts")" class="order">content</a>*@
                 </div>
             </div>
             <div class="notice">
@@ -140,23 +140,27 @@
 }
 
 <script>
-    var checked = [];
 
-    document.querySelectorAll(".form-check-input").forEach(function (x) {
-        if (x.checked == true) {
-            checked.push(x.parentNode.parentNode.children[2].childNodes[1].innerText)
-        }
-    })
 
-    checked.forEach(function (x) {
-        console.log(x);
-    });
-    var jc = JSON.stringify(checked);
+
+
+    
+
+
 
 
     //傳資料
     $(document).ready(function () {
         $(".order").click(function () {
+
+            let checked = [];
+
+            document.querySelectorAll(".form-check-input").forEach(function (x) {
+                if (x.checked == true) {
+                    checked.push(x.parentNode.parentNode.children[2].childNodes[1].innerText)
+                }
+            })
+            let jc = JSON.stringify(checked);
 
             $.ajax({
                 type: "POST",
