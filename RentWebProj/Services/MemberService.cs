@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using RentWebProj.ViewModels;
+using System.Data.Entity.Core.Objects;
 
 
 namespace RentWebProj.Services
@@ -57,7 +58,8 @@ namespace RentWebProj.Services
                                   {
                                       BranchName = b.StoreName,
 
-                                      RentDate = (DateTime)od.ExpirationDate,
+                                      //RentDate = (DateTime)od.ExpirationDate,
+                                      RentDate = (int)EntityFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
                                       //RentDate = DiffRentDate(od.ExpirationDate, od.StartDate),
                                       //RentDate = (DateTime)od.ExpirationDate - (DateTime)od.StartDate),
                                       //RentDate = (DateTime)od.ExpirationDate-(DateTime)od.StartDate,

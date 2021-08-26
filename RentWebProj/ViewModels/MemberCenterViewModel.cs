@@ -23,11 +23,11 @@ namespace RentWebProj.ViewModels
         public string BranchName { get; set; }
 
         //ExpirationDate - RentDate = RentDate
-        public DateTime RentDate { get; set; }
+        //public DateTime RentDate { get; set; }
 
         //測試區
         //public TimeSpan RentDate { get; set; }
-        //public int RentDate { get; set; }
+        public int RentDate { get; set; }
         //public IEnumerable<MemberDiffDateViewModel> RentDate { get; set; }
 
         public int TotalAmount { get; set; }
