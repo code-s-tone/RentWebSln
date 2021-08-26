@@ -260,8 +260,8 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
+    <Content Include="Assets\js\Google\gapiScript.js" />
     <Content Include="Assets\js\Google\Google.js" />
-    <Content Include="Assets\js\Google\Google1.js" />
     <Content Include="Assets\js\ProductDetail\dateTimePicker.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />

@@ -3,7 +3,7 @@
         $("#btnSignIn").on("click", function () {
             GoogleLogin();//Google 登入
         });
-        $("#btnDisconnect").on("click", function () {
+        $(".signOutBtn").on("click", function () {
         Google_disconnect();//和Google App斷連
         });
     });

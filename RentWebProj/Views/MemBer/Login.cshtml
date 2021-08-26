@@ -8,7 +8,6 @@
         <div class="Login_Logo my-1">
             <img src="https://soulkey373.github.io/WorkFinalblock/image/rentIcon.svg">
         </div>
-        <button class="btn btn-primary" onclick="Google_disconnect()">Google專用登出</button>
         <p>租任何你想要的東西</p>
         <div class="Login_content shadow">
             @using (Html.BeginForm("Login", "Member", FormMethod.Post))
@@ -38,8 +37,7 @@
 
 
 @section topJS{
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
+    @*<script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>*@
 
 }
 <!--從 Web.config檔 抓取Googl App Client ID-->
@@ -61,8 +59,10 @@
             gapi.auth2.init({
                 client_id: GoolgeApp_Cient_Id//必填，記得開發時期要開啟 Chrome開發人員工具 查看有沒有403錯誤(Javascript來源被禁止)
             });
+            console.log("GoogleSigninInit有啟用到")
         });//end gapi.load
     }//end GoogleSigninInit function
+
 
 
     function GoogleLogin() {
@@ -115,9 +115,10 @@
 
 }
 
+
 @section endJS{
 
-    @*<script src="~/Assets/js/Google/Google.js"></script>*@
+    <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
 
 }
 

@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,9 +18,10 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    @*//有時候會加載不到google api:platform*@
+    @*<script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>*@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <title>知租網</title>
     @Scripts.Render("~/bundles/jqueryval")
@@ -72,7 +74,7 @@
                             <ul class="member-subMenu">
                                 <div class="profileBox">
                                     <div class="profileImg d-grid"><img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt=""></div>
-                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">庭安</p></div>
+                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">@User.Identity.Name</p></div>
                                 </div>
                                 <a href="#">
                                 <li>通知</li></a>
@@ -81,7 +83,7 @@
                                 <li>我的訂單</li></a>
                                 <a href="@Url.Action("MemberCenter", "Member")">
                                 <li>修改個人資料</li></a>
-                                <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" >
+                                <a href="@Url.Action("SignOut", "Member")" class="signOutBtn">
                                 <li>登出</li></a>
                             </ul>
                         </div>
@@ -327,7 +329,6 @@
     <script src="~/Assets/js/Layout_Rent/header.js"></script>
     <script src="~/Assets/js/Layout_Rent/sidebar.js"></script>
     <script src="~/Assets/js/Layout_Rent/footer.js"></script>
-
 
     @Scripts.Render("~/bundles/jquery")
 

@@ -11,8 +11,6 @@ Is Authentication : @User.Identity.IsAuthenticated
 <br>
 Authentication Type : @User.Identity.AuthenticationType
 <br>
-<button class="btn btn-primary" onclick="Google_disconnect()">Google專用登出</button>
-<br />
 @Html.ActionLink("登出", "SignOut", "Member", null, new { @class = "btn btn-danger" })
 
 <header>

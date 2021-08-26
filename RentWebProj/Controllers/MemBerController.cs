@@ -165,7 +165,7 @@ namespace RentWebProj.Controllers
 
                 var ticket = new FormsAuthenticationTicket(
                   version: 1,
-                  name: email.ToString(), //可以放使用者Id
+                  name: name.ToString(), //可以放使用者Id
                   issueDate: DateTime.UtcNow,//現在UTC時間
                   expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
                   isPersistent: true,// 是否要記住我 true or false
@@ -181,11 +181,11 @@ namespace RentWebProj.Controllers
 
                 //4.取得original URL.
                 var url = FormsAuthentication.GetRedirectUrl(email.ToString(), true);
-           
+
                 //5.導向original URL
-       
+
                 //return View(url);
-                //return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
                 //return RedirectToAction("Index", "Home");
 
             }
