@@ -15,12 +15,14 @@ namespace RentWebProj.Controllers
     {
         private RentContext db = new RentContext();
         private IndexService _service;
+        private CartService _cartService;
         // GET: Carts
 
 
         public CartsController()
         {
             _service = new IndexService();
+            _cartService = new CartService();
         }
         public ActionResult Checkout(string OrderUrl)
         {
@@ -28,14 +30,20 @@ namespace RentWebProj.Controllers
             
             return View(_service.getCartsData(OrderUrl));
         }
+
         public ActionResult Index()
         {
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
 
-            //Session["TestData"] = "6666666666";
-            var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
-            return View(carts.ToList());
+            return View(carts);
         }
 
+        //public ActionResult Index()
+        //{
+        //    var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
+        //    return View(carts.ToList());
+        //}
 
         // GET: Carts/Details/5
         public ActionResult Details(int? id)

@@ -38,5 +38,26 @@ namespace RentWebProj.ViewModels
         //三個屬性
     }
 
+    public class CartIndex
+    {
+        public int MemberID { get; set; }
 
+        public string ProductID { get; set; }
+
+        public string ProductName { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
+
+        public decimal DailyRate { get; set; }
+
+        public int Qty { get; set; }
+
+        public bool Available { get; set; }
+
+        public int DateDiff { get; set; }
+
+        public decimal Sub { get; set; }
+    }
 }
