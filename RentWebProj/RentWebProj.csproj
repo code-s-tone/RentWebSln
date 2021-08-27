@@ -175,6 +175,7 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\ProductDetail\dateTimePicker.css" />
     <Content Include="Assets\css\ProductDetail\flatpickr_orange.css" />
     <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
@@ -193,6 +194,7 @@
     <Content Include="Assets\css\MemberCenter\order.css" />
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
+    <Content Include="Assets\css\Register\Register.css" />
     <Content Include="Assets\js\ProductDetail\dateTimePicker.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />
@@ -459,6 +461,8 @@
     <Content Include="Views\Member\_memberCenterPersonPartial.cshtml" />
     <Content Include="Views\Member\_memberCenterAccountPartial.cshtml" />
     <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

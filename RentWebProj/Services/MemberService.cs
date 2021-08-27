@@ -74,33 +74,49 @@ namespace RentWebProj.Services
             return MemberCenterVM;
         }
 
-        //public string ChangeData(string newEmail)
-        //{   
+        public bool getMemberLogintData(string Email, string Password)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            string email = HttpUtility.HtmlEncode(Email);
+            string password = HttpUtility.HtmlEncode(Password);
 
-        //    var result = _repository.GetAll<Member>();
-        //    result.ToList().Find(x => x.Email ==  )
-        //}
+            var result = pDMList.Where(x => x.Email == Email && x.PasswordHash == Password).FirstOrDefault() == null ? false : true;
+            return result;
 
+        }
+        public bool getMemberRegistertData(MemberRegisterDetailViewModel s)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            string email = HttpUtility.HtmlEncode(s.Email);
+            string password = HttpUtility.HtmlEncode(s.Password);
+            var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = s.Email, PasswordHash = s.Password, SignWayID = 1 };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
+        }
 
-        //待開發區
-        ////單讀取一個表
-        //public Member getMemberData()
-        //{
-        //    Member VMList;
-        //    var DMList = _repository.GetAll<Member>();
-        //    VMList = DMList.Where(x => x.MemberID == 38).FirstOrDefault();
-        //    return VMList;
-        //}
+        public void getMemberGoogleData(string id, string picture, string email, string name)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            var result = pDMList.Where(x => x.Email == email && x.FullName == name && x.Account == id).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = email, SignWayID = 1, FullName = name, Account = id, ProfilePhotoUrl = picture };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+            }
 
-        //預計搭配Session使用
-        //public Member getMemberData(int y)
-        //{
-        //    Member VMList;
-        //    var DMList = _repository.GetAll<Member>();
-        //    VMList = DMList.Where(x => x.MemberID == y).FirstOrDefault();
-        //    return VMList;
-        //}
+        }
+
 
     }
 }
