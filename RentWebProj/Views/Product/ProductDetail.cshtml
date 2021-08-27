@@ -266,25 +266,25 @@
                     <!-- 顯示設好的時間 -->
                     @* 同時有兩個按鈕? *@
                     @*  *@
-                <div class="decision-group">
-                    @using (Html.BeginForm("Product", "Product"))
-                    {
-                        @Html.AntiForgeryToken()
-
-                        @*for (int i = 0; i < Model.ImgSources.Count(); i++)
+                    <div class="decision-group">
+                        @using (Html.BeginForm("ProductDetail", "Product"))
                         {
-                            <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
-                        }*@
-                        @*@Html.HiddenFor(M => M.CurrentMemberID)*@
-                        @Html.HiddenFor(M => M.IsExisted)
-                        @Html.HiddenFor(M => M.StartDate)
-                        @Html.HiddenFor(M => M.ExpirationDate)
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(M => M.IsExisted)
+                            @Html.HiddenFor(M => M.StartDate)
+                            @Html.HiddenFor(M => M.ExpirationDate)
 
-                        <button id="ToCart" class="orange" type="submit">放入購物車</button>
-                        <button id="ToCheck" class="orange">直接結帳</button>
-                    }
-
-                </div>
+                            if (Model.IsExisted)
+                            {
+                                <button id="ToCart" class="orange" type="submit">更新購物車</button>
+                            }
+                            else
+                            {
+                                <button id="ToCart" class="orange" type="submit">放入購物車</button>
+                            }
+                            <button id="ToCheck" class="orange">直接結帳</button>
+                        }
+                    </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
             </div>

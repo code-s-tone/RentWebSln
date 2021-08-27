@@ -13,7 +13,7 @@ namespace RentWebProj
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //產品細節頁 路由，用id來判斷
+            //產品細節頁，用PID來判斷
             routes.MapRoute(
                 name: "ProductDetail",
                 url: "Product/ProductDetail/{PID}",

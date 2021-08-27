@@ -105,14 +105,6 @@ completeBtn.addEventListener('click', function () {
 });
 
 
-//如果已在車內，改變按鈕文字
-if (document.getElementById('IsExisted').value) {
-    actionBtns[0].innerText = '更新購物車';
-}
-
-//日期初始化         是否可以填
-//設定日期完成 => 改變顯示文字、改變表單值
-
 //輔助函式庫
 function combinDateTime(i) {
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
