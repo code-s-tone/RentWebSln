@@ -228,6 +228,7 @@
     <Compile Include="Services\IndexService.cs" />
     <Compile Include="ViewModels\MemberCenterView.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
@@ -407,6 +408,7 @@
     <Content Include="Assets\css\Index\index.css.map" />
     <Content Include="Assets\css\Index\index.scss" />
     <Content Include="bin\RentWebProj.dll.config" />
+    <Content Include="HomePage\line.html" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\RentWebProj.csproj.CopyComplete" />
     <Content Include="obj\Debug\RentWebProj.csproj.CoreCompileInputs.cache" />

@@ -8,6 +8,7 @@
         <div class="Login_Logo my-1">
             <img src="https://soulkey373.github.io/WorkFinalblock/image/rentIcon.svg">
         </div>
+    
         <p>租任何你想要的東西</p>
         <div class="Login_content shadow">
             @using (Html.BeginForm("Login", "Member", FormMethod.Post))
@@ -27,7 +28,7 @@
 
             }
             <button class="btn google my-3 text-light w-100 fs-5" id="btnSignIn">Google登入</button>
-
+            <button class="btn Line my-3 text-light w-100 fs-5" id="btnLineSignIn">Line登入</button>
         </div>
         <div class="Login_footer my-1 ">
             <h5 class="my-4">新來的?<a href="@Url.Action("Register", "Member")" class="text-primary m-1"><strong>註冊</strong></a></h5>
