@@ -74,12 +74,12 @@ namespace RentWebProj.Services
             return MemberCenterVM;
         }
 
-        public string ChangeData(string newEmail)
-        {   
+        //public string ChangeData(string newEmail)
+        //{   
 
-            var result = _repository.GetAll<Member>();
-            result.ToList().Find(x => x.Email ==  )
-        }
+        //    var result = _repository.GetAll<Member>();
+        //    result.ToList().Find(x => x.Email ==  )
+        //}
 
 
 
