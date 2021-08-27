@@ -277,7 +277,7 @@
                             <input name="ImgSources[@i]" type="hidden" value=@Model.ImgSources[i]>
                         }*@
                         @*@Html.HiddenFor(M => M.CurrentMemberID)*@
-                        @Html.HiddenFor(M => M.isExisted)
+                        @Html.HiddenFor(M => M.IsExisted)
                         @Html.HiddenFor(M => M.StartDate)
                         @Html.HiddenFor(M => M.ExpirationDate)
 
@@ -390,7 +390,9 @@
         }
     </script>
 
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js">
+
+    </script>
 }
 
 

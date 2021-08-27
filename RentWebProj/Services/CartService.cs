@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RentWebProj.Models;
 using RentWebProj.ViewModels;
+using RentWebProj.Models;
 using RentWebProj.Repositories;
 
 namespace RentWebProj.Services
@@ -21,19 +21,16 @@ namespace RentWebProj.Services
             var result = new OperationResult();
             try
             {
-                DateTime ExpirationDate = DateTime.Parse(VM.ExpirationDate);
-                DateTime StartDate = Convert.ToDateTime(VM.StartDate);
-
                 //VM->DM
                 Cart entity = new Cart()
                 {
                     MemberID = 1,
                     ProductID = PID,
-                    StartDate = Convert.ToDateTime(VM.StartDate),//如何指定日期格式?
+                    StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
                     ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
                 };
                 //判斷是否本來就存在
-                if ( VM.isExisted )
+                if ( VM.IsExisted )
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
                     OperationType = "Update";

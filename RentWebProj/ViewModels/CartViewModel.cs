@@ -9,11 +9,11 @@ namespace RentWebProj.ViewModels
 
     public class ProductDetailToCart
     {
-        public string dateTimeFormat;
+        public string DateTimeFormat;
 
         public ProductDetailToCart()
         {
-            this.dateTimeFormat = "yyyy / MM / dd HH:mm";
+            this.DateTimeFormat = "yyyy / MM / dd HH:mm";
         }
 
         //public string ProductID { get; set; }
@@ -26,11 +26,10 @@ namespace RentWebProj.ViewModels
 
         //public int? CurrentMemberID { get; set; }
         //禁用日期
-        public string[] disableDateArray { get; set; }
+        public List<DisablePeriod> DisablePeriods { get; set; }
 
         //來自Cart
-        public bool isExisted { get; set; }
-
+        public bool IsExisted { get; set; }
         //前端無法使用DateTime型別
         public string StartDate { get; set; }
         public string ExpirationDate { get; set; }
@@ -38,6 +37,17 @@ namespace RentWebProj.ViewModels
         public string OperationType { get; set; }
         public bool OperationSuccessful { get; set; }
         
+    }
+
+    public class DisablePeriod
+    {
+        public string from { get; set; }
+        public string to { get; set; }
+        //JS陣列：
+        //    {
+        //        from: "2025-04-01",
+        //        to: "2025-05-01"
+        //    }
     }
 
 

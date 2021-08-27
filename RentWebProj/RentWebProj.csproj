@@ -156,12 +156,14 @@
     <Compile Include="Repositories\CommonRepository.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Services\MemberService.cs" />
+    <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterView.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
