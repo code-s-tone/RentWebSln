@@ -15,21 +15,30 @@ namespace RentWebProj.Controllers
     {
         private RentContext db = new RentContext();
         private IndexService _service;
+        private CartService _cartService;
         // GET: Carts
+
 
         public CartsController()
         {
             _service = new IndexService();
+            _cartService = new CartService();
         }
         public ActionResult Checkout()
         {
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
 
-            return View(_service.getCartsData());
+            return View(carts);
+            //return View(_service.getCartsData());
         }
         public ActionResult Index()
         {
-            var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
-            return View(carts.ToList());
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
+
+            return View(carts);
+
         }
 
         // GET: Carts/Details/5
