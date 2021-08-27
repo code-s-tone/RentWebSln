@@ -68,41 +68,32 @@ namespace RentWebProj.Controllers
 
         public ActionResult ProductDetail(string PID)
         {
-            //接收路由PID撈產品資料、取MID，傳到View
-
-            //如何取當前登入者?
-            //memberID的取法session["Email"]?
-            //C#如何取session?
+            //接收路由PID撈產品資料、取當前登入者，傳到View
+            //User.Identity.Name
             ProductDetailToCart VM = _service.getProductDetail(PID,1);
+
             return View(VM);
         }
 
         //通過模型驗證=>	呼叫service 寫入資料庫
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
-        public ActionResult ProductDetail(ProductDetailToCart PostVM , string ProductName, string PID) {
-            //不使用架構
+        [ValidateAntiForgeryToken]
+        public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
+            //紀錄操作種類、成敗
+            string OperationType = null;
+            OperationResult result = new OperationResult();
             if (ModelState.IsValid)
             {
-                CartService service = new CartService();
-                OperationResult result = service.Create(PostVM, PID);
-                //以下是Bill教的錯誤log
-                if (result.IsSuccessful)
-                {
-                    //MessageBox.Show("資料庫寫入成功");
-                }
-                else
-                {
-                    //var path = result.WriteLog();
-                    //MessageBox.Show($"發生錯誤，請參考{path}");
-                }
+                result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
             }
-            //因為購物車已變動，重新撈，重新顯示 => return View
-            ProductDetailToCart VM = _service.getProductDetail(PID, PostVM.CurrentMemberID);
-            return View(VM);//由於共用View、網址，型別必須跟Get方法的一致
+            //購物車可能已變動，需重撈
+            ProductDetailToCart VM = _service.getProductDetail(PID, 1);
+            VM.OperationType = OperationType;
+            VM.OperationSuccessful = result.IsSuccessful;
 
 
-            //表單室友指定網址  是分開的 個有一個提交按鈕
+            return View(VM);//由於共用View，型別必須跟Get方法的一致
         }
     }
 }
