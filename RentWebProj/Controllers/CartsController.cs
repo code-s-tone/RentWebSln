@@ -15,11 +15,14 @@ namespace RentWebProj.Controllers
     {
         private RentContext db = new RentContext();
         private IndexService _service;
+        private CartService _cartService;
         // GET: Carts
+
 
         public CartsController()
         {
             _service = new IndexService();
+            _cartService = new CartService();
         }
         public ActionResult Checkout()
         {
