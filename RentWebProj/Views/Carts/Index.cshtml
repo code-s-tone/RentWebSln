@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RentWebProj.Models.Cart>
+﻿@model IEnumerable<CartIndex>
 
 @{
     ViewBag.Title = "Index";
@@ -19,21 +19,22 @@
         </div>
     </div>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @*
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    *@
 
     <div class="order-content">
         <div class="content-nav">
-            <li class="active"><a href="#">購物明細({X})</a></li>
-            <li><a href="#">追蹤清單({X})</a></li>
+            <li class="active"><a href="#">購物明細(@Model.Count())</a></li>
+            @*<li><a href="#">追蹤清單({X})</a></li>*@
         </div>
         <div class="content">
             <table class="table">
                 <tr>
                     <th>
                         <span>商品名稱</span>
-                        @Html.DisplayNameFor(model => model.ProductID)
                     </th>
                 </tr>
 
@@ -55,44 +56,58 @@
                                 </div>
                                 <div class="product-name">
                                     <a href="#">
-                                        {JavaScript 學習手冊, 3/e (Learning JavaScript: Add Sparkle and Life to Your Web Pages, 3/e)}
-                                        @Html.DisplayFor(modelItem => item.ProductID)
+                                        @*{JavaScript 學習手冊}*@
+                                        @Html.DisplayFor(m => item.ProductName)
                                     </a>
                                 </div>
                             </div>
                             <div class="product-stock">
-                                <p>利用程式判斷是否有庫存，有的話就顯示立即出貨</p>
-                            </div>
-                            <div class="product-price-qty">
-                                <div class="unitprice">
-                                    <span class="title">價格 :</span>
-                                    <span class="price">利用程式顯示價格</span>
+                                <p>
+                                    @{
+                                        if (item.Available)
+                                        {
+                                        <p>立即出貨</p>}
+                                    else
+                                    {<p>暫時無法租借</p>}
+                                    }
+                                    </p>
                                 </div>
-                                <div class="buyqty">
-                                    <span class="title">數量 :</span>
-                                    <input type="number" value="1" class="qty">
+                                <div class="product-price-qty">
+                                    <div class="unitprice">
+                                        <span class="title">日租價格 :</span>
+                                        <span class="price">
+                                            @Html.DisplayFor(m => item.DailyRate)
+                                        </span>
+                                    </div>
+                                    <div class="buyqty">
+                                        <span class="title">租借數量 :</span>
+                                        <input type="number" value="1" class="qty" readonly>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-sub">
-                                <span class="title">小計 :</span>
-                                <span class="subTotal">利用程式計算小計</span>
-                            </div>
-                        </td>
-                       
+                                <div class="product-sub">
+                                    <span class="title">小計 :</span>
+                                    <span class="subTotal">
+                                        @Html.DisplayFor(m => item.Sub)
+                                    </span>
+                                </div>
+                            </td>
+
                             @*<td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { Memberid = item.MemberID, Productid = item.ProductID })
-                            </td>*@
-                        
-                    </tr>
-                }
+                                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                        @Html.ActionLink("Delete", "Delete", new { Memberid = item.MemberID, Productid = item.ProductID })
+                                </td>*@
+
+                        </tr>
+                    }
                 <tr>
                     <td>
                         <div class="order-total">
                             <span>總計：</span>
                             <span class="currency">TWD$</span> &emsp;
-                            <span class="total">利用程式計算總價</span>
+                            <span class="total">
+                                @ViewBag.Total
+                            </span>
                         </div>
                     </td>
                 </tr>
@@ -102,7 +117,10 @@
                     <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
                 </div>
                 <div class="checkout">
-                    <button type="button" class="btn">進行結帳</button>
+                    <button type="button" class="btn order">
+                        進行結帳
+                    </button>
+                    @*<a href="@Url.Action("Checkout", "Carts")" class="order">content</a>*@
                 </div>
             </div>
             <div class="notice">
@@ -135,3 +153,46 @@
     <link href="~/Assets/css/Cart/navbar.css" rel="stylesheet" />
     <link href="~/Assets/css/Cart/ordercontent.css" rel="stylesheet" />
 }
+
+<script>
+
+
+
+
+
+
+
+
+
+    //傳資料
+    $(document).ready(function () {
+        $(".order").click(function () {
+
+            let checked = [];
+
+            document.querySelectorAll(".form-check-input").forEach(function (x) {
+                if (x.checked == true) {
+                    checked.push(x.parentNode.parentNode.children[2].childNodes[1].innerText)
+                }
+            })
+            let jc = JSON.stringify(checked);
+
+            $.ajax({
+                type: "POST",
+                url: "/Carts/Checkout",
+                traditional: true,
+                data: { "OrderUrl": jc },
+
+                success: function () {
+                    console.log("傳送成功")
+                },
+                error: function () {
+                    console.log("傳送失敗")
+                }
+            });
+
+
+        });
+    });
+
+</script>
