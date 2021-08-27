@@ -455,7 +455,7 @@
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
     <Content Include="Views\Product\Category_Product_Cards.cshtml" />
-    <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

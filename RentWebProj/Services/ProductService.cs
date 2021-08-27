@@ -46,6 +46,7 @@ namespace RentWebProj.Services
 
                       select new Category_Product_CardViewModel
                       {
+                          ProductID = p.ProductID,
                           ProductName = p.ProductName,
                           CategoryName = c.CategoryName,
                           Description = p.Description,
@@ -116,10 +117,10 @@ namespace RentWebProj.Services
             if (CurrentMemberID != null)//有登入
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
-                              where c.MemberID == CurrentMemberID && c.ProductID == PID 
-                              select c
+                             where c.MemberID == CurrentMemberID && c.ProductID == PID
+                             select c
                               ).SingleOrDefault();
-                if(cart != null)
+                if (cart != null)
                 {
                     isExisted = true;
                     StartDate = ((DateTime)cart.StartDate).ToString(VM.dateTimeFormat);
@@ -128,7 +129,12 @@ namespace RentWebProj.Services
             }
 
             //查圖片
-            List<string> ImgSources = new List<string>{ "a","b"};
+            //List<string> ImgSources = new List<string>{ "a","b"};
+
+            //根據PID查對應的商品圖片
+            var imgUrl = _repository.GetAll<ProductImage>();
+            var ImgSources = imgUrl.Where(x => x.ProductID == PID).Select(x => x.Source).ToList();
+
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID

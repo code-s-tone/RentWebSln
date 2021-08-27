@@ -66,7 +66,7 @@ namespace RentWebProj.Controllers
         }
         //---------------------------------------------------------------
 
-        public ActionResult Product(string PID)
+        public ActionResult ProductDetail(string PID)
         {
             //接收路由PID撈產品資料、取MID，傳到View
 
@@ -80,7 +80,7 @@ namespace RentWebProj.Controllers
         //通過模型驗證=>	呼叫service 寫入資料庫
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
-        public ActionResult Product(ProductDetailToCart PostVM , string ProductName, string PID) {
+        public ActionResult ProductDetail(ProductDetailToCart PostVM , string ProductName, string PID) {
             //不使用架構
             if (ModelState.IsValid)
             {
