@@ -29,9 +29,9 @@ namespace RentWebProj
 
             //產品卡片頁(各種類) 路由用種類id來判斷
             routes.MapRoute(
-                name: "Category_Product_Cards",
-                url: "Product/Category_Product_Cards/{categoryID}",
-                defaults: new { controller = "Product", action = "Category_Product_Cards" }
+                name: "ProductCardsList",
+                url: "Product/ProductCardsList/{categoryID}",
+                defaults: new { controller = "Product", action = "ProductCardsList" }
             );
             
 
