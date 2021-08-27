@@ -26,8 +26,11 @@ namespace RentWebProj.Controllers
         }
         public ActionResult Checkout()
         {
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
 
-            return View(_service.getCartsData());
+            return View(carts);
+            //return View(_service.getCartsData());
         }
         public ActionResult Index()
         {
