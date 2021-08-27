@@ -5,6 +5,7 @@
 header-top .container-xl {
     max-width: 1200px !important;
     margin: auto;
+    border-bottom: 1px solid whitesmoke;
 }
 
 
@@ -127,7 +128,7 @@ header-top .container-xl {
     .header-search.active,
     .header-search:hover {
         width: 200px;
-        height: 40px;
+        height: 45px;
         margin-right: 0px;
         margin-top: 3px;
     }
@@ -244,7 +245,7 @@ header-top .container-xl {
 
 /* 第二塊導覽列 下拉式選單*/
 .dropdown-nav {
-    height: 45px;
+    height: 40px;
     background: white;
     /* .sub-menu同色 */
     display: grid;
@@ -294,7 +295,7 @@ header-top .container-xl {
     .links .sub-menu {
         position: absolute;
         width: 160px;
-        top: 20px;
+        top: 22px;
         left: -30%;
         line-height: 40px;
         background: white;

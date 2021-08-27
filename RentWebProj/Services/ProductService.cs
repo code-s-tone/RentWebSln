@@ -11,29 +11,35 @@ namespace RentWebProj.Services
 {
     public class ProductService
     {
-        private CommonRepository _repository;
+        private readonly CommonRepository _repository;
         public ProductService()
         {
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<Category_Product_CardViewModel> GetCategoryData()
+        public IEnumerable<CardsViewModel> GetCategoryData()
         {
-            IEnumerable<Category_Product_CardViewModel> ctVMList;
+            IEnumerable<CardsViewModel> ctVMList;
 
             var ctDMList = _repository.GetAll<Category>();
 
             //Query Expression
             ctVMList = from ct in ctDMList
-                       select new Category_Product_CardViewModel
+                       select new CardsViewModel
                        { CategoryName = ct.CategoryName, CategoryID=ct.CategoryID, ImageSrcMain = ct.ImageSrcMain, ImageSrcSecond = ct.ImageSrcSecond };
 
             return ctVMList;
         }
 
-        public IEnumerable<Category_Product_CardViewModel> GetProductData(string productID)
+        public string GetCategoryName(string categoryID)
         {
-            IEnumerable<Category_Product_CardViewModel> VMList;
+            var cate = GetCategoryData().Where(x => x.CategoryID == categoryID).ToArray();
+            return cate[0].CategoryName.ToString();
+        }
+
+        public IEnumerable<CardsViewModel> GetProductData(string productID)
+        {
+            IEnumerable<CardsViewModel> VMList;
             var pDMList = _repository.GetAll<Product>();
             var ctDMList = _repository.GetAll<Category>();
             var subCtDMList = _repository.GetAll<SubCategory>();
@@ -45,7 +51,7 @@ namespace RentWebProj.Services
                       on p.ProductID.Substring(3, 2) equals s.SubCategoryID
                       where c.CategoryID == productID.Substring(0, 3)
 
-                      select new Category_Product_CardViewModel
+                      select new CardsViewModel
                       {
                           ProductID = p.ProductID,
                           ProductName = p.ProductName,
@@ -59,7 +65,7 @@ namespace RentWebProj.Services
 
             return VMList;
         }
-        public IEnumerable<Category_Product_CardViewModel> GetSubCategoryOptions(string catID)
+        public IEnumerable<CardsViewModel> GetSubCategoryOptions(string catID)
         {
             var ctDMList = GetCategoryData();
             var subCtDMList = _repository.GetAll<SubCategory>();
@@ -67,7 +73,7 @@ namespace RentWebProj.Services
                             join sub in subCtDMList
                             on ct.CategoryID equals sub.CategoryID
                             where ct.CategoryID == catID
-                            select new Category_Product_CardViewModel
+                            select new CardsViewModel
                             {
                                 SubCategoryName = sub.SubCategoryName,
                                 SubCategoryID = sub.SubCategoryID

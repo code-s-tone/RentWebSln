@@ -74,15 +74,11 @@
                                     <div class="profileImg d-grid"><img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt=""></div>
                                     <div class="profileWelcome"><span>Hello</span><p class="profile-name">庭安</p></div>
                                 </div>
-                                <a href="#">
-                                <li>通知</li></a>
-
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>我的訂單</li></a>
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>修改個人資料</li></a>
-                                <a href="#" class="signOutBtn">
-                                <li>登出</li></a>
+                                <a href="#"><li>通知</li></a>
+                                
+                                <a href="@Url.Action("MemberCenter", "Member")"><li>我的訂單</li></a>
+                                <a href="@Url.Action("MemberCenter", "Member")"><li>修改個人資料</li></a>
+                                <a href="#" class="signOutBtn"><li>登出</li></a>
                             </ul>
                         </div>
 
@@ -111,48 +107,35 @@
                             <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
 
                             <ul class="sub-menu">
-                                <a href="@Url.Action("GeneralCategories", "Product")">
-                                <li>所有種類</li></a>
-                                <a href="@Url.Action("Category_Product_Cards", "Product",new { categoryID = "Car" })">
-                                <li>想租車車</li></a>
-                                <a href="@Url.Action("Category_Product_Cards", "Product",new { categoryID = "Acc" })">
-                                <li>想租配件</li></a>
-                                <a href="@Url.Action("Category_Product_Cards", "Product",new { categoryID = "Ppl" })">
-                                <li>想租人類</li></a>
-                                <a href="@Url.Action("Category_Product_Cards", "Product",new { categoryID = "Gam" })">
-                                <li>想租遊戲</li></a>
-                                <a href="@Url.Action("ProductCards", "Product")">
-                                <li>想租狗狗</li></a>
-
+                                <a href="@Url.Action("GeneralCategories", "Product")"><li>所有種類</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Car" })"><li>想租車車</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Acc" })"><li>想租配件</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Ppl" })"><li>想租人類</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Gam" })"><li>想租遊戲</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product")"><li>想租狗狗</li></a>
+                     
                             </ul>
                         </li>
                         <li>
                             <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <a href="@Url.Action("HowToRent", "Home")">
-                                <li>如何租借</li></a>
+                                <a href="@Url.Action("HowToRent", "Home")"><li>如何租借</li></a>
                             </ul>
                         </li>
                         <li>
                             <a href="#">關於我們<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <a href="@Url.Action("About", "Home")">
-                                <li>我們的故事</li></a>
-                                <a href="@Url.Action("ContributionProgram", "Home")">
-                                <li>回饋計畫</li></a>
-                                <a href="@Url.Action("ContactUs", "Home")">
-                                <li>聯繫我們</li></a>
+                                <a href="@Url.Action("About", "Home")"><li>我們的故事</li></a>
+                                <a href="@Url.Action("ContributionProgram", "Home")"><li>回饋計畫</li></a>
+                                <a href="@Url.Action("ContactUs", "Home")"><li>聯繫我們</li></a> 
                             </ul>
                         </li>
                         <li>
                             <a href="#">葉配一下<i class="fas fa-chevron-down arrow"></i></a>
                             <ul class="sub-menu">
-                                <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                                <li>共享經濟</li></a>
-                                <a href="@Url.Action("News", "SocialMedia")">
-                                <li>上新聞了</li></a>
-                                <a href="@Url.Action("BlogPost", "SocialMedia")">
-                                <li>網紅推推</li></a>
+                                <a href="@Url.Action("SharingEconomy", "SocialMedia")"><li>共享經濟</li></a>
+                                <a href="@Url.Action("News", "SocialMedia")"><li>上新聞了</li></a>
+                                <a href="@Url.Action("BlogPost", "SocialMedia")"><li>網紅推推</li></a>
 
                             </ul>
                         </li>
@@ -270,45 +253,32 @@
                 <div class="col-6 col-md-3">
                     <ul class="footer-links">
 
-                        <a href="@Url.Action("GeneralCategories", "Product")">
-                        <li>所有種類</li></a>
-                        <a href="@Url.Action("ProductCards", "Product")">
-                        <li>想租配件</li></a>
-                        <a href="@Url.Action("ProductCards", "Product")">
-                        <li>想租車車</li></a>
-                        <a href="@Url.Action("ProductCards", "Product")">
-                        <li>想租女友</li></a>
-                        <a href="@Url.Action("ProductCards", "Product")">
-                        <li>想租狗狗</li></a>
-                        <a href="@Url.Action("ProductCards", "Product")">
-                        <li>想租電動</li></a>
-
+                        <a href="@Url.Action("GeneralCategories", "Product")"><li>所有種類</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租配件</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租車車</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租女友</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租狗狗</li></a>
+                        <a href="@Url.Action("ProductCards", "Product")"><li>想租電動</li></a>
+                      
                     </ul>
                 </div>
 
                 <div class="col-6 col-md-3">
 
                     <ul class="footer-links">
-                        <a href="@Url.Action("HowToRent", "Home")">
-                        <li>如何租借</li></a>
-                        <a href="@Url.Action("About", "Home")">
-                        <li>我們的故事</li></a>
-                        <a href="@Url.Action("ContributionProgram", "Home")">
-                        <li>回饋計畫</li></a>
-                        <a href="@Url.Action("ContactUs", "Home")">
-                        <li>聯繫我們</li></a>
+                        <a href="@Url.Action("HowToRent", "Home")"><li>如何租借</li></a>
+                        <a href="@Url.Action("About", "Home")"><li>我們的故事</li></a>
+                        <a href="@Url.Action("ContributionProgram", "Home")"><li>回饋計畫</li></a>
+                        <a href="@Url.Action("ContactUs", "Home")"><li>聯繫我們</li></a>
                     </ul>
                 </div>
 
                 <div class="col-6 col-md-3">
 
                     <ul class="footer-links">
-                        <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                        <li>共享經濟</li></a>
-                        <a href="@Url.Action("News", "SocialMedia")">
-                        <li>上新聞了</li></a>
-                        <a href="@Url.Action("BlogPost", "SocialMedia")">
-                        <li>網紅推推</li></a>
+                        <a href="@Url.Action("SharingEconomy", "SocialMedia")"><li>共享經濟</li></a>
+                        <a href="@Url.Action("News", "SocialMedia")"><li>上新聞了</li></a>
+                        <a href="@Url.Action("BlogPost", "SocialMedia")"><li>網紅推推</li></a>
                     </ul>
                 </div>
 

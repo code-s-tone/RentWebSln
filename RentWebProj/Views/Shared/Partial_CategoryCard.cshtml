@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CardsViewModel>
+
+@foreach (var ct in Model)
+{
+<div class="col-12 col-md-6">
+    <div class="category-card">
+        <div class="frontSide">
+            <div class="category-img">
+                <img src=@ct.ImageSrcMain
+                     alt="">
+            </div>
+            <div class="categoryName d-grid card-3d">
+                <p class="m-auto">@ct.CategoryName</p>
+            </div>
+        </div>
+        <div class="backSide">
+            <div class="category-img">
+                <img src=@ct.ImageSrcSecond alt="">
+            </div>
+            <div class="d-grid card-3d">
+                @Html.ActionLink("查看商品", "ProductCardsList", "Product", new { categoryID = @ct.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
+
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+
+

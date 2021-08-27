@@ -100,10 +100,13 @@
 
 .backSide .checkitOut_ct {
     font-size: 18px;
-    padding: 10px 20px;
+    width: 75px;
+    padding: 10px 15px;
     border: 1px solid #fc8d61;
     background-color: white;
     color: #fc8d61;
+    box-sizing: border-box;
+    text-align: center;
 }
 
     .backSide .checkitOut_ct:hover {
