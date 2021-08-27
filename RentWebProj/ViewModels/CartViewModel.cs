@@ -26,7 +26,7 @@ namespace RentWebProj.ViewModels
 
         //public int? CurrentMemberID { get; set; }
         //禁用日期
-        public List<DisablePeriod> DisablePeriods { get; set; }
+        public string DisablePeriodsJSON { get; set; }
 
         //來自Cart
         public bool IsExisted { get; set; }

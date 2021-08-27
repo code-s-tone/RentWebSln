@@ -22,8 +22,18 @@ const datePicker = flatpickr("#datePicker", {
     // altInput: true,
     // altFormat: "F j, Y",
 
+    //disable: [
+    //    {
+    //        from: "2021 / 10 / 04",
+    //        to: "2021 / 10 / 06"
+    //    },
+    //    {
+    //        from: "2021 / 10 / 08",
+    //        to: "2021 / 10 / 09"
+    //    }
+    //],
+
     minDate: new Date(),
-    disable: ["2021-09-11", new Date(2021, 8, 19)],//需要一個json陣列
 
     inline: true,
 
@@ -96,7 +106,7 @@ completeBtn.addEventListener('click', function () {
 
 
 //如果已在車內，改變按鈕文字
-if (document.getElementById('isExisted').value) {
+if (document.getElementById('IsExisted').value) {
     actionBtns[0].innerText = '更新購物車';
 }
 

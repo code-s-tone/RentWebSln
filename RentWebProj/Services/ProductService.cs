@@ -5,6 +5,7 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
+using Newtonsoft.Json;
 
 namespace RentWebProj.Services
 {
@@ -131,6 +132,16 @@ namespace RentWebProj.Services
             //查圖片群
             List<string> ImgSources = new List<string>{ "a","b"};
 
+            //禁用日期
+            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
+                .Where(x => x.to >= new DateTime())
+                .Select(x => new DisablePeriod
+                {
+                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
+                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
+                }).ToList();
+            var disablePeriodJSON = JsonConvert.SerializeObject(disablePeriodList);
+
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
                   select new ProductDetailToCart
@@ -140,6 +151,7 @@ namespace RentWebProj.Services
                       Description = p.Description,
                       DailyRate = (decimal)p.DailyRate,
                       ImgSources = ImgSources,
+                      DisablePeriodsJSON = disablePeriodJSON,
                       //購物車
                       //CurrentMemberID = CurrentMemberID,
                       IsExisted = isExisted,
@@ -149,16 +161,6 @@ namespace RentWebProj.Services
                       OperationType = null
                   }).SingleOrDefault();
 
-            //禁用日期
-            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
-                .Where(x => x.to >= new DateTime())
-                .Select(x => new DisablePeriod
-                {
-                    @from = (x.from).ToString().Substring(0, 10),
-                    to = (x.to).ToString().Substring(0, 10)
-                }).ToList();
-
-            VM.DisablePeriods = disablePeriodList;
             return VM;
         }
 

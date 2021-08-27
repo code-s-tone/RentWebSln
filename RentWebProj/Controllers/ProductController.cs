@@ -71,6 +71,7 @@ namespace RentWebProj.Controllers
             //接收路由PID撈產品資料、取當前登入者，傳到View
             //User.Identity.Name
             ProductDetailToCart VM = _service.getProductDetail(PID,1);
+
             return View(VM);
         }
 

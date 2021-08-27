@@ -390,8 +390,9 @@
         }
     </script>
 
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js">
-
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+    <script>
+        datePicker.config.disable = @Html.Raw(Model.DisablePeriodsJSON) ;
     </script>
 }
 
