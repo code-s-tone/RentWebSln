@@ -28,8 +28,11 @@ namespace RentWebProj.Controllers
         }
         public ActionResult Index()
         {
-            var carts = db.Carts.Include(c => c.Member).Include(c => c.Product);
-            return View(carts.ToList());
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
+
+            return View(carts);
+
         }
 
         // GET: Carts/Details/5
