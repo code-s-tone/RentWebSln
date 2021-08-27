@@ -119,7 +119,7 @@ namespace RentWebProj.Services
             if (currentMemberID != null)//有登入
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
-                             where c.MemberID == CurrentMemberID && c.ProductID == PID
+                             where c.MemberID == currentMemberID && c.ProductID == PID
                              select c
                               ).SingleOrDefault();
                 if (cart != null)
