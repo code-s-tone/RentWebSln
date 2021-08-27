@@ -275,7 +275,7 @@
                         @Html.HiddenFor(M => M.ExpirationDate)
 
                         <button id="ToCart" class="orange" type="submit">
-                            @(Model.IsExisted? "更新購物車" : "放入購物車")
+                            @(Model.IsExisted?"更新":"放入")購物車
                         </button>
                         <button id="ToCheck" class="orange">直接結帳</button>
                         }
