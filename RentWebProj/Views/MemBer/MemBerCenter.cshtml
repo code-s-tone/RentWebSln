@@ -8,6 +8,9 @@
     <div class="member-center-container">
         <div class="member-display-block">
             <!-- BS新版 -->
+
+            
+
             <h2 class="member-display-title">訂單查詢</h2>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -28,8 +31,10 @@
                 <!-- 個人資料 -->
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     @Html.Partial("_memberCenterPersonPartial")
-                    
+
                 </div>
+
+                @ViewBag.Change
                 <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="profile-tab">
                     <!-- 帳號信箱 -->
                     @Html.Partial("_memberCenterAccountPartial")
@@ -80,7 +85,7 @@
                         }
 
 
-                         @*變更密碼*@ 
+                        @*變更密碼*@
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header member-display-new-email-context">目前密碼</div>
                             <div class="member-display-service-password">Model.MemberPasswordHash</div>
@@ -108,7 +113,7 @@
 
                             </div>
                         </div>
-                         button 
+                        button
                         <div class="member-display-shop-container member-display-item">
                             <div class="member-display-button-group">
                                 <button class="member-display-button-item member-display-password-button">送出修改</button>

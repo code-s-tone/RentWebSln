@@ -37,13 +37,15 @@ namespace RentWebProj.Controllers
         {
 
             //model是否合法驗證
-            if (ModelState.IsValid) 
+            if (!ModelState.IsValid) 
             {
                 ModelState.AddModelError("ComfirMemberEmail", "無效的帳號或密碼!");
                 //return View(x.MemberEmail);
                 return View(_service.GetMemberData().FirstOrDefault());
             }
-            return View();//可以強型別
+            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, x.ComfirMemberEmail);
+
+            return View(_service.GetMemberData().FirstOrDefault());//可以強型別
 
             //單讀取一個表方法
             //ViewData.Model = _service.getMemberData();

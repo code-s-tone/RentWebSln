@@ -117,6 +117,15 @@ namespace RentWebProj.Services
 
         }
 
+        public string ChangeProfile(string UserEmail , string ChangeEmail)
+        {
+            var result = _repository.GetAll<Member>().ToList();
+            result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
+            _repository.SaveChanges();
+
+            return "修改成功";
+        }
+
 
     }
 }
