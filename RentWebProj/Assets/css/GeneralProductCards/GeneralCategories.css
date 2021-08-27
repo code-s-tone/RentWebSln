@@ -1,7 +1,7 @@
 ﻿/* 以下為商品卡片 by庭安 */
 .CategoriesCardsPage {
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .CategoriesCardsContainer h2 {
     padding-left: 17px;
@@ -80,7 +80,7 @@
 }
 
 .frontSide .categoryName p {
-    font-size: 25px;
+    font-size: 23px;
     position: relative;
     color: black;
 }
@@ -124,9 +124,12 @@
         cursor: pointer;
     }
 
+.multiline {
+    /*為了讓查看商品換行*/
+    white-space: pre-wrap;
+}
 
 @media (max-width: 991px) {
-
     .CategoriesCardsPage {
         margin: 0 20px;
     }
@@ -140,10 +143,10 @@
 @media screen and (max-width: 767px) {
     .backSide .checkitOut_ct {
         font-size: 16px;
-        padding: 10px 18px;
+        padding: 7px 14px;
     }
 
     .frontSide .categoryName p {
-        font-size: 22px;
+        font-size: 20px;
     }
 }

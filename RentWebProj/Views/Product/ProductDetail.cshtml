@@ -1,10 +1,15 @@
-﻿@model ProductDetailView
+﻿@model ProductDetailToCart
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "ProductDetail";
+    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model  
+
+    var service = new ProductService();
+
+    //razor會先把 C#語法都編譯完。  先轉成json  並且讓js變數接手 chart範例 接陣列
 }
 
 <div class="container-xl main">
-    <h2>@Model.ProductName</h2>
+    <h2>商品名稱: @Model.ProductName</h2>
     <div class="Top_Title mb-3">
         <div class="Zip">
             <div class="ZipContent">
@@ -30,12 +35,12 @@
     </div>
     <div class="row d-flex justify-content-between">
         <div class="col-sm-7 col-12 Product">
-            <img src="https://cdn.ruckify.com/public_regen/51705cc0-f9dd-11ea-b5d2-c3496c2964a7/7bbae040-fe71-11ea-b0ea-511d396a4595/7bc2a500-fe71-11ea-a63e-1d976c5697ec_800x800.jpg"
+            <img src="@Model.ImgSources[0]"
                  data-fancybox="gallery"
                  data-caption="Optional caption">
         </div>
         <div class="col-sm-5 col-12 Product">
-            <img src="https://lipsum.app/id/1/1024x768"
+          <img src="@Model.ImgSources[1]"
                  data-fancybox="gallery"
                  data-caption="Optional caption">
             <span class="SeeMore">See ALL 2</span>
@@ -55,8 +60,7 @@
                 <div class="">
                     <div class="">
                         <h2 class="heading_size">
-                            sold on a monday: a novel
-                            <span> - perfect</span>
+                            商品名稱: @Model.ProductName
                         </h2>
                     </div>
                 </div>
@@ -65,21 +69,21 @@
                     <div class="description_text">
                         <div id="">
                             <p id="p1">
-                                @Model.Description
+                                商品描述 : @Model.Description
                                 <span id="span1">
-                                    ...
+                                    @*...*@
                                     <span class="link1" id="link1">
                                         <a data-bs-toggle="collapse" href="#collapse_text1"
                                            aria-controls="collapse_text1">
-                                            Read more
+                                            @*Read more*@
                                         </a>
                                     </span>
                                 </span>
 
                                 <span class="collapse" id="collapse_text1" aria-expanded="false">
-                                    your rental request. Submit a request and a member from our Customer Success Team
+                                    @*your rental request. Submit a request and a member from our Customer Success Team
                                     will be in
-                                    touch with you.
+                                    touch with you.*@
                                 </span>
 
                             </p>
@@ -254,15 +258,27 @@
         <div class="right">
             <div class="RentInfo">
                 <div class="RentSetting">
-                    <div class="price"><span>@Model.DailyRate</span>元/日</div>
+                    <div class="price"><span>@Decimal.ToInt32(Model.DailyRate) </span>元/日</div>
                     <!-- Button trigger modal -->
                     <button id="setDate" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                         設定租借期間
                     </button>
                     <!-- 顯示設好的時間 -->
-                    <div class="decision-group">
-                        <button class="orange">放入購物車</button>
-                        <button class="orange">直接結帳</button>
+                    @* 同時有兩個按鈕? *@
+                    @*  *@
+                <div class="decision-group">
+                    @using (Html.BeginForm("ProductDetail", "Product"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(M => M.IsExisted)
+                        @Html.HiddenFor(M => M.StartDate)
+                        @Html.HiddenFor(M => M.ExpirationDate)
+
+                        <button id="ToCart" class="orange" type="submit">
+                            @(Model.IsExisted?"更新":"放入")購物車
+                        </button>
+                        <button id="ToCheck" class="orange">直接結帳</button>
+                        }
                     </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
@@ -270,7 +286,7 @@
 
             <!-- DateModal -->
             <div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
@@ -307,15 +323,75 @@
                 </div>
             </div>
 
-        </div>
+            <div class="modal " id="OperationHintModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title w-100"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
     </div>
 </div>
 
 
+
+
+
+@section endJS{
+    <!-- leaf js -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
+    <!-- dateTimePicker -->
+    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
+
+    <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
+    <script src="~/Assets/js/ProductDetail/leaf.js"></script>
+    <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
+    <script>
+        //未登入的禁用
+        @*if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
+            let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+            DateModalLauncher.disabled = true;
+            DateModalLauncher.innerText = '= 登入後才可租賃商品 =';
+        }*@
+
+        //入車提示訊息
+        if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
+            let OpText = "";
+            if ( @Json.Encode(Model.OperationType == "Create")  )
+                OpText = "加入";
+            else if (@Json.Encode(Model.OperationType == "Update")  )
+                OpText = "更新";
+
+            OpText += "購物車";
+            if (@Json.Encode(Model.OperationSuccessful)) {
+                OpText += "成功";
+            }
+            else {
+                OpText += "失敗";
+            }
+            let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
+            document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
+            OpModal.toggle();
+        }
+    </script>
+
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+    <script>
+        datePicker.config.disable = @Html.Raw(Model.DisablePeriodsJSON) ;
+    </script>
+}
+
+
 @section topCSS{
-    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <!-- swiper還有用到?? -->
+    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <!-- leaf css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -333,33 +409,11 @@
 
 
 @section topJS{
-    <script src="~/Scripts/fontawesome.js" crossorigin="anonymous"></script>
-    <script src="~/Scripts/swiper-bundle.min.js"></script>
     @* swiper還有用到?? *@
-
+    <script src="~/Scripts/swiper-bundle.min.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 
 }
-
-
-@section endJS{
-    @*<script src="./index.js"></script>   這還有作用嗎*@
-
-    <!-- leaf js -->
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCem632bQH4n1otBAe6oCI64ww7j5yn27c&callback=initMap&libraries=&v=weekly" async></script>
-    <!-- dateTimePicker -->
-    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
-
-    <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
-    <script src="~/Assets/js/ProductDetail/leaf.js"></script>
-    <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
-
-}
-
-

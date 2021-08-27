@@ -41,7 +41,7 @@ namespace RentWebProj.Services
 
             var pDMList = _repository.GetAll<Product>();
             var cDMList = _repository.GetAll<Category>();
-
+            //var temp =
             //篩選、轉型
             //Method Expression  有join時，這方法很吃邏輯
             VMList = pDMList

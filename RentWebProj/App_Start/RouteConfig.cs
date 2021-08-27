@@ -13,19 +13,20 @@ namespace RentWebProj
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //這是??
-            routes.MapRoute(
-                name: "Product",
-                url: "product",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            //產品細節頁 路由，用id來判斷
+            //產品細節頁，用PID來判斷
             routes.MapRoute(
                 name: "ProductDetail",
-                url: "Product/Product/{PID}",
-                defaults: new { controller = "Product", action = "Product", PID = "PplPg002" }
+                url: "Product/ProductDetail/{PID}",
+                defaults: new { controller = "Product", action = "ProductDetail", PID = "PplPg002" }
             );
+
+            //產品卡片頁(各種類) 路由用種類id來判斷
+            routes.MapRoute(
+                name: "Category_Product_Cards",
+                url: "Product/Category_Product_Cards/{categoryID}",
+                defaults: new { controller = "Product", action = "Category_Product_Cards" }
+            );
+            
 
             routes.MapRoute(
                 name: "Default",

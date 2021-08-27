@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RentWebProj.Models;
 using RentWebProj.ViewModels;
+using RentWebProj.Models;
 using RentWebProj.Repositories;
+using Newtonsoft.Json;
 
 namespace RentWebProj.Services
 {
@@ -16,138 +17,155 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<ProductCategoryView> getCategoryData()
+        public IEnumerable<Category_Product_CardViewModel> GetCategoryData()
         {
-            IEnumerable<ProductCategoryView> VMList;
+            IEnumerable<Category_Product_CardViewModel> ctVMList;
 
-            var DMList = _repository.GetAll<Category>();
-
-            //篩選、轉型
-            //Method Expression  有join時，這方法很吃邏輯
-            VMList = DMList.Select(x => new ProductCategoryView
-            { CategoryName = x.CategoryName, ImageSrc = "" });
+            var ctDMList = _repository.GetAll<Category>();
 
             //Query Expression
-            VMList = from c in DMList
-                     select new ProductCategoryView
-                     { CategoryName = c.CategoryName,  ImageSrc="" };
+            ctVMList = from ct in ctDMList
+                       select new Category_Product_CardViewModel
+                       { CategoryName = ct.CategoryName, CategoryID=ct.CategoryID, ImageSrcMain = ct.ImageSrcMain, ImageSrcSecond = ct.ImageSrcSecond };
 
-            return VMList;
+            return ctVMList;
         }
 
-        public IEnumerable<ProductCardView> getProductData(string catID)
+        public IEnumerable<Category_Product_CardViewModel> GetProductData(string productID)
         {
-            IEnumerable<ProductCardView> VMList;
-
+            IEnumerable<Category_Product_CardViewModel> VMList;
             var pDMList = _repository.GetAll<Product>();
-            var cDMList = _repository.GetAll<Category>();
-
-            //篩選、轉型
-            //Method Expression  有join時，這方法很吃邏輯
-            VMList = pDMList
-                .Take(6)
-                .Where(x => x.ProductID.Substring(0, 3) == catID)
-                .Select(x => new ProductCardView
-                {
-                    ProductName = x.ProductName,
-                    CategoryName =
-                    cDMList.FirstOrDefault(c => c.CategoryID == catID).CategoryName
-                });
-
+            var ctDMList = _repository.GetAll<Category>();
+            var subCtDMList = _repository.GetAll<SubCategory>();
 
             VMList = (from p in pDMList
-                      join c in cDMList
-                      on p.ProductID.Substring(0,3) equals c.CategoryID
-                      where c.CategoryID == catID
-                      select new ProductCardView
-                      { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            ).Take(6);
+                      join c in ctDMList
+                      on p.ProductID.Substring(0, 3) equals c.CategoryID
+                      join s in subCtDMList
+                      on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+                      where c.CategoryID == productID.Substring(0, 3)
+
+                      select new Category_Product_CardViewModel
+                      {
+                          ProductID = p.ProductID,
+                          ProductName = p.ProductName,
+                          CategoryName = c.CategoryName,
+                          Description = p.Description,
+                          DailyRate = (decimal)p.DailyRate,
+                          SubCategoryName = s.SubCategoryName,
+                          SubCategoryID=s.SubCategoryID
+                      });
 
 
             return VMList;
         }
-
-
-        public OperationResult Create(IndexProductView input)
+        public IEnumerable<Category_Product_CardViewModel> GetSubCategoryOptions(string catID)
         {
-            var result = new OperationResult();
-            try//寫入result
-            {
+            var ctDMList = GetCategoryData();
+            var subCtDMList = _repository.GetAll<SubCategory>();
+            var subDMList = from ct in ctDMList
+                            join sub in subCtDMList
+                            on ct.CategoryID equals sub.CategoryID
+                            where ct.CategoryID == catID
+                            select new Category_Product_CardViewModel
+                            {
+                                SubCategoryName = sub.SubCategoryName,
+                                SubCategoryID = sub.SubCategoryID
+                            };
 
-                //if(fakeProducts.Any(x=>x.PartNo == input.PartNo))
-                //{
-                //    throw new ArgumentException($"partNo : {input.PartNo }已存在");
-                //}
-                //else
-                //{
-                //    fakeProducts.Add(input);
-                //    result.IsSuccessful = true;
-                //}
-
-
-                //資料庫若有防呆，不用檢查重複
-                var repository = new CommonRepository(new RentContext());
-                var entity = new Product { };
-                repository.Create(entity);
-                repository.SaveChanges();
-                //寫入資料庫 不需要回傳
-                result.IsSuccessful = true;
-
-            }
-            catch (Exception ex)
-            {
-                result.IsSuccessful = false;
-                result.Exception = ex;
-            }
-
-            return result;
-        }
-        public IEnumerable<ProductCartsView> getCartsData()
-        {
-            IEnumerable<ProductCartsView> CMList;
-
-            //var CList = _repository.GetAll<Category>();
-            var PList = _repository.GetAll<Product>();
-            var OList = _repository.GetAll<OrderDetail>();
-
-            //篩選、轉型
-            //Method Expression  有join時，這方法很吃邏輯
-
-
-            //Query Expression
-            //VMList = (from p in pDMList
-            //          join c in cDMList
-            //          on p.CategoryID equals c.CategoryID
-            //          where p.CategoryID == catID
-            //          select new IndexProductView
-            //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            //).Take(6);
-
-            CMList = (from p in PList
-                      join o in OList
-                      on p.ProductID equals o.ProductID
-                      select new ProductCartsView
-                      { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
-            );
-
-
-            return CMList;
+            return subDMList;
         }
 
-        public ProductDetailView getProductDetail(string PID)
+
+        //public IEnumerable<ProductCartsView> getCartsData()
+        //{
+        //    IEnumerable<ProductCartsView> CMList  ;
+
+            //    //var CList = _repository.GetAll<Category>();
+            //    var PList = _repository.GetAll<Product>();
+            //    var OList = _repository.GetAll<OrderDetail>();
+
+            //    //篩選、轉型
+            //    //Method Expression  有join時，這方法很吃邏輯
+
+
+            //    //Query Expression
+            //    //VMList = (from p in pDMList
+            //    //          join c in cDMList
+            //    //          on p.CategoryID equals c.CategoryID
+            //    //          where p.CategoryID == catID
+            //    //          select new IndexProductView
+            //    //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
+            //    //).Take(6);
+
+            //    CMList = (from p in PList
+            //              join o in OList
+            //              on p.ProductID equals o.ProductID
+            //              select new ProductCartsView
+            //              { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
+            //    );
+
+        //    return CMList;
+        //}
+
+        public ProductDetailToCart getProductDetail(string PID, int? currentMemberID)
         {
-            ProductDetailView VM;
+            ProductDetailToCart VM = new ProductDetailToCart();
 
-            var DMList = _repository.GetAll<Product>();
+            bool isExisted = false;
+            string startDate = null;
+            string expirationDate = null;
 
-            VM = (from p in DMList
+            if (currentMemberID != null)//有登入
+            {
+                Cart cart = (from c in (_repository.GetAll<Cart>())
+                             where c.MemberID == currentMemberID && c.ProductID == PID
+                             select c
+                              ).SingleOrDefault();
+                if (cart != null)
+                {
+                    isExisted = true;
+                    startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
+                    expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                }
+            }
+
+            //根據PID查對應的商品圖片
+            var ImgSources = _repository.GetAll<ProductImage>()
+                                    .Where(x => x.ProductID == PID)
+                                    .Select(x => x.Source)
+                                    .ToList();
+
+
+            //禁用日期
+            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
+                .Where(x => x.to >= new DateTime())
+                .Select(x => new DisablePeriod
+                {
+                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
+                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
+                }).ToList();
+            var disablePeriodJSON = JsonConvert.SerializeObject(disablePeriodList);
+
+            VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
-                  select new ProductDetailView
+                  select new ProductDetailToCart
                   {
+                      //ProductID = PID,
                       ProductName = p.ProductName,
                       Description = p.Description,
-                      DailyRate = p.DailyRate
-                  }).FirstOrDefault();
+                      DailyRate = (decimal)p.DailyRate,
+                      ImgSources = ImgSources,
+                      DisablePeriodsJSON = disablePeriodJSON,
+                      //購物車
+                      //CurrentMemberID = CurrentMemberID,
+                      IsExisted = isExisted,
+                      StartDate = startDate,
+                      ExpirationDate = expirationDate,
+                      //操作
+                      OperationType = null
+                  }).SingleOrDefault();
+
             return VM;
         }
 

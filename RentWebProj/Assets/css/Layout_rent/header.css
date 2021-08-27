@@ -50,16 +50,18 @@ header-top .container-xl {
 .nav-btn a {
     font-size: 18px;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 5%;
-    margin: 0 8px;
+}
+.nav-btn a:first-child{
+    margin-right:10px;
 }
 
-.nav-btn .loginBtn {
-    color: #fc8d61;
-    background-color: white;
-    border: 1px solid #fc8d61;
-}
+    .nav-btn .loginBtn {
+        color: #fc8d61;
+        background-color: white;
+        border: 1px solid #fc8d61;
+    }
 
 .nav-btn .signUpBtn {
     color: white;
