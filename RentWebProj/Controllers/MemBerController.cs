@@ -22,9 +22,6 @@ namespace RentWebProj.Controllers
         // GET: Member
         public ActionResult MemberCenter()
         {
-            
-
-
             return View(_service.GetMemberData().FirstOrDefault());//可以強型別
 
             //單讀取一個表方法
