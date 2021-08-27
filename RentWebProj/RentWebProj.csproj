@@ -226,6 +226,7 @@
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
+    <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterView.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
   </ItemGroup>
