@@ -1,25 +1,28 @@
-﻿
+﻿@model MemberPersonDataViewModel
 
+<div class="member-display-person-detail member-display-account-detail member-display-group">
+    <div class="member-display-name-container member-display-item">
+        <div class="member-display-header member-display-new-email-context">目前信箱</div>
+        <div class="member-display-service-email">@Model.MemberEmail</div>
+    </div>
 
-
-    <div class="member-display-person-detail member-display-account-detail member-display-group">
-        <div class="member-display-name-container member-display-item">
-            <div class="member-display-header member-display-new-email-context">目前信箱</div>
-            <div class="member-display-service-email">@Model.MemberEmail</div>
-        </div>
+    @using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
+    {
         <div class="member-display-name-container member-display-item">
             <div class="member-display-new-email-context">
                 <div class="member-display-header">請輸入新電子信箱</div>
                 <div class="member-display-point">*</div>
             </div>
-
             <div class="member-display-name-input-box-last">
                 <div class="member-display-email-container">
-                    <input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新電子信箱" data-max="50">
+                    @Html.EditorFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "member-display-new-email", @placeholder = "新電子信箱" } })
+                    @*<input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新電子信箱" data-max="50">*@
                 </div>
-
             </div>
+            @Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })
+
         </div>
+
         <div class="member-display-name-container member-display-item">
             <div class="member-display-new-email-context">
                 <div class="member-display-header">再確認新電子信箱</div>
@@ -27,51 +30,60 @@
             </div>
             <div class="member-display-name-input-box-last ">
                 <div class="member-display-email-container">
-                    <input type="email" class="member-display-doublecheck-email" name="new-email" value="" placeholder="再輸入一次新電子信箱" data-max="50">
+                    @Html.EditorFor(m => m.ComfirMemberEmail, new { htmlAttributes = new { @class = "member-display-doublecheck-email", @placeholder = "再輸入一次新電子信箱" } })
+                    @*<input type="email" class="member-display-doublecheck-email" name="new-email" value="" placeholder="再輸入一次新電子信箱" data-max="50">*@
                 </div>
 
             </div>
+            @Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })
         </div>
 
-        <!-- button -->
+        <!-- Email-button -->
         <div class="member-display-shop-container member-display-item">
             <div class="member-display-button-group">
                 <button class="member-display-button-item member-display-email-button">送出修改</button>
             </div>
         </div>
+    }
 
-        <!-- 變更密碼 -->
-        <div class="member-display-name-container member-display-item">
-            <div class="member-display-header member-display-new-email-context">目前密碼</div>
-            <div class="member-display-service-password">@Model.MemberPasswordHash</div>
-        </div>
-        <div class="member-display-name-container member-display-item">
-            <div class="member-display-new-email-context">
-                <div class="member-display-header">請輸入新密碼</div>
-                <div class="member-display-point">*</div>
-            </div>
-            <div class="member-display-name-input-box-last">
-                <div class="member-display-email-container">
-                    <input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新密碼" data-max="50">
-                </div>
-            </div>
-        </div>
-        <div class="member-display-name-container member-display-item">
-            <div class="member-display-new-email-context">
-                <div class="member-display-header">再輸入新密碼</div>
-                <div class="member-display-point">*</div>
-            </div>
-            <div class="member-display-name-input-box-last">
-                <div class="member-display-email-container">
-                    <input type="email" class="member-display-doublecheck-email" name="new-email" value="" placeholder="再輸入確認新密碼" data-max="50">
-                </div>
 
-            </div>
+    <!-- 變更密碼 -->
+    <div class="member-display-name-container member-display-item">
+        <div class="member-display-header member-display-new-email-context">目前密碼</div>
+        <div class="member-display-service-password">@Model.MemberPasswordHash</div>
+    </div>
+    <div class="member-display-name-container member-display-item">
+        <div class="member-display-new-email-context">
+            <div class="member-display-header">請輸入新密碼</div>
+            <div class="member-display-point">*</div>
         </div>
-        <!-- button -->
-        <div class="member-display-shop-container member-display-item">
-            <div class="member-display-button-group">
-                <button class="member-display-button-item member-display-password-button">送出修改</button>
+        <div class="member-display-name-input-box-last">
+            <div class="member-display-email-container">
+                <input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新密碼" data-max="50">
             </div>
         </div>
     </div>
+    <div class="member-display-name-container member-display-item">
+        <div class="member-display-new-email-context">
+            <div class="member-display-header">再輸入新密碼</div>
+            <div class="member-display-point">*</div>
+        </div>
+        <div class="member-display-name-input-box-last">
+            <div class="member-display-email-container">
+                <input type="email" class="member-display-doublecheck-email" name="new-email" value="" placeholder="再輸入確認新密碼" data-max="50">
+            </div>
+
+        </div>
+    </div>
+    <!-- button -->
+    <div class="member-display-shop-container member-display-item">
+        <div class="member-display-button-group">
+            <button class="member-display-button-item member-display-password-button">送出修改</button>
+        </div>
+    </div>
+</div>
+
+@* 前端驗證 *@
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

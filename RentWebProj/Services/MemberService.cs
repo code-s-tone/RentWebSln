@@ -74,6 +74,14 @@ namespace RentWebProj.Services
             return MemberCenterVM;
         }
 
+        public string ChangeData(string newEmail)
+        {   
+
+            var result = _repository.GetAll<Member>();
+            result.ToList().Find(x => x.Email ==  )
+        }
+
+
 
         //待開發區
         ////單讀取一個表
