@@ -266,23 +266,18 @@
                     <!-- 顯示設好的時間 -->
                     @* 同時有兩個按鈕? *@
                     @*  *@
-                    <div class="decision-group">
-                        @using (Html.BeginForm("ProductDetail", "Product"))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(M => M.IsExisted)
-                            @Html.HiddenFor(M => M.StartDate)
-                            @Html.HiddenFor(M => M.ExpirationDate)
+                <div class="decision-group">
+                    @using (Html.BeginForm("ProductDetail", "Product"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(M => M.IsExisted)
+                        @Html.HiddenFor(M => M.StartDate)
+                        @Html.HiddenFor(M => M.ExpirationDate)
 
-                            if (Model.IsExisted)
-                            {
-                                <button id="ToCart" class="orange" type="submit">更新購物車</button>
-                            }
-                            else
-                            {
-                                <button id="ToCart" class="orange" type="submit">放入購物車</button>
-                            }
-                            <button id="ToCheck" class="orange">直接結帳</button>
+                        <button id="ToCart" class="orange" type="submit">
+                            @(Model.IsExisted? "更新購物車" : "放入購物車")
+                        </button>
+                        <button id="ToCheck" class="orange">直接結帳</button>
                         }
                     </div>
                 </div>
