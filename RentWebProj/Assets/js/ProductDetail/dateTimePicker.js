@@ -90,12 +90,16 @@ let endDateTimeText;
 let formatDivider = ' ';
 let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
+//設定日期完成
 completeBtn.addEventListener('click', function () {
-    showPeriodText(DateModalLauncher, combinDateTime(0), combinDateTime(1));
-            //flatpickr.parseDate(startDateTimeText, dateTimeFormat);
-    //設定完成，改變表單值，開放購物動作
-    document.querySelector('#StartDate').value = startDateTimeText
-    document.querySelector('#ExpirationDate').value = endDateTimeText;
+    startDateTimeText = combinDateTime(0);
+    endDateTimeText = combinDateTime(1);
+    //顯示文字
+    showPeriodText(DateModalLauncher, startDateTimeText, endDateTimeText);
+    //改變表單值
+    StartDateToPost.value = startDateTimeText;
+    ExpirationDateToPost.value = endDateTimeText;
+    //開放購物動作
     actionBtns.forEach(x => x.disabled = false);
 });
 
