@@ -5,7 +5,6 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
-using Newtonsoft.Json;
 
 namespace RentWebProj.Services
 {
@@ -116,7 +115,8 @@ namespace RentWebProj.Services
             string startDate = null;
             string expirationDate = null;
 
-            if (currentMemberID != null)//有登入
+            //有登入 //User.Identity.
+            if (currentMemberID != null)
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
                              where c.MemberID == currentMemberID && c.ProductID == PID
@@ -138,14 +138,7 @@ namespace RentWebProj.Services
 
 
             //禁用日期
-            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
-                .Where(x => x.to >= new DateTime())
-                .Select(x => new DisablePeriod
-                {
-                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
-                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
-                }).ToList();
-            var disablePeriodJSON = JsonConvert.SerializeObject(disablePeriodList);
+            string disablePeriodJSON = new OrderService().getDisablePeriodJSON(PID);
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
@@ -158,7 +151,6 @@ namespace RentWebProj.Services
                       ImgSources = ImgSources,
                       DisablePeriodsJSON = disablePeriodJSON,
                       //購物車
-                      //CurrentMemberID = CurrentMemberID,
                       IsExisted = isExisted,
                       StartDate = startDate,
                       ExpirationDate = expirationDate,
