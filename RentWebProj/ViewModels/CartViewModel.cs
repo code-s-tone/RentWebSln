@@ -58,6 +58,8 @@ namespace RentWebProj.ViewModels
 
         public string ProductName { get; set; }
 
+        //祥聖: 是不是要加產品圖片? >_<
+
         public DateTime StartDate { get; set; }//軒：是否改 可null?
 
         public DateTime ExpirationDate { get; set; }
@@ -71,5 +73,12 @@ namespace RentWebProj.ViewModels
         public int DateDiff { get; set; }
 
         public decimal Sub { get; set; }
+
+        
+
+
+        //建立訂單用
+        public int StoreID { get; set; }
+
     }
 }

@@ -93,6 +93,7 @@ namespace RentWebProj.Controllers
             VM.OperationSuccessful = result.IsSuccessful;
 
 
+
             return View(VM);//由於共用View，型別必須跟Get方法的一致
         }
     }
