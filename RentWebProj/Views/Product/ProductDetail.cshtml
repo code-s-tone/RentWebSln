@@ -1,7 +1,7 @@
 ﻿@model ProductDetailToCart
 @{
     ViewBag.Title = "ProductDetail";
-    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model  
+    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model
 
     var service = new ProductService();
 
@@ -40,7 +40,7 @@
                  data-caption="Optional caption">
         </div>
         <div class="col-sm-5 col-12 Product">
-          <img src="@Model.ImgSources[1]"
+            <img src="@Model.ImgSources[1]"
                  data-fancybox="gallery"
                  data-caption="Optional caption">
             <span class="SeeMore">See ALL 2</span>
@@ -82,8 +82,8 @@
 
                                 <span class="collapse" id="collapse_text1" aria-expanded="false">
                                     @*your rental request. Submit a request and a member from our Customer Success Team
-                                    will be in
-                                    touch with you.*@
+                                        will be in
+                                        touch with you.*@
                                 </span>
 
                             </p>
@@ -266,18 +266,18 @@
                     <!-- 顯示設好的時間 -->
                     @* 同時有兩個按鈕? *@
                     @*  *@
-                <div class="decision-group">
-                    @using (Html.BeginForm("ProductDetail", "Product"))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.HiddenFor(M => M.IsExisted)
-                        @Html.HiddenFor(M => M.StartDate)
-                        @Html.HiddenFor(M => M.ExpirationDate)
+                    <div class="decision-group">
+                        @using (Html.BeginForm("ProductDetail", "Product"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(M => M.IsExisted)
+                            @Html.HiddenFor(M => M.StartDate)
+                            @Html.HiddenFor(M => M.ExpirationDate)
 
-                        <button id="ToCart" class="orange" type="submit">
-                            @(Model.IsExisted?"更新":"放入")購物車
-                        </button>
-                        <button id="ToCheck" class="orange">直接結帳</button>
+                            <button id="ToCart" class="orange" type="submit">
+                                @(Model.IsExisted?"更新":"放入")購物車
+                            </button>
+                            <button id="ToCheck" class="orange">直接結帳</button>
                         }
                     </div>
                 </div>
@@ -353,13 +353,15 @@
     <script src="~/Assets/js/ProductDetail/ProductCarousel.js"></script>
     <script src="~/Assets/js/ProductDetail/leaf.js"></script>
     <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+
     <script>
         //未登入的禁用
         @*if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
             let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
             DateModalLauncher.disabled = true;
             DateModalLauncher.innerText = '= 登入後才可租賃商品 =';
-        }*@
+        }else{}*@
 
         //入車提示訊息
         if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
@@ -380,11 +382,13 @@
             document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
             OpModal.toggle();
         }
-    </script>
 
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
-    <script>
+        //禁用日期
         datePicker.config.disable = @Html.Raw(Model.DisablePeriodsJSON) ;
+        //如果存在於購物車且 日期已選=>填入日期選取器的選取?。  顯示文字//Model.IsExisted &&
+        if ( @Json.Encode(Model.StartDate!=null ) ) { 
+            showPeriodText('@(Model.StartDate)', '@Model.ExpirationDate');
+        }
     </script>
 }
 
@@ -404,7 +408,6 @@
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/leafMap.css" />
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/Product_Detail.css" />
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/dateTimePicker.css" />
-
 }
 
 
