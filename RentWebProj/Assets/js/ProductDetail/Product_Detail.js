@@ -40,7 +40,7 @@ arrow1.addEventListener('click', function () {
 
     else if (x1 == 1) {
         arrow1.classList.add('rotate');
-        link2.classList.remove('hide');
+        setTimeout(function () { link2.classList.remove('hide') }, 200);
         x1 = 0;
     }
 });
@@ -54,7 +54,7 @@ arrow2.addEventListener('click', function () {
     }
     else if (x2 == 1) {
         arrow2.classList.add('rotate');
-        link4.classList.remove('hide');
+        setTimeout(function () { link4.classList.remove('hide') }, 300);
         x2 = 0;
     }
 });

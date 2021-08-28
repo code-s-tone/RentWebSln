@@ -1,4 +1,5 @@
-let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+//需要指定DateModalLauncher
+
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
 let actionBtns = document.querySelectorAll('.decision-group .orange');
@@ -22,8 +23,18 @@ const datePicker = flatpickr("#datePicker", {
     // altInput: true,
     // altFormat: "F j, Y",
 
+    //disable: [
+    //    {
+    //        from: "2021 / 10 / 04",
+    //        to: "2021 / 10 / 06"
+    //    },
+    //    {
+    //        from: "2021 / 10 / 08",
+    //        to: "2021 / 10 / 09"
+    //    }
+    //],
+
     minDate: new Date(),
-    disable: ["2021-08-11", new Date(2021, 7, 19)],
 
     inline: true,
 
@@ -39,10 +50,10 @@ const datePicker = flatpickr("#datePicker", {
             collapseBtn.disabled = false;
             if (timePicker[0].selectedDates.length == 1
                 && timePicker[1].selectedDates.length == 1
-            ) {
-            //日期時間都設定好> 才可以按completeBtn
-            completeBtn.disabled = false;
-                }
+            ){
+                //日期時間都設定好> 才可以按completeBtn
+                completeBtn.disabled = false;
+            }
 
         } else {
             //禁止
@@ -79,32 +90,28 @@ let endDateTimeText;
 let formatDivider = ' ';
 let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
+//設定日期完成
 completeBtn.addEventListener('click', function () {
-    startDateTimeText = combinDateTime(0);  //顯示期間文字 給使用者看
-    endDateTimeText = combinDateTime(1);    //顯示期間文字 給使用者看
-
-    DateModalLauncher.classList.add('setted');
-    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
-
-    //設定完成，改變表單值
-    document.querySelector('#StartDate').value = startDateTimeText
-    document.querySelector('#ExpirationDate').value = endDateTimeText;
-    //flatpickr.parseDate(startDateTimeText, dateTimeFormat);
-    //判斷已填
+    startDateTimeText = combinDateTime(0);
+    endDateTimeText = combinDateTime(1);
+    //顯示文字
+    showPeriodText(DateModalLauncher, startDateTimeText, endDateTimeText);
+    //改變表單值
+    StartDateToPost.value = startDateTimeText;
+    ExpirationDateToPost.value = endDateTimeText;
+    //開放購物動作
     actionBtns.forEach(x => x.disabled = false);
 });
 
-
-//如果已在車內，改變按鈕文字
-if (document.getElementById('isExisted').value) {
-    actionBtns[0].innerText = '更新購物車';
-}
-
-//日期初始化         是否可以填
-//設定日期完成 => 改變顯示文字、改變表單值
 
 //輔助函式庫
 function combinDateTime(i) {
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
         formatDivider + timePicker[i].input.value;
+}
+
+//顯示期間文字 給使用者看
+function showPeriodText(dateModalLauncher ,startDateTimeText, endDateTimeText ) {
+    dateModalLauncher.classList.add('setted');
+    dateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
 }

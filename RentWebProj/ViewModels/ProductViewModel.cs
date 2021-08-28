@@ -11,6 +11,7 @@ namespace RentWebProj.ViewModels
         public string ImageSrcSecond { get; set; }
         public string CategoryName { get; set; }
         public string CategoryID { get; set; }
+        public string ProductID { get; set; }
         public string ProductName { get; set; }
         public string SubCategoryName { get; set; }
         public string SubCategoryID { get; set; }
