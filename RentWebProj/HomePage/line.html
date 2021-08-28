@@ -1,27 +1,20 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>LINE Login Demo</title>
+    <title></title>
+    <meta charset="utf-8" />
+    <script>
+        function LineAuth() {
+            var URL = 'https://access.line.me/oauth2/v2.1/authorize?';
+            URL += 'response_type=code';
+            URL += '&client_id=1656361385';
+            URL += '&redirect_uri=https://localhost:44399/HomePage/line.html';
+            URL += '&state=abcde';
+            URL += '&scope=openid%20email';
+            window.location.href = URL;
+        }
+    </script>
 </head>
 <body>
-    <button id="lineLoginBtn">LINE 登入</button>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
-    <script>
-            $('#lineLoginBtn').on('click', function(e) {
-                let client_id = '1656361385';
-                let redirect_uri = 'https://localhost:44399/HomePage/line.html';
-                let link = 'https://access.line.me/oauth2/v2.1/authorize?';
-                link += 'response_type=code';
-                link += '&client_id=' + client_id;
-                link += '&redirect_uri=' + redirect_uri;
-                link += '&state=login';
-                link += '&scope=profile%20openid%20email';
-                window.location.href = link;
-
-            });
-    </script>
+    <button onclick="LineAuth()">點選 Line Login</button>
 </body>
 </html>

@@ -26,15 +26,15 @@ namespace RentWebProj.Services
             var ProductDMList = _repository.GetAll<Product>();
 
             MemberCenterVM = from m in MemberDMList
-                             //join o in OrderDMList
-                             //on m.MemberID equals o.MemberID
-                             //join od in OrderDetailDMList
-                             //on o.OrderID equals od.OrderID
-                             //join b in BranchDMList
-                             //on o.StoreID equals b.StoreID
+                                 //join o in OrderDMList
+                                 //on m.MemberID equals o.MemberID
+                                 //join od in OrderDetailDMList
+                                 //on o.OrderID equals od.OrderID
+                                 //join b in BranchDMList
+                                 //on o.StoreID equals b.StoreID
                              where m.MemberID == 38
                              select new MemberPersonDataViewModel
-                             {   
+                             {
                                  MemberId = m.MemberID,
                                  MemberName = m.FullName,
                                  MemBerBirthday = (DateTime)m.Birthday,
@@ -53,8 +53,8 @@ namespace RentWebProj.Services
             string email = HttpUtility.HtmlEncode(Email);
             string password = HttpUtility.HtmlEncode(Password);
 
-                var result = pDMList.Where(x => x.Email == Email && x.PasswordHash == Password).FirstOrDefault() == null ? false : true;
-                return result;       
+            var result = pDMList.Where(x => x.Email == Email && x.PasswordHash == Password).FirstOrDefault() == null ? false : true;
+            return result;
 
         }
         public bool getMemberRegistertData(MemberRegisterDetailViewModel s)
@@ -62,7 +62,7 @@ namespace RentWebProj.Services
             var pDMList = _repository.GetAll<Member>();
             string email = HttpUtility.HtmlEncode(s.Email);
             string password = HttpUtility.HtmlEncode(s.Password);
-            var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
+            var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password || x.Email == email).FirstOrDefault();
             if (result == null)
             {
                 var entity = new Member { Email = s.Email, PasswordHash = s.Password, SignWayID = 1 };
@@ -74,37 +74,34 @@ namespace RentWebProj.Services
             {
                 return false;
             }
-          
+
         }
 
-        public void getMemberGoogleData(string id,string picture,string email,string name)
+        public void getMemberGoogleData(string id, string picture, string email, string name)
         {
             var pDMList = _repository.GetAll<Member>();
-            var result = pDMList.Where(x => x.Email == email && x.FullName ==name && x.Account==id).FirstOrDefault();
+            var result = pDMList.Where(x => x.Email == email && x.FullName == name && x.Account == id).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, SignWayID = 1, FullName=name,Account=id,ProfilePhotoUrl=picture};
+                var entity = new Member { Email = email, SignWayID = 1, FullName = name, Account = id, ProfilePhotoUrl = picture };
                 _repository.Create(entity);
-                _repository.SaveChanges();         
-            }          
+                _repository.SaveChanges();
+            }
 
         }
-        ////單讀取一個表
-        //public Member getMemberData()
-        //{
-        //    Member VMList;
-        //    var DMList = _repository.GetAll<Member>();
-        //    VMList = DMList.Where(x => x.MemberID == 38).FirstOrDefault();
-        //    return VMList;
-        //}
 
-        //預計搭配Session使用
-        //public Member getMemberData(int y)
-        //{
-        //    Member VMList;
-        //    var DMList = _repository.GetAll<Member>();
-        //    VMList = DMList.Where(x => x.MemberID == y).FirstOrDefault();
-        //    return VMList;
-        //}
+        public void getMemberLineData(string name, string picture, string email)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            var result = pDMList.Where(x => x.Email == email && x.FullName == name || x.Email == email).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = email, SignWayID = 1, FullName = name, ProfilePhotoUrl = picture };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+            }
+
+        }
+
     }
 }
