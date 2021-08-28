@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RentWebProj.Models;
 using RentWebProj.ViewModels;
+using RentWebProj.Models;
 using RentWebProj.Repositories;
+using Newtonsoft.Json;
 
 namespace RentWebProj.Services
 {
@@ -44,15 +45,16 @@ namespace RentWebProj.Services
         //              on p.ProductID.Substring(3, 2) equals s.SubCategoryID
         //              where c.CategoryID == productID.Substring(0, 3)
 
-        //              select new Category_Product_CardViewModel
-        //              {
-        //                  ProductName = p.ProductName,
-        //                  CategoryName = c.CategoryName,
-        //                  Description = p.Description,
-        //                  DailyRate = (decimal)p.DailyRate,
-        //                  SubCategoryName = s.SubCategoryName,
-        //                  SubCategoryID=s.SubCategoryID
-        //              });
+                      select new Category_Product_CardViewModel
+                      {
+                          ProductID = p.ProductID,
+                          ProductName = p.ProductName,
+                          CategoryName = c.CategoryName,
+                          Description = p.Description,
+                          DailyRate = (decimal)p.DailyRate,
+                          SubCategoryName = s.SubCategoryName,
+                          SubCategoryID=s.SubCategoryID
+                      });
 
 
         //    return VMList;
@@ -106,29 +108,44 @@ namespace RentWebProj.Services
             return CMList;
         }
 
-        public ProductDetailToCart getProductDetail(string PID, int? CurrentMemberID)
+        public ProductDetailToCart getProductDetail(string PID, int? currentMemberID)
         {
             ProductDetailToCart VM = new ProductDetailToCart();
 
             bool isExisted = false;
-            string StartDate = null;
-            string ExpirationDate = null;
-            if (CurrentMemberID != null)//有登入
+            string startDate = null;
+            string expirationDate = null;
+
+            if (currentMemberID != null)//有登入
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
-                              where c.MemberID == CurrentMemberID && c.ProductID == PID 
-                              select c
+                             where c.MemberID == currentMemberID && c.ProductID == PID
+                             select c
                               ).SingleOrDefault();
-                if(cart != null)
+                if (cart != null)
                 {
                     isExisted = true;
-                    StartDate = ((DateTime)cart.StartDate).ToString(VM.dateTimeFormat);
-                    ExpirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.dateTimeFormat);
+                    startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
+                    expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
                 }
             }
 
-            //查圖片
-            List<string> ImgSources = new List<string>{ "a","b"};
+            //根據PID查對應的商品圖片
+            var ImgSources = _repository.GetAll<ProductImage>()
+                                    .Where(x => x.ProductID == PID)
+                                    .Select(x => x.Source)
+                                    .ToList();
+
+
+            //禁用日期
+            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
+                .Where(x => x.to >= new DateTime())
+                .Select(x => new DisablePeriod
+                {
+                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
+                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
+                }).ToList();
+            var disablePeriodJSON = JsonConvert.SerializeObject(disablePeriodList);
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
@@ -139,11 +156,14 @@ namespace RentWebProj.Services
                       Description = p.Description,
                       DailyRate = (decimal)p.DailyRate,
                       ImgSources = ImgSources,
-                      //登入者、購物車
-                      CurrentMemberID = CurrentMemberID,
-                      isExisted = isExisted,
-                      StartDate = StartDate,
-                      ExpirationDate = ExpirationDate
+                      DisablePeriodsJSON = disablePeriodJSON,
+                      //購物車
+                      //CurrentMemberID = CurrentMemberID,
+                      IsExisted = isExisted,
+                      StartDate = startDate,
+                      ExpirationDate = expirationDate,
+                      //操作
+                      OperationType = null
                   }).SingleOrDefault();
 
             return VM;

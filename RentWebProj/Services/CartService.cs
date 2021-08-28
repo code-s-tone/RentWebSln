@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RentWebProj.Models;
 using RentWebProj.ViewModels;
+using RentWebProj.Models;
 using RentWebProj.Repositories;
 using System.Data.Entity.Core.Objects;
 
@@ -17,41 +17,37 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult Create(ProductDetailToCart VM , string PID)
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID , ref string OperationType)
         {
             var result = new OperationResult();
-            try//寫入result
+            try
             {
-                //資料庫若有防呆，不用檢查重複
-                DateTime ExpirationDate = DateTime.Parse(VM.ExpirationDate);
-                DateTime StartDate = Convert.ToDateTime(VM.StartDate);
-
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = (int)VM.CurrentMemberID,
+                    MemberID = 1,
                     ProductID = PID,
-                    StartDate = Convert.ToDateTime(VM.StartDate),
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)
-                    //如何指定格式?
+                    StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
+                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
                 };
-
                 //判斷是否本來就存在
-                if ( VM.isExisted )
+                if ( VM.IsExisted )
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
+                    OperationType = "Update";
                 }
                 else
                 {//加入
                     _repository.Create(entity);
+                    OperationType = "Create";
                 }
                 _repository.SaveChanges();
 
-                //Bill教的
+                
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
-            {   //Bill教的
+            {
                 result.IsSuccessful = false;
                 result.Exception = ex;
             }
@@ -106,5 +102,4 @@ namespace RentWebProj.Services
             return CartTotal;
         }
     }
-
 }

@@ -62,3 +62,101 @@
 p{
     line-height:1.8;
 }
+
+
+/*right*/
+.right {
+    width: 100%;
+}
+
+@media screen and (max-width:991px) {
+    .right {
+        height: 0;
+        position: absolute;
+    }
+}
+
+.RentInfo {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    border-top: 1px solid #000;
+    background-color: #fff;
+}
+
+.RentSetting {
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 900;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.hint {
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+    line-height: 3;
+    letter-spacing: 2px;
+    background-color: transparent;
+    color: #aaa;
+}
+/* 選取器 */
+
+.decision-group {
+    width: 100%;
+}
+
+    .decision-group > form {
+        display: flex;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+        .decision-group > form > button:nth-of-type(1) {
+            margin-right: 10px;
+        }
+
+        .decision-group > form > button {
+            width: 40%;
+            flex-grow: 1;
+        }
+
+
+@media screen and (min-width:992px) {
+    .right {
+        width: 40.2%;
+        flex-shrink: 0;
+        margin: 15px 0 0 10px;
+    }
+
+    .RentInfo {
+        position: sticky;
+        top: 15px;
+        border: 1px solid #ccc;
+        border-radius: 11px;
+        box-shadow: 0 0 5px #ccc;
+        width: 100%;
+    }
+
+    .RentSetting {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .price {
+        font-size: 40px;
+    }
+    /* .hint{
+        background-color:transparent;
+        color: #aaa;
+    } */
+}
+
