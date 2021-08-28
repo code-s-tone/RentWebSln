@@ -1,5 +1,4 @@
-//需要動態改變DateModalLauncher
-let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+//需要指定DateModalLauncher
 
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
@@ -92,7 +91,7 @@ let formatDivider = ' ';
 let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
 completeBtn.addEventListener('click', function () {
-    showPeriodText(combinDateTime(0), combinDateTime(1));
+    showPeriodText(DateModalLauncher, combinDateTime(0), combinDateTime(1));
             //flatpickr.parseDate(startDateTimeText, dateTimeFormat);
     //設定完成，改變表單值，開放購物動作
     document.querySelector('#StartDate').value = startDateTimeText
@@ -108,7 +107,7 @@ function combinDateTime(i) {
 }
 
 //顯示期間文字 給使用者看
-function showPeriodText(startDateTimeText, endDateTimeText) {
-    DateModalLauncher.classList.add('setted');
-    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
+function showPeriodText(dateModalLauncher ,startDateTimeText, endDateTimeText ) {
+    dateModalLauncher.classList.add('setted');
+    dateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
 }

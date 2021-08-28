@@ -71,6 +71,11 @@
                                     {<p>暫時無法租借</p>}
                                     }
                                     </p>
+                                    <!-- Button trigger modal -->
+                                    <button class="setDate orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
+                                        設定租借期間
+                                    </button>
+
                                 </div>
                                 <div class="product-price-qty">
                                     <div class="unitprice">
@@ -100,6 +105,7 @@
 
                         </tr>
                     }
+
                 <tr>
                     <td>
                         <div class="order-total">
@@ -138,6 +144,7 @@
                 </div>
             </div>
         </div>
+        @Html.Partial("../Shared/_DateTimeModal")
     </div>
 </div>
 
@@ -146,12 +153,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- dateTimePicker 套件-->
+    <link rel="stylesheet" href="~/Assets/css/ProductDetail/flatpickr_orange.css" />
 
     <link rel="stylesheet" href="~/Assets/css/Cart/navbar.css" />
-    <link rel="stylesheet" href="~/Assets/css/Cart/ordercontent.css"  />
+    <link rel="stylesheet" href="~/Assets/css/Cart/ordercontent.css" />
+    <!-- dateTimePicker 自訂-->
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/dateTimePicker.css" />
 }
 
 @section endJS{
+    <!-- dateTimePicker套件 -->
+    <script src="~/Assets/js/ProductDetail/flatpickr.js"></script>
+    <!-- 指定DateModalLauncher -->
+    <script>
+        //debugger;
+        let DateModalLauncher = null;
+        let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
+        DateModalBtns.forEach(btn =>
+            btn.addEventListener('click', function (ev) {
+                DateModalLauncher = ev.target;
+            })
+        );
+    </script>
+    <!-- dateTimePicker自訂 -->
     <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
 }
