@@ -117,15 +117,32 @@ namespace RentWebProj.Services
 
         }
 
-        public string ChangeProfile(string UserEmail , string ChangeEmail)
+        public string ChangeProfile(string UserEmail , string ChangeEmail , string UserPassword ,  string ChangePassword)
         {
             var result = _repository.GetAll<Member>().ToList();
             result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
+            result.Find(x => x.PasswordHash == UserPassword).PasswordHash = ChangePassword;
             _repository.SaveChanges();
 
             return "修改成功";
         }
 
-
+        //取得與目前登入User對應的"密碼"
+        public string CheckName(string UserEmail)
+        {   
+            var result = _repository.GetAll<Member>();
+            var Memberpassword = from s in result
+                                  where s.Email == UserEmail
+                                  select new CheckPassword
+                                  {
+                                      Password = s.PasswordHash
+                                  };
+            string MemberPasswordString = "";
+            foreach (var item in Memberpassword)
+            {   //因為IQueryable故需要轉型為ToString
+                MemberPasswordString = item.Password.ToString();
+            }
+            return MemberPasswordString;
+        }
     }
 }

@@ -261,6 +261,7 @@
     color: #0482c3;
     font-weight: 600;
     margin-left: 5px;
+    text-decoration:none;
 }
 
 @media screen and (min-width:576px) {
@@ -278,10 +279,19 @@
 
     .member-display-service-id,
     .member-display-service-email,
-    .member-display-service-password{
+    .member-display-service-password {
         color: #0482c3;
         font-weight: 600;
         margin-left: 5px;
+        text-decoration: none;
+    }
+    .member-display-service-email > a,
+    .member-display-service-password > a {
+        color: #0482c3;
+        font-weight: 600;
+        margin-left: 5px;
+        text-decoration: none;
+        pointer-events: none
     }
 }
 

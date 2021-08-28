@@ -59,7 +59,8 @@
         </div>
         <div class="member-display-name-input-box-last">
             <div class="member-display-email-container">
-                <input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新密碼" data-max="50">
+                @*<input type="email" class="member-display-new-email" name="new-email" value="" placeholder="新密碼" data-max="50">*@
+                @Html.DisplayFor(m => m.MemberPasswordHash, new { htmlAttributes = new { @class = "border border-white rounded" } })
             </div>
         </div>
     </div>
