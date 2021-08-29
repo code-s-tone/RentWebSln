@@ -22,8 +22,8 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.CategoriesCardsPage);
             ViewBag.Container = nameof(Container.CategoriesCardsContainer);
             ViewBag.ContainerTitle = nameof(ContainerTitle.所有種類);
-            ViewBag.CategoryOptions = _service.GetCategoryData();
-            return View("ProductCardsList", _service.GetCategoryData()); 
+            ViewBag.CategoryOptions = _service.GetCategoryData();   //軒：好奇為何要用兩種方式傳同一種資料
+            return View("ProductCardsList", _service.GetCategoryData()); //軒：好奇為何要用兩種方式傳同一種資料
         }
         public ActionResult ProductCardsList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
         {

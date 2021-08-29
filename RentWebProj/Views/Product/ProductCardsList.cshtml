@@ -77,12 +77,33 @@
                     <div class=" d-flex flex-wrap">
                         @if (ViewBag.ContainerTitle == nameof(ContainerTitle.所有種類))
                         {
-                            @Html.Partial("Partial_CategoryCard", Model)
+                            //庭安原本的
+                            @Html.Partial("Partial_CategoryCard", Model);
+                            //可以傳進去一個比較小的型別，
+                            @*@Html.Partial("partial_categorycard",
+                                Model.Select(ct => new CategoryView
+                                {
+                                    CategoryName = ct.CategoryName,
+                                    ImageSrcMain = ct.ImageSrcMain,
+                                    ImageSrcSecond = ct.ImageSrcSecond
+                                })
+                            );*@
+                            //partialView裡面的@model也要指定正確的
+
                         }
                         else
                         {
-                            @Html.Partial("Partial_ProductCard", Model)
-                            
+                            @Html.Partial("Partial_ProductCard", Model);
+                            //好像可以傳進去一個比較小的型別，
+                            //Html.Partial("Partial_CategoryCard",
+                            //    Model.Select(ct => new CategoryView
+                            //    {
+                            //        CategoryName = ct.CategoryName,
+                            //        ImageSrcMain = ct.ImageSrcMain,
+                            //        ImageSrcSecond = ct.ImageSrcSecond
+                            //    })
+                            //);
+                            //partialView裡面的@model也要指定正確的
                         }
 
                     </div>

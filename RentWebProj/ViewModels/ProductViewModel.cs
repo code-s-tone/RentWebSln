@@ -5,6 +5,19 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
+    public class CategoryView
+    {
+        public string CategoryName { get; set; }
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
+
+    }
+    public class IndexProductView
+    {
+        public string ProductName { get; set; }
+        public string CategoryName { get; set; }
+    }
+
     public class CardsViewModel
     {   
         public string ImageSrcMain { get; set; }
