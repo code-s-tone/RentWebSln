@@ -454,10 +454,10 @@
     <Content Include="Views\Carts\Checkout.cshtml" />
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
-    <Content Include="Views\Product\ProductCardsList.cshtml" />
-    <Content Include="Views\Product\Product.cshtml" />
-    
+    <Content Include="Views\Product\ProductCardsList.cshtml" />     
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
+    <Content Include="Views\Product\ProductDetail.cshtml" />
+    <Content Include="Views\Shared\_DateTimeModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

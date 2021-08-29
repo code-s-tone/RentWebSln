@@ -1,7 +1,7 @@
 ﻿@model ProductDetailToCart
 @{
     ViewBag.Title = "ProductDetail";
-    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model  
+    //禁招  //一個網址 多個ACtion  一個view  一個強行別Model
 
     var service = new ProductService();
 
@@ -40,7 +40,7 @@
                  data-caption="Optional caption">
         </div>
         <div class="col-sm-5 col-12 Product">
-          <img src="@Model.ImgSources[1]"
+            <img src="@Model.ImgSources[1]"
                  data-fancybox="gallery"
                  data-caption="Optional caption">
             <span class="SeeMore">See ALL 2</span>
@@ -82,8 +82,8 @@
 
                                 <span class="collapse" id="collapse_text1" aria-expanded="false">
                                     @*your rental request. Submit a request and a member from our Customer Success Team
-                                    will be in
-                                    touch with you.*@
+                                        will be in
+                                        touch with you.*@
                                 </span>
 
                             </p>
@@ -263,65 +263,25 @@
                     <button id="setDate" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                         設定租借期間
                     </button>
-                    <!-- 顯示設好的時間 -->
-                    @* 同時有兩個按鈕? *@
-                    @*  *@
-                <div class="decision-group">
-                    @using (Html.BeginForm("ProductDetail", "Product"))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.HiddenFor(M => M.IsExisted)
-                        @Html.HiddenFor(M => M.StartDate)
-                        @Html.HiddenFor(M => M.ExpirationDate)
 
-                        <button id="ToCart" class="orange" type="submit">
-                            @(Model.IsExisted?"更新":"放入")購物車
-                        </button>
-                        <button id="ToCheck" class="orange">直接結帳</button>
+                    <div class="decision-group">
+                        @using (Html.BeginForm("ProductDetail", "Product"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(M => M.IsExisted)
+                            @Html.HiddenFor(M => M.StartDate)
+                            @Html.HiddenFor(M => M.ExpirationDate)
+
+                            <button id="ToCart" class="orange" type="submit">
+                                @(Model.IsExisted?"更新":"放入")購物車
+                            </button>
+                            <button id="ToCheck" class="orange">直接結帳</button>
                         }
                     </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
             </div>
-
-            <!-- DateModal -->
-            <div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body d-flex flex-column align-items-center">
-
-                            <div id="collapseDatePicker" class="collapse collapseItem show">
-                                <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
-                            </div>
-
-                            <button class="w-100 orange" data-bs-toggle="collapse" data-bs-target=".collapseItem">
-                                繼續設定時間
-                            </button>
-
-                            <div id="collapseTimePicker" class="collapse collapseItem">
-                                <div class="d-flex w-100">
-                                    <div class="d-flex">
-                                        <strong>從</strong><div id="start"></div>
-                                        <input class="flatpickr timePicker" type=text placeholder="選時間" id="startTimePicker">
-                                    </div>
-                                    <div class="arrow"></div>
-                                    <div class="d-flex">
-                                        <strong>到</strong><div id="end"></div>
-                                        <input class="flatpickr timePicker" type=text placeholder="選時間" id="endTimePicker">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="orange" id="complete" data-bs-dismiss="modal">設定完成</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @Html.Partial("../Shared/_DateTimeModal")
 
             <div class="modal " id="OperationHintModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -354,12 +314,19 @@
     <script src="~/Assets/js/ProductDetail/leaf.js"></script>
     <script src="~/Assets/js/ProductDetail/Product_Detail.js"></script>
     <script>
+        let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+        let StartDateToPost = document.querySelector('#StartDate');
+        let ExpirationDateToPost = document.querySelector('#ExpirationDate');
+    </script>
+    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
+
+    <script>
         //未登入的禁用
         @*if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
             let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
             DateModalLauncher.disabled = true;
             DateModalLauncher.innerText = '= 登入後才可租賃商品 =';
-        }*@
+        }else{}*@
 
         //入車提示訊息
         if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
@@ -380,11 +347,13 @@
             document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
             OpModal.toggle();
         }
-    </script>
 
-    <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>
-    <script>
+        //禁用日期
         datePicker.config.disable = @Html.Raw(Model.DisablePeriodsJSON) ;
+        //如果存在於購物車且 日期已選=>填入日期選取器的選取?。  顯示文字//Model.IsExisted &&
+        if ( @Json.Encode(Model.StartDate!=null ) ) {
+            showPeriodText(DateModalLauncher,'@(Model.StartDate)', '@Model.ExpirationDate');
+        }
     </script>
 }
 
@@ -397,14 +366,14 @@
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
-    <!-- dateTimePicker -->
+    <!-- dateTimePicker 套件-->
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/flatpickr_orange.css" />
 
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/ProductCarousel.css" />
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/leafMap.css" />
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/Product_Detail.css" />
+    <!-- dateTimePicker 自訂-->
     <link rel="stylesheet" href="~/Assets/css/ProductDetail/dateTimePicker.css" />
-
 }
 
 

@@ -1,4 +1,5 @@
-let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+//需要指定DateModalLauncher
+
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
 let actionBtns = document.querySelectorAll('.decision-group .orange');
@@ -49,10 +50,10 @@ const datePicker = flatpickr("#datePicker", {
             collapseBtn.disabled = false;
             if (timePicker[0].selectedDates.length == 1
                 && timePicker[1].selectedDates.length == 1
-            ) {
-            //日期時間都設定好> 才可以按completeBtn
-            completeBtn.disabled = false;
-                }
+            ){
+                //日期時間都設定好> 才可以按completeBtn
+                completeBtn.disabled = false;
+            }
 
         } else {
             //禁止
@@ -89,18 +90,16 @@ let endDateTimeText;
 let formatDivider = ' ';
 let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
+//設定日期完成
 completeBtn.addEventListener('click', function () {
-    startDateTimeText = combinDateTime(0);  //顯示期間文字 給使用者看
-    endDateTimeText = combinDateTime(1);    //顯示期間文字 給使用者看
-
-    DateModalLauncher.classList.add('setted');
-    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
-
-    //設定完成，改變表單值
-    document.querySelector('#StartDate').value = startDateTimeText
-    document.querySelector('#ExpirationDate').value = endDateTimeText;
-    //flatpickr.parseDate(startDateTimeText, dateTimeFormat);
-    //判斷已填
+    startDateTimeText = combinDateTime(0);
+    endDateTimeText = combinDateTime(1);
+    //顯示文字
+    showPeriodText(DateModalLauncher, startDateTimeText, endDateTimeText);
+    //改變表單值
+    StartDateToPost.value = startDateTimeText;
+    ExpirationDateToPost.value = endDateTimeText;
+    //開放購物動作
     actionBtns.forEach(x => x.disabled = false);
 });
 
@@ -109,4 +108,10 @@ completeBtn.addEventListener('click', function () {
 function combinDateTime(i) {
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
         formatDivider + timePicker[i].input.value;
+}
+
+//顯示期間文字 給使用者看
+function showPeriodText(dateModalLauncher ,startDateTimeText, endDateTimeText ) {
+    dateModalLauncher.classList.add('setted');
+    dateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
 }
