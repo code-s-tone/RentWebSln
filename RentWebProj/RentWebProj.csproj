@@ -468,15 +468,12 @@
     <Content Include="Views\Carts\Checkout.cshtml" />
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
-    <Content Include="Views\Product\Category_Product_Cards.cshtml" />
-    <Content Include="Views\Product\Product.cshtml" />
     <Content Include="Views\Member\_memberCenterPersonPartial.cshtml" />
     <Content Include="Views\Member\_memberCenterAccountPartial.cshtml" />
     <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Product\ProductCardsList.cshtml" />
-    
     <Content Include="Views\Shared\Partial_CategoryCard.cshtml" />
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
