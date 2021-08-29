@@ -79,35 +79,91 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
+        public IEnumerable<CardsViewModel> SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string orderByOptions, string dailyRateBudget)
+        {
+            int minBudget = 0;
+            int maxBudget = 0;
+            switch (dailyRateBudget)
+            {
+                case "1":
+                    maxBudget = 100;
+                    break;
+                case "2":
+                    minBudget = 101;
+                    maxBudget = 500;
+                    break;
+                case "3":
+                    minBudget = 501;
+                    maxBudget = 1000;
+                    break;
+                case "4":
+                    minBudget = 1001;
+                    maxBudget = 2147483647; //int32最大值
+                    break;
+                default:
+                    break;
+            }
+
+            IEnumerable<CardsViewModel> VMList;
+            var pDMList = _repository.GetAll<Product>();
+            var ctDMList = _repository.GetAll<Category>();
+            var subCtDMList = _repository.GetAll<SubCategory>();
+
+            VMList = (from p in pDMList
+                join c in ctDMList
+                    on p.ProductID.Substring(0, 3) equals c.CategoryID
+                join s in subCtDMList
+                    on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+                where (categoryOptions == "0" || c.CategoryID == categoryOptions)
+                && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
+                && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
+                && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
+                && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+
+                select new CardsViewModel
+                {
+                    ProductID = p.ProductID,
+                    ProductName = p.ProductName,
+                    CategoryName = c.CategoryName,
+                    Description = p.Description,
+                    DailyRate = (decimal)p.DailyRate,
+                    SubCategoryName = s.SubCategoryName,
+                    SubCategoryID = s.SubCategoryID
+                });
+
+            return VMList;
+
+        }
+
 
 
         //public IEnumerable<ProductCartsView> getCartsData()
         //{
         //    IEnumerable<ProductCartsView> CMList  ;
 
-            //    //var CList = _repository.GetAll<Category>();
-            //    var PList = _repository.GetAll<Product>();
-            //    var OList = _repository.GetAll<OrderDetail>();
+        //    //var CList = _repository.GetAll<Category>();
+        //    var PList = _repository.GetAll<Product>();
+        //    var OList = _repository.GetAll<OrderDetail>();
 
-            //    //篩選、轉型
-            //    //Method Expression  有join時，這方法很吃邏輯
+        //    //篩選、轉型
+        //    //Method Expression  有join時，這方法很吃邏輯
 
 
-            //    //Query Expression
-            //    //VMList = (from p in pDMList
-            //    //          join c in cDMList
-            //    //          on p.CategoryID equals c.CategoryID
-            //    //          where p.CategoryID == catID
-            //    //          select new IndexProductView
-            //    //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            //    //).Take(6);
+        //    //Query Expression
+        //    //VMList = (from p in pDMList
+        //    //          join c in cDMList
+        //    //          on p.CategoryID equals c.CategoryID
+        //    //          where p.CategoryID == catID
+        //    //          select new IndexProductView
+        //    //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
+        //    //).Take(6);
 
-            //    CMList = (from p in PList
-            //              join o in OList
-            //              on p.ProductID equals o.ProductID
-            //              select new ProductCartsView
-            //              { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
-            //    );
+        //    CMList = (from p in PList
+        //              join o in OList
+        //              on p.ProductID equals o.ProductID
+        //              select new ProductCartsView
+        //              { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
+        //    );
 
         //    return CMList;
         //}
