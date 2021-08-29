@@ -27,7 +27,7 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-
+            
             return View(_service.getCartsData());
 
             //return View();
@@ -50,18 +50,19 @@ namespace RentWebProj.Controllers
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(string name,string StartDate,string checkjson)
+        public ActionResult Index(string[] check,string StartDate,string checkjson)
         {
             //沒V任何商品不能到下個，是空的return原本頁面
-            name.Substring(0, name.LastIndexOf(","));
-            
-            string[] result = name.Split(',');
-            result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
+            //name.Substring(0, name.LastIndexOf(","));
+
+            //string[] result = name.Split(',');
+            //result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
 
             //存viewbag 、 viewdata 
-            
 
-            return View("Checkout", model:result);
+
+            //return View("Checkout", model:result);
+            return View();
 
             //return RedirectToAction("Checkout", "Carts", name);
         }
