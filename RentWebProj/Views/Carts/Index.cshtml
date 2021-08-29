@@ -195,17 +195,7 @@
 
     <!-- dateTimePicker預定義 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
-    <script>
-        //如果在購物車且有選日期 => 預顯示文字
-    @foreach ( var item in Model)
-    {
-        <text>
-        if ( @Json.Encode(item.StartDate!=null ) ) {
-            showPeriodText(DateModalLauncher,'@(item.StartDate)', '@item.ExpirationDate');
-        }
-        </text>
-    }
-    </script>
+
 
     <script>
         let DateModalLauncher = null;
@@ -280,5 +270,20 @@
 
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
+    <script>
+        //如果在購物車且有選日期 => 預顯示文字
+    @{
+        int i = 0;
+    }
+    @foreach ( var item in Model)
+    {
 
+        <text>
+        if ( @Json.Encode(item.StartDate!=null ) ) {
+            showPeriodText(DateModalBtns[@i],'@(item.StartDate)', '@item.ExpirationDate');
+        }
+        </text>
+        i++;
+    }
+    </script>
 }
