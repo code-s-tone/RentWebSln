@@ -66,21 +66,19 @@ namespace RentWebProj.Services
             return VMList;
         }
         public IEnumerable<CardsViewModel> GetSubCategoryOptions(string catID)
-        {
-            var ctDMList = GetCategoryData();
-            var subCtDMList = _repository.GetAll<SubCategory>();
-            var subDMList = from ct in ctDMList
-                            join sub in subCtDMList
-                            on ct.CategoryID equals sub.CategoryID
-                            where ct.CategoryID == catID
+        {   
+            var subDMList = _repository.GetAll<SubCategory>();
+            var subVMList = from sub in subDMList 
+                            where sub.CategoryID == catID
                             select new CardsViewModel
                             {
                                 SubCategoryName = sub.SubCategoryName,
                                 SubCategoryID = sub.SubCategoryID
                             };
 
-            return subDMList;
+            return subVMList;
         }
+
 
 
         //public IEnumerable<ProductCartsView> getCartsData()

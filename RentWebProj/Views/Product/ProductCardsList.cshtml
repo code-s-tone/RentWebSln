@@ -14,7 +14,6 @@
                 <form action="" method="post">
                     <div class="filterGroup">
                         <label for="keywordInput" class="">關鍵字搜尋</label> <br>
-
                         <input type="text" id="keywordInput" class="btn" placeholder="想找什麼呢？">
                     </div>
 
@@ -24,11 +23,9 @@
                             <option value="0">選擇商品種類</option>
 
                             @{
-
                                 foreach (var ct in ViewBag.CategoryOptions)
                                 {
                                     <option value=@ct.CategoryID>@ct.CategoryName</option>
-
                                 }
                             }
 
@@ -39,20 +36,18 @@
 
                         </select>
                     </div>
-                   
 
                     <div class="filterGroup dNoneOnPhone">
                         <label for="OrderByOptions" class="">排序方式</label> <br>
 
-                        <label class="mt-1"><input type="radio" id="SortByRelevance" name="OrderByOptions" value="Relevance">最相關不要五四三</label><br>
-                        <label class="mt-1"><input type="radio" id="SortByPrice" name="OrderByOptions" value="Price">甜甜價低到高</label><br>
-                        <label class="mt-1" ><input type="radio" id="SortByStarsForLike" name="OrderByOptions" value="starsForLike">星星熱門度</label><br>
+                        <label class="mt-1"><input type="radio" id="OrderByRelevance" name="OrderByOptions" value="OrderByRelevance">最相關不要五四三</label><br>
+                        <label class="mt-1"><input type="radio" id="OrderByPrice" name="OrderByOptions" value="OrderByPrice">甜甜價低到高</label><br>
+                        <label class="mt-1" ><input type="radio" id="OrderByStarsForLike" name="OrderByOptions" value="OrderByStarsForLike">星星熱門度</label><br>
                     </div>
-
 
                     <div class="filterGroup dNoneOnPhone">
                         <label for="Budget" class="">錢錢決定一切</label> <br>
-                        <select name="Rate" id="DailyRate" class="my-2">
+                        <select name="DailyRateBudget" id="DailyRateBudget" class="my-2">
                             <option value="0">日租費預算範圍</option>
                             <option value="1">$100以下</option>
                             <option value="2">$101~$500</option>
@@ -68,7 +63,7 @@
 
         </div>
 
-            <!-- Right 商品卡片部分:Dora -->
+            <!-- Right 商品卡片部分 -->
             <div class="col-lg-9 col-12 px-2  mb-4 mx-0 ">
 
                 <div class="col-12 px-2 @ViewBag.Container">
