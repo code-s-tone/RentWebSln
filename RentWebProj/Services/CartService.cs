@@ -101,5 +101,18 @@ namespace RentWebProj.Services
 
             return CartTotal;
         }
+
+        public void DeleteCart(int MemberID, string ProductID)
+        {
+            Cart deleteList = new Cart() 
+            {
+                MemberID = MemberID,
+                ProductID = ProductID
+            };
+
+            _repository.Delete<Cart>(deleteList);
+            _repository.SaveChanges();
+            int i = 0;
+        }
     }
 }
