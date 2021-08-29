@@ -18,7 +18,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<MemberPersonDataViewModel> GetMemberData()
+        public IEnumerable<MemberPersonDataViewModel> GetMemberData(string LoginEmail)
         {
             IEnumerable<MemberPersonDataViewModel> MemberCenterVM;
             IEnumerable<MemberOrderDetailViewModel> MemberOrderDetailVM;
@@ -38,7 +38,8 @@ namespace RentWebProj.Services
                                   on od.ProductID equals p.ProductID
                                   join m in MemberDMList
                                   on o.MemberID equals m.MemberID
-                                  where m.MemberID == 38
+                                  //where m.MemberID == 38
+                                  where m.Email == LoginEmail
                                   select new MemberOrderDetailViewModel
                                   {
                                       BranchName = b.StoreName,
@@ -58,7 +59,8 @@ namespace RentWebProj.Services
                              on o.OrderID equals od.OrderID
                              join b in BranchDMList
                              on o.StoreID equals b.StoreID
-                             where m.MemberID == 38
+                             //where m.MemberID == 38
+                             where m.Email == LoginEmail
                              select new MemberPersonDataViewModel
                              {
                                  MemberId = m.MemberID,
@@ -68,7 +70,8 @@ namespace RentWebProj.Services
                                  MemberEmail = m.Email,
                                  MemberPasswordHash = m.PasswordHash,
                                  MemberBranchName = b.StoreName,
-                                 MemberOrderDetail = MemberOrderDetailVM
+                                 //測試中
+                                 //MemberOrderDetail = MemberOrderDetailVM
                              };
 
             return MemberCenterVM;
@@ -117,7 +120,7 @@ namespace RentWebProj.Services
 
         }
 
-        public string ChangeProfile(string UserEmail , string ChangeEmail , string UserPassword ,  string ChangePassword)
+        public string ChangeProfile(string UserEmail , string ChangeEmail , string UserPassword ,  string ChangePassword , string UserName , string UserPhone)
         {
             var result = _repository.GetAll<Member>().ToList();
             result.Find(x => x.Email == UserEmail).Email = ChangeEmail;

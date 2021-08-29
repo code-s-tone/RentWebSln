@@ -10,6 +10,9 @@ namespace RentWebProj.ViewModels
     public class MemberPersonDataViewModel
     {
         public int MemberId { get; set; }
+        [Required]
+        [Display(Name = "確認姓名")]
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "姓名至少2個字元,最多20字元")]
         public string MemberName { get; set; }
         public DateTime MemBerBirthday { get; set; }
         public string MemberPhone { get; set; }
@@ -38,7 +41,8 @@ namespace RentWebProj.ViewModels
         [Compare("MemberPasswordHash", ErrorMessage = "輸入密碼不一致")]
         public string ComfigMemberPasswordHash { get; set; }
 
-        public IEnumerable<MemberOrderDetailViewModel> MemberOrderDetail { get; set; }
+        //測試中
+        //public IEnumerable<MemberOrderDetailViewModel> MemberOrderDetail { get; set; }
     }
 
     //訂單資訊

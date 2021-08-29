@@ -23,7 +23,7 @@ namespace RentWebProj.Controllers
         // GET: Member
         public ActionResult MemberCenter()
         {
-            return View(_service.GetMemberData().FirstOrDefault());//可以強型別
+            return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());//可以強型別
             //單讀取一個表方法
             //預計搭配Session方法
             //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
@@ -42,12 +42,12 @@ namespace RentWebProj.Controllers
                 ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
                 ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
                 //return View(x.MemberEmail);
-                return View(_service.GetMemberData().FirstOrDefault());
+                return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());
             }
             //Step2. 把信箱跟密碼進行"比對並更新"
-            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, x.ComfirMemberEmail , MemberPasswordHash , x.ComfigMemberPasswordHash);
+            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, x.ComfirMemberEmail , MemberPasswordHash , x.ComfigMemberPasswordHash , x.MemberName , x.MemberPhone);
 
-            return View(_service.GetMemberData().FirstOrDefault());//可以強型別
+            return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());//可以強型別
 
             //單讀取一個表方法
             //ViewData.Model = _service.getMemberData();
