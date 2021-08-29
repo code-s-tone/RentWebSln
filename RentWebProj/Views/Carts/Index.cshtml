@@ -3,48 +3,49 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<div class="container-xl">
-    <div class="order-nav">
-        <div class="title">
-            <h2>
-                購物步驟
-            </h2>
+@using (Html.BeginForm("Index", "Carts", FormMethod.Post))
+{
+    <div class="container-xl">
+        <div class="order-nav">
+            <div class="title">
+                <h2>
+                    購物步驟
+                </h2>
+            </div>
+            <div class="step row">
+                <li class="col-6 col-sm-2 active"><a href="#">1.確認購物明細</a></li>
+                <li class="col-6 col-sm-2"><a href="#">2.確認訂單明細</a></li>
+                <li class="col-6 col-sm-2"><a href="#">3.進行付款</a></li>
+                <li class="col-6 col-sm-2"><a href="#">4.完成訂購</a></li>
+            </div>
         </div>
-        <div class="step row">
-            <li class="col-6 col-sm-2 active"><a href="#">1.確認購物明細</a></li>
-            <li class="col-6 col-sm-2"><a href="#">2.確認訂單明細</a></li>
-            <li class="col-6 col-sm-2"><a href="#">3.進行付款</a></li>
-            <li class="col-6 col-sm-2"><a href="#">4.完成訂購</a></li>
-        </div>
-    </div>
 
-    @*
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-    *@
+        @*
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+        *@
 
-<div class="order-content">
-    <div class="content-nav">
-        <li class="active"><a href="#">購物明細(@Model.Count())</a></li>
-        @*<li><a href="#">追蹤清單({X})</a></li>*@
-    </div>
-    <div class="content">
-        <table class="table">
-            <tr>
-                <th>
-                    <span>商品名稱</span>
-                </th>
-            </tr>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <div class="product">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
+        <div class="order-content">
+            <div class="content-nav">
+                <li class="active"><a href="#">購物明細(@Model.Count())</a></li>
+                @*<li><a href="#">追蹤清單({X})</a></li>*@
+            </div>
+            <div class="content">
+                <table class="table">
+                    <tr>
+                        <th>
+                            <span>商品名稱</span>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <div class="form-check">
+                                        <input class="form-check-input" name="check" type="checkbox" value="@item.ProductID" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
 
                                 </label>
                             </div>
@@ -110,8 +111,8 @@
                             @Html.ActionLink("Delete", "Delete", new { Memberid = item.MemberID, Productid = item.ProductID })
                         </td>*@
 
-                    </tr>
-                }
+                            </tr>
+                        }
 
             <tr>
                 <td>
@@ -152,12 +153,10 @@
         </div>
     </div>
 
-    @Html.Partial("../Shared/_DateTimeModal")
-    <input type="hidden" name="StartDate" value="" />
-    <input type="hidden" name="ExpirationDate" value="" />
-</div>
-</div>
-
+            @Html.Partial("../Shared/_DateTimeModal")
+        </div>
+    </div>
+}
 @section topCSS{
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,7 +181,7 @@
         let ExpirationDateToPost = null;
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
-        DateModalBtns.forEach((btn,idx) =>
+        DateModalBtns.forEach((btn, idx) =>
             btn.addEventListener('click', function (ev) {
                 DateModalLauncher = ev.target;
                 //StartDateToPost = ...idx;
@@ -192,6 +191,55 @@
 
             })
         );
+
+
+        
+        //function Checked() {
+        //    let result = "";
+        //    document.querySelectorAll('.form-check-input').forEach(function (x) {
+        //        if (x.checked == true) {
+
+        //            result += x.value + ",";
+        //        }
+        //    })
+
+        //    let b = document.querySelector('.check');
+        //    b.setAttribute("value", result);
+        //}
+
+        //document.querySelectorAll('.form-check-input').forEach(function (btn) {
+        //    btn.addEventListener('change', Checked);
+
+        //})
+
+        //function Date() {
+        //    let start = "";
+        //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
+
+        //            start += startDateTimeText + ",";
+                
+        //    })
+
+        //    let a = document.querySelector(".start");
+        //    a.setAttribute("value", start);
+        //}
+
+        //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
+        //    btn.addEventListener('change', Date);
+
+        //})
+        
+
+
+           
+        
+
+
+
+
+
+
+
     </script>
     <!-- dateTimePicker自訂 -->
     <script src="~/Assets/js/ProductDetail/dateTimePicker.js"></script>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
 using RentWebProj.Services;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
@@ -23,10 +24,22 @@ namespace RentWebProj.Controllers
             _service = new IndexService();
             _cartService = new CartService();
         }
+
         public ActionResult Checkout()
         {
-
+            
             return View(_service.getCartsData());
+
+            //return View();
+
+        }
+        [HttpPost]
+        public ActionResult Checkout(IEnumerable<CartIndex> VM)
+        {
+            //參數可能要調整
+            new OrderService().Create(VM);
+
+            return RedirectToAction("MemberCenter", "Member");
         }
 
         public ActionResult Index()
@@ -35,6 +48,23 @@ namespace RentWebProj.Controllers
             ViewBag.Total = _cartService.GetCartTotal(2);
 
             return View(carts);
+        }
+        [HttpPost]
+        public ActionResult Index(string[] check,string StartDate,string checkjson)
+        {
+            //沒V任何商品不能到下個，是空的return原本頁面
+            //name.Substring(0, name.LastIndexOf(","));
+
+            //string[] result = name.Split(',');
+            //result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
+
+            //存viewbag 、 viewdata 
+
+
+            return View("Checkout", model: check);
+            //return View();
+
+            //return RedirectToAction("Checkout", "Carts", name);
         }
 
         public ActionResult Delete(int MemberID, string ProductID)
