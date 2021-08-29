@@ -422,6 +422,7 @@
     <Content Include="Assets\css\Index\index.css.map" />
     <Content Include="Assets\css\Index\index.scss" />
     <Content Include="bin\RentWebProj.dll.config" />
+    <Content Include="HomePage\Fb.html" />
     <Content Include="HomePage\line.html" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <Content Include="obj\Debug\RentWebProj.csproj.CopyComplete" />
