@@ -20,9 +20,6 @@ collapseBtn.addEventListener('click', function () {
 const datePicker = flatpickr("#datePicker", {
     mode: "range",
     dateFormat: "Y / m / d",
-    // altInput: true,
-    // altFormat: "F j, Y",
-
     //disable: [
     //    {
     //        from: "2021 / 10 / 04",

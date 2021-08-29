@@ -60,6 +60,10 @@ namespace RentWebProj.ViewModels
 
         //祥聖: 是不是要加產品圖片? >_<
 
+        //禁用日期
+        //public string DisablePeriodsJSON { get; set; }
+
+
         public DateTime StartDate { get; set; }//軒：是否改 可null?
 
         public DateTime ExpirationDate { get; set; }
