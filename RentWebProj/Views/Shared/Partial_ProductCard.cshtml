@@ -9,12 +9,12 @@
                 <repeat n="4"></repeat>
             </div>
             <div class="product-img">
-                <a href="@Url.Action("", "Product")"><img src='https://tnntoday.com/wp-content/uploads/2021/04/Maserati.jpg' alt=""></a>
+                <a href="@Url.Action("ProductDetail", "Product", new { PID=p.ProductID })"><img src='https://tnntoday.com/wp-content/uploads/2021/04/Maserati.jpg' alt=""></a>
             </div>
             <div class="product-details">
-                <div class="checkitOut"><a class="d-grid" href="@Url.Action("", "Product")"><span class="m-auto">查看詳情</span></a> </div>
+                <div class="checkitOut"><a class="d-grid" href="@Url.Action("ProductDetail", "Product", new { PID=p.ProductID })"><span class="m-auto">查看詳情</span></a> </div>
                 <span class="product-catagory">@p.CategoryName,@p.SubCategoryName</span>
-                <p class="product-name"><a href="@Url.Action("", "Product")">@p.ProductName</a></p>
+                <p class="product-name"><a href="@Url.Action("ProductDetail", "Product", new { PID=p.ProductID })">@p.ProductName</a></p>
                 <p class="product-description">@p.Description </p>
                 <div class="product-price-cart-box d-flex">
                     <div class="product-price flex-grow-1">$@Math.Ceiling(p.DailyRate)<span>/日租</span></div>

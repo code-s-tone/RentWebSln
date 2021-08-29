@@ -17,7 +17,7 @@ namespace RentWebProj
             routes.MapRoute(
                 name: "ProductDetail",
                 url: "Product/ProductDetail/{PID}",
-                defaults: new { controller = "Product", action = "ProductDetail", PID = "PplPg002" }
+                defaults: new { controller = "Product", action = "ProductDetail" }
             );
 
             //產品卡片頁(各種類) 路由用種類id來判斷
