@@ -73,6 +73,11 @@ namespace RentWebProj.ViewModels
         public string Password { get; set; }
     }
 
+    public class CheckFullName
+    {
+        public string Name { get; set; }
+    }
+
     public class MemberLoginDetailViewModel
     {
         [Required]
