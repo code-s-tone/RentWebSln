@@ -7,13 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Repositories;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
+
     public class CartsController : Controller
     {
+
+
         private RentContext db = new RentContext();
         private IndexService _service;
         private CartService _cartService;
@@ -27,10 +31,13 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            
-            return View(_service.getCartsData());
 
-            //return View();
+            var sb = TempData["DATA"];
+
+
+            return View(sb);
+
+  
 
         }
         [HttpPost]
@@ -44,27 +51,29 @@ namespace RentWebProj.Controllers
 
         public ActionResult Index()
         {
-            var carts = _cartService.GetCart(2);
-            ViewBag.Total = _cartService.GetCartTotal(2);
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(string[] check,string StartDate,string checkjson)
+        public ActionResult Index(string name, string StartDate,string ExpirationDate)
         {
-            //沒V任何商品不能到下個，是空的return原本頁面
-            //name.Substring(0, name.LastIndexOf(","));
-
-            //string[] result = name.Split(',');
-            //result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
-
-            //存viewbag 、 viewdata 
 
 
-            return View("Checkout", model: check);
-            //return View();
 
-            //return RedirectToAction("Checkout", "Carts", name);
+            string[] subs = name.Split(',');
+
+            List<ProductCartsView> lstStuModel = new List<ProductCartsView>();
+            for(var x = 0; x <= subs.Length-2; x++)
+            {
+                lstStuModel.Add(new ProductCartsView() { ProductName = subs[x]});
+            }
+
+            
+
+            TempData["DATA"] = _service.getCartsData(lstStuModel);
+            return RedirectToAction("checkout", "carts");
         }
 
         public ActionResult Delete(int MemberID, string ProductID)

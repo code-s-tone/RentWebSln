@@ -44,7 +44,7 @@
                             <td>
                                 <div class="product">
                                     <div class="form-check">
-                                        <input class="form-check-input" name="check" type="checkbox" value="@item.ProductID" id="flexCheckDefault">
+                                        <input class="form-check-input" type="checkbox" value="@item.ProductID" id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
 
                                 </label>
@@ -73,7 +73,7 @@
                                 }
                                 </p>
                                 <!-- Button trigger modal setDate -->
-                                <button class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
+                                <button type="button" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                                     設定租借期間
                                     <!-- POST資料用 -->
                                     @*@Html.HiddenFor(M => M.StartDate)
@@ -131,7 +131,9 @@
                 <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
             </div>
             <div class="checkout">
-                <a href="@Url.Action("Checkout","Carts")" class="btn" role="button">進行結帳</a>
+                <input type="hidden" class="check" name="name" value="" />
+                <a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>
+                <button type="submit" class="btn">進行結帳</button>
             </div>
         </div>
         <div class="notice">
@@ -203,23 +205,23 @@
 
 
         
-        //function Checked() {
-        //    let result = "";
-        //    document.querySelectorAll('.form-check-input').forEach(function (x) {
-        //        if (x.checked == true) {
+        function Checked() {
+            let result = "";
+            document.querySelectorAll('.form-check-input').forEach(function (x) {
+                if (x.checked == true) {
 
-        //            result += x.value + ",";
-        //        }
-        //    })
+                    result += x.value + ",";
+                }
+            })
 
-        //    let b = document.querySelector('.check');
-        //    b.setAttribute("value", result);
-        //}
+            let b = document.querySelector('.check');
+            b.setAttribute("value", result);
+        }
 
-        //document.querySelectorAll('.form-check-input').forEach(function (btn) {
-        //    btn.addEventListener('change', Checked);
+        document.querySelectorAll('.form-check-input').forEach(function (btn) {
+            btn.addEventListener('change', Checked);
 
-        //})
+        })
 
         //function Date() {
         //    let start = "";
