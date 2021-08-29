@@ -44,8 +44,8 @@ namespace RentWebProj.Controllers
 
         public ActionResult Index()
         {
-            var carts = _cartService.GetCart(2);
-            ViewBag.Total = _cartService.GetCartTotal(2);
+            var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
         }
