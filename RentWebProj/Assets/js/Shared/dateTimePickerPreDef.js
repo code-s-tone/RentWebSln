@@ -1,12 +1,9 @@
-//需要指定DateModalLauncher
-
+//dateTimePicker本身設定
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
-let actionBtns = document.querySelectorAll('.decision-group .orange');
 
 collapseBtn.disabled = true;
 completeBtn.disabled = true;
-actionBtns.forEach(x => x.disabled = true);
 
 collapseBtn.addEventListener('click', function () {
     if (collapseBtn.classList.contains('collapsed')) {
@@ -80,35 +77,3 @@ const timePicker = flatpickr(".timePicker", {
         }
     }
 });
-
-
-let startDateTimeText;
-let endDateTimeText;
-let formatDivider = ' ';
-let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
-
-//設定日期完成
-completeBtn.addEventListener('click', function () {
-    startDateTimeText = combinDateTime(0);
-    endDateTimeText = combinDateTime(1);
-    //顯示文字
-    showPeriodText(DateModalLauncher, startDateTimeText, endDateTimeText);
-    //改變表單值
-    StartDateToPost.value = startDateTimeText;
-    ExpirationDateToPost.value = endDateTimeText;
-    //開放購物動作
-    actionBtns.forEach(x => x.disabled = false);
-});
-
-
-//輔助函式庫
-function combinDateTime(i) {
-    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
-        formatDivider + timePicker[i].input.value;
-}
-
-//顯示期間文字 給使用者看
-function showPeriodText(dateModalLauncher ,startDateTimeText, endDateTimeText ) {
-    dateModalLauncher.classList.add('setted');
-    dateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
-}

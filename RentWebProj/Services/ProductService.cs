@@ -185,8 +185,11 @@ namespace RentWebProj.Services
                 if (cart != null)
                 {
                     isExisted = true;
-                    startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
-                    expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    if (cart.StartDate != null)
+                    {
+                        startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
+                        expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    }
                 }
             }
 

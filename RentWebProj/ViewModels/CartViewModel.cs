@@ -6,7 +6,6 @@ using RentWebProj.Services;
 
 namespace RentWebProj.ViewModels
 {
-
     public class ProductDetailToCart
     {
         public string DateTimeFormat;
@@ -52,6 +51,7 @@ namespace RentWebProj.ViewModels
 
     public class CartIndex
     {
+
         public int MemberID { get; set; }
 
         public string ProductID { get; set; }
