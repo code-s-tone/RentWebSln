@@ -23,6 +23,19 @@ namespace RentWebProj.ViewModels
 
     }
 
+    public class FilterSearchViewModel
+    {
+        public string keywordInput { get; set; }
+        public string CategoryID { get; set; }
+        public string SubCategoryID { get; set; }
+        //public int OrderByOptions { get; set; }
+        public enum OrderByOptions { OrderByRelevance, OrderByPrice, OrderByStarsForLike }
+        //public enum DailyRateBudget { none, , 101, }
+
+    }
+
+    
+
     public enum Pages
     {
         CategoriesCardsPage, ProductCardsPage
