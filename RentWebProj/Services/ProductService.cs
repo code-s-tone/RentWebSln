@@ -45,16 +45,16 @@ namespace RentWebProj.Services
         //              on p.ProductID.Substring(3, 2) equals s.SubCategoryID
         //              where c.CategoryID == productID.Substring(0, 3)
 
-                      select new Category_Product_CardViewModel
-                      {
-                          ProductID = p.ProductID,
-                          ProductName = p.ProductName,
-                          CategoryName = c.CategoryName,
-                          Description = p.Description,
-                          DailyRate = (decimal)p.DailyRate,
-                          SubCategoryName = s.SubCategoryName,
-                          SubCategoryID = s.SubCategoryID
-                      });
+                      //select new Category_Product_CardViewModel
+                      //{
+                      //    ProductID = p.ProductID,
+                      //    ProductName = p.ProductName,
+                      //    CategoryName = c.CategoryName,
+                      //    Description = p.Description,
+                      //    DailyRate = (decimal)p.DailyRate,
+                      //    SubCategoryName = s.SubCategoryName,
+                      //    SubCategoryID = s.SubCategoryID
+                      //});
 
 
         //    return VMList;

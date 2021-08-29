@@ -27,13 +27,25 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            string[] checkID = Session["check"] as string[];
+            //string[] checkID = Session["check"] as string[];
 
-            var carts = _cartService.GetCart(1).Select(x => x.ProductID == checkID.Select(y => y).ToString()); ;
-            //var carts = _cartService.GetCart(1);
-            ViewBag.Total = _cartService.GetCartTotal(1);
+            //IEnumerable<bool> carts = _cartService.GetCart(1).Select(x => x.ProductID == checkID);
+            //IEnumerable<CartIndex> car = _cartService.GetCart(1).Where(x => x.ProductID == checkID.Select(y => y).ToString());
 
-            return View(carts);
+
+
+            //IEnumerable<CartIndex> carts = _cartService.GetCart(1);
+            //ViewBag.Total = _cartService.GetCartTotal(1);
+            //return View(carts);
+
+
+            var sb = TempData["DATA"];
+            
+
+
+            return View(sb);
+
+            
 
             //return View();
 
@@ -53,6 +65,7 @@ namespace RentWebProj.Controllers
             ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
+
         }
         [HttpPost]
         public ActionResult Index(string[] check, string StartDate, string ExpirationDate)
@@ -60,11 +73,24 @@ namespace RentWebProj.Controllers
             //沒V任何商品不能到下個，是空的return原本頁面
 
 
-            Session["check"] = check;
+            //Session["check"] = check;
 
-
+          
             //return View("Checkout", model: check);
             //return View();
+
+            //string[] subs = name.Split(',');
+
+            List<ProductCartsView> lstStuModel = new List<ProductCartsView>();
+            for(var x = 0; x <= check.Length - 1; x++)
+            {
+                lstStuModel.Add(new ProductCartsView() { ProductID = check[x]});
+            }
+
+            IEnumerable<CartIndex> VMList;
+            VMList = lstStuModel.Select(x => new CartIndex { ProductID = x.ProductID });
+            TempData["DATA"] = VMList;
+            //return RedirectToAction("checkout", "carts");
 
             return RedirectToAction("Checkout");
         }

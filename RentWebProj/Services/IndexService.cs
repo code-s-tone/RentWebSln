@@ -132,7 +132,7 @@ namespace RentWebProj.Services
 
             CMList = (from p in PList
                       join o in OList
-                      on p.ProductID equals o.ProductID
+                      on p.ProductID equals o.ProductID 
                       select new ProductCartsView
                       { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
             );
