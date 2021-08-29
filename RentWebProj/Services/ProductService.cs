@@ -5,6 +5,7 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
+using System.Web.Mvc;
 
 namespace RentWebProj.Services
 {
@@ -78,8 +79,14 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        public IEnumerable<CardsViewModel> SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string orderByOptions, string dailyRateBudget)
+        public List<CardsViewModel> SearchProductCards(FormCollection filterForm)
         {
+            string keywordInput = string.IsNullOrEmpty(filterForm["keywordInput"]) ? null : filterForm["keywordInput"];
+            string categoryOptions = filterForm["categoryOptions"];
+            string subCategoryOptions = filterForm["subCategoryOptions"];
+            string orderByOptions = filterForm["orderByOptions"];
+            string dailyRateBudget = filterForm["dailyRateBudget"];
+
             int minBudget = 0;
             int maxBudget = 0;
             switch (dailyRateBudget)
@@ -103,15 +110,15 @@ namespace RentWebProj.Services
                     break;
             }
 
-            IEnumerable<CardsViewModel> VMList;
+            List<CardsViewModel> selectedVMList;
             var pDMList = _repository.GetAll<Product>();
             var ctDMList = _repository.GetAll<Category>();
-            var subCtDMList = _repository.GetAll<SubCategory>();
+            var subDMList = _repository.GetAll<SubCategory>();
 
-            VMList = (from p in pDMList
+            selectedVMList = (from p in pDMList
                 join c in ctDMList
                     on p.ProductID.Substring(0, 3) equals c.CategoryID
-                join s in subCtDMList
+                join s in subDMList
                     on p.ProductID.Substring(3, 2) equals s.SubCategoryID
                 where (categoryOptions == "0" || c.CategoryID == categoryOptions)
                 && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
@@ -128,9 +135,9 @@ namespace RentWebProj.Services
                     DailyRate = (decimal)p.DailyRate,
                     SubCategoryName = s.SubCategoryName,
                     SubCategoryID = s.SubCategoryID
-                });
+                }).ToList();
 
-            return VMList;
+            return selectedVMList;
 
         }
 

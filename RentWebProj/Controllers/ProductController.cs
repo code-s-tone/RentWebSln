@@ -44,16 +44,16 @@ namespace RentWebProj.Controllers
         [HttpPost] //前端搜尋篩選
         public ActionResult SearchProductCards(FormCollection filterForm)
         {
-            string keywordInput = string.IsNullOrEmpty(filterForm["keywordInput"]) ? null : filterForm["keywordInput"];
-            string categoryOptions = filterForm["categoryOptions"];
-            string subCategoryOptions = filterForm["subCategoryOptions"];
-            string orderByOptions = filterForm["orderByOptions"];
-            string dailyRateBudget = filterForm["dailyRateBudget"];
-            var selectedCtProductList = _service.SearchProductCards(keywordInput, categoryOptions, subCategoryOptions, orderByOptions, dailyRateBudget);
+            var selectedCtProductList = _service.SearchProductCards(filterForm);
+                //keywordInput, categoryOptions, subCategoryOptions, orderByOptions, dailyRateBudget);
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            ViewBag.ContainerTitle = "篩選";
+            if (selectedCtProductList.Count() == 0)
+            {
+                ViewBag.ContainerTitle = nameof(ContainerTitle.您要的商品);
+            }
+            
             ViewBag.FilterForm = filterForm;
             return View("ProductCardsList", selectedCtProductList);
         }
