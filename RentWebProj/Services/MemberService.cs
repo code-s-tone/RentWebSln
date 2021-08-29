@@ -69,11 +69,11 @@ namespace RentWebProj.Services
                                  //會員生日判斷如果為"null"則給預設值
                                  MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
                                  MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
-                                 //Email回必填欄位
+                                 //Email為必有欄位
                                  MemberEmail = m.Email,
                                  MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
                                  //MemberBranchName = b.StoreName,
-                                 //測試訂單中
+                                 //測試中訂單
                                  //MemberOrderDetail = MemberOrderDetailVM,
                                  //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
                              };
@@ -124,7 +124,7 @@ namespace RentWebProj.Services
 
         }
 
-        public string ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword)
+        public string ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string ChangeFullName , string ChangePhone)
         {
             var result = _repository.GetAll<Member>().ToList();
             result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
@@ -135,7 +135,43 @@ namespace RentWebProj.Services
         }
 
         //取得與目前登入User對應的"密碼"
+        public string CheckPassword(string UserEmail)
+        {
+            var result = _repository.GetAll<Member>();
+            var Memberpassword = from s in result
+                                 where s.Email == UserEmail
+                                 select new CheckPassword
+                                 {
+                                     Password = s.PasswordHash
+                                 };
+            string MemberPasswordString = "";
+            foreach (var item in Memberpassword)
+            {   //因為IQueryable故需要轉型為ToString
+                MemberPasswordString = item.Password.ToString();
+            }
+            return MemberPasswordString;
+        }
+
+        //取得與目前登入User對應的"姓名"
         public string CheckName(string UserEmail)
+        {
+            var result = _repository.GetAll<Member>();
+            var Memberpassword = from s in result
+                                 where s.Email == UserEmail
+                                 select new CheckPassword
+                                 {
+                                     Password = s.PasswordHash
+                                 };
+            string MemberPasswordString = "";
+            foreach (var item in Memberpassword)
+            {   //因為IQueryable故需要轉型為ToString
+                MemberPasswordString = item.Password.ToString();
+            }
+            return MemberPasswordString;
+        }
+
+        //取得與目前登入User對應的"姓名"
+        public string CheckPhone(string UserEmail)
         {
             var result = _repository.GetAll<Member>();
             var Memberpassword = from s in result

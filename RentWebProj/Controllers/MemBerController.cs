@@ -34,7 +34,7 @@ namespace RentWebProj.Controllers
         public ActionResult MemberCenter(MemberPersonDataViewModel X)
         {
             //Step1. 先"取得"目前登入的"密碼"
-            var MemberPasswordHash = _service.CheckName(User.Identity.Name);
+            var MemberPasswordHash = _service.CheckPassword(User.Identity.Name);
             //var MemberPasswordHash = ViewBag.CheckPassword;
             //model是否合法驗證
             if (ModelState.IsValid)
@@ -45,7 +45,7 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());
             }
             //Step2. 把信箱跟密碼進行"比對並更新"
-            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash);
+            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash , X.MemberName , X.MemberPhone);
 
             return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());//可以強型別
 
