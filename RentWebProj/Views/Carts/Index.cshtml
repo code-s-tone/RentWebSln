@@ -176,14 +176,23 @@
         let ExpirationDateToPost = null;
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
-        DateModalBtns.forEach((btn,idx) =>
+
+        //如果是List就可以用index取
+        DateModalBtns.forEach((btn, idx) =>
             btn.addEventListener('click', function (ev) {
                 DateModalLauncher = ev.target;
+                //設定要POST資料的是哪個欄位
                 //StartDateToPost = ...idx;
                 //ExpirationDateToPost = ...idx;
                 StartDateToPost = document.querySelector('input[name="StartDate"]');
                 ExpirationDateToPost = document.querySelector('input[name="ExpirationDate"]');
 
+                //禁用日期
+                @*datePicker.config.disable = @Html.Raw(Model.DisablePeriodsJSON) ;*@
+                //如果存在於購物車且 日期已選=>填入日期選取器的選取?。  顯示文字//Model.IsExisted &&
+                @*if ( @Json.Encode(Model.StartDate!=null ) ) {
+                    showPeriodText(DateModalLauncher,'@(Model.StartDate)', '@Model.ExpirationDate');
+                }*@
             })
         );
     </script>

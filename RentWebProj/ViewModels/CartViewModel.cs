@@ -58,6 +58,10 @@ namespace RentWebProj.ViewModels
 
         public string ProductName { get; set; }
 
+        //禁用日期
+        //public string DisablePeriodsJSON { get; set; }
+
+
         public DateTime StartDate { get; set; }//軒：是否改 可null?
 
         public DateTime ExpirationDate { get; set; }
