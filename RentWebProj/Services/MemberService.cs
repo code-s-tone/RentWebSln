@@ -50,28 +50,32 @@ namespace RentWebProj.Services
                                       ExpirationDate = (DateTime)od.ExpirationDate,
                                       DailyRate = (int)od.DailyRate,
                                   };
-            
+
 
             MemberCenterVM = from m in MemberDMList
-                             join o in OrderDMList
-                             on m.MemberID equals o.MemberID
-                             join od in OrderDetailDMList
-                             on o.OrderID equals od.OrderID
-                             join b in BranchDMList
-                             on o.StoreID equals b.StoreID
-                             //where m.MemberID == 38
+                                 //join o in OrderDMList
+                                 //on m.MemberID equals o.MemberID
+                                 //join od in OrderDetailDMList
+                                 //on o.OrderID equals od.OrderID
+                                 //join b in BranchDMList
+                                 //on o.StoreID equals b.StoreID
+                                 //where m.MemberID == 38
                              where m.Email == LoginEmail
                              select new MemberPersonDataViewModel
                              {
+                                 //系統自動產生
                                  MemberId = m.MemberID,
-                                 MemberName = m.FullName,
-                                 MemBerBirthday = (DateTime)m.Birthday,
-                                 MemberPhone = m.Phone,
+                                 MemberName = (String.IsNullOrEmpty(m.FullName)) ? null : m.FullName,
+                                 //會員生日判斷如果為"null"則給預設值
+                                 MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
+                                 MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
+                                 //Email回必填欄位
                                  MemberEmail = m.Email,
-                                 MemberPasswordHash = m.PasswordHash,
-                                 MemberBranchName = b.StoreName,
-                                 //測試中
-                                 //MemberOrderDetail = MemberOrderDetailVM
+                                 MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
+                                 //MemberBranchName = b.StoreName,
+                                 //測試訂單中
+                                 //MemberOrderDetail = MemberOrderDetailVM,
+                                 //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
                              };
 
             return MemberCenterVM;
@@ -120,7 +124,7 @@ namespace RentWebProj.Services
 
         }
 
-        public string ChangeProfile(string UserEmail , string ChangeEmail , string UserPassword ,  string ChangePassword , string UserName , string UserPhone)
+        public string ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword)
         {
             var result = _repository.GetAll<Member>().ToList();
             result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
@@ -132,14 +136,14 @@ namespace RentWebProj.Services
 
         //取得與目前登入User對應的"密碼"
         public string CheckName(string UserEmail)
-        {   
+        {
             var result = _repository.GetAll<Member>();
             var Memberpassword = from s in result
-                                  where s.Email == UserEmail
-                                  select new CheckPassword
-                                  {
-                                      Password = s.PasswordHash
-                                  };
+                                 where s.Email == UserEmail
+                                 select new CheckPassword
+                                 {
+                                     Password = s.PasswordHash
+                                 };
             string MemberPasswordString = "";
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString

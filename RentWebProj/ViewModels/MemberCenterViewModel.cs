@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace RentWebProj.ViewModels
-{   
+{
     //個人資料
     public class MemberPersonDataViewModel
     {
@@ -18,8 +18,8 @@ namespace RentWebProj.ViewModels
         public string MemberPhone { get; set; }
         public string MemberBranchName { get; set; }
         [Required]
-        [StringLength(30, MinimumLength = 10 , ErrorMessage = "信箱至少10個字元,最多30字元")]
-        [DataType(DataType.EmailAddress , ErrorMessage ="請輸入正確的電子信箱")]
+        [StringLength(30, MinimumLength = 10, ErrorMessage = "信箱至少10個字元,最多30字元")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "請輸入正確的電子信箱")]
         public string MemberEmail { get; set; }
 
         [Required]
@@ -42,7 +42,7 @@ namespace RentWebProj.ViewModels
         public string ComfigMemberPasswordHash { get; set; }
 
         //測試中
-        //public IEnumerable<MemberOrderDetailViewModel> MemberOrderDetail { get; set; }
+        public IEnumerable<MemberOrderDetailViewModel> MemberOrderDetail { get; set; }
     }
 
     //訂單資訊
@@ -70,7 +70,7 @@ namespace RentWebProj.ViewModels
     //修改密碼驗證使用
     public class CheckPassword
     {
-       public string Password { get; set; }
+        public string Password { get; set; }
     }
 
     public class MemberLoginDetailViewModel
