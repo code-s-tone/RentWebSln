@@ -4,7 +4,7 @@
     margin: 10px auto;
 }
 
-.ProductCardsContainer h2 {
+.ProductCardsContainer h4 {
     padding-left: 10px;
     /* 為配合對齊下面卡片(卡片有左右margin12) */
 }
@@ -78,12 +78,18 @@ repeat {
     background-color: white;
     overflow: hidden;
     cursor: pointer;
+    
 }
+
+    .product-img a{
+        width: 100%;
+        height: 100%;
+    }
 
     .product-img img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover !important;
         /* 還是要用contain?? */
     }
 
@@ -105,12 +111,15 @@ repeat {
     opacity: .95;
     top: -8%;
     right: 0%;
+    
+}
+.checkitOut a{
     color: white;
+
 }
 
-
-@keyframes checkitOut {
-    from {
+    @keyframes checkitOut {
+        from {
         /* right: 20%; */
         top: 0%;
     }

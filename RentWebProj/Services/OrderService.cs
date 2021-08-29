@@ -5,6 +5,8 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
+using Newtonsoft.Json;
+
 
 namespace RentWebProj.Services
 {
@@ -16,7 +18,8 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<RentPeriod> getProductRentPeriods(string PID)
+        //取得歷史租期
+        public IEnumerable<RentPeriod> getProductRentPeriods(string PID) 
         {
             var RentPeriods =
                 from od in (_repository.GetAll<OrderDetail>())
@@ -75,6 +78,19 @@ namespace RentWebProj.Services
                     where o.MemberID == MemberID && o.OrderDate == OrderDate
                     select new { o.OrderID })
                    .SingleOrDefault().OrderID;
+        }
+
+        //取得禁租日期JSON
+        public string getDisablePeriodJSON(string PID)
+        {
+            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
+                .Where(x => x.to >= new DateTime())
+                .Select(x => new DisablePeriod
+                {
+                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
+                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
+                }).ToList();
+            return JsonConvert.SerializeObject(disablePeriodList);
         }
     }
 }

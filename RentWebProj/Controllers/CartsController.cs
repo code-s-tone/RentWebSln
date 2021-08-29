@@ -52,8 +52,8 @@ namespace RentWebProj.Controllers
         public ActionResult Index()
         {
             var carts = _cartService.GetCart(1);
-            ViewBag.Total = _cartService.GetCartTotal(1);       
-
+            ViewBag.Total = _cartService.GetCartTotal(1);
+            
             return View(carts);
         }
         [HttpPost]
@@ -76,8 +76,11 @@ namespace RentWebProj.Controllers
             return RedirectToAction("checkout", "carts");
         }
 
-
-
+        public ActionResult Delete(int MemberID, string ProductID)
+        {
+             _cartService.DeleteCart(MemberID, ProductID);
+            return RedirectToAction("Index");
+        }
 
         //public ActionResult Index()
         //{
@@ -162,31 +165,31 @@ namespace RentWebProj.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
-        }
+        //// GET: Carts/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Cart cart = db.Carts.Find(id);
+        //    if (cart == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cart);
+        //}
 
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Carts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Cart cart = db.Carts.Find(id);
+        //    db.Carts.Remove(cart);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

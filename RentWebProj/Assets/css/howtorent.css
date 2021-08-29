@@ -314,6 +314,7 @@
 
 .LearnMore {
     padding: 30px;
+    margin-bottom: 100px;
 }
 
 .LearnMore-title {
@@ -327,6 +328,7 @@
 
 .LearnMore-btn {
     padding: 10px;
+    margin: auto;
     text-align: center;
 }
 

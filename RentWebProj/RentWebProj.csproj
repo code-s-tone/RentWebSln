@@ -55,6 +55,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -63,6 +66,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -125,9 +134,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\ProductController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
@@ -160,8 +171,9 @@
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\OperationResultHelper.cs" />
     <Compile Include="Services\IndexService.cs" />
+    <Compile Include="ViewModels\ApiViewModels\ApiBase\ApiResult.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
-    <Compile Include="ViewModels\MemberCenterView.cs" />
+    <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\IndexView.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -177,6 +189,7 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\ProductDetail\dateTimePicker.css" />
     <Content Include="Assets\css\ProductDetail\flatpickr_orange.css" />
     <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
@@ -195,6 +208,7 @@
     <Content Include="Assets\css\MemberCenter\order.css" />
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
+    <Content Include="Assets\css\Register\Register.css" />
     <Content Include="Assets\js\ProductDetail\dateTimePicker.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />
@@ -435,8 +449,6 @@
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Product\TEST_ProductCategory.cshtml" />
-    <Content Include="Views\Product\TEST_ProductSubCategory.cshtml" />
     <Content Include="Views\Members\Create.cshtml" />
     <Content Include="Views\Members\Delete.cshtml" />
     <Content Include="Views\Members\Details.cshtml" />
@@ -457,6 +469,16 @@
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
     <Content Include="Views\Product\Category_Product_Cards.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Member\_memberCenterPersonPartial.cshtml" />
+    <Content Include="Views\Member\_memberCenterAccountPartial.cshtml" />
+    <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
+    <Content Include="Views\Member\Login.cshtml" />
+    <Content Include="Views\Member\Register.cshtml" />
+    <Content Include="Views\Product\ProductCardsList.cshtml" />
+    
+    <Content Include="Views\Shared\Partial_CategoryCard.cshtml" />
+    <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Shared\_DateTimeModal.cshtml" />
   </ItemGroup>
