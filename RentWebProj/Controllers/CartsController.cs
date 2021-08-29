@@ -61,8 +61,8 @@ namespace RentWebProj.Controllers
             //存viewbag 、 viewdata 
 
 
-            //return View("Checkout", model:result);
-            return View();
+            return View("Checkout", model: check);
+            //return View();
 
             //return RedirectToAction("Checkout", "Carts", name);
         }
