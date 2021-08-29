@@ -49,10 +49,8 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            if (selectedCtProductList.Count() == 0)
-            {
-                ViewBag.ContainerTitle = nameof(ContainerTitle.您要的商品);
-            }
+
+            ViewBag.ContainerTitle = selectedCtProductList.Count == 0? nameof(ContainerTitle.很抱歉找不到您要的商品):nameof(ContainerTitle.您要的商品);
             
             ViewBag.FilterForm = filterForm;
             return View("ProductCardsList", selectedCtProductList);

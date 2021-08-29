@@ -110,21 +110,20 @@ namespace RentWebProj.Services
                     break;
             }
 
-            List<CardsViewModel> selectedVMList;
             var pDMList = _repository.GetAll<Product>();
             var ctDMList = _repository.GetAll<Category>();
             var subDMList = _repository.GetAll<SubCategory>();
 
-            selectedVMList = (from p in pDMList
+            var selectedVMList = (from p in pDMList
                 join c in ctDMList
                     on p.ProductID.Substring(0, 3) equals c.CategoryID
                 join s in subDMList
                     on p.ProductID.Substring(3, 2) equals s.SubCategoryID
                 where (categoryOptions == "0" || c.CategoryID == categoryOptions)
-                && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
-                && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
-                && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
-                && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+                      && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
+                      && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
+                      && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
+                      && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
 
                 select new CardsViewModel
                 {
