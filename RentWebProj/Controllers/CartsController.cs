@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
 using RentWebProj.Services;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
@@ -23,18 +24,53 @@ namespace RentWebProj.Controllers
             _service = new IndexService();
             _cartService = new CartService();
         }
+
         public ActionResult Checkout()
         {
-
+            
             return View(_service.getCartsData());
+
+            //return View();
+
+        }
+        [HttpPost]
+        public ActionResult Checkout(IEnumerable<CartIndex> VM)
+        {
+            //參數可能要調整
+            new OrderService().Create(VM);
+
+            return RedirectToAction("MemberCenter", "Member");
         }
 
         public ActionResult Index()
         {
-            var carts = _cartService.GetCart(1);
-            ViewBag.Total = _cartService.GetCartTotal(1);
+            var carts = _cartService.GetCart(2);
+            ViewBag.Total = _cartService.GetCartTotal(2);
 
             return View(carts);
+        }
+        [HttpPost]
+        public ActionResult Index(string[] check,string StartDate,string checkjson)
+        {
+            //沒V任何商品不能到下個，是空的return原本頁面
+            //name.Substring(0, name.LastIndexOf(","));
+
+            //string[] result = name.Split(',');
+            //result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
+
+            //存viewbag 、 viewdata 
+
+
+            return View("Checkout", model: check);
+            //return View();
+
+            //return RedirectToAction("Checkout", "Carts", name);
+        }
+
+        public ActionResult Delete(int MemberID, string ProductID)
+        {
+             _cartService.DeleteCart(MemberID, ProductID);
+            return RedirectToAction("Index");
         }
 
         //public ActionResult Index()
@@ -120,31 +156,31 @@ namespace RentWebProj.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
-        }
+        //// GET: Carts/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Cart cart = db.Carts.Find(id);
+        //    if (cart == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cart);
+        //}
 
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Carts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Cart cart = db.Carts.Find(id);
+        //    db.Carts.Remove(cart);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {
