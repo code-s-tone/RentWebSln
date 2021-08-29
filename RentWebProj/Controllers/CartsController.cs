@@ -19,7 +19,6 @@ namespace RentWebProj.Controllers
         private CartService _cartService;
         // GET: Carts
 
-
         public CartsController()
         {
             _service = new IndexService();
@@ -28,8 +27,13 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            
-            return View(_service.getCartsData());
+            string[] checkID = Session["check"] as string[];
+
+            var carts = _cartService.GetCart(1).Select(x => x.ProductID == checkID.Select(y => y).ToString()); ;
+            //var carts = _cartService.GetCart(1);
+            ViewBag.Total = _cartService.GetCartTotal(1);
+
+            return View(carts);
 
             //return View();
 
@@ -47,25 +51,22 @@ namespace RentWebProj.Controllers
         {
             var carts = _cartService.GetCart(1);
             ViewBag.Total = _cartService.GetCartTotal(1);
-            
+
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(string[] check,string StartDate,string checkjson)
+        public ActionResult Index(string[] check, string StartDate, string ExpirationDate)
         {
             //沒V任何商品不能到下個，是空的return原本頁面
-            //name.Substring(0, name.LastIndexOf(","));
-
-            //string[] result = name.Split(',');
-            //result = result.Where(r => !string.IsNullOrEmpty(r)).ToArray();
-
-            //存viewbag 、 viewdata 
 
 
-            return View("Checkout", model: check);
+            Session["check"] = check;
+
+
+            //return View("Checkout", model: check);
             //return View();
 
-            //return RedirectToAction("Checkout", "Carts", name);
+            return RedirectToAction("Checkout");
         }
 
         //public ActionResult Index()

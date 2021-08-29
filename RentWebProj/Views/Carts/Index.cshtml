@@ -49,7 +49,7 @@
 
                                         </label>
 
-                                        
+
 
                                     </div>
                                     <div class="product-img">
@@ -75,7 +75,7 @@
                                         }
                                         </p>
                                         <!-- Button trigger modal setDate -->
-                                        <button class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
+                                        <button class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal" type="button">
                                             設定租借期間
                                             <!-- POST資料用 -->
                                             @*@Html.HiddenFor(M => M.StartDate)
@@ -128,7 +128,6 @@
                         <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
                     </div>
                     <div class="checkout">
-                        @*<input type="hidden" class="check" name="name" value="" />*@
                         <input type="hidden" name="StartDate" value="" />
                         <input type="hidden" name="ExpirationDate" value="" />
                         <button type="submit" class="btn">進行結帳</button>
@@ -194,46 +193,46 @@
         );
 
 
-        
-        //function Checked() {
-        //    let result = "";
-        //    document.querySelectorAll('.form-check-input').forEach(function (x) {
-        //        if (x.checked == true) {
 
-        //            result += x.value + ",";
-        //        }
-        //    })
+            //function Checked() {
+            //    let result = "";
+            //    document.querySelectorAll('.form-check-input').forEach(function (x) {
+            //        if (x.checked == true) {
 
-        //    let b = document.querySelector('.check');
-        //    b.setAttribute("value", result);
-        //}
+            //            result += x.value + ",";
+            //        }
+            //    })
 
-        //document.querySelectorAll('.form-check-input').forEach(function (btn) {
-        //    btn.addEventListener('change', Checked);
+            //    let b = document.querySelector('.check');
+            //    b.setAttribute("value", result);
+            //}
 
-        //})
+            //document.querySelectorAll('.form-check-input').forEach(function (btn) {
+            //    btn.addEventListener('change', Checked);
 
-        //function Date() {
-        //    let start = "";
-        //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
+            //})
 
-        //            start += startDateTimeText + ",";
-                
-        //    })
+            //function Date() {
+            //    let start = "";
+            //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
 
-        //    let a = document.querySelector(".start");
-        //    a.setAttribute("value", start);
-        //}
+            //            start += startDateTimeText + ",";
 
-        //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
-        //    btn.addEventListener('change', Date);
+            //    })
 
-        //})
-        
+            //    let a = document.querySelector(".start");
+            //    a.setAttribute("value", start);
+            //}
+
+            //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
+            //    btn.addEventListener('change', Date);
+
+            //})
 
 
-           
-        
+
+
+
 
 
 

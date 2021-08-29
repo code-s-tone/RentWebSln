@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ProductCartsView>
+﻿@model IEnumerable<CartIndex>
 @{
-    
+
     ViewBag.Title = "Checkout";
 }
 
@@ -70,15 +70,15 @@
                             </div>
                             <div class="product-sub">
                                 <span class="title">小計 : </span>&emsp;
-                                <span class="subTotal"> @Html.DisplayFor(modelItem => item.TotalAmount)</span>
+                                <span class="subTotal">@Html.DisplayFor(m => item.Sub)</span>
                             </div>
                         </td>
                         @*
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
                         *@
                     </tr>
                     <tr>
@@ -86,7 +86,7 @@
                             <div class="order-total">
                                 <span>總計：</span>
                                 <span class="currency">TWD$</span> &emsp;
-                                <span class="total">@Html.DisplayFor(modelItem => item.TotalAmount)</span>
+                                <span class="total">@Html.DisplayFor(m => item.Sub)</span>
                             </div>
                         </td>
                     </tr>
@@ -150,7 +150,7 @@
             <div class="info-body">
                 <div class="sub">
                     <span>小計 :</span>
-                    <span class="subtotal">{NT$400}</span>
+                    <span class="subtotal">@ViewBag.Total</span>
                 </div>
                 <div class="dis">
                     <span>折扣 :</span>
@@ -159,7 +159,7 @@
                 <hr>
                 <div class="tol">
                     <span>合計 :</span>
-                    <span class="total">{NT$400}</span>
+                    <span class="total">@ViewBag.Total</span>
                 </div>
                 <div class="checkout">
                     <button type="button" class="btn">進行結帳</button>
