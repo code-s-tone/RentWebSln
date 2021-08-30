@@ -53,7 +53,7 @@ namespace RentWebProj.Controllers
         {
             var carts = _cartService.GetCart(1);
             ViewBag.Total = _cartService.GetCartTotal(1);
-            
+
             return View(carts);
         }
         [HttpPost]
