@@ -22,8 +22,8 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.CategoriesCardsPage);
             ViewBag.Container = nameof(Container.CategoriesCardsContainer);
             ViewBag.ContainerTitle = nameof(ContainerTitle.所有種類);
-            ViewBag.CategoryOptions = _service.GetCategoryData();   //軒：好奇為何要用兩種方式傳同一種資料
-            return View("ProductCardsList", _service.GetCategoryData()); //軒：好奇為何要用兩種方式傳同一種資料
+            ViewBag.CategoryOptions = _service.GetCategoryData();
+            return View("ProductCardsList"); 
         }
         public ActionResult ProductCardsList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
         {
@@ -41,20 +41,30 @@ namespace RentWebProj.Controllers
             return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost] //前端搜尋篩選
-        //public ActionResult GetSelectedProductCards(string categoryID)
-        //{
-        //    var selectedCtProductList = _service.GetSubCategoryOptions(categoryID);
-        //    return Json(selectedCtProductList,JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost] //前端搜尋篩選
+        public ActionResult SearchProductCards(FormCollection filterForm)
+        {
+            string keywordInput = string.IsNullOrEmpty(filterForm["keywordInput"]) ? null : filterForm["keywordInput"];
+            string categoryOptions = filterForm["categoryOptions"];
+            string subCategoryOptions = filterForm["subCategoryOptions"];
+            string orderByOptions = filterForm["orderByOptions"];
+            string dailyRateBudget = filterForm["dailyRateBudget"];
+            var selectedCtProductList = _service.SearchProductCards(keywordInput, categoryOptions, subCategoryOptions, orderByOptions, dailyRateBudget);
+            ViewBag.Page = nameof(Pages.ProductCardsPage);
+            ViewBag.Container = nameof(Container.ProductCardsContainer);
+            ViewBag.CategoryOptions = _service.GetCategoryData();
+            ViewBag.ContainerTitle = "篩選";
+            ViewBag.FilterForm = filterForm;
+            return View("ProductCardsList", selectedCtProductList);
+        }
 
 
         //---------------------------------------------------------------
 
 
+        //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
         {
-            //接收路由PID撈產品資料、取當前登入者，傳到View
             //User.Identity.Name
             ProductDetailToCart VM = _service.getProductDetail(PID,1);
 
@@ -67,19 +77,22 @@ namespace RentWebProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
             //紀錄操作種類、成敗
-            string OperationType = null;
             OperationResult result = new OperationResult();
+            bool isSuccessful = false;
+            //錯誤訊息
+            //租借日期已被下訂、違法輸入
             if (ModelState.IsValid)
             {
-                result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
+                result = new CartService().CreateOrUpdate(PostVM, PID);
+                isSuccessful = result.IsSuccessful;
             }
-            //購物車可能已變動，需重撈
+
+            //購物車可能已變動/違法輸入，需重撈
             ProductDetailToCart VM = _service.getProductDetail(PID, 1);
-            VM.OperationType = OperationType;
-            VM.OperationSuccessful = result.IsSuccessful;
+            VM.OperationSuccessful = isSuccessful;
+            VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
-
-            return View(VM);//由於共用View，型別必須跟Get方法的一致
+            return View(VM);
         }
     }
 }

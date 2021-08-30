@@ -1,11 +1,23 @@
-let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+//輔助函式庫
+function combinDateTime(i) {
+    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
+        formatDivider + timePicker[i].input.value;
+}
+
+//顯示期間文字 給使用者看
+function showPeriodText( startDateTimeText, endDateTimeText) {
+    DateModalLauncher.classList.add('setted');
+    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
+}
+
+
+
+//dateTimePicker本身設定
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');
-let actionBtns = document.querySelectorAll('.decision-group .orange');
 
 collapseBtn.disabled = true;
 completeBtn.disabled = true;
-actionBtns.forEach(x => x.disabled = true);
 
 collapseBtn.addEventListener('click', function () {
     if (collapseBtn.classList.contains('collapsed')) {
@@ -19,9 +31,6 @@ collapseBtn.addEventListener('click', function () {
 const datePicker = flatpickr("#datePicker", {
     mode: "range",
     dateFormat: "Y / m / d",
-    // altInput: true,
-    // altFormat: "F j, Y",
-
     //disable: [
     //    {
     //        from: "2021 / 10 / 04",
@@ -47,12 +56,12 @@ const datePicker = flatpickr("#datePicker", {
             //日期設定好> 才可以按collapseBtn
             //啟用
             collapseBtn.disabled = false;
-            if (timePicker[0].selectedDates.length == 1
-                && timePicker[1].selectedDates.length == 1
-            ) {
-            //日期時間都設定好> 才可以按completeBtn
-            completeBtn.disabled = false;
-                }
+            if (timePicker[0].selectedDates.length == 1 &&
+                timePicker[1].selectedDates.length == 1
+            ){
+                //日期時間都設定好> 才可以按completeBtn
+                completeBtn.disabled = false;
+            }
 
         } else {
             //禁止
@@ -71,10 +80,10 @@ const timePicker = flatpickr(".timePicker", {
     maxTime: "22:30",
 
     onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (timePicker[0].selectedDates.length == 1
-            && timePicker[1].selectedDates.length == 1
-            && datePicker.selectedDates.length == 2
-            && datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
+        if (timePicker[0].selectedDates.length == 1 &&
+            timePicker[1].selectedDates.length == 1 &&
+            datePicker.selectedDates.length == 2 &&
+            datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
             //日期時間都設定好> 才可以按completeBtn
             completeBtn.disabled = false;
         } else {
@@ -82,31 +91,3 @@ const timePicker = flatpickr(".timePicker", {
         }
     }
 });
-
-
-let startDateTimeText;
-let endDateTimeText;
-let formatDivider = ' ';
-let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
-
-completeBtn.addEventListener('click', function () {
-    startDateTimeText = combinDateTime(0);  //顯示期間文字 給使用者看
-    endDateTimeText = combinDateTime(1);    //顯示期間文字 給使用者看
-
-    DateModalLauncher.classList.add('setted');
-    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
-
-    //設定完成，改變表單值
-    document.querySelector('#StartDate').value = startDateTimeText
-    document.querySelector('#ExpirationDate').value = endDateTimeText;
-    //flatpickr.parseDate(startDateTimeText, dateTimeFormat);
-    //判斷已填
-    actionBtns.forEach(x => x.disabled = false);
-});
-
-
-//輔助函式庫
-function combinDateTime(i) {
-    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
-        formatDivider + timePicker[i].input.value;
-}

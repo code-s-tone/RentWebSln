@@ -69,6 +69,13 @@
     padding: 2px 7px;
 }
 
+.product-name a{
+    text-decoration: none;
+    color: #000;
+    display: block;
+    padding: 10px;
+}
+
 .product-stock p {
     color: #999;
     padding: 2px 7px;
@@ -87,6 +94,26 @@
     width: 38px;
     text-align: right;
     padding: 1px 3px;
+}
+
+/*.product-delete-sub、.delete a 只有cart有*/
+.product-delete-sub {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete .btn {
+    display: block;
+    text-align: center;
+    color: #fff;
+    background-color: #FC8D61;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.delete .btn:hover {
+    color: #fff;
+    background-color: #5bbdc5;
 }
 
 .product-sub {
@@ -119,15 +146,17 @@
 }
 
 .checkout .btn {
+    display: block;
+    text-align: center;
+    color: #fff;
+    background-color: #FC8D61;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 0px 0px 10px;
-    padding: 5px 12px 8px;
 }
 
 .checkout .btn:hover {
     color: #fff;
-    background-color: #FC8D61;
+    background-color: #5bbdc5;
 }
 
 .notice h2 {

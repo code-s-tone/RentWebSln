@@ -5,7 +5,6 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
-using Newtonsoft.Json;
 
 namespace RentWebProj.Services
 {
@@ -70,28 +69,80 @@ namespace RentWebProj.Services
                           Description = p.Description,
                           DailyRate = (decimal)p.DailyRate,
                           SubCategoryName = s.SubCategoryName,
-                          SubCategoryID=s.SubCategoryID
+                          SubCategoryID = s.SubCategoryID
                       });
 
 
             return VMList;
         }
         public IEnumerable<CardsViewModel> GetSubCategoryOptions(string catID)
-        {
-            var ctDMList = GetCategoryData();
-            var subCtDMList = _repository.GetAll<SubCategory>();
-
-            var subDMList = from ct in ctDMList      
-                            join sub in subCtDMList
-                            on ct.CategoryID equals sub.CategoryID
-                            where ct.CategoryID == catID
+        {   
+            var subDMList = _repository.GetAll<SubCategory>();
+            var subVMList = from sub in subDMList 
+                            where sub.CategoryID == catID
                             select new CardsViewModel
                             {
                                 SubCategoryName = sub.SubCategoryName,
                                 SubCategoryID = sub.SubCategoryID
                             };
 
-            return subDMList;
+            return subVMList;
+        }
+
+        public IEnumerable<CardsViewModel> SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string orderByOptions, string dailyRateBudget)
+        {
+            int minBudget = 0;
+            int maxBudget = 0;
+            switch (dailyRateBudget)
+            {
+                case "1":
+                    maxBudget = 100;
+                    break;
+                case "2":
+                    minBudget = 101;
+                    maxBudget = 500;
+                    break;
+                case "3":
+                    minBudget = 501;
+                    maxBudget = 1000;
+                    break;
+                case "4":
+                    minBudget = 1001;
+                    maxBudget = 2147483647; //int32最大值
+                    break;
+                default:
+                    break;
+            }
+
+            IEnumerable<CardsViewModel> VMList;
+            var pDMList = _repository.GetAll<Product>();
+            var ctDMList = _repository.GetAll<Category>();
+            var subCtDMList = _repository.GetAll<SubCategory>();
+
+            VMList = (from p in pDMList
+                join c in ctDMList
+                    on p.ProductID.Substring(0, 3) equals c.CategoryID
+                join s in subCtDMList
+                    on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+                where (categoryOptions == "0" || c.CategoryID == categoryOptions)
+                && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
+                && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
+                && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
+                && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+
+                select new CardsViewModel
+                {
+                    ProductID = p.ProductID,
+                    ProductName = p.ProductName,
+                    CategoryName = c.CategoryName,
+                    Description = p.Description,
+                    DailyRate = (decimal)p.DailyRate,
+                    SubCategoryName = s.SubCategoryName,
+                    SubCategoryID = s.SubCategoryID
+                });
+
+            return VMList;
+
         }
 
         public ProductDetailToCart getProductDetail(string PID, int? currentMemberID)
@@ -102,7 +153,8 @@ namespace RentWebProj.Services
             string startDate = null;
             string expirationDate = null;
 
-            if (currentMemberID != null)//有登入
+            //有登入 //User.Identity.
+            if (currentMemberID != null)
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
                              where c.MemberID == currentMemberID && c.ProductID == PID
@@ -111,8 +163,11 @@ namespace RentWebProj.Services
                 if (cart != null)
                 {
                     isExisted = true;
-                    startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
-                    expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    if (cart.StartDate != null)
+                    {
+                        startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
+                        expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    }
                 }
             }
 
@@ -124,14 +179,7 @@ namespace RentWebProj.Services
 
 
             //禁用日期
-            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
-                .Where(x => x.to >= new DateTime())
-                .Select(x => new DisablePeriod
-                {
-                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
-                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
-                }).ToList();
-            var disablePeriodJSON = JsonConvert.SerializeObject(disablePeriodList);
+            string disablePeriodJSON = new OrderService().GetDisablePeriodJSON(PID);
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID
@@ -144,7 +192,6 @@ namespace RentWebProj.Services
                       ImgSources = ImgSources,
                       DisablePeriodsJSON = disablePeriodJSON,
                       //購物車
-                      //CurrentMemberID = CurrentMemberID,
                       IsExisted = isExisted,
                       StartDate = startDate,
                       ExpirationDate = expirationDate,

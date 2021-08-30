@@ -1,0 +1,149 @@
+/* ------------modal---------------------- */
+
+.orange {
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    /* vertical-align: middle; */
+
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    background-color: #FF8A65;
+    border: none;
+}
+
+    .orange.setted {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #000;
+        font-weight: 900;
+    }
+
+        .orange.setted > div {
+            /* background-color: #fcc; */
+            width: 130px;
+        }
+
+button:not(:disabled):hover {
+    box-shadow: 2px 2px 2px #aaa;
+    transform: translate(-3px,-2px) scaleY(1.05);
+}
+
+.modal-title {
+    margin-right: -30px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.modal-content {
+    min-width: 340px;
+}
+
+/* input.flatpickr */
+#datePicker {
+    display: none;
+}
+
+.flatpickr-calendar.rangeMode {
+    width: 100%;
+}
+
+.flatpickr-rContainer {
+    width: 100%;
+}
+
+.flatpickr-days {
+    width: 100%;
+}
+
+.dayContainer {
+    width: 100%;
+    max-width: none;
+}
+
+.flatpickr-day {
+    height: auto;
+    max-width: none;
+    aspect-ratio: 1/1;
+    padding-top: calc(7.14285% - 18px);
+}
+
+
+.modal-body > button[data-bs-toggle="collapse"] {
+    color: #fff;
+    background-color: #FFAD87;
+    letter-spacing: 2px;
+    /* FF8A65   +2*/
+}
+
+.right .orange:disabled {
+    color: #777;
+    background-color: #ddd;
+}
+/* .modal-body>button[data-bs-toggle="collapse"]:disabled{
+    color: #777;
+    background-color: #ddd;
+} */
+
+#collapseTimePicker {
+    box-shadow: 0px 0px 7px #eee;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px;
+    padding: 20px 0;
+}
+
+    #collapseTimePicker > .d-flex {
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+        #collapseTimePicker > .d-flex > .arrow {
+            width: 12px;
+            height: 12px;
+            border-top: 2px solid #ccc;
+            border-right: 2px solid #ccc;
+            transform: rotate( 45deg);
+            margin-bottom: 18px;
+        }
+
+        #collapseTimePicker > .d-flex > .d-flex {
+            flex-direction: column;
+            align-items: center;
+        }
+
+            #collapseTimePicker > .d-flex > .d-flex > strong {
+                font-size: 20px;
+                color: #777;
+                line-height: 1;
+            }
+
+            #collapseTimePicker > .d-flex > .d-flex > * {
+                margin-top: 12px;
+            }
+
+            #collapseTimePicker > .d-flex > .d-flex > input {
+                width: 130px;
+                text-align: center;
+                padding: 12px 0;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                letter-spacing: 3px;
+            }
+
+.flatpickr-calendar.hasTime.noCalendar.open {
+    width: 260px;
+}
+
+.modal-footer > #complete {
+    width: 100%;
+    margin: 0 auto;
+    letter-spacing: 3px;
+}
+
+    .modal-footer > #complete:disabled {
+        color: #777;
+        background-color: #ddd;
+    }

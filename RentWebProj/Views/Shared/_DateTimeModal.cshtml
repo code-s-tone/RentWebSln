@@ -1,0 +1,38 @@
+﻿<div class="modal fade" id="DateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title w-100" id="exampleModalLabel">設定起迄日</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column align-items-center">
+
+                <div id="collapseDatePicker" class="collapse collapseItem show">
+                    <input class="flatpickr" type=text placeholder="Select Date 啦" id="datePicker">
+                </div>
+
+                <button type="button" class="w-100 orange" data-bs-toggle="collapse" data-bs-target=".collapseItem">
+                    繼續設定時間
+                </button>
+
+                <div id="collapseTimePicker" class="collapse collapseItem">
+                    <div class="d-flex w-100">
+                        <div class="d-flex">
+                            <strong>從</strong><div id="start"></div>
+                            <input class="flatpickr timePicker" type=text placeholder="選時間" id="startTimePicker" type="button">
+                        </div>
+                        <div class="arrow"></div>
+                        <div class="d-flex">
+                            <strong>到</strong><div id="end"></div>
+                            <input class="flatpickr timePicker" type=text placeholder="選時間" id="endTimePicker" type="button">
+                        </div>
+                        @*<p>從早上10:30~晚上10:30</p>*@
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="orange" id="complete" data-bs-dismiss="modal">設定完成</button>
+            </div>
+        </div>
+    </div>
+</div>

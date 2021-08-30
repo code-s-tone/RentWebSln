@@ -7,12 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Repositories;
 using RentWebProj.Services;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
+
     public class CartsController : Controller
     {
+
+
         private RentContext db = new RentContext();
         private IndexService _service;
         private CartService _cartService;
@@ -23,10 +28,27 @@ namespace RentWebProj.Controllers
             _service = new IndexService();
             _cartService = new CartService();
         }
+
         public ActionResult Checkout()
         {
 
-            return View(_service.getCartsData());
+            var sb = TempData["DATA"];
+
+
+            return View(sb);
+  
+
+        }
+        [HttpPost]
+        public ActionResult Checkout(IEnumerable<CartIndex> VM)
+        {   
+            //判斷日期是否可通過
+
+            //造訂單、寫入庫
+            //參數可能要調整
+            new OrderService().Create(VM);
+
+            return RedirectToAction("MemberCenter", "Member");
         }
 
         public ActionResult Index()
@@ -35,6 +57,41 @@ namespace RentWebProj.Controllers
             ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
+        }
+        [HttpPost]
+        public ActionResult Index(OrderDoubleCheck VM)
+        {
+            //可能未考慮日期null
+            for (int i = 0;  i < VM.ListChecked.Count() ; i++)
+            {
+                //只有有勾選 且有更動日期的 才弄
+                if (VM.ListChecked[i] && VM.ListModified[i])
+                {
+                    //紀錄操作種類、成敗
+                    OperationResult result = new OperationResult();
+                    if (ModelState.IsValid)
+                    {
+                        var CartVM = new ProductDetailToCart()
+                        {
+                            IsExisted = true,
+                            StartDate = VM.ListStartDate[i],
+                            ExpirationDate = VM.ListExpirationDate[i]
+                        };
+                        result = new CartService().CreateOrUpdate(CartVM, VM.ListProductID[i]);
+                    }
+                }
+            }
+
+
+            //自己傳資料到View
+            //return RedirectToAction("checkout", "carts");
+            return View("checkout");// , model: _service.getCartsData(lstStuModel)
+        }
+
+        public ActionResult Delete(int MemberID, string ProductID)
+        {
+             _cartService.DeleteCart(MemberID, ProductID);
+            return RedirectToAction("Index");
         }
 
         //public ActionResult Index()
@@ -120,31 +177,31 @@ namespace RentWebProj.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
-        }
+        //// GET: Carts/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Cart cart = db.Carts.Find(id);
+        //    if (cart == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cart);
+        //}
 
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Carts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Cart cart = db.Carts.Find(id);
+        //    db.Carts.Remove(cart);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

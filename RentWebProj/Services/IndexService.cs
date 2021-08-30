@@ -83,7 +83,7 @@ namespace RentWebProj.Services
                       join o in (_repository.GetAll<OrderDetail>())
                       on p.ProductID equals o.ProductID
                       select new ProductCartsView
-                      { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
+                      { ProductName = o.ProductName}
             );
 
 

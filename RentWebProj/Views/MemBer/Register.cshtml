@@ -1,0 +1,51 @@
+﻿@model MemberRegisterDetailViewModel
+
+
+<div class="back">
+    <div class="Register">
+        <div class="Register_Logo my-3">
+            <img src="https://soulkey373.github.io/WorkFinalblock/image/rentIcon.svg">
+        </div>
+        <p>租任何你想要的東西</p>
+        <div class="Register_content shadow">
+            @using (Html.BeginForm("Register", "Member", FormMethod.Post))
+            {
+
+
+                <h5 class="Register_content-title text-center p-2">加入我們<br>這值得信賴的社群</h5>
+                <div class="form-group mt-4">
+
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "w-100  border-0", @placeholder = "信箱" } })
+                </div>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                <div class="form-group d-flex mt-4 ">
+                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "w-100  border-0", @placeholder = "密碼" } })
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                <div class="form-group d-flex mt-4 ">
+                    @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "w-100  border-0", @placeholder = "確認密碼" } })
+                </div>
+                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                <button type="submit" class="btn btn-secondary  my-4 text-light w-100 fs-5" id="sign">註冊</button>
+            }
+            <div class="Register_footer my-1 ">
+                <h5 class="my-4">按這<a href="@Url.Action("Login", "Member")" class="text-primary m-1"><strong>登入</strong></a></h5>
+            </div>
+        </div>
+    </div>
+</div>
+@section topCSS{
+
+    <link href="~/Assets/css/Register/Register.css" rel="stylesheet" />
+
+}
+@section endCSS{
+    <style>
+        .site-footer {
+            margin-top: 0px;
+        }
+    </style>
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
