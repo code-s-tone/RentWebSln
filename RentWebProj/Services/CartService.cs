@@ -17,8 +17,8 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID , ref string OperationType)
-        {
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
+        {//再判斷訂單卡時段?            
             var result = new OperationResult();
             try
             {
@@ -34,12 +34,10 @@ namespace RentWebProj.Services
                 if ( VM.IsExisted )
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
-                    OperationType = "Update";
                 }
                 else
                 {//加入
                     _repository.Create(entity);
-                    OperationType = "Create";
                 }
                 _repository.SaveChanges();
 
@@ -54,6 +52,9 @@ namespace RentWebProj.Services
 
             return result;
         }
+
+
+
 
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
