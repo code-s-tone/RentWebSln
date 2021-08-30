@@ -7,6 +7,7 @@ using System.Web;
 using RentWebProj.ViewModels;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
+using System.Windows;
 
 namespace RentWebProj.Services
 {
@@ -124,15 +125,17 @@ namespace RentWebProj.Services
 
         }
 
-        public string ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName)
+        public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
         {
             var result = _repository.GetAll<Member>().ToList();
             result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
             result.Find(x => x.PasswordHash == UserPassword).PasswordHash = ChangePassword;
             result.Find(x => x.FullName == UserFullName).FullName = ChangeFullName;
+            result.Find(x => x.Phone == UserPhone).Phone = ChangePhone;
             _repository.SaveChanges();
 
-            return "修改成功";
+            //return "修改成功";
+            return MessageBox.Show("修改成功");
         }
 
         //取得與目前登入User對應的"密碼"
@@ -172,6 +175,24 @@ namespace RentWebProj.Services
                 MemberNameString = item.Name.ToString();
             }
             return MemberNameString;
+        }
+
+        //取得與目前登入User對應的"電話"
+        public string CheckPhone(string UserEmail)
+        {
+            var result = _repository.GetAll<Member>();
+            var MemberPhone = from s in result
+                                 where s.Email == UserEmail
+                                 select new CheckPhone
+                                 {
+                                    Phone  = s.Phone
+                                 };
+            string MemberPhoneString = "";
+            foreach (var item in MemberPhone)
+            {   //因為IQueryable故需要轉型為ToString
+                MemberPhoneString = item.Phone.ToString();
+            }
+            return MemberPhoneString;
         }
     }
 }
