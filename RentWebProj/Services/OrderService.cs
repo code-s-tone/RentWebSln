@@ -19,7 +19,7 @@ namespace RentWebProj.Services
         }
 
         //取得歷史租期
-        public IEnumerable<RentPeriod> getProductRentPeriods(string PID) 
+        public IEnumerable<RentPeriod> GetProductRentPeriods(string PID) 
         {
             var RentPeriods =
                 from od in (_repository.GetAll<OrderDetail>())
@@ -33,6 +33,18 @@ namespace RentWebProj.Services
 
             return RentPeriods;
         }
+        public string GetDisablePeriodJSON(string PID)
+        {
+            List<DisablePeriod> disablePeriodList = GetProductRentPeriods(PID)
+                .Where(x => x.to >= DateTime.Now )
+                .Select(x => new DisablePeriod
+                {
+                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
+                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
+                }).ToList();
+            return JsonConvert.SerializeObject(disablePeriodList);
+        }
+
         //寫入
         public void Create(IEnumerable<CartIndex> carts)
         {
@@ -71,7 +83,6 @@ namespace RentWebProj.Services
                 _repository.SaveChanges();
             }
         }
-
         public int GetOrderId(int MemberID, DateTime OrderDate)
         {
             return (from o in (_repository.GetAll<Order>())
@@ -81,16 +92,5 @@ namespace RentWebProj.Services
         }
 
         //取得禁租日期JSON
-        public string getDisablePeriodJSON(string PID)
-        {
-            List<DisablePeriod> disablePeriodList = new OrderService().getProductRentPeriods(PID)
-                .Where(x => x.to >= new DateTime())
-                .Select(x => new DisablePeriod
-                {
-                    @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
-                    to = (x.to).ToString().Substring(0, 10).Replace("/", " / ")
-                }).ToList();
-            return JsonConvert.SerializeObject(disablePeriodList);
-        }
     }
 }

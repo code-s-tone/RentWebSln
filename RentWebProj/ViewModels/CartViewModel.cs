@@ -6,7 +6,6 @@ using RentWebProj.Services;
 
 namespace RentWebProj.ViewModels
 {
-
     public class ProductDetailToCart
     {
         public string DateTimeFormat;
@@ -43,15 +42,15 @@ namespace RentWebProj.ViewModels
     {
         public string from { get; set; }
         public string to { get; set; }
-        //JS陣列：
-        //    {
-        //        from: "2025-04-01",
-        //        to: "2025-05-01"
-        //    }
+        //JS陣列：{
+        //            from: "2025-04-01",
+        //            to: "2025-05-01"
+        //        }
     }
 
     public class CartIndex
     {
+
         public int MemberID { get; set; }
 
         public string ProductID { get; set; }
@@ -60,9 +59,8 @@ namespace RentWebProj.ViewModels
 
         //祥聖: 是不是要加產品圖片? >_<
 
-        //禁用日期
-        //public string DisablePeriodsJSON { get; set; }
-
+        //禁租日期
+        public string DisablePeriodsJSON { get; set; }
 
         public DateTime StartDate { get; set; }//軒：是否改 可null?
 
