@@ -14,7 +14,7 @@ namespace RentWebProj.ViewModels
         public DateTime to { get; set; }
     }
 
-    public class CreateOrder
+    public class OrderDoubleCheck
     {
         public List<string> ListProductID { get; set; }
         public List<string> ListStartDate { get; set; }

@@ -49,7 +49,7 @@
                             <td>
                                 <div class="product">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="@item.ProductID"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
+                                        <input class="form-check-input" type="checkbox" value="@i"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
                                         <label class="form-check-label" for="flexCheckDefault">
 
                                         </label>
@@ -86,18 +86,17 @@
                                             //懿的起訖日型別不允許null => 庭安那邊來的有null的怎麼辦??
                                             //軒：POST起迄日用
                                             //class="displayNone"style="display:none" type="text"
+                                            //ID
+                                            <input type="hidden" name="ListProductID[@i]"
+                                                   value="@item.ProductID" />
                                             <input type="hidden" name="ListStartDate[@i]"
                                                    value="" />
                                             <input type="hidden" name="ListExpirationDate[@i]"
                                                    value="" />
                                             <input type="hidden" name="ListModified[@i]"
                                                    value="false" />
-                                            @*<script>
-                                                if ( @Json.Encode(item.StartDate != null) ) {
-                                                showPeriodText(DateModalBtns[@i], '@(item.StartDate.ToString(dateTimeFormat))',
-                                                '@item.ExpirationDate.ToString(dateTimeFormat)');
-                                                }
-                                            </script>*@
+                                            <input type="hidden" name="ListChecked[@i]"
+                                                   value="false" />
                                             i++;
                                         }
 
@@ -236,8 +235,8 @@
                     showPeriodText(startDateTimeText,endDateTimeText);
 
                     //寫入POST欄位
-                    document.querySelector(`input[name="ListStartDate[@i]"]`) = startDateTimeText;
-                    document.querySelector(`input[name="ListExpirationDate[@i]"]`) = endDateTimeText;
+                    document.querySelector(`input[name="ListStartDate[@i]"]`).value = startDateTimeText;
+                    document.querySelector(`input[name="ListExpirationDate[@i]"]`).value = endDateTimeText;
 
                 }
 
@@ -270,22 +269,26 @@
         });
     </script>
     <script>
-        function Checked() {
-            let result = "";
-            document.querySelectorAll('.form-check-input').forEach(function (x) {
-                if (x.checked == true) {
+        //function Checked() {
+        //    let result = "";
+        //    document.querySelectorAll('.form-check-input').forEach((x, idx) => function () {
+        //        if (x.checked == true) {
+        //            result += x.value + ",";
+        //        }
+        //    })
 
-                    result += x.value + ",";
-                }
-            })
-
-            let b = document.querySelector('.check');
-            b.setAttribute("value", result);
-        }
+        //    let b = document.querySelector('.check');
+        //    b.setAttribute("value", result);
+        //}
 
         document.querySelectorAll('.form-check-input').forEach(function (btn) {
-            btn.addEventListener('change', Checked);
-
+            //btn.addEventListener('change', Checked);
+            btn.addEventListener('change', function () {
+                let i = btn.value;
+                let temp = document.querySelector(`input[name="ListChecked[${i}]"]`);
+                console.log(temp);
+                temp.value = btn.checked;
+            });
         })
 
             //function Date() {

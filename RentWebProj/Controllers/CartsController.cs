@@ -41,7 +41,10 @@ namespace RentWebProj.Controllers
         }
         [HttpPost]
         public ActionResult Checkout(IEnumerable<CartIndex> VM)
-        {
+        {   
+            //判斷日期是否可通過
+
+            //造訂單、寫入庫
             //參數可能要調整
             new OrderService().Create(VM);
 
@@ -56,25 +59,29 @@ namespace RentWebProj.Controllers
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(CreateOrder VM,string name, string StartDate,string ExpirationDate)
+        public ActionResult Index(OrderDoubleCheck VM)
         {
 
-            //造訂單、寫入庫
+            //for (int i = 0, i < VM.ListChecked.Count();)
 
-            string[] subs = name.Split(',');
+            //判斷Modefied
+            //sevice 負責VM=>DM  (  , ,  , ,)
+            //if (VM.IsExisted)
+            //{//更新購物車
+            //    Cart entity = new Cart()
+            //    {
+            //        MemberID = 1,
+            //        ProductID = PID,
+            //        StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
+            //        ExpirationDate = DateTime.Parse(VM.ExpirationDate)
+            //    };
 
-            List<ProductCartsView> lstStuModel = new List<ProductCartsView>();
-            for(var x = 0; x <= subs.Length-2; x++)
-            {
-                lstStuModel.Add(new ProductCartsView() { ProductName = subs[x]});
-            }
+            //    _repository.Update(entity);//猜測會用PK去找到原有的資料
+            //}
 
-            
-
-            TempData["DATA"] = _service.getCartsData(lstStuModel);
-            return RedirectToAction("checkout", "carts");
-            //軒：祥聖你可以直接回傳那個View吧  不用經過兩個action?
-            //return View("checkout" , model: _service.getCartsData(lstStuModel);
+            //自己傳資料到View
+            //return RedirectToAction("checkout", "carts");
+            return View("checkout");// , model: _service.getCartsData(lstStuModel)
         }
 
         public ActionResult Delete(int MemberID, string ProductID)
