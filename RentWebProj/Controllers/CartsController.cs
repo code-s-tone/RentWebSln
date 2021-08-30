@@ -36,7 +36,6 @@ namespace RentWebProj.Controllers
 
 
             return View(sb);
-
   
 
         }
@@ -57,10 +56,10 @@ namespace RentWebProj.Controllers
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(string name, string StartDate,string ExpirationDate)
+        public ActionResult Index(CreateOrder VM,string name, string StartDate,string ExpirationDate)
         {
 
-
+            //造訂單、寫入庫
 
             string[] subs = name.Split(',');
 
@@ -74,6 +73,8 @@ namespace RentWebProj.Controllers
 
             TempData["DATA"] = _service.getCartsData(lstStuModel);
             return RedirectToAction("checkout", "carts");
+            //軒：祥聖你可以直接回傳那個View吧  不用經過兩個action?
+            //return View("checkout" , model: _service.getCartsData(lstStuModel);
         }
 
         public ActionResult Delete(int MemberID, string ProductID)

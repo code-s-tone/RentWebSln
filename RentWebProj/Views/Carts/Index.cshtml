@@ -204,6 +204,16 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
+        
+        completeBtn.addEventListener('click', function ModifiedRecord(){
+            let Modified = SetTarget();
+            //console.log(Modified);
+            if (Modified.value == "false") {
+                Modified.value = "true";
+            }
+        });
+
+
         let DateModalLauncher = null;
         let StartDateToPost = null;
         let ExpirationDateToPost = null;
@@ -221,33 +231,45 @@
                 <text>
                 if ( @Json.Encode(item.StartDate!=null ) ) {
                     DateModalLauncher = DateModalBtns[@i];
-                    showPeriodText( '@(item.StartDate.ToString(dateTimeFormat))',
-                                    '@item.ExpirationDate.ToString(dateTimeFormat)');
+                    let startDateTimeText = '@(item.StartDate.ToString(dateTimeFormat))';
+                    let endDateTimeText = '@item.ExpirationDate.ToString(dateTimeFormat)';
+                    showPeriodText(startDateTimeText,endDateTimeText);
+
+                    //寫入POST欄位
+                    document.querySelector(`input[name="ListStartDate[@i]"]`) = startDateTimeText;
+                    document.querySelector(`input[name="ListExpirationDate[@i]"]`) = endDateTimeText;
+
                 }
 
                 disablePeriodsJSONArray.push( @Html.Raw(item.DisablePeriodsJSON));
-                
+
                 </text>
                 i++;
             }
         }
 
-        console.log(disablePeriodsJSONArray);
 
-        DateModalBtns.forEach((btn, idx) =>
+        //console.log(disablePeriodsJSONArray);
+        DateModalBtns.forEach((btn, i) => {        
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
                 DateModalLauncher = btn;
                 //指定要寫入的POST欄位
-                StartDateToPost = document.querySelector(`input[name="ListStartDate[${idx}]"]`);
-                ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${idx}]"]`);
+                StartDateToPost = document.querySelector(`input[name="ListStartDate[${i}]"]`);
+                ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${i}]"]`);
 
                 //禁用日期
-                datePicker.config.disable = disablePeriodsJSONArray[idx];
-            })
-        );
+                datePicker.config.disable = disablePeriodsJSONArray[i];
 
+                //日期設定完成=>以索引值取物件 紀錄"有更動"
+                SetTarget = function () {
+                    return document.querySelector(`input[name="ListModified[${i}]"]`);
+                };
 
+            });
+        });
+    </script>
+    <script>
         function Checked() {
             let result = "";
             document.querySelectorAll('.form-check-input').forEach(function (x) {
@@ -288,12 +310,6 @@
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
     <script>
 
-        //日期設定完成=>以索引值取物件 紀錄"有更動"
-        completeBtn.addEventListener('click', function () {
-            let t = document.querySelector(`input[name="ListModified[${i}]"]`);
-            if (t.value == "false") {
-                t.value = "true";
-            }
-        });
+
     </script>
 }
