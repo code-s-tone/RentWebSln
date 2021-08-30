@@ -74,6 +74,7 @@ namespace RentWebProj.Controllers
 
             TempData["DATA"] = _service.getCartsData(lstStuModel);
             return RedirectToAction("checkout", "carts");
+            //return View("Check", model: _service.getCartsData(lstStuModel));
         }
 
         public ActionResult Delete(int MemberID, string ProductID)
