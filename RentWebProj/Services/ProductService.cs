@@ -201,7 +201,7 @@ namespace RentWebProj.Services
 
 
             //禁用日期
-            string disablePeriodJSON = new OrderService().getDisablePeriodJSON(PID);
+            string disablePeriodJSON = new OrderService().GetDisablePeriodJSON(PID);
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID

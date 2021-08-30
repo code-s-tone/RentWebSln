@@ -26,5 +26,3 @@ completeBtn.addEventListener('click', function () {
 });
 
 
-//禁用日期
-//datePicker.config.disable = disablePeriodsJSON;

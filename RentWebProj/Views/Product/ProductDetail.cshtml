@@ -339,13 +339,17 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
     <script>
         let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
+        let disablePeriodsJSON = @Html.Raw(Model.DisablePeriodsJSON);
+        //禁用日期
+        datePicker.config.disable = disablePeriodsJSON;
+
         let StartDateToPost = document.querySelector('#StartDate');
         let ExpirationDateToPost = document.querySelector('#ExpirationDate');
                  //如果在購物車且有選日期 => 預顯示文字
         if ( @Json.Encode(Model.StartDate!=null ) ) {
             showPeriodText('@(Model.StartDate)', '@Model.ExpirationDate');
         }
-        let disablePeriodsJSON = @Html.Raw(Model.DisablePeriodsJSON);
+
     </script>
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 

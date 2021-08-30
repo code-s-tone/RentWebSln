@@ -56,8 +56,8 @@ const datePicker = flatpickr("#datePicker", {
             //日期設定好> 才可以按collapseBtn
             //啟用
             collapseBtn.disabled = false;
-            if (timePicker[0].selectedDates.length == 1
-                && timePicker[1].selectedDates.length == 1
+            if (timePicker[0].selectedDates.length == 1 &&
+                timePicker[1].selectedDates.length == 1
             ){
                 //日期時間都設定好> 才可以按completeBtn
                 completeBtn.disabled = false;
@@ -80,10 +80,10 @@ const timePicker = flatpickr(".timePicker", {
     maxTime: "22:30",
 
     onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (timePicker[0].selectedDates.length == 1
-            && timePicker[1].selectedDates.length == 1
-            && datePicker.selectedDates.length == 2
-            && datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
+        if (timePicker[0].selectedDates.length == 1 &&
+            timePicker[1].selectedDates.length == 1 &&
+            datePicker.selectedDates.length == 2 &&
+            datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
             //日期時間都設定好> 才可以按completeBtn
             completeBtn.disabled = false;
         } else {
