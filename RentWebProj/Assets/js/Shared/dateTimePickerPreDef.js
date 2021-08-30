@@ -1,3 +1,17 @@
+//輔助函式庫
+function combinDateTime(i) {
+    return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
+        formatDivider + timePicker[i].input.value;
+}
+
+//顯示期間文字 給使用者看
+function showPeriodText( startDateTimeText, endDateTimeText) {
+    DateModalLauncher.classList.add('setted');
+    DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
+}
+
+
+
 //dateTimePicker本身設定
 let collapseBtn = document.querySelector('button[data-bs-target=".collapseItem"]');
 let completeBtn = document.querySelector('#complete');

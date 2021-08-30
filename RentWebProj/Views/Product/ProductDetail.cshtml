@@ -341,20 +341,17 @@
         let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
         let StartDateToPost = document.querySelector('#StartDate');
         let ExpirationDateToPost = document.querySelector('#ExpirationDate');
-
-        //如果在購物車且有選日期 => 預顯示文字
+                 //如果在購物車且有選日期 => 預顯示文字
         if ( @Json.Encode(Model.StartDate!=null ) ) {
-            showPeriodText(DateModalLauncher,'@(Model.StartDate)', '@Model.ExpirationDate');
+            showPeriodText('@(Model.StartDate)', '@Model.ExpirationDate');
         }
-
         let disablePeriodsJSON = @Html.Raw(Model.DisablePeriodsJSON);
     </script>
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
+
     <!-- dateTimePicker設定完成引發事件 -->
 
     <script>
-
-
         //禁用購物動作
         let actionBtns = document.querySelectorAll('.decision-group .orange');
         actionBtns.forEach(x => x.disabled = true);

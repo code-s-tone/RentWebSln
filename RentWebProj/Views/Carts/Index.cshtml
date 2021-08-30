@@ -41,7 +41,7 @@
                     </tr>
                     @{
                         int i = 0;
-                        string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
+                        //string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
                     }
                     @foreach (var item in Model)
                     {
@@ -85,15 +85,22 @@
                                             </button>
                                             //懿的起訖日型別不允許null => 庭安那邊來的有null的怎麼辦??
                                             //軒：POST起迄日用
-                                            //class="displayNone"
-                                            <input style="display:none" type="text" name="ListStartDate[@i]"
-                                                   value="@(  item.StartDate.ToString(dateTimeFormat)  )" />
-                                            <input style="display:none" type="text" name="ListExpirationDate[@i]"
-                                                   value="@(  item.ExpirationDate.ToString(dateTimeFormat)  )" />
-                                            <input style="display:none" type="text" name="ListModified[@i]"
+                                            //class="displayNone"style="display:none" type="text"
+                                            <input type="hidden" name="ListStartDate[@i]"
+                                                   value="" />
+                                            <input type="hidden" name="ListExpirationDate[@i]"
+                                                   value="" />
+                                            <input type="hidden" name="ListModified[@i]"
                                                    value="false" />
+                                            @*<script>
+                                                if ( @Json.Encode(item.StartDate != null) ) {
+                                                showPeriodText(DateModalBtns[@i], '@(item.StartDate.ToString(dateTimeFormat))',
+                                                '@item.ExpirationDate.ToString(dateTimeFormat)');
+                                                }
+                                            </script>*@
                                             i++;
                                         }
+
                                     </div>
                                     <div class="product-price-qty">
                                         <div class="unitprice">
@@ -196,24 +203,46 @@
     <!-- dateTimePicker預定義 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
-
     <script>
         let DateModalLauncher = null;
         let StartDateToPost = null;
         let ExpirationDateToPost = null;
+
+
         let disablePeriodsJSON = "";
         @*let disablePeriodsJSON = "";
            @Html.Raw(Model.Select(x=> x.));*@
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
+
+        //如果在購物車且有選日期 => 預顯示文字
+        @{
+            int i = 0;
+            string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
+        }
+        @foreach ( var item in Model)
+        {
+
+            <text>
+            if ( @Json.Encode(item.StartDate!=null ) ) {
+                DateModalLauncher = DateModalBtns[@i];
+                showPeriodText( '@(item.StartDate.ToString(dateTimeFormat))',
+                                '@item.ExpirationDate.ToString(dateTimeFormat)');
+            }
+            </text>
+            i++;
+
+        }
+
         let i;//設定索引值
         DateModalBtns.forEach((btn, idx) =>
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
-                DateModalLauncher = ev.target;
+                DateModalLauncher = btn;
                 //指定要寫入的POST欄位
-                StartDateToPost = document.querySelector(`input[name="StartDate[${i}]"]`);
-                ExpirationDateToPost = document.querySelector(`input[name="ExpirationDate[${i}]"]`);
+                StartDateToPost = document.querySelector(`input[name="ListStartDate[${idx}]"]`);
+                ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${idx}]"]`);
+
                 //禁用日期
                 //disablePeriodsJSON = [];
 
@@ -222,13 +251,6 @@
             })
         );
 
-        //日期設定完成=>以索引值取物件 紀錄"有更動"
-        completeBtn.addEventListener('click', function () {
-            let t = document.querySelector(`input[name="ListModified[${i}]"]`);
-            if (t.value == "false") {
-                t.value = "true";
-            }
-        });
 
         function Checked() {
             let result = "";
@@ -264,26 +286,18 @@
             //    btn.addEventListener('change', Date);
 
             //})
-
-
     </script>
 
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
     <script>
-        //如果在購物車且有選日期 => 預顯示文字
-    @{
-        int i = 0;
-    }
-    @foreach ( var item in Model)
-    {
 
-        <text>
-        if ( @Json.Encode(item.StartDate!=null ) ) {
-            showPeriodText(DateModalBtns[@i],'@(item.StartDate)', '@item.ExpirationDate');
-        }
-        </text>
-        i++;
-    }
+        //日期設定完成=>以索引值取物件 紀錄"有更動"
+        completeBtn.addEventListener('click', function () {
+            let t = document.querySelector(`input[name="ListModified[${i}]"]`);
+            if (t.value == "false") {
+                t.value = "true";
+            }
+        });
     </script>
 }
