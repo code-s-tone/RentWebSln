@@ -61,23 +61,27 @@ namespace RentWebProj.Controllers
         [HttpPost]
         public ActionResult Index(OrderDoubleCheck VM)
         {
+            //可能未考慮日期null
+            for (int i = 0;  i < VM.ListChecked.Count() ; i++)
+            {
+                //只有有勾選 且有更動日期的 才弄
+                if (VM.ListChecked[i] && VM.ListModified[i])
+                {
+                    //紀錄操作種類、成敗
+                    OperationResult result = new OperationResult();
+                    if (ModelState.IsValid)
+                    {
+                        var CartVM = new ProductDetailToCart()
+                        {
+                            IsExisted = true,
+                            StartDate = VM.ListStartDate[i],
+                            ExpirationDate = VM.ListExpirationDate[i]
+                        };
+                        result = new CartService().CreateOrUpdate(CartVM, VM.ListProductID[i]);
+                    }
+                }
+            }
 
-            //for (int i = 0, i < VM.ListChecked.Count();)
-
-            //判斷Modefied
-            //sevice 負責VM=>DM  (  , ,  , ,)
-            //if (VM.IsExisted)
-            //{//更新購物車
-            //    Cart entity = new Cart()
-            //    {
-            //        MemberID = 1,
-            //        ProductID = PID,
-            //        StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
-            //        ExpirationDate = DateTime.Parse(VM.ExpirationDate)
-            //    };
-
-            //    _repository.Update(entity);//猜測會用PK去找到原有的資料
-            //}
 
             //自己傳資料到View
             //return RedirectToAction("checkout", "carts");
