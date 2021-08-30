@@ -7,12 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RentWebProj.Models;
+using RentWebProj.Repositories;
 using RentWebProj.Services;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
+
     public class CartsController : Controller
     {
+
+
         private RentContext db = new RentContext();
         private IndexService _service;
         private CartService _cartService;
@@ -23,10 +28,25 @@ namespace RentWebProj.Controllers
             _service = new IndexService();
             _cartService = new CartService();
         }
+
         public ActionResult Checkout()
         {
 
-            return View(_service.getCartsData());
+            var sb = TempData["DATA"];
+
+
+            return View(sb);
+
+  
+
+        }
+        [HttpPost]
+        public ActionResult Checkout(IEnumerable<CartIndex> VM)
+        {
+            //參數可能要調整
+            new OrderService().Create(VM);
+
+            return RedirectToAction("MemberCenter", "Member");
         }
 
         public ActionResult Index()
@@ -35,6 +55,31 @@ namespace RentWebProj.Controllers
             ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
+        }
+        [HttpPost]
+        public ActionResult Index(string name, string StartDate,string ExpirationDate)
+        {
+
+
+
+            string[] subs = name.Split(',');
+
+            List<ProductCartsView> lstStuModel = new List<ProductCartsView>();
+            for(var x = 0; x <= subs.Length-2; x++)
+            {
+                lstStuModel.Add(new ProductCartsView() { ProductName = subs[x]});
+            }
+
+            
+
+            TempData["DATA"] = _service.getCartsData(lstStuModel);
+            return RedirectToAction("checkout", "carts");
+        }
+
+        public ActionResult Delete(int MemberID, string ProductID)
+        {
+             _cartService.DeleteCart(MemberID, ProductID);
+            return RedirectToAction("Index");
         }
 
         //public ActionResult Index()
@@ -120,31 +165,31 @@ namespace RentWebProj.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cart cart = db.Carts.Find(id);
-            if (cart == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cart);
-        }
+        //// GET: Carts/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Cart cart = db.Carts.Find(id);
+        //    if (cart == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cart);
+        //}
 
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cart cart = db.Carts.Find(id);
-            db.Carts.Remove(cart);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Carts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Cart cart = db.Carts.Find(id);
+        //    db.Carts.Remove(cart);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

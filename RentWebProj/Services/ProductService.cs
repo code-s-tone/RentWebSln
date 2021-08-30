@@ -58,7 +58,7 @@ namespace RentWebProj.Services
                           Description = p.Description,
                           DailyRate = (decimal)p.DailyRate,
                           SubCategoryName = s.SubCategoryName,
-                          SubCategoryID=s.SubCategoryID
+                          SubCategoryID = s.SubCategoryID
                       });
 
 
