@@ -155,17 +155,17 @@ article {
   margin-right: auto;
 }
 
+article > .Area h3 > a, article .category-sample h3 > a {
+  font-size: 15px;
+  color: #fc8d61;
+}
+
 article > .Area {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
   padding: 11px;
   margin: 33px auto;
-}
-
-article > .Area h3 > a {
-  font-size: 15px;
-  color: #fc8d61;
 }
 
 article > .Area .imgBox, article > .Area .textBox {

@@ -144,6 +144,47 @@ namespace RentWebProj.Services
             return VMList;
 
         }
+        public IEnumerable<CardsViewModel> GetAllProductCardData()
+        {
+            IEnumerable<CardsViewModel> AllProductCardVMList;
+            //var pDMList = ;
+            //var ctDMList = ;
+            //var subCtDMList = ;
+
+            AllProductCardVMList = 
+                from p in (_repository.GetAll<Product>())
+                join c in (_repository.GetAll<Category>())
+                on p.ProductID.Substring(0, 3) equals c.CategoryID
+                join s in (_repository.GetAll<SubCategory>())
+                on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+
+                select new CardsViewModel
+                {
+                    ProductID = p.ProductID,
+                    ProductName = p.ProductName,
+                    CategoryName = c.CategoryName,
+                    Description = p.Description,
+                    DailyRate = (decimal)p.DailyRate,
+                    SubCategoryName = s.SubCategoryName,
+                    SubCategoryID = s.SubCategoryID//這好像不需要，因為資訊已經存在ProductID中?
+                };
+
+            return AllProductCardVMList;
+        }
+
+        public IEnumerable<CardsViewModel> GetMostPopularProductCardData()
+        {
+
+            var pList = GetAllProductCardData().ToList();
+            pList.ForEach(p => {
+                var days = new OrderService().countRenteDays(p.ProductID);
+                p.CountOfRentedDays = days;
+            });
+
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            return VMList;
+        }
+
 
         public ProductDetailToCart getProductDetail(string PID, int? currentMemberID)
         {
@@ -209,6 +250,5 @@ namespace RentWebProj.Services
             //orderby 
 
         }
-
     }
 }

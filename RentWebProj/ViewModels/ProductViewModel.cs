@@ -32,8 +32,10 @@ namespace RentWebProj.ViewModels
         public decimal DailyRate { get; set; }
         public int StarsForLike { get; set; }   //商品卡片上的星星數待決定如何判斷
 
-        //還有商品卡的兩張照片
+        //偉軒用
+        public double CountOfRentedDays { get; set; }
 
+        //public int StarsForLike { get; set; }
     }
 
     public class FilterSearchViewModel
