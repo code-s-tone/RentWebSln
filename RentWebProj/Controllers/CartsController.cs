@@ -81,7 +81,13 @@ namespace RentWebProj.Controllers
                     }
                 }
             }
-            
+
+
+            List<ProductCartsView> pcModel = new List<ProductCartsView>();
+            foreach (var item in VM.ListProductID)
+            {
+                pcModel.Add(new ProductCartsView() { ProductName = item });
+            }
 
             //自己傳資料到View
             //return RedirectToAction("checkout", "carts");

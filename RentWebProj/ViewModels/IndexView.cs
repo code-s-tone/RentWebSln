@@ -28,6 +28,7 @@ namespace RentWebProj.ViewModels
         public DateTime ExpirationDate { get; set; }
         public decimal TotalAmount { get; set; }
 
+        public string ProductID { get; set; }
     }
 
 }
