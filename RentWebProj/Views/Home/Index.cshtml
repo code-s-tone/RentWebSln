@@ -46,6 +46,7 @@ Authentication Type : @User.Identity.AuthenticationType
                 @foreach (var item in A)
                 {
                     <div class="swiper-slide">
+                        @* 放卡片 *@
                         <div class="imgBox">
                             <img class="w-100" src="https://picsum.photos/100/150/?random=1">
                         </div>
@@ -154,12 +155,10 @@ Authentication Type : @User.Identity.AuthenticationType
         </div>
     </section>
 
-     @{ 
-        foreach(var item in Model)
-        {
-            ShowProductList(item);
-        }
-     }
+    @foreach(var item in Model)
+    {
+        @ShowProductList(item);
+    }
 
 
     <section id="blogPosts" class="Area">
