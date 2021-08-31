@@ -17,8 +17,8 @@ namespace RentWebProj.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Plist = _service.getCategoryData();
-            return View(_service.getCategoryData() );
+            
+            return View(_service.getCategoryData());
         }
 
         public ActionResult ContactUs()

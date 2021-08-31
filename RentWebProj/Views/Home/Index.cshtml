@@ -1,4 +1,4 @@
-﻿@model IEnumerable<IndexCategoryView>
+﻿@model IEnumerable<CategoryView>
 
 @{
     ViewBag.Title = "首頁";
@@ -162,8 +162,10 @@ Authentication Type : @User.Identity.AuthenticationType
         //conn.Execute(sql,Obj);
 
     }
-    @addProduct(service.getProductData("Car"))
-    @addProduct(service.getProductData("Ppl"))
+    @*@Html.Partial("Partial_ProductCard")*@
+
+    @*@addProduct(service.getProductData("Car"))
+        @addProduct(service.getProductData("Ppl"))*@
 
 
     <section id="blogPosts" class="Area">
@@ -213,9 +215,9 @@ Authentication Type : @User.Identity.AuthenticationType
     </section>
 </article>
 
-<div id="cookiePermission"></div>
+@*<div id="cookiePermission"></div>*@
 
-@helper addProduct(IEnumerable<IndexProductView> items)
+@helper addProduct(IEnumerable<ProductView> items)
 {
     <section class="category-sample">
         <h3>

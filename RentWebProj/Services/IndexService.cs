@@ -24,8 +24,8 @@ namespace RentWebProj.Services
 
             //篩選、轉型
             //Method Expression  有join時，這方法很吃邏輯
-            VMList = DMList.Select(x => new CategoryView
-            { CategoryName = x.CategoryName, ImageSrcMain = "" });
+            //VMList = DMList.Select(x => new CategoryView
+            //{ CategoryName = x.CategoryName, ImageSrcMain = "" });
 
             //Query Expression
             VMList = from c in DMList
@@ -35,9 +35,9 @@ namespace RentWebProj.Services
             return VMList;
         }
 
-        public IEnumerable<IndexProductView> getProductData(string catID)
+        public IEnumerable<ProductView> getProductData(string catID)
         {
-            IEnumerable<IndexProductView> VMList;
+            IEnumerable<ProductView> VMList;
 
             var pDMList = _repository.GetAll<Product>();
             var cDMList = _repository.GetAll<Category>();
@@ -47,26 +47,18 @@ namespace RentWebProj.Services
             VMList = pDMList
                 .Take(6)
                 .Where(x => x.ProductID.Substring(0, 3) == catID)
-                .Select(x => new IndexProductView{
+                .Select(x => new ProductView{
                     ProductName = x.ProductName,
                     CategoryName =
                     cDMList.FirstOrDefault(c => c.CategoryID == catID).CategoryName
                 });
 
             //Query Expression
-            //VMList = (from p in pDMList
-            //          join c in cDMList
-            //          on p.CategoryID equals c.CategoryID
-            //          where p.CategoryID == catID
-            //          select new IndexProductView
-            //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-            //).Take(6);
-
             VMList = (from p in pDMList
                       join c in cDMList
                       on p.ProductID.Substring(0,3) equals c.CategoryID
                       where c.CategoryID == catID
-                      select new IndexProductView
+                      select new ProductView
                       { ProductName = p.ProductName, CategoryName = c.CategoryName }
             ).Take(6);
 
@@ -83,7 +75,7 @@ namespace RentWebProj.Services
                       join o in (_repository.GetAll<OrderDetail>())
                       on p.ProductID equals o.ProductID
                       select new ProductCartsView
-                      { ProductName = o.ProductName}
+                      { ProductName = p.ProductName}
             );
 
 

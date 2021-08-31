@@ -12,7 +12,7 @@ namespace RentWebProj.ViewModels
         public string ImageSrcSecond { get; set; }
 
     }
-    public class IndexProductView
+    public class ProductView
     {
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
