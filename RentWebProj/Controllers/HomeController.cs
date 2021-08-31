@@ -21,7 +21,7 @@ namespace RentWebProj.Controllers
             {
                 //{ "最高評價", _service.GetMostPopularProductCardData() },
                 //{ "最新上架", _service.GetMostPopularProductCardData() },
-                { "最熱門", _service.GetMostPopularProductCardData() }
+                { "最熱門商品", _service.GetMostPopularProductCardData() }
 
             };
 

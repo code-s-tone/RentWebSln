@@ -43,21 +43,23 @@ Authentication Type : @User.Identity.AuthenticationType
         <div class="swiper-container categories-swiper-container">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @foreach (var item in A)
-                {
-                    <div class="swiper-slide">
-                        @* 放卡片 *@
-                        <div class="imgBox">
-                            <img class="w-100" src="https://picsum.photos/100/150/?random=1">
-                        </div>
-                        <div class="textBox">
-                            <div>
-                                @item.CategoryName v.s.
-                                @Html.DisplayFor(modelItem => item.CategoryName)
-                            </div>
-                        </div>
-                    </div>
-                }
+            @foreach (var item in A)
+            {
+                <div class="swiper-slide category-card">
+                    @* 放卡片 *@
+                    @Html.Partial("PC", item)
+
+                    @*<div class="imgBox">
+            <img class="w-100" src="https://picsum.photos/100/150/?random=1">
+        </div>
+        <div class="textBox">
+            <div>
+                @item.CategoryName v.s.
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </div>
+        </div>*@
+                </div>
+            }
             </div>
             <!-- <div class="swiper-pagination"></div> -->
             <div class="swiper-button-prev"></div>

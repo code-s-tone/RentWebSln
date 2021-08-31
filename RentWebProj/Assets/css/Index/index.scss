@@ -84,7 +84,7 @@ header{
     }
 }
 
-.swiper-container{
+.swiper-container:not(.categories-swiper-container){
     width: 100%;
     // .swiper-wrapper{
     //     // align-items: stretch;
@@ -101,6 +101,7 @@ header{
         align-items: center;
     }
 }
+
 .swiper-button-prev, .swiper-button-next{
     color: #000;
     background-color: rgba(255, 255, 255, 0.6);
@@ -152,28 +153,30 @@ article{
     }
 
     .categories-swiper-container{
-        >.swiper-wrapper{
-            >.swiper-slide{
-                height: 111px;
-                >.imgBox{
-                    width: 111px;
-                    flex-grow: 0;
-                    overflow: hidden;
-                }
-                >.textBox{
-                    flex-grow: 1;
-                    height: 100%;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 16px;
-                }
-                >.textBox:hover{
-                    background-color: #eee;
-                }
-            }
+        .swiper-slide.category-card{
+            margin: 0;
         }
+    //     >.swiper-wrapper{
+    //         >.swiper-slide{
+    //             height: 111px;
+    //             >.imgBox{
+    //                 width: 111px;
+    //                 flex-grow: 0;
+    //                 overflow: hidden;
+    //             }
+    //             >.textBox{
+    //                 flex-grow: 1;
+    //                 height: 100%;
+    //                 justify-content: center;
+    //                 align-items: center;
+    //                 font-size: 16px;
+    //             }
+    //             >.textBox:hover{
+    //                 background-color: #eee;
+    //             }
+    //         }
+    //     }
     }
-
     .stories-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
@@ -197,14 +200,14 @@ article{
     .reviews-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
-                height: 160px;
-                padding: 0 10px;
+                height:160px;
+                padding:0 10px;
                 >.imgBox{
-                    width: 80px;
+                    width:80px;
                     img{
-                        width: 55px;
-                        height: 55px;
-                        border-radius: 50%;
+                        width:55px;
+                        height:55px;
+                        border-radius:50%;
                     }
                 }
                 >.textBox{
@@ -220,18 +223,18 @@ article{
     }
 
     .category-sample{
-        padding: 0 11px;
+        // padding: 0 11px;
         width: 100%;
-        >.d-flex{
-            // width: 100%;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            .card-item{//有bs
-                min-height: 33px;
-                background-color: #fcc;
-                margin-bottom: 11px;
-            }
-        }
+        // >.d-flex{
+        //     // width: 100%;
+        //     flex-wrap: wrap;
+        //     justify-content: space-between;
+        //     .card-item{//有bs
+        //         min-height: 33px;
+        //         background-color: #fcc;
+        //         margin-bottom: 11px;
+        //     }
+        // }
     }
 
     .blogPosts-swiper-container{
@@ -301,11 +304,11 @@ article{
     }
 
     //產品兩欄
-    .category-sample{
-        .card-item{//有bs
-            width: 48.5%;
-        }
-    }
+    // .category-sample{
+    //     .card-item{//有bs
+    //         width: 48.5%;
+    //     }
+    // }
 }
 
 
@@ -337,14 +340,14 @@ article{
     }
 }
 
-@media screen and (min-width:768px) and (max-width:991px){
-    //產品三欄
-    .category-sample{
-        .card-item{//有bs
-            width: 32%;
-        }
-    }
-}
+// @media screen and (min-width:768px) and (max-width:991px){
+//     //產品三欄
+//     .category-sample{
+//         .card-item{//有bs
+//             width: 32%;
+//         }
+//     }
+// }
 
 @media screen and (min-width:992px){
     header{
@@ -379,11 +382,11 @@ article{
         }
     }
     //產品六欄
-    .category-sample{
-        .card-item{//有bs
-            width: 15.5%;
-        }
-    }
+    // .category-sample{
+    //     .card-item{//有bs
+    //         width: 15.5%;
+    //     }
+    // }
 }
 //blog特殊設定
 @media screen and (max-width:1279px){
