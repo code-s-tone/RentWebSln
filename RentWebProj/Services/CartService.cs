@@ -17,8 +17,8 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID , ref string OperationType)
-        {
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
+        {//再判斷訂單卡時段?            
             var result = new OperationResult();
             try
             {
@@ -34,12 +34,10 @@ namespace RentWebProj.Services
                 if ( VM.IsExisted )
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
-                    OperationType = "Update";
                 }
                 else
                 {//加入
                     _repository.Create(entity);
-                    OperationType = "Create";
                 }
                 _repository.SaveChanges();
 
@@ -55,6 +53,9 @@ namespace RentWebProj.Services
             return result;
         }
 
+
+
+
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
             IEnumerable<CartIndex> CartIndex;
@@ -62,6 +63,7 @@ namespace RentWebProj.Services
             var Member = _repository.GetAll<Member>();
             var Product = _repository.GetAll<Product>();
             var Cart = _repository.GetAll<Cart>();
+            var odSV = new OrderService();//軒
 
             CartIndex = from c in Cart
                         join m in Member on c.MemberID equals m.MemberID
@@ -80,9 +82,19 @@ namespace RentWebProj.Services
                             DateDiff = (int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
                             Sub = (decimal)p.DailyRate * ((int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };
+
+            var temp = CartIndex.ToList();
+                temp.ForEach(c => 
+                    c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
+                );
+            CartIndex = temp.AsEnumerable();
+
             //foreach (var item in CartIndex)
             //{
-            //    item.Sub = item.DailyRate * item.DateDiff;
+            //    //item.Sub = item.DailyRate * item.DateDiff;
+            //    //軒：每筆產品加入禁租日期
+            //    //item.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(item.ProductID);
+            //    item.DisablePeriodsJSON = "abc";
             //}
 
             return CartIndex;

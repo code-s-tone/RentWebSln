@@ -212,8 +212,11 @@ namespace RentWebProj.Services
                 if (cart != null)
                 {
                     isExisted = true;
-                    startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
-                    expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    if (cart.StartDate != null)
+                    {
+                        startDate = ((DateTime)cart.StartDate).ToString(VM.DateTimeFormat);
+                        expirationDate = ((DateTime)cart.ExpirationDate).ToString(VM.DateTimeFormat);
+                    }
                 }
             }
 
@@ -225,7 +228,7 @@ namespace RentWebProj.Services
 
 
             //禁用日期
-            string disablePeriodJSON = new OrderService().getDisablePeriodJSON(PID);
+            string disablePeriodJSON = new OrderService().GetDisablePeriodJSON(PID);
 
             VM = (from p in (_repository.GetAll<Product>())
                   where p.ProductID == PID

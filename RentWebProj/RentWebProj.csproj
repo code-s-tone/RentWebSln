@@ -52,6 +52,7 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -190,8 +191,8 @@
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
     <Content Include="Assets\css\Login\Login.css" />
-    <Content Include="Assets\css\ProductDetail\dateTimePicker.css" />
-    <Content Include="Assets\css\ProductDetail\flatpickr_orange.css" />
+    <Content Include="Assets\css\Shared\dateTimePicker.css" />
+    <Content Include="Assets\css\Shared\flatpickr_orange.css" />
     <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
     <Content Include="Assets\css\GeneralProductCards\ProductCards.css" />
     <Content Include="Assets\css\GeneralProductCards\SearchFilter.css" />
@@ -209,7 +210,8 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
-    <Content Include="Assets\js\ProductDetail\dateTimePicker.js" />
+    <Content Include="Assets\js\Shared\dateTimePickerPreDef.js" />
+    <Content Include="Assets\js\Shared\dateTimePickerSettedEvent.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
     <Content Include="Assets\css\ProductCategory.css" />
     <Content Include="Assets\css\ProductSubCategory.css" />
@@ -414,7 +416,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap5.0.1-bundle.min.js" />
-    <Content Include="Assets\js\ProductDetail\flatpickr.js" />
+    <Content Include="Assets\js\Shared\flatpickr.js" />
     <Content Include="Scripts\fontawesome.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -481,6 +483,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\js\Cart\" />
     <Folder Include="HtmlPages\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>

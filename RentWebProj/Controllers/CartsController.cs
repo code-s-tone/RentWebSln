@@ -36,13 +36,15 @@ namespace RentWebProj.Controllers
 
 
             return View(sb);
-
   
 
         }
         [HttpPost]
         public ActionResult Checkout(IEnumerable<CartIndex> VM)
-        {
+        {   
+            //判斷日期是否可通過
+
+            //造訂單、寫入庫
             //參數可能要調整
             new OrderService().Create(VM);
 
@@ -57,23 +59,33 @@ namespace RentWebProj.Controllers
             return View(carts);
         }
         [HttpPost]
-        public ActionResult Index(string name, string StartDate,string ExpirationDate)
+        public ActionResult Index(OrderDoubleCheck VM)
         {
-
-
-
-            string[] subs = name.Split(',');
-
-            List<ProductCartsView> lstStuModel = new List<ProductCartsView>();
-            for(var x = 0; x <= subs.Length-2; x++)
+            //可能未考慮日期null
+            for (int i = 0;  i < VM.ListChecked.Count() ; i++)
             {
-                lstStuModel.Add(new ProductCartsView() { ProductName = subs[x]});
+                //只有有勾選 且有更動日期的 才弄
+                if (VM.ListChecked[i] && VM.ListModified[i])
+                {
+                    //紀錄操作種類、成敗
+                    OperationResult result = new OperationResult();
+                    if (ModelState.IsValid)
+                    {
+                        var CartVM = new ProductDetailToCart()
+                        {
+                            IsExisted = true,
+                            StartDate = VM.ListStartDate[i],
+                            ExpirationDate = VM.ListExpirationDate[i]
+                        };
+                        result = new CartService().CreateOrUpdate(CartVM, VM.ListProductID[i]);
+                    }
+                }
             }
 
-            
 
-            TempData["DATA"] = _service.getCartsData(lstStuModel);
-            return RedirectToAction("checkout", "carts");
+            //自己傳資料到View
+            //return RedirectToAction("checkout", "carts");
+            return View("checkout");// , model: _service.getCartsData(lstStuModel)
         }
 
         public ActionResult Delete(int MemberID, string ProductID)

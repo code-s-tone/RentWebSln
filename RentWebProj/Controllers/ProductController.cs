@@ -83,9 +83,9 @@ namespace RentWebProj.Controllers
         //---------------------------------------------------------------
 
 
+        //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
         {
-            //接收路由PID撈產品資料、取當前登入者，傳到View
             //User.Identity.Name
             ProductDetailToCart VM = _service.getProductDetail(PID,1);
 
@@ -98,20 +98,22 @@ namespace RentWebProj.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
             //紀錄操作種類、成敗
-            string OperationType = null;
             OperationResult result = new OperationResult();
+            bool isSuccessful = false;
+            //錯誤訊息
+            //租借日期已被下訂、違法輸入
             if (ModelState.IsValid)
             {
-                result = new CartService().CreateOrUpdate(PostVM, PID, ref OperationType);
+                result = new CartService().CreateOrUpdate(PostVM, PID);
+                isSuccessful = result.IsSuccessful;
             }
-            //購物車可能已變動，需重撈
+
+            //購物車可能已變動/違法輸入，需重撈
             ProductDetailToCart VM = _service.getProductDetail(PID, 1);
-            VM.OperationType = OperationType;
-            VM.OperationSuccessful = result.IsSuccessful;
+            VM.OperationSuccessful = isSuccessful;
+            VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
-
-
-            return View(VM);//由於共用View，型別必須跟Get方法的一致
+            return View(VM);
         }
     }
 }
