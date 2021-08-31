@@ -210,6 +210,7 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
+    <Content Include="Assets\js\ProductDetail\ProductDisplay.js" />
     <Content Include="Assets\js\Shared\dateTimePickerPreDef.js" />
     <Content Include="Assets\js\Shared\dateTimePickerSettedEvent.js" />
     <Content Include="Assets\js\ProductDetail\ProductCarousel.js" />
