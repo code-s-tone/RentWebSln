@@ -81,7 +81,7 @@ namespace RentWebProj.Controllers
                     }
                 }
             }
-
+            
 
             //自己傳資料到View
             //return RedirectToAction("checkout", "carts");
