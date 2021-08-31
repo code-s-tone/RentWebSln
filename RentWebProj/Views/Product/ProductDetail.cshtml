@@ -336,8 +336,10 @@
             OpModal.toggle();
         }
     </script>
+    <!-- dateTimePicker初始化、Modal事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
     <script>
+        //設定選完日期的事件
         let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
         let disablePeriodsJSON = @Html.Raw(Model.DisablePeriodsJSON);
         //禁用日期
@@ -351,10 +353,10 @@
         }
 
     </script>
+    <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 
-    <!-- dateTimePicker設定完成引發事件 -->
-
+    <!-- 本頁的特殊後續 -->
     <script>
         //禁用購物動作
         let actionBtns = document.querySelectorAll('.decision-group .orange');
