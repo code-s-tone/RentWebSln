@@ -79,14 +79,15 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        public List<CardsViewModel> SearchProductCards(FormCollection filterForm)
+        public List<CardsViewModel> SearchProductCards(List<FilterSearchViewModel> filterFormList)
         {
-            string keywordInput = string.IsNullOrEmpty(filterForm["keywordInput"]) ? null : filterForm["keywordInput"];
-            string categoryOptions = filterForm["categoryOptions"];
-            string subCategoryOptions = filterForm["subCategoryOptions"];
-            string orderByOptions = filterForm["orderByOptions"];
-            string dailyRateBudget = filterForm["dailyRateBudget"];
+            string keywordInput = filterFormList[0].keywordInput;
+            string categoryOptions = filterFormList[0].categoryOptions;
+            string subCategoryOptions = filterFormList[0].subCategoryOptions; 
+            string dailyRateBudget = filterFormList[0].dailyRateBudget;
+            string orderByOptions = filterFormList[0].orderByOptions;
 
+            //判斷預算範圍
             int minBudget = 0;
             int maxBudget = 0;
             switch (dailyRateBudget)
@@ -114,6 +115,7 @@ namespace RentWebProj.Services
             var ctDMList = _repository.GetAll<Category>();
             var subDMList = _repository.GetAll<SubCategory>();
 
+            //依所選條件取出相關產品 AccBg001
             var selectedVMList = (from p in pDMList
                 join c in ctDMList
                     on p.ProductID.Substring(0, 3) equals c.CategoryID
@@ -136,11 +138,30 @@ namespace RentWebProj.Services
                     SubCategoryID = s.SubCategoryID
                 }).ToList();
 
-            return selectedVMList;
-
+            System.Diagnostics.Debug.WriteLine(orderByOptions);
+            //選出的產品排序 如果沒選排序就直接回傳 有選就丟進order方法
+            if (orderByOptions == null)
+            {
+                return selectedVMList;
+            }
+            else
+            {
+                return OrderSelectedProductCards(selectedVMList, orderByOptions);
+            }
         }
 
+        public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
+        {
+            if (orderByOptions=="orderByRelevance")
+            {
 
+            }
+            else if (orderByOptions == "orderByPrice")
+            {
+                selectedList= selectedList.OrderBy(x => x.DailyRate).ToList();
+            }
+            return selectedList;
+        }
 
         //public IEnumerable<ProductCartsView> getCartsData()
         //{

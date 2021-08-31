@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CardsViewModel>
+﻿@model IEnumerable<FilterSearchViewModel>
 @{
     ViewBag.Title = "ProductCards";
 }
@@ -11,7 +11,7 @@
         <!-- Left filter區-->
         <div class="col-lg-3 px-2 mx-0 ">
             <div class="searchContainer">
-                <form action="@Url.Action("SearchProductCards", "Product")" method="post">
+                <form action="@Url.Action("SearchProductCards", "Product")" method="get">
                     <div class="filterGroup">
                         <label for="keywordInput" class="">關鍵字搜尋</label> <br>
                         <input type="text" id="keywordInput" name="keywordInput" class="btn" placeholder="想找什麼呢？">
@@ -30,34 +30,33 @@
                             }
 
                         </select>
-                        
-                        <select name="subCategoryOptions" id="subCategoryOptions" class="dNoneOnPhone w-100">
+
+                        <select name="subCategoryOptions" id="subCategoryOptions" class="w-100">
                             <option value="0">選擇子分類</option>
 
                         </select>
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
-                        <label for="orderByOptions" class="">排序方式</label> <br>
-
-                        <label class="mt-1"><input type="radio" id="orderByRelevance" name="orderByOptions" value="OrderByRelevance" checked>最相關不要五四三</label><br>
-                        <label class="mt-1"><input type="radio" id="orderByPrice" name="orderByOptions" value="OrderByPrice">甜甜價低到高</label><br>
-                        <label class="mt-1" ><input type="radio" id="orderByStarsForLike" name="orderByOptions" value="OrderByStarsForLike">星星熱門度</label><br>
-                    </div>
-
-                    <div class="filterGroup dNoneOnPhone">
-                        <label for="Budget" class="">錢錢決定一切</label> <br>
-                        <select name="dailyRateBudget" id="dailyRateBudget" class="my-2">
+                        <label for="" class="">錢錢決定一切</label> <br>
+                        <select name="dailyRateBudget" id="dailyRateBudget" class="my-2 w-100">
                             <option value="0">日租費預算範圍</option>
                             <option value="1">$100以下</option>
                             <option value="2">$101~$500</option>
                             <option value="3">$501~$1000</option>
                             <option value="4">$1000以上 價格不是問題</option>
                         </select>
-
-                        <button type="reset" class="btn btn-default clearFilterBtn my-2">清除條件</button>
-                        <input type="submit" value="送出搜尋" class="filterResultBtn my-2">
                     </div>
+
+                    <div class="filterGroup dNoneOnPhone">
+                        <label for="orderByOptions" class="">排序方式</label> <br>
+
+                        <label class="mt-1"><input type="radio" id="orderByRelevance" name="orderByOptions" value="orderByRelevance" checked > 最相關不要五四三</label><br>
+                        <label class="mt-1"><input type="radio" id="orderByPrice" name="orderByOptions" value="orderByPrice"> 甜甜價低到高</label><br>
+                        <label class="mt-1"><input type="radio" id="orderByStarsForLike" name="orderByOptions" value="orderByStarsForLike"> 星星熱門度</label><br>
+                    </div>
+
+                    <input type="submit" value="送出搜尋" class="filterResultBtn my-2 dNoneOnPhone">
                 </form>
             </div>
 

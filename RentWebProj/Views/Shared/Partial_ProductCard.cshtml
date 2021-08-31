@@ -1,6 +1,6 @@
-﻿@model IEnumerable<CardsViewModel>
+﻿@model IEnumerable<FilterSearchViewModel>
 
-@foreach (var p in Model)
+@foreach (var p in ViewBag.selectedProductList)
 {
     <div class="col-6 col-md-4">
         <div class="product-card" onmouseover="productCard_Hover2(this);"

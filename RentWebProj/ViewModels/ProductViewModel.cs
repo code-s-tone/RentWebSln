@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace RentWebProj.ViewModels
 {
@@ -23,18 +24,17 @@ namespace RentWebProj.ViewModels
 
     }
 
-    public class FilterSearchViewModel
+    public class FilterSearchViewModel:CardsViewModel
     {
+        public List<CardsViewModel> selectedProductList { get; set; }
+        public List<FilterSearchViewModel> filterFormList { get; set; }
         public string keywordInput { get; set; }
-        public string CategoryID { get; set; }
-        public string SubCategoryID { get; set; }
-        //public int OrderByOptions { get; set; }
-        public enum OrderByOptions { OrderByRelevance, OrderByPrice, OrderByStarsForLike }
-        //public enum DailyRateBudget { none, , 101, }
+        public string categoryOptions { get; set; }
+        public string subCategoryOptions { get; set; }
+        public string orderByOptions { get; set; }
+        public string dailyRateBudget { get; set; }
 
     }
-
-    
 
     public enum Pages
     {
