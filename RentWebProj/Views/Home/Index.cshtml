@@ -154,13 +154,16 @@ Authentication Type : @User.Identity.AuthenticationType
     </section>
 
     @{
-        var service = new IndexService();
+        //var service = new IndexService();
 
         //dapper法 ORM講義p.29~p.34
         //連線字串connStr 連線執行個體conn  引數群物件Obj 查詢語法sql字串
         //var conn  = new SqlConnection (connStr);
         //conn.Execute(sql,Obj);
 
+        var service = new ProductService();
+        var m1 = 1;
+        var selectedCtProductList = service.GetProductData(categoryID);
     }
     @*@Html.Partial("Partial_ProductCard")*@
 
