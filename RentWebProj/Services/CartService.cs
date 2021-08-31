@@ -83,20 +83,19 @@ namespace RentWebProj.Services
                         };
 
             var odSV = new OrderService();//軒
-            //軒：每筆產品加入禁租日期
+            //軒：每筆產品加入禁租日期，用select和foreach都失敗，所以才用這麼繞的方法
             var temp = CartIndex.ToList();
-                temp.ForEach(c => 
-                    c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
-                );
+            temp.ForEach(c =>
+                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
+            );
             CartIndex = temp.AsEnumerable();
 
-            CartIndex.Select(c =>
-            {
-                CartIndex x = c;
-                x.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
-                return x;
-            });
-
+            //CartIndex.Select(c =>
+            //{
+            //    CartIndex x = c;
+            //    x.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
+            //    return x;
+            //});
 
             //foreach (var item in CartIndex)
             //{
