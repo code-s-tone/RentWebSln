@@ -485,6 +485,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\images\Index\" />
     <Folder Include="Assets\js\Cart\" />
     <Folder Include="HtmlPages\" />
     <Folder Include="obj\Debug\TempPE\" />
