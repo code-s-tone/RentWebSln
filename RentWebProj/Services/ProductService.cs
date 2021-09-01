@@ -25,7 +25,12 @@ namespace RentWebProj.Services
             //Query Expression
             ctVMList = from ct in ctDMList
                        select new CardsViewModel
-                       { CategoryName = ct.CategoryName, CategoryID=ct.CategoryID, ImageSrcMain = ct.ImageSrcMain, ImageSrcSecond = ct.ImageSrcSecond };
+                       { 
+                           CategoryName = ct.CategoryName, 
+                           CategoryID = ct.CategoryID, 
+                           ImageSrcMain = ct.ImageSrcMain, 
+                           ImageSrcSecond = ct.ImageSrcSecond
+                       };
 
             return ctVMList;
         }
@@ -34,6 +39,12 @@ namespace RentWebProj.Services
         {
             var cate = GetCategoryData().Where(x => x.CategoryID == categoryID).ToArray();
             return cate[0].CategoryName.ToString();
+            //軒：可考慮FirstOrDefault方法，如下
+            //return 
+            //    GetCategoryData()
+            //    .Where(x => x.CategoryID == categoryID)
+            //    .FirstOrDefault()
+            //    .CategoryName.ToString();
         }
 
         public IEnumerable<CardsViewModel> GetProductData(string productID)
@@ -133,39 +144,47 @@ namespace RentWebProj.Services
             return VMList;
 
         }
+        public IEnumerable<CardsViewModel> GetAllProductCardData()
+        {
+            IEnumerable<CardsViewModel> AllProductCardVMList;
+            //var pDMList = ;
+            //var ctDMList = ;
+            //var subCtDMList = ;
 
+            AllProductCardVMList = 
+                from p in (_repository.GetAll<Product>())
+                join c in (_repository.GetAll<Category>())
+                on p.ProductID.Substring(0, 3) equals c.CategoryID
+                join s in (_repository.GetAll<SubCategory>())
+                on p.ProductID.Substring(3, 2) equals s.SubCategoryID
 
+                select new CardsViewModel
+                {
+                    ProductID = p.ProductID,
+                    ProductName = p.ProductName,
+                    CategoryName = c.CategoryName,
+                    Description = p.Description,
+                    DailyRate = (decimal)p.DailyRate,
+                    SubCategoryName = s.SubCategoryName,
+                    SubCategoryID = s.SubCategoryID//這好像不需要，因為資訊已經存在ProductID中?
+                };
 
-        //public IEnumerable<ProductCartsView> getCartsData()
-        //{
-        //    IEnumerable<ProductCartsView> CMList  ;
+            return AllProductCardVMList;
+        }
 
-        //    //var CList = _repository.GetAll<Category>();
-        //    var PList = _repository.GetAll<Product>();
-        //    var OList = _repository.GetAll<OrderDetail>();
+        public IEnumerable<CardsViewModel> GetMostPopularProductCardData()
+        {
 
-        //    //篩選、轉型
-        //    //Method Expression  有join時，這方法很吃邏輯
+            var pList = GetAllProductCardData().ToList();
+            pList.ForEach(p => {
+                var days = new OrderService().countRenteDays(p.ProductID);
+                p.CountOfRentedDays = days;
+            });
 
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            return VMList;
+        }
 
-        //    //Query Expression
-        //    //VMList = (from p in pDMList
-        //    //          join c in cDMList
-        //    //          on p.CategoryID equals c.CategoryID
-        //    //          where p.CategoryID == catID
-        //    //          select new IndexProductView
-        //    //          { ProductName = p.ProductName, CategoryName = c.CategoryName }
-        //    //).Take(6);
-
-        //    CMList = (from p in PList
-        //              join o in OList
-        //              on p.ProductID equals o.ProductID
-        //              select new ProductCartsView
-        //              { ProductName = p.ProductName, DailyRate = (decimal)o.DailyRate, StartDate = (DateTime)o.StartDate, ExpirationDate = (DateTime)o.ExpirationDate, TotalAmount = (decimal)o.TotalAmount }
-        //    );
-
-        //    return CMList;
-        //}
 
         public ProductDetailToCart getProductDetail(string PID, int? currentMemberID)
         {
@@ -222,7 +241,14 @@ namespace RentWebProj.Services
                   }).SingleOrDefault();
 
             return VM;
-        }
 
+            //Func<SubCategory, bool> filterCondition = x => x.CategoryID == catID;
+            //Func<CardsViewModel, bool> filterCondition2 = x => x.CategoryID == catID;
+            //.Where(filterCondition2);
+            //Func<CardsViewModel, string> orderCondition = x => x.CategoryID;
+            //subDMList.OrderBy(orderCondition);
+            //orderby 
+
+        }
     }
 }

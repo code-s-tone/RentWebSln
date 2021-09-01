@@ -8,7 +8,7 @@ namespace RentWebProj.ViewModels
     public class OrderViewModel
     {
     }
-    public class RentPeriod
+    public class RentedPeriod
     {
         public DateTime from { get; set; }
         public DateTime to { get; set; }

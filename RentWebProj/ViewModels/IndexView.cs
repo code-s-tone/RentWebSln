@@ -5,17 +5,7 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
-    public class IndexCategoryView
-    {
-        public string CategoryName { get; set; }
-        public string ImageSrc { get; set; }
-
-    }
-    public class IndexProductView
-    {
-        public string ProductName { get; set; }
-        public string CategoryName { get; set; }
-    }
+    //祥聖在使用嗎，該移去別處?
     public class ProductCartsView
     {
         public string ImageSrc { get; set; }
@@ -27,8 +17,5 @@ namespace RentWebProj.ViewModels
         public DateTime StartDate { get; set; }
         public DateTime ExpirationDate { get; set; }
         public decimal TotalAmount { get; set; }
-
-        public string ProductID { get; set; }
     }
-
 }
