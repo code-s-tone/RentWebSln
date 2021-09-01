@@ -7,6 +7,19 @@ using System.Web.Mvc;
 
 namespace RentWebProj.ViewModels
 {
+    public class CategoryView
+    {
+        public string CategoryName { get; set; }
+        public string ImageSrcMain { get; set; }
+        public string ImageSrcSecond { get; set; }
+
+    }
+    public class ProductView
+    {
+        public string ProductName { get; set; }
+        public string CategoryName { get; set; }
+    }
+
     public class CardsViewModel
     {   
         public string ImageSrcMain { get; set; }
@@ -21,8 +34,10 @@ namespace RentWebProj.ViewModels
         public decimal DailyRate { get; set; }
         public int StarsForLike { get; set; }   //商品卡片上的星星數待決定如何判斷
 
-        //還有商品卡的兩張照片
+        //偉軒用
+        public double CountOfRentedDays { get; set; }
 
+        //public int StarsForLike { get; set; }
     }
 
     public class FilterSearchViewModel:CardsViewModel

@@ -5,22 +5,26 @@
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
-    spaceBetween: 12,
-    centeredSlides: true,
-    slidesPerView: 1.8,
+    spaceBetween: 20,
+    //centeredSlides: true,
+    slidesPerView: 1,
     breakpoints: {
         // when window width is >=
-        768: {
-            height: 55,
+        600:{
             centeredSlides: true,
-            slidesPerView: 3.3
+            slidesPerView: 1.8
+        },
+        768: {
+            centeredSlides: true,
+            slidesPerView: 2.2
         },
         992: {
             centeredSlides: false,
-            slidesPerView: 4
+            slidesPerView: 2.6
         },
         1280: {
-            slidesPerView: 5
+            centeredSlides: true,
+            slidesPerView: 3.5
         }
     }
 });

@@ -19,19 +19,28 @@ namespace RentWebProj.Services
         }
 
         //取得歷史租期
-        public IEnumerable<RentPeriod> GetProductRentPeriods(string PID) 
+        public IEnumerable<RentedPeriod> GetProductRentPeriods(string PID) 
         {
-            var RentPeriods =
+            var RentedPeriods =
                 from od in (_repository.GetAll<OrderDetail>())
                 where od.ProductID == PID
                 orderby od.StartDate    //日期由小至大
-                select new RentPeriod
+                select new RentedPeriod
                 {
                     @from = (DateTime)od.StartDate,
                     to = (DateTime)od.ExpirationDate
                 };
 
-            return RentPeriods;
+            return RentedPeriods;
+        }
+        public double countRenteDays(string PID)
+        {
+            var RentedDays =
+                GetProductRentPeriods(PID)
+                .Select(x => (x.to - x.from).TotalDays)
+                .Sum();
+
+            return RentedDays;
         }
         public string GetDisablePeriodJSON(string PID)
         {
