@@ -5,10 +5,6 @@
 //ExpirationDateToPost
 //disablePeriodsJSON
 
-let startDateTimeText;
-let endDateTimeText;
-let formatDivider = ' ';
-let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
 
 

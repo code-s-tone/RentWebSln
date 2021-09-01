@@ -96,8 +96,8 @@
                                     <input type="hidden" name="ListProductID[@i]" value="@item.ProductID" />
                                     <input type="hidden" name="ListDailyRate[@i]" value="@item.DailyRate" />
                                     <input type="hidden" name="ListTotalAmount[@i]" value="@subTotal" />
-                                    <input type="hidden" name="ListStartDate[@i]" value="@item.StartDate.ToString(dateTimeFormat)" />
-                                    <input type="hidden" name="ListExpirationDate[@i]" value="@item.ExpirationDate.ToString(dateTimeFormat)" />
+                                    <input type="hidden" name="ListStartDate[@i]" value="@item.StartDate.Value.ToString(dateTimeFormat)" />
+                                    <input type="hidden" name="ListExpirationDate[@i]" value="@item.ExpirationDate.Value.ToString(dateTimeFormat)" />
                                     i++;
                                 }
 

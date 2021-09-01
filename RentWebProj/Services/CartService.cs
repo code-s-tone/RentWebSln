@@ -6,6 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -75,29 +76,30 @@ namespace RentWebProj.Services
                             MemberID = c.MemberID,
                             ProductID = c.ProductID,
                             ProductName = p.ProductName,
-                            StartDate = (DateTime)c.StartDate,
-                            ExpirationDate = (DateTime)c.ExpirationDate,
+                            StartDate = c.StartDate,
+                            ExpirationDate = c.ExpirationDate,
                             DailyRate = (decimal)p.DailyRate,
                             Qty = 1,
                             Available = (bool)p.Available,
-                            DateDiff = (int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
-                            Sub = (decimal)p.DailyRate * ((int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
+                            //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
+                            //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };
 
             var odSV = new OrderService();//軒
             //軒：每筆產品加入禁租日期，用select和foreach都失敗，所以才用這麼繞的方法
             var temp = CartIndex.ToList();
             temp.ForEach(c =>
-                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
-            );
+            {
+                int dateDiff = 0;
+                if (c.StartDate.HasValue)
+                {
+                    dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
+                }
+                c.DateDiff = dateDiff;
+                c.Sub = c.DailyRate * dateDiff;
+                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
+            });
             CartIndex = temp.AsEnumerable();
-
-            //CartIndex.Select(c =>
-            //{
-            //    CartIndex x = c;
-            //    x.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
-            //    return x;
-            //});
 
             //foreach (var item in CartIndex)
             //{

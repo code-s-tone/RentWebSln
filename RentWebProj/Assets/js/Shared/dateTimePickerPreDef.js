@@ -1,3 +1,6 @@
+let startDateTimeText;
+let endDateTimeText;
+
 //輔助函式庫
 function combinDateTime(i) {
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
@@ -91,3 +94,6 @@ const timePicker = flatpickr(".timePicker", {
         }
     }
 });
+
+let formatDivider = ' ';
+let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;

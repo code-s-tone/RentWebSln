@@ -198,18 +198,15 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
-        //checkbox
-        completeBtn.addEventListener('click', function ModifiedRecord(){
-            let Modified = SetTarget();
-            if (Modified.value == "false") {
-                Modified.value = "true";
+        completeBtn.addEventListener('click', function(){
+            let modified = modifiedTarget();
+            if (modified.value == "false") {
+                modified.value = "true";
             }
-            //if (Modified.value == "false") {
-            //    Modified.value = "true";
-            //}
-
-            //console.log(Modified);
-
+            let ckBox = checkBoxTarget();
+            if (ckBox.disabled == true) {
+                ckBox.disabled = false;
+            }
         });
 
         let DateModalLauncher = null;
@@ -218,6 +215,7 @@
         let disablePeriodsJSONArray = [];
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
+        let checkBoxs = document.querySelectorAll('.form-check-input');
 
         //如果在購物車且有選日期 => 預顯示文字，開放勾選
         @{
@@ -225,31 +223,34 @@
             string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
             foreach ( var item in Model)
             {
-                <text>
-                if ( @Json.Encode(item.StartDate!=null ) ) {
+
+                if ( item.StartDate.HasValue ) {
+                    <text>
                     DateModalLauncher = DateModalBtns[@i];
-                    let startDateTimeText = '@(item.StartDate.ToString(dateTimeFormat))';
-                    let endDateTimeText = '@item.ExpirationDate.ToString(dateTimeFormat)';
+                    startDateTimeText = '@(item.StartDate.Value.ToString(dateTimeFormat))';
+                    endDateTimeText = '@item.ExpirationDate.Value.ToString(dateTimeFormat)';
                     showPeriodText(startDateTimeText,endDateTimeText);
 
                     //寫入POST欄位
                     document.querySelector(`input[name="ListStartDate[@i]"]`).value = startDateTimeText;
                     document.querySelector(`input[name="ListExpirationDate[@i]"]`).value = endDateTimeText;
-                }//讓CheckBox可以打V，沒有日期就禁用
+                    </text>
+                }
                 else
                 {
-                    document.querySelector('.form-check-input[value="@i"]').disabled = true;
+                    <text>
+                    //沒有日期就禁用CheckBox
+                    checkBoxs[@i].disabled = true;
+                    </text>
                 }
-
+                <text>
                 disablePeriodsJSONArray.push( @Html.Raw(item.DisablePeriodsJSON));
-
                 </text>
                 i++;
             }
         }
 
 
-        //console.log(disablePeriodsJSONArray);
         DateModalBtns.forEach((btn, i) => {
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
@@ -258,14 +259,16 @@
                 StartDateToPost = document.querySelector(`input[name="ListStartDate[${i}]"]`);
                 ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${i}]"]`);
 
-                //禁用日期
+                //禁租日期
                 datePicker.config.disable = disablePeriodsJSONArray[i];
 
-                //日期設定完成=>以索引值取物件 紀錄"有更動"
-                SetTarget = function () {
+                //日期設定完成=>以索引值取 目標異動紀錄欄位 目標核取方塊
+                modifiedTarget = function () {
                     return document.querySelector(`input[name="ListModified[${i}]"]`);
                 };
-
+                checkBoxTarget = function () {
+                    return checkBoxs[i];
+                };
             });
         });
     </script>
@@ -281,14 +284,11 @@
         //    let b = document.querySelector('.check');
         //    b.setAttribute("value", result);
         //}
-
-        document.querySelectorAll('.form-check-input').forEach(function (btn) {
-            //btn.addEventListener('change', Checked);
-            btn.addEventListener('change', function () {
-                let i = btn.value;
-                let temp = document.querySelector(`input[name="ListChecked[${i}]"]`);
-                console.log(temp);
-                temp.value = btn.checked;
+        checkBoxs.forEach(function (ckBox) {
+            ckBox.addEventListener('change', function () {
+                let i = ckBox.value;
+                let PostTarget = document.querySelector(`input[name="ListChecked[${i}]"]`);
+                PostTarget.value = ckBox.checked;
             });
         })
 

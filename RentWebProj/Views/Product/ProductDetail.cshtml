@@ -353,24 +353,21 @@
         }else{}*@
 
         //入車提示訊息
-        if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
-            let OpText = "";
-            if ( @Json.Encode(Model.OperationType == "Create")  )
-                OpText = "加入";
-            else if (@Json.Encode(Model.OperationType == "Update")  )
-                OpText = "更新";
+            @if (!String.IsNullOrEmpty(Model.OperationType))
+            {
+                string OpText = "";
+                if ( Model.OperationType == "Create") { OpText = "加入"; }
+                else if (Model.OperationType == "Update") { OpText = "更新"; }
 
-            OpText += "購物車";
-            if (@Json.Encode(Model.OperationSuccessful)) {
-                OpText += "成功";
+                OpText += "購物車";
+                if ( Model.OperationSuccessful ){ OpText += "成功"; }
+                else  { OpText += "失敗"; }
+                <text>
+                let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
+                document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
+                OpModal.toggle();
+                </text>
             }
-            else {
-                OpText += "失敗";
-            }
-            let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
-            document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
-            OpModal.toggle();
-        }
     </script>
     <!-- dateTimePicker初始化、Modal事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
