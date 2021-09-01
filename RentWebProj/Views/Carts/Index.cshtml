@@ -78,15 +78,11 @@
                                         }
                                         </p>
                                         @{
-                                            //軒：
                                             //日期選取器
                                             <button type="button" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                                                 設定租借期間
                                             </button>
-                                            //懿的起訖日型別不允許null => 庭安那邊來的有null的怎麼辦??
                                             //軒：POST起迄日用
-                                            //class="displayNone"style="display:none" type="text"
-                                            //ID
                                             <input type="hidden" name="ListProductID[@i]"
                                                    value="@item.ProductID" />
                                             <input type="hidden" name="ListStartDate[@i]"
@@ -203,15 +199,19 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
-        
+        //checkbox
         completeBtn.addEventListener('click', function ModifiedRecord(){
             let Modified = SetTarget();
-            //console.log(Modified);
             if (Modified.value == "false") {
                 Modified.value = "true";
             }
-        });
+            //if (Modified.value == "false") {
+            //    Modified.value = "true";
+            //}
 
+            //console.log(Modified);
+
+        });
 
         let DateModalLauncher = null;
         let StartDateToPost = null;
@@ -220,11 +220,10 @@
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
 
-        //如果在購物車且有選日期 => 預顯示文字
+        //如果在購物車且有選日期 => 預顯示文字，開放勾選
         @{
             int i = 0;
             string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
-            //Model.ToList().ForEach(item , idx);
             foreach ( var item in Model)
             {
                 <text>
