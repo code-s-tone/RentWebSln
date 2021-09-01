@@ -79,13 +79,13 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        public List<CardsViewModel> SearchProductCards(List<FilterSearchViewModel> filterFormList)
+        public List<CardsViewModel> SearchProductCards(FilterSearchViewModel filterFormList)
         {
-            string keywordInput = filterFormList[0].keywordInput;
-            string categoryOptions = filterFormList[0].categoryOptions;
-            string subCategoryOptions = filterFormList[0].subCategoryOptions; 
-            string dailyRateBudget = filterFormList[0].dailyRateBudget;
-            string orderByOptions = filterFormList[0].orderByOptions;
+            string keywordInput = filterFormList.keywordInput;
+            string categoryOptions = filterFormList.categoryOptions;
+            string subCategoryOptions = filterFormList.subCategoryOptions; 
+            string dailyRateBudget = filterFormList.dailyRateBudget;
+            string orderByOptions = filterFormList.orderByOptions;
 
             //判斷預算範圍
             int minBudget = 0;
@@ -136,9 +136,9 @@ namespace RentWebProj.Services
                     DailyRate = (decimal)p.DailyRate,
                     SubCategoryName = s.SubCategoryName,
                     SubCategoryID = s.SubCategoryID
+
                 }).ToList();
 
-            System.Diagnostics.Debug.WriteLine(orderByOptions);
             //選出的產品排序 如果沒選排序就直接回傳 有選就丟進order方法
             if (orderByOptions == null)
             {
@@ -154,7 +154,7 @@ namespace RentWebProj.Services
         {
             if (orderByOptions=="orderByRelevance")
             {
-
+                //思考中...
             }
             else if (orderByOptions == "orderByPrice")
             {

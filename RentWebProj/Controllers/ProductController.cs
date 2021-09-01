@@ -59,25 +59,29 @@ namespace RentWebProj.Controllers
         [HttpGet] //前端搜尋篩選
         public ActionResult SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string dailyRateBudget,string orderByOptions)
         {
-            var filterFormList = new List<FilterSearchViewModel>
+            var filterForm = new FilterSearchViewModel
             {
-                new FilterSearchViewModel(){keywordInput=keywordInput,categoryOptions = categoryOptions,subCategoryOptions = subCategoryOptions,dailyRateBudget = dailyRateBudget,orderByOptions = orderByOptions},
+                keywordInput = keywordInput,
+                categoryOptions = categoryOptions,
+                subCategoryOptions = subCategoryOptions,
+                dailyRateBudget = dailyRateBudget,
+                orderByOptions = orderByOptions
             };
-            var selectedProductList = _service.SearchProductCards(filterFormList);
+
+            var selectedProductList = _service.SearchProductCards(filterForm);
 
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
+            ViewBag.CategorySelected = filterForm.categoryOptions;
+            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.categoryOptions);
             ViewBag.selectedProductList = selectedProductList;
             ViewBag.ContainerTitle = selectedProductList.Count == 0 ? nameof(ContainerTitle.很抱歉找不到您要的商品) : nameof(ContainerTitle.您要的商品);
 
-            var filterSearchVMList = new List<FilterSearchViewModel>()
-            {
-                new FilterSearchViewModel() {selectedProductList = selectedProductList,filterFormList = filterFormList}
-            };
+            
 
 
-            return View("ProductCardsList", filterSearchVMList);
+            return View("ProductCardsList", filterForm);
         }
 
         //---------------------------------------------------------------
