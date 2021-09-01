@@ -52,6 +52,16 @@ namespace RentWebProj.Services
 
             return result;
         }
+        //public IEnumerable<ProductCartsView> CheckCart(OrderDoubleCheck VM)
+        //{
+        //    IEnumerable<ProductCartsView> CCList;
+        //    CCList = from o in _repository.GetAll<Order>()
+        //             join p in _repository.GetAll<Product>() on 
+                     
+
+
+        //    return CCList;
+        //}
 
 
 
