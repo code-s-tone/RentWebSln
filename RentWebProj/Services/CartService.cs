@@ -17,7 +17,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM, string PID)
         {//再判斷訂單卡時段?            
             var result = new OperationResult();
             try
@@ -28,10 +28,10 @@ namespace RentWebProj.Services
                     MemberID = 1,
                     ProductID = PID,
                     StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
+                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)
                 };
                 //判斷是否本來就存在
-                if ( VM.IsExisted )
+                if (VM.IsExisted)
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
                 }
@@ -41,7 +41,7 @@ namespace RentWebProj.Services
                 }
                 _repository.SaveChanges();
 
-                
+
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
@@ -52,19 +52,11 @@ namespace RentWebProj.Services
 
             return result;
         }
-        //public IEnumerable<ProductCartsView> CheckCart(OrderDoubleCheck VM)
-        //{
-        //    IEnumerable<ProductCartsView> CCList;
-        //    CCList = from o in _repository.GetAll<Order>()
-        //             join p in _repository.GetAll<Product>() on 
-                     
 
-
-        //    return CCList;
-        //}
-
-
-
+        public CartIndex CheckCart(string PID, int MemberID)
+        {
+            return GetCart(MemberID).SingleOrDefault(x => x.ProductID == PID);
+        }
 
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
@@ -131,7 +123,7 @@ namespace RentWebProj.Services
 
         public void DeleteCart(int MemberID, string ProductID)
         {
-            Cart deleteList = new Cart() 
+            Cart deleteList = new Cart()
             {
                 MemberID = MemberID,
                 ProductID = ProductID

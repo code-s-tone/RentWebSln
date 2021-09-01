@@ -19,34 +19,26 @@ namespace RentWebProj.Controllers
 
 
         private RentContext db = new RentContext();
-        private IndexService _service;
         private CartService _cartService;
         // GET: Carts
 
         public CartsController()
         {
-            _service = new IndexService();
             _cartService = new CartService();
         }
 
         public ActionResult Checkout()
         {
-
-            var sb = TempData["DATA"];
-
-
-            return View(sb);
-  
-
+            return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult Checkout(IEnumerable<CartIndex> VM)
-        {   
+        public ActionResult Checkout(CreateOrder PostVM)//IEnumerable<CartIndex> VM
+        {
             //判斷日期是否可通過
 
             //造訂單、寫入庫
             //參數可能要調整
-            new OrderService().Create(VM);
+            new OrderService().Create(PostVM);
 
             return RedirectToAction("MemberCenter", "Member");
         }
@@ -61,8 +53,10 @@ namespace RentWebProj.Controllers
         [HttpPost]
         public ActionResult Index(OrderDoubleCheck VM)
         {
+            List<CartIndex> CList = new List<CartIndex>();
+
             //可能未考慮日期null
-            for (int i = 0;  i < VM.ListChecked.Count() ; i++)
+            for (int i = 0; i < VM.ListChecked.Count(); i++)
             {
                 //只有有勾選 且有更動日期的 才弄
                 if (VM.ListChecked[i] && VM.ListModified[i])
@@ -79,24 +73,21 @@ namespace RentWebProj.Controllers
                         };
                         result = new CartService().CreateOrUpdate(CartVM, VM.ListProductID[i]);
                     }
+                    //要補資料、增加Store
+                }
+                if (VM.ListChecked[i])
+                {
+                    CList.Add(_cartService.CheckCart(VM.ListProductID[i], 1));
                 }
             }
 
-
-            List<ProductCartsView> pcModel = new List<ProductCartsView>();
-            foreach (var item in VM.ListProductID)
-            {
-                pcModel.Add(new ProductCartsView() { ProductName = item });
-            }
-
             //自己傳資料到View
-            //return RedirectToAction("checkout", "carts");
-            return View("checkout");// , model: _service.getCartsData(lstStuModel)
+            return View("checkout", model: CList);
         }
 
         public ActionResult Delete(int MemberID, string ProductID)
         {
-             _cartService.DeleteCart(MemberID, ProductID);
+            _cartService.DeleteCart(MemberID, ProductID);
             return RedirectToAction("Index");
         }
 

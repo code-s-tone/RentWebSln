@@ -1,6 +1,6 @@
-﻿@model IEnumerable<ProductCartsView>
+﻿@model List<CartIndex>
 @{
-    
+
     ViewBag.Title = "Checkout";
 }
 
@@ -19,150 +19,182 @@
         </div>
     </div>
 
+    @{
+        var total = @Math.Ceiling(Model.Sum(x => x.DailyRate * x.DateDiff));
+        var discount = 0;
+    }
+    @using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
+    {
 
 
-    <div class="order-content">
-        <div class="content-nav">
-            <li class="active"><a href="#">購物明細({X})</a></li>
-            <li><a href="#">追蹤清單({X})</a></li>
-        </div>
-        <div class="content">
-            <table class="table">
-                <tr>
-                    <th>
-                        <span>商品名稱</span>
-                    </th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
+        <div class="order-content">
+            <div class="content-nav">
+                <li class="active"><a href="#">購物明細({X})</a></li>
+                <li><a href="#">追蹤清單({X})</a></li>
+            </div>
+            <div class="content">
+                <table class="table">
                     <tr>
-                        <td>
-                            <div class="product">
-                                <div class="product-img">
-                                    <a href="#">
-                                        <img src="~/Assets/images/cart/A451.jpg" />
-                                    </a>
-                                </div>
-                                <div class="product-name">
-                                    <a href="#" style="text-decoration:none;">
-                                        @Html.DisplayFor(modelItem => item.ProductName)
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="product-stock">
-                                <p>利用程式判斷是否有庫存，有的話就顯示立即出貨</p>
-                            </div>
-                            <div class="product-price-qty">
-                                <div class="unitprice">
-                                    <span class="title">單日租價 :</span>
-                                    <span class="price">@*@Html.DisplayFor(modelItem => item.DailyRate)*@</span>
-                                </div>
-                                <div class="buyqty">
-                                    <span class="title">天數 : @*@Html.DisplayFor(modelItem => new TimeSpan(item.ExpirationDate.Ticks - item.StartDate.Ticks).TotalDays)*@</span>
-
-                                    @*<input type="number" value="1" class="qty">*@
-                                </div>
-                            </div>
-                            <div class="product-sub">
-                                <span class="title">小計 : </span>&emsp;
-                                <span class="subTotal"> @*@Html.DisplayFor(modelItem => item.TotalAmount)*@</span>
-                            </div>
-                        </td>
-                        @*
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                            </td>
-                        *@
+                        <th>
+                            <span>商品名稱</span>
+                        </th>
                     </tr>
+
+                    @{
+                        int i = 0;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="product">
+                                    <div class="product-img">
+                                        <a href="#">
+                                            <img src="~/Assets/images/cart/A451.jpg" />
+                                        </a>
+                                    </div>
+                                    <div class="product-name">
+                                        <a href="#" style="text-decoration:none;">
+                                            @Html.DisplayFor(M => item.ProductName)
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-stock">
+                                    <p></p>
+                                </div>
+                                <div class="product-price-qty">
+                                    <div class="unitprice">
+                                        <span class="title">單日租價 :</span>
+                                        <span class="price">@Html.DisplayFor(M => item.DailyRate)</span>
+
+                                    </div>
+                                    @*顯示起訖日*@
+                                    <div class="alldate">
+                                        <span class="title">起日 :</span>
+                                        <span class="">@Html.DisplayFor(M => item.StartDate)</span>
+                                        <span class="title">迄日 :</span>
+                                        <span class="">@Html.DisplayFor(M => item.ExpirationDate)</span>
+                                    </div>
+                                    <div class="buyqty">
+                                        <span class="title">天數 : @Html.DisplayFor(M => item.DateDiff)</span>
+
+                                        @*<input type="number" value="1" class="qty">*@
+                                    </div>
+                                </div>
+                                @{
+                                    string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
+                                    var subTotal = Math.Ceiling(item.DateDiff * item.DailyRate);
+                                }
+                                <div class="product-sub">
+                                    <span class="title">小計 : </span>&emsp;
+                                    <span class="subTotal"> @subTotal</span>
+                                </div>
+
+                                @*Post需用欄位*@
+                                @{
+                                    <input type="hidden" name="ListProductID[@i]" value="@item.ProductID" />
+                                    <input type="hidden" name="ListDailyRate[@i]" value="@item.DailyRate" />
+                                    <input type="hidden" name="ListTotalAmount[@i]" value="@subTotal" />
+                                    <input type="hidden" name="ListStartDate[@i]" value="@item.StartDate.ToString(dateTimeFormat)" />
+                                    <input type="hidden" name="ListExpirationDate[@i]" value="@item.ExpirationDate.ToString(dateTimeFormat)" />
+                                    i++;
+                                }
+
+                            </td>
+                            @*
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>
+                            *@
+                        </tr>
+                    }
+
+
                     <tr>
                         <td>
                             <div class="order-total">
                                 <span>總計：</span>
                                 <span class="currency">TWD$</span> &emsp;
-                                <span class="total">@*@Html.DisplayFor(modelItem => item.TotalAmount)*@</span>
+                                <span class="total">
+                                    @total
+                                </span>
                             </div>
                         </td>
                     </tr>
-                }
 
-            </table>
-            <div class="content-footer">
-                <div>
-                    <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
-                </div>
-                <div class="checkout">
-                    <button type="button" class="btn">進行結帳</button>
+
+                </table>
+                <div class="content-footer">
+                    <div>
+                        <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
+                    </div>
+                    <div class="checkout">
+                        @*<button type="submit" class="btn">進行結帳</button>*@
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="order-footer">
-        <div class="left-info">
-            <div class="info-head">
-                收件人資訊及付款方式
-            </div>
-            <div class="info-body">
-                <div class="member-info">
-                    <div>
-                        <label for="member-name">收件人</label>
-                    </div>
-                    <div>
-                        <input type="text" id="member-name">
-                    </div>
 
-                    <div>
-                        <label for="member-address">地址</label>
-                    </div>
+        <div class="order-footer">
+            <div class="left-info">
+                <div class="info-head">
+                    收件人資訊
+                </div>
+                <div class="info-body">
+                    <div class="member-info">
+                        <div>
+                            <label for="member-name">收件人</label>
+                        </div>
+                        <div>
+                            <input type="text" id="member-name">
+                        </div>
 
-                    <div>
-                        <select class="form-select" aria-label="address select">
-                            <option selected>請選擇分店地址</option>
-                            <option value="1">新竹總店</option>
-                            <option value="2">台北分店</option>
-                            <option value="3">台中分店</option>
-                        </select>
-                    </div>
+                        <div>
+                            <label for="member-address">地址</label>
+                        </div>
 
-                    <div>
-                        <label for="member-pay">付款方式</label>
-                    </div>
-                    <div>
-                        <select class="form-select" aria-label="pay select">
-                            <option selected>請選擇付款方式</option>
-                            <option value="cash">現金</option>
-                            <option value="card">信用卡</option>
-                        </select>
-                    </div>
+                        <div>
+                            <select name="StoreID" class="form-select" aria-label="address select">
+                                <option selected value="0">請選擇分店地址</option>
+                                @{
+                                    var StoreList = new OrderService().GetAllStore();
+                                    foreach (var item in StoreList)
+                                    {
+                                        <option value="@(item.StoreID + 1) ">@item.StoreName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
-
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="right-info">
-            <div class="info-head">訂單詳情</div>
-            <div class="info-body">
-                <div class="sub">
-                    <span>小計 :</span>
-                    <span class="subtotal">{NT$400}</span>
-                </div>
-                <div class="dis">
-                    <span>折扣 :</span>
-                    <span class="discount">{-NT$0}</span>
-                </div>
-                <hr>
-                <div class="tol">
-                    <span>合計 :</span>
-                    <span class="total">{NT$400}</span>
-                </div>
-                <div class="checkout">
-                    <button type="button" class="btn">進行結帳</button>
+            <div class="right-info">
+                <div class="info-head">訂單詳情</div>
+                <div class="info-body">
+                    <div class="sub">
+                        <span>小計 :</span>
+                        <span class="subtotal">NT$@total</span>
+                    </div>
+                    <div class="dis">
+                        <span>折扣 :</span>
+                        <span class="discount">- NT$@discount</span>
+                    </div>
+                    <hr>
+                    <div class="tol">
+                        <span>合計 :</span>
+                        <span class="total">NT$@(total - discount) </span>
+                    </div>
+                    <div class="checkout">
+                        <button type="submit" class="btn">進行結帳</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 
 @section topCSS{

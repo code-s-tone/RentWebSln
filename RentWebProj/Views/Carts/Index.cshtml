@@ -41,7 +41,6 @@
                     </tr>
                     @{
                         int i = 0;
-                        //string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
                     }
                     @foreach (var item in Model)
                     {
@@ -203,13 +202,16 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
-        
+
         completeBtn.addEventListener('click', function ModifiedRecord(){
             let Modified = SetTarget();
             //console.log(Modified);
             if (Modified.value == "false") {
                 Modified.value = "true";
             }
+            //if (Modified.value == "false") {
+            //    Modified.value = "true";
+            //}
         });
 
 
@@ -237,7 +239,10 @@
                     //寫入POST欄位
                     document.querySelector(`input[name="ListStartDate[@i]"]`).value = startDateTimeText;
                     document.querySelector(`input[name="ListExpirationDate[@i]"]`).value = endDateTimeText;
-
+                }//讓CheckBox可以打V，沒有日期就禁用
+                else
+                {
+                    document.querySelector('.form-check-input[value="@i"]').disabled = true;
                 }
 
                 disablePeriodsJSONArray.push( @Html.Raw(item.DisablePeriodsJSON));
@@ -249,7 +254,7 @@
 
 
         //console.log(disablePeriodsJSONArray);
-        DateModalBtns.forEach((btn, i) => {        
+        DateModalBtns.forEach((btn, i) => {
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
                 DateModalLauncher = btn;
