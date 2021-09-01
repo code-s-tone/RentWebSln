@@ -17,7 +17,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM, string PID)
         {//再判斷訂單卡時段?            
             var result = new OperationResult();
             try
@@ -28,10 +28,10 @@ namespace RentWebProj.Services
                     MemberID = 1,
                     ProductID = PID,
                     StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
+                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)
                 };
                 //判斷是否本來就存在
-                if ( VM.IsExisted )
+                if (VM.IsExisted)
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
                 }
@@ -41,7 +41,7 @@ namespace RentWebProj.Services
                 }
                 _repository.SaveChanges();
 
-                
+
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
@@ -53,8 +53,10 @@ namespace RentWebProj.Services
             return result;
         }
 
-
-
+        public CartIndex CheckCart(string PID, int MemberID)
+        {
+            return GetCart(MemberID).SingleOrDefault(x => x.ProductID == PID);
+        }
 
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
@@ -63,7 +65,6 @@ namespace RentWebProj.Services
             var Member = _repository.GetAll<Member>();
             var Product = _repository.GetAll<Product>();
             var Cart = _repository.GetAll<Cart>();
-            var odSV = new OrderService();//軒
 
             CartIndex = from c in Cart
                         join m in Member on c.MemberID equals m.MemberID
@@ -83,18 +84,24 @@ namespace RentWebProj.Services
                             Sub = (decimal)p.DailyRate * ((int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };
 
+            var odSV = new OrderService();//軒
+            //軒：每筆產品加入禁租日期，用select和foreach都失敗，所以才用這麼繞的方法
             var temp = CartIndex.ToList();
-                temp.ForEach(c => 
-                    c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
-                );
+            temp.ForEach(c =>
+                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
+            );
             CartIndex = temp.AsEnumerable();
+
+            //CartIndex.Select(c =>
+            //{
+            //    CartIndex x = c;
+            //    x.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
+            //    return x;
+            //});
 
             //foreach (var item in CartIndex)
             //{
             //    //item.Sub = item.DailyRate * item.DateDiff;
-            //    //軒：每筆產品加入禁租日期
-            //    //item.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(item.ProductID);
-            //    item.DisablePeriodsJSON = "abc";
             //}
 
             return CartIndex;
@@ -116,7 +123,7 @@ namespace RentWebProj.Services
 
         public void DeleteCart(int MemberID, string ProductID)
         {
-            Cart deleteList = new Cart() 
+            Cart deleteList = new Cart()
             {
                 MemberID = MemberID,
                 ProductID = ProductID

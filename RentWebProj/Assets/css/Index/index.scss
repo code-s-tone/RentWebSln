@@ -4,10 +4,8 @@ $max-width:1200px;
 $arrowBtnWidth:48px;
 $searchBorderR:11px;
 
-
-//    font-family: Noto Sans TC,SimHei,Microsoft YaHei,Microsoft JhengHei,STHeiti,LiHei Pro Medium,Apple LiGothic Medium;
-
-    // @font-face cwTeXYen, Noto Sans TC,
+// font-family: Noto Sans TC,SimHei,Microsoft YaHei,Microsoft JhengHei,STHeiti,LiHei Pro Medium,Apple LiGothic Medium;
+// @font-face cwTeXYen, Noto Sans TC,
 
 a{
     text-decoration: none;
@@ -86,8 +84,7 @@ header{
     }
 }
 
-
-.swiper-container{
+.swiper-container:not(.categories-swiper-container){
     width: 100%;
     // .swiper-wrapper{
     //     // align-items: stretch;
@@ -104,6 +101,7 @@ header{
         align-items: center;
     }
 }
+
 .swiper-button-prev, .swiper-button-next{
     color: #000;
     background-color: rgba(255, 255, 255, 0.6);
@@ -127,17 +125,19 @@ article{
     max-width: $max-width;
     margin-left: auto;
     margin-right: auto;
-    >.Area{
-        box-sizing: border-box;
-        width: 100%;
-        padding: 11px;
-        margin: 33px auto;
+    >.Area,.category-sample{
         h3{
             >a{
                 font-size: 15px;
                 color: $themeColor;
             }
-        }    
+        }
+    }
+    >.Area{
+        box-sizing: border-box;
+        width: 100%;
+        padding: 11px;
+        margin: 33px auto;
         .imgBox,.textBox{
             display: flex;
         }
@@ -153,28 +153,30 @@ article{
     }
 
     .categories-swiper-container{
-        >.swiper-wrapper{
-            >.swiper-slide{
-                height: 111px;
-                >.imgBox{
-                    width: 111px;
-                    flex-grow: 0;
-                    overflow: hidden;
-                }
-                >.textBox{
-                    flex-grow: 1;
-                    height: 100%;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 16px;
-                }
-                >.textBox:hover{
-                    background-color: #eee;
-                }
-            }
+        .swiper-slide.category-card{
+            margin: 0;
         }
+    //     >.swiper-wrapper{
+    //         >.swiper-slide{
+    //             height: 111px;
+    //             >.imgBox{
+    //                 width: 111px;
+    //                 flex-grow: 0;
+    //                 overflow: hidden;
+    //             }
+    //             >.textBox{
+    //                 flex-grow: 1;
+    //                 height: 100%;
+    //                 justify-content: center;
+    //                 align-items: center;
+    //                 font-size: 16px;
+    //             }
+    //             >.textBox:hover{
+    //                 background-color: #eee;
+    //             }
+    //         }
+    //     }
     }
-
     .stories-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
@@ -198,15 +200,14 @@ article{
     .reviews-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
-                height: 160px;
-                padding: 0 10px;
-
+                height:160px;
+                padding:0 10px;
                 >.imgBox{
-                    width: 80px;
+                    width:80px;
                     img{
-                        width: 55px;
-                        height: 55px;
-                        border-radius: 50%;
+                        width:55px;
+                        height:55px;
+                        border-radius:50%;
                     }
                 }
                 >.textBox{
@@ -216,25 +217,24 @@ article{
                     >.ellipsis{
                         -webkit-line-clamp: 4;
                     }
-
                 }
             }
         }
     }
 
     .category-sample{
-        padding: 0 11px;
+        // padding: 0 11px;
         width: 100%;
-        >.d-flex{
-            // width: 100%;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            .card-item{//有bs
-                min-height: 33px;
-                background-color: #fcc;
-                margin-bottom: 11px;
-            }
-        }
+        // >.d-flex{
+        //     // width: 100%;
+        //     flex-wrap: wrap;
+        //     justify-content: space-between;
+        //     .card-item{//有bs
+        //         min-height: 33px;
+        //         background-color: #fcc;
+        //         margin-bottom: 11px;
+        //     }
+        // }
     }
 
     .blogPosts-swiper-container{
@@ -252,8 +252,8 @@ article{
                 >.textBox{
                     width: 100%;
                     justify-content: flex-start;
-                    padding: 0 22px ;
-                    margin: 22px 0 ;
+                    padding: 0 22px;
+                    margin: 22px 0;
 
                     >button{
                         border: 1px solid $themeColor;
@@ -304,11 +304,11 @@ article{
     }
 
     //產品兩欄
-    .category-sample{
-        .card-item{//有bs
-            width: 48.5%;
-        }
-    }
+    // .category-sample{
+    //     .card-item{//有bs
+    //         width: 48.5%;
+    //     }
+    // }
 }
 
 
@@ -340,14 +340,14 @@ article{
     }
 }
 
-@media screen and (min-width:768px) and (max-width:991px){
-    //產品三欄
-    .category-sample{
-        .card-item{//有bs
-            width: 32%;
-        }
-    }
-}
+// @media screen and (min-width:768px) and (max-width:991px){
+//     //產品三欄
+//     .category-sample{
+//         .card-item{//有bs
+//             width: 32%;
+//         }
+//     }
+// }
 
 @media screen and (min-width:992px){
     header{
@@ -359,18 +359,18 @@ article{
                     width: 50%;
                     >#keyword{
                         border-right: 1px solid #ddd;
-                        border-radius: $searchBorderR 0 0 $searchBorderR ;
+                        border-radius: $searchBorderR 0 0 $searchBorderR;
                     }
                 }
                 >.inputGroup:last-of-type{
                     width: 44%;
                     >#position{
-                        border-radius: 0 ;
+                        border-radius: 0;
                     }
                 }
                 >button{
                     width: 6%;
-                    border-radius: 0 $searchBorderR $searchBorderR 0 ;
+                    border-radius: 0 $searchBorderR $searchBorderR 0;
                 }
                 >button:first-of-type{
                     display: none;
@@ -381,16 +381,13 @@ article{
             }
         }
     }
-
     //產品六欄
-    .category-sample{
-        .card-item{//有bs
-            width: 15.5%;
-        }
-    }
+    // .category-sample{
+    //     .card-item{//有bs
+    //         width: 15.5%;
+    //     }
+    // }
 }
-
-
 //blog特殊設定
 @media screen and (max-width:1279px){
     .blogPosts-swiper-container{
@@ -411,7 +408,6 @@ article{
         }
     }
 }
-
 @media screen and (min-width:1280px){
     .blogPosts-swiper-container{
         >.swiper-wrapper{

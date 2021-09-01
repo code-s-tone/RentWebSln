@@ -1,7 +1,8 @@
-﻿@model IEnumerable<IndexCategoryView>
+﻿@model Dictionary<string, IEnumerable<CardsViewModel>>
 
 @{
     ViewBag.Title = "首頁";
+    var A = new ProductService().GetCategoryData();
 }
 }
 這是管理後台，需經驗證授權才能存取
@@ -42,20 +43,23 @@ Authentication Type : @User.Identity.AuthenticationType
         <div class="swiper-container categories-swiper-container">
             <div class="swiper-wrapper">
                 <!-- Slides -->
-                @foreach (var item in Model)
-                {
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="w-100" src="https://picsum.photos/100/150/?random=1">
-                        </div>
-                        <div class="textBox">
-                            <div>
-                                @item.CategoryName v.s.
-                                @Html.DisplayFor(modelItem => item.CategoryName)
-                            </div>
-                        </div>
-                    </div>
-                }
+            @foreach (var item in A)
+            {
+                <div class="swiper-slide category-card">
+                    @* 放卡片 *@
+                    @Html.Partial("PC", item)
+
+                    @*<div class="imgBox">
+            <img class="w-100" src="https://picsum.photos/100/150/?random=1">
+        </div>
+        <div class="textBox">
+            <div>
+                @item.CategoryName v.s.
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </div>
+        </div>*@
+                </div>
+            }
             </div>
             <!-- <div class="swiper-pagination"></div> -->
             <div class="swiper-button-prev"></div>
@@ -153,17 +157,10 @@ Authentication Type : @User.Identity.AuthenticationType
         </div>
     </section>
 
-    @{
-        var service = new IndexService();
-
-        //dapper法 ORM講義p.29~p.34
-        //連線字串connStr 連線執行個體conn  引數群物件Obj 查詢語法sql字串
-        //var conn  = new SqlConnection (connStr);
-        //conn.Execute(sql,Obj);
-
+    @foreach(var item in Model)
+    {
+        @ShowProductList(item);
     }
-    @addProduct(service.getProductData("Car"))
-    @addProduct(service.getProductData("Gam"))
 
 
     <section id="blogPosts" class="Area">
@@ -213,32 +210,29 @@ Authentication Type : @User.Identity.AuthenticationType
     </section>
 </article>
 
-<div id="cookiePermission"></div>
+@*<div id="cookiePermission"></div>*@
 
-@helper addProduct(IEnumerable<IndexProductView> items)
+@helper ShowProductList(KeyValuePair<string, IEnumerable<CardsViewModel>> PListPair)
 {
     <section class="category-sample">
         <h3>
-            產品類
-            @*@items.FirstOrDefault().CategoryName*@
+            @PListPair.Key
             <a href="">(see all)</a>
         </h3>
-        <div class="d-flex">
-            @foreach (var item in items)
-            {
-                <div class="card-item">@item.ProductName</div>
-            }
+        <div class="d-flex flex-wrap">
+            @Html.Partial("Partial_ProductCard", PListPair.Value)
         </div>
     </section>
-
-
 }
 
 
 @section topCSS{
     <!-- swiper -->
     <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
-    <link href="~/Assets/css/Index/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Assets/css/Index/index.css">
+    <link rel="stylesheet" href="~/assets/css/generalproductcards/generalcategories.css"/>
+    <link rel="stylesheet" href="~/Assets/css/GeneralProductCards/ProductCards.css"/>
+
 }
 @section endJS{
     <!-- fontawesome -->
@@ -246,6 +240,9 @@ Authentication Type : @User.Identity.AuthenticationType
     <!-- swiper -->
     <script src="~/Scripts/swiper-bundle.min.js"></script>
     <script src="~/Assets/js/index.js"></script>
+    <script src="~/Assets/js/GeneralProductCards/GeneralCategories.js"></script>
+    <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
+
 
 }
 

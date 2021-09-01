@@ -19,24 +19,34 @@ namespace RentWebProj.Services
         }
 
         //取得歷史租期
-        public IEnumerable<RentPeriod> GetProductRentPeriods(string PID) 
+        public IEnumerable<RentedPeriod> GetProductRentPeriods(string PID)
         {
-            var RentPeriods =
+            var RentedPeriods =
                 from od in (_repository.GetAll<OrderDetail>())
                 where od.ProductID == PID
                 orderby od.StartDate    //日期由小至大
-                select new RentPeriod
+                select new RentedPeriod
                 {
                     @from = (DateTime)od.StartDate,
                     to = (DateTime)od.ExpirationDate
                 };
-
-            return RentPeriods;
+            
+            return RentedPeriods;
         }
+        public double countRenteDays(string PID)
+        {
+            var RentedDays =
+                GetProductRentPeriods(PID)
+                .Select(x => (x.to - x.from).TotalDays)
+                .Sum();
+
+            return RentedDays;
+        }
+        //取得禁租日期JSON
         public string GetDisablePeriodJSON(string PID)
         {
             List<DisablePeriod> disablePeriodList = GetProductRentPeriods(PID)
-                .Where(x => x.to >= DateTime.Now )
+                .Where(x => x.to >= DateTime.Now)
                 .Select(x => new DisablePeriod
                 {
                     @from = (x.from).ToString().Substring(0, 10).Replace("/", " / "),
@@ -46,51 +56,62 @@ namespace RentWebProj.Services
         }
 
         //寫入
-        public void Create(IEnumerable<CartIndex> carts)
+        public void Create(CreateOrder VM)
         {
             //要從user.Identity.Name拿，要using
             int MemberID = 1;
-            DateTime OrderDate = new DateTime();
+            DateTime OrderDate = DateTime.Now;
             Order orderEntity = new Order()
             {
                 //int OrderID
                 OrderDate = OrderDate,
                 DeliverID = 1,
-                StoreID = 1,//要從下拉選單拿
+                StoreID = VM.StoreID,//要從下拉選單拿
                 OrderStatusID = "未付款",
-                MemberID = MemberID 
+                MemberID = MemberID
 
             };
             _repository.Create(orderEntity);
             _repository.SaveChanges();
 
             int OrderID = GetOrderId(MemberID, OrderDate);
-
-            foreach (var p in carts)
+            
+            for (int i = 0; i < VM.ListProductID.Count(); i++)
             {
                 //VM->DM
                 OrderDetail odEntity = new OrderDetail()
                 {
                     OrderID = OrderID,
-                    ProductID = p.ProductID,
-                    DailyRate = p.DailyRate,
-                    StartDate = p.StartDate,
-                    ExpirationDate = p.ExpirationDate,
-                    TotalAmount = p.DateDiff * p.DailyRate,
+                    ProductID = VM.ListProductID[i],
+                    DailyRate = Decimal.Parse(VM.ListDailyRate[i]),
+                    StartDate = DateTime.Parse(VM.ListStartDate[i]),
+                    ExpirationDate = DateTime.Parse(VM.ListExpirationDate[i]),
+                    TotalAmount = Decimal.Parse(VM.ListTotalAmount[i]),
                     Returned = false
                 };
                 _repository.Create(odEntity);
-                _repository.SaveChanges();
             }
-        }
-        public int GetOrderId(int MemberID, DateTime OrderDate)
-        {
-            return (from o in (_repository.GetAll<Order>())
-                    where o.MemberID == MemberID && o.OrderDate == OrderDate
-                    select new { o.OrderID })
-                   .SingleOrDefault().OrderID;
+            _repository.SaveChanges();
         }
 
-        //取得禁租日期JSON
+        public int GetOrderId(int MemberID, DateTime OrderDate)
+        {
+            //string dateTimeFormat = "yyyy/MM/dd HH:mm:ss";
+            var b = (from o in (_repository.GetAll<Order>())
+                     where o.MemberID == MemberID && o.OrderDate == OrderDate
+                     select new { o.OrderID });
+            return 
+                  b.SingleOrDefault().OrderID;
+        }
+        public IQueryable<BranchStore> GetAllStore()
+        {
+            IQueryable<BranchStore> StoreList =
+                from s in _repository.GetAll<BranchStore>()
+                select s;
+            return StoreList;
+        }
+
+
+
     }
 }

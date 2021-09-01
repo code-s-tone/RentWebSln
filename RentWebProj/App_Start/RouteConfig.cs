@@ -26,12 +26,16 @@ namespace RentWebProj
                 url: "Product/ProductCardsList/{categoryID}",
                 defaults: new { controller = "Product", action = "ProductCardsList" }
             );
-
+            routes.MapRoute(
+                name: "Cart",
+                url: "Carts/{action}/{id}",
+                defaults: new { controller = "Carts", action = "Index", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Carts", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
