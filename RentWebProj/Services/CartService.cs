@@ -36,7 +36,7 @@ namespace RentWebProj.Services
                     ExpirationDate = e                    
                 };
                 //判斷是否本來就存在
-                if ( VM.IsExisted )
+                if (VM.IsExisted)
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
                 }
@@ -46,7 +46,7 @@ namespace RentWebProj.Services
                 }
                 _repository.SaveChanges();
 
-                
+
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
@@ -58,8 +58,10 @@ namespace RentWebProj.Services
             return result;
         }
 
-
-
+        public CartIndex CheckCart(string PID, int MemberID)
+        {
+            return GetCart(MemberID).SingleOrDefault(x => x.ProductID == PID);
+        }
 
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
@@ -126,7 +128,7 @@ namespace RentWebProj.Services
 
         public void DeleteCart(int MemberID, string ProductID)
         {
-            Cart deleteList = new Cart() 
+            Cart deleteList = new Cart()
             {
                 MemberID = MemberID,
                 ProductID = ProductID
