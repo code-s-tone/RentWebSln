@@ -480,7 +480,7 @@
     <Content Include="Views\Shared\Partial_CategoryCard.cshtml" />
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\Shared\_DateTimeModal.cshtml" />
+    <Content Include="Views\Shared\Partial_DateTimeModal.cshtml" />
     <Content Include="Views\Shared\PC.cshtml" />
   </ItemGroup>
   <ItemGroup>

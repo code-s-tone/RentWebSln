@@ -14,6 +14,9 @@ completeBtn.addEventListener('click', function () {
     //console.log(disablePeriodsJSON);
     startDateTimeText = combinDateTime(0);
     endDateTimeText = combinDateTime(1);
+
+    //若大小關係不對就交換    
+
     //顯示文字在指定的物件上
     showPeriodText(startDateTimeText, endDateTimeText);
     //改變傳遞表單值
