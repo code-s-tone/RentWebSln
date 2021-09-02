@@ -63,7 +63,7 @@ namespace RentWebProj.Controllers
         //未登入 => 提示需登入或一律disabled
         //已登入 => 有IsExisted屬性，=>true => 提示已加入            
         //                           false => 導到某action，給予參數：ProductID 以及 IsExisted:false (篩選狀況的JSON?)
-        //                           以       action執行：    ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
+        //                                    action執行：  以ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
         //                                    1.return重新導向原action，自然重篩
         //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
         //              篩選狀況如何記錄起來傳遞?

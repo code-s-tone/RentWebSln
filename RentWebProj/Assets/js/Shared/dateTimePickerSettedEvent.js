@@ -16,12 +16,13 @@ completeBtn.addEventListener('click', function () {
     endDateTimeText = combinDateTime(1);
 
     //若大小關係不對就交換    
-
-    //顯示文字在指定的物件上
-    showPeriodText(startDateTimeText, endDateTimeText);
-    //改變傳遞表單值
-    StartDateToPost.value = startDateTimeText;
-    ExpirationDateToPost.value = endDateTimeText;
+    if (startDateTimeText > endDateTimeText) {
+        let tmp = startDateTimeText;
+        startDateTimeText = endDateTimeText;
+        endDateTimeText = tmp;
+    }
+    //顯示文字在指定的物件上 + 改變傳遞表單值
+    showPeriodText(startDateTimeText, endDateTimeText);    
 });
 
 

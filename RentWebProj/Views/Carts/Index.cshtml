@@ -171,7 +171,7 @@
                 </div>
             </div>
 
-            @Html.Partial("../Shared/_DateTimeModal")
+            @Html.Partial("../Shared/Partial_DateTimeModal")
         </div>
     </div>
 }
@@ -217,7 +217,7 @@
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
         let checkBoxs = document.querySelectorAll('.form-check-input');
 
-        //如果在購物車且有選日期 => 預顯示文字，開放勾選
+        //如果在購物車且有選日期 => 預顯示文字、寫入POST欄位，開放勾選
         @{
             int i = 0;
             string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
@@ -229,11 +229,10 @@
                     DateModalLauncher = DateModalBtns[@i];
                     startDateTimeText = '@(item.StartDate.Value.ToString(dateTimeFormat))';
                     endDateTimeText = '@item.ExpirationDate.Value.ToString(dateTimeFormat)';
-                    showPeriodText(startDateTimeText,endDateTimeText);
+                    StartDateToPost = document.querySelector(`input[name="ListStartDate[@i]"]`);
+                    ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[@i]"]`);
 
-                    //寫入POST欄位
-                    document.querySelector(`input[name="ListStartDate[@i]"]`).value = startDateTimeText;
-                    document.querySelector(`input[name="ListExpirationDate[@i]"]`).value = endDateTimeText;
+                    showPeriodText(startDateTimeText,endDateTimeText);
                     </text>
                 }
                 else
