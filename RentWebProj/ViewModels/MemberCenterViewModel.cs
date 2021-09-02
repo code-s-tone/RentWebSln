@@ -123,4 +123,43 @@ namespace RentWebProj.ViewModels
         public string Picture { get; set; }
         public string Email { get; set; }
     }
+    public class MemberLineLoginTokenViewModel
+    {
+        public string access_token { get; set; }
+        public int expires_in { get; set; }
+        public string id_token { get; set; }
+        public string refresh_token { get; set; }
+        public string scope { get; set; }
+        public string token_type { get; set; }
+    }
+    public class MemberLineProfileTokenViewModel
+    {
+        public string userId { get; set; }
+        public string displayName { get; set; }
+        public string pictureUrl { get; set; }
+        public string statusMessage { get; set; }
+        public string iss { get; set; }
+        public string sub { get; set; }
+        public string aud { get; set; }
+
+        public string exp { get; set; }
+        public string iat { get; set; }
+
+        public string nonce { get; set; }
+
+        public string[] amr { get; set; }
+        public string name { get; set; }
+
+        public string picture { get; set; }
+
+        public string email { get; set; }
+    }
+
+    public class MemberFbProfileTokenViewModel
+    {
+        public string id { get; set; }
+        public string name { get; set; }
+        public string email { get; set; }
+    }
+
 }
