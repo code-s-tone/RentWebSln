@@ -349,6 +349,8 @@
 @if (User.Identity.IsAuthenticated)
 {
     <script src="~/Assets/js/MemberCenter/LoginAndOut/Login.js"></script>
+    TempData["img"] = Helper.ConvertMemberIdToProgilePhotoUrl(Int32.Parse(User.Identity.Name));
+    TempData["name"] = Helper.ConvertMemberIdToFullName(Int32.Parse(User.Identity.Name));
 }
 else
 {
