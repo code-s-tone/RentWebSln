@@ -113,9 +113,12 @@
     background-color: rgb(221, 76, 57)
 }
 
-.Line {
+i {
     border: 0;
-    background-color: #00b900;
+    background-color: none;
+    background: none;
+    color: black;
+    border-radius: 20px;
 }
 
 .login {
@@ -126,6 +129,10 @@
     text-decoration: none;
 }
 
+.fa-google, .fa-line, .fa-facebook, #btnSignIn {
+    font-size: 40px;
+    cursor: pointer;
+}
 /* 手機板設計 */
 @media screen and (max-width:768px) {
     .back {

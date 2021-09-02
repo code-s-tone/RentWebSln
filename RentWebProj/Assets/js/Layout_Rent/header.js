@@ -20,14 +20,14 @@ $("#header-search-input").on('blur', function () {
 //}
 
 //不論在桌機版或手機版按登出都要回復
-document.querySelector(".member-dropdown .signOutBtn").addEventListener("click", function () {
-    backHeaderCSS_signOut();
-    backSidebarCSS_signOut()
+//document.querySelector(".member-dropdown .signOutBtn").addEventListener("click", function () {
+//    backHeaderCSS_signOut();
+//    backSidebarCSS_signOut()
 
-})
+//})
 
-function backHeaderCSS_signOut() {
-    document.querySelector('.nav-btn').style.display = 'block';
-    document.querySelector('.member-dropdown').style.display = 'none';
+//function backHeaderCSS_signOut() {
+//    document.querySelector('.nav-btn').style.display = 'block';
+//    document.querySelector('.member-dropdown').style.display = 'none';
 
-}
+//}
