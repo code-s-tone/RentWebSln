@@ -29,7 +29,7 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            return RedirectToAction("Index");
+            return View(TempData["directCheckout"]);
         }
         [HttpPost]
         public ActionResult Checkout(CreateOrder PostVM)//IEnumerable<CartIndex> VM
@@ -38,6 +38,9 @@ namespace RentWebProj.Controllers
 
             //造訂單、寫入庫
             //參數可能要調整
+
+            //軒：我的直接結帳，有可能產品不在購物車中，故刪除時可考慮一下
+            //刪除購物車要用郭懿的方法喔，在下面
             new OrderService().Create(PostVM);
 
             return RedirectToAction("MemberCenter", "Member");
@@ -65,6 +68,7 @@ namespace RentWebProj.Controllers
                     OperationResult result = new OperationResult();
                     if (ModelState.IsValid)
                     {
+                        //更新購物車時間
                         var CartVM = new ProductDetailToCart()
                         {
                             IsExisted = true,
@@ -73,7 +77,6 @@ namespace RentWebProj.Controllers
                         };
                         result = new CartService().CreateOrUpdate(CartVM, VM.ListProductID[i]);
                     }
-                    //要補資料、增加Store
                 }
                 if (VM.ListChecked[i])
                 {

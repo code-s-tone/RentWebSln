@@ -301,11 +301,11 @@
                             @Html.HiddenFor(M => M.IsExisted)
                             @Html.HiddenFor(M => M.StartDate)
                             @Html.HiddenFor(M => M.ExpirationDate)
-
+                            <input type="hidden" name="isCheckout" value="false">
                             <button id="ToCart" class="orange" type="submit">
                                 @(Model.IsExisted?"更新":"放入")購物車
                             </button>
-                            <button id="ToCheck" class="orange">直接結帳</button>
+                            <button id="ToCheck" class="orange" type="submit">直接結帳</button>
                         }
                     </div>
                 </div>
@@ -380,23 +380,28 @@
 
         let StartDateToPost = document.querySelector('#StartDate');
         let ExpirationDateToPost = document.querySelector('#ExpirationDate');
-                 //如果在購物車且有選日期 => 預顯示文字
+        //入車鈕、結帳鈕
+        let actionBtns = document.querySelectorAll('.decision-group .orange');
+        actionBtns[0].disabled = true;
+        //如果在購物車且有選日期 => 預顯示文字、開放結帳
         if ( @Json.Encode(Model.StartDate!=null ) ) {
             showPeriodText('@(Model.StartDate)', '@Model.ExpirationDate');
+        } else {
+            actionBtns[1].disabled = true;
         }
-
+        actionBtns[1].addEventListener('click', function () {
+            document.querySelector('input[name="isCheckout"]').value = 'true';
+        });
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 
-    <!-- 本頁的特殊後續 -->
     <script>
-        //禁用購物動作
-        let actionBtns = document.querySelectorAll('.decision-group .orange');
-        actionBtns.forEach(x => x.disabled = true);
         completeBtn.addEventListener('click', function () {
             //開放購物動作
-            actionBtns.forEach(x => x.disabled = false);
+            actionBtns.forEach(x => {
+                if (x.disabled) x.disabled = false
+            });
         });
     </script>
 }
