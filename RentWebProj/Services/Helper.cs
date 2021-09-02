@@ -69,6 +69,20 @@ namespace RentWebProj.Services
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
 
         }
+        public static string ConvertMemberIdToFullName(int MemberID) //擴充方法
+        {
+
+            var MemberDMList = _repository.GetAll<Member>();
+            var result = MemberDMList.Where(x => x.MemberID == MemberID).Select(x => x.FullName).FirstOrDefault();
+            return result;
+        }
+        public static string ConvertMemberIdToProgilePhotoUrl(int MemberID) //擴充方法
+        {
+
+            var MemberDMList = _repository.GetAll<Member>();
+            var result = MemberDMList.Where(x => x.MemberID == MemberID).Select(x => x.ProfilePhotoUrl).FirstOrDefault();
+            return result;
+        }
         public static int ConvertEmailToMemberId(string Email) //擴充方法
         {
 

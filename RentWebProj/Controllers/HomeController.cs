@@ -16,7 +16,6 @@ namespace RentWebProj.Controllers
             ProductService _service = new ProductService();
 
             IEnumerable<CardsViewModel> MostPopularPList = _service.GetMostPopularProductCardData();
-
             Dictionary<string, IEnumerable<CardsViewModel>> VMDictionary = new Dictionary<string, IEnumerable<CardsViewModel>>
             {
                 //{ "最高評價", _service.GetMostPopularProductCardData() },
@@ -24,6 +23,12 @@ namespace RentWebProj.Controllers
                 { "最熱門商品", _service.GetMostPopularProductCardData() }
 
             };
+            //判斷登入之後動態顯示大頭貼跟名子 by _家承
+            if (User.Identity.IsAuthenticated)
+            {
+                TempData["img"] = Helper.ConvertMemberIdToProgilePhotoUrl(Int32.Parse(User.Identity.Name));
+                TempData["name"] = Helper.ConvertMemberIdToFullName(Int32.Parse(User.Identity.Name));
+            }
 
             return View(VMDictionary);
         }
