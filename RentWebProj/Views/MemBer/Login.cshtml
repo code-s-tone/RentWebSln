@@ -1,5 +1,12 @@
 ﻿@model MemberLoginDetailViewModel
-
+@{
+    if (@TempData["msg"] == "註冊成功!")
+    {
+        <script>
+            swal("註冊成功!", "請登入後繼續", "success");
+        </script>
+    }
+}
 
 
 <div class="back">
@@ -8,7 +15,7 @@
         <div class="Login_Logo my-1">
             <img src="https://soulkey373.github.io/WorkFinalblock/image/rentIcon.svg">
         </div>
-
+        <div id="content"></div>
         <p>租任何你想要的東西</p>
         <div class="Login_content shadow">
             @using (Html.BeginForm("Login", "Member", FormMethod.Post))
@@ -27,8 +34,13 @@
                 <button type="submit" class="btn btn-secondary login my-4 mt-5 text-light w-100 fs-5" id="sign">登入</button>
 
             }
-            <button class="btn google my-3 text-light w-100 fs-5" id="btnSignIn">Google登入</button>
-            <button class="btn Line my-3 text-light w-100 fs-5" id="btnLineSignIn">Line登入</button>
+            <a id="btnSignIn"><i class="fab fa-google mx-2"></i></a>
+            <a id="btnSignIn" onclick="FBLogin()"><i class="fab fa-facebook mx-2"></i></a>
+            <a id="btnLineSignIn" href="@Url.Action("Line", "Member")"><i class="fab fa-line mx-2 "></i></a>
+
+
+
+
         </div>
         <div class="Login_footer my-1 ">
             <h5 class="my-4">新來的?<a href="@Url.Action("Register", "Member")" class="text-primary m-1"><strong>註冊</strong></a></h5>
@@ -38,91 +50,26 @@
 
 
 @section topJS{
-    @*<script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>*@
-
+    <script src="~/Assets/js/MemberCenter/Fb/Fb_Init.js"></script>
+    <script src="~/Assets/js/MemberCenter/Fb/Fb_Login.js"></script>
+    <script src="~/Assets/js/MemberCenter/Fb/Fb_Logout.js"></script>
+    <script src="~/Assets/js/MemberCenter/Fb/Fb_Profile.js"></script>
+    <script src="~/Assets/js/MemberCenter/Google/Google.js"></script>
 }
-<!--從 Web.config檔 抓取Googl App Client ID-->
-<script>
-        let GoolgeApp_Cient_Id = "@System.Web.Configuration.WebConfigurationManager.AppSettings["Google_clientId_forLogin"]";
-        let id_token_to_userIDUrl = "@Url.Action("Google","Member")";
-    //jQuery處理button click event 當畫面DOM都載入時....
-    $(function () {
-        $("#btnSignIn").on("click", function () {
-            GoogleLogin();//Google 登入
-        });
-        $("#btnDisconnect").on("click", function () {
-            Google_disconnect();//和Google App斷連
-        });
-    });
 
-    function GoogleSigninInit() {
-        gapi.load('auth2', function () {
-            gapi.auth2.init({
-                client_id: GoolgeApp_Cient_Id//必填，記得開發時期要開啟 Chrome開發人員工具 查看有沒有403錯誤(Javascript來源被禁止)
-            });
-            console.log("GoogleSigninInit有啟用到")
-        });//end gapi.load
-    }//end GoogleSigninInit function
-
-
-
-    function GoogleLogin() {
-        let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
-        auth2.signIn().then(function (GoogleUser) {
-
-            let user_id = GoogleUser.getId();//取得user id，不過要發送至Server端的話，請使用↓id_token
-            let AuthResponse = GoogleUser.getAuthResponse(true);//true會回傳access token ，false則不會，自行決定。如果只需要Google登入功能應該不會使用到access token
-            let id_token = AuthResponse.id_token;//取得id_token
-            $.ajax({
-                url: id_token_to_userIDUrl,
-                method: "post",
-                data: { id_token: id_token },
-                success: function (msg) {
-                    console.log("Google登入成功");
-                     window.location.href = "@Url.Action("Index", "Home")";
-                }
-            });//end $.ajax
-
-        },
-            function (error) {
-                console.log("Google登入失敗");
-                console.log(error);
-            });
-
-    }//end function GoogleLogin
-
-
-
-    function Google_disconnect() {
-        let auth2 = gapi.auth2.getAuthInstance(); //取得GoogleAuth物件
-
-        auth2.disconnect().then(function () {
-            console.log('User disconnect.');
-        });
-    }
-
-</script>
 @section topCSS{
-
     <link href="~/Assets/css/Login/Login.css" rel="stylesheet" />
-
 }
+
 @section endCSS{
-    <style>
-        .site-footer {
-            margin-top: 0px;
-        }
-    </style>
-
+    <link href="~/Assets/css/Login/LoginEnd.css" rel="stylesheet" />
 }
-
 
 @section endJS{
-
     <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
-
 }
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
+
 }

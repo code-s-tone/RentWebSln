@@ -18,18 +18,23 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public OperationResult CreateOrUpdate(ProductDetailToCart VM, string PID)
-        {//再判斷訂單卡時段?            
+        public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
+        {           
             var result = new OperationResult();
             try
             {
+                DateTime? s = Convert.ToDateTime(VM.StartDate);
+                DateTime? e = Convert.ToDateTime(VM.ExpirationDate);
+                if (s == DateTime.MinValue) s = null;
+                if (e == DateTime.MinValue) e = null;
+
                 //VM->DM
                 Cart entity = new Cart()
                 {
                     MemberID = 1,
                     ProductID = PID,
-                    StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)
+                    StartDate = s,
+                    ExpirationDate = e                    
                 };
                 //判斷是否本來就存在
                 if (VM.IsExisted)

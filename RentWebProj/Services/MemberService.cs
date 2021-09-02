@@ -92,15 +92,15 @@ namespace RentWebProj.Services
             return result;
 
         }
-        public bool getMemberRegistertData(MemberRegisterDetailViewModel s)
+        public bool getMemberRegistertData(string Email,string Password)
         {
             var pDMList = _repository.GetAll<Member>();
-            string email = HttpUtility.HtmlEncode(s.Email);
-            string password = HttpUtility.HtmlEncode(s.Password);
+            string email = HttpUtility.HtmlEncode(Email);
+            string password = HttpUtility.HtmlEncode(Password);
             var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = s.Email, PasswordHash = s.Password, SignWayID = 1 };
+                var entity = new Member { Email = email, PasswordHash = password, SignWayID = 1 };
                 _repository.Create(entity);
                 _repository.SaveChanges();
                 return true;
@@ -124,7 +124,31 @@ namespace RentWebProj.Services
             }
 
         }
+        public void getMemberLineData(string name, string picture, string email)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            var result = pDMList.Where(x => x.Email == email && x.FullName == name || x.Email == email).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = email, SignWayID = 1, FullName = name, ProfilePhotoUrl = picture };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+            }
 
+        }
+
+        public void getMemberFbData(string name, string email)
+        {
+            var pDMList = _repository.GetAll<Member>();
+            var result = pDMList.Where(x => x.Email == email && x.FullName == name || x.Email == email).FirstOrDefault();
+            if (result == null)
+            {
+                var entity = new Member { Email = email, SignWayID = 1, FullName = name };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+            }
+
+        }
         public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
         {
             var result = _repository.GetAll<Member>().ToList();

@@ -6,12 +6,13 @@ body {
   min-width: 300px;
 }
 header {
+  padding:0 10px 200px;
   box-sizing: border-box;
   width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  background-image: url("https://picsum.photos/900/900/?random=1");
+  background-image: url("../../images/Index/IndexBanner.jpg");
 }
 header > div {
   box-sizing: border-box;
@@ -127,7 +128,7 @@ article > .Area .textBox {
   align-items: flex-start;
 }
 article .categories-swiper-container .swiper-slide.category-card {
-  margin: 0;
+  margin: 15px 0;
 }
 article .stories-swiper-container > .swiper-wrapper > .swiper-slide {
   height: 333px;
