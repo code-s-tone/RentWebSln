@@ -160,6 +160,20 @@ namespace RentWebProj.Services
                 return OrderSelectedProductCards(selectedVMList, orderByOptions);
             }
         }
+
+        public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
+        {
+            if (orderByOptions == "orderByRelevance")
+            {
+                //思考中...
+            }
+            else if (orderByOptions == "orderByPrice")
+            {
+                selectedList = selectedList.OrderBy(x => x.DailyRate).ToList();
+            }
+            return selectedList;
+        }
+
         public IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
@@ -167,18 +181,7 @@ namespace RentWebProj.Services
             //var ctDMList = ;
             //var subCtDMList = ;
 
-        public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
-        {
-            if (orderByOptions=="orderByRelevance")
-            {
-                //思考中...
-            }
-            else if (orderByOptions == "orderByPrice")
-            {
-                selectedList= selectedList.OrderBy(x => x.DailyRate).ToList();
-            }
-            return selectedList;
-        }
+        
             AllProductCardVMList = 
                 from p in (_repository.GetAll<Product>())
                 join c in (_repository.GetAll<Category>())
