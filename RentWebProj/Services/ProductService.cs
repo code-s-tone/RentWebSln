@@ -181,12 +181,11 @@ namespace RentWebProj.Services
             //var ctDMList = ;
             //var subCtDMList = ;
 
-        
             AllProductCardVMList = 
-                from p in (_repository.GetAll<Product>())
-                join c in (_repository.GetAll<Category>())
+                from p in _repository.GetAll<Product>()
+                join c in _repository.GetAll<Category>()
                 on p.ProductID.Substring(0, 3) equals c.CategoryID
-                join s in (_repository.GetAll<SubCategory>())
+                join s in _repository.GetAll<SubCategory>()
                 on p.ProductID.Substring(3, 2) equals s.SubCategoryID
 
                 select new CardsViewModel

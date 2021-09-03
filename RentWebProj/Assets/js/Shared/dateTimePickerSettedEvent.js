@@ -5,10 +5,6 @@
 //ExpirationDateToPost
 //disablePeriodsJSON
 
-let startDateTimeText;
-let endDateTimeText;
-let formatDivider = ' ';
-let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;
 
 
 
@@ -18,11 +14,15 @@ completeBtn.addEventListener('click', function () {
     //console.log(disablePeriodsJSON);
     startDateTimeText = combinDateTime(0);
     endDateTimeText = combinDateTime(1);
-    //顯示文字在指定的物件上
-    showPeriodText(startDateTimeText, endDateTimeText);
-    //改變傳遞表單值
-    StartDateToPost.value = startDateTimeText;
-    ExpirationDateToPost.value = endDateTimeText;
+
+    //若大小關係不對就交換    
+    if (startDateTimeText > endDateTimeText) {
+        let tmp = startDateTimeText;
+        startDateTimeText = endDateTimeText;
+        endDateTimeText = tmp;
+    }
+    //顯示文字在指定的物件上 + 改變傳遞表單值
+    showPeriodText(startDateTimeText, endDateTimeText);    
 });
 
 

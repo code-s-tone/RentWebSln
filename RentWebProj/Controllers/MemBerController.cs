@@ -8,6 +8,14 @@ using RentWebProj.Services;
 using RentWebProj.ViewModels;
 using System.Data.Entity;
 using System.Web.Security;
+using System.Threading;
+using System.Net;
+using System.Text;
+using System.Collections.Specialized;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using Google.Apis.Auth;
+using System.IO;
 
 namespace RentWebProj.Controllers
 {
@@ -20,6 +28,7 @@ namespace RentWebProj.Controllers
             _service = new MemberService();
         }
 
+        [Authorize]
         // GET: Member
         public ActionResult MemberCenter()
         {
@@ -73,35 +82,12 @@ namespace RentWebProj.Controllers
                 return View(s);
             }
 
-            if (_service.getMemberLogintData(s.Email, s.Password))
+            string email = HttpUtility.HtmlEncode(s.Email);
+            string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
+            if (_service.getMemberLogintData(email, password))
             {
-                //把登入後的密碼，進行md5加密，然後去資料庫尋找
-                //string name = HttpUtility.HtmlEncode(s.Email);
-                //string password =HashService.MD5Hash( HttpUtility.HtmlEncode(s.Password));
-                string name = HttpUtility.HtmlEncode(s.Email);
-                string password = HttpUtility.HtmlEncode(s.Password);
-                //1.建立FormsAuthenticationTicket
-                var ticket = new FormsAuthenticationTicket(
-                    version: 1,
-                    name: s.Email.ToString(), //可以放使用者Id
-                    issueDate: DateTime.UtcNow,//現在UTC時間
-                    expiration: DateTime.UtcNow.AddMinutes(30),//Cookie有效時間=現在時間往後+30分鐘
-                    isPersistent: true,// 是否要記住我 true or false
-                    userData: "", //可以放使用者角色名稱
-                    cookiePath: FormsAuthentication.FormsCookiePath);
-
-                //2.加密Ticket
-                var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-
-                //3.Create the cookie.
-                var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                Response.Cookies.Add(cookie);
-
-                //4.取得original URL.
-                var url = FormsAuthentication.GetRedirectUrl(name, true);
-
-                //5.導向original URL
-                return Redirect(url);
+                Helper.FormsAuthorization(s.Email);
+                return RedirectToAction("Index", "Home");
 
             }
             else
@@ -128,10 +114,13 @@ namespace RentWebProj.Controllers
             }
             else
             {
-                var result = _service.getMemberRegistertData(s);
+                string email = HttpUtility.HtmlEncode(s.Email);
+                string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
+                var result = _service.getMemberRegistertData(email, password);
                 if (result)
                 {
-                    return Content("註冊成功");
+                    TempData["msg"] = "註冊成功!";
+                    return RedirectToAction("Login", "Member");
                 }
                 else
                 {
@@ -141,11 +130,155 @@ namespace RentWebProj.Controllers
             }
 
         }
+        string response_type = "code";
+        string client_id = "1656366912";
+        string redirect_uri = HttpUtility.UrlEncode("https://localhost:44399/Member/LineCallback");
+        string state = "success";
+        public ActionResult Line()
+        {
+            string LineLoginUrl = string.Format("https://access.line.me/oauth2/v2.1/authorize?response_type={0}&client_id={1}&redirect_uri={2}&state={3}&scope=openid%20profile%20email",
+                response_type,
+                client_id,
+                redirect_uri,
+                state
+                );
+            return Redirect(LineLoginUrl);
+        }
+        public ActionResult LineCallback(string code, string state)
+        {
+            if (state == "success")
+            {
+                #region Api變數宣告
+                WebClient wc = new WebClient();
+                wc.Encoding = Encoding.UTF8;
+                wc.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+                string result = string.Empty;
+                NameValueCollection nvc = new NameValueCollection();
+                NameValueCollection nyc = new NameValueCollection();
+                #endregion
+                try
+                {
+                    //取回Token
+                    string ApiUrl_Token = "https://api.line.me/oauth2/v2.1/token";
+                    nvc.Add("grant_type", "authorization_code");
+                    nvc.Add("code", code);
+                    nvc.Add("redirect_uri", "https://localhost:44399/Member/LineCallback");
+                    nvc.Add("client_id", "1656366912");
+                    nvc.Add("client_secret", "fbde31cf195d309ad7cffc633840b557");
+                    string JsonStr = Encoding.UTF8.GetString(wc.UploadValues(ApiUrl_Token, "POST", nvc));
+                    MemberLineLoginTokenViewModel ToKenObj = JsonConvert.DeserializeObject<MemberLineLoginTokenViewModel>(JsonStr);
+                    wc.Headers.Clear();
+                    //取回使用者資訊
+
+                    //取回email
+                    string Email_Url = "https://api.line.me/oauth2/v2.1/verify";
+                    nyc.Add("client_id", "1656366912");
+                    nyc.Add("id_token", ToKenObj.id_token);
+                    string JsonStrr = Encoding.UTF8.GetString(wc.UploadValues(Email_Url, "POST", nyc));
+                    MemberLineProfileTokenViewModel ToKenObja = JsonConvert.DeserializeObject<MemberLineProfileTokenViewModel>(JsonStrr);
+
+
+
+                    //取回User Profile
+                    string ApiUrl_Profile = "https://api.line.me/v2/profile";
+                    wc.Headers.Add("Authorization", "Bearer " + ToKenObj.access_token);
+                    string UserProfile = wc.DownloadString(ApiUrl_Profile);
+                    MemberLineProfileTokenViewModel ProfileObj = JsonConvert.DeserializeObject<MemberLineProfileTokenViewModel>(UserProfile);
+                    ViewData["name"] = ProfileObj.displayName;
+                    ViewData["pictureUrl"] = ProfileObj.pictureUrl;
+                    ViewData["email"] = ToKenObja.email;
+                    _service.getMemberLineData(ProfileObj.displayName, ProfileObj.pictureUrl, ToKenObja.email);
+
+
+                    string email = HttpUtility.HtmlEncode(ToKenObja.email);
+                    Helper.FormsAuthorization(email);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex)
+                {
+                    string msg = ex.Message;
+                    throw;
+                }
+            }
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> Google(string id_token)
+        {
+            string msg = "ok";
+            string user_id = "ok";
+            string picture = "ok";
+            string name = "ok";
+            string email = "ok";
+            GoogleJsonWebSignature.Payload payload = null;
+            try
+            {
+                payload = await GoogleJsonWebSignature.ValidateAsync(id_token, new GoogleJsonWebSignature.ValidationSettings()
+                {
+                    Audience = new List<string>() { System.Web.Configuration.WebConfigurationManager.AppSettings["Google_clientId_forLogin"] }//要驗證的client id，把自己申請的Client ID填進去
+                });
+            }
+            catch (Google.Apis.Auth.InvalidJwtException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (Newtonsoft.Json.JsonReaderException ex)
+            {
+                msg = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+
+            if (msg == "ok" && payload != null)
+            {//都成功
+                user_id = payload.Subject;//取得user_id
+                picture = payload.Picture;
+                email = payload.Email;
+                name = payload.Name;
+                _service.getMemberGoogleData(user_id, picture, email, name);
+                Helper.FormsAuthorization(email);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Fb(string id_token)
+        {
+
+            string targetUrl = "https://graph.facebook.com/me?fields=id,name,email,picture&access_token=" + id_token;
+
+            HttpWebRequest request = HttpWebRequest.Create(targetUrl) as HttpWebRequest;
+            request.Method = "GET";
+            request.ContentType = "application/x-www-form-urlencoded";
+            string result = "";
+            // 取得回應資料
+            using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+            {
+                using (StreamReader sr = new StreamReader(response.GetResponseStream()))
+                {
+                    result = sr.ReadToEnd();
+                }
+            }
+
+            MemberFbProfileTokenViewModel Profile = JsonConvert.DeserializeObject<MemberFbProfileTokenViewModel>(result);
+            ViewData["FB_Email"] = Profile.email;
+            ViewData["FB_Name"] = Profile.name;
+            ViewData["FB_userId"] = Profile.id;
+            _service.getMemberFbData(Profile.name, Profile.email);
+
+            Helper.FormsAuthorization(ViewData["FB_Email"].ToString());
+            return RedirectToAction("Index", "Home");
+        }
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-
+            Thread.Sleep(5000);
             return RedirectToAction("Index", "Home");
         }
+
     }
 }

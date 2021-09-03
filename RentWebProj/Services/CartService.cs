@@ -6,6 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -18,20 +19,25 @@ namespace RentWebProj.Services
         }
 
         public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
-        {//再判斷訂單卡時段?            
+        {           
             var result = new OperationResult();
             try
             {
+                DateTime? s = Convert.ToDateTime(VM.StartDate);
+                DateTime? e = Convert.ToDateTime(VM.ExpirationDate);
+                if (s == DateTime.MinValue) s = null;
+                if (e == DateTime.MinValue) e = null;
+
                 //VM->DM
                 Cart entity = new Cart()
                 {
                     MemberID = 1,
                     ProductID = PID,
-                    StartDate = Convert.ToDateTime(VM.StartDate),//空字串能否轉?
-                    ExpirationDate = DateTime.Parse(VM.ExpirationDate)                    
+                    StartDate = s,
+                    ExpirationDate = e                    
                 };
                 //判斷是否本來就存在
-                if ( VM.IsExisted )
+                if (VM.IsExisted)
                 {//更新
                     _repository.Update(entity);//猜測會用PK去找到原有的資料
                 }
@@ -41,7 +47,7 @@ namespace RentWebProj.Services
                 }
                 _repository.SaveChanges();
 
-                
+
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
@@ -53,8 +59,10 @@ namespace RentWebProj.Services
             return result;
         }
 
-
-
+        public CartIndex CheckCart(string PID, int MemberID)
+        {
+            return GetCart(MemberID).SingleOrDefault(x => x.ProductID == PID);
+        }
 
         public IEnumerable<CartIndex> GetCart(int MemberID)
         {
@@ -73,29 +81,30 @@ namespace RentWebProj.Services
                             MemberID = c.MemberID,
                             ProductID = c.ProductID,
                             ProductName = p.ProductName,
-                            StartDate = (DateTime)c.StartDate,
-                            ExpirationDate = (DateTime)c.ExpirationDate,
+                            StartDate = c.StartDate,
+                            ExpirationDate = c.ExpirationDate,
                             DailyRate = (decimal)p.DailyRate,
                             Qty = 1,
                             Available = (bool)p.Available,
-                            DateDiff = (int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
-                            Sub = (decimal)p.DailyRate * ((int)EntityFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
+                            //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
+                            //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };
 
             var odSV = new OrderService();//軒
             //軒：每筆產品加入禁租日期，用select和foreach都失敗，所以才用這麼繞的方法
             var temp = CartIndex.ToList();
             temp.ForEach(c =>
-                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID)
-            );
+            {
+                int dateDiff = 0;
+                if (c.StartDate.HasValue)
+                {
+                    dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
+                }
+                c.DateDiff = dateDiff;
+                c.Sub = c.DailyRate * dateDiff;
+                c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
+            });
             CartIndex = temp.AsEnumerable();
-
-            //CartIndex.Select(c =>
-            //{
-            //    CartIndex x = c;
-            //    x.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
-            //    return x;
-            //});
 
             //foreach (var item in CartIndex)
             //{
@@ -121,7 +130,7 @@ namespace RentWebProj.Services
 
         public void DeleteCart(int MemberID, string ProductID)
         {
-            Cart deleteList = new Cart() 
+            Cart deleteList = new Cart()
             {
                 MemberID = MemberID,
                 ProductID = ProductID

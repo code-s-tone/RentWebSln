@@ -1,15 +1,33 @@
-//輔助函式庫
+let startDateTimeText;
+let endDateTimeText;
+
+//輔助函式庫  
+//組合日 時
 function combinDateTime(i) {
     return flatpickr.formatDate(datePicker.selectedDates[i], datePicker.config.dateFormat) +
         formatDivider + timePicker[i].input.value;
 }
 
-//顯示期間文字 給使用者看
-function showPeriodText( startDateTimeText, endDateTimeText) {
+//顯示期間文字 給使用者看 並改變表單傳遞值
+function showPeriodText(startDateTimeText, endDateTimeText) {
     DateModalLauncher.classList.add('setted');
     DateModalLauncher.innerHTML = `<div>${startDateTimeText}</div>~<div>${endDateTimeText}</div>`;
+
+    StartDateToPost.value = startDateTimeText;
+    ExpirationDateToPost.value = endDateTimeText;
 }
 
+function JudgeEnableCompeleteBtn() {
+    if (timePicker[0].selectedDates.length == 1 &&
+        timePicker[1].selectedDates.length == 1 &&
+        datePicker.selectedDates.length == 2) {//&& datePicker.selectedDates[1] >= datePicker.selectedDates[0]
+        
+        completeBtn.disabled = false;
+    } else {
+        completeBtn.disabled = true;
+    }
+
+}
 
 
 //dateTimePicker本身設定
@@ -47,27 +65,29 @@ const datePicker = flatpickr("#datePicker", {
     inline: true,
 
     onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (selectedDates.length == 2 && selectedDates[1] >= selectedDates[0]) {
+        if (selectedDates.length == 2) { //&& selectedDates[1] >= selectedDates[0]
+            //Modal顯示文字
             let s = flatpickr.formatDate(selectedDates[0], instance.config.dateFormat);
             let e = flatpickr.formatDate(selectedDates[1], instance.config.dateFormat);
-
             document.querySelector("#start").innerHTML = s;
             document.querySelector("#end").innerHTML = e;
+
             //日期設定好> 才可以按collapseBtn
             //啟用
             collapseBtn.disabled = false;
-            if (timePicker[0].selectedDates.length == 1 &&
-                timePicker[1].selectedDates.length == 1
-            ){
-                //日期時間都設定好> 才可以按completeBtn
-                completeBtn.disabled = false;
-            }
+            //if (timePicker[0].selectedDates.length == 1 &&
+            //    timePicker[1].selectedDates.length == 1
+            //){
+            //    //日期時間都設定好> 才可以按completeBtn
+            //    completeBtn.disabled = false;
+            //}
 
         } else {
             //禁止
             collapseBtn.disabled = true;
-            completeBtn.disabled = true;
+        //    completeBtn.disabled = true;
         }
+        JudgeEnableCompeleteBtn();
     }
 });
 
@@ -80,14 +100,18 @@ const timePicker = flatpickr(".timePicker", {
     maxTime: "22:30",
 
     onChange: function (selectedDates, dateStr, instance) {//固定的參數群
-        if (timePicker[0].selectedDates.length == 1 &&
-            timePicker[1].selectedDates.length == 1 &&
-            datePicker.selectedDates.length == 2 &&
-            datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
-            //日期時間都設定好> 才可以按completeBtn
-            completeBtn.disabled = false;
-        } else {
-            completeBtn.disabled = true;
-        }
+        //if (timePicker[0].selectedDates.length == 1 &&
+        //    timePicker[1].selectedDates.length == 1 &&
+        //    datePicker.selectedDates.length == 2 &&
+        //    datePicker.selectedDates[1] > datePicker.selectedDates[0]) {
+        //    //日期時間都設定好> 才可以按completeBtn
+        //    completeBtn.disabled = false;
+        //} else {
+        //    completeBtn.disabled = true;
+        //}
+        JudgeEnableCompeleteBtn();
     }
 });
+
+let formatDivider = ' ';
+let dateTimeFormat = datePicker.config.dateFormat + formatDivider + timePicker[0].config.dateFormat;

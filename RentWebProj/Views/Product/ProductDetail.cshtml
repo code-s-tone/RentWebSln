@@ -28,54 +28,24 @@
             </div>
         </div>
     </div>
+
     <div class="row d-flex justify-content-between">
+
         <div class="col-sm-7 col-12 Product">
             <img src="@Model.ImgSources[0]"
                  data-fancybox="gallery"
                  data-caption="Optional caption">
         </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
-        <div class="col-sm-5 col-12 Product">
-            <img src="@Model.ImgSources[1]"
-                 data-fancybox="gallery"
-                 data-caption="Optional caption">
-            <span class="SeeMore">See ALL 2</span>
-        </div>
+
+        @for( int i=1; i<Model.ImgSources.Count ; i++ ) {
+            <div class="col-sm-5 col-12 Product">
+                <img src="@Model.ImgSources[i]"
+                     data-fancybox="gallery"
+                     data-caption="Optional caption">
+                <span class="SeeMore">See ALL 2</span>
+            </div>
+        }
+
     </div>
 
     <br>
@@ -164,7 +134,7 @@
                 <div class="title">
                     <div class="title-left">
                         <h2 class="heading_size">
-                            Available Times
+                            物流中心營業時段:
                         </h2>
                     </div>
 
@@ -186,21 +156,16 @@
                                 <span class="link2" id="link2">
                                     <a data-bs-toggle="collapse" href="#collapse_textTwo" aria-expanded="false"
                                        aria-controls="collapse_textTwo">
-                                        Read more...
+                                        @*Read more...*@
+                                        查看更多...
                                     </a>
                                 </span>
 
                             </span>
 
                             <div class="collapse" id="collapse_textTwo" aria-expanded="false">
-                                A Ruckify driver can deliver to and return the item from your location: <br>
-                                Monday to Sunday
-                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-                                &nbsp &nbsp
-                                9:00 am to 9:00 pm<br>
-
+                                物流中心 運送產品服務 以及 退回產品服務 時段: <br>
+                                每天 早上 9:00 至 晚上 9:00 <br>
                             </div>
                         </p>
                     </div>
@@ -215,7 +180,7 @@
                 <div class="">
                     <div class="">
                         <h2 class="heading_size">
-                            Keep in Mind
+                            租借注意事項:
                         </h2>
                     </div>
                 </div>
@@ -225,8 +190,7 @@
 
                         <div id="">
                             <p>
-                                You remain fully liable to the Owner for any damage, loss, or theft of the item during
-                                the rental period.
+                                對於租賃期間物品的任何損壞、丟失或被盜，您仍需對所有者承擔全部責任。
                             </p>
                         </div>
 
@@ -241,7 +205,7 @@
                 <div class="title">
                     <div class="title-left">
                         <h2 class="heading_size">
-                            Cancellation
+                            取消訂單說明:
                         </h2>
                     </div>
 
@@ -257,15 +221,16 @@
                 <div class="description_text">
                     <div id="">
                         <p class="p4">
-                            Cancellation policy is <strong>Easy-Going.</strong> <br>
+                            取消訂單之前 <strong> 需要注意的事項</strong> <br>
 
-                            Full refund will be issued if cancelled greater than 2 days before <br>
+                            如果在 2 天前取消，將全額退款 <br>
                             <span id="text4">
 
                                 <span class="link4" id="link4">
                                     <a data-bs-toggle="collapse" href="#collapse_text4" aria-expanded="false"
                                        aria-controls="collapse_text4">
-                                        Read more...
+                                        @*Read more...*@
+                                        查看更多...
                                     </a>
                                 </span>
 
@@ -273,10 +238,9 @@
 
                             <span class="collapse" id="collapse_text4" aria-expanded="false">
                                 <br>
-                                If the member booking the item sends a cancellation notification at least 48 hours
-                                before the booking Start Date and Time, they are entitled to a full refund minus the
-                                booking fee, and payment processing fee. The item price and any additional price
-                                including delivery will be refunded.
+                                如果預訂項目的會員在預訂開始日期和時間前至少 48 小時發送取消通知，
+                                他們有權獲得全額退款，減去預訂費和付款處理費。
+                                商品價格和任何附加價格（包括送貨）將被退還。
                             </span>
                         </p>
                     </div>
@@ -301,17 +265,17 @@
                             @Html.HiddenFor(M => M.IsExisted)
                             @Html.HiddenFor(M => M.StartDate)
                             @Html.HiddenFor(M => M.ExpirationDate)
-
+                            <input type="hidden" name="isCheckout" value="false">
                             <button id="ToCart" class="orange" type="submit">
                                 @(Model.IsExisted?"更新":"放入")購物車
                             </button>
-                            <button id="ToCheck" class="orange">直接結帳</button>
+                            <button id="ToCheck" class="orange" type="submit">直接結帳</button>
                         }
                     </div>
                 </div>
                 <div class="hint">您還不會被收費</div>
             </div>
-            @Html.Partial("../Shared/_DateTimeModal")
+            @Html.Partial("../Shared/Partial_DateTimeModal")
 
             <div class="modal " id="OperationHintModal" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
@@ -353,24 +317,21 @@
         }else{}*@
 
         //入車提示訊息
-        if (   @Json.Encode(  ! String.IsNullOrEmpty(Model.OperationType)   )  )  {
-            let OpText = "";
-            if ( @Json.Encode(Model.OperationType == "Create")  )
-                OpText = "加入";
-            else if (@Json.Encode(Model.OperationType == "Update")  )
-                OpText = "更新";
+            @if (!String.IsNullOrEmpty(Model.OperationType))
+            {
+                string OpText = "";
+                if ( Model.OperationType == "Create") { OpText = "加入"; }
+                else if (Model.OperationType == "Update") { OpText = "更新"; }
 
-            OpText += "購物車";
-            if (@Json.Encode(Model.OperationSuccessful)) {
-                OpText += "成功";
+                OpText += "購物車";
+                if ( Model.OperationSuccessful ){ OpText += "成功"; }
+                else  { OpText += "失敗"; }
+                <text>
+                let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
+                document.querySelector('#OperationHintModal .modal-header>h5').innerText = '@OpText';
+                OpModal.toggle();
+                </text>
             }
-            else {
-                OpText += "失敗";
-            }
-            let OpModal = new bootstrap.Modal(document.querySelector('#OperationHintModal'));
-            document.querySelector('#OperationHintModal .modal-header>h5').innerText = OpText;
-            OpModal.toggle();
-        }
     </script>
     <!-- dateTimePicker初始化、Modal事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
@@ -383,23 +344,28 @@
 
         let StartDateToPost = document.querySelector('#StartDate');
         let ExpirationDateToPost = document.querySelector('#ExpirationDate');
-                 //如果在購物車且有選日期 => 預顯示文字
+        //入車鈕、結帳鈕
+        let actionBtns = document.querySelectorAll('.decision-group .orange');
+        actionBtns[0].disabled = true;
+        //如果在購物車且有選日期 => 預顯示文字、開放結帳
         if ( @Json.Encode(Model.StartDate!=null ) ) {
             showPeriodText('@(Model.StartDate)', '@Model.ExpirationDate');
+        } else {
+            actionBtns[1].disabled = true;
         }
-
+        actionBtns[1].addEventListener('click', function () {
+            document.querySelector('input[name="isCheckout"]').value = 'true';
+        });
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 
-    <!-- 本頁的特殊後續 -->
     <script>
-        //禁用購物動作
-        let actionBtns = document.querySelectorAll('.decision-group .orange');
-        actionBtns.forEach(x => x.disabled = true);
         completeBtn.addEventListener('click', function () {
             //開放購物動作
-            actionBtns.forEach(x => x.disabled = false);
+            actionBtns.forEach(x => {
+                if (x.disabled) x.disabled = false
+            });
         });
     </script>
 }
@@ -426,7 +392,7 @@
 
 @section topJS{
     @* swiper還有用到?? *@
-    <script src="~/Scripts/swiper-bundle.min.js"></script>
+    @*<script src="~/Scripts/swiper-bundle.min.js"></script>*@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>

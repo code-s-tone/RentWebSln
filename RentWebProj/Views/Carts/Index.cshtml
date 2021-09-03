@@ -41,7 +41,6 @@
                     </tr>
                     @{
                         int i = 0;
-                        //string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
                     }
                     @foreach (var item in Model)
                     {
@@ -78,15 +77,11 @@
                                         }
                                         </p>
                                         @{
-                                            //軒：
                                             //日期選取器
                                             <button type="button" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
                                                 設定租借期間
                                             </button>
-                                            //懿的起訖日型別不允許null => 庭安那邊來的有null的怎麼辦??
                                             //軒：POST起迄日用
-                                            //class="displayNone"style="display:none" type="text"
-                                            //ID
                                             <input type="hidden" name="ListProductID[@i]"
                                                    value="@item.ProductID" />
                                             <input type="hidden" name="ListStartDate[@i]"
@@ -153,7 +148,7 @@
                     </div>
                     <div class="checkout">
                         <input type="hidden" class="check" name="name" value="" />
-                        <a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>
+                        @*<a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>*@
                         <button type="submit" class="btn">進行結帳</button>
                     </div>
                 </div>
@@ -176,7 +171,7 @@
                 </div>
             </div>
 
-            @Html.Partial("../Shared/_DateTimeModal")
+            @Html.Partial("../Shared/Partial_DateTimeModal")
         </div>
     </div>
 }
@@ -203,15 +198,16 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
-        
-        completeBtn.addEventListener('click', function ModifiedRecord(){
-            let Modified = SetTarget();
-            //console.log(Modified);
-            if (Modified.value == "false") {
-                Modified.value = "true";
+        completeBtn.addEventListener('click', function(){
+            let modified = modifiedTarget();
+            if (modified.value == "false") {
+                modified.value = "true";
+            }
+            let ckBox = checkBoxTarget();
+            if (ckBox.disabled == true) {
+                ckBox.disabled = false;
             }
         });
-
 
         let DateModalLauncher = null;
         let StartDateToPost = null;
@@ -219,37 +215,42 @@
         let disablePeriodsJSONArray = [];
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
+        let checkBoxs = document.querySelectorAll('.form-check-input');
 
-        //如果在購物車本來就有選日期 => 預顯示文字
+        //如果在購物車且有選日期 => 預顯示文字、寫入POST欄位，開放勾選
         @{
             int i = 0;
             string dateTimeFormat = new ProductDetailToCart().DateTimeFormat;
-            //Model.ToList().ForEach(item , idx);
             foreach ( var item in Model)
             {
-                <text>
-                if ( @Json.Encode(item.StartDate!=null ) ) {
+
+                if ( item.StartDate.HasValue ) {
+                    <text>
                     DateModalLauncher = DateModalBtns[@i];
-                    let startDateTimeText = '@(item.StartDate.ToString(dateTimeFormat))';
-                    let endDateTimeText = '@item.ExpirationDate.ToString(dateTimeFormat)';
+                    startDateTimeText = '@(item.StartDate.Value.ToString(dateTimeFormat))';
+                    endDateTimeText = '@item.ExpirationDate.Value.ToString(dateTimeFormat)';
+                    StartDateToPost = document.querySelector(`input[name="ListStartDate[@i]"]`);
+                    ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[@i]"]`);
+
                     showPeriodText(startDateTimeText,endDateTimeText);
-
-                    //寫入POST欄位
-                    document.querySelector(`input[name="ListStartDate[@i]"]`).value = startDateTimeText;
-                    document.querySelector(`input[name="ListExpirationDate[@i]"]`).value = endDateTimeText;
-
+                    </text>
                 }
-
+                else
+                {
+                    <text>
+                    //沒有日期就禁用CheckBox
+                    checkBoxs[@i].disabled = true;
+                    </text>
+                }
+                <text>
                 disablePeriodsJSONArray.push( @Html.Raw(item.DisablePeriodsJSON));
-
                 </text>
                 i++;
             }
         }
 
 
-        //console.log(disablePeriodsJSONArray);
-        DateModalBtns.forEach((btn, i) => {        
+        DateModalBtns.forEach((btn, i) => {
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
                 DateModalLauncher = btn;
@@ -257,14 +258,16 @@
                 StartDateToPost = document.querySelector(`input[name="ListStartDate[${i}]"]`);
                 ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${i}]"]`);
 
-                //禁用日期
+                //禁租日期
                 datePicker.config.disable = disablePeriodsJSONArray[i];
 
-                //日期設定完成=>以索引值取物件 紀錄"有更動"
-                SetTarget = function () {
+                //日期設定完成=>以索引值取 目標異動紀錄欄位 目標核取方塊
+                modifiedTarget = function () {
                     return document.querySelector(`input[name="ListModified[${i}]"]`);
                 };
-
+                checkBoxTarget = function () {
+                    return checkBoxs[i];
+                };
             });
         });
     </script>
@@ -280,14 +283,11 @@
         //    let b = document.querySelector('.check');
         //    b.setAttribute("value", result);
         //}
-
-        document.querySelectorAll('.form-check-input').forEach(function (btn) {
-            //btn.addEventListener('change', Checked);
-            btn.addEventListener('change', function () {
-                let i = btn.value;
-                let temp = document.querySelector(`input[name="ListChecked[${i}]"]`);
-                console.log(temp);
-                temp.value = btn.checked;
+        checkBoxs.forEach(function (ckBox) {
+            ckBox.addEventListener('change', function () {
+                let i = ckBox.value;
+                let PostTarget = document.querySelector(`input[name="ListChecked[${i}]"]`);
+                PostTarget.value = ckBox.checked;
             });
         })
 

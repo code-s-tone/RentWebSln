@@ -23,7 +23,7 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
-    background-image: url("https://picsum.photos/900/900/?random=1");
+    background-image: url("../../images/IndexBanner.jpg");
     >div{
         box-sizing: border-box;
         width: 100%;
@@ -122,7 +122,7 @@ header{
 .swiper-button-prev::after{ right: 7%;}
 
 article{
-    max-width: $max-width;
+    // max-width: $max-width;
     margin-left: auto;
     margin-right: auto;
     >.Area,.category-sample{
@@ -154,7 +154,7 @@ article{
 
     .categories-swiper-container{
         .swiper-slide.category-card{
-            margin: 0;
+            margin: 15px 0;
         }
     //     >.swiper-wrapper{
     //         >.swiper-slide{

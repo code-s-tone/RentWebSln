@@ -85,6 +85,13 @@ namespace RentWebProj.Controllers
         }
 
         //---------------------------------------------------------------
+        //未登入 => 提示需登入或一律disabled
+        //已登入 => 有IsExisted屬性，=>true => 提示已加入            
+        //                           false => 導到某action，給予參數：ProductID 以及 IsExisted:false (篩選狀況的JSON?)
+        //                                    action執行：  以ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
+        //                                    1.return重新導向原action，自然重篩
+        //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
+        //              篩選狀況如何記錄起來傳遞?
 
 
         //接收路由PID撈產品資料、取當前登入者，傳到View
@@ -100,7 +107,7 @@ namespace RentWebProj.Controllers
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM , string PID) {
+        public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM, bool isCheckout , string PID) {
             //紀錄操作種類、成敗
             OperationResult result = new OperationResult();
             bool isSuccessful = false;
@@ -108,7 +115,33 @@ namespace RentWebProj.Controllers
             //租借日期已被下訂、違法輸入
             if (ModelState.IsValid)
             {
-                result = new CartService().CreateOrUpdate(PostVM, PID);
+                var cartService = new CartService();
+                result = cartService.CreateOrUpdate(PostVM, PID);
+                if (isCheckout)
+                {
+                    List<CartIndex> CList = new List<CartIndex>();
+
+                    var c = new CartIndex()
+                    {
+                        MemberID = 1,
+                        ProductID = PID,
+                        //StartDate = PostVM.StartDate,
+                        //ExpirationDate = PostVM.ExpirationDate,
+                        //DailyRate = (decimal)p.DailyRate,
+                        Qty = 1,//
+                        Available = true,//
+                    };
+
+                    var dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
+                    c.DateDiff = dateDiff;
+                    c.Sub = c.DailyRate * dateDiff;
+
+                    CList.Add(c);
+                    TempData["directCheckout"] = CList;
+                    return RedirectToAction("Checkout", "Carts");
+
+                }
+
                 isSuccessful = result.IsSuccessful;
             }
 

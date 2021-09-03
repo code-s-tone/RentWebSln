@@ -62,9 +62,9 @@ namespace RentWebProj.ViewModels
         //禁租日期
         public string DisablePeriodsJSON { get; set; }
 
-        public DateTime StartDate { get; set; }//軒：是否改 可null?
-
-        public DateTime ExpirationDate { get; set; }
+        //來自產品列表頁的加入，日期可能為null
+        public DateTime? StartDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
 
         public decimal DailyRate { get; set; }
 
