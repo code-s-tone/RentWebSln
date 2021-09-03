@@ -19,16 +19,16 @@ namespace RentWebProj.Models
         [StringLength(8)]
         public string ProductID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string ProductName { get; set; }
 
+        [Required]
         [StringLength(250)]
         public string Description { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? DailyRate { get; set; }
-
-        public bool? Available { get; set; }
+        public decimal DailyRate { get; set; }
 
         public DateTime? LaunchDate { get; set; }
 
@@ -36,7 +36,7 @@ namespace RentWebProj.Models
 
         public bool? Discontinuation { get; set; }
 
-        public DateTime? UpdateTime { get; set; }
+        public DateTime UpdateTime { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }

@@ -163,7 +163,7 @@
                                     var StoreList = new OrderService().GetAllStore();
                                     foreach (var item in StoreList)
                                     {
-                                        <option value="@(item.StoreID + 1) ">@item.StoreName</option>
+                                        <option value="@(item.StoreID) ">@item.StoreName</option>
                                     }
                                 }
                             </select>
