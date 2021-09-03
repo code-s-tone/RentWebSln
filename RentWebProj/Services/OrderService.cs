@@ -33,13 +33,17 @@ namespace RentWebProj.Services
             
             return RentedPeriods;
         }
-        public double countRenteDays(string PID)
+        public double countRentedDays(string PID,int amongDays)
         {
+            var now = DateTime.Now.AddDays(-amongDays);
             var RentedDays =
                 GetProductRentPeriods(PID)
-                .Select(x => (x.to - x.from).TotalDays)
+                .Where(x => x.to > now  )
+                .Select(x =>   (x.to - (x.from > now?  x.from : now )  ).TotalDays  )
                 .Sum();
+            //RentedDatesAmongDays.ForEach(x=>x)
 
+           
             return RentedDays;
         }
         //取得禁租日期JSON
