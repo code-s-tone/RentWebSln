@@ -12,11 +12,11 @@
         <!-- Left filter區-->
         <div class="col-lg-3 px-2 mx-0 ">
             <div class="searchContainer">
-                @using (Html.BeginForm("SearchProductCards", "Product",FormMethod.Get))
+                @using (Html.BeginForm("SearchProductCards", "Product", FormMethod.Get))
                 {
                     <div class="filterGroup">
-                    @Html.LabelFor(model => model.keywordInput)
-                    @Html.EditorFor(model => model.keywordInput, new { htmlAttributes = new { @class = "btn",placeholder= "想找什麼呢？" } })
+                        @Html.LabelFor(model => model.keywordInput)
+                        @Html.EditorFor(model => model.keywordInput, new { htmlAttributes = new { @class = "btn", placeholder = "想找什麼呢？" } })
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
@@ -24,7 +24,7 @@
                         <br>
                         @{
                             List<SelectListItem> categoryList = new List<SelectListItem>()
-                                        {
+                                                                {
                                 new SelectListItem {Text = "選擇商品種類", Value = "0"}
                             };
                             foreach (var ct in ViewBag.categoryOptions)
@@ -34,13 +34,13 @@
                             }
 
                         }
-                        
+
                         @Html.DropDownListFor(m => m.categoryOptions, categoryList, new { @class = "my-2 w-100", @id = "categoryOptions" })
-  
+
                         @* 副類下拉 *@
                         @{
                             List<SelectListItem> subcategoryList = new List<SelectListItem>()
-                            {
+                                                    {
                                 new SelectListItem {Text = "選擇子分類", Value = "0"}
                             };
 
@@ -59,9 +59,9 @@
                         @Html.DropDownListFor(m => m.subCategoryOptions, subcategoryList, new { @class = "w-100", @id = "subCategoryOptions" })
 
                         @*<select name="subCategoryOptions" id="subCategoryOptions" class="w-100">
-                            <option value="0">選擇子分類</option>
+                                <option value="0">選擇子分類</option>
 
-                        </select>*@
+                            </select>*@
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
@@ -69,7 +69,7 @@
                         <br>
                         @{
                             List<SelectListItem> priceList = new List<SelectListItem>()
-                            {
+                                                    {
                                 new SelectListItem {Text = "日租費預算範圍", Value = "0"},
                                 new SelectListItem {Text = "$100以下", Value = "1"},
                                 new SelectListItem {Text = "$101~$500", Value = "2"},
@@ -78,7 +78,7 @@
                             };
                         }
                         @Html.DropDownListFor(m => m.dailyRateBudget, priceList, new { @class = "my-2 w-100" })
-           
+
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
@@ -87,21 +87,21 @@
                         <br>
                         <label class="mt-1 ms-1">
                             @Html.RadioButtonFor(m => m.orderByOptions, "orderByRelevance") 最相關不要五四三
-                    </label>
-                    <br>
-                    <label class="mt-1 ms-1">
-                        @Html.RadioButtonFor(m => m.orderByOptions, "orderByPrice") 甜甜價低到高
-                    </label>
+                        </label>
                         <br>
-                    <label class="mt-1 ms-1">
-                        @Html.RadioButtonFor(m => m.orderByOptions, "orderByStarsForLike") 星星熱門度
-                    </label>
-                    <br>
+                        <label class="mt-1 ms-1">
+                            @Html.RadioButtonFor(m => m.orderByOptions, "orderByPrice") 甜甜價低到高
+                        </label>
+                        <br>
+                        <label class="mt-1 ms-1">
+                            @Html.RadioButtonFor(m => m.orderByOptions, "orderByStarsForLike") 星星熱門度
+                        </label>
+                        <br>
 
                     </div>
 
-                        <input type="submit" value="送出搜尋" class="filterResultBtn my-2 dNoneOnPhone">
-                    
+                    <input type="submit" value="送出搜尋" class="filterResultBtn my-2 dNoneOnPhone">
+
 
                 }
 
@@ -118,13 +118,23 @@
                 <div class=" d-flex flex-wrap">
                     @if (ViewBag.ContainerTitle == nameof(ContainerTitle.所有種類))
                     {
-                        @Html.Partial("Partial_CategoryCard")
+                        foreach (CardsViewModel ct in ViewBag.CategoryOptions)
+                        {
+                            <div class="col-12 col-md-6">
+                                @Html.Partial("Partial_CategoryCard", ct)
+                            </div>
+
+                        }
                     }
 
                     else
                     {
-                        @Html.Partial("Partial_ProductCard")
-
+                        foreach (CardsViewModel product in ViewBag.selectedProductList)
+                        {
+                            <div class="col-6 col-md-4">
+                                @Html.Partial("Partial_ProductCard", product)
+                            </div>
+                        }
                     }
 
                 </div>
@@ -164,7 +174,7 @@
     <script>
         // window.onload
         // 1. 選擇的主類, 選擇的副類
-        // 2. 
+        // 2.
         $('#categoryOptions').on('change', function (e) {
 
             var optionSelected = $("option:selected", this);
@@ -187,7 +197,7 @@
                     optionIni.value = "0";
                     optionIni.innerText = `從${optionSelected[0].childNodes[0].nodeValue}再細分`;
                     subSelector.appendChild(optionIni);
-        
+
                     response.forEach(sub => {
                         let option = document.createElement('option');
                         option.innerText = sub.SubCategoryName;
