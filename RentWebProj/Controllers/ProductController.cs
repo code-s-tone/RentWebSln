@@ -86,8 +86,7 @@ namespace RentWebProj.Controllers
             //紀錄操作種類、成敗
             OperationResult result = new OperationResult();
             bool isSuccessful = false;
-            //錯誤訊息
-            //租借日期已被下訂、違法輸入
+            //錯誤訊息 違法輸入
             if (ModelState.IsValid)
             {
                 var cartService = new CartService();
