@@ -24,7 +24,7 @@ namespace RentWebProj
             routes.MapRoute(
                 name: "ProductCardsList",
                 url: "Product/ProductCardsList/{categoryID}",
-                defaults: new { controller = "Product", action = "ProductCardsList" }
+                defaults: new { controller = "Product", action = "ProductCardsList", categoryID="Ppl" }
             );
             routes.MapRoute(
                 name: "Cart",
