@@ -63,14 +63,9 @@ p{
     line-height:1.8;
 }
 
-
-/*right*/
-.right {
-    width: 100%;
-}
-
 @media screen and (max-width:991px) {
     .right {
+        width: 100%;
         height: 0;
         position: absolute;
     }
