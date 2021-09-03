@@ -44,7 +44,7 @@ namespace RentWebProj.Controllers
             //刪除購物車要用郭懿的方法喔，在下面
             foreach (var PID in PostVM.ListProductID)
             {
-                new CartService().DeleteCart(1, PID);
+                new CartService().DeleteCart(Int32.Parse(User.Identity.Name), PID);
             }
 
 
@@ -53,8 +53,8 @@ namespace RentWebProj.Controllers
         
         public ActionResult Index()
         {
-            var carts = _cartService.GetCart(1);
-            ViewBag.Total = _cartService.GetCartTotal(1);
+            var carts = _cartService.GetCart(Int32.Parse(User.Identity.Name));
+            ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name));
 
             return View(carts);
         }
@@ -85,7 +85,7 @@ namespace RentWebProj.Controllers
                 }
                 if (VM.ListChecked[i])
                 {
-                    CList.Add(_cartService.CheckCart(VM.ListProductID[i], 1));
+                    CList.Add(_cartService.CheckCart(VM.ListProductID[i],Int32.Parse(User.Identity.Name)));
                 }
             }
 

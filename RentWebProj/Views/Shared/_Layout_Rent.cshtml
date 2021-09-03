@@ -68,31 +68,32 @@
                     </div>
 
                     <div class="header-member-box">
+                        <a href="@Url.Action("Index", "Carts")"><img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon" title="購物車"></a>
+                            <div class="member-dropdown">
+                                <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
+                                <ul class="member-subMenu">
+                                    <div class="profileBox">
+                                        <div class="profileImg d-grid"><img class="m-auto" src=@TempData["img"] alt=""></div>
+                                        <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
+                                    </div>
+                                    <a href="#">
+                                        <li>通知</li>
+                                    </a>
 
-                        <img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon" title="購物車">
+                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                        <li>我的訂單</li>
+                                    </a>
+                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                        <li>修改個人資料</li>
+                                    </a>
+                                    <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
+                                        <li>登出</li>
 
-                        <div class="member-dropdown">
-                            <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
-                            <ul class="member-subMenu">
-                                <div class="profileBox">
-                                    <div class="profileImg d-grid"><img class="m-auto" src=@TempData["img"] alt=""></div>
-                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
-                                </div>
-                                <a href="#">
-                                <li>通知</li></a>
-
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>我的訂單</li></a>
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>修改個人資料</li></a>
-                                <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
-                                <li>登出</li>
-
-                                </a>
+                                    </a>
 
 
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
 
                     </div>
 

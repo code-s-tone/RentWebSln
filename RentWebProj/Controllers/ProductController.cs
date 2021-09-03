@@ -98,7 +98,7 @@ namespace RentWebProj.Controllers
         public ActionResult ProductDetail(string PID)
         {
             //User.Identity.Name
-            ProductDetailToCart VM = _service.getProductDetail(PID,1);
+            ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
 
             return View(VM);
         }
@@ -123,7 +123,7 @@ namespace RentWebProj.Controllers
 
                     var c = new CartIndex()
                     {
-                        MemberID = 1,
+                        MemberID = Int32.Parse(User.Identity.Name),
                         ProductID = PID,
                         //StartDate = PostVM.StartDate,
                         //ExpirationDate = PostVM.ExpirationDate,
@@ -146,7 +146,7 @@ namespace RentWebProj.Controllers
             }
 
             //購物車可能已變動/違法輸入，需重撈
-            ProductDetailToCart VM = _service.getProductDetail(PID, 1);
+            ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
             VM.OperationSuccessful = isSuccessful;
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
