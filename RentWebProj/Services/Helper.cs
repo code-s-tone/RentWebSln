@@ -107,11 +107,11 @@ namespace RentWebProj.Services
             return result;
         }
 
-        public static int NameConvertToMemberId(string name) //擴充方法
-        {
-            var MID = name;
-            return 1;
-        }
+        //public static int NameConvertToMemberId(string name) //擴充方法
+        //{
+        //    var MID = name;
+        //    return 1;
+        //}
         public static string WriteLog(this OperationResult value) //擴充方法
         {
             if ( value.Exception != null)
