@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace RentWebProj.ViewModels
 {
@@ -38,18 +40,23 @@ namespace RentWebProj.ViewModels
         //public int StarsForLike { get; set; }
     }
 
-    public class FilterSearchViewModel
+    public class FilterSearchViewModel:CardsViewModel
     {
+        public List<CardsViewModel> selectedProductList { get; set; }
+        [Display(Name = "關鍵字搜尋")]
         public string keywordInput { get; set; }
-        public string CategoryID { get; set; }
-        public string SubCategoryID { get; set; }
-        //public int OrderByOptions { get; set; }
-        public enum OrderByOptions { OrderByRelevance, OrderByPrice, OrderByStarsForLike }
-        //public enum DailyRateBudget { none, , 101, }
+
+        [Display(Name = "種類篩選")]
+        public string categoryOptions { get; set; }
+        public string subCategoryOptions { get; set; }
+
+        [Display(Name = "排序方式")]
+        public string orderByOptions { get; set; }
+
+        [Display(Name = "錢錢決定一切")]
+        public string dailyRateBudget { get; set; }
 
     }
-
-    
 
     public enum Pages
     {
@@ -61,7 +68,7 @@ namespace RentWebProj.ViewModels
     }
     public enum ContainerTitle
     {
-        所有種類
+        所有種類, 您要的商品,很抱歉找不到您要的商品
     }
 
 

@@ -85,7 +85,6 @@ namespace RentWebProj.Services
                             ExpirationDate = c.ExpirationDate,
                             DailyRate = (decimal)p.DailyRate,
                             Qty = 1,
-                            Available = (bool)p.Available,
                             //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
                             //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };

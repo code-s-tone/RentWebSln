@@ -67,7 +67,7 @@ namespace RentWebProj.Services
                 OrderDate = OrderDate,
                 DeliverID = 1,
                 StoreID = VM.StoreID,//要從下拉選單拿
-                OrderStatusID = "未付款",
+                OrderStatusID = 1,
                 MemberID = MemberID
 
             };
@@ -87,7 +87,7 @@ namespace RentWebProj.Services
                     StartDate = DateTime.Parse(VM.ListStartDate[i]),
                     ExpirationDate = DateTime.Parse(VM.ListExpirationDate[i]),
                     TotalAmount = Decimal.Parse(VM.ListTotalAmount[i]),
-                    Returned = false
+                    GoodsStatus = 1
                 };
                 _repository.Create(odEntity);
             }

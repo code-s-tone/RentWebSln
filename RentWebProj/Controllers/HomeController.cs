@@ -26,8 +26,9 @@ namespace RentWebProj.Controllers
             //判斷登入之後動態顯示大頭貼跟名子 by _家承
             if (User.Identity.IsAuthenticated)
             {
-                TempData["img"] = Helper.ConvertMemberIdToProgilePhotoUrl(Int32.Parse(User.Identity.Name));
-                TempData["name"] = Helper.ConvertMemberIdToFullName(Int32.Parse(User.Identity.Name));
+                var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+                TempData["img"] = result.ProfilePhotoUrl;
+                TempData["name"] = result.Fullname;
             }
 
             return View(VMDictionary);
