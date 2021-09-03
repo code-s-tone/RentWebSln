@@ -9,6 +9,7 @@ using RentWebProj.Models;
 using System.Security.Cryptography;
 using System.Web.Security;
 using System.Web;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
@@ -68,6 +69,21 @@ namespace RentWebProj.Services
             //4.網頁添加cookie
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
 
+        }
+        public static MemberProfileViewModel ConvertMemberIdToMemberProfile(int MemberID) //擴充方法
+        {
+            IEnumerable<MemberProfileViewModel> vmModel;
+            var MemberDMList = _repository.GetAll<Member>();
+            vmModel= from m in MemberDMList
+                     where m.MemberID == MemberID
+                     select new MemberProfileViewModel
+                     {
+                       Fullname=m.FullName,
+                       ProfilePhotoUrl=m.ProfilePhotoUrl,
+                       email=m.Email,
+                     };
+            var result = vmModel.FirstOrDefault();
+            return result;
         }
         public static string ConvertMemberIdToFullName(int MemberID) //擴充方法
         {
