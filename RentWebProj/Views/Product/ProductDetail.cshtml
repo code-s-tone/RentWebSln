@@ -354,8 +354,12 @@
             actionBtns[1].disabled = true;
         }
         actionBtns[1].addEventListener('click', function () {
+            //改變表單位址
+            //document.querySelector('form').setAttribute('action','') ;//<form action="/Product/ProductDetail" method="post">
             document.querySelector('input[name="isCheckout"]').value = 'true';
+            
         });
+
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>

@@ -83,7 +83,7 @@ namespace RentWebProj.Services
                             ProductName = p.ProductName,
                             StartDate = c.StartDate,
                             ExpirationDate = c.ExpirationDate,
-                            DailyRate = (decimal)p.DailyRate,
+                            DailyRate = p.DailyRate,
                             Qty = 1,
                             //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
                             //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
