@@ -121,9 +121,10 @@
                         foreach (CardsViewModel ct in ViewBag.CategoryOptions)
                         {
                             <div class="col-12 col-md-6">
-                                @Html.Partial("Partial_CategoryCard", ct)
+                                <div class="category-card">
+                                    @Html.Partial("Partial_CategoryCard", ct)
+                                </div>
                             </div>
-
                         }
                     }
 
