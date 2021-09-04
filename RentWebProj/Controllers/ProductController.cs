@@ -91,7 +91,7 @@ namespace RentWebProj.Controllers
         //                                    action執行：  以ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
         //                                    1.return重新導向原action，自然重篩
         //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
-        //              篩選狀況如何記錄起來傳遞?
+        //              篩選狀況如何記錄起來傳遞?  或者 如何不跳轉也執行
         public ActionResult ProductToCart(string PID)
         {
             OperationResult result = new OperationResult();
