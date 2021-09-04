@@ -98,7 +98,7 @@ namespace RentWebProj.Controllers
         public ActionResult ProductDetail(string PID)
         {
             //User.Identity.Name
-            ProductDetailToCart VM = _service.getProductDetail(PID,1);
+            ProductDetailToCart VM = _service.GetProductDetail(PID,1);
 
             return View(VM);
         }
@@ -107,46 +107,28 @@ namespace RentWebProj.Controllers
         //不通過=> 路由PID撈產品資料，加入表單post過來的租借期間=>回填
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM, bool isCheckout , string PID) {
+        public ActionResult ProductDetail([Bind(Include = "isExisted,StartDate,ExpirationDate")] ProductDetailToCart PostVM, string PID, bool isCheckout ) {
             //紀錄操作種類、成敗
             OperationResult result = new OperationResult();
             bool isSuccessful = false;
-            //錯誤訊息
-            //租借日期已被下訂、違法輸入
+            //錯誤訊息 違法輸入
             if (ModelState.IsValid)
             {
-                var cartService = new CartService();
-                result = cartService.CreateOrUpdate(PostVM, PID);
                 if (isCheckout)
                 {
-                    List<CartIndex> CList = new List<CartIndex>();
+                    //不寫入購物車
 
-                    var c = new CartIndex()
-                    {
-                        MemberID = 1,
-                        ProductID = PID,
-                        //StartDate = PostVM.StartDate,
-                        //ExpirationDate = PostVM.ExpirationDate,
-                        //DailyRate = (decimal)p.DailyRate,
-                        Qty = 1,//
-                        Available = true,//
-                    };
-
-                    var dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
-                    c.DateDiff = dateDiff;
-                    c.Sub = c.DailyRate * dateDiff;
-
-                    CList.Add(c);
-                    TempData["directCheckout"] = CList;
+                    TempData["directCheckout"] = _service.ProductToCheckout(PID, PostVM.StartDate , PostVM.ExpirationDate);
                     return RedirectToAction("Checkout", "Carts");
 
                 }
-
+                var cartService = new CartService();
+                result = cartService.CreateOrUpdate(PostVM, PID);
                 isSuccessful = result.IsSuccessful;
             }
 
             //購物車可能已變動/違法輸入，需重撈
-            ProductDetailToCart VM = _service.getProductDetail(PID, 1);
+            ProductDetailToCart VM = _service.GetProductDetail(PID, 1);
             VM.OperationSuccessful = isSuccessful;
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 

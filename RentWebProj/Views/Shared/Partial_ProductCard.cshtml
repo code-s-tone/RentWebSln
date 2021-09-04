@@ -1,12 +1,15 @@
 ﻿@model CardsViewModel
+@{
+    var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/ProductDetail/" + Model.ProductID + "_1.jpg";
 
+}
 <div class="product-card" onmouseover="productCard_Hover2(this);"
      onmouseout="productCard_Unhover2(this);">
     <div class="badge">
         <repeat n="4"></repeat>
     </div>
     <div class="product-img">
-        <a href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><img src='https://tnntoday.com/wp-content/uploads/2021/04/Maserati.jpg' alt=""></a>
+        <a href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><img src=@src alt=""></a>
     </div>
     <div class="product-details">
         <div class="checkitOut"><a class="d-grid" href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><span class="m-auto">查看詳情</span></a> </div>
