@@ -149,16 +149,16 @@
                             <label for="member-name">收件人</label>
                         </div>
                         <div>
-                            <input type="text" id="member-name">
+                            <input type="text" id="member-name" />
                         </div>
 
                         <div>
                             <label for="member-address">地址</label>
                         </div>
 
-                        <div id="app">
-                            <select name="StoreID" class="form-select" aria-label="address select" v-model="selected">
-                                <option selected value="0">請選擇分店地址</option>
+                        <div>
+                            <select name="StoreID" class="form-select" aria-label="address select" id="number">
+                                <option value="0">請選擇分店地址</option>
                                 @{
                                     var StoreList = new OrderService().GetAllStore();
                                     foreach (var item in StoreList)
@@ -168,9 +168,7 @@
                                 }
 
                             </select>
-                            <div class="text-danger small mt-1">
-                            </div>
-                            
+
                         </div>
 
                     </div>
@@ -193,7 +191,9 @@
                         <span class="total">NT$@(total - discount) </span>
                     </div>
                     <div class="checkout">
-                        <button type="submit" class="btn">進行結帳</button>
+                        <div class="text-danger small mt-1">
+                        </div>
+                        <button type="submit" class="btn btn_sub">進行結帳</button>
                     </div>
                 </div>
             </div>
@@ -218,4 +218,54 @@
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
 
+    <script>
+
+
+        let btn = document.querySelector('.btn_sub');
+        let sel = document.getElementById("number");
+        let user = document.getElementById('member-name');
+        let small = document.querySelector('.small');
+
+        function selectCheck() {
+            if (user.value == "" || sel.value == 0) {
+                btn.disabled = true;
+                small.innerHTML = "姓名未填寫或是收件地址未選擇";
+            }
+            else if (user.value != "" && sel.value != 0) {
+                small.innerHTML = "";
+                btn.disabled = false;
+            }
+        }
+        sel.addEventListener('change', selectCheck);
+
+        window.onload = function () {
+            btn.disabled = true;
+            //selectCheck();
+        }
+                //function select_value(x) {
+                //    x = document.getElementById("number").value;
+                //    if (x == 0) {
+                //        btn.disabled = true;
+                //        document.querySelector(".small").innerHTML = "請選擇地址"
+                //    } else {
+                //        document.querySelector(".small").innerHTML = "";
+                //        btn.disabled = false;
+                //    }
+                //}
+                //btn.addEventListener('click', function () {
+                //    if (user.value == "") {
+                //        alert('請輸入姓名');
+                //        window.location.href = window.location.href;
+                //        window.location.reload;
+                //    }
+                //    else if (sel == 0) {
+                //        alert('請選擇分店地址');
+                //        window.location.href = window.location.href;
+                //        window.location.reload;
+                //    } else {
+
+                //    }
+                //})
+
+    </script>
 }
