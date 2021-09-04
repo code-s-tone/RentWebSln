@@ -32,40 +32,38 @@ namespace RentWebProj.Controllers
         // GET: Member
         public ActionResult MemberCenter()
         {
-            return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());//可以強型別
-            //單讀取一個表方法
-            //預計搭配Session方法
-            //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
+            //已將User.Identity.Name轉成MemberId
+            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
         // Post: Member
-        [HttpPost]
-        public ActionResult MemberCenter(MemberPersonDataViewModel X)
-        {
-            //Step1. 先"取得"目前登入的"密碼"
-            var MemberPasswordHash = _service.CheckPassword(User.Identity.Name);
-            var MemberFullName = _service.CheckName(User.Identity.Name);
-            var MemberPhone = _service.CheckPhone(User.Identity.Name);
-            //var MemberFullName = _service.CheckName(User.Identity.Name);
-            //var MemberPasswordHash = ViewBag.CheckPassword;
-            //model是否合法驗證
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
-                //return View(x.MemberEmail);
-                return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());
-            }
-            //Step2. 把信箱跟密碼進行"比對並更新"
-            ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash , MemberFullName , X.MemberName , MemberPhone , X.MemberPhone);
+        //[HttpPost]
+        //public ActionResult MemberCenter(MemberPersonDataViewModel X)
+        //{
+        //    //Step1. 先"取得"目前登入的"密碼"
+        //    var MemberPasswordHash = _service.CheckPassword(User.Identity.Name);
+        //    var MemberFullName = _service.CheckName(User.Identity.Name);
+        //    var MemberPhone = _service.CheckPhone(User.Identity.Name);
+        //    //var MemberFullName = _service.CheckName(User.Identity.Name);
+        //    //var MemberPasswordHash = ViewBag.CheckPassword;
+        //    //model是否合法驗證
+        //    if (ModelState.IsValid)
+        //    {
+        //        ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+        //        ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
+        //        //return View(x.MemberEmail);
+        //        return View(_service.GetMemberData(User.Identity.Name).FirstOrDefault());
+        //    }
+        //    //Step2. 把信箱跟密碼進行"比對並更新"
+        //    ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash , MemberFullName , X.MemberName , MemberPhone , X.MemberPhone);
 
-            return View(_service.GetMemberData(X.ComfirMemberEmail).FirstOrDefault());//可以強型別
+        //    return View(_service.GetMemberData(X.ComfirMemberEmail).FirstOrDefault());//可以強型別
 
-            //單讀取一個表方法
-            //ViewData.Model = _service.getMemberData();
-            //預計搭配Session方法
-            //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
-        }
+        //    //單讀取一個表方法
+        //    //ViewData.Model = _service.getMemberData();
+        //    //預計搭配Session方法
+        //    //return View(_service.getMemberData((int)Session["userId"]));//可以強型別
+        //}
 
 
         public ActionResult Login()

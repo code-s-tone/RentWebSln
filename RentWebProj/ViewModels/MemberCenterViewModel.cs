@@ -53,18 +53,11 @@ namespace RentWebProj.ViewModels
         //ExpirationDate - RentDate = RentDate
         public int RentDate { get; set; }
         public int TotalAmount { get; set; }
-
         public DateTime StartDate { get; set; }
-        //public string StartDate { get; set; }
-
         public string ProductName { get; set; }
-
         public DateTime ExpirationDate { get; set; }
-        //public string ExpirationDate { get; set; }
         public int DailyRate { get; set; }
 
-        //public int Available { get; set; }
-        //public int TotalAmount { get; set; }
     }
 
     //修改密碼驗證使用

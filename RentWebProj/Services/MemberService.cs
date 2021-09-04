@@ -19,7 +19,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<MemberPersonDataViewModel> GetMemberData(string LoginEmail)
+        public IEnumerable<MemberPersonDataViewModel> GetMemberData(int LoginMemeberId)
         {
             IEnumerable<MemberPersonDataViewModel> MemberCenterVM;
             IEnumerable<MemberOrderDetailViewModel> MemberOrderDetailVM;
@@ -40,7 +40,7 @@ namespace RentWebProj.Services
                                   join m in MemberDMList
                                   on o.MemberID equals m.MemberID
                                   //where m.MemberID == 38
-                                  where m.Email == LoginEmail
+                                  where m.MemberID == LoginMemeberId
                                   select new MemberOrderDetailViewModel
                                   {
                                       BranchName = b.StoreName,
@@ -61,12 +61,13 @@ namespace RentWebProj.Services
                                  //join b in BranchDMList
                                  //on o.StoreID equals b.StoreID
                                  //where m.MemberID == 38
-                             where m.Email == LoginEmail
+                             where m.MemberID == LoginMemeberId
                              select new MemberPersonDataViewModel
                              {
                                  //系統自動產生
                                  MemberId = m.MemberID,
                                  MemberName = (String.IsNullOrEmpty(m.FullName)) ? null : m.FullName,
+                                 //MemberName = m.FullName,
                                  //會員生日判斷如果為"null"則給預設值
                                  MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
                                  MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
@@ -75,7 +76,7 @@ namespace RentWebProj.Services
                                  MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
                                  //MemberBranchName = b.StoreName,
                                  //測試中訂單
-                                 //MemberOrderDetail = MemberOrderDetailVM,
+                                 MemberOrderDetail = MemberOrderDetailVM,
                                  //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
                              };
 
