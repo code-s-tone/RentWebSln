@@ -19,16 +19,16 @@ namespace RentWebProj.Models
         public string ProductID { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? DailyRate { get; set; }
+        public decimal DailyRate { get; set; }
 
         [Column(TypeName = "money")]
-        public decimal? TotalAmount { get; set; }
+        public decimal TotalAmount { get; set; }
 
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public DateTime? ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
 
-        public bool? Returned { get; set; }
+        public int GoodsStatus { get; set; }
 
         public virtual Order Order { get; set; }
 

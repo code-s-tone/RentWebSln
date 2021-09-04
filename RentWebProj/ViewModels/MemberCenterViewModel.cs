@@ -162,4 +162,13 @@ namespace RentWebProj.ViewModels
         public string email { get; set; }
     }
 
+    public class MemberProfileViewModel
+    {
+
+        public string Fullname { get; set; }
+
+        public string ProfilePhotoUrl { get; set; }
+        public string email { get; set; }
+    }
+
 }

@@ -15,15 +15,20 @@ namespace RentWebProj.Controllers
         {
             ProductService _service = new ProductService();
 
-            IEnumerable<CardsViewModel> MostPopularPList = _service.GetMostPopularProductCardData();
-
             Dictionary<string, IEnumerable<CardsViewModel>> VMDictionary = new Dictionary<string, IEnumerable<CardsViewModel>>
             {
                 //{ "最高評價", _service.GetMostPopularProductCardData() },
                 //{ "最新上架", _service.GetMostPopularProductCardData() },
-                { "最熱門商品", _service.GetMostPopularProductCardData() }
+                { "30天內最搶手商品", _service.GetMostPopularProductCardData(30).Take(6) }
 
             };
+            //判斷登入之後動態顯示大頭貼跟名子 by _家承
+            if (User.Identity.IsAuthenticated)
+            {
+                var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+                TempData["img"] = result.ProfilePhotoUrl;
+                TempData["name"] = result.Fullname;
+            }
 
             return View(VMDictionary);
         }

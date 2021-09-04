@@ -5,6 +5,7 @@ using System.Web;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
+using System.Web.Mvc;
 
 namespace RentWebProj.Services
 {
@@ -89,8 +90,15 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        public IEnumerable<CardsViewModel> SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string orderByOptions, string dailyRateBudget)
+        public List<CardsViewModel> SearchProductCards(FilterSearchViewModel filterFormList)
         {
+            string keywordInput = filterFormList.keywordInput;
+            string categoryOptions = filterFormList.categoryOptions;
+            string subCategoryOptions = filterFormList.subCategoryOptions; 
+            string dailyRateBudget = filterFormList.dailyRateBudget;
+            string orderByOptions = filterFormList.orderByOptions;
+
+            //判斷預算範圍
             int minBudget = 0;
             int maxBudget = 0;
             switch (dailyRateBudget)
@@ -114,21 +122,21 @@ namespace RentWebProj.Services
                     break;
             }
 
-            IEnumerable<CardsViewModel> VMList;
             var pDMList = _repository.GetAll<Product>();
             var ctDMList = _repository.GetAll<Category>();
-            var subCtDMList = _repository.GetAll<SubCategory>();
+            var subDMList = _repository.GetAll<SubCategory>();
 
-            VMList = (from p in pDMList
+            //依所選條件取出相關產品 AccBg001
+            var selectedVMList = (from p in pDMList
                 join c in ctDMList
                     on p.ProductID.Substring(0, 3) equals c.CategoryID
-                join s in subCtDMList
+                join s in subDMList
                     on p.ProductID.Substring(3, 2) equals s.SubCategoryID
                 where (categoryOptions == "0" || c.CategoryID == categoryOptions)
-                && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
-                && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
-                && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
-                && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+                      && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
+                      && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
+                      && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
+                      && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
 
                 select new CardsViewModel
                 {
@@ -139,14 +147,37 @@ namespace RentWebProj.Services
                     DailyRate = (decimal)p.DailyRate,
                     SubCategoryName = s.SubCategoryName,
                     SubCategoryID = s.SubCategoryID
-                });
 
-            return VMList;
+                }).ToList();
 
+            //選出的產品排序 如果沒選排序就直接回傳 有選就丟進order方法
+            if (orderByOptions == null)
+            {
+                return selectedVMList;
+            }
+            else
+            {
+                return OrderSelectedProductCards(selectedVMList, orderByOptions);
+            }
         }
+
+        public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
+        {
+            if (orderByOptions == "orderByRelevance")
+            {
+                //思考中...
+            }
+            else if (orderByOptions == "orderByPrice")
+            {
+                selectedList = selectedList.OrderBy(x => x.DailyRate).ToList();
+            }
+            return selectedList;
+        }
+
         public IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
+
             AllProductCardVMList = 
                 from p in _repository.GetAll<Product>()
                 join c in _repository.GetAll<Category>()
@@ -162,22 +193,23 @@ namespace RentWebProj.Services
                     Description = p.Description,
                     DailyRate = (decimal)p.DailyRate,
                     SubCategoryName = s.SubCategoryName,
-                    SubCategoryID = s.SubCategoryID//這好像不需要，因為資訊已經存在ProductID中?
+                    //SubCategoryID = s.SubCategoryID
+                    //這好像不需要，因為資訊已經存在ProductID中?
                 };
 
             return AllProductCardVMList;
         }
 
-        public IEnumerable<CardsViewModel> GetMostPopularProductCardData()
+        public IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays)
         {
 
             var pList = GetAllProductCardData().ToList();
             pList.ForEach(p => {
-                var days = new OrderService().countRenteDays(p.ProductID);
+                var days = new OrderService().countRentedDays(p.ProductID, amongDays);
                 p.CountOfRentedDays = days;
             });
 
-            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
             return VMList;
         }
 
@@ -237,14 +269,6 @@ namespace RentWebProj.Services
                   }).SingleOrDefault();
 
             return VM;
-
-            //Func<SubCategory, bool> filterCondition = x => x.CategoryID == catID;
-            //Func<CardsViewModel, bool> filterCondition2 = x => x.CategoryID == catID;
-            //.Where(filterCondition2);
-            //Func<CardsViewModel, string> orderCondition = x => x.CategoryID;
-            //subDMList.OrderBy(orderCondition);
-            //orderby 
-
         }
     }
 }

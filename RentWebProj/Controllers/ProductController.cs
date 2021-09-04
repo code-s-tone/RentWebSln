@@ -30,9 +30,9 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            var selectedCtProductList = _service.GetProductData(categoryID);
+            ViewBag.selectedProductList = _service.GetProductData(categoryID);
             ViewBag.ContainerTitle = "所有"+_service.GetCategoryName(categoryID);
-            return View(selectedCtProductList);
+            return View();
         }
      
         [HttpPost] //前端選了主類選項 出現副類
@@ -40,24 +40,49 @@ namespace RentWebProj.Controllers
         {
             return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
         }
+        
+        //[HttpPost] //前端搜尋篩選
+        //public ActionResult SearchProductCards(FormCollection filterForm)
+        //{
+        //    var selectedCtProductList = _service.SearchProductCards(filterForm);
+                
+        //    ViewBag.Page = nameof(Pages.ProductCardsPage);
+        //    ViewBag.Container = nameof(Container.ProductCardsContainer);
+        //    ViewBag.CategoryOptions = _service.GetCategoryData();
 
-        [HttpPost] //前端搜尋篩選
-        public ActionResult SearchProductCards(FormCollection filterForm)
+        //    ViewBag.ContainerTitle = selectedCtProductList.Count == 0? nameof(ContainerTitle.很抱歉找不到您要的商品):nameof(ContainerTitle.您要的商品);
+            
+        //    //ViewBag.FilterForm = filterForm;
+        //    return View("ProductCardsList", selectedCtProductList);
+        //}
+
+        [HttpGet] //前端搜尋篩選
+        public ActionResult SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string dailyRateBudget,string orderByOptions)
         {
-            string keywordInput = string.IsNullOrEmpty(filterForm["keywordInput"]) ? null : filterForm["keywordInput"];
-            string categoryOptions = filterForm["categoryOptions"];
-            string subCategoryOptions = filterForm["subCategoryOptions"];
-            string orderByOptions = filterForm["orderByOptions"];
-            string dailyRateBudget = filterForm["dailyRateBudget"];
-            var selectedCtProductList = _service.SearchProductCards(keywordInput, categoryOptions, subCategoryOptions, orderByOptions, dailyRateBudget);
+            var filterForm = new FilterSearchViewModel
+            {
+                keywordInput = keywordInput,
+                categoryOptions = categoryOptions,
+                subCategoryOptions = subCategoryOptions,
+                dailyRateBudget = dailyRateBudget,
+                orderByOptions = orderByOptions
+            };
+
+            var selectedProductList = _service.SearchProductCards(filterForm);
+
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            ViewBag.ContainerTitle = "篩選";
-            ViewBag.FilterForm = filterForm;
-            return View("ProductCardsList", selectedCtProductList);
-        }
+            ViewBag.CategorySelected = filterForm.categoryOptions;
+            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.categoryOptions);
+            ViewBag.selectedProductList = selectedProductList;
+            ViewBag.ContainerTitle = selectedProductList.Count == 0 ? nameof(ContainerTitle.很抱歉找不到您要的商品) : nameof(ContainerTitle.您要的商品);
 
+            
+
+
+            return View("ProductCardsList", filterForm);
+        }
 
         //---------------------------------------------------------------
         //未登入 => 提示需登入或一律disabled

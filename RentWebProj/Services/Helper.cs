@@ -9,6 +9,7 @@ using RentWebProj.Models;
 using System.Security.Cryptography;
 using System.Web.Security;
 using System.Web;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
@@ -69,6 +70,35 @@ namespace RentWebProj.Services
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
 
         }
+        public static MemberProfileViewModel ConvertMemberIdToMemberProfile(int MemberID) //擴充方法
+        {
+            IEnumerable<MemberProfileViewModel> vmModel;
+            var MemberDMList = _repository.GetAll<Member>();
+            vmModel= from m in MemberDMList
+                     where m.MemberID == MemberID
+                     select new MemberProfileViewModel
+                     {
+                       Fullname=m.FullName,
+                       ProfilePhotoUrl=m.ProfilePhotoUrl,
+                       email=m.Email,
+                     };
+            var result = vmModel.FirstOrDefault();
+            return result;
+        }
+        public static string ConvertMemberIdToFullName(int MemberID) //擴充方法
+        {
+
+            var MemberDMList = _repository.GetAll<Member>();
+            var result = MemberDMList.Where(x => x.MemberID == MemberID).Select(x => x.FullName).FirstOrDefault();
+            return result;
+        }
+        public static string ConvertMemberIdToProgilePhotoUrl(int MemberID) //擴充方法
+        {
+
+            var MemberDMList = _repository.GetAll<Member>();
+            var result = MemberDMList.Where(x => x.MemberID == MemberID).Select(x => x.ProfilePhotoUrl).FirstOrDefault();
+            return result;
+        }
         public static int ConvertEmailToMemberId(string Email) //擴充方法
         {
 
@@ -76,6 +106,12 @@ namespace RentWebProj.Services
             var result = MemberDMList.Where(x => x.Email == Email).Select(x => x.MemberID).FirstOrDefault();
             return result;
         }
+
+        //public static int NameConvertToMemberId(string name) //擴充方法
+        //{
+        //    var MID = name;
+        //    return 1;
+        //}
         public static string WriteLog(this OperationResult value) //擴充方法
         {
             if ( value.Exception != null)

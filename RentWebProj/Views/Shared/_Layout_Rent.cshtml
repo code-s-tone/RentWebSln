@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,8 +75,8 @@
                             <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
                             <ul class="member-subMenu">
                                 <div class="profileBox">
-                                    <div class="profileImg d-grid"><img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt=""></div>
-                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">庭安</p></div>
+                                    <div class="profileImg d-grid"><img class="m-auto" src=@TempData["img"] alt=""></div>
+                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
                                 </div>
                                 <a href="#">
                                 <li>通知</li></a>
@@ -90,7 +90,7 @@
 
                                 </a>
 
-   
+
                             </ul>
                         </div>
 
@@ -119,13 +119,19 @@
                             <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
 
                             <ul class="sub-menu">
-                                <a href="@Url.Action("GeneralCategories", "Product")"><li>所有種類</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Car" })"><li>想租車車</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Acc" })"><li>想租配件</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Ppl" })"><li>想租人類</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Gam" })"><li>想租遊戲</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product")"><li>想租狗狗</li></a>
-                     
+                                <a href="@Url.Action("GeneralCategories", "Product")">
+                                <li>所有種類</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Car" })">
+                                <li>想租車車</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Acc" })">
+                                <li>想租配件</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Ppl" })">
+                                <li>想租人類</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Gam" })">
+                                <li>想租遊戲</li></a>
+                                <a href="@Url.Action("ProductCardsList", "Product")">
+                                <li>想租狗狗</li></a>
+
                             </ul>
                         </li>
                         <li>
@@ -342,9 +348,13 @@
 </html>
 @if (User.Identity.IsAuthenticated)
 {
-<script src="~/Assets/js/MemberCenter/LoginAndOut/Login.js"></script>
+    <script src="~/Assets/js/MemberCenter/LoginAndOut/Login.js"></script>
+
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
 }
 else
 {
-<script src="~/Assets/js/MemberCenter/LoginAndOut/Logout.js"></script>
+    <script src="~/Assets/js/MemberCenter/LoginAndOut/Logout.js"></script>
 }

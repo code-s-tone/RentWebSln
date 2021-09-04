@@ -1,35 +1,23 @@
-﻿@model IEnumerable<CardsViewModel>
-
-@foreach (var ct in ViewBag.CategoryOptions)
-{
-<div class="col-12 col-md-6">
+﻿@model CardsViewModel
     <div class="category-card">
-        @*軒：由於首頁只能共用卡片樣式，在外的排版不能套你的，
-            希望你考慮，把外面的排版外移，以避免需要多出一個PartialView，
-            而且每當你有改，我就得再複製一次
-            另，卡片的margin，我目前得在首頁那兒再覆蓋掉，這無所謂，至少這不用無限跟著你變動*@
-        @*@Html.Partial("PC",ct)*@
         <div class="frontSide">
             <div class="category-img">
-                <img src=@ct.ImageSrcMain
+                <img src=@Model.ImageSrcMain
                      alt="">
             </div>
             <div class="categoryName d-grid card-3d">
-                <p class="m-auto">@ct.CategoryName</p>
+                <p class="m-auto">@Model.CategoryName</p>
             </div>
         </div>
         <div class="backSide">
             <div class="category-img">
-                <img src=@ct.ImageSrcSecond alt="">
+                <img src=@Model.ImageSrcSecond alt="">
             </div>
             <div class="d-grid card-3d">
-                @Html.ActionLink("查看商品", "ProductCardsList", "Product", new { categoryID = @ct.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
+                @Html.ActionLink("查看商品", "ProductCardsList", "Product", new { categoryID = @Model.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
 
             </div>
         </div>
     </div>
-</div>
-
-}
 
 
