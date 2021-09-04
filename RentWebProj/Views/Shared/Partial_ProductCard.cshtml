@@ -19,7 +19,7 @@
         <div class="product-price-cart-box d-flex">
             <div class="product-price flex-grow-1">$@Math.Ceiling(@Model.DailyRate)<span>/日租</span></div>
             <div class="product-cart-icon d-grid">
-                <a class="m-auto" href="@Url.Action("", "Carts")"><i class="fa fa-shopping-cart"></i></a>
+                <a class="m-auto" href="@Url.Action("", "Carts",new { ProductID = Model.ProductID})"><i class="fa fa-shopping-cart"></i></a>
             </div>
         </div>
     </div>

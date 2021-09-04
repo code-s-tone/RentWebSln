@@ -1,7 +1,7 @@
 ﻿
 .nav-background {
-    height: 1125px;
-    margin-top: -125px;
+    height: 1130px;
+    margin-top: -130px;
     margin-bottom: -1000px;
     background-color: #ffaf00;
 }
@@ -18,7 +18,7 @@ header {
 
 .keyart {
     position: relative;
-    z-index: 10;
+    z-index: 5;
 }
 
 #parallax {
@@ -84,7 +84,7 @@ header {
 #maincontain {
     background-color: #fff;
     position: relative;
-    z-index: 98;
+    z-index: 6;
     margin-bottom:-50px;
     padding:50px 0;
 }

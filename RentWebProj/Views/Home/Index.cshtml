@@ -172,10 +172,10 @@
             </div>
         </section>
 
-        @*@foreach (var item in Model)
-            {
-                @ShowProductList(item);
-            }*@
+        @foreach (var item in Model)
+        {
+            @ShowProductList(item);
+        }
 
 
         <section id="blogPosts" class="Area">
@@ -235,7 +235,12 @@
             <a href="">(see all)</a>
         </h3>
         <div class="d-flex flex-wrap">
-            @Html.Partial("Partial_ProductCard", PListPair.Value)
+            @foreach (CardsViewModel product in PListPair.Value)
+            {
+            <div class="col-6 col-md-4 col-xl-2">
+                @Html.Partial("Partial_ProductCard", product)
+            </div>
+            }
         </div>
     </section>
 }
