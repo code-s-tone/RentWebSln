@@ -36,8 +36,8 @@ namespace RentWebProj.ViewModels
 
         //偉軒用
         public double CountOfRentedDays { get; set; }
+        //public bool IsExisted { get; set; }
 
-        //public int StarsForLike { get; set; }
     }
 
     public class FilterSearchViewModel:CardsViewModel

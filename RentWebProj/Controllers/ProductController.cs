@@ -92,7 +92,22 @@ namespace RentWebProj.Controllers
         //                                    1.return重新導向原action，自然重篩
         //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
         //              篩選狀況如何記錄起來傳遞?
-
+        public ActionResult ProductToCart(string PID)
+        {
+            OperationResult result = new OperationResult();
+            var cartService = new CartService();
+            result = cartService.Create(PID);
+            if (result.IsSuccessful)
+            {
+                //成功代表有寫入
+                return RedirectToAction("ProductCardsList");
+            }
+            else
+            {
+                //失敗代表本來就在車內
+                return RedirectToAction("ProductCardsList");
+            }
+        }
 
         //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
@@ -117,10 +132,8 @@ namespace RentWebProj.Controllers
                 if (isCheckout)
                 {
                     //不寫入購物車
-
                     TempData["directCheckout"] = _service.ProductToCheckout(PID, PostVM.StartDate , PostVM.ExpirationDate);
                     return RedirectToAction("Checkout", "Carts");
-
                 }
                 var cartService = new CartService();
                 result = cartService.CreateOrUpdate(PostVM, PID);
