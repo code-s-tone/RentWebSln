@@ -177,9 +177,6 @@ namespace RentWebProj.Services
         public IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
-            //var pDMList = ;
-            //var ctDMList = ;
-            //var subCtDMList = ;
 
             AllProductCardVMList = 
                 from p in _repository.GetAll<Product>()
@@ -196,22 +193,23 @@ namespace RentWebProj.Services
                     Description = p.Description,
                     DailyRate = (decimal)p.DailyRate,
                     SubCategoryName = s.SubCategoryName,
-                    SubCategoryID = s.SubCategoryID//這好像不需要，因為資訊已經存在ProductID中?
+                    //SubCategoryID = s.SubCategoryID
+                    //這好像不需要，因為資訊已經存在ProductID中?
                 };
 
             return AllProductCardVMList;
         }
 
-        public IEnumerable<CardsViewModel> GetMostPopularProductCardData()
+        public IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays)
         {
 
             var pList = GetAllProductCardData().ToList();
             pList.ForEach(p => {
-                var days = new OrderService().countRenteDays(p.ProductID);
+                var days = new OrderService().countRentedDays(p.ProductID, amongDays);
                 p.CountOfRentedDays = days;
             });
 
-            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
             return VMList;
         }
 
@@ -271,14 +269,6 @@ namespace RentWebProj.Services
                   }).SingleOrDefault();
 
             return VM;
-
-            //Func<SubCategory, bool> filterCondition = x => x.CategoryID == catID;
-            //Func<CardsViewModel, bool> filterCondition2 = x => x.CategoryID == catID;
-            //.Where(filterCondition2);
-            //Func<CardsViewModel, string> orderCondition = x => x.CategoryID;
-            //subDMList.OrderBy(orderCondition);
-            //orderby 
-
         }
     }
 }
