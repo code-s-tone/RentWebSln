@@ -18,13 +18,12 @@ body{
 
 header{
     box-sizing: border-box;
-    width: 100%;
-    
-    background-repeat: no-repeat;
+    width: 100%;    
+/*  background-repeat: no-repeat;
     background-size: cover;
     background-position: 50%;
     background-image: url("../../images/IndexBanner.jpg");
-    >div{
+*//*    >div{
         box-sizing: border-box;
         width: 100%;
         padding: 111px 11px;    
@@ -82,7 +81,7 @@ header{
             }        
         }
     }
-}
+*/}
 
 .swiper-container:not(.categories-swiper-container){
     width: 100%;
@@ -350,7 +349,7 @@ article{
 // }
 
 @media screen and (min-width:992px){
-    header{
+/*    header{
         >div{
             max-width: 900px;
             >#search{
@@ -381,7 +380,7 @@ article{
             }
         }
     }
-    //產品六欄
+*/    //產品六欄
     // .category-sample{
     //     .card-item{//有bs
     //         width: 15.5%;
@@ -412,7 +411,6 @@ article{
     .blogPosts-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
-                // border-color: #f00;
                 display: flex;
                 flex-direction: row;
                 >.imgBox{
