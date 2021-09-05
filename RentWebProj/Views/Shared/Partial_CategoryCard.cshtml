@@ -1,23 +1,19 @@
 ﻿@model CardsViewModel
-    <div class="category-card">
-        <div class="frontSide">
-            <div class="category-img">
-                <img src=@Model.ImageSrcMain
-                     alt="">
-            </div>
-            <div class="categoryName d-grid card-3d">
-                <p class="m-auto">@Model.CategoryName</p>
-            </div>
-        </div>
-        <div class="backSide">
-            <div class="category-img">
-                <img src=@Model.ImageSrcSecond alt="">
-            </div>
-            <div class="d-grid card-3d">
-                @Html.ActionLink("查看商品", "ProductList", "Product", new { categoryID = @Model.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
-
-            </div>
-        </div>
+<div class="frontSide">
+    <div class="category-img">
+        <img src=@Model.ImageSrcMain
+             alt="">
     </div>
-
+    <div class="categoryName d-grid card-3d">
+        <p class="m-auto">@Model.CategoryName</p>
+    </div>
+</div>
+<div class="backSide">
+    <div class="category-img">
+        <img src=@Model.ImageSrcSecond alt="">
+    </div>
+    <div class="d-grid card-3d">
+        @Html.ActionLink("查看商品", "ProductCardsList", "Product", new { categoryID = @Model.CategoryID }, new { @class = "checkitOut_ct m-auto multiline" })
+    </div>
+</div>
 

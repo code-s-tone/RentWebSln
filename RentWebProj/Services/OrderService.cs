@@ -33,13 +33,17 @@ namespace RentWebProj.Services
             
             return RentedPeriods;
         }
-        public double countRenteDays(string PID)
+        public double CountRentedDays(string PID,int amongDays)
         {
+            var now = DateTime.Now.AddDays(-amongDays);
             var RentedDays =
                 GetProductRentPeriods(PID)
-                .Select(x => (x.to - x.from).TotalDays)
+                .Where(x => x.to > now  )
+                .Select(x =>   (x.to - (x.from > now?  x.from : now )  ).TotalDays  )
                 .Sum();
+            //RentedDatesAmongDays.ForEach(x=>x)
 
+           
             return RentedDays;
         }
         //取得禁租日期JSON
@@ -67,7 +71,7 @@ namespace RentWebProj.Services
                 OrderDate = OrderDate,
                 DeliverID = 1,
                 StoreID = VM.StoreID,//要從下拉選單拿
-                OrderStatusID = "未付款",
+                OrderStatusID = 1,
                 MemberID = MemberID
 
             };
@@ -87,7 +91,7 @@ namespace RentWebProj.Services
                     StartDate = DateTime.Parse(VM.ListStartDate[i]),
                     ExpirationDate = DateTime.Parse(VM.ListExpirationDate[i]),
                     TotalAmount = Decimal.Parse(VM.ListTotalAmount[i]),
-                    Returned = false
+                    GoodsStatus = 1
                 };
                 _repository.Create(odEntity);
             }

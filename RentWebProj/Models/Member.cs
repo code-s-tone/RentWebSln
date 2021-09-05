@@ -13,6 +13,7 @@ namespace RentWebProj.Models
         public Member()
         {
             Carts = new HashSet<Cart>();
+            Orders = new HashSet<Order>();
         }
 
         public int MemberID { get; set; }
@@ -23,9 +24,11 @@ namespace RentWebProj.Models
         [StringLength(50)]
         public string PasswordHash { get; set; }
 
+        [Required]
         [StringLength(20)]
         public string FullName { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string Email { get; set; }
 
@@ -49,5 +52,8 @@ namespace RentWebProj.Models
         public virtual ICollection<Cart> Carts { get; set; }
 
         public virtual SignWay SignWay { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

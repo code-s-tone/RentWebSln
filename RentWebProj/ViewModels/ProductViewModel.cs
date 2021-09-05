@@ -36,6 +36,7 @@ namespace RentWebProj.ViewModels
 
         //偉軒用
         public double CountOfRentedDays { get; set; }
+        //public bool IsExisted { get; set; }
 
     }
 

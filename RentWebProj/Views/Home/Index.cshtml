@@ -6,51 +6,30 @@
 }
 
 @*這是管理後台，需經驗證授權才能存取
-<br>
-User  Name: @User.Identity.Name
-<br>
-Is Authentication : @User.Identity.IsAuthenticated
-<br>
-Authentication Type : @User.Identity.AuthenticationType
-<br>*@
+    <br>
+    User  Name: @User.Identity.Name
+    <br>
+    Is Authentication : @User.Identity.IsAuthenticated
+    <br>
+    Authentication Type : @User.Identity.AuthenticationType
+    <br>*@
+<div class="nav-background"></div>@* 打底 *@
 
-@*@RenderSection("banner", required: false)*@
-@*@section banner{}*@
-<header>
-    <section id="categories" class="Area">
-        @*<h3>
-                租借種類
-                <a href="">(see all)</a>
-            </h3>*@
-        <div class="swiper-container categories-swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                @foreach (var ct in Catgories)
-                {
-                    <div class="swiper-slide category-card">
-                        @* 放卡片 *@
-                        @Html.Partial("PC", ct)
+<header class="keyart" id="parallax">
+    <div class="keyart_layer parallax" id="keyart-0" data-speed="2" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 00.0 -->
+    <div class="keyart_layer parallax" id="keyart-1" data-speed="5" style="transform: translate3d(0px, 0px, 0px)"></div>	<!-- 12.5 -->
+    <div class="keyart_layer parallax" id="keyart-2" data-speed="11" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 25.0 -->
+    <div class="keyart_layer parallax" id="keyart-3" data-speed="16" style="transform: translate3d(0px, 0px, 0px)"></div>	<!-- 37.5 -->
+    <div class="keyart_layer parallax" id="keyart-4" data-speed="26" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 50.0 -->
+    <div class="keyart_layer parallax" id="keyart-5" data-speed="36" style="transform: translate3d(0px, 0px, 0px)"></div>	<!-- 62.5 -->
+    <div class="keyart_layer parallax" id="keyart-6" data-speed="49" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 75.0 -->
+    <div class="keyart_layer" id="keyart-scrim"></div>
+    <div class="keyart_layer parallax" id="keyart-7" data-speed="69" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 87.5 -->
+    <div class="keyart_layer" id="keyart-8" data-speed="100"></div>		<!-- 100. -->
+</header>
 
-                        @*<div class="imgBox">
-                                <img class="w-100" src="https://picsum.photos/100/150/?random=1">
-                            </div>
-                            <div class="textBox">
-                                <div>
-                                    @item.CategoryName v.s.
-                                    @Html.DisplayFor(modelItem => item.CategoryName)
-                                </div>
-                            </div>*@
-                    </div>
-                }
-            </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <!-- <div class="swiper-scrollbar"></div> -->
-        </div>
-    </section>
-
-    @*<div>
+@*<header>
+        <div>
             <h2>標題文字</h2>
             <div id="search">
                 <div class="inputGroup">
@@ -66,155 +45,186 @@ Authentication Type : @User.Identity.AuthenticationType
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-        </div>*@
-</header>
-<article style="background-color:#fcc">
-</article>
-
-<article class="container-xl">
-
-    <section id="stories" class="Area">
-        <h3>
-            故事
-            <a href="">(see all)</a>
-        </h3>
-        <div class="swiper-container stories-swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="" src="https://picsum.photos/100/100/?random=1">
-                    </div>
-                    <div class="textBox">
-                        <h5>組成周。 </h5>
-                        <p class="ellipsis">一張改革只不過，故事十二人氣自主核心能否導演觀念註冊時間斑竹估計長沙，值得全家，很難這個溫暖小子，合同確定線上，大眾習慣你自己技巧利用福建樓上解放分析至今確保學者治理，較大適應，稱為到來，總經理增強一對現象而言由於校園龍岡投入信用創業相關植物本科，打了觀。 </p>
-                        <p>owned by </p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="" src="https://picsum.photos/100/100/?random=2">
-                    </div>
-                    <div class="textBox">
-                        <h5>本帖回應，凱文。 </h5>
-                        <p class="ellipsis">操作系統圖象治理提出了春天，把你公里正在具體開了營養地理速度授權然而武器，代理一口氣幾個代表記錄鄉民謝謝韓國，理解看過一些，雖然早。 </p>
-                        <p>owned by </p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="" src="https://picsum.photos/100/100/?random=3">
-                    </div>
-                    <div class="textBox">
-                        <h5>苗栗漫畫可憐，費用色彩。 </h5>
-                        <p class="ellipsis">堅持完了，達到資產寂寞，上。 </p>
-                        <p>owned by </p>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <!-- <div class="swiper-scrollbar"></div> -->
         </div>
-    </section>
+    </header>*@
+<div id="maincontain">
 
-    <section id="reviews" class="Area">
-        <h3>
-            顧客評論
-            <a href="">(see all)</a>
-        </h3>
-        <div class="swiper-container reviews-swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img src="https://picsum.photos/150/160/?random=1">
-                    </div>
-                    <div class="textBox">
-                        <h5>Dora</h5>
-                        <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
-                    </div>
+    <article class="container-xl">
+        <section id="categories" class="Area">
+            <h3>
+                租借種類
+                <a href="">(see all)</a>
+            </h3>
+            <div class="swiper-container categories-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    @foreach (var ct in Catgories)
+                    {
+                        <div class="swiper-slide category-card">
+                            @* 放卡片 *@
+                            @Html.Partial("Partial_CategoryCard", ct)
+
+                            @*<div class="imgBox">
+                                    <img class="w-100" src="https://picsum.photos/100/150/?random=1">
+                                </div>
+                                <div class="textBox">
+                                    <div>
+                                        @item.CategoryName v.s.
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
+                                    </div>
+                                </div>*@
+                        </div>
+                    }
                 </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img src="https://picsum.photos/150/160/?random=1">
-                    </div>
-                    <div class="textBox">
-                        <h5>Tom</h5>
-                        <p class="ellipsis">Lorem ipsum .</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img src="https://picsum.photos/150/160/?random=1">
-                    </div>
-                    <div class="textBox">
-                        <h5>Jun</h5>
-                        <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
-                    </div>
-                </div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-scrollbar"></div> -->
             </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <!-- <div class="swiper-scrollbar"></div> -->
-        </div>
-    </section>
+        </section>
 
-    @foreach (var item in Model)
-    {
-        @ShowProductList(item);
-    }
-
-
-    <section id="blogPosts" class="Area">
-        <h3>
-            部落格po文
-            <a href="">(see all)</a>
-        </h3>
-        <div class="swiper-container blogPosts-swiper-container">
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="w-100" src="https://picsum.photos/300/500/?random=1">
+        <section id="stories" class="Area">
+            <h3>
+                故事
+                <a href="">(see all)</a>
+            </h3>
+            <div class="swiper-container stories-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="" src="https://picsum.photos/100/100/?random=1">
+                        </div>
+                        <div class="textBox">
+                            <h5>組成周。 </h5>
+                            <p class="ellipsis">一張改革只不過，故事十二人氣自主核心能否導演觀念註冊時間斑竹估計長沙，值得全家，很難這個溫暖小子，合同確定線上，大眾習慣你自己技巧利用福建樓上解放分析至今確保學者治理，較大適應，稱為到來，總經理增強一對現象而言由於校園龍岡投入信用創業相關植物本科，打了觀。 </p>
+                            <p>owned by </p>
+                        </div>
                     </div>
-                    <div class="textBox">
-                        <h5 class="ellipsis">緊急時刻，男子模仿google小姐大喊：「RRRRRRURRRRRR」 </h5>
-                        <p class="ellipsis">隨着台中空調女孩子，它們細節超過類似工廠，不然雜誌總體答應深深將軍互相先進教育，好像政治精靈師傅明白，女朋友另一真實性見面終於一遍眼睛遺憾突破宣傳福州點擊女性，看不到這些有意博士動物效益領先我就西方瀏覽次數幫助是由資料庫，感覺傳播，春節任務群發查找施工他。 </p>
-                        <button class="btn">查看更多</button>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="" src="https://picsum.photos/100/100/?random=2">
+                        </div>
+                        <div class="textBox">
+                            <h5>本帖回應，凱文。 </h5>
+                            <p class="ellipsis">操作系統圖象治理提出了春天，把你公里正在具體開了營養地理速度授權然而武器，代理一口氣幾個代表記錄鄉民謝謝韓國，理解看過一些，雖然早。 </p>
+                            <p>owned by </p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="" src="https://picsum.photos/100/100/?random=3">
+                        </div>
+                        <div class="textBox">
+                            <h5>苗栗漫畫可憐，費用色彩。 </h5>
+                            <p class="ellipsis">堅持完了，達到資產寂寞，上。 </p>
+                            <p>owned by </p>
+                        </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="w-100" src="https://picsum.photos/300/500/?random=2">
-                    </div>
-                    <div class="textBox">
-                        <h5 class="ellipsis">報導標題八十億人都震驚了 </h5>
-                        <p class="ellipsis">施工更大一家部門豐富小心加速說著房價員工，精英也在資料上下大師一大區域對不起衝突經濟發展獨特，信號選單感興趣，改造線路不太優化拿出。 </p>
-                        <button class="btn">查看更多</button>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="imgBox">
-                        <img class="w-100" src="https://picsum.photos/300/500/?random=3">
-                    </div>
-                    <div class="textBox">
-                        <h5 class="ellipsis">驚，他竟然.. </h5>
-                        <p class="ellipsis">唯一相當私服比賽官員，進步房屋。</p>
-                        <button class="btn">查看更多</button>
-                    </div>
-                </div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-scrollbar"></div> -->
             </div>
-            <!-- <div class="swiper-pagination"></div> -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <!-- <div class="swiper-scrollbar"></div> -->
-        </div>
-    </section>
-</article>
+        </section>
 
+        <section id="reviews" class="Area">
+            <h3>
+                顧客評論
+                <a href="">(see all)</a>
+            </h3>
+            <div class="swiper-container reviews-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img src="https://picsum.photos/150/160/?random=1">
+                        </div>
+                        <div class="textBox">
+                            <h5>Dora</h5>
+                            <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img src="https://picsum.photos/150/160/?random=1">
+                        </div>
+                        <div class="textBox">
+                            <h5>Tom</h5>
+                            <p class="ellipsis">Lorem ipsum .</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img src="https://picsum.photos/150/160/?random=1">
+                        </div>
+                        <div class="textBox">
+                            <h5>Jun</h5>
+                            <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </section>
+
+        @foreach (var item in Model)
+        {
+            @ShowProductList(item);
+        }
+
+
+        <section id="blogPosts" class="Area">
+            <h3>
+                部落格po文
+                <a href="">(see all)</a>
+            </h3>
+            <div class="swiper-container blogPosts-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="w-100" src="https://picsum.photos/300/500/?random=1">
+                        </div>
+                        <div class="textBox">
+                            <h5 class="ellipsis">緊急時刻，男子模仿google小姐大喊：「RRRRRRURRRRRR」 </h5>
+                            <p class="ellipsis">隨着台中空調女孩子，它們細節超過類似工廠，不然雜誌總體答應深深將軍互相先進教育，好像政治精靈師傅明白，女朋友另一真實性見面終於一遍眼睛遺憾突破宣傳福州點擊女性，看不到這些有意博士動物效益領先我就西方瀏覽次數幫助是由資料庫，感覺傳播，春節任務群發查找施工他。 </p>
+                            <button class="btn">查看更多</button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="w-100" src="https://picsum.photos/300/500/?random=2">
+                        </div>
+                        <div class="textBox">
+                            <h5 class="ellipsis">報導標題八十億人都震驚了 </h5>
+                            <p class="ellipsis">施工更大一家部門豐富小心加速說著房價員工，精英也在資料上下大師一大區域對不起衝突經濟發展獨特，信號選單感興趣，改造線路不太優化拿出。 </p>
+                            <button class="btn">查看更多</button>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="imgBox">
+                            <img class="w-100" src="https://picsum.photos/300/500/?random=3">
+                        </div>
+                        <div class="textBox">
+                            <h5 class="ellipsis">驚，他竟然.. </h5>
+                            <p class="ellipsis">唯一相當私服比賽官員，進步房屋。</p>
+                            <button class="btn">查看更多</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </section>
+    </article>
+</div>
 @*<div id="cookiePermission"></div>*@
 
 @helper ShowProductList(KeyValuePair<string, IEnumerable<CardsViewModel>> PListPair)
@@ -225,13 +235,19 @@ Authentication Type : @User.Identity.AuthenticationType
             <a href="">(see all)</a>
         </h3>
         <div class="d-flex flex-wrap">
-            @Html.Partial("Partial_ProductCard", PListPair.Value)
+            @foreach (CardsViewModel product in PListPair.Value)
+            {
+            <div class="col-6 col-md-4 col-xl-2">
+                @Html.Partial("Partial_ProductCard", product)
+            </div>
+            }
         </div>
     </section>
 }
 
 
 @section topCSS{
+    <link rel="stylesheet" href="~/Assets/css/Index/parallax.css">
     <!-- swiper -->
     <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <link rel="stylesheet" href="~/Assets/css/Index/index.css">

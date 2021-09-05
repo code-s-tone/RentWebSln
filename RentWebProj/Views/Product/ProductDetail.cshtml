@@ -69,7 +69,7 @@
                     <div class="description_text">
                         <div id="">
                             <p id="p1">
-                                商品描述 : @Model.Description
+                                @Model.Description
                                 <span id="span1">
                                     @*...*@
                                     <span class="link1" id="link1">
@@ -164,7 +164,7 @@
                             </span>
 
                             <div class="collapse" id="collapse_textTwo" aria-expanded="false">
-                                物流中心 運送產品服務 以及 退回產品服務 時段: <br>
+                                運送產品服務 以及 退回產品服務 時段: <br>
                                 每天 早上 9:00 至 晚上 9:00 <br>
                             </div>
                         </p>
@@ -190,7 +190,7 @@
 
                         <div id="">
                             <p>
-                                對於租賃期間物品的任何損壞、丟失或被盜，您仍需對所有者承擔全部責任。
+                                對於租賃期間物品的任何損壞、丟失或被盜，您仍需對本公司承擔全部責任。
                             </p>
                         </div>
 
@@ -354,8 +354,12 @@
             actionBtns[1].disabled = true;
         }
         actionBtns[1].addEventListener('click', function () {
+            //改變表單位址
+            //document.querySelector('form').setAttribute('action','') ;//<form action="/Product/ProductDetail" method="post">
             document.querySelector('input[name="isCheckout"]').value = 'true';
+            
         });
+
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
@@ -372,8 +376,6 @@
 
 
 @section topCSS{
-    <!-- swiper還有用到?? -->
-    <link rel="stylesheet" href="~/Content/swiper-bundle.min.css" />
     <!-- leaf css -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
@@ -391,8 +393,6 @@
 
 
 @section topJS{
-    @* swiper還有用到?? *@
-    @*<script src="~/Scripts/swiper-bundle.min.js"></script>*@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>

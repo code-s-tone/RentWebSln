@@ -159,9 +159,7 @@
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SocialMediaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,11 +185,9 @@
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
     <Compile Include="Services\Helper.cs" />
-    <Compile Include="Services\IndexService.cs" />
     <Compile Include="ViewModels\ApiViewModels\ApiBase\ApiResult.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
-    <Compile Include="ViewModels\IndexView.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
@@ -206,6 +202,7 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
@@ -227,6 +224,15 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
+    <Content Include="Assets\images\Index\parallax0.png" />
+    <Content Include="Assets\images\Index\parallax1.png" />
+    <Content Include="Assets\images\Index\parallax2.png" />
+    <Content Include="Assets\images\Index\parallax3.png" />
+    <Content Include="Assets\images\Index\parallax4.png" />
+    <Content Include="Assets\images\Index\parallax5.png" />
+    <Content Include="Assets\images\Index\parallax6.png" />
+    <Content Include="Assets\images\Index\parallax7.png" />
+    <Content Include="Assets\images\Index\parallax8.png" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Init.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Login.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Logout.js" />
@@ -476,22 +482,7 @@
     <Content Include="Views\Shared\_Layout_Rent.cshtml" />
     <Content Include="Views\Shared\Login-Sign.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Members\Create.cshtml" />
-    <Content Include="Views\Members\Delete.cshtml" />
-    <Content Include="Views\Members\Details.cshtml" />
-    <Content Include="Views\Members\Edit.cshtml" />
-    <Content Include="Views\Members\Index.cshtml" />
-    <Content Include="Views\Members\_ViewStart.cshtml" />
-    <Content Include="Views\Carts\Create.cshtml" />
-    <Content Include="Views\Carts\Delete.cshtml" />
-    <Content Include="Views\Carts\Details.cshtml" />
-    <Content Include="Views\Carts\Edit.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
-    <Content Include="Views\Products\Create.cshtml" />
-    <Content Include="Views\Products\Delete.cshtml" />
-    <Content Include="Views\Products\Details.cshtml" />
-    <Content Include="Views\Products\Edit.cshtml" />
-    <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Carts\Checkout.cshtml" />
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
@@ -509,7 +500,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\images\Index\" />
     <Folder Include="Assets\js\Cart\" />
     <Folder Include="HtmlPages\" />
     <Folder Include="obj\Debug\TempPE\" />

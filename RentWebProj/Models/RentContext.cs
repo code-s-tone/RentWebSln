@@ -47,6 +47,11 @@ namespace RentWebProj.Models
                 .WithRequired(e => e.Member)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Member>()
+                .HasMany(e => e.Orders)
+                .WithRequired(e => e.Member)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<OrderDetail>()
                 .Property(e => e.DailyRate)
                 .HasPrecision(19, 4);
