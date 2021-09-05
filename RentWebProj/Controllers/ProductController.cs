@@ -112,8 +112,14 @@ namespace RentWebProj.Controllers
         //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
         {
-            //User.Identity.Name
-            ProductDetailToCart VM = _service.GetProductDetail(PID,1);
+            //var test = HttpContext.Current.User.Identity.Name;
+            int? MID = null; 
+            if (User.Identity.IsAuthenticated)
+            {
+                MID = Helper.ConvertEmailToMemberId(User.Identity.Name);
+            }
+
+            ProductDetailToCart VM = _service.GetProductDetail(PID, MID);
 
             return View(VM);
         }
