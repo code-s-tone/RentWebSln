@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "首頁";
     var Catgories = new ProductService().GetCategoryData();
+    var AllComments = new MemberService().GetAllComment();
 }
 
 @*這是管理後台，需經驗證授權才能存取
@@ -137,33 +138,46 @@
             <div class="swiper-container reviews-swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img src="https://picsum.photos/150/160/?random=1">
+                    <!-- ========================================================================== -->
+                    @foreach (var item in AllComments)
+                    {
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img src="@item.PhotoUrl">
+                            </div>
+                            <div class="textBox">
+                                <h5>@item.MemberName</h5>
+                                <p class="ellipsis"> 星星評分: @item.Score </p>
+                                <p class="ellipsis"> @item.Message </p>
+                                <p class="ellipsis"> 留言時間: @item.Time </p>
+                            </div>
                         </div>
-                        <div class="textBox">
-                            <h5>Dora</h5>
-                            <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
+                    }
+
+                    <!-- ========================================================================== -->
+                    @*
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img src="https://picsum.photos/150/160/?random=1">
+                            </div>
+                            <div class="textBox">
+                                <h5>Tom</h5>
+                                <p class="ellipsis">Lorem ipsum .</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img src="https://picsum.photos/150/160/?random=1">
+                        <!-- ========================================================================== -->
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img src="https://picsum.photos/150/160/?random=1">
+                            </div>
+                            <div class="textBox">
+                                <h5>Jun</h5>
+                                <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
+                            </div>
                         </div>
-                        <div class="textBox">
-                            <h5>Tom</h5>
-                            <p class="ellipsis">Lorem ipsum .</p>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img src="https://picsum.photos/150/160/?random=1">
-                        </div>
-                        <div class="textBox">
-                            <h5>Jun</h5>
-                            <p class="ellipsis">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur optio eum, soluta adipisci blanditiis nostrum quasi qui cumque quo illo.</p>
-                        </div>
-                    </div>
+                        <!-- ========================================================================== -->
+                    *@
+
                 </div>
                 <!-- <div class="swiper-pagination"></div> -->
                 <div class="swiper-button-prev"></div>
@@ -237,9 +251,9 @@
         <div class="d-flex flex-wrap">
             @foreach (CardsViewModel product in PListPair.Value)
             {
-            <div class="col-6 col-md-4 col-xl-2">
-                @Html.Partial("Partial_ProductCard", product)
-            </div>
+                <div class="col-6 col-md-4 col-xl-2">
+                    @Html.Partial("Partial_ProductCard", product)
+                </div>
             }
         </div>
     </section>
