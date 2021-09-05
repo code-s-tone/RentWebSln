@@ -1,0 +1,106 @@
+﻿
+.nav-background {
+    height: 1000px;
+/*原高度1130 庭安改成1000 因為margin-top要拿掉*/
+    /*margin-top: -130px;*/
+    margin-bottom: -1000px;
+    background-color: #ffaf00;
+}
+
+header {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+
+.keyart, .keyart_layer {
+    height: 1000px;
+}
+
+.keyart {
+    position: relative;
+    z-index: 5;
+}
+
+#parallax {
+    overflow:hidden;
+}
+
+
+.keyart_layer {
+    background-position: bottom center;
+    background-size: auto 1038px;
+    background-repeat: repeat-x;
+    width: 100%;
+    position: absolute;
+}
+/*fix搭配位置調整*/
+    .keyart_layer.parallax {
+        position: fixed;
+    }
+
+#keyart-0 {
+    background-image: url('../../images/Index/parallax0.png');
+    /*background-color: #ffaf1b;*/
+}
+
+#keyart-1 {
+    background-image: url('../../images/Index/parallax1.png');
+}
+
+#keyart-2 {
+    background-image: url('../../images/Index/parallax2.png');
+}
+
+#keyart-3 {
+    background-image: url('../../images/Index/parallax3.png');
+}
+
+#keyart-4 {
+    background-image: url('../../images/Index/parallax4.png');
+}
+
+#keyart-5 {
+    background-image: url('../../images/Index/parallax5.png');
+}
+
+#keyart-6 {
+    background-image: url('../../images/Index/parallax6.png');
+}
+
+#keyart-7 {
+    background-image: url('../../images/Index/parallax7.png');
+}
+
+#keyart-8 {
+    background-image: url('../../images/Index/parallax8.png');
+}
+
+#keyart-scrim {
+    background-color: #f00; /*#ffaf00*/
+    opacity: 0;
+}
+
+
+#maincontain {
+    background-color: #fff;
+    position: relative;
+    z-index: 6;
+    margin-bottom:-50px;
+    padding:50px 0;
+}
+
+/*.pax #maincontain {
+    top: 140px;
+}*/
+
+
+/*#main {*/
+    /*max-width: 900px;*/
+    /*padding-left: 30px;*/
+    /*padding-right: 30px;*/
+    /*margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    z-index: 99;
+}*/

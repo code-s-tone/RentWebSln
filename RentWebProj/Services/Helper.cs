@@ -101,29 +101,23 @@ namespace RentWebProj.Services
         }
         public static int ConvertEmailToMemberId(string Email) //擴充方法
         {
-
             var MemberDMList = _repository.GetAll<Member>();
             var result = MemberDMList.Where(x => x.Email == Email).Select(x => x.MemberID).FirstOrDefault();
             return result;
         }
 
-        //public static int NameConvertToMemberId(string name) //擴充方法
+        //public static string WriteLog(this OperationResult value) //擴充方法
         //{
-        //    var MID = name;
-        //    return 1;
+        //    if ( value.Exception != null)
+        //    {
+        //        string path = $"{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")}.txt";
+        //        File.WriteAllText(path, value.Exception.ToString());
+        //        return path;
+        //    }
+        //    else
+        //    {
+        //        return "沒有存檔";
+        //    }
         //}
-        public static string WriteLog(this OperationResult value) //擴充方法
-        {
-            if ( value.Exception != null)
-            {
-                string path = $"{DateTime.Now.ToString("yyyy-MM-dd_HH_mm_ss")}.txt";
-                File.WriteAllText(path, value.Exception.ToString());
-                return path;
-            }
-            else
-            {
-                return "沒有存檔";
-            }
-        }
     }
 }

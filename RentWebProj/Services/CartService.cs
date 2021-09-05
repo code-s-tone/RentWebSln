@@ -17,7 +17,30 @@ namespace RentWebProj.Services
         {
             _repository = new CommonRepository(new RentContext());
         }
-
+        //產品列表頁入車，兩種可能
+        public OperationResult Create(string PID)
+        {
+            var result = new OperationResult();
+            try
+            {
+                //VM->DM
+                Cart entity = new Cart()
+                {
+                    MemberID = 1,
+                    ProductID = PID,
+                };
+                _repository.Create(entity);
+                _repository.SaveChanges();
+                result.IsSuccessful = true;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessful = false;
+                result.Exception = ex;
+            }
+            return result;
+        }
+        //產品細節頁入車，兩種可能
         public OperationResult CreateOrUpdate(ProductDetailToCart VM , string PID)
         {           
             var result = new OperationResult();
@@ -83,7 +106,7 @@ namespace RentWebProj.Services
                             ProductName = p.ProductName,
                             StartDate = c.StartDate,
                             ExpirationDate = c.ExpirationDate,
-                            DailyRate = (decimal)p.DailyRate,
+                            DailyRate = p.DailyRate,
                             Qty = 1,
                             //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
                             //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))

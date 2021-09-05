@@ -19,7 +19,9 @@
         <div class="product-price-cart-box d-flex">
             <div class="product-price flex-grow-1">$@Math.Ceiling(@Model.DailyRate)<span>/日租</span></div>
             <div class="product-cart-icon d-grid">
-                <a class="m-auto" href="@Url.Action("", "Carts")"><i class="fa fa-shopping-cart"></i></a>
+                @*popover 已加入 *@
+                <a class="m-auto" href="@Url.Action("ProductToCart", "Product", new { PID = Model.ProductID})"><i class="fas fa-cart-plus"></i></a>
+
             </div>
         </div>
     </div>

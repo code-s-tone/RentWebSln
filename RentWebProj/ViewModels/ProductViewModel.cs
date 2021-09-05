@@ -36,25 +36,25 @@ namespace RentWebProj.ViewModels
 
         //偉軒用
         public double CountOfRentedDays { get; set; }
+        //public bool IsExisted { get; set; }
 
-        //public int StarsForLike { get; set; }
     }
 
     public class FilterSearchViewModel:CardsViewModel
     {
-        public List<CardsViewModel> selectedProductList { get; set; }
+        public List<CardsViewModel> SelectedProductList { get; set; }
         [Display(Name = "關鍵字搜尋")]
-        public string keywordInput { get; set; }
+        public string Keyword { get; set; }
 
         [Display(Name = "種類篩選")]
-        public string categoryOptions { get; set; }
-        public string subCategoryOptions { get; set; }
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
 
         [Display(Name = "排序方式")]
-        public string orderByOptions { get; set; }
+        public string OrderBy{ get; set; }
 
         [Display(Name = "錢錢決定一切")]
-        public string dailyRateBudget { get; set; }
+        public string RateBudget { get; set; }
 
     }
 

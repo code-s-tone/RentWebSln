@@ -202,6 +202,7 @@
     <Content Include="Assets\css\Contribution\helpTo.css" />
     <Content Include="Assets\css\Contribution\howTo.css" />
     <Content Include="Assets\css\Contribution\conrtibution.css" />
+    <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
@@ -223,6 +224,15 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
+    <Content Include="Assets\images\Index\parallax0.png" />
+    <Content Include="Assets\images\Index\parallax1.png" />
+    <Content Include="Assets\images\Index\parallax2.png" />
+    <Content Include="Assets\images\Index\parallax3.png" />
+    <Content Include="Assets\images\Index\parallax4.png" />
+    <Content Include="Assets\images\Index\parallax5.png" />
+    <Content Include="Assets\images\Index\parallax6.png" />
+    <Content Include="Assets\images\Index\parallax7.png" />
+    <Content Include="Assets\images\Index\parallax8.png" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Init.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Login.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Logout.js" />
@@ -481,7 +491,7 @@
     <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
-    <Content Include="Views\Product\ProductCardsList.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Shared\Partial_CategoryCard.cshtml" />
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
@@ -490,7 +500,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\images\Index\" />
     <Folder Include="Assets\js\Cart\" />
     <Folder Include="HtmlPages\" />
     <Folder Include="obj\Debug\TempPE\" />

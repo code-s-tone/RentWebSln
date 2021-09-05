@@ -33,7 +33,7 @@ namespace RentWebProj.Services
             
             return RentedPeriods;
         }
-        public double countRentedDays(string PID,int amongDays)
+        public double CountRentedDays(string PID,int amongDays)
         {
             var now = DateTime.Now.AddDays(-amongDays);
             var RentedDays =
