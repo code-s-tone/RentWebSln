@@ -86,12 +86,12 @@ namespace RentWebProj.Controllers
             if (result.IsSuccessful)
             {
                 //成功代表有寫入
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
             else
             {
                 //失敗代表本來就在車內
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
         }
 
