@@ -265,6 +265,7 @@
     <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
+    <Content Include="Assets\css\MemberCenter\ProfilePhoto.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
     <Content Include="Assets\css\Shared\flatpickr_orange.css" />
     <Content Include="Assets\css\GeneralProductCards\GeneralCategories.css" />
@@ -300,6 +301,7 @@
     <Content Include="Assets\js\MemberCenter\Google\Google.js" />
     <Content Include="Assets\js\MemberCenter\LoginAndOut\Login.js" />
     <Content Include="Assets\js\MemberCenter\LoginAndOut\Logout.js" />
+    <Content Include="Assets\js\MemberCenter\ProfilePhoto.js" />
     <Content Include="Assets\js\ProductDetail\ProductDisplay.js" />
     <Content Include="Assets\js\Shared\dateTimePickerPreDef.js" />
     <Content Include="Assets\js\Shared\dateTimePickerSettedEvent.js" />
