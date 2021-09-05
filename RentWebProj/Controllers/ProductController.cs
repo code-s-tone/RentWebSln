@@ -100,7 +100,7 @@ namespace RentWebProj.Controllers
             int? MID = null; 
             if (User.Identity.IsAuthenticated)
             {
-                MID = Helper.ConvertEmailToMemberId(User.Identity.Name);
+                MID = Helper.ConvertAuthNameToMemberId(User.Identity.Name);
             }
 
             ProductDetailToCart VM = _service.GetProductDetail(PID, MID);
@@ -134,7 +134,7 @@ namespace RentWebProj.Controllers
             int? MID = null;
             if (User.Identity.IsAuthenticated)
             {
-                MID = Helper.ConvertEmailToMemberId(User.Identity.Name);
+                MID = Helper.ConvertAuthNameToMemberId(User.Identity.Name);
             }
             ProductDetailToCart VM = _service.GetProductDetail(PID, MID);
             VM.OperationSuccessful = isSuccessful;

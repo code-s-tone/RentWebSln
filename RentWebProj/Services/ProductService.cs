@@ -211,6 +211,8 @@ namespace RentWebProj.Services
 
         public ProductDetailToCart GetProductDetail(string PID, int? currentMemberID)
         {
+            var test = HttpContext.Current.User.Identity.Name;
+
             ProductDetailToCart VM = new ProductDetailToCart();
 
             bool isExisted = false;

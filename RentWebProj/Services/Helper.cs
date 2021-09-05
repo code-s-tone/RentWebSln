@@ -106,6 +106,12 @@ namespace RentWebProj.Services
             return result;
         }
 
+        public static int ConvertAuthNameToMemberId(string AuthName) //擴充方法
+        {
+            int MID = Int32.Parse(AuthName);
+            return MID;
+        }
+
         //public static string WriteLog(this OperationResult value) //擴充方法
         //{
         //    if ( value.Exception != null)
