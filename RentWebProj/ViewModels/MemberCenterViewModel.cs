@@ -76,6 +76,11 @@ namespace RentWebProj.ViewModels
         public string Phone { get; set; }
     }
 
+    public class CheckBirthDay
+    {
+        public DateTime? BirthDay { get; set; }
+    }
+
     public class MemberLoginDetailViewModel
     {
         [Required]

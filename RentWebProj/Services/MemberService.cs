@@ -144,7 +144,7 @@ namespace RentWebProj.Services
         }
         //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
         //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail,string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone)
+        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone , DateTime MemberBirthDay , DateTime ChangeBirthDay)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x=>x.MemberID==UserMemberId);
 
@@ -172,7 +172,10 @@ namespace RentWebProj.Services
             {
                 result.Phone = ChangePhone;
             }
-            
+
+            result.Birthday = ChangeBirthDay;
+
+
             _repository.SaveChanges();
 
             //return "修改成功";
@@ -234,6 +237,24 @@ namespace RentWebProj.Services
                 MemberPhoneString = item.Phone.ToString();
             }
             return MemberPhoneString;
+        }
+
+        //取得與目前登入User對應的"生日"
+        public DateTime CheckBirthDay(int UserId)
+        {
+            var result = _repository.GetAll<Member>();
+            var MemberBirthDay = from s in result
+                              where s.MemberID == UserId
+                              select new CheckBirthDay
+                              {
+                                  BirthDay = (DateTime)s.Birthday
+                              };
+            DateTime MemberBirthDayString = new DateTime();
+            foreach (var item in MemberBirthDay)
+            {   //因為IQueryable故需要轉型為ToString
+                MemberBirthDayString = (DateTime)item.BirthDay;
+            }
+            return MemberBirthDayString;
         }
     }
 }
