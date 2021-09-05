@@ -77,7 +77,7 @@ namespace RentWebProj.Services
 
         public string GetCategoryName(string categoryID)
         {
-            return GetCategoryData().FirstOrDefault(x => x.CategoryID == categoryID).CategoryName;
+            return GetCategoryData().FirstOrDefault(x => x.CategoryID == categoryID)?.CategoryName;
    
         }
 
@@ -95,19 +95,45 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        public IEnumerable<CardsViewModel> GetProductData(string productID)
+        //public IEnumerable<CardsViewModel> GetProductData()
+        //{
+        //    return GetProductData(null);
+        //}
+
+        public IEnumerable<CardsViewModel> GetProductData(string categoryID)
         {
             IEnumerable<CardsViewModel> VMList;
             var pDMList = _repository.GetAll<Product>();
             var ctDMList = _repository.GetAll<Category>();
             var subCtDMList = _repository.GetAll<SubCategory>();
 
-            VMList = (from p in pDMList
+            if (categoryID == null || categoryID.Trim().ToUpper() == "ALL") //表示帶所有商品不分類
+            {
+                VMList = (from p in pDMList
+                    join c in ctDMList
+                        on p.ProductID.Substring(0, 3) equals c.CategoryID
+                    join s in subCtDMList
+                        on p.ProductID.Substring(3, 2) equals s.SubCategoryID
+
+                    select new CardsViewModel
+                    {
+                        ProductID = p.ProductID,
+                        ProductName = p.ProductName,
+                        CategoryName = c.CategoryName,
+                        Description = p.Description,
+                        DailyRate = p.DailyRate,
+                        SubCategoryName = s.SubCategoryName,
+                        SubCategoryID = s.SubCategoryID
+                    });
+            }
+            else
+            {
+                VMList = (from p in pDMList
                       join c in ctDMList
                       on p.ProductID.Substring(0, 3) equals c.CategoryID
                       join s in subCtDMList
                       on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-                      where c.CategoryID == productID.Substring(0, 3)
+                      where c.CategoryID == categoryID.Substring(0, 3)
 
                       select new CardsViewModel
                       {
@@ -119,7 +145,7 @@ namespace RentWebProj.Services
                           SubCategoryName = s.SubCategoryName,
                           SubCategoryID = s.SubCategoryID
                       });
-
+            }
 
             return VMList;
         }
@@ -166,10 +192,10 @@ namespace RentWebProj.Services
                     on p.ProductID.Substring(0, 3) equals c.CategoryID
                 join s in subDMList
                     on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-                where (categoryOptions == "0" || c.CategoryID == categoryOptions)
-                      && (subCategoryOptions == "0" || s.SubCategoryID == subCategoryOptions)
-                      && (dailyRateBudget == "0" || p.DailyRate >= minBudget)
-                      && (dailyRateBudget == "0" || p.DailyRate <= maxBudget)
+                where (categoryOptions == "0" || categoryOptions == null || c.CategoryID == categoryOptions)
+                      && (subCategoryOptions == "0" || subCategoryOptions == null || s.SubCategoryID == subCategoryOptions)
+                      && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate >= minBudget)
+                      && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate <= maxBudget)
                       && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
 
                 select new CardsViewModel

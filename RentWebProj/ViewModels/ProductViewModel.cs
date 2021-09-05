@@ -68,7 +68,7 @@ namespace RentWebProj.ViewModels
     }
     public enum ContainerTitle
     {
-        所有種類, 您要的商品,很抱歉找不到您要的商品
+        種類列表, 所有商品, 您要的商品, 很抱歉找不到您要的商品
     }
 
 

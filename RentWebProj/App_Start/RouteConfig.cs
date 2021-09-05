@@ -23,10 +23,9 @@ namespace RentWebProj
             //產品卡片頁(各種類) 路由用種類id來判斷
             routes.MapRoute(
                 name: "ProductList",
-                url: "Product/ProductList/{categoryID}",
-                defaults: new { controller = "Product", action = "ProductList", categoryID="Ppl" }
+                url: "Product/category/{categoryID}",
+                defaults: new { controller = "Product", action = "ProductList", categoryID = UrlParameter.Optional }
             );
-
 
             //原網址Product/SearchProductCards 用Product/Search取代
             routes.MapRoute(

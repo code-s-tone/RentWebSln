@@ -21,20 +21,36 @@ namespace RentWebProj.Controllers
         {
             ViewBag.Page = nameof(Pages.CategoriesCardsPage);
             ViewBag.Container = nameof(Container.CategoriesCardsContainer);
-            ViewBag.ContainerTitle = nameof(ContainerTitle.所有種類);
+            ViewBag.ContainerTitle = nameof(ContainerTitle.種類列表);
             ViewBag.CategoryOptions = _service.GetCategoryData();
             return View("ProductList"); 
         }
-        public ActionResult ProductList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
+
+
+        //取得商品資料 1.如果有帶categoryID就顯示該主類商品 2.沒帶就顯示所有商品不分類
+        public ActionResult ProductList(string categoryID) 
         {
+            if (string.IsNullOrEmpty(categoryID) || categoryID.Trim().ToUpper() == "ALL")//沒指定或是打ALL 都秀出所有商品
+            {
+                ViewBag.ContainerTitle = nameof(ContainerTitle.所有商品);
+            }
+            else if (_service.GetCategoryName(categoryID)==null) //網址category後如果亂打  
+            {
+                ViewBag.ContainerTitle = nameof(ContainerTitle.很抱歉找不到您要的商品);
+            }
+            else
+            {
+                ViewBag.ContainerTitle="所有" + _service.GetCategoryName(categoryID);
+            }
+            
+
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
             ViewBag.selectedProductList = _service.GetProductData(categoryID);
-            ViewBag.ContainerTitle = "所有"+_service.GetCategoryName(categoryID);
             return View();
         }
-     
+
         [HttpPost] //前端選了主類選項 出現副類
         public ActionResult GetSubCategoryOptions(string categoryID)
         {
@@ -63,9 +79,6 @@ namespace RentWebProj.Controllers
             ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.Category);
             ViewBag.selectedProductList = selectedProductList;
             ViewBag.ContainerTitle = selectedProductList.Count == 0 ? nameof(ContainerTitle.很抱歉找不到您要的商品) : nameof(ContainerTitle.您要的商品);
-
-            
-
 
             return View("ProductList", filterForm);
         }
