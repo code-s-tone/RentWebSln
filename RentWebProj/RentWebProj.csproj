@@ -168,6 +168,7 @@
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\DeliveryOption.cs" />
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\Order.cs" />
