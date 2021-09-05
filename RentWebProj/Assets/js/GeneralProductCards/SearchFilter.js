@@ -1,7 +1,7 @@
 ﻿
 let dNoneOnPhone = document.querySelectorAll(".dNoneOnPhone");
 console.log(document.querySelector("#keywordInput"));
-document.querySelector("#keywordInput").addEventListener("click", function () {
+document.querySelector("#Keyword").addEventListener("click", function () {
     dNoneOnPhone.forEach(x => x.classList.remove('dNoneOnPhone'));
 });
 
