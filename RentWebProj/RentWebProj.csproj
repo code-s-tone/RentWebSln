@@ -500,7 +500,7 @@
     <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
-    <Content Include="Views\Product\ProductCardsList.cshtml" />
+    <Content Include="Views\Product\ProductList.cshtml" />
     <Content Include="Views\Shared\Partial_CategoryCard.cshtml" />
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
