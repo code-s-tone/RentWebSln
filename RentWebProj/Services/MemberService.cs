@@ -220,7 +220,32 @@ namespace RentWebProj.Services
             }
             return MemberPhoneString;
         }
+        public string FileUploadProfileImageData(string blobUrl)
+        {
+            var Sname = HttpContext.Current.User.Identity.Name;
+            var Tname = Int32.Parse(Sname);
+            Account account = new Account(
+              "dgaodzamk",
+              "192222538187587",
+              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(blobUrl),
+                PublicId = $"MemberProfilePhoto/{Sname}"
+
+            };
+
+            var uploadResult = cloudinary.Upload(uploadParams);
+
+            var getResultImgUrl = cloudinary.GetResource($"MemberProfilePhoto/{Sname}").SecureUrl;
+            var result = _repository.GetAll<Member>();
+            result.ToList().Find(x => x.MemberID == Tname).ProfilePhotoUrl = getResultImgUrl; ;
+            _repository.SaveChanges();
+
+            return getResultImgUrl;
+        }
         //抓取 要在首頁 顯示留言的資料<名駿>
         public IEnumerable<CommentViewModel> GetAllComment()
         {
