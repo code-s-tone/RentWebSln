@@ -218,5 +218,29 @@ namespace RentWebProj.Services
             }
             return MemberPhoneString;
         }
+
+        //抓取 要在首頁 顯示留言的資料<名駿>
+        public IEnumerable<CommentViewModel> GetAllComment()
+        {
+            IEnumerable<CommentViewModel> AllCommentVMList;
+            AllCommentVMList =
+                from c in _repository.GetAll<Comment>()
+                join m in _repository.GetAll<Member>()
+                on c.MemberID equals m.MemberID
+                orderby c.Time descending
+
+                select new CommentViewModel
+                {
+                    MemberID = c.MemberID,
+                    MemberName = m.FullName,
+                    Score = c.Score,
+                    Time = c.Time,
+                    Message = c.Message,
+                    PhotoUrl = m.ProfilePhotoUrl
+                };
+
+            return AllCommentVMList;
+        }
+
     }
 }
