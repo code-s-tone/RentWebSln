@@ -14,6 +14,8 @@ namespace RentWebProj.Models
 
         public int Score { get; set; }
 
+        public DateTime Time { get; set; }
+
         [Required]
         [StringLength(100)]
         public string Message { get; set; }
