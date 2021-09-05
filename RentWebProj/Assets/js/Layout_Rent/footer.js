@@ -3,10 +3,10 @@
     var chatImg = document.querySelector(".chatIcon img");
     if (chatBox.style.display === "none") {
         chatBox.style.display = "block";
-        chatImg.src = "img/close2.png"
+        chatImg.src = "~/Assets/images/Layout_Rent/close2.png"
     }
     else {
         chatBox.style.display = "none";
-        chatImg.src = "img/chatIcon3.png"
+        chatImg.src = "~/Assets/images/Layout_Rent/chatIcon3.png"
     }
 })

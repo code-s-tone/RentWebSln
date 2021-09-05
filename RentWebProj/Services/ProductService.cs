@@ -77,14 +77,8 @@ namespace RentWebProj.Services
 
         public string GetCategoryName(string categoryID)
         {
-            var cate = GetCategoryData().Where(x => x.CategoryID == categoryID).ToArray();
-            return cate[0].CategoryName.ToString();
-            //軒：可考慮FirstOrDefault方法，如下
-            //return 
-            //    GetCategoryData()
-            //    .Where(x => x.CategoryID == categoryID)
-            //    .FirstOrDefault()
-            //    .CategoryName.ToString();
+            return GetCategoryData().FirstOrDefault(x => x.CategoryID == categoryID).CategoryName;
+   
         }
 
         public IEnumerable<CardsViewModel> GetSubCategoryOptions(string catID)
@@ -132,11 +126,11 @@ namespace RentWebProj.Services
 
         public List<CardsViewModel> SearchProductCards(FilterSearchViewModel filterFormList)
         {
-            string keywordInput = filterFormList.keywordInput;
-            string categoryOptions = filterFormList.categoryOptions;
-            string subCategoryOptions = filterFormList.subCategoryOptions; 
-            string dailyRateBudget = filterFormList.dailyRateBudget;
-            string orderByOptions = filterFormList.orderByOptions;
+            string keywordInput = filterFormList.Keyword;
+            string categoryOptions = filterFormList.Category;
+            string subCategoryOptions = filterFormList.SubCategory; 
+            string dailyRateBudget = filterFormList.RateBudget;
+            string orderByOptions = filterFormList.OrderBy;
 
             //判斷預算範圍
             int minBudget = 0;
@@ -203,11 +197,11 @@ namespace RentWebProj.Services
 
         public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
         {
-            if (orderByOptions == "orderByRelevance")
+            if (orderByOptions.ToLower() == "relevance")
             {
                 //思考中...
             }
-            else if (orderByOptions == "orderByPrice")
+            else if (orderByOptions.ToLower() == "price")
             {
                 selectedList = selectedList.OrderBy(x => x.DailyRate).ToList();
             }

@@ -23,9 +23,9 @@ namespace RentWebProj.Controllers
             ViewBag.Container = nameof(Container.CategoriesCardsContainer);
             ViewBag.ContainerTitle = nameof(ContainerTitle.所有種類);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            return View("ProductCardsList"); 
+            return View("ProductList"); 
         }
-        public ActionResult ProductCardsList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
+        public ActionResult ProductList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
         {
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
@@ -40,32 +40,18 @@ namespace RentWebProj.Controllers
         {
             return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
         }
-        
-        //[HttpPost] //前端搜尋篩選
-        //public ActionResult SearchProductCards(FormCollection filterForm)
-        //{
-        //    var selectedCtProductList = _service.SearchProductCards(filterForm);
-                
-        //    ViewBag.Page = nameof(Pages.ProductCardsPage);
-        //    ViewBag.Container = nameof(Container.ProductCardsContainer);
-        //    ViewBag.CategoryOptions = _service.GetCategoryData();
-
-        //    ViewBag.ContainerTitle = selectedCtProductList.Count == 0? nameof(ContainerTitle.很抱歉找不到您要的商品):nameof(ContainerTitle.您要的商品);
-            
-        //    //ViewBag.FilterForm = filterForm;
-        //    return View("ProductCardsList", selectedCtProductList);
-        //}
+ 
 
         [HttpGet] //前端搜尋篩選
-        public ActionResult SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string dailyRateBudget,string orderByOptions)
+        public ActionResult SearchProductCards(string keyword, string category, string subCategory, string rateBudget,string orderBy)
         {
             var filterForm = new FilterSearchViewModel
             {
-                keywordInput = keywordInput,
-                categoryOptions = categoryOptions,
-                subCategoryOptions = subCategoryOptions,
-                dailyRateBudget = dailyRateBudget,
-                orderByOptions = orderByOptions
+                Keyword = keyword,
+                Category = category,
+                SubCategory = subCategory,
+                RateBudget = rateBudget,
+                OrderBy = orderBy
             };
 
             var selectedProductList = _service.SearchProductCards(filterForm);
@@ -73,15 +59,15 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            ViewBag.CategorySelected = filterForm.categoryOptions;
-            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.categoryOptions);
+            ViewBag.CategorySelected = filterForm.Category;
+            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.Category);
             ViewBag.selectedProductList = selectedProductList;
             ViewBag.ContainerTitle = selectedProductList.Count == 0 ? nameof(ContainerTitle.很抱歉找不到您要的商品) : nameof(ContainerTitle.您要的商品);
 
             
 
 
-            return View("ProductCardsList", filterForm);
+            return View("ProductList", filterForm);
         }
 
         //---------------------------------------------------------------
@@ -100,12 +86,12 @@ namespace RentWebProj.Controllers
             if (result.IsSuccessful)
             {
                 //成功代表有寫入
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
             else
             {
                 //失敗代表本來就在車內
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
         }
 
