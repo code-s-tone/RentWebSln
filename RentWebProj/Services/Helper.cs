@@ -106,6 +106,19 @@ namespace RentWebProj.Services
             return result;
         }
 
+        public static int? GetMemberId() //擴充方法
+        {
+            int? currentMemberID = null;
+            var identity = HttpContext.Current.User.Identity;
+
+            if (identity.IsAuthenticated)
+            {
+                currentMemberID = ConvertAuthNameToMemberId(identity.Name);
+            }
+
+            return currentMemberID;
+        }
+
         public static int ConvertAuthNameToMemberId(string AuthName) //擴充方法
         {
             int MID = Int32.Parse(AuthName);
