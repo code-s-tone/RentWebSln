@@ -273,6 +273,13 @@ namespace RentWebProj.Controllers
             Helper.FormsAuthorization(ViewData["FB_Email"].ToString());
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public ActionResult ProfilePhoto(string blobUrl)
+        {
+            _service.FileUploadProfileImageData(blobUrl);
+            return RedirectToAction("MemberCenter", "Member");
+        }
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
