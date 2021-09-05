@@ -131,7 +131,12 @@ namespace RentWebProj.Controllers
             }
 
             //購物車可能已變動/違法輸入，需重撈
-            ProductDetailToCart VM = _service.GetProductDetail(PID, 1);
+            int? MID = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                MID = Helper.ConvertEmailToMemberId(User.Identity.Name);
+            }
+            ProductDetailToCart VM = _service.GetProductDetail(PID, MID);
             VM.OperationSuccessful = isSuccessful;
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
