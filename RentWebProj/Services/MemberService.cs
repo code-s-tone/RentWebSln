@@ -273,6 +273,7 @@ namespace RentWebProj.Services
 
             return getResultImgUrl;
         }
+
         //抓取 要在首頁 顯示留言的資料<名駿>
         public IEnumerable<CommentViewModel> GetAllComment()
         {
@@ -294,6 +295,20 @@ namespace RentWebProj.Services
                 };
 
             return AllCommentVMList;
+        }
+
+        // 將顧客留言 Create一筆新的 之後存入資料庫
+        public void Create(string comment, int star)
+        {
+            Comment entity = new Comment()
+            {
+                MemberID = (int)Helper.GetMemberId(),
+                Score = star,
+                Message = comment,
+                Time = DateTime.Now
+            };
+            _repository.Create(entity);
+            _repository.SaveChanges();
         }
 
     }
