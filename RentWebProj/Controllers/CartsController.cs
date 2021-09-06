@@ -42,7 +42,10 @@ namespace RentWebProj.Controllers
             //軒：我的直接結帳，有可能產品不在購物車中，故刪除時可考慮一下
             //刪除購物車要用郭懿的方法喔，在下面
             new OrderService().Create(PostVM);
-
+            foreach (var PID in PostVM.ListProductID)
+            {
+                new CartService().DeleteCart(1, PID);
+            }
             return RedirectToAction("MemberCenter", "Member");
         }
 
