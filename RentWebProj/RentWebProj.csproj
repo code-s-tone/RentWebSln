@@ -285,6 +285,7 @@
     <Content Include="Assets\css\MemberCenter\reset.css" />
     <Content Include="Assets\css\ProductDetail\ProductCarousel.css" />
     <Content Include="Assets\css\Register\Register.css" />
+    <Content Include="Assets\css\SocialMedia\Blog.css" />
     <Content Include="Assets\images\Index\parallax0.png" />
     <Content Include="Assets\images\Index\parallax1.png" />
     <Content Include="Assets\images\Index\parallax2.png" />
