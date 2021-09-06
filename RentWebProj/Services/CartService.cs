@@ -26,7 +26,7 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name),
+                    MemberID = 1,
                     ProductID = PID,
                 };
                 _repository.Create(entity);
@@ -54,7 +54,7 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name),
+                    MemberID = 1,
                     ProductID = PID,
                     StartDate = s,
                     ExpirationDate = e                    
