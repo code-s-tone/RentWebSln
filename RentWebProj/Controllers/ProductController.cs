@@ -99,7 +99,7 @@ namespace RentWebProj.Controllers
         public ActionResult ProductDetail(string PID)
         {
             //User.Identity.Name
-            ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
+            //ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
 
             return View(VM);
         }
