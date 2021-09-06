@@ -1,0 +1,18 @@
+﻿
+
+.buttonDisabled{
+    background-color:gray;
+}
+
+.buttonDisabled:disabled {
+    cursor: not-allowed;
+}
+
+.buttonDisabled:hover {
+    background-color: gray;
+}
+
+.inputDisabled {
+    pointer-events: none;
+    color: #BEBEBE;
+}

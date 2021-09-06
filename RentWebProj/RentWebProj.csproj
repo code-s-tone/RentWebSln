@@ -265,6 +265,7 @@
     <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
+    <Content Include="Assets\css\MemberCenter\memberJS.css" />
     <Content Include="Assets\css\MemberCenter\ProfilePhoto.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
     <Content Include="Assets\css\Shared\flatpickr_orange.css" />

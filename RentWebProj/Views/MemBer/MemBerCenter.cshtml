@@ -9,8 +9,7 @@
         <div class="member-display-block">
             <!-- BS新版 -->
 
-
-
+            <!--欄位區-->
             <h2 class="member-display-title">訂單查詢</h2>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -26,202 +25,298 @@
                     <button class="nav-link select-hover" id="contact-tab" data-bs-toggle="tab" data-bs-target="#car-order" type="button" role="tab" aria-controls="car-order" aria-selected="false">待購清單</button>
                 </li>
             </ul>
-            @ViewBag.Change
-            @using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
-            {
-                <div class="tab-content" id="myTabContent">
-                    <!-- 個人資料 -->
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="member-display-person-detail member-display-group">
-                            <span class="member-display-header member-display-new-email-context my-3">頭像</span>
-                            <div class="member-display-name-container member-display-item d-flex position-relative" style="width:100px;height:100px">
-                                <img style="width:100px;height:100px" class="border  rounded-0 shadow-sm Profile2" src="" />
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><i class="fas fa-camera d-block " style="color:aliceblue" type="file" name="file" id="file"></i> <span class="visually-hidden">unread messages</span></span>
-                            </div>
-                            <div class="member-display-name-container member-display-item">
-                                <span class="member-display-header member-display-new-email-context">卡號</span>
-                                <span class="member-display-service-id">{ABS20210809}</span>
-                            </div>
-                            <div class="member-display-radio-container member-display-item">
-                                <div class="radio-men member-display-person-style">
-                                    <input type="radio" name="gender" id="gender">
-                                    <label class="member-display-header" for="text">男</label>
-                                    <i class="fas fa-male"></i>
-                                </div>
-                                <div class="radio-women member-display-person-style">
-                                    <input type="radio" name="gender" id="gender">
-                                    <label class="member-display-header" for="text">女</label>
-                                    <i class="fas fa-female"></i>
-                                </div>
-                            </div>
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-header">姓名</div><div class="member-display-point">*</div>
-                                <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-lastname" name="firstname" value="@Model.MemberName" placeholder="姓名" data-max="20">*@
-                                    @*<input type="text" class="member-display-lastname" name="firstname" value="@Model.MemberName" placeholder="姓名" data-max="20">*@
-                                    @Html.EditorFor(m => m.MemberName, new { @htmlAttributes = new { @class = "member-display-lastname", @placeholder = "姓名" } })
 
-                                </div>
 
-                            </div>
-                            <div class="member-display-born-container member-display-item">
-                                <div class="member-display-header">生日</div><div class="member-display-point">*</div>
-                                <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
-                                    @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Year, new { @htmlAttributes = new { @class = "member-display-year", @placeholder = "年" } })
-                                </div>
-                                <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
-                                    @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Month, new { @htmlAttributes = new { @class = "member-display-month", @placeholder = "月份" } })
-                                </div>
-                                <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
-                                    @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Day, new { @htmlAttributes = new { @class = "member-display-date", @placeholder = "日期" } })
-                                </div>
-                            </div>
-                            <div class="member-display-phone-container member-display-item">
-                                <div class="member-display-header">手機</div><div class="member-display-point">*</div>
-                                <div class="member-display-name-input-box-first">
-                                    <input type="text" class="member-display-block-num" name="block" value="+886" placeholder="區域碼" data-max="10">
-                                </div>
-                                <div class="member-display-name-input-box-last">
-                                    @*<input type="text" class="member-display-num" name="num" value="@Model.MemberPhone" placeholder="電話" data-max="10">*@
-                                    @*<input type="text" class="member-display-num" name="num" value="@Model.MemberPhone" placeholder="電話" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemberPhone, new { @htmlAttributes = new { @class = "member-display-num", @placeholder = "電話" } })
-                                </div>
-                            </div>
-                            <div class="member-display-shop-container member-display-item">
-                                <div class="member-display-header">門市</div><div class="member-display-point">*</div>
-                                <select class="member-display-shop" name="shop">
-                                    <option value="門市選項">門市選項</option>
-                                    @*@foreach (var item in Model.MemberBranchName)
-                                        {
-                                            <option value="@item">@item</option>
-                                        }*@
-                                </select>
-                            </div>
-                            @* 留單獨送出Button *@
-                            @*<div class="member-display-shop-container member-display-item">
-                                  <div class="member-display-button-group">
-                                      <button class="member-display-button-item">送出修改</button>
-                                  </div>
-                                </div>*@
-                        </div>
+            @*原始表單區塊*@
+            @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
+            {}*@
+            <div class="tab-content" id="myTabContent">
+            <!-- 個人資料 -->
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="member-display-person-detail member-display-group">
 
+
+                    <!--這是換頭像的東西-->
+                    <input class="efg" type="file" id="file2">
+                    <span class="member-display-header member-display-new-email-context my-3">頭像</span>
+                    <div class="member-display-name-container member-display-item d-flex position-relative" style="width:100px;height:100px">
+                        <img style="width:100px;height:100px" class="border  rounded-0 shadow-sm Profile2" src="" />
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary"><i class="fas fa-camera d-block " style="color:aliceblue" type="file" name="file" id="file"></i> <span class="visually-hidden">unread messages</span></span>
                     </div>
 
 
-                    @*@ViewBag.Change*@
-                    @*@ViewBag.CheckPassword*@
-                    <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="profile-tab">
-                        <!-- 帳號信箱 -->
 
-                        <div class="member-display-person-detail member-display-account-detail member-display-group">
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-header member-display-new-email-context">目前信箱</div>
-                                <div class="member-display-service-email">
-                                    @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
-                                </div>
-                            </div>
 
-                            @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
-                                {*@
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-new-email-context">
-                                    <div class="member-display-header">請輸入新電子信箱</div>
-                                    <div class="member-display-point">*</div>
-                                </div>
-                                <div class="member-display-name-input-box-last">
-                                    <div class="member-display-email-container">
-                                        @Html.EditorFor(m => m.MemberEmail, new { @htmlAttributes = new { @class = "member-display-new-email", @placeholder = "新電子信箱" } })
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-new-email-context">
-                                    <div class="member-display-header">請再輸入電子信箱</div>
-                                    <div class="member-display-point">*</div>
-                                </div>
-                                <div class="member-display-name-input-box-last ">
-                                    <div class="member-display-email-container">
-                                        @Html.EditorFor(m => m.ComfirMemberEmail, new { htmlAttributes = new { @class = "member-display-doublecheck-email", @placeholder = "再輸入一次新電子信箱" } })
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })
-                            </div>
 
-                            @ViewBag.CheckPassword
-                            @*變更密碼*@
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-header member-display-new-email-context">目前密碼</div>
-                                <div class="member-display-service-password">
-                                    @Html.DisplayFor(m => m.MemberPasswordHash, new { htmlAttributes = new { @class = "border border-white rounded" } })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    @*卡號目前無使用註解*@
+                    @*
+        <div class="member-display-name-container member-display-item">
+            <span class="member-display-header member-display-new-email-context">卡號</span>
+            <span class="member-display-service-id">{ABS20210809}</span>
+        </div>
+                    *@
+
+                    <!--姓氏-->
+                    <div class="member-display-name-container member-display-item">
+                        <div class="member-display-header">姓氏與名字</div>
+                        <div class="member-display-name-input-box-first">
+
+                            @*<div style="margin-bottom:10px">@Model.MemberName</div>*@
+
+                            @*<input type="text" class="member-display-lastname" name="firstname" value="@Model.MemberName" placeholder="姓名" data-max="20">*@
+                            @*<input type="text" class="member-display-lastname" name="firstname" value="@Model.MemberName" placeholder="姓名" data-max="20">*@
+                            @Html.EditorFor(m => m.MemberName, new { @htmlAttributes = new { @class = "member-display-lastname member-person-input", @placeholder = "姓名" } })
+                        </div>
+                    </div>
+
+                    <div class="member-display-born-container member-display-item">
+                        <div class="member-display-header">生日</div>
+                        <div class="member-display-birthday-group">
+                            <div class="member-display-name-input-box-first">
+                                @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
+                                @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
+                                @Html.EditorFor(m => m.MemBerBirthday.Year, new { @htmlAttributes = new { @class = "member-display-year member-person-input", @placeholder = "年" } })
+                            </div>
+                            <div class="member-display-name-input-box-first">
+                                @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
+                                @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
+                                @Html.EditorFor(m => m.MemBerBirthday.Month, new { @htmlAttributes = new { @class = "member-display-month member-person-input", @placeholder = "月份" } })
+                            </div>
+                            <div class="member-display-name-input-box-first">
+                                @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
+                                @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
+                                @Html.EditorFor(m => m.MemBerBirthday.Day, new { @htmlAttributes = new { @class = "member-display-date member-person-input", @placeholder = "日期" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--性別-->
+                    <div class="member-display-radio-container member-display-item">
+                        <div class="member-display-header">性別</div>
+                        <div class="member-display-gender-textContent">男</div>
+                        <div class="radio-men member-display-person-style">
+                            <input type="radio" name="gender" id="gender">
+                            <label class="member-display-header" for="text">男</label>
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <div class="radio-women member-display-person-style">
+                            <input type="radio" name="gender" id="gender">
+                            <label class="member-display-header" for="text">女</label>
+                            <i class="fas fa-female"></i>
+                        </div>
+                    </div>
+
+                    <!--電話-->
+                    <div class="member-display-phone-container member-display-item">
+                        <div class="member-display-header">電話號碼</div>
+                        <div class="member-display-phone-group">
+                            <div class="member-display-name-input-box-first">
+                                <input type="text" class="member-display-block-num" name="block" value="+886" placeholder="區域碼" data-max="10">
+                            </div>
+                            <div class="member-display-name-input-box-last">
+                                @*<input type="text" class="member-display-num" name="num" value="@Model.MemberPhone" placeholder="電話" data-max="10">*@
+                                @*<input type="text" class="member-display-num" name="num" value="@Model.MemberPhone" placeholder="電話" data-max="10">*@
+                                @Html.EditorFor(m => m.MemberPhone, new { @htmlAttributes = new { @class = "member-display-num member-person-input", @placeholder = "電話" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--喜好門市-->
+                    <div class="member-display-shop-container member-display-item">
+                        <div class="member-display-shop-group">
+                            <div class="member-display-header">喜好門市</div>
+                            <select class="member-display-shop" name="shop">
+                                <option value="門市選項">門市選項</option>
+                                @*@foreach (var item in Model.MemberBranchName)
+                    {
+                        <option value="@item">@item</option>
+                    }*@
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="member-display-button-group">
+                        <div class="member-display-shop-container">
+                            <div class="member-display-button-group">
+                                <button class="member-display-button-item memberperson-button-edit">編輯</button>
+                            </div>
+                        </div>
+                        <div class="member-display-shop-container">
+                            <div class="member-display-button-group">
+                                <button class="member-display-button-item memberperson-button-save">儲存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+            <!-- 信箱密碼 -->
+            <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="member-display-person-detail member-display-account-detail member-display-group">
+
+
+                    @ViewBag.returnEmail
+                    @using (Html.BeginForm("Email", "Member", FormMethod.Post))
+                    {
+                        <div class="member-display-name-container member-display-item">
+                            <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
+                            <div class="member-display-service-email">
+                                @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
+                            </div>
+                        </div>
+
+                        <div class="member-display-name-container member-display-item">
+                            <div class="member-display-new-email-context">
+                                <div class="member-display-header">請輸入新電子信箱地址</div>
+
+                            </div>
+                            <div class="member-display-name-input-box-last">
+                                <div class="member-display-email-container">
+                                    @Html.EditorFor(m => m.MemberEmail, new { @htmlAttributes = new { @class = "member-display-new-email", @placeholder = "新電子信箱" } })
                                 </div>
                             </div>
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-new-email-context">
-                                    <div class="member-display-header">請輸入新密碼</div>
-                                    <div class="member-display-point">*</div>
-                                </div>
-                                <div class="member-display-name-input-box-last">
-                                    <div class="member-display-email-container">
-                                        @Html.EditorFor(m => m.MemberPasswordHash, new { htmlAttributes = new { @class = "member-display-new-email" } })
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(m => m.MemberPasswordHash, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="member-display-name-container member-display-item">
+                            <div class="member-display-new-email-context">
+                                <div class="member-display-header">請再輸入新電子信箱地址</div>
+
                             </div>
-                            <div class="member-display-name-container member-display-item">
-                                <div class="member-display-new-email-context">
-                                    <div class="member-display-header">再輸入新密碼</div>
-                                    <div class="member-display-point">*</div>
+                            <div class="member-display-name-input-box-last ">
+                                <div class="member-display-email-container">
+                                    @Html.EditorFor(m => m.ComfirMemberEmail, new { htmlAttributes = new { @class = "member-display-doublecheck-email", @placeholder = "再輸入一次新電子信箱" } })
                                 </div>
-                                <div class="member-display-name-input-box-last">
-                                    <div class="member-display-email-container">
-                                        @Html.EditorFor(m => m.ComfigMemberPasswordHash, new { htmlAttributes = new { @class = "member-display-new-email" } })
-                                    </div>
-                                </div>
-                                @Html.ValidationMessageFor(m => m.ComfigMemberPasswordHash, "", new { @class = "text-danger" })
                             </div>
-                            <div class="member-display-shop-container member-display-item">
+                            @Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="member-display-button-group">
+                            <div class="member-display-shop-container">
                                 <div class="member-display-button-group">
-                                    <button class="member-display-button-item member-display-password-button">送出修改</button>
+                                    <button type="button" class="member-display-button-item memberemail-button-edit">編輯信箱</button>
                                 </div>
                             </div>
-                            @*}*@
+                            <div class="member-display-shop-container">
+                                <div class="member-display-button-group">
+                                    <button type="submit" class="member-display-button-item memberemail-button-save">儲存變更</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!--變更密碼-->
+                    @using (Html.BeginForm("MemberPassword", "Member", FormMethod.Post))
+                    {
+
+                    }
+                    <div class="member-display-name-container member-display-item">
+                        <div class="member-display-header member-display-new-email-context">目前密碼</div>
+                        <div class="member-display-service-password">
+                            @Html.DisplayFor(m => m.MemberPasswordHash, new { htmlAttributes = new { @class = "border border-white rounded" } })
                         </div>
                     </div>
+                    <div class="member-display-name-container member-display-item">
+                        <div class="member-display-new-email-context">
+                            <div class="member-display-header">請輸入新密碼</div>
 
-
-                    <!-- 訂單 -->
-                    <div class="tab-pane fade" id="order-search" role="tabpanel" aria-labelledby="contact-tab">
-                        <div class="member-display-title member-display-order-title">
-                            <span class="member-display-order-item">店家</span>
-                            <span class="member-display-order-item">租期</span>
-                            <span class="member-display-order-item">金額</span>
-                            <span class="member-display-order-item">交易日期</span>
-                            <span class="member-display-order-item member-display-order-item-show">內容</span>
                         </div>
+                        <div class="member-display-name-input-box-last">
+                            <div class="member-display-email-container">
+                                @Html.EditorFor(m => m.MemberPasswordHash, new { htmlAttributes = new { @class = "member-display-new-email" } })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.MemberPasswordHash, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="member-display-name-container member-display-item">
+                        <div class="member-display-new-email-context">
+                            <div class="member-display-header">再輸入新密碼</div>
+
+                        </div>
+                        <div class="member-display-name-input-box-last">
+                            <div class="member-display-email-container">
+                                @Html.EditorFor(m => m.ComfigMemberPasswordHash, new { htmlAttributes = new { @class = "member-display-new-email" } })
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ComfigMemberPasswordHash, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="member-display-button-group">
+                        <div class="member-display-shop-container">
+                            <div class="member-display-button-group">
+                                <button class="member-display-button-item memberpassword-button-edit">編輯密碼</button>
+                            </div>
+                        </div>
+                        <div class="member-display-shop-container">
+                            <div class="member-display-button-group">
+                                <button class="member-display-button-item memberpassword-button-save">儲存變更</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
-                        <!--{
-                        foreach (var item in Model.MemberOrderDetail)
-                        {
-                        <div class="member-display-order-detail-container">
-                            <div class="member-display-title member-display-order-detail">
-                                <span class="member-display-order-item member-display-order-show">item.BranchName</span>
-                                <span class="member-display-order-item
-                                member-display-order-day">item.RentDate 天</span>
-                                <span class="member-display-order-item
-                                member-display-order-dynamic-total">NT$item.TotalAmount</span>
-                                <span class="member-display-order-item
-                                member-display-order-day">item.StartDate.AddYears(-1911).ToString("yyy/MM/dd")</span>-->
-                        @*<span class="member-display-order-item
-                            member-display-order-day">@item.StartDate</span>*@
-                        <!--<span class="member-display-order-item-show-button member-display-order-item-show-dynamic-button">+</span>
+
+
+            <!-- 歷史訂單 -->
+            @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
+            {
+
+            }*@
+            <div class="tab-pane fade" id="order-search" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="member-display-title member-display-order-title">
+                    <span class="member-display-order-item">店家</span>
+                    <span class="member-display-order-item">租期</span>
+                    <span class="member-display-order-item">金額</span>
+                    <span class="member-display-order-item">交易日期</span>
+                    <span class="member-display-order-item member-display-order-item-show">內容</span>
+                </div>
+                @foreach (var item in Model.MemberOrderDetail)
+                {
+                    <div class="member-display-order-detail-container">
+                        <div class="member-display-title member-display-order-detail">
+                            <span class="member-display-order-item member-display-order-show">@item.BranchName</span>
+                            <span class="member-display-order-item
+                            member-display-order-day">@item.RentDate 天</span>
+                            <span class="member-display-order-item
+                            member-display-order-dynamic-total">NT$@item.TotalAmount</span>
+                            <span class="member-display-order-item
+                            member-display-order-day">@item.StartDate.AddYears(-1911).ToString("yyy/MM/dd")</span>
+                            <span class="member-display-order-item-show-button member-display-order-item-show-dynamic-button">+</span>
                         </div>
                         <div class="member-display-order-detail-list">
                             <span class="member-display-order-item member-display-order-name">租賃商品</span>
@@ -233,28 +328,31 @@
                                 member-display-order-amount">數量</span>
                             <span class="member-display-order-item
                                 member-display-order-total">總計</span>
-                            <span class="member-display-order-item member-display-order-dynamic-name">item.ProductName</span>
+                            <span class="member-display-order-item member-display-order-dynamic-name">@item.ProductName</span>
                             <span class="member-display-order-item
-                                member-display-order-dynamic-return-day">item.ExpirationDate.AddYears(-1911).ToString("yyy/MM/dd")</span>-->
-                        @*<span class="member-display-order-item
-                            member-display-order-dynamic-return-day">@item.ExpirationDate</span>*@
-                        <!--<span class="member-display-order-item
-                                       member-display-order-dynamic-price">item.DailyRate</span>
-                                       <span class="member-display-order-item
-                                       member-display-order-dynamic-amount">1</span>
-                                       <span class="member-display-order-item
-                                       member-display-order-dynamic-total">NT$item.TotalAmount</span>
-                               </div>
-                           </div>
-                           }
-                        }-->
-                    </div>
-                    <!-- 購物車 -->
-                    <div class="tab-pane fade" id="car-order" role="tabpanel" aria-labelledby="car-order"></div>
-                </div>
-            }
-            @*這是換頭像的東西*@
-            <input class="efg" type="file" id="file2">
+                                member-display-order-dynamic-return-day">@item.ExpirationDate.AddYears(-1911).ToString("yyy/MM/dd")</span>
+                                <span class="member-display-order-item
+                                member-display-order-dynamic-price">@item.DailyRate</span>
+                                <span class="member-display-order-item
+                                member-display-order-dynamic-amount">1</span>
+                                <span class="member-display-order-item
+                                member-display-order-dynamic-total">NT$@item.TotalAmount</span>
+                            </div>
+                        </div>
+                    }
+            </div>
+            <!-- 購物車 -->
+            <div class="tab-pane fade" id="car-order" role="tabpanel" aria-labelledby="car-order">
+
+            </div>
+        </div>
+            
+
+
+
+
+
+
         </div>
     </div>
 </div>
@@ -265,6 +363,7 @@
     <link href="~/Assets/css/MemberCenter/member.css" rel="stylesheet" />
     <link href="~/Assets/css/MemberCenter/account.css" rel="stylesheet" />
     <link href="~/Assets/css/MemberCenter/order.css" rel="stylesheet" />
+    <link href="~/Assets/css/MemberCenter/memberJS.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link href="~/Assets/css/MemberCenter/ProfilePhoto.css" rel="stylesheet" />
 }
@@ -276,6 +375,109 @@
     <script src="~/Assets/js/MemberCenter/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="~/Assets/js/MemberCenter/ProfilePhoto.js"></script>
+    <script>
+        //編輯
+        let personEditBtn = document.querySelector('.memberperson-button-edit');
+        let emailEditBtn = document.querySelector('.memberemail-button-edit');
+        let passwordEditBtn = document.querySelector('.memberpassword-button-edit');
+
+        //儲存
+        let personSaveBtn = document.querySelector('.memberperson-button-save');
+        let emailSaveBtn = document.querySelector('.memberemail-button-save');
+        let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
+
+        //姓氏 //生日 //電話
+        let personNameInp = document.querySelectorAll('.member-person-input');
+
+
+        //性別
+
+        //門市
+
+        //信箱
+
+        //密碼
+
+        window.onload = function() {
+            personSaveBtn.disabled = true;
+            personSaveBtn.classList.add('buttonDisabled');
+            emailSaveBtn.disabled = true;
+            emailSaveBtn.classList.add('buttonDisabled');
+            passwordSaveBtn.disabled = true;
+            passwordSaveBtn.classList.add('buttonDisabled');
+            inputInit();
+        };
+
+        //初始化表格狀態
+        function inputInit() {
+            for (let i = 0; i < personNameInp.length; i++) {
+                personNameInp[i].classList.add('inputDisabled');
+            }
+        }
+
+        //個資啟動編輯
+        personEditBtn.addEventListener('click', function () {
+            for (let i = 0; i < personNameInp.length; i++) {
+                personNameInp[i].classList.remove('inputDisabled');
+            }
+
+            personEditBtn.disabled = true;
+            personEditBtn.classList.add('buttonDisabled');
+            personSaveBtn.disabled = false;
+            personSaveBtn.classList.remove('buttonDisabled');
+        });
+
+        //個資關閉編輯
+        personSaveBtn.addEventListener('click', function () {
+            inputInit();
+            personEditBtn.disabled = false;
+            personEditBtn.classList.remove('buttonDisabled');
+            personSaveBtn.disabled = true;
+            personSaveBtn.classList.add('buttonDisabled');
+        });
+
+        //信箱啟動編輯
+        emailEditBtn.addEventListener('click', function () {
+            emailSaveBtn.disabled = false;
+            emailSaveBtn.classList.remove('buttonDisabled');
+            emailEditBtn.disabled = true;
+            emailEditBtn.classList.add('buttonDisabled');
+        });
+        emailSaveBtn.addEventListener('click', function () {
+            emailEditBtn.disabled = false;
+            emailEditBtn.classList.remove('buttonDisabled');
+            //alert('修改成功')
+            swal("修改成功" , '自動跳轉..' , 'success');
+            //emailSaveBtn.disabled = true;
+            //emailSaveBtn.classList.add('buttonDisabled');
+        });
+
+
+        //密碼啟動編輯
+        passwordEditBtn.addEventListener('click', function () {
+            passwordSaveBtn.disabled = false;
+            passwordSaveBtn.classList.remove('buttonDisabled');
+            passwordEditBtn.disabled = true;
+            passwordEditBtn.classList.add('buttonDisabled');
+        });
+        passwordSaveBtn.addEventListener('click', function () {
+            passwordEditBtn.disabled = false;
+            passwordEditBtn.classList.remove('buttonDisabled');
+            passwordSaveBtn.disabled = true;
+            passwordSaveBtn.classList.add('buttonDisabled');
+        });
+        
+
+
+
+    </script>
+    
+    
+    
+
+
+
+
 }
 
 @* 前端驗證 *@

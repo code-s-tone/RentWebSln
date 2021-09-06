@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -21,7 +22,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<MemberPersonDataViewModel> GetMemberData(string LoginEmail)
+        public IEnumerable<MemberPersonDataViewModel> GetMemberData(int LoginMemeberId)
         {
             IEnumerable<MemberPersonDataViewModel> MemberCenterVM;
             IEnumerable<MemberOrderDetailViewModel> MemberOrderDetailVM;
@@ -41,12 +42,11 @@ namespace RentWebProj.Services
                                   on od.ProductID equals p.ProductID
                                   join m in MemberDMList
                                   on o.MemberID equals m.MemberID
-                                  //where m.MemberID == 38
-                                  where m.Email == LoginEmail
+                                  where m.MemberID == LoginMemeberId
                                   select new MemberOrderDetailViewModel
                                   {
                                       BranchName = b.StoreName,
-                                      RentDate = (int)EntityFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
+                                      RentDate = (int)DbFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
                                       TotalAmount = (int)od.TotalAmount,
                                       StartDate = (DateTime)od.StartDate,
                                       ProductName = p.ProductName,
@@ -56,19 +56,13 @@ namespace RentWebProj.Services
 
 
             MemberCenterVM = from m in MemberDMList
-                                 //join o in OrderDMList
-                                 //on m.MemberID equals o.MemberID
-                                 //join od in OrderDetailDMList
-                                 //on o.OrderID equals od.OrderID
-                                 //join b in BranchDMList
-                                 //on o.StoreID equals b.StoreID
-                                 //where m.MemberID == 38
-                             where m.Email == LoginEmail
+                             where m.MemberID == LoginMemeberId
                              select new MemberPersonDataViewModel
                              {
                                  //系統自動產生
                                  MemberId = m.MemberID,
                                  MemberName = (String.IsNullOrEmpty(m.FullName)) ? null : m.FullName,
+                                 //MemberName = m.FullName,
                                  //會員生日判斷如果為"null"則給預設值
                                  MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
                                  MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
@@ -77,7 +71,7 @@ namespace RentWebProj.Services
                                  MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
                                  //MemberBranchName = b.StoreName,
                                  //測試中訂單
-                                 //MemberOrderDetail = MemberOrderDetailVM,
+                                 MemberOrderDetail = MemberOrderDetailVM,
                                  //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
                              };
 
@@ -151,26 +145,59 @@ namespace RentWebProj.Services
             }
 
         }
-        public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
+        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
+        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail,string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
+        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone)
         {
-            var result = _repository.GetAll<Member>().ToList();
-            result.Find(x => x.Email == UserEmail).Email = ChangeEmail;
-            result.Find(x => x.PasswordHash == UserPassword).PasswordHash = ChangePassword;
-            result.Find(x => x.FullName == UserFullName).FullName = ChangeFullName;
-            result.Find(x => x.Phone == UserPhone).Phone = ChangePhone;
+            var result = _repository.GetAll<Member>().FirstOrDefault(x=>x.MemberID==UserMemberId);
+
+            result.Email = ChangeEmail;
+
+            result.PasswordHash = Helper.SHA1Hash(ChangePassword);
+
+            if (UserFullName == null || UserFullName == "")
+            {
+                result.FullName = ChangeFullName;
+            }
+            else
+            {
+                result.FullName = ChangeFullName;
+            }
+            //result.Find(x => x.MemberID == UserMemberId).Email = ChangeEmail;
+            //result.Find(x => x.PasswordHash == UserPasswordHash).PasswordHash = ChangePasswordHash;
+            //result.Find(x => x.FullName == UserFullName).FullName = ChangeFullName;
+            //會員電話判斷
+            if (UserPhone == null)
+            {
+                result.Phone = ChangePhone;
+            }
+            else
+            {
+                result.Phone = ChangePhone;
+            }
+
+
             _repository.SaveChanges();
 
             //return "修改成功";
             return MessageBox.Show("修改成功");
         }
 
+        public string ChangeEmail(int UserMemberId , string ChangeEmail)
+        {
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+            result.Email = ChangeEmail;
+            _repository.SaveChanges();
+            return "";
+        }
+
         //取得與目前登入User對應的"密碼"
         //public List<CheckInfo> CheckInfo(string UserEmail)
-        public string CheckPassword(string UserEmail)
+        public string CheckPassword(int MemberId)
         {
             var result = _repository.GetAll<Member>();
             var Memberpassword = from s in result
-                                 where s.Email == UserEmail
+                                 where s.MemberID == MemberId
                                  select new CheckPassword
                                  {
                                      Password = s.PasswordHash
@@ -186,11 +213,11 @@ namespace RentWebProj.Services
         }
 
         //取得與目前登入User對應的"姓名"
-        public string CheckName(string UserEmail)
+        public string CheckName(int MemberId)
         {
             var result = _repository.GetAll<Member>();
             var MemberFullName = from s in result
-                                 where s.Email == UserEmail
+                                 where s.MemberID == MemberId
                                  select new CheckFullName
                                  {
                                      Name = s.FullName
