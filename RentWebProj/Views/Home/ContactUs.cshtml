@@ -34,14 +34,14 @@
 
 </div>
 
-@using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
+@using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
 {
     <div class="container enter my-5">
         <div class="row d-flex">
             <div class="col-sm-6 col-12">
                 <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評論</label>
 
-                <textarea class="form-control" aria-label="With textarea" placeholder="分享您的心得感想"></textarea>
+                <textarea class="form-control" aria-label="With textarea" placeholder="分享您的心得感想" name="comment"></textarea>
             </div>
 
             <div class="col-sm-6 col-12 d-flex flex-column right">
@@ -50,29 +50,29 @@
 
                 <div class="rate">
                     <label title="Poor">
-                        <input type="radio" name="stars" value="1" />
+                        <input type="radio" name="star" value="1" />
                         <span class="icon"><i class="fas fa-star"></i></span>
                     </label>
                     <label title="Below average">
-                        <input type="radio" name="stars" value="2" />
+                        <input type="radio" name="star" value="2" />
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                     </label>
                     <label title="Average">
-                        <input type="radio" name="stars" value="3" />
+                        <input type="radio" name="star" value="3" />
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                     </label>
                     <label title="Above average">
-                        <input type="radio" name="stars" value="4" />
+                        <input type="radio" name="star" value="4" />
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                     </label>
                     <label title="Excellent">
-                        <input type="radio" name="stars" value="5" />
+                        <input type="radio" name="star" value="5" />
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
