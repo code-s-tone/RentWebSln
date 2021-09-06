@@ -1,11 +1,19 @@
 ﻿body {
     /* margin: 0; */
 }
-
+header-top{
+    
+}
+header-top .headerContainerFullWidth{
+ 
+    background-color: white;
+    width: 100%;
+}
 header-top .container-xl {
     max-width: 1200px !important;
     margin: auto;
     border-bottom: 1px solid whitesmoke;
+    
 }
 
 
@@ -21,7 +29,7 @@ header-top .container-xl {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    height: 90px;
+    height: 95px;
 }
 
 .header-function-box {
@@ -43,9 +51,11 @@ header-top .container-xl {
     position: relative;
 }
 
+
 .header-member-box i {
     font-size: 30px;
-    color: gray;
+    color: #fc8d61;
+
 }
 
 .nav-btn a {
@@ -95,7 +105,7 @@ header-top .container-xl {
 
 .header-search-box {
     margin-right: 25px;
-    margin-top: -3px;
+    margin-top: -5px;
 }
 
 .header-search {
@@ -128,9 +138,9 @@ header-top .container-xl {
     .header-search.active,
     .header-search:hover {
         width: 200px;
-        height: 45px;
+        height: 42px;
         margin-right: 0px;
-        margin-top: 3px;
+        margin-top: 4px;
     }
 
         .header-search.active:after,
@@ -152,6 +162,7 @@ header-top .container-xl {
 
 .header-member-box {
     display: flex;
+    align-items:center;
 }
 /* 會員中心dropdown */
 
@@ -270,6 +281,7 @@ header-top .container-xl {
         position: relative;
         list-style: none;
         margin: 5px 40px 0 40px;
+        height:100%;
     }
 
         .links li a {
@@ -295,7 +307,7 @@ header-top .container-xl {
     .links .sub-menu {
         position: absolute;
         width: 160px;
-        top: 22px;
+        top: 23px;
         left: -30%;
         line-height: 40px;
         background: white;

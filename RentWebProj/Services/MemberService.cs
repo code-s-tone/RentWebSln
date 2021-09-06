@@ -8,6 +8,8 @@ using RentWebProj.ViewModels;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Windows;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using System.Data.Entity;
 
 namespace RentWebProj.Services
@@ -247,23 +249,54 @@ namespace RentWebProj.Services
             }
             return MemberPhoneString;
         }
-
-        //取得與目前登入User對應的"生日"
-        public DateTime CheckBirthDay(int UserId)
+        public string FileUploadProfileImageData(string blobUrl)
         {
+            var Sname = HttpContext.Current.User.Identity.Name;
+            var Tname = Int32.Parse(Sname);
+            Account account = new Account(
+              "dgaodzamk",
+              "192222538187587",
+              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(blobUrl),
+                PublicId = $"MemberProfilePhoto/{Sname}"
+
+            };
+
+            var uploadResult = cloudinary.Upload(uploadParams);
+
+            var getResultImgUrl = cloudinary.GetResource($"MemberProfilePhoto/{Sname}").SecureUrl;
             var result = _repository.GetAll<Member>();
-            var MemberBirthDay = from s in result
-                              where s.MemberID == UserId
-                              select new CheckBirthDay
-                              {
-                                  BirthDay = (DateTime)s.Birthday
-                              };
-            DateTime MemberBirthDayString = new DateTime();
-            foreach (var item in MemberBirthDay)
-            {   //因為IQueryable故需要轉型為ToString
-                MemberBirthDayString = (DateTime)item.BirthDay;
-            }
-            return MemberBirthDayString;
+            result.ToList().Find(x => x.MemberID == Tname).ProfilePhotoUrl = getResultImgUrl; ;
+            _repository.SaveChanges();
+
+            return getResultImgUrl;
         }
+        //抓取 要在首頁 顯示留言的資料<名駿>
+        public IEnumerable<CommentViewModel> GetAllComment()
+        {
+            IEnumerable<CommentViewModel> AllCommentVMList;
+            AllCommentVMList =
+                from c in _repository.GetAll<Comment>()
+                join m in _repository.GetAll<Member>()
+                on c.MemberID equals m.MemberID
+                orderby c.Time descending
+
+                select new CommentViewModel
+                {
+                    MemberID = c.MemberID,
+                    MemberName = m.FullName,
+                    Score = c.Score,
+                    Time = c.Time,
+                    Message = c.Message,
+                    PhotoUrl = m.ProfilePhotoUrl
+                };
+
+            return AllCommentVMList;
+        }
+
     }
 }

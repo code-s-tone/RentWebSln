@@ -43,131 +43,154 @@
 
     <header-top>
 
+        <div class="headerContainerFullWidth">
+            <div class="container-xl">
+                <input type="checkbox" id="menu-control">
 
-        <div class="container-xl">
-            <input type="checkbox" id="menu-control">
+                <div class="header-nav">
 
-            <div class="header-nav">
-
-                <div class="logo d-grid">
-                    <a class="m-auto" href='@Url.Action("Index", "Home")'>
-                        <img src="~/Assets/images/Layout_Rent/logo.png" />
-                    </a>
-                </div>
-
-                <div class="header-function-box">
-
-                    <!-- 屆時MVC記得在input寫name 對應到action的參數 submit按鈕先hidden掉 待測試靠按enter可否行 -->
-                    <div class="header-search-box d-grid">
-                        <form class="m-auto">
-                            <label class="header-search d-grid" for="header-search-input">
-                                <input id="header-search-input" class="m-auto" type="text" placeholder=" 想租什麼呢?" />
-                            </label>
-                            <button type="submit"></button>
-                        </form>
+                    <div class="logo d-grid">
+                        <a class="m-auto" href='@Url.Action("Index", "Home")'>
+                            <img src="~/Assets/images/Layout_Rent/logo.png" />
+                        </a>
                     </div>
 
-                    <div class="header-member-box">
+                    <div class="header-function-box">
 
-                        <img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon" title="購物車">
-
-                        <div class="member-dropdown">
-                            <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
-                            <ul class="member-subMenu">
-                                <div class="profileBox">
-                                    <div class="profileImg d-grid"><img class="m-auto" src=@TempData["img"] alt=""></div>
-                                    <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
-                                </div>
-                                <a href="#">
-                                <li>通知</li></a>
-
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>我的訂單</li></a>
-                                <a href="@Url.Action("MemberCenter", "Member")">
-                                <li>修改個人資料</li></a>
-                                <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
-                                <li>登出</li>
-
-                                </a>
-
-
-                            </ul>
+                        <!-- 屆時MVC記得在input寫name 對應到action的參數 submit按鈕先hidden掉 待測試靠按enter可否行 -->
+                        <div class="header-search-box d-grid">
+                            <form class="m-auto">
+                                <label class="header-search d-grid" for="header-search-input">
+                                    <input id="header-search-input" class="m-auto" type="text" placeholder=" 想租什麼呢?" />
+                                </label>
+                                <button type="submit"></button>
+                            </form>
                         </div>
 
+                        <div class="header-member-box">
+
+                            @*<img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon">*@
+                            <a href="@Url.Action("Index", "Carts")">
+                                <i class="fas fa-shopping-cart" title="購物車"></i>
+                            </a>
+
+                            <div class="member-dropdown">
+                                <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
+                                <ul class="member-subMenu">
+                                    <div class="profileBox">
+                                        <div class="profileImg d-grid"><img class="m-auto Profile" src=@TempData["img"] alt=""></div>
+                                        <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
+                                    </div>
+                                    <a href="#">
+                                        <li>通知</li>
+                                    </a>
+
+                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                        <li>我的訂單</li>
+                                    </a>
+                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                        <li>修改個人資料</li>
+                                    </a>
+                                    <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
+                                        <li>登出</li>
+
+                                    </a>
+
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <!-- 註冊登入鈕 -->
+                        <nav class="nav-btn">
+                            <a href="@Url.Action("Login", "Member")" class="loginBtn">登入</a>
+                            <a href="@Url.Action("Register", "Member")" class="signUpBtn">註冊</a>
+                        </nav>
                     </div>
 
-                    <!-- 註冊登入鈕 -->
-                    <nav class="nav-btn">
-                        <a href="@Url.Action("Login", "Member")" class="loginBtn">登入</a>
-                        <a href="@Url.Action("Register", "Member")" class="signUpBtn">註冊</a>
-                    </nav>
+                    <label for="menu-control" class="hb my-auto">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </label>
                 </div>
 
-                <label for="menu-control" class="hb my-auto">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </label>
+                <nav class="dropdown-nav">
+                    <div class="navbar">
+
+                        <ul class="links">
+
+                            <li>
+                                <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
+
+                                <ul class="sub-menu">
+                                    <a href="@Url.Action("GeneralCategories", "Product")">
+                                        <li>所有種類</li>
+                                    </a>
+                                    <a href="@Url.Action("ProductList", "Product",new { categoryID = "Car" })">
+                                        <li>想租車車</li>
+                                    </a>
+                                    <a href="@Url.Action("ProductList", "Product",new { categoryID = "Acc" })">
+                                        <li>想租配件</li>
+                                    </a>
+                                    <a href="@Url.Action("ProductList", "Product",new { categoryID = "Ppl" })">
+                                        <li>想租人類</li>
+                                    </a>
+                                    <a href="@Url.Action("ProductList", "Product",new { categoryID = "Gam" })">
+                                        <li>想租遊戲</li>
+                                    </a>
+                                    <a href="@Url.Action("ProductList", "Product")">
+                                        <li>想租狗狗</li>
+                                    </a>
+                                    <a href="@Url.Action("GeneralCategories", "Product")">
+                                        <li>所有商品</li>
+                                    </a>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
+                                <ul class="sub-menu">
+                                    <a href="@Url.Action("HowToRent", "Home")">
+                                        <li>如何租借</li>
+                                    </a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">關於我們<i class="fas fa-chevron-down arrow"></i></a>
+                                <ul class="sub-menu">
+                                    <a href="@Url.Action("About", "Home")">
+                                        <li>我們的故事</li>
+                                    </a>
+                                    <a href="@Url.Action("ContributionProgram", "Home")">
+                                        <li>回饋計畫</li>
+                                    </a>
+                                    <a href="@Url.Action("ContactUs", "Home")">
+                                        <li>聯繫我們</li>
+                                    </a>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">業配一下<i class="fas fa-chevron-down arrow"></i></a>
+                                <ul class="sub-menu">
+                                    <a href="@Url.Action("SharingEconomy", "SocialMedia")">
+                                        <li>共享經濟</li>
+                                    </a>
+                                    <a href="@Url.Action("News", "SocialMedia")">
+                                        <li>上新聞了</li>
+                                    </a>
+                                    <a href="@Url.Action("BlogPost", "SocialMedia")">
+                                        <li>網紅推推</li>
+                                    </a>
+
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
             </div>
-
-            <nav class="dropdown-nav">
-                <div class="navbar">
-
-                    <ul class="links">
-
-                        <li>
-                            <a href="#">商品總覽<i class="fas fa-chevron-down arrow"></i></a>
-
-                            <ul class="sub-menu">
-                                <a href="@Url.Action("GeneralCategories", "Product")">
-                                <li>所有種類</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Car" })">
-                                <li>想租車車</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Acc" })">
-                                <li>想租配件</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Ppl" })">
-                                <li>想租人類</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product",new { categoryID = "Gam" })">
-                                <li>想租遊戲</li></a>
-                                <a href="@Url.Action("ProductCardsList", "Product")">
-                                <li>想租狗狗</li></a>
-
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
-                            <ul class="sub-menu">
-                                <a href="@Url.Action("HowToRent", "Home")">
-                                <li>如何租借</li></a>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">關於我們<i class="fas fa-chevron-down arrow"></i></a>
-                            <ul class="sub-menu">
-                                <a href="@Url.Action("About", "Home")">
-                                <li>我們的故事</li></a>
-                                <a href="@Url.Action("ContributionProgram", "Home")">
-                                <li>回饋計畫</li></a>
-                                <a href="@Url.Action("ContactUs", "Home")">
-                                <li>聯繫我們</li></a>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">葉配一下<i class="fas fa-chevron-down arrow"></i></a>
-                            <ul class="sub-menu">
-                                <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                                <li>共享經濟</li></a>
-                                <a href="@Url.Action("News", "SocialMedia")">
-                                <li>上新聞了</li></a>
-                                <a href="@Url.Action("BlogPost", "SocialMedia")">
-                                <li>網紅推推</li></a>
-
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </nav>
         </div>
     </header-top>
 
@@ -267,11 +290,7 @@
                         <li>codestone@gmail.com</li>
                         <li>© 2021 All Rights Reserved.</li>
                     </ul>
-                    <!--下載APP的圖先拿掉-->
-                    <!-- <ul class="footer-links appDownload">
-                        <li><a href="#"><img src="img/googleplay.png" alt="" style="width: 110px;"></a></li>
-                        <li><a href="#"><img src="img/applestore.png" alt="" style="width: 110px;" ></a></li>
-                    </ul>  -->
+                   
 
                 </div>
 

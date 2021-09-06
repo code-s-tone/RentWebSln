@@ -13,6 +13,7 @@ namespace RentWebProj.Models
         public Member()
         {
             Carts = new HashSet<Cart>();
+            Comments = new HashSet<Comment>();
             Orders = new HashSet<Order>();
         }
 
@@ -50,6 +51,9 @@ namespace RentWebProj.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual SignWay SignWay { get; set; }
 

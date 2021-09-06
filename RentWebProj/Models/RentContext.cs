@@ -16,6 +16,7 @@ namespace RentWebProj.Models
         public virtual DbSet<BranchStore> BranchStores { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<DeliveryOption> DeliveryOptions { get; set; }
         public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
@@ -44,6 +45,11 @@ namespace RentWebProj.Models
 
             modelBuilder.Entity<Member>()
                 .HasMany(e => e.Carts)
+                .WithRequired(e => e.Member)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(e => e.Comments)
                 .WithRequired(e => e.Member)
                 .WillCascadeOnDelete(false);
 

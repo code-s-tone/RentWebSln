@@ -23,9 +23,9 @@ namespace RentWebProj.Controllers
             ViewBag.Container = nameof(Container.CategoriesCardsContainer);
             ViewBag.ContainerTitle = nameof(ContainerTitle.所有種類);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            return View("ProductCardsList"); 
+            return View("ProductList"); 
         }
-        public ActionResult ProductCardsList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
+        public ActionResult ProductList(string categoryID) //路由先暫時用categoryID 至於搜尋待考慮是否改為productID
         {
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
@@ -40,32 +40,18 @@ namespace RentWebProj.Controllers
         {
             return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
         }
-        
-        //[HttpPost] //前端搜尋篩選
-        //public ActionResult SearchProductCards(FormCollection filterForm)
-        //{
-        //    var selectedCtProductList = _service.SearchProductCards(filterForm);
-                
-        //    ViewBag.Page = nameof(Pages.ProductCardsPage);
-        //    ViewBag.Container = nameof(Container.ProductCardsContainer);
-        //    ViewBag.CategoryOptions = _service.GetCategoryData();
-
-        //    ViewBag.ContainerTitle = selectedCtProductList.Count == 0? nameof(ContainerTitle.很抱歉找不到您要的商品):nameof(ContainerTitle.您要的商品);
-            
-        //    //ViewBag.FilterForm = filterForm;
-        //    return View("ProductCardsList", selectedCtProductList);
-        //}
+ 
 
         [HttpGet] //前端搜尋篩選
-        public ActionResult SearchProductCards(string keywordInput, string categoryOptions, string subCategoryOptions, string dailyRateBudget,string orderByOptions)
+        public ActionResult SearchProductCards(string keyword, string category, string subCategory, string rateBudget,string orderBy)
         {
             var filterForm = new FilterSearchViewModel
             {
-                keywordInput = keywordInput,
-                categoryOptions = categoryOptions,
-                subCategoryOptions = subCategoryOptions,
-                dailyRateBudget = dailyRateBudget,
-                orderByOptions = orderByOptions
+                Keyword = keyword,
+                Category = category,
+                SubCategory = subCategory,
+                RateBudget = rateBudget,
+                OrderBy = orderBy
             };
 
             var selectedProductList = _service.SearchProductCards(filterForm);
@@ -73,25 +59,23 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            ViewBag.CategorySelected = filterForm.categoryOptions;
-            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.categoryOptions);
+            ViewBag.CategorySelected = filterForm.Category;
+            ViewBag.SubcategoryOptions = _service.GetSubCategoryOptions(filterForm.Category);
             ViewBag.selectedProductList = selectedProductList;
             ViewBag.ContainerTitle = selectedProductList.Count == 0 ? nameof(ContainerTitle.很抱歉找不到您要的商品) : nameof(ContainerTitle.您要的商品);
 
             
 
 
-            return View("ProductCardsList", filterForm);
+            return View("ProductList", filterForm);
         }
 
         //---------------------------------------------------------------
-        //未登入 => 提示需登入或一律disabled
-        //已登入 => 有IsExisted屬性，=>true => 提示已加入            
-        //                           false => 導到某action，給予參數：ProductID 以及 IsExisted:false (篩選狀況的JSON?)
-        //                                    action執行：  以ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
-        //                                    1.return重新導向原action，自然重篩
-        //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
-        //              篩選狀況如何記錄起來傳遞?  或者 如何不跳轉也執行
+        //未登入 => disabled 或 點下去提示需登入
+        //已登入 => 點下去，不跳轉地執行後端程式，呼叫CartService的 Create方法
+        //                  =>IsSuccessful == false => 提示已加入過            
+        //                    IsSuccessful == true => 提示加入成功
+
         public ActionResult ProductToCart(string PID)
         {
             OperationResult result = new OperationResult();
@@ -100,21 +84,19 @@ namespace RentWebProj.Controllers
             if (result.IsSuccessful)
             {
                 //成功代表有寫入
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
             else
             {
                 //失敗代表本來就在車內
-                return RedirectToAction("ProductCardsList");
+                return RedirectToAction("ProductList");
             }
         }
 
         //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
         {
-            //User.Identity.Name
-            ProductDetailToCart VM = _service.GetProductDetail(PID,1);
-
+            ProductDetailToCart VM = _service.GetProductDetail(PID);
             return View(VM);
         }
 
@@ -141,7 +123,7 @@ namespace RentWebProj.Controllers
             }
 
             //購物車可能已變動/違法輸入，需重撈
-            ProductDetailToCart VM = _service.GetProductDetail(PID, 1);
+            ProductDetailToCart VM = _service.GetProductDetail(PID);
             VM.OperationSuccessful = isSuccessful;
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
