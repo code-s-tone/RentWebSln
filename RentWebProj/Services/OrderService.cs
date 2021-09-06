@@ -63,7 +63,7 @@ namespace RentWebProj.Services
         public void Create(CreateOrder VM)
         {
             //要從user.Identity.Name拿，要using
-            int MemberID = 1;
+            int MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name);
             DateTime OrderDate = DateTime.Now;
             Order orderEntity = new Order()
             {
