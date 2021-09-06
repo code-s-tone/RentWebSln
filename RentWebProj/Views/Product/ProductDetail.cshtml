@@ -310,11 +310,11 @@
     <script src="~/Assets/js/ProductDetail/ProductDisplay.js"></script>
     <script>
                 //未登入的禁用
-        @*if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
+        if (@Json.Encode( !User.Identity.IsAuthenticated) ) {
             let DateModalLauncher = document.querySelector('button[data-bs-target="#DateModal"]');
             DateModalLauncher.disabled = true;
             DateModalLauncher.innerText = '= 登入後才可租賃商品 =';
-        }else{}*@
+        }else{}
 
         //入車提示訊息
             @if (!String.IsNullOrEmpty(Model.OperationType))

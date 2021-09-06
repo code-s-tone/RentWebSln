@@ -8,6 +8,8 @@ using RentWebProj.ViewModels;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Windows;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace RentWebProj.Services
 {
@@ -235,5 +237,54 @@ namespace RentWebProj.Services
             }
             return MemberPhoneString;
         }
+        public string FileUploadProfileImageData(string blobUrl)
+        {
+            var Sname = HttpContext.Current.User.Identity.Name;
+            var Tname = Int32.Parse(Sname);
+            Account account = new Account(
+              "dgaodzamk",
+              "192222538187587",
+              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(blobUrl),
+                PublicId = $"MemberProfilePhoto/{Sname}"
+
+            };
+
+            var uploadResult = cloudinary.Upload(uploadParams);
+
+            var getResultImgUrl = cloudinary.GetResource($"MemberProfilePhoto/{Sname}").SecureUrl;
+            var result = _repository.GetAll<Member>();
+            result.ToList().Find(x => x.MemberID == Tname).ProfilePhotoUrl = getResultImgUrl; ;
+            _repository.SaveChanges();
+
+            return getResultImgUrl;
+        }
+        //抓取 要在首頁 顯示留言的資料<名駿>
+        public IEnumerable<CommentViewModel> GetAllComment()
+        {
+            IEnumerable<CommentViewModel> AllCommentVMList;
+            AllCommentVMList =
+                from c in _repository.GetAll<Comment>()
+                join m in _repository.GetAll<Member>()
+                on c.MemberID equals m.MemberID
+                orderby c.Time descending
+
+                select new CommentViewModel
+                {
+                    MemberID = c.MemberID,
+                    MemberName = m.FullName,
+                    Score = c.Score,
+                    Time = c.Time,
+                    Message = c.Message,
+                    PhotoUrl = m.ProfilePhotoUrl
+                };
+
+            return AllCommentVMList;
+        }
+
     }
 }

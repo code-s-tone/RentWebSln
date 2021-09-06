@@ -15,12 +15,12 @@
                 @using (Html.BeginForm("SearchProductCards", "Product", FormMethod.Get))
                 {
                     <div class="filterGroup">
-                        @Html.LabelFor(model => model.keywordInput)
-                        @Html.EditorFor(model => model.keywordInput, new { htmlAttributes = new { @class = "btn", placeholder = "想找什麼呢？" } })
+                        @Html.LabelFor(model => model.Keyword)
+                        @Html.EditorFor(model => model.Keyword, new { htmlAttributes = new { @class = "btn", placeholder = "想找什麼呢？" } })
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
-                        @Html.LabelFor(model => model.categoryOptions)
+                        @Html.LabelFor(model => model.Category)
                         <br>
                         @{
                             List<SelectListItem> categoryList = new List<SelectListItem>()
@@ -35,7 +35,7 @@
 
                         }
 
-                        @Html.DropDownListFor(m => m.categoryOptions, categoryList, new { @class = "my-2 w-100", @id = "categoryOptions" })
+                        @Html.DropDownListFor(m => m.Category, categoryList, new { @class = "my-2 w-100", @id = "category" })
 
                         @* 副類下拉 *@
                         @{
@@ -56,7 +56,7 @@
 
 
                         }
-                        @Html.DropDownListFor(m => m.subCategoryOptions, subcategoryList, new { @class = "w-100", @id = "subCategoryOptions" })
+                        @Html.DropDownListFor(m => m.SubCategory, subcategoryList, new { @class = "w-100", @id = "subCategory" })
 
                         @*<select name="subCategoryOptions" id="subCategoryOptions" class="w-100">
                                 <option value="0">選擇子分類</option>
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
-                        @Html.LabelFor(model => model.dailyRateBudget)
+                        @Html.LabelFor(model => model.RateBudget)
                         <br>
                         @{
                             List<SelectListItem> priceList = new List<SelectListItem>()
@@ -77,24 +77,24 @@
                                 new SelectListItem {Text = "$1000以上 價格不是問題", Value = "4"}
                             };
                         }
-                        @Html.DropDownListFor(m => m.dailyRateBudget, priceList, new { @class = "my-2 w-100" })
+                        @Html.DropDownListFor(m => m.RateBudget, priceList, new { @class = "my-2 w-100" })
 
                     </div>
 
                     <div class="filterGroup dNoneOnPhone">
 
-                        @Html.LabelFor(model => model.orderByOptions)
+                        @Html.LabelFor(model => model.OrderBy)
                         <br>
                         <label class="mt-1 ms-1">
-                            @Html.RadioButtonFor(m => m.orderByOptions, "orderByRelevance") 最相關不要五四三
+                            @Html.RadioButtonFor(m => m.OrderBy, "Relevance") 最相關不要五四三
                         </label>
                         <br>
                         <label class="mt-1 ms-1">
-                            @Html.RadioButtonFor(m => m.orderByOptions, "orderByPrice") 甜甜價低到高
+                            @Html.RadioButtonFor(m => m.OrderBy, "Price") 甜甜價低到高
                         </label>
                         <br>
                         <label class="mt-1 ms-1">
-                            @Html.RadioButtonFor(m => m.orderByOptions, "orderByStarsForLike") 星星熱門度
+                            @Html.RadioButtonFor(m => m.OrderBy, "Stars") 星星熱門度
                         </label>
                         <br>
 
@@ -176,12 +176,12 @@
         // window.onload
         // 1. 選擇的主類, 選擇的副類
         // 2.
-        $('#categoryOptions').on('change', function (e) {
+        $('#category').on('change', function (e) {
 
             var optionSelected = $("option:selected", this);
             //console.log(optionSelected);
             var valueSelected = this.value;
-            var subSelector = document.querySelector('#subCategoryOptions');
+            var subSelector = document.querySelector('#subCategory');
 
             //取消Ajax快取
             $.ajaxSetup({ cache: false });
