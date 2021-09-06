@@ -113,25 +113,8 @@ namespace RentWebProj.Controllers
             {
                 if (isCheckout)
                 {
-                    List<CartIndex> CList = new List<CartIndex>();
-
-                    var c = new CartIndex()
-                    {
-                        MemberID = Int32.Parse(User.Identity.Name),
-                        ProductID = PID,
-                        //StartDate = PostVM.StartDate,
-                        //ExpirationDate = PostVM.ExpirationDate,
-                        //DailyRate = (decimal)p.DailyRate,
-                        Qty = 1,//
-                        Available = true,//
-                    };
-
-                    var dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
-                    c.DateDiff = dateDiff;
-                    c.Sub = c.DailyRate * dateDiff;
-
-                    CList.Add(c);
-                    TempData["directCheckout"] = CList;
+                    //不寫入購物車
+                    TempData["directCheckout"] = _service.ProductToCheckout(PID, PostVM.StartDate, PostVM.ExpirationDate);
                     return RedirectToAction("Checkout", "Carts");
                 }
                 var cartService = new CartService();
