@@ -131,9 +131,6 @@
                     <div>
                         <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
                     </div>
-                    <div class="checkout">
-                        @*<button type="submit" class="btn">進行結帳</button>*@
-                    </div>
                 </div>
             </div>
         </div>
@@ -149,7 +146,7 @@
                             <label for="member-name">收件人</label>
                         </div>
                         <div>
-                            <input type="text" id="member-name">
+                            <input type="text" id="member-name" />
                         </div>
 
                         <div>
@@ -157,8 +154,8 @@
                         </div>
 
                         <div>
-                            <select name="StoreID" class="form-select" aria-label="address select">
-                                <option selected value="0">請選擇分店地址</option>
+                            <select name="StoreID" class="form-select" aria-label="address select" id="number">
+                                <option value="0">請選擇分店地址</option>
                                 @{
                                     var StoreList = new OrderService().GetAllStore();
                                     foreach (var item in StoreList)
@@ -166,7 +163,9 @@
                                         <option value="@(item.StoreID) ">@item.StoreName</option>
                                     }
                                 }
+
                             </select>
+
                         </div>
 
                     </div>
@@ -189,7 +188,9 @@
                         <span class="total">NT$@(total - discount) </span>
                     </div>
                     <div class="checkout">
-                        <button type="submit" class="btn">進行結帳</button>
+                        <div class="text-danger small mt-1">
+                        </div>
+                        <button type="submit" class="btn btn_sub">進行結帳</button>
                     </div>
                 </div>
             </div>
@@ -213,4 +214,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
+
+    <script>
+
+
+        let btn = document.querySelector('.btn_sub');
+        let sel = document.getElementById("number");
+        let user = document.getElementById('member-name');
+        let small = document.querySelector('.small');
+
+        function selectCheck() {
+            if (user.value == "" || sel.value == 0) {
+                btn.disabled = true;
+                small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
+            }
+            else if (user.value != "" && sel.value != 0) {
+                small.innerHTML = "";
+                btn.disabled = false;
+            }
+        }
+        sel.addEventListener('change', selectCheck);
+
+        window.onload = function () {
+            btn.disabled = true;
+            small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
+            //selectCheck();
+        }
+    </script>
 }

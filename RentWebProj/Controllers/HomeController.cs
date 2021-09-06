@@ -38,6 +38,12 @@ namespace RentWebProj.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult ContactUs(string comment,int star)
+        {
+            return View();
+        }
+
         public ActionResult ContributionProgram()
         {
             return View();

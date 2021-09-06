@@ -114,7 +114,7 @@ namespace RentWebProj.Controllers
                 if (isCheckout)
                 {
                     //不寫入購物車
-                    TempData["directCheckout"] = _service.ProductToCheckout(PID, PostVM.StartDate , PostVM.ExpirationDate);
+                    TempData["directCheckout"] = _service.ProductToCheckout(PID, PostVM.StartDate, PostVM.ExpirationDate);
                     return RedirectToAction("Checkout", "Carts");
                 }
                 var cartService = new CartService();
