@@ -59,6 +59,24 @@ namespace RentWebProj.Controllers
 
             return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());//可以強型別
         }
+        
+        //回傳個人資訊
+        public ActionResult MemberPerson(MemberPersonDataViewModel X)
+        {
+            return View();
+        }
+
+        //回傳信箱資訊
+        public ActionResult MemberEmail(string UserPassword , string ChangeEmail)
+        {
+            return View();
+        }
+
+        //回傳密碼資訊
+        public ActionResult MemberPassword(string UserPassword , string ChangePassword)
+        {
+            return View();
+        }
 
 
         public ActionResult Login()

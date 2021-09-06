@@ -8,6 +8,7 @@ using RentWebProj.ViewModels;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Windows;
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -43,7 +44,7 @@ namespace RentWebProj.Services
                                   select new MemberOrderDetailViewModel
                                   {
                                       BranchName = b.StoreName,
-                                      RentDate = (int)EntityFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
+                                      RentDate = (int)DbFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
                                       TotalAmount = (int)od.TotalAmount,
                                       StartDate = (DateTime)od.StartDate,
                                       ProductName = p.ProductName,
