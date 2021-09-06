@@ -71,13 +71,11 @@ namespace RentWebProj.Controllers
         }
 
         //---------------------------------------------------------------
-        //未登入 => 提示需登入或一律disabled
-        //已登入 => 有IsExisted屬性，=>true => 提示已加入            
-        //                           false => 導到某action，給予參數：ProductID 以及 IsExisted:false (篩選狀況的JSON?)
-        //                                    action執行：  以ProductDetailToCart型別  呼叫CartService.CreateOrUpdate加入購物車
-        //                                    1.return重新導向原action，自然重篩
-        //                                    3.return View，由於沒有重撈資料，必須透過某些手段改變ProductID搭配的IsExisted
-        //              篩選狀況如何記錄起來傳遞?  或者 如何不跳轉也執行
+        //未登入 => disabled 或 點下去提示需登入
+        //已登入 => 點下去，不跳轉地執行後端程式，呼叫CartService的 Create方法
+        //                  =>IsSuccessful == false => 提示已加入過            
+        //                    IsSuccessful == true => 提示加入成功
+
         public ActionResult ProductToCart(string PID)
         {
             OperationResult result = new OperationResult();
@@ -98,9 +96,7 @@ namespace RentWebProj.Controllers
         //接收路由PID撈產品資料、取當前登入者，傳到View
         public ActionResult ProductDetail(string PID)
         {
-            //User.Identity.Name
-            //ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
-
+            ProductDetailToCart VM = _service.GetProductDetail(PID);
             return View(VM);
         }
 
@@ -144,7 +140,7 @@ namespace RentWebProj.Controllers
             }
 
             //購物車可能已變動/違法輸入，需重撈
-            ProductDetailToCart VM = _service.getProductDetail(PID, Int32.Parse(User.Identity.Name));
+            ProductDetailToCart VM = _service.GetProductDetail(PID);
             VM.OperationSuccessful = isSuccessful;
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
