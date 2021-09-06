@@ -222,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RouteHelper.cs" />
     <Compile Include="Models\Administer.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />

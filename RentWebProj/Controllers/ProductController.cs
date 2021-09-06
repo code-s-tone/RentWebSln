@@ -6,15 +6,18 @@ using System.Web.Mvc;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
+using RentWebProj.Helpers;
 
 namespace RentWebProj.Controllers
 {
     public class ProductController : Controller
     {
         private ProductService _service;
+        private RouteHelper _rhelper;
         public ProductController()
         {
             _service = new ProductService();
+            _rhelper = new RouteHelper();
         }
 
         public ActionResult GeneralCategories()
@@ -27,10 +30,17 @@ namespace RentWebProj.Controllers
         }
 
 
-        //取得商品資料 1.如果有帶categoryID就顯示該主類商品 2.沒帶就顯示所有商品不分類
+        //取得商品資料 1.如果有帶categoryID就顯示該主類商品 2.沒帶或打all就顯示所有商品不分類
         public ActionResult ProductList(string categoryID) 
         {
-            if (string.IsNullOrEmpty(categoryID) || categoryID.Trim().ToUpper() == "ALL")//沒指定或是打ALL 都秀出所有商品
+            //1. 若使用者是打種類的單字(大於三碼) 先判斷種類代號
+            if (categoryID!=null && categoryID.Length > 3)
+            {
+                categoryID=_rhelper.SwitchToCategoryID(categoryID);
+            }
+            
+            //2. 沒指定或是打ALL 都秀出所有商品
+            if (string.IsNullOrEmpty(categoryID) || categoryID.Trim().ToUpper() == "ALL")
             {
                 ViewBag.ContainerTitle = nameof(ContainerTitle.所有商品);
             }
@@ -43,7 +53,6 @@ namespace RentWebProj.Controllers
                 ViewBag.ContainerTitle="所有" + _service.GetCategoryName(categoryID);
             }
             
-
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();

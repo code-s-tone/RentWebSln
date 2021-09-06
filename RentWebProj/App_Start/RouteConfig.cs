@@ -20,14 +20,14 @@ namespace RentWebProj
                 defaults: new { controller = "Product", action = "ProductDetail" , PID ="PplPg002" }
             );//Product/ProductDetail 重導到庭安所有種類頁
 
-            //產品卡片頁(各種類) 路由用種類id來判斷
+            //產品卡片頁(各種類) 原網址Product/ProductList 用Product/category/{categoryID}取代 且使用者打單字也可行
             routes.MapRoute(
                 name: "ProductList",
                 url: "Product/category/{categoryID}",
                 defaults: new { controller = "Product", action = "ProductList", categoryID = UrlParameter.Optional }
             );
 
-            //原網址Product/SearchProductCards 用Product/Search取代
+            //搜尋 原網址Product/SearchProductCards 用Product/Search取代
             routes.MapRoute(
                 name: "Search",
                 url: "Product/Search",

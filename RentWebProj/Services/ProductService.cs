@@ -6,6 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using System.Web.Mvc;
+using RentWebProj.Helpers;
 
 namespace RentWebProj.Services
 {
@@ -77,7 +78,7 @@ namespace RentWebProj.Services
 
         public string GetCategoryName(string categoryID)
         {
-            return GetCategoryData().FirstOrDefault(x => x.CategoryID == categoryID)?.CategoryName;
+            return GetCategoryData().FirstOrDefault(x => x.CategoryID.ToUpper() == categoryID.ToUpper())?.CategoryName;
    
         }
 
