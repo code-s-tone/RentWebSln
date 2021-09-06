@@ -7,37 +7,37 @@
 <div class="banner">
     <h1>評分與評論</h1>
 </div>
+
 <title>連繫我們</title>
-</head>
-
-<body>
-
-    <div class="container d-flex text-center mt-5">
-
-        <div class="row">
-            <div class="col-sm-6">
-                <img src="https://cdn.ruckify.com/pages/uploads/2021/01/30165555/Ruckify_Icons_RGB_Customer-Service-120x120.png"
-                     alt="" style="width: 150px;">
-                <h2 class="my-3">提供意見</h2>
-                <p>通過我們的即時聊天功能向我們發送消息以獲取即時幫助，或有任何問題透過留言評論，我們很樂意傾聽你們的想法。</p>
-                <!-- <a href="#">FAQ</a> or <a href="#">Help Article</a> pages for immediate assistance. -->
-            </div>
 
 
-            <div class="col-sm-6">
-                <img src="https://cdn.ruckify.com/pages/uploads/2021/01/30165555/Ruckify_Icons_RGB_Books-120x120.png" alt=""
-                     style="width: 150px;">
-                <h2 class="my-3">了解更多</h2>
-                <p>您是否有興趣了解更多有關知租網、共享經濟或在您的社區內租賃物品的信息？查看部落格了解更多信息。</p>
-            </div>
 
+<div class="container d-flex text-center mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://cdn.ruckify.com/pages/uploads/2021/01/30165555/Ruckify_Icons_RGB_Customer-Service-120x120.png"
+                 alt="" style="width: 150px;">
+            <h2 class="my-3">提供意見</h2>
+            <p>通過我們的即時聊天功能向我們發送消息以獲取即時幫助，或有任何問題透過留言評論，我們很樂意傾聽你們的想法。</p>
+            <!-- <a href="#">FAQ</a> or <a href="#">Help Article</a> pages for immediate assistance. -->
+        </div>
+
+
+        <div class="col-sm-6">
+            <img src="https://cdn.ruckify.com/pages/uploads/2021/01/30165555/Ruckify_Icons_RGB_Books-120x120.png" alt=""
+                 style="width: 150px;">
+            <h2 class="my-3">了解更多</h2>
+            <p>您是否有興趣了解更多有關知租網、共享經濟或在您的社區內租賃物品的信息？查看部落格了解更多信息。</p>
         </div>
 
     </div>
 
+</div>
+
+@using (Html.BeginForm("Checkout", "Carts", FormMethod.Post))
+{
     <div class="container enter my-5">
         <div class="row d-flex">
-
             <div class="col-sm-6 col-12">
                 <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評論</label>
 
@@ -49,7 +49,6 @@
                 <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評分</label>
 
                 <div class="rate">
-
                     <label title="Poor">
                         <input type="radio" name="stars" value="1" />
                         <span class="icon"><i class="fas fa-star"></i></span>
@@ -80,32 +79,28 @@
                         <span class="icon"><i class="fas fa-star"></i></span>
                         <span class="icon"><i class="fas fa-star"></i></span>
                     </label>
-                    <!-- button class="btn-info btn btn-sm pull-right">Submit</button>-->
                 </div>
+
                 <div class="word">請給我們五星好評喔!</div>
 
                 <div class="btn_all">
                     <button class="btn-s" type="submit">提交</button>
                 </div>
-
-
             </div>
         </div>
+    </div>
+}
 
 
-    </div>z
+@section topCSS{
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-
-
-    @section topCSS{
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-        <link href="~/Assets/css/contactus.css" rel="stylesheet" />
-    }
-    @section endJS{
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-                crossorigin="anonymous"></script>
-    }
+    <link href="~/Assets/css/contactus.css" rel="stylesheet" />
+}
+@section endJS{
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
+}
 

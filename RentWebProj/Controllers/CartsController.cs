@@ -53,8 +53,13 @@ namespace RentWebProj.Controllers
         
         public ActionResult Index()
         {
+            //要登帳號
             var carts = _cartService.GetCart(Int32.Parse(User.Identity.Name));
             ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name));
+
+            //免登預設1
+            //var carts = _cartService.GetCart(1);            
+            //ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
         }

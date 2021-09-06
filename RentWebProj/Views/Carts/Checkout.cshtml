@@ -131,9 +131,6 @@
                     <div>
                         <p>超商取貨滿350元免運費，未滿350元酌收處理費40元，宅配郵寄未滿1000元需加收50元運費</p>
                     </div>
-                    <div class="checkout">
-                        @*<button type="submit" class="btn">進行結帳</button>*@
-                    </div>
                 </div>
             </div>
         </div>
@@ -229,7 +226,7 @@
         function selectCheck() {
             if (user.value == "" || sel.value == 0) {
                 btn.disabled = true;
-                small.innerHTML = "姓名未填寫或是收件地址未選擇";
+                small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
             }
             else if (user.value != "" && sel.value != 0) {
                 small.innerHTML = "";
@@ -240,6 +237,7 @@
 
         window.onload = function () {
             btn.disabled = true;
+            small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
             //selectCheck();
         }
                 //function select_value(x) {
