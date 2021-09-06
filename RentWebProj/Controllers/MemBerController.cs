@@ -44,7 +44,7 @@ namespace RentWebProj.Controllers
             var MemberPasswordHash = _service.CheckPassword(Int32.Parse(User.Identity.Name));
             var MemberFullName = _service.CheckName(Int32.Parse(User.Identity.Name));
             var MemberPhone = _service.CheckPhone(User.Identity.Name);
-            var MemberBirthDay = _service.CheckBirthDay(Int32.Parse(User.Identity.Name));
+            //var MemberBirthDay = _service.CheckBirthDay(Int32.Parse(User.Identity.Name));
             //model是否合法驗證
             if (ModelState.IsValid)
             {
@@ -55,7 +55,7 @@ namespace RentWebProj.Controllers
             //Step2. 把信箱跟密碼進行"比對並更新"
             //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
             //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
-            ViewBag.Change = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail, MemberPasswordHash, X.MemberPasswordHash , MemberFullName, X.MemberName , MemberPhone, X.MemberPhone , MemberBirthDay , X.MemBerBirthday );
+            ViewBag.Change = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail, MemberPasswordHash, X.MemberPasswordHash , MemberFullName, X.MemberName , MemberPhone, X.MemberPhone);
 
             return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());//可以強型別
         }
@@ -79,8 +79,9 @@ namespace RentWebProj.Controllers
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
 
-
+            Thread.Sleep(5000);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+
         }
 
         [HttpPost]

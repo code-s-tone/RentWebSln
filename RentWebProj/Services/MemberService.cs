@@ -147,7 +147,7 @@ namespace RentWebProj.Services
         }
         //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
         //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail,string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone , DateTime MemberBirthDay , DateTime ChangeBirthDay)
+        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x=>x.MemberID==UserMemberId);
 
@@ -175,8 +175,6 @@ namespace RentWebProj.Services
             {
                 result.Phone = ChangePhone;
             }
-
-            result.Birthday = ChangeBirthDay;
 
 
             _repository.SaveChanges();
