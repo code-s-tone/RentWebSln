@@ -102,7 +102,7 @@
 }
 
 .member-display-group{
-    padding: 30px;
+    padding: 30px 0px;
     border-bottom: 1px solid #FFEEDD;
 }
 
@@ -110,8 +110,9 @@
     font-size: 16px;
 }
 
-.member-display-header{
+.member-display-header {
     font-weight: 600;
+    margin-bottom: 10px;
 }
 
 .member-display-person-style{
@@ -150,8 +151,14 @@
     display: block;
 }
 
-.member-display-item{
+.member-display-birthday-group,
+.member-display-phone-group{
+    display: flex;
+}
+
+.member-display-item {
     margin-bottom: 30px;
+    border-bottom: 1px solid #FFEEDD;
 }
 
 .member-display-firstname,
@@ -166,10 +173,14 @@
     padding: 7px;
     border: 1px solid #d7d7d7;
     border-radius: 3px;
-    margin-right: 8px;
+    margin-bottom: 10px;
 }
 
-.member-display-block-num{
+.member-display-year,
+.member-display-month {
+    margin-bottom: 10px;
+}
+.member-display-block-num {
     font-style: italic;
     pointer-events: none;
     color: #BEBEBE;
@@ -203,10 +214,17 @@
     padding: 7px;
     border: 1px solid #d7d7d7;
     border-radius: 3px;
+    
 }
-.member-display-shop{
+
+.member-display-lastname{
+    margin-bottom:10px;
+}
+
+.member-display-shop {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 /* .member-display-shop{
@@ -228,6 +246,7 @@
     background-color: #fc8d61;
     border: 1px solid rgb(0, 0, 0, 0);
     border-radius: 5px;
+    margin-bottom:5px;
     padding: 10px 20px;
     transition: .2s;
     cursor: pointer;
@@ -238,8 +257,9 @@
     background-color:#5BBDC5;
 }
 
-.member-display-name-input-box-first{
-    margin-bottom: 10px;
+.member-display-name-input-box-first {
+    margin-bottom: 0px;
+    margin-right: 2px;
 }
 
 .member-display-button-item{
@@ -257,24 +277,32 @@
 
 .member-display-service-id,
 .member-display-service-email,
-.member-display-service-password{
+.member-display-service-password {
     color: #0482c3;
     font-weight: 600;
-    margin-left: 5px;
-    text-decoration:none;
+    /*margin-left: 5px;*/
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.member-display-gender-textContent{
+    margin-bottom:10px
 }
 
 @media screen and (min-width:576px) {
-    .member-display-name-container,
-    .member-display-phone-container,
-    .member-display-born-container,
-    .member-display-shop-container{
+    .member-display-name-container, .member-display-phone-container, .member-display-born-container, .member-display-shop-container{
         display: flex;
         align-items: center;
     }
 
-    .member-display-name-input-box-first{
+    .member-display-name-container,
+    .member-display-phone-container,
+    .member-display-born-container{
+        display:block;
+    }
+    .member-display-name-input-box-first {
         margin-bottom: 0px;
+        margin-right: 2px;
     }
 
     .member-display-service-id,
@@ -282,14 +310,16 @@
     .member-display-service-password {
         color: #0482c3;
         font-weight: 600;
-        margin-left: 5px;
+        /*margin-left: 5px;*/
+        margin-bottom:10px;
         text-decoration: none;
     }
     .member-display-service-email > a,
     .member-display-service-password > a {
         color: #0482c3;
         font-weight: 600;
-        margin-left: 5px;
+        /*margin-left: 5px;*/
+        margin-bottom: 10px;
         text-decoration: none;
         pointer-events: none
     }

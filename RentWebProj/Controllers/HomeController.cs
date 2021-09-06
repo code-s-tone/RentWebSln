@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RentWebProj.ViewModels;
 using RentWebProj.Services;
-
+using RentWebProj.Models;
 
 namespace RentWebProj.Controllers
 {
@@ -35,6 +35,14 @@ namespace RentWebProj.Controllers
 
         public ActionResult ContactUs()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ContactUs(string comment,int star)
+        {
+            MemberService memberService = new MemberService();
+            memberService.Create(comment, star);
             return View();
         }
 

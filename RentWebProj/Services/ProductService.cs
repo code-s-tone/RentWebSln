@@ -235,8 +235,9 @@ namespace RentWebProj.Services
         }
 
 
-        public ProductDetailToCart GetProductDetail(string PID, int? currentMemberID)
+        public ProductDetailToCart GetProductDetail(string PID)
         {
+            int? currentMemberID = Helper.GetMemberId();
             ProductDetailToCart VM = new ProductDetailToCart();
 
             bool isExisted = false;
@@ -244,7 +245,7 @@ namespace RentWebProj.Services
             string expirationDate = null;
 
             //有登入 //User.Identity.
-            if (currentMemberID != null)
+            if (currentMemberID.HasValue)
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
                              where c.MemberID == currentMemberID && c.ProductID == PID
