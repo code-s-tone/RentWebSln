@@ -183,6 +183,14 @@ namespace RentWebProj.Services
             return MessageBox.Show("修改成功");
         }
 
+        public string ChangeEmail(int UserMemberId , string ChangeEmail)
+        {
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+            result.Email = ChangeEmail;
+            _repository.SaveChanges();
+            return "";
+        }
+
         //取得與目前登入User對應的"密碼"
         //public List<CheckInfo> CheckInfo(string UserEmail)
         public string CheckPassword(int MemberId)

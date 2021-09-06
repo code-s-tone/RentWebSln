@@ -59,22 +59,39 @@ namespace RentWebProj.Controllers
 
             return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());//可以強型別
         }
-        
+
+
+        [HttpPost]
         //回傳個人資訊
         public ActionResult MemberPerson(MemberPersonDataViewModel X)
         {
             return View();
         }
 
+        [HttpPost]
         //回傳信箱資訊
-        public ActionResult MemberEmail(string UserPassword , string ChangeEmail)
+        public ActionResult Email(MemberPersonDataViewModel X)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            }
+            ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
+
+
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
+        [HttpPost]
         //回傳密碼資訊
         public ActionResult MemberPassword(string UserPassword , string ChangePassword)
         {
+            if (ModelState.IsValid)
+            {
+                ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
+                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            }
             return View();
         }
 
