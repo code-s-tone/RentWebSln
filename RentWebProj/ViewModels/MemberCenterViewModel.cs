@@ -15,6 +15,11 @@ namespace RentWebProj.ViewModels
         [StringLength(20, MinimumLength = 2, ErrorMessage = "姓名至少2個字元,最多20字元")]
         public string MemberName { get; set; }
         public DateTime MemBerBirthday { get; set; }
+
+        public string MemberYear { get; set; }
+        public string MemberMonth { get; set; }
+        public string MemberDay { get; set; }
+
         public string MemberPhone { get; set; }
         public string MemberBranchName { get; set; }
         [Required]

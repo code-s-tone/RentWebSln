@@ -65,6 +65,9 @@ namespace RentWebProj.Services
                                  //MemberName = m.FullName,
                                  //會員生日判斷如果為"null"則給預設值
                                  MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
+                                 MemberYear = ((DateTime)m.Birthday).Year.ToString(),
+                                 MemberMonth = ((DateTime)m.Birthday).Month.ToString(),
+                                 MemberDay = ((DateTime)m.Birthday).Day.ToString(),
                                  MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
                                  //Email為必有欄位
                                  MemberEmail = m.Email,
@@ -183,6 +186,35 @@ namespace RentWebProj.Services
             return MessageBox.Show("修改成功");
         }
 
+        //回傳個人資訊
+        public string ChangeProfile(int UserMemberId , string ChangeUserName , int ChangeYear , int ChangeMonth , int ChangeDay, string ChangeUserPhone)
+        {   
+            //先找對應人會員
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+            if (ChangeUserName == "")
+            {
+                result.FullName = "";
+            }
+            else
+            {
+                result.FullName = ChangeUserName;
+            }
+
+            result.Birthday = result.Birthday;
+            
+            if(ChangeUserPhone == "")
+            {
+                result.Phone = "";
+            }
+            else
+            {
+                result.Phone = ChangeUserPhone;
+            }
+            _repository.SaveChanges();
+            return "";
+        }
+
+        //回傳信箱資訊
         public string ChangeEmail(int UserMemberId , string ChangeEmail)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
@@ -191,6 +223,7 @@ namespace RentWebProj.Services
             return "";
         }
 
+        //回傳密碼資訊
         public string ChangePassword(int UserMemberId , string ChangePassword)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);

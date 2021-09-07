@@ -42,8 +42,8 @@
                         </div>
 
 
-
-                        <!--信箱密碼Form-->
+                        @ViewBag.returnPerson
+                        <!--個人資料Form-->
                         @using (Html.BeginForm("MemberPerson", "Member", FormMethod.Post))
                         {
 
@@ -54,47 +54,48 @@
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header">姓氏與名字</div>
                             <div class="member-display-name-input-box-first">
-
                                 @Html.EditorFor(m => m.MemberName, new { @htmlAttributes = new { @class = "member-display-lastname member-person-input", @placeholder = "姓名" } })
                             </div>
                         </div>
-
+                        
                         <div class="member-display-born-container member-display-item">
                             <div class="member-display-header">生日</div>
                             <div class="member-display-birthday-group">
                                 <div class="member-display-name-input-box-first">
                                     @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
                                     @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Year, new { @htmlAttributes = new { @class = "member-display-year member-person-input", @placeholder = "年" } })
+                                    @Html.EditorFor(m => m.MemberYear, new { @htmlAttributes = new { @class = "member-display-year member-person-input", @placeholder = "年" } })
                                 </div>
                                 <div class="member-display-name-input-box-first">
                                     @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
                                     @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Month, new { @htmlAttributes = new { @class = "member-display-month member-person-input", @placeholder = "月份" } })
+                                    @Html.EditorFor(m => m.MemberMonth, new { @htmlAttributes = new { @class = "member-display-month member-person-input", @placeholder = "月份" } })
                                 </div>
                                 <div class="member-display-name-input-box-first">
                                     @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
                                     @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
-                                    @Html.EditorFor(m => m.MemBerBirthday.Day, new { @htmlAttributes = new { @class = "member-display-date member-person-input", @placeholder = "日期" } })
+                                    @Html.EditorFor(m => m.MemberDay, new { @htmlAttributes = new { @class = "member-display-date member-person-input", @placeholder = "日期" } })
                                 </div>
                             </div>
                         </div>
 
-                        <!--性別-->
-                        <div class="member-display-radio-container member-display-item">
-                            <div class="member-display-header">性別</div>
-                            <div class="member-display-gender-textContent">男</div>
-                            <div class="radio-men member-display-person-style">
-                                <input type="radio" name="gender" id="gender">
-                                <label class="member-display-header" for="text">男</label>
-                                <i class="fas fa-male"></i>
+                         <!--性別 戰略性暫時移除-->
+                                                <!--
+                            <div class="member-display-radio-container member-display-item">
+                                <div class="member-display-header">性別</div>
+                                <div class="member-display-gender-textContent">男</div>
+                                <div class="radio-men member-display-person-style">
+                                    <input type="radio" name="gender" id="gender">
+                                    <label class="member-display-header" for="text">男</label>
+                                    <i class="fas fa-male"></i>
+                                </div>
+                                <div class="radio-women member-display-person-style">
+                                    <input type="radio" name="gender" id="gender">
+                                    <label class="member-display-header" for="text">女</label>
+                                    <i class="fas fa-female"></i>
+                                </div>
                             </div>
-                            <div class="radio-women member-display-person-style">
-                                <input type="radio" name="gender" id="gender">
-                                <label class="member-display-header" for="text">女</label>
-                                <i class="fas fa-female"></i>
-                            </div>
-                        </div>
+                                -->
 
                         <!--電話-->
                         <div class="member-display-phone-container member-display-item">
@@ -129,12 +130,12 @@
                                     <button type="button" class="member-display-button-item memberperson-cancel-edit">取消編輯</button>
                                 </div>
                                 <div class="member-display-button-group">
-                                    <button class="member-display-button-item memberperson-button-edit">編輯</button>
+                                    <button type="button" class="member-display-button-item memberperson-button-edit">編輯</button>
                                 </div>
                             </div>
                             <div class="member-display-shop-container">
                                 <div class="member-display-button-group">
-                                    <button class="member-display-button-item memberperson-button-save">儲存</button>
+                                    <button type="submit" class="member-display-button-item memberperson-button-save">儲存</button>
                                 </div>
                             </div>
                         </div>
@@ -375,6 +376,14 @@
 
         //姓氏 //生日 //電話
         let personNameInp = document.querySelectorAll('.member-person-input');
+
+        //生日value
+        let changeYearValue = document.querySelector('.member-display-year');
+        let changeMonthValue = document.querySelector('.member-display-month');
+        let changeDateValue = document.querySelector('.member-display-date');
+
+        
+
 
 
         //性別

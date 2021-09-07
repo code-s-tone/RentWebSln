@@ -64,10 +64,10 @@ namespace RentWebProj.Controllers
         [HttpPost]
         //回傳個人資訊
         public ActionResult MemberPerson(MemberPersonDataViewModel X)
-        {   
-
-
-            return View();
+        {
+            ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemBerBirthday.Year , X.MemBerBirthday.Month , X.MemBerBirthday.Day, X.MemberPhone);
+            int a = 1;
+            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
         [HttpPost]
