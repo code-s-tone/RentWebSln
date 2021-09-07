@@ -64,7 +64,9 @@ namespace RentWebProj.Controllers
         [HttpPost]
         //回傳個人資訊
         public ActionResult MemberPerson(MemberPersonDataViewModel X)
-        {
+        {   
+
+
             return View();
         }
 

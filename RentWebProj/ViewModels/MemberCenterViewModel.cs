@@ -30,6 +30,7 @@ namespace RentWebProj.ViewModels
         public string ComfirMemberEmail { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         [StringLength(30, MinimumLength = 6, ErrorMessage = "密碼至少6個字元,最多30字元")]
         //[DataType(DataType.Password, ErrorMessage = "請輸入正確的密碼")]
         public string MemberPasswordHash { get; set; }
