@@ -239,4 +239,10 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="~/Assets/js/Contribution/swiperInHtml.js"></script>
     <script src="~/Assets/js/Contribution/countUp.js"></script>
-} 
+}
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
+}

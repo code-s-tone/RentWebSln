@@ -9,6 +9,7 @@ using RentWebProj.Models;
 
 namespace RentWebProj.Controllers
 {
+    
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -41,9 +42,10 @@ namespace RentWebProj.Controllers
         [HttpPost]
         public ActionResult ContactUs(string comment,int star)
         {
-            MemberService memberService = new MemberService();
-            memberService.Create(comment, star);
-            return View();
+                MemberService memberService = new MemberService();
+                memberService.Create(comment, star);
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ContributionProgram()

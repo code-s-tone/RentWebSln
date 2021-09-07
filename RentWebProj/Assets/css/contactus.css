@@ -45,7 +45,7 @@
 
 
 .enter .btn_all {
-    height: 100px;
+    height: 80px;
     display: flex;
     align-items: flex-end;
 }
@@ -54,6 +54,10 @@
     height: 80px;
     line-height: 80px;
     font-size: 30px;
+}
+.error{
+    height:20px;
+    line-height:20px;
 }
 
 .enter textarea {
