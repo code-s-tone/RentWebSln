@@ -51,7 +51,7 @@ namespace RentWebProj.Controllers
 
             return RedirectToAction("MemberCenter", "Member");
         }
-
+        [Authorize]
         public ActionResult Index()
         {
             //要登帳號

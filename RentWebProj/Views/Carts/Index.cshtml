@@ -104,8 +104,13 @@
                                             </span>
                                         </div>
                                         <div class="buyqty">
-                                            <span class="title">租借數量 :</span>
-                                            <input type="number" value="1" class="qty" readonly>
+                                            <span class="title">天數 : </span>
+                                            <span class="dateDiff">
+                                                @Html.DisplayFor(m => item.DateDiff)
+                                            </span>
+
+                                            @*<span class="title">租借數量 :</span>
+                                                <input type="number" value="1" class="qty" readonly>*@
                                         </div>
                                     </div>
                                     <div class="product-delete-sub">
@@ -198,24 +203,13 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
-        completeBtn.addEventListener('click', function(){
-            let modified = modifiedTarget();
-            if (modified.value == "false") {
-                modified.value = "true";
-            }
-            let ckBox = checkBoxTarget();
-            if (ckBox.disabled == true) {
-                ckBox.disabled = false;
-            }
-        });
-
         let DateModalLauncher = null;
         let StartDateToPost = null;
         let ExpirationDateToPost = null;
         let disablePeriodsJSONArray = [];
 
         let DateModalBtns = document.querySelectorAll('button[data-bs-target="#DateModal"]');
-        let checkBoxs = document.querySelectorAll('.form-check-input');
+        let checkBoxes = document.querySelectorAll('.form-check-input');
 
         //如果在購物車且有選日期 => 預顯示文字、寫入POST欄位，開放勾選
         @{
@@ -239,7 +233,7 @@
                 {
                     <text>
                     //沒有日期就禁用CheckBox
-                    checkBoxs[@i].disabled = true;
+                    checkBoxes[@i].disabled = true;
                     </text>
                 }
                 <text>
@@ -249,7 +243,6 @@
             }
         }
 
-
         DateModalBtns.forEach((btn, i) => {
             btn.addEventListener('click', function (ev) {
                 //指定DateModalLauncher
@@ -257,21 +250,69 @@
                 //指定要寫入的POST欄位
                 StartDateToPost = document.querySelector(`input[name="ListStartDate[${i}]"]`);
                 ExpirationDateToPost = document.querySelector(`input[name="ListExpirationDate[${i}]"]`);
-
                 //禁租日期
                 datePicker.config.disable = disablePeriodsJSONArray[i];
 
-                //日期設定完成=>以索引值取 目標異動紀錄欄位 目標核取方塊
+
+                //以索引值取
+                //目標單價、目標天數欄位、目標小計欄位、目標異動紀錄欄位 目標核取方塊
+                dailyRate = function () {
+                    return document.querySelectorAll(`span.price`)[i].innerText;
+                };
+                rentDaysTarget = function () {
+                    return document.querySelectorAll(`span.dateDiff`)[i];
+                };
+                subTotalTarget = function () {
+                    return document.querySelectorAll(`span.subTotal`)[i];
+                };
                 modifiedTarget = function () {
                     return document.querySelector(`input[name="ListModified[${i}]"]`);
                 };
                 checkBoxTarget = function () {
-                    return checkBoxs[i];
+                    return checkBoxes[i];
                 };
+
             });
         });
+
     </script>
+    <!-- dateTimePicker設定完成引發事件 -->
+    <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
+
     <script>
+        completeBtn.addEventListener('click', function () {
+            let modified = modifiedTarget();
+            if (modified.value == "false") {
+                modified.value = "true";
+            }
+            let ckBox = checkBoxTarget();
+            if (ckBox.disabled == true) {
+                ckBox.disabled = false;
+            }
+
+            //改變天數、小計、總計、異動過、核取權限
+            let days = Math.ceil(Math.abs(
+                (new Date(startDateTimeText) - new Date(endDateTimeText)) / 1000 / 60 / 60 / 24
+            ))
+
+            rentDaysTarget().innerText = days;
+            subTotalTarget().innerText = days * dailyRate() ;
+
+            let subs = document.querySelectorAll(`span.subTotal`);
+            let total = 0;
+            subs.forEach((x, idx) => {
+                total += parseInt(subs[idx].innerText);
+            });
+            document.querySelector('span.total').innerText = total;
+        });
+        //checkbox勾選事件
+        checkBoxes.forEach(function (ckBox) {
+            ckBox.addEventListener('change', function () {
+                let i = ckBox.value;
+                let PostTarget = document.querySelector(`input[name="ListChecked[${i}]"]`);
+                PostTarget.value = ckBox.checked;
+            });
+        })
         //function Checked() {
         //    let result = "";
         //    document.querySelectorAll('.form-check-input').forEach((x, idx) => function () {
@@ -283,38 +324,27 @@
         //    let b = document.querySelector('.check');
         //    b.setAttribute("value", result);
         //}
-        checkBoxs.forEach(function (ckBox) {
-            ckBox.addEventListener('change', function () {
-                let i = ckBox.value;
-                let PostTarget = document.querySelector(`input[name="ListChecked[${i}]"]`);
-                PostTarget.value = ckBox.checked;
-            });
-        })
 
-                //function Date() {
-                //    let start = "";
-                //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
 
-                //            start += startDateTimeText + ",";
+        //function Date() {
+        //    let start = "";
+        //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
 
-                //    })
+        //            start += startDateTimeText + ",";
 
-                //    let a = document.querySelector(".start");
-                //    a.setAttribute("value", start);
-                //}
+        //    })
 
-                //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
-                //    btn.addEventListener('change', Date);
+        //    let a = document.querySelector(".start");
+        //    a.setAttribute("value", start);
+        //}
 
-                //})
+        //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
+        //    btn.addEventListener('change', Date);
+
+        //})
     </script>
 
-    <!-- dateTimePicker設定完成引發事件 -->
-    <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
-    <script>
 
-
-    </script>
 }
 @if (User.Identity.IsAuthenticated)
 {
