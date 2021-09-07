@@ -37,7 +37,8 @@
                  data-caption="Optional caption">
         </div>
 
-        @for( int i=1; i<Model.ImgSources.Count ; i++ ) {
+        @for (int i = 1; i < Model.ImgSources.Count; i++)
+        {
             <div class="col-sm-5 col-12 Product">
                 <img src="@Model.ImgSources[i]"
                      data-fancybox="gallery"
@@ -357,7 +358,7 @@
             //改變表單位址
             //document.querySelector('form').setAttribute('action','') ;//<form action="/Product/ProductDetail" method="post">
             document.querySelector('input[name="isCheckout"]').value = 'true';
-            
+
         });
 
     </script>
@@ -397,4 +398,10 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
 
+}
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
 }

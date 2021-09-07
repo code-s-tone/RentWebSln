@@ -21,7 +21,7 @@
                         data: { id_token: access },
                         success: function () {
                             console.log("fb的accessToken傳送成功");
-                            window.location.href = "../Home/Index";
+                            window.location.href = `${document.referrer}`;
                         }
 
                     });
