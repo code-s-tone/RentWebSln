@@ -78,22 +78,23 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
-
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
 
         }
 
         [HttpPost]
         //回傳密碼資訊
-        public ActionResult MemberPassword(string UserPassword , string ChangePassword)
+        public ActionResult MemberPassword(MemberPersonDataViewModel X)
         {
             if (ModelState.IsValid)
             {
                 ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
-            return View();
+            ViewBag.returnEmail = _service.ChangePassword(Int32.Parse(User.Identity.Name), X.MemberPasswordHash);
+            Thread.Sleep(3000);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
 

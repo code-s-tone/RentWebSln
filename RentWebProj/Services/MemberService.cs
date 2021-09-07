@@ -191,6 +191,14 @@ namespace RentWebProj.Services
             return "";
         }
 
+        public string ChangePassword(int UserMemberId , string ChangePassword)
+        {
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+            result.PasswordHash = Helper.SHA1Hash(ChangePassword);
+            _repository.SaveChanges();
+            return "";
+        }
+
         //取得與目前登入User對應的"密碼"
         //public List<CheckInfo> CheckInfo(string UserEmail)
         public string CheckPassword(int MemberId)
