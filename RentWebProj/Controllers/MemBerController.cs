@@ -70,7 +70,7 @@ namespace RentWebProj.Controllers
 
         [HttpPost]
         //回傳信箱資訊
-        public ActionResult Email(MemberPersonDataViewModel X)
+        public ActionResult MemberEmail(MemberPersonDataViewModel X)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
 
         }
@@ -93,7 +93,7 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangePassword(Int32.Parse(User.Identity.Name), X.MemberPasswordHash);
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 

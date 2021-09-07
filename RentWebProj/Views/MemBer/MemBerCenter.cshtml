@@ -29,7 +29,9 @@
 
             @*原始表單區塊*@
             @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
-            {}*@
+            {
+                
+            }*@
         <div class="tab-content" id="myTabContent">
             <!-- 個人資料 -->
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -177,7 +179,7 @@
 
 
                     @ViewBag.returnEmail
-                    @using (Html.BeginForm("Email", "Member", FormMethod.Post))
+                    @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
                     {
                     <div class="member-display-name-container member-display-item">
                         <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
@@ -417,6 +419,7 @@
         
         //密碼
         let changePasswordDisplay = document.querySelectorAll('.member-changePassword-item');
+        let passwordClear = document.querySelectorAll('.member-password-clear');
 
 
         window.onload = function () {
@@ -472,6 +475,13 @@
         function PasswordDisplay() {
             for (let i = 0; i < changePasswordDisplay.length; i++) {
                 changePasswordDisplay[i].classList.remove('notDisplay');
+            }
+        }
+
+        //顯示變更密碼清除
+        function PasswordClear() {
+            for (let i = 0; i < passwordClear.length; i++) {
+                passwordClear[i].value = '';
             }
         }
         
@@ -544,6 +554,7 @@
             passwordSaveBtn.disabled = false;
             passwordSaveBtn.classList.remove('buttonDisabled');
             PasswordDisplay();
+            PasswordClear();
         });
         
         //取消密碼編輯
