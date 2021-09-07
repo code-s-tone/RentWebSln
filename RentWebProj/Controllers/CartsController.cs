@@ -29,7 +29,10 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            return View(TempData["directCheckout"]);
+            if(TempData["directCheckout"]!=null)
+                return View();
+            else
+                return RedirectToAction("Index", "Carts");
         }
         [HttpPost]
         public ActionResult Checkout(CreateOrder PostVM)//IEnumerable<CartIndex> VM
