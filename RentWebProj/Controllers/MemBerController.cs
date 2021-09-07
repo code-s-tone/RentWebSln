@@ -101,9 +101,25 @@ namespace RentWebProj.Controllers
         {
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
-                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
-                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
-                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = url_Pre.Split('/')[1];
+              
+                if (url_Pre.Split('/')[1] == "Carts")
+                {
+                    TempData["PreviousAction"] = "Index";
+                }
+                else if(url_Pre.Split('/').Length < 4)
+                {
+                    TempData["PreviousAction"] = url_Pre.Split('/')[2];
+                    TempData["PreviousId"] = null; 
+                }
+                else
+                {
+                    TempData["PreviousAction"] = url_Pre.Split('/')[2];
+                    TempData["PreviousId"] = url_Pre.Split('/')[3];
+                }
+     
             }
 
            return View();
@@ -126,7 +142,7 @@ namespace RentWebProj.Controllers
                 Helper.FormsAuthorization(s.Email);
                 if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
                 {
-                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}");
+                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}", new { id = TempData["PreviousId"] });
                 }
                 else
                 {
@@ -353,10 +369,24 @@ namespace RentWebProj.Controllers
             Thread.Sleep(4000);
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
-                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
-                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
-                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
-                return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}");
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString();
+                var controller_Pre = url_Pre.Split('/')[1];
+   
+                if (url_Pre.Split('/')[1] == "Carts") 
+                {
+                    return RedirectToAction("Index", "Carts");
+                }
+                else if (url_Pre.Split('/').Length < 4)
+                {
+                    var action_Pre = url_Pre.Split('/')[2];
+                    return RedirectToAction($"{action_Pre}", $"{controller_Pre}");
+                }
+                else
+                {
+                    var action_Pre = url_Pre.Split('/')[2];
+                    var id_Pre = url_Pre.Split('/')[3];
+                    return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { id = id_Pre });
+                }
             }
             else
             {

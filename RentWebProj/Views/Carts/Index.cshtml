@@ -291,22 +291,22 @@
             });
         })
 
-            //function Date() {
-            //    let start = "";
-            //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
+                //function Date() {
+                //    let start = "";
+                //    document.querySelectorAll('input[name="StartDate"]').forEach(function (x) {
 
-            //            start += startDateTimeText + ",";
+                //            start += startDateTimeText + ",";
 
-            //    })
+                //    })
 
-            //    let a = document.querySelector(".start");
-            //    a.setAttribute("value", start);
-            //}
+                //    let a = document.querySelector(".start");
+                //    a.setAttribute("value", start);
+                //}
 
-            //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
-            //    btn.addEventListener('change', Date);
+                //document.querySelectorAll('input[name="StartDate"]').forEach(function (btn) {
+                //    btn.addEventListener('change', Date);
 
-            //})
+                //})
     </script>
 
     <!-- dateTimePicker設定完成引發事件 -->
@@ -315,4 +315,10 @@
 
 
     </script>
+}
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
 }
