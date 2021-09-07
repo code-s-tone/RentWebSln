@@ -10,13 +10,13 @@ namespace RentWebProj.ApiControllers
 {
     public class ProductController : ApiController
     {
-        public ApiResult GetProductData()
+        public ApiResult GetSelectedProductData()
         {
             //var result = new List<ProductData>();
             var result = "";
             try
             {
-                //result = _proService.GetProductData();
+                //result = _proService.GetSelectedProductData();
                 result = "";
                 throw new ApiResult(ApiStatus.Success, string.Empty, result);
             }

@@ -18,7 +18,7 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        //可以從這邊再篩選、轉型
+        //全部商品的資訊 可以從這邊再篩選、轉型
         public IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
@@ -37,16 +37,39 @@ namespace RentWebProj.Services
                     DailyRate = p.DailyRate,
                     Description = p.Description,
                     CategoryName = c.CategoryName,
+                    CategoryID = c.CategoryID,
                     SubCategoryName = s.SubCategoryName,
+                    SubCategoryID = s.SubCategoryID
                 };
 
             return AllProductCardVMList;
         }
 
+        public IEnumerable<CardsViewModel> ProductDataWithStars()
+        {
+            //回傳所有商品資料含30天內被租過的日期
+            var pLists = GetMostPopularProductCardData(30).ToList();
+            int[] dayRange = new int[] {0, 1, 2, 3, 4 };
+
+            pLists.ForEach(p =>
+            {
+                for (int i = 0; i < dayRange.Length; i++)
+                {
+                    if (p.CountOfRentedDays >= dayRange[i])
+                    { 
+                        p.StarsForLike = i+1;
+                    }
+                }
+            });
+            return pLists;
+        }
+
+        //首頁算30天內被租天數高到低排序
         public IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays)
         {
             var pList = GetAllProductCardData().ToList();
-            pList.ForEach(p => {
+            pList.ForEach(p =>
+            {
                 var days = new OrderService().CountRentedDays(p.ProductID, amongDays);
                 p.CountOfRentedDays = days;
             });
@@ -55,21 +78,18 @@ namespace RentWebProj.Services
             return VMList;
         }
 
-
-
         public IEnumerable<CardsViewModel> GetCategoryData()
         {
             IEnumerable<CardsViewModel> ctVMList;
 
             var ctDMList = _repository.GetAll<Category>();
 
-            //Query Expression
             ctVMList = from ct in ctDMList
                        select new CardsViewModel
-                       { 
-                           CategoryName = ct.CategoryName, 
-                           CategoryID = ct.CategoryID, 
-                           ImageSrcMain = ct.ImageSrcMain, 
+                       {
+                           CategoryName = ct.CategoryName,
+                           CategoryID = ct.CategoryID,
+                           ImageSrcMain = ct.ImageSrcMain,
                            ImageSrcSecond = ct.ImageSrcSecond
                        };
 
@@ -79,7 +99,6 @@ namespace RentWebProj.Services
         public string GetCategoryName(string categoryID)
         {
             return GetCategoryData().FirstOrDefault(x => x.CategoryID.ToUpper() == categoryID.ToUpper())?.CategoryName;
-   
         }
 
         public IEnumerable<CardsViewModel> GetSubCategoryOptions(string catID)
@@ -96,66 +115,28 @@ namespace RentWebProj.Services
             return subVMList;
         }
 
-        //public IEnumerable<CardsViewModel> GetProductData()
-        //{
-        //    return GetProductData(null);
-        //}
 
-        public IEnumerable<CardsViewModel> GetProductData(string categoryID)
+        public List<CardsViewModel> GetSelectedProductData(string categoryID)
         {
-            IEnumerable<CardsViewModel> VMList;
-            var pDMList = _repository.GetAll<Product>();
-            var ctDMList = _repository.GetAll<Category>();
-            var subCtDMList = _repository.GetAll<SubCategory>();
+            List<CardsViewModel> selectedVMList;
 
             if (categoryID == null || categoryID.Trim().ToUpper() == "ALL") //表示帶所有商品不分類
             {
-                VMList = (from p in pDMList
-                    join c in ctDMList
-                        on p.ProductID.Substring(0, 3) equals c.CategoryID
-                    join s in subCtDMList
-                        on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-
-                    select new CardsViewModel
-                    {
-                        ProductID = p.ProductID,
-                        ProductName = p.ProductName,
-                        CategoryName = c.CategoryName,
-                        Description = p.Description,
-                        DailyRate = p.DailyRate,
-                        SubCategoryName = s.SubCategoryName,
-                        SubCategoryID = s.SubCategoryID
-                    });
+                selectedVMList = ProductDataWithStars().ToList();
             }
-            else
+            else//找該分類
             {
-                VMList = (from p in pDMList
-                      join c in ctDMList
-                      on p.ProductID.Substring(0, 3) equals c.CategoryID
-                      join s in subCtDMList
-                      on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-                      where c.CategoryID == categoryID.Substring(0, 3)
-
-                      select new CardsViewModel
-                      {
-                          ProductID = p.ProductID,
-                          ProductName = p.ProductName,
-                          CategoryName = c.CategoryName,
-                          Description = p.Description,
-                          DailyRate = p.DailyRate,
-                          SubCategoryName = s.SubCategoryName,
-                          SubCategoryID = s.SubCategoryID
-                      });
+                selectedVMList = ProductDataWithStars().Where(x => x.CategoryID == categoryID.Substring(0, 3)).ToList();
             }
 
-            return VMList;
+            return selectedVMList;
         }
 
         public List<CardsViewModel> SearchProductCards(FilterSearchViewModel filterFormList)
         {
             string keywordInput = filterFormList.Keyword;
             string categoryOptions = filterFormList.Category;
-            string subCategoryOptions = filterFormList.SubCategory; 
+            string subCategoryOptions = filterFormList.SubCategory;
             string dailyRateBudget = filterFormList.RateBudget;
             string orderByOptions = filterFormList.OrderBy;
 
@@ -183,40 +164,26 @@ namespace RentWebProj.Services
                     break;
             }
 
-            var pDMList = _repository.GetAll<Product>();
-            var ctDMList = _repository.GetAll<Category>();
-            var subDMList = _repository.GetAll<SubCategory>();
 
             //依所選條件取出相關產品 AccBg001
-            var selectedVMList = (from p in pDMList
-                join c in ctDMList
-                    on p.ProductID.Substring(0, 3) equals c.CategoryID
-                join s in subDMList
-                    on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-                where (categoryOptions == "0" || categoryOptions == null || c.CategoryID == categoryOptions)
-                      && (subCategoryOptions == "0" || subCategoryOptions == null || s.SubCategoryID == subCategoryOptions)
+            var selectedVMList = (
+
+                from p in ProductDataWithStars()
+
+                where (categoryOptions == "0" || categoryOptions == null || p.CategoryID == categoryOptions)
+                      && (subCategoryOptions == "0" || subCategoryOptions == null || p.SubCategoryID == subCategoryOptions)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate >= minBudget)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate <= maxBudget)
-                      && (keywordInput == null || c.CategoryName.Contains(keywordInput) || s.SubCategoryName.Contains(keywordInput) || p.ProductName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+                      && (keywordInput == null || p.ProductName.Contains(keywordInput)|| p.CategoryName.Contains(keywordInput) || p.SubCategoryName.Contains(keywordInput) || p.Description.Contains(keywordInput))
 
-                select new CardsViewModel
-                {
-                    ProductID = p.ProductID,
-                    ProductName = p.ProductName,
-                    CategoryName = c.CategoryName,
-                    Description = p.Description,
-                    DailyRate = p.DailyRate,
-                    SubCategoryName = s.SubCategoryName,
-                    SubCategoryID = s.SubCategoryID
+                select p).ToList();
 
-                }).ToList();
-
-            //選出的產品排序 如果沒選排序就直接回傳 有選就丟進order方法
+            //選出的產品排序 如果沒選排序就直接回傳 
             if (orderByOptions == null)
             {
                 return selectedVMList;
             }
-            else
+            else //有選排序就丟進order方法
             {
                 return OrderSelectedProductCards(selectedVMList, orderByOptions);
             }
@@ -231,6 +198,10 @@ namespace RentWebProj.Services
             else if (orderByOptions.ToLower() == "price")
             {
                 selectedList = selectedList.OrderBy(x => x.DailyRate).ToList();
+            }
+            else //選星星
+            {
+                selectedList = selectedList.OrderBy(x => x.StarsForLike).ToList();
             }
             return selectedList;
         }
@@ -295,24 +266,24 @@ namespace RentWebProj.Services
         }
 
 
-        public List<CartIndex> ProductToCheckout(string PID ,string startDate , string expirationDate)
+        public List<CartIndex> ProductToCheckout(string PID, string startDate, string expirationDate)
         {
             DateTime s = Convert.ToDateTime(startDate);
             DateTime e = Convert.ToDateTime(expirationDate);
 
             var c = (from p in _repository.GetAll<Product>()
                      where p.ProductID == PID
-                    select new CartIndex()
-                    {
-                        //MemberID = 1,
-                        ProductID = PID,
-                        ProductName = p.ProductName,
-                        DailyRate = p.DailyRate,
-                        //Qty = 1,//無作用
-                        StartDate = s,
-                        ExpirationDate = e,
-                        //產品圖片
-                    }).SingleOrDefault();
+                     select new CartIndex()
+                     {
+                         //MemberID = 1,
+                         ProductID = PID,
+                         ProductName = p.ProductName,
+                         DailyRate = p.DailyRate,
+                         //Qty = 1,//無作用
+                         StartDate = s,
+                         ExpirationDate = e,
+                         //產品圖片
+                     }).SingleOrDefault();
 
             var dateDiff = (e - s).Days; //TotalDays帶小數
             c.DateDiff = dateDiff;
