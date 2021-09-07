@@ -13,6 +13,7 @@ using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
+    [Authorize]
     public class CartsController : Controller
     {
         private RentContext db = new RentContext();
