@@ -99,8 +99,16 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+            }
 
-            return View();
+           return View();
+            
+           
 
         }
         [HttpPost]
@@ -116,7 +124,14 @@ namespace RentWebProj.Controllers
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
-                return RedirectToAction("Index", "Home");
+                if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
+                {
+                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }   
 
             }
             else
@@ -185,6 +200,8 @@ namespace RentWebProj.Controllers
                 NameValueCollection nvc = new NameValueCollection();
                 NameValueCollection nyc = new NameValueCollection();
                 #endregion
+
+                #region Line_Post_token
                 try
                 {
                     //取回Token
@@ -228,8 +245,18 @@ namespace RentWebProj.Controllers
                     string msg = ex.Message;
                     throw;
                 }
+                #endregion
             }
-            return View();
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                return RedirectPermanent("https://www.google.com");
+            }
+            else
+            {
+             
+                return View();
+            }
+     
         }
         [HttpPost]
         public async Task<ActionResult> Google(string id_token)
@@ -270,7 +297,12 @@ namespace RentWebProj.Controllers
                 Helper.FormsAuthorization(email);
                 return RedirectToAction("Index", "Home");
             }
-
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+            }
             return View();
         }
 
@@ -300,6 +332,12 @@ namespace RentWebProj.Controllers
             _service.getMemberFbData(Profile.name, Profile.email);
 
             Helper.FormsAuthorization(ViewData["FB_Email"].ToString());
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -312,8 +350,18 @@ namespace RentWebProj.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            Thread.Sleep(5000);
-            return RedirectToAction("Index", "Home");
+            Thread.Sleep(4000);
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+                return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
     }
