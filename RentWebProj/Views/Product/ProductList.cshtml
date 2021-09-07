@@ -10,7 +10,7 @@
     <div class="row pt-lg-3 px-2">
 
         <!-- Left filter區-->
-        <div class="col-lg-3 px-2 mx-0 ">
+        <div class="col-lg-2 px-2 mx-0 ">
             <div class="searchContainer">
                 @using (Html.BeginForm("SearchProductCards", "Product", FormMethod.Get))
                 {
@@ -74,7 +74,7 @@
                                 new SelectListItem {Text = "$100以下", Value = "1"},
                                 new SelectListItem {Text = "$101~$500", Value = "2"},
                                 new SelectListItem {Text = "$501~$1000", Value = "3"},
-                                new SelectListItem {Text = "$1000以上 價格不是問題", Value = "4"}
+                                new SelectListItem {Text = "$1000以上 $$不是問題", Value = "4"}
                             };
                         }
                         @Html.DropDownListFor(m => m.RateBudget, priceList, new { @class = "my-2 w-100" })
@@ -86,7 +86,7 @@
                         @Html.LabelFor(model => model.OrderBy)
                         <br>
                         <label class="mt-1 ms-1">
-                            @Html.RadioButtonFor(m => m.OrderBy, "Relevance") 最相關不要五四三
+                            @Html.RadioButtonFor(m => m.OrderBy, "Relevance") 最相關
                         </label>
                         <br>
                         <label class="mt-1 ms-1">
@@ -110,13 +110,13 @@
         </div>
 
         <!-- Right 種類或商品卡片部分 -->
-        <div class="col-lg-9 col-12 px-2  mb-4 mx-0 ">
+        <div class="col-lg-10 col-12 px-2  mb-4 mx-0 ">
 
             <div class="col-12 px-2 @ViewBag.Container">
                 <h4>@ViewBag.ContainerTitle</h4>
 
                 <div class=" d-flex flex-wrap">
-                    @if (ViewBag.ContainerTitle == nameof(ContainerTitle.所有種類))
+                    @if (ViewBag.ContainerTitle == nameof(ContainerTitle.種類列表))
                     {
                         foreach (CardsViewModel ct in ViewBag.CategoryOptions)
                         {
@@ -159,17 +159,16 @@
 
 @section topJS
 {
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    @*<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin="">
     </script>
-    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>*@
 
 }
 
 @section endJS
 {
-    <script src="~/Assets/js/GeneralProductCards/GeneralCategories.js"></script>
     <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
     <script src="~/Assets/js/GeneralProductCards/SearchFilter.js"></script>
     <script>

@@ -1,14 +1,15 @@
 ﻿// 庭安
 // 商品卡片
+let FirstSrc;
+let SecondSrc;
 
-function productCard_Hover2(element) {
-    let FirstSrc = element.querySelector('img:first-child').getAttribute('src');
-    let SecondSrc = FirstSrc.replace('_1', '_2')
-    element.querySelector('img:first-child').setAttribute('src2', FirstSrc);
-    element.querySelector('img:first-child').setAttribute('src', SecondSrc);
+function productCard_Hover(element) {
+    FirstSrc = element.querySelector('img').getAttribute('src');
+    SecondSrc = FirstSrc.replace('_1', '_2');
+    element.querySelector('img').setAttribute('src', SecondSrc);
+console.log(FirstSrc);
 }
 
-function productCard_Unhover2(element) {
-    let SecondtSrc = element.querySelector('img:first-child').getAttribute('src2');
-    element.querySelector('img:first-child').setAttribute('src', SecondtSrc);
+function productCard_Unhover(element) {
+    element.querySelector('img').setAttribute('src', FirstSrc);
 }

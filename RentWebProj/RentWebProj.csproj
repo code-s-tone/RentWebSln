@@ -222,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RouteHelper.cs" />
     <Compile Include="Models\Administer.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -380,7 +381,6 @@
     <Content Include="Assets\images\Contribution\Why_Icons_Protection-120x120.png" />
     <Content Include="Assets\js\about.js" />
     <Content Include="Assets\js\Contribution\countUp.js" />
-    <Content Include="Assets\js\GeneralProductCards\GeneralCategories.js" />
     <Content Include="Assets\js\GeneralProductCards\ProductCards.js" />
     <Content Include="Assets\js\GeneralProductCards\SearchFilter.js" />
     <Content Include="Assets\js\howtorent.js" />
