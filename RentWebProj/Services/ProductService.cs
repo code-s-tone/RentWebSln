@@ -7,6 +7,7 @@ using RentWebProj.Models;
 using RentWebProj.Repositories;
 using System.Web.Mvc;
 using RentWebProj.Helpers;
+using WebGrease.Css.Extensions;
 
 namespace RentWebProj.Services
 {
@@ -164,6 +165,11 @@ namespace RentWebProj.Services
                     break;
             }
 
+            string[] keyArray = keywordInput.Split();
+            foreach (var s in keyArray)
+            {
+                
+            }
 
             //依所選條件取出相關產品 AccBg001
             var selectedVMList = (
@@ -174,38 +180,38 @@ namespace RentWebProj.Services
                       && (subCategoryOptions == "0" || subCategoryOptions == null || p.SubCategoryID == subCategoryOptions)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate >= minBudget)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate <= maxBudget)
-                      && (keywordInput == null || p.ProductName.Contains(keywordInput)|| p.CategoryName.Contains(keywordInput) || p.SubCategoryName.Contains(keywordInput) || p.Description.Contains(keywordInput))
+                      && (keywordInput == null || p.ProductName.IndexOf(keywordInput,StringComparison.OrdinalIgnoreCase)>=0  || p.CategoryName.ToLower().Contains(keywordInput.ToLower()) || p.SubCategoryName.ToLower().Contains(keywordInput.ToLower()) || p.Description.ToLower().Contains(keywordInput.ToLower()))
 
                 select p).ToList();
 
-            //選出的產品排序 如果沒選排序就直接回傳 
-            if (orderByOptions == null)
-            {
-                return selectedVMList;
-            }
-            else //有選排序就丟進order方法
-            {
-                return OrderSelectedProductCards(selectedVMList, orderByOptions);
-            }
-        }
+            List<CardsViewModel> orderedVMList = null;
 
-        public List<CardsViewModel> OrderSelectedProductCards(List<CardsViewModel> selectedList, string orderByOptions)
-        {
-            if (orderByOptions.ToLower() == "relevance")
+            switch (orderByOptions.ToLower())
             {
-                //思考中...
-            }
-            else if (orderByOptions.ToLower() == "price")
-            {
-                selectedList = selectedList.OrderBy(x => x.DailyRate).ToList();
-            }
-            else //選星星
-            {
-                selectedList = selectedList.OrderBy(x => x.StarsForLike).ToList();
-            }
-            return selectedList;
-        }
+                case "relevance":
+                    //var level1 = selectedVMList.Where(x=>x.ProductName.IndexOf(keywordInput)>=0).ToList();
+                    var level1 = selectedVMList.Where(x => x.ProductName.IndexOf(keywordInput, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                    var level2 = selectedVMList.Where(x=>x.CategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
+                    var level3 = selectedVMList.Where(x=>x.SubCategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
+                    var level4 = selectedVMList.Where(x=>x.Description.ToLower().Contains(keywordInput.ToLower())).ToList();
+                    orderedVMList = level1.Concat(level2).Concat(level3).Concat(level4).Distinct().ToList();
+                
+                    break;
 
+                case "price":
+                    orderedVMList = selectedVMList.OrderBy(x => x.DailyRate).ToList(); 
+                    break;
+
+                case "stars":
+                    orderedVMList = selectedVMList.OrderByDescending(x => x.StarsForLike).ToList();
+                    break;
+
+                default:
+                    break;
+            }
+            
+            return orderedVMList;
+        }
 
         public ProductDetailToCart GetProductDetail(string PID)
         {
