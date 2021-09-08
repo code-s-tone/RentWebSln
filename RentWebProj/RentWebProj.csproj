@@ -526,9 +526,6 @@
     <Content Include="Views\Carts\Checkout.cshtml" />
     <Content Include="Views\Member\MemberCenter.cshtml" />
     <Content Include="Views\Product\GeneralCategories.cshtml" />
-    <Content Include="Views\Member\_memberCenterPersonPartial.cshtml" />
-    <Content Include="Views\Member\_memberCenterAccountPartial.cshtml" />
-    <Content Include="Views\Member\_memberCenterOrderPartial.cshtml" />
     <Content Include="Views\Member\Login.cshtml" />
     <Content Include="Views\Member\Register.cshtml" />
     <Content Include="Views\Product\ProductList.cshtml" />
