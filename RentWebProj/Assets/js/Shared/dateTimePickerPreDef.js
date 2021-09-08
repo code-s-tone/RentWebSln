@@ -60,7 +60,7 @@ const datePicker = flatpickr("#datePicker", {
     //    }
     //],
 
-    minDate: new Date(),
+    minDate: new Date().getTime()+1000*60*60*24,
 
     inline: true,
 
