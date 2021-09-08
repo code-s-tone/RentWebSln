@@ -98,6 +98,8 @@ namespace RentWebProj.Controllers
         //                  =>IsSuccessful == false => 提示已加入過            
         //                    IsSuccessful == true => 提示加入成功
 
+
+        [HttpPost]
         public ActionResult ProductToCart(string PID)
         {
             OperationResult result = new OperationResult();
