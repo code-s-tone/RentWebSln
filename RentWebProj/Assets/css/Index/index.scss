@@ -125,7 +125,9 @@ article {
     margin-left: auto;
     margin-right: auto;
 
-    > .Area, .category-sample {
+    > section {
+        width: 100%;
+        margin: 33px auto;
         h3 {
             > a {
                 font-size: 15px;
@@ -136,21 +138,16 @@ article {
 
     > .Area {
         box-sizing: border-box;
-        width: 100%;
         padding: 14px;
-        margin: 33px auto;
-
         .imgBox, .textBox {
             display: flex;
         }
 
         .imgBox {
-            // background-color: #fee;
             align-items: center;
         }
 
         .textBox {
-            // background-color: #efe;
             flex-direction: column;
             align-items: flex-start;
         }
@@ -182,7 +179,20 @@ article {
         //     }
     }
 
-    .stories-swiper-container {
+    .category-sample {
+        // padding: 0 11px;
+        // >.d-flex{
+        //     // width: 100%;
+        //     flex-wrap: wrap;
+        //     justify-content: space-between;
+        //     .card-item{//有bs
+        //         min-height: 33px;
+        //         background-color: #fcc;
+        //         margin-bottom: 11px;
+        //     }
+        // }
+    }
+    /*    .stories-swiper-container {
         > .swiper-wrapper {
             > .swiper-slide {
                 height: 333px;
@@ -204,7 +214,7 @@ article {
                 }
             }
         }
-    }
+    }*/
 
     .reviews-swiper-container {
         > .swiper-wrapper {
@@ -223,20 +233,24 @@ article {
 
                 > .textBox {
                     font-size: 16px;
+
                     h5 {
                         margin: 0;
                         font-size: 20px;
                         font-weight: 900;
                     }
+
                     .score .icon .fa-star {
                         color: #fc8d61;
                     }
+
                     > .msgBox {
                         .ellipsis {
                             line-height: 30px;
                             margin-bottom: 0;
                         }
                     }
+
                     > .time {
                         font-size: 12px;
                     }
@@ -245,20 +259,7 @@ article {
         }
     }
 
-    .category-sample {
-        width: 100%;
-        // padding: 0 11px;
-        // >.d-flex{
-        //     // width: 100%;
-        //     flex-wrap: wrap;
-        //     justify-content: space-between;
-        //     .card-item{//有bs
-        //         min-height: 33px;
-        //         background-color: #fcc;
-        //         margin-bottom: 11px;
-        //     }
-        // }
-    }
+
 
     .blogPosts-swiper-container {
         > .swiper-wrapper {

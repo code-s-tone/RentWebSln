@@ -59,7 +59,13 @@ namespace RentWebProj.Services
             });
             return pLists;
         }
-
+        //算XX天內被租天數高到低排序
+        public IEnumerable<CardsViewModel> GetCheapestProductCardData()
+        {
+            var pList = GetAllProductCardData().ToList();
+            IEnumerable<CardsViewModel> VMList = pList.OrderBy(x => x.DailyRate);
+            return VMList;
+        }
         //算XX天內被租天數高到低排序
         public IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays)
         {
