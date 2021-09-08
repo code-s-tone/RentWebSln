@@ -378,11 +378,13 @@
         let personNameInp = document.querySelectorAll('.member-person-input');
 
         //生日value
-        let changeYearValue = document.querySelector('.member-display-year');
-        let changeMonthValue = document.querySelector('.member-display-month');
-        let changeDateValue = document.querySelector('.member-display-date');
+        let changeYearContent = document.querySelector('.member-display-year');
+        let changeMonthContext = document.querySelector('.member-display-month');
+        let changeDateContext = document.querySelector('.member-display-date');
 
         
+
+
 
 
 
@@ -486,7 +488,7 @@
             inputInit();
         });
 
-        //個資關閉編輯
+        //個資變更送出
         personSaveBtn.addEventListener('click', function () {
             inputInit();
             personEditBtn.disabled = false;
@@ -494,6 +496,7 @@
             personCancelEditBtn.classList.add('notDisplay');
             personEditBtn.classList.remove('buttonDisabled');
             personSaveBtn.classList.add('buttonDisabled');
+            swal("修改成功", '自動跳轉..', 'success');
         });
 
         

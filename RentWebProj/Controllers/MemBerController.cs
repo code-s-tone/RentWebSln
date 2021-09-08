@@ -37,37 +37,13 @@ namespace RentWebProj.Controllers
         }
 
         //Post: Member
-       [HttpPost]
-        public ActionResult MemberCenter(MemberPersonDataViewModel X)
-        {
-            //Step1. 先"取得"目前登入的"密碼"
-            var MemberPasswordHash = _service.CheckPassword(Int32.Parse(User.Identity.Name));
-            var MemberFullName = _service.CheckName(Int32.Parse(User.Identity.Name));
-            var MemberPhone = _service.CheckPhone(User.Identity.Name);
-            //var MemberBirthDay = _service.CheckBirthDay(Int32.Parse(User.Identity.Name));
-            //model是否合法驗證
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
-            }
-            //Step2. 把信箱跟密碼進行"比對並更新"
-            //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
-            //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
-            ViewBag.Change = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail, MemberPasswordHash, X.MemberPasswordHash , MemberFullName, X.MemberName , MemberPhone, X.MemberPhone);
-
-            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());//可以強型別
-        }
-
-
         [HttpPost]
         //回傳個人資訊
         public ActionResult MemberPerson(MemberPersonDataViewModel X)
         {
-            ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemBerBirthday.Year , X.MemBerBirthday.Month , X.MemBerBirthday.Day, X.MemberPhone);
-            int a = 1;
-            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
+            Thread.Sleep(1500);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
         [HttpPost]
@@ -80,7 +56,7 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
 
         }
@@ -95,7 +71,7 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangePassword(Int32.Parse(User.Identity.Name), X.MemberPasswordHash);
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 

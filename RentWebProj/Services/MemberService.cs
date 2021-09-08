@@ -148,49 +148,13 @@ namespace RentWebProj.Services
             }
 
         }
-        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail,string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone)
-        {
-            var result = _repository.GetAll<Member>().FirstOrDefault(x=>x.MemberID==UserMemberId);
-
-            result.Email = ChangeEmail;
-
-            result.PasswordHash = Helper.SHA1Hash(ChangePassword);
-
-            if (UserFullName == null || UserFullName == "")
-            {
-                result.FullName = ChangeFullName;
-            }
-            else
-            {
-                result.FullName = ChangeFullName;
-            }
-            //result.Find(x => x.MemberID == UserMemberId).Email = ChangeEmail;
-            //result.Find(x => x.PasswordHash == UserPasswordHash).PasswordHash = ChangePasswordHash;
-            //result.Find(x => x.FullName == UserFullName).FullName = ChangeFullName;
-            //會員電話判斷
-            if (UserPhone == null)
-            {
-                result.Phone = ChangePhone;
-            }
-            else
-            {
-                result.Phone = ChangePhone;
-            }
-
-
-            _repository.SaveChanges();
-
-            //return "修改成功";
-            return MessageBox.Show("修改成功");
-        }
-
+        
         //回傳個人資訊
-        public string ChangeProfile(int UserMemberId , string ChangeUserName , int ChangeYear , int ChangeMonth , int ChangeDay, string ChangeUserPhone)
+        public string ChangeProfile(int UserMemberId , string ChangeUserName , string ChangeYear , string ChangeMonth , string ChangeDay, string ChangeUserPhone)
         {   
-            //先找對應人會員
+            //先找對應會員
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+
             if (ChangeUserName == "")
             {
                 result.FullName = "";
@@ -200,8 +164,6 @@ namespace RentWebProj.Services
                 result.FullName = ChangeUserName;
             }
 
-            result.Birthday = result.Birthday;
-            
             if(ChangeUserPhone == "")
             {
                 result.Phone = "";
@@ -209,6 +171,18 @@ namespace RentWebProj.Services
             else
             {
                 result.Phone = ChangeUserPhone;
+            }
+
+            if(ChangeYear == "" && ChangeMonth == "" && ChangeDay == "")
+            {
+                var a = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+                var d = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+            }
+            else
+            {
+                result.Birthday = DateTime.Parse($"{ChangeYear}-{ChangeMonth}-{ChangeDay}");
+                //result.Birthday = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+                //result.Birthday = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
             }
             _repository.SaveChanges();
             return "";
