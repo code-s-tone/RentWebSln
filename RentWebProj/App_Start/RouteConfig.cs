@@ -25,7 +25,7 @@ namespace RentWebProj
             //產品細節頁，用PID來判斷
             routes.MapRoute(
                 name: "ProductDetail",
-                url: "Product/ProductDetail/{PID}",
+                url: "Product/Detail/{PID}",
                 defaults: new { controller = "Product", action = "ProductDetail" , PID ="PplPg002" }
             );//Product/ProductDetail 重導到庭安所有種類頁
 
