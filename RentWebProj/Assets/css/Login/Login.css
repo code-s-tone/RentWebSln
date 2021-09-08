@@ -6,7 +6,8 @@
 .back {
     width: 100%;
     height: 100%;
-    background-color: #3e3e3e;
+    /*background-color: #3e3e3e;*/
+    background-color: rgba(181, 181, 181, 0.9);
     padding: 20px;
 }
 
@@ -113,7 +114,7 @@
     background-color: rgb(221, 76, 57)
 }
 
-i {
+.Login i {
     border: 0;
     background-color: none;
     background: none;
@@ -129,10 +130,20 @@ i {
     text-decoration: none;
 }
 
-.fa-google, .fa-line, .fa-facebook, #btnSignIn {
+.Login .fa-google, .Login .fa-line, .Login .fa-facebook, #btnSignIn {
     font-size: 40px;
     cursor: pointer;
 }
+.Login .fa-google {
+    color: #d54936;
+}
+.Login .fa-facebook {
+    color: #3b5998;
+}
+.Login .fa-line {
+    color: #00a818;
+}
+
 /* 手機板設計 */
 @media screen and (max-width:768px) {
     .back {

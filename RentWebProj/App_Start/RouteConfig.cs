@@ -12,6 +12,15 @@ namespace RentWebProj
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            //測試
+            routes.IgnoreRoute("Carts/Index");
+            routes.IgnoreRoute("Carts");
+            routes.MapRoute(
+                name: "Cart",
+                url: "Cart",
+                defaults: new { controller = "Carts", action = "Index" }
+            );
+
 
             //產品細節頁，用PID來判斷
             routes.MapRoute(
@@ -34,11 +43,7 @@ namespace RentWebProj
                 defaults: new { controller = "Product", action = "SearchProductCards", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "Cart",
-                url: "Carts/{action}/{id}",
-                defaults: new { controller = "Carts", action = "Index", id = UrlParameter.Optional }
-            );
+
 
             routes.MapRoute(
                 name: "Default",

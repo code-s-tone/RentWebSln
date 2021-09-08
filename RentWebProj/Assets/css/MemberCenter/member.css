@@ -289,6 +289,10 @@
     margin-bottom:10px
 }
 
+.member-display-button-groups {
+    display: block;
+}
+
 @media screen and (min-width:576px) {
     .member-display-name-container, .member-display-phone-container, .member-display-born-container, .member-display-shop-container{
         display: flex;
@@ -323,5 +327,13 @@
         text-decoration: none;
         pointer-events: none
     }
+
+    .member-display-button-groups{
+        display:flex;
+    }
+
+    .member-display-button-group{
+        margin-right:5px;
+    } 
 }
 

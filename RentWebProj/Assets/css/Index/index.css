@@ -137,7 +137,7 @@ article > .Area {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
-  padding: 11px;
+  padding: 14px;
   margin: 33px auto;
 }
 
@@ -261,6 +261,11 @@ article .blogPosts-swiper-container > .swiper-wrapper > .swiper-slide > .textBox
   -webkit-line-clamp: 1;
 }
 
+/*���� �P�P:���*/
+.score .icon .fa-star {
+    color: #fc8d61;
+}
+
 .ellipsis {
   font-size: 16px;
   overflow: hidden;
@@ -268,6 +273,7 @@ article .blogPosts-swiper-container > .swiper-wrapper > .swiper-slide > .textBox
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
 
 @media screen and (max-width: 555px) {
   .stories-swiper-container > .swiper-wrapper > .swiper-slide {

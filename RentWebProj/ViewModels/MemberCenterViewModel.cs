@@ -15,6 +15,11 @@ namespace RentWebProj.ViewModels
         [StringLength(20, MinimumLength = 2, ErrorMessage = "姓名至少2個字元,最多20字元")]
         public string MemberName { get; set; }
         public DateTime MemBerBirthday { get; set; }
+
+        public string MemberYear { get; set; }
+        public string MemberMonth { get; set; }
+        public string MemberDay { get; set; }
+
         public string MemberPhone { get; set; }
         public string MemberBranchName { get; set; }
         [Required]
@@ -30,6 +35,8 @@ namespace RentWebProj.ViewModels
         public string ComfirMemberEmail { get; set; }
 
         [Required]
+        [Display(Name = "密碼")]
+        [DataType(DataType.Password)]
         [StringLength(30, MinimumLength = 6, ErrorMessage = "密碼至少6個字元,最多30字元")]
         //[DataType(DataType.Password, ErrorMessage = "請輸入正確的密碼")]
         public string MemberPasswordHash { get; set; }
