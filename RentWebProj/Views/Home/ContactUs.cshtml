@@ -8,10 +8,6 @@
     <h1>評分與評論</h1>
 </div>
 
-<title>連繫我們</title>
-
-
-
 <div class="container d-flex text-center mt-5">
     <div class="row">
         <div class="col-sm-6">
@@ -29,65 +25,74 @@
             <h2 class="my-3">了解更多</h2>
             <p>您是否有興趣了解更多有關知租網、共享經濟或在您的社區內租賃物品的信息？查看部落格了解更多信息。</p>
         </div>
-
     </div>
-
 </div>
 
-@using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
+@if (User.Identity.IsAuthenticated)
 {
-    <div class="container enter my-5">
-        <div class="row d-flex">
-            <div class="col-sm-6 col-12">
-                <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評論</label>
+    using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
+    {
+        <div class="container enter my-5">
+            <div class="row d-flex">
+                <div class="col-sm-6 col-12">
+                    <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評論</label>
 
-                <textarea class="form-control" aria-label="With textarea" placeholder="分享您的心得感想" name="comment"></textarea>
-            </div>
-
-            <div class="col-sm-6 col-12 d-flex flex-column right">
-
-                <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評分</label>
-
-                <div class="rate">
-                    <label title="Poor">
-                        <input type="radio" name="star" value="1" />
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                    </label>
-                    <label title="Below average">
-                        <input type="radio" name="star" value="2" />
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                    </label>
-                    <label title="Average">
-                        <input type="radio" name="star" value="3" />
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                    </label>
-                    <label title="Above average">
-                        <input type="radio" name="star" value="4" />
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                    </label>
-                    <label title="Excellent">
-                        <input type="radio" name="star" value="5" />
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                        <span class="icon"><i class="fas fa-star"></i></span>
-                    </label>
+                    <textarea class="form-control" aria-label="With textarea" placeholder="分享您的心得感想" name="comment" id="area"></textarea>
                 </div>
 
-                <div class="word">請給我們五星好評喔!</div>
+                <div class="col-sm-6 col-12 d-flex flex-column right">
 
-                <div class="btn_all">
-                    <button class="btn-s" type="submit">提交</button>
+                    <label for="exampleFormControlInput1" class="form-label" style="font-size: 30px;">評分</label>
+
+                    <div class="rate">
+                        @*<input type="hidden" name="star" value="0" />*@
+                        <label title="Poor">
+                            <input type="radio" name="star" value="1" />
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                        </label>
+                        <label title="Below average">
+                            <input type="radio" name="star" value="2" />
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                        </label>
+                        <label title="Average">
+                            <input type="radio" name="star" value="3" />
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                        </label>
+                        <label title="Above average">
+                            <input type="radio" name="star" value="4" checked />
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                        </label>
+                        <label title="Excellent">
+                            <input type="radio" name="star" value="5" />
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                            <span class="icon"><i class="fas fa-star"></i></span>
+                        </label>
+                    </div>
+
+                    <div class="word">請給我們五星好評喔!</div>
+                    <div class="error text-danger"></div>
+
+                    <div class="btn_all">
+                        <button class="btn-s" type="submit">提交</button>
+                    </div>
                 </div>
             </div>
         </div>
+    }
+}
+else
+{
+    <div class="container enter my-5 text-center">
+        <p>請登入即可留言分享您的心得</p>
     </div>
 }
 
@@ -98,9 +103,49 @@
 
     <link href="~/Assets/css/contactus.css" rel="stylesheet" />
 }
+
 @section endJS{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
             crossorigin="anonymous"></script>
+
+    <script>
+        let btn = document.querySelector('.btn-s');
+        let com = document.getElementById('area');
+        let error = document.querySelector('.error');
+
+        window.onload = function () {
+            btn.disabled = true;
+            btn.style.backgroundColor = 'gray';
+            error.innerHTML = "您尚未留言或評分喔~";
+        }
+
+        function AllCheck() {
+            if (com.value == "") {
+                btn.disabled = true;
+                btn.style.backgroundColor = 'gray';
+                error.innerHTML = "您尚未留言或評分喔~";
+            }
+            else if (com.value != "") {
+                error.innerHTML = "";
+                btn.disabled = false;
+                btn.style.backgroundColor = '#fc8d61';
+            }
+        }
+
+        com.addEventListener('change', AllCheck);
+
+        btn.addEventListener('click', function () {
+            alert('提交成功');
+        })
+
+        
+    </script>
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
+}

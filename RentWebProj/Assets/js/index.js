@@ -86,14 +86,14 @@ const reviewsSwiper = new Swiper('.reviews-swiper-container', {
     slidesPerView: 1.3,  //原始大小?
     breakpoints: {
         // when window width is >=
-        768: {
+        777: {
             centeredSlides: false,
             slidesPerView: 2
         },
-        992: {
-            centeredSlides: false,
-            slidesPerView: 2
-        },
+        //992: {
+        //    centeredSlides: false,
+        //    slidesPerView: 2
+        //},
         1280: {
             slidesPerView: 3
         }

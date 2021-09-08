@@ -13,11 +13,8 @@ using RentWebProj.ViewModels;
 
 namespace RentWebProj.Controllers
 {
-
     public class CartsController : Controller
     {
-
-
         private RentContext db = new RentContext();
         private CartService _cartService;
         // GET: Carts
@@ -29,7 +26,10 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            return View(TempData["directCheckout"]);
+            if(TempData["directCheckout"]!=null)
+                return View();
+            else
+                return RedirectToAction("Index", "Carts");
         }
         [HttpPost]
         public ActionResult Checkout(CreateOrder PostVM)//IEnumerable<CartIndex> VM
@@ -44,15 +44,21 @@ namespace RentWebProj.Controllers
             new OrderService().Create(PostVM);
             foreach (var PID in PostVM.ListProductID)
             {
-                new CartService().DeleteCart(1, PID);
+                new CartService().DeleteCart(Int32.Parse(User.Identity.Name), PID);
+                //new CartService().DeleteCart(1, PID);
             }
             return RedirectToAction("MemberCenter", "Member");
         }
-
+        [Authorize]
         public ActionResult Index()
         {
+            //要登帳號
             var carts = _cartService.GetCart(Int32.Parse(User.Identity.Name));
             ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name));
+
+            //免登預設1
+            //var carts = _cartService.GetCart(1);            
+            //ViewBag.Total = _cartService.GetCartTotal(1);
 
             return View(carts);
         }
@@ -83,6 +89,7 @@ namespace RentWebProj.Controllers
                 }
                 if (VM.ListChecked[i])
                 {
+                    //CList.Add(_cartService.CheckCart(VM.ListProductID[i],1));
                     CList.Add(_cartService.CheckCart(VM.ListProductID[i], Int32.Parse(User.Identity.Name)));
                 }
             }

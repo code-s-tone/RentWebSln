@@ -64,6 +64,7 @@ namespace RentWebProj.Services
         {
             //要從user.Identity.Name拿，要using
             int MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name);
+            //int MemberID = 1;
             DateTime OrderDate = DateTime.Now;
             Order orderEntity = new Order()
             {

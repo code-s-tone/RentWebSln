@@ -26,7 +26,7 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name),
+                    MemberID = (int)Helper.GetMemberId(),
                     ProductID = PID,
                 };
                 _repository.Create(entity);
@@ -54,7 +54,7 @@ namespace RentWebProj.Services
                 //VM->DM
                 Cart entity = new Cart()
                 {
-                    MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name),
+                    MemberID = (int)Helper.GetMemberId(),
                     ProductID = PID,
                     StartDate = s,
                     ExpirationDate = e                    
@@ -120,7 +120,7 @@ namespace RentWebProj.Services
                 int dateDiff = 0;
                 if (c.StartDate.HasValue)
                 {
-                    dateDiff = (c.ExpirationDate - c.StartDate).Value.Days; //TotalDays帶小數
+                    dateDiff = (int)Math.Ceiling((c.ExpirationDate - c.StartDate).Value.TotalDays); //TotalDays帶小數
                 }
                 c.DateDiff = dateDiff;
                 c.Sub = c.DailyRate * dateDiff;

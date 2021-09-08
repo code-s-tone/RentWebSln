@@ -33,7 +33,9 @@ function GoogleLogin() {
             data: { id_token: id_token },
             success: function (msg) {
                 console.log("Google登入成功");
-                window.location.href = "../Home/Index";
+                
+                window.location.href = `${document.referrer}`;
+           /*     window.location.href = "../Home/Index";*/
             }
         });//end $.ajax
 

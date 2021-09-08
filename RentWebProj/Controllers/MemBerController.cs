@@ -19,6 +19,7 @@ using System.IO;
 
 namespace RentWebProj.Controllers
 {
+    
     public class MemberController : Controller
     {
 
@@ -78,8 +79,40 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
 
-            return View();
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
+                TempData["PreviousController"] = url_Pre[1];
+              
+                if (url_Pre[1] == "Carts")
+                {
+                    TempData["PreviousAction"] = "Index";
+                }
+                else if(url_Pre.Length < 4)
+                {
+                    TempData["PreviousAction"] = url_Pre[2];
+                    TempData["PreviousId"] = null; 
+                }
+                else
+                {
+                    TempData["PreviousAction"] = url_Pre[2];
+                 
+                    if(url_Pre.Length == 3)
+                    {
+                        TempData["PreviousIdOrCa"] = new { categoryID = url_Pre[3] };
+                    }
+                    else
+                    {
+                        TempData["PreviousIdOrCa"] = new {  PID = url_Pre[3] };
+                    }
+                }
+     
+            }
+
+           return View();
+            
+           
 
         }
         [HttpPost]
@@ -95,7 +128,14 @@ namespace RentWebProj.Controllers
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
-                return RedirectToAction("Index", "Home");
+                if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
+                {
+                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}",TempData["PreviousIdOrCa"]);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }   
 
             }
             else
@@ -164,6 +204,8 @@ namespace RentWebProj.Controllers
                 NameValueCollection nvc = new NameValueCollection();
                 NameValueCollection nyc = new NameValueCollection();
                 #endregion
+
+                #region Line_Post_token
                 try
                 {
                     //取回Token
@@ -207,8 +249,18 @@ namespace RentWebProj.Controllers
                     string msg = ex.Message;
                     throw;
                 }
+                #endregion
             }
-            return View();
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                return RedirectPermanent("https://www.google.com");
+            }
+            else
+            {
+             
+                return View();
+            }
+     
         }
         [HttpPost]
         public async Task<ActionResult> Google(string id_token)
@@ -249,7 +301,12 @@ namespace RentWebProj.Controllers
                 Helper.FormsAuthorization(email);
                 return RedirectToAction("Index", "Home");
             }
-
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+            }
             return View();
         }
 
@@ -279,6 +336,12 @@ namespace RentWebProj.Controllers
             _service.getMemberFbData(Profile.name, Profile.email);
 
             Helper.FormsAuthorization(ViewData["FB_Email"].ToString());
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
+                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
+                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -291,8 +354,40 @@ namespace RentWebProj.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            Thread.Sleep(5000);
-            return RedirectToAction("Index", "Home");
+            Thread.Sleep(4000);
+            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            {
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
+                var controller_Pre = url_Pre[1];
+   
+                if (url_Pre[1] == "Carts") 
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (url_Pre.Length < 4)
+                {
+                    var action_Pre = url_Pre[2];
+                    return RedirectToAction($"{action_Pre}", $"{controller_Pre}");
+                }
+                else
+                {
+                    var action_Pre = url_Pre[2];
+                    var id_Pre = url_Pre[3];
+                    if (id_Pre.Length == 3)
+                    {
+                        return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { categoryID = id_Pre });
+                    }
+                    else
+                    {
+                        return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { PID = id_Pre });
+                    }
+                    
+                }
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
     }

@@ -170,7 +170,7 @@
                                         <li>回饋計畫</li>
                                     </a>
                                     <a href="@Url.Action("ContactUs", "Home")">
-                                        <li>聯繫我們</li>
+                                        <li>評分與評論</li>
                                     </a>
                                 </ul>
                             </li>
@@ -394,10 +394,10 @@
 @if (User.Identity.IsAuthenticated)
 {
     <script src="~/Assets/js/MemberCenter/LoginAndOut/Login.js"></script>
-
     var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
     TempData["img"] = result.ProfilePhotoUrl;
     TempData["name"] = result.Fullname;
+
 }
 else
 {
