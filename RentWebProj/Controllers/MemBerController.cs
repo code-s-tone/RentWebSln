@@ -376,6 +376,10 @@ namespace RentWebProj.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
+                else if(url_Pre[2] == "MemberCenter")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 else if (url_Pre.Length < 4)
                 {
                     var action_Pre = url_Pre[2];
