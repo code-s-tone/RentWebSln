@@ -56,7 +56,7 @@ namespace RentWebProj.Controllers
             ViewBag.Page = nameof(Pages.ProductCardsPage);
             ViewBag.Container = nameof(Container.ProductCardsContainer);
             ViewBag.CategoryOptions = _service.GetCategoryData();
-            ViewBag.selectedProductList = _service.GetProductData(categoryID);
+            ViewBag.selectedProductList = _service.GetSelectedProductData(categoryID);
             return View();
         }
 

@@ -14,7 +14,7 @@
 
 .category-card {
     margin: 15px 20px;
-    height: 180px;
+    height: 190px;
     transform-style: preserve-3d;
     perspective: 1000px;
 }
@@ -116,7 +116,7 @@
 
 .category-img {
     width: 70%;
-    height: 180px;
+    height: 190px;
 }
 
     .category-img img {

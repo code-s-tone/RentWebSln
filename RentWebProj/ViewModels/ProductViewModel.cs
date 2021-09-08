@@ -32,7 +32,7 @@ namespace RentWebProj.ViewModels
         public string SubCategoryID { get; set; }
         public string Description { get; set; }
         public decimal DailyRate { get; set; }
-        public int StarsForLike { get; set; }   //商品卡片上的星星數待決定如何判斷
+        public int StarsForLike { get; set; }  
 
         //偉軒用
         public double CountOfRentedDays { get; set; }

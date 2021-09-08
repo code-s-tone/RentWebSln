@@ -37,7 +37,7 @@ body {
 }*/
 /* -------------------------------- */
 .site-footer {
-    padding: 15px 0 20px;
+    padding: 23px;
     color: #737373;
     background-color: #26272b;
     font-size: 13px;
@@ -91,8 +91,8 @@ body {
     background-color: #3b5998;
 }
 
-.social-icon .twitter:hover {
-    background-color: #00aced;
+.social-icon .mail:hover {
+    background-color: rgb(221, 76, 57);
 }
 
 .social-icon .linkedin:hover {

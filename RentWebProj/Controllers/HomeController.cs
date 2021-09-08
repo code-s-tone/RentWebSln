@@ -20,7 +20,8 @@ namespace RentWebProj.Controllers
             {
                 //{ "最高評價", _service.GetMostPopularProductCardData() },
                 //{ "最新上架", _service.GetMostPopularProductCardData() },
-                { "30天內最搶手商品", _service.GetMostPopularProductCardData(30).Take(6) }
+                //{ "30天內最搶手商品", _service.GetMostPopularProductCardData(30).Take(6) } 偉軒原本
+                { "30天內最搶手商品", _service.ProductDataWithStars().Take(6) } //庭安9/7修改 需改成這樣才會帶星星
 
             };
             //判斷登入之後動態顯示大頭貼跟名子 by _家承

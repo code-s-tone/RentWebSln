@@ -27,29 +27,30 @@ namespace RentWebProj.Controllers
 
         public ActionResult Checkout()
         {
-            return View(TempData["directCheckout"]);
+            if(TempData["directCheckout"]!=null)
+                return View();
+            else
+                return RedirectToAction("Index", "Carts");
         }
         [HttpPost]
         public ActionResult Checkout(CreateOrder PostVM)//IEnumerable<CartIndex> VM
         {
             //判斷日期是否可通過
+
             //造訂單、寫入庫
             //參數可能要調整
-            
-            //軒：我的直接結帳，有可能產品不在購物車中，故刪除時可考慮一下
-            new OrderService().Create(PostVM);
 
+            //軒：我的直接結帳，有可能產品不在購物車中，故刪除時可考慮一下
             //刪除購物車要用郭懿的方法喔，在下面
+            new OrderService().Create(PostVM);
             foreach (var PID in PostVM.ListProductID)
             {
                 new CartService().DeleteCart(Int32.Parse(User.Identity.Name), PID);
                 //new CartService().DeleteCart(1, PID);
             }
-
-
             return RedirectToAction("MemberCenter", "Member");
         }
-
+        [Authorize]
         public ActionResult Index()
         {
             //要登帳號

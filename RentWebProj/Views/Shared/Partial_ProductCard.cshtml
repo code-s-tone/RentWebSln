@@ -6,7 +6,7 @@
 <div class="product-card" onmouseover="productCard_Hover(this);"
      onmouseout="productCard_Unhover(this);">
     <div class="badge">
-        <repeat n="4"></repeat>
+        <repeat n=@Model.StarsForLike></repeat>
     </div>
     <div class="product-img">
         <a href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><img src=@src alt=""></a>

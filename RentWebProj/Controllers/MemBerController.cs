@@ -38,40 +38,18 @@ namespace RentWebProj.Controllers
         }
 
         //Post: Member
-       [HttpPost]
-        public ActionResult MemberCenter(MemberPersonDataViewModel X)
-        {
-            //Step1. 先"取得"目前登入的"密碼"
-            var MemberPasswordHash = _service.CheckPassword(Int32.Parse(User.Identity.Name));
-            var MemberFullName = _service.CheckName(Int32.Parse(User.Identity.Name));
-            var MemberPhone = _service.CheckPhone(User.Identity.Name);
-            //var MemberBirthDay = _service.CheckBirthDay(Int32.Parse(User.Identity.Name));
-            //model是否合法驗證
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
-            }
-            //Step2. 把信箱跟密碼進行"比對並更新"
-            //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberPasswordHash, X.ComfigMemberPasswordHash, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
-            //ViewBag.Change = _service.ChangeProfile(User.Identity.Name, X.ComfirMemberEmail, MemberFullName, X.MemberName, MemberPhone, X.MemberPhone);
-            ViewBag.Change = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail, MemberPasswordHash, X.MemberPasswordHash , MemberFullName, X.MemberName , MemberPhone, X.MemberPhone);
-
-            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());//可以強型別
-        }
-
-
         [HttpPost]
         //回傳個人資訊
         public ActionResult MemberPerson(MemberPersonDataViewModel X)
         {
-            return View();
+            ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
+            Thread.Sleep(1500);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
         [HttpPost]
         //回傳信箱資訊
-        public ActionResult Email(MemberPersonDataViewModel X)
+        public ActionResult MemberEmail(MemberPersonDataViewModel X)
         {
             if (ModelState.IsValid)
             {
@@ -79,53 +57,67 @@ namespace RentWebProj.Controllers
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
-
-            Thread.Sleep(5000);
+            Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
 
         }
 
         [HttpPost]
         //回傳密碼資訊
-        public ActionResult MemberPassword(string UserPassword , string ChangePassword)
+        public ActionResult MemberPassword(MemberPersonDataViewModel X)
         {
             if (ModelState.IsValid)
             {
                 ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
                 return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             }
-            return View();
+            ViewBag.returnEmail = _service.ChangePassword(Int32.Parse(User.Identity.Name), X.MemberPasswordHash);
+            Thread.Sleep(1500);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
 
 
         public ActionResult Login()
         {
-            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            var reuslt = Request.UrlReferrer;
+
+            if (Request.UrlReferrer != null && Request.UrlReferrer.LocalPath != "/")
             {
 
-                var url_Pre = Request.UrlReferrer.LocalPath.ToString();
-                TempData["PreviousController"] = url_Pre.Split('/')[1];
-              
-                if (url_Pre.Split('/')[1] == "Carts")
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
+                TempData["PreviousController"] = url_Pre[1];
+
+                if (url_Pre[1] == "Carts")
                 {
                     TempData["PreviousAction"] = "Index";
                 }
-                else if(url_Pre.Split('/').Length < 4)
+                else if (url_Pre.Length < 4)
                 {
-                    TempData["PreviousAction"] = url_Pre.Split('/')[2];
-                    TempData["PreviousId"] = null; 
+                    TempData["PreviousAction"] = url_Pre[2];
+                    TempData["PreviousId"] = null;
                 }
                 else
                 {
-                    TempData["PreviousAction"] = url_Pre.Split('/')[2];
-                    TempData["PreviousId"] = url_Pre.Split('/')[3];
+                    TempData["PreviousAction"] = url_Pre[2];
+
+                    if (url_Pre.Length == 4)
+                    {
+                        //TempData["PreviousIdOrCa"] = new { categoryID = url_Pre[3] };
+                        //TempData["PreviousIdOrCa"] = $"categoryID = {url_Pre[3]}";
+                        TempData["PreviousIdOrCa"] = url_Pre[3];
+                    }
+                    else
+                    {
+                        //TempData["PreviousIdOrCa"] = $"PID = {url_Pre[3]}";
+                        TempData["PreviousIdOrCa"] = url_Pre[3];
+                    }
                 }
-     
+
             }
 
-           return View();
-            
-           
+            return View();
+
+
 
         }
         [HttpPost]
@@ -138,17 +130,22 @@ namespace RentWebProj.Controllers
 
             string email = HttpUtility.HtmlEncode(s.Email);
             string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
+            var result = $"{TempData["PreviousController"]}/{TempData["PreviousAction"]}/{TempData["PreviousIdOrCa"]}";
+            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
+            //Response.Redirect(virtualPath + "Users/Login", true);
+            var abs = 1;
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
                 if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
                 {
-                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}", new { id = TempData["PreviousId"] });
+                    //return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}",TempData["PreviousIdOrCa"]);
+                    return Redirect(virtualPath + $"{result}");
                 }
                 else
                 {
                     return RedirectToAction("Index", "Home");
-                }   
+                }
 
             }
             else
@@ -366,33 +363,54 @@ namespace RentWebProj.Controllers
         }
         public ActionResult SignOut()
         {
+            
+            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
             FormsAuthentication.SignOut();
             Thread.Sleep(4000);
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
-                var url_Pre = Request.UrlReferrer.LocalPath.ToString();
-                var controller_Pre = url_Pre.Split('/')[1];
-   
-                if (url_Pre.Split('/')[1] == "Carts") 
+                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
+                var controller_Pre = url_Pre[1];
+
+                if (url_Pre[1] == "Carts")
                 {
-                    return RedirectToAction("Index", "Carts");
+                    return RedirectToAction("Index", "Home");
                 }
-                else if (url_Pre.Split('/').Length < 4)
+                else if(url_Pre[2] == "MemberCenter")
                 {
-                    var action_Pre = url_Pre.Split('/')[2];
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (url_Pre.Length < 4)
+                {
+                    var action_Pre = url_Pre[2];
                     return RedirectToAction($"{action_Pre}", $"{controller_Pre}");
                 }
                 else
                 {
-                    var action_Pre = url_Pre.Split('/')[2];
-                    var id_Pre = url_Pre.Split('/')[3];
-                    return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { id = id_Pre });
+                    var action_Pre = url_Pre[2];
+                    var id_Pre = url_Pre[3];
+                    var result = $"{controller_Pre}/{action_Pre}/{id_Pre}";
+                    if (id_Pre.Length == 3)
+                    {
+
+                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { categoryID = id_Pre });
+                        return Redirect(virtualPath + $"{result}");
+                    }
+                    else
+                    {
+                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { PID = id_Pre });
+                        return Redirect(virtualPath + $"{result}");
+                    }
+
                 }
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
+
+
+
         }
 
     }
