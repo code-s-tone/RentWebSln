@@ -46,10 +46,6 @@
                         <!--個人資料Form-->
                         @using (Html.BeginForm("MemberPerson", "Member", FormMethod.Post))
                         {
-
-
-
-
                         <!--姓氏-->
                         <div class="member-display-name-container member-display-item">
                             <div class="member-display-header">姓氏與名字</div>
@@ -57,23 +53,16 @@
                                 @Html.EditorFor(m => m.MemberName, new { @htmlAttributes = new { @class = "member-display-lastname member-person-input", @placeholder = "姓名" } })
                             </div>
                         </div>
-                        
                         <div class="member-display-born-container member-display-item">
                             <div class="member-display-header">生日</div>
                             <div class="member-display-birthday-group">
                                 <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
-                                    @*<input type="text" class="member-display-year" name="year" value="@Model.MemBerBirthday.Year" placeholder="年" data-max="10">*@
                                     @Html.EditorFor(m => m.MemberYear, new { @htmlAttributes = new { @class = "member-display-year member-person-input", @placeholder = "年" } })
                                 </div>
                                 <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
-                                    @*<input type="text" class="member-display-month" name="month" value="@Model.MemBerBirthday.Month" placeholder="月份" data-max="10">*@
                                     @Html.EditorFor(m => m.MemberMonth, new { @htmlAttributes = new { @class = "member-display-month member-person-input", @placeholder = "月份" } })
                                 </div>
                                 <div class="member-display-name-input-box-first">
-                                    @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
-                                    @*<input type="text" class="member-display-date" name="date" value="@Model.MemBerBirthday.Day" placeholder="日期" data-max="10">*@
                                     @Html.EditorFor(m => m.MemberDay, new { @htmlAttributes = new { @class = "member-display-date member-person-input", @placeholder = "日期" } })
                                 </div>
                             </div>
@@ -127,10 +116,10 @@
                         <div class="member-display-button-groups">
                             <div class="member-display-shop-container">
                                 <div class="member-display-button-group member-display-cancel-deit">
-                                    <button type="button" class="member-display-button-item memberperson-cancel-edit">取消編輯</button>
+                                    <button type="button" class="member-display-button-item memberperson-cancel-edit">取消修改</button>
                                 </div>
                                 <div class="member-display-button-group">
-                                    <button type="button" class="member-display-button-item memberperson-button-edit">編輯</button>
+                                    <button type="button" class="member-display-button-item memberperson-button-edit">修改</button>
                                 </div>
                             </div>
                             <div class="member-display-shop-container">
@@ -151,8 +140,6 @@
                 <!--信箱密碼Form-->
                 <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="member-display-person-detail member-display-account-detail member-display-group">
-
-
                         @ViewBag.returnEmail
                         @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
                         {
@@ -190,10 +177,10 @@
                         <div class="member-display-button-groups">
                             <div class="member-display-shop-container">
                                 <div class="member-display-button-group member-display-cancel-deit">
-                                    <button type="button" class="member-display-button-item memberemail-cancel-edit">取消編輯</button>
+                                    <button type="button" class="member-display-button-item memberemail-cancel-edit">取消修改</button>
                                 </div>
                                 <div class="member-display-button-group">
-                                    <button type="button" class="member-display-button-item memberemail-button-edit">編輯信箱</button>
+                                    <button type="button" class="member-display-button-item memberemail-button-edit">修改信箱</button>
                                 </div>
                             </div>
                             <div class="member-display-shop-container">
@@ -203,23 +190,6 @@
                             </div>
                         </div>
                         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                         <!--變更密碼Form-->
                         @ViewBag.returnPassword
@@ -257,10 +227,10 @@
                         <div class="member-display-button-groups">
                             <div class="member-display-shop-container">
                                 <div class="member-display-button-group member-display-cancel-deit">
-                                    <button type="button" class="member-display-button-item memberpassword-cancel-edit">取消編輯</button>
+                                    <button type="button" class="member-display-button-item memberpassword-cancel-edit">取消修改</button>
                                 </div>
                                 <div class="member-display-button-group">
-                                    <button type="button" class="member-display-button-item memberpassword-button-edit">編輯密碼</button>
+                                    <button type="button" class="member-display-button-item memberpassword-button-edit">修改密碼</button>
                                 </div>
                             </div>
                             <div class="member-display-shop-container">
@@ -272,9 +242,6 @@
                         }
                     </div>
                 </div>
-
-
-
 
                 <!-- 歷史訂單 -->
                 @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
