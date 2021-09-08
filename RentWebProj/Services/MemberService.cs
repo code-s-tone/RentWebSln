@@ -251,25 +251,24 @@ namespace RentWebProj.Services
         {
             var Sname = HttpContext.Current.User.Identity.Name;
             var Tname = Int32.Parse(Sname);
-            Account account = new Account(
+            Account account = new Account(//這些資料從哪來?
               "dgaodzamk",
               "192222538187587",
               "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
-            Cloudinary cloudinary = new Cloudinary(account);
+            Cloudinary cloudinary = new Cloudinary(account);//需要account物件
             var uploadParams = new ImageUploadParams()
             {
-                File = new FileDescription(blobUrl),
-                PublicId = $"MemberProfilePhoto/{Sname}"
-
+                File = new FileDescription(blobUrl),//檔案來源
+                PublicId = $"MemberProfilePhoto/{Sname}"//目標路徑?
             };
 
-            var uploadResult = cloudinary.Upload(uploadParams);
+            var uploadResult = cloudinary.Upload(uploadParams);//上傳
 
             var getResultImgUrl = cloudinary.GetResource($"MemberProfilePhoto/{Sname}").SecureUrl;
             var result = _repository.GetAll<Member>();
             result.ToList().Find(x => x.MemberID == Tname).ProfilePhotoUrl = getResultImgUrl; ;
-            _repository.SaveChanges();
+            _repository.SaveChanges();//這邊會異動資料庫??
 
             return getResultImgUrl;
         }
