@@ -65,6 +65,9 @@ namespace RentWebProj.Services
                                  //MemberName = m.FullName,
                                  //會員生日判斷如果為"null"則給預設值
                                  MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
+                                 MemberYear = ((DateTime)m.Birthday).Year.ToString(),
+                                 MemberMonth = ((DateTime)m.Birthday).Month.ToString(),
+                                 MemberDay = ((DateTime)m.Birthday).Day.ToString(),
                                  MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
                                  //Email為必有欄位
                                  MemberEmail = m.Email,
@@ -145,48 +148,60 @@ namespace RentWebProj.Services
             }
 
         }
-        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail, string UserPassword, string ChangePassword , string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        //public MessageBoxResult ChangeProfile(string UserEmail, string ChangeEmail,string UserFullName , string ChangeFullName , string UserPhone ,string ChangePhone)
-        public MessageBoxResult ChangeProfile(int UserMemberId, string ChangeEmail , string UserPassword, string ChangePassword, string UserFullName , string ChangeFullName , string UserPhone , string ChangePhone)
-        {
-            var result = _repository.GetAll<Member>().FirstOrDefault(x=>x.MemberID==UserMemberId);
+        
+        //回傳個人資訊
+        public string ChangeProfile(int UserMemberId , string ChangeUserName , string ChangeYear , string ChangeMonth , string ChangeDay, string ChangeUserPhone)
+        {   
+            //先找對應會員
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
 
-            result.Email = ChangeEmail;
-
-            result.PasswordHash = Helper.SHA1Hash(ChangePassword);
-
-            if (UserFullName == null || UserFullName == "")
+            if (ChangeUserName == "")
             {
-                result.FullName = ChangeFullName;
+                result.FullName = "";
             }
             else
             {
-                result.FullName = ChangeFullName;
+                result.FullName = ChangeUserName;
             }
-            //result.Find(x => x.MemberID == UserMemberId).Email = ChangeEmail;
-            //result.Find(x => x.PasswordHash == UserPasswordHash).PasswordHash = ChangePasswordHash;
-            //result.Find(x => x.FullName == UserFullName).FullName = ChangeFullName;
-            //會員電話判斷
-            if (UserPhone == null)
+
+            if(ChangeUserPhone == "")
             {
-                result.Phone = ChangePhone;
+                result.Phone = "";
             }
             else
             {
-                result.Phone = ChangePhone;
+                result.Phone = ChangeUserPhone;
             }
 
-
+            if(ChangeYear == "" && ChangeMonth == "" && ChangeDay == "")
+            {
+                var a = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+                var d = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+            }
+            else
+            {
+                result.Birthday = DateTime.Parse($"{ChangeYear}-{ChangeMonth}-{ChangeDay}");
+                //result.Birthday = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+                //result.Birthday = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
+            }
             _repository.SaveChanges();
-
-            //return "修改成功";
-            return MessageBox.Show("修改成功");
+            return "";
         }
 
+        //回傳信箱資訊
         public string ChangeEmail(int UserMemberId , string ChangeEmail)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
             result.Email = ChangeEmail;
+            _repository.SaveChanges();
+            return "";
+        }
+
+        //回傳密碼資訊
+        public string ChangePassword(int UserMemberId , string ChangePassword)
+        {
+            var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
+            result.PasswordHash = Helper.SHA1Hash(ChangePassword);
             _repository.SaveChanges();
             return "";
         }
