@@ -36,8 +36,14 @@ namespace RentWebProj
 
             routes.MapRoute(
                 name: "Cart",
-                url: "Carts/{action}/{id}",
-                defaults: new { controller = "Carts", action = "Index", id = UrlParameter.Optional }
+                url: "Cart",
+                defaults: new { controller = "Carts", action = "Index" }
+            );
+
+            routes.MapRoute(
+                name: "Carts",
+                url: "Carts/{action}",
+                defaults: new { controller = "Carts", action = "Index" }
             );
 
             routes.MapRoute(
