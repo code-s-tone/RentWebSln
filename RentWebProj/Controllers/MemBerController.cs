@@ -79,40 +79,45 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
+            var reuslt = Request.UrlReferrer;
+
+            if (Request.UrlReferrer != null && Request.UrlReferrer.LocalPath != "/")
             {
 
                 var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
                 TempData["PreviousController"] = url_Pre[1];
-              
+
                 if (url_Pre[1] == "Carts")
                 {
                     TempData["PreviousAction"] = "Index";
                 }
-                else if(url_Pre.Length < 4)
+                else if (url_Pre.Length < 4)
                 {
                     TempData["PreviousAction"] = url_Pre[2];
-                    TempData["PreviousId"] = null; 
+                    TempData["PreviousId"] = null;
                 }
                 else
                 {
                     TempData["PreviousAction"] = url_Pre[2];
-                 
-                    if(url_Pre.Length == 3)
+
+                    if (url_Pre.Length == 4)
                     {
-                        TempData["PreviousIdOrCa"] = new { categoryID = url_Pre[3] };
+                        //TempData["PreviousIdOrCa"] = new { categoryID = url_Pre[3] };
+                        //TempData["PreviousIdOrCa"] = $"categoryID = {url_Pre[3]}";
+                        TempData["PreviousIdOrCa"] = url_Pre[3];
                     }
                     else
                     {
-                        TempData["PreviousIdOrCa"] = new {  PID = url_Pre[3] };
+                        //TempData["PreviousIdOrCa"] = $"PID = {url_Pre[3]}";
+                        TempData["PreviousIdOrCa"] = url_Pre[3];
                     }
                 }
-     
+
             }
 
-           return View();
-            
-           
+            return View();
+
+
 
         }
         [HttpPost]
@@ -125,17 +130,22 @@ namespace RentWebProj.Controllers
 
             string email = HttpUtility.HtmlEncode(s.Email);
             string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
+            var result = $"{TempData["PreviousController"]}/{TempData["PreviousAction"]}/{TempData["PreviousIdOrCa"]}";
+            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
+            //Response.Redirect(virtualPath + "Users/Login", true);
+            var abs = 1;
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
                 if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
                 {
-                    return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}",TempData["PreviousIdOrCa"]);
+                    //return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}",TempData["PreviousIdOrCa"]);
+                    return Redirect(virtualPath + $"{result}");
                 }
                 else
                 {
                     return RedirectToAction("Index", "Home");
-                }   
+                }
 
             }
             else
@@ -353,14 +363,16 @@ namespace RentWebProj.Controllers
         }
         public ActionResult SignOut()
         {
+            
+            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
             FormsAuthentication.SignOut();
             Thread.Sleep(4000);
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
                 var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
                 var controller_Pre = url_Pre[1];
-   
-                if (url_Pre[1] == "Carts") 
+
+                if (url_Pre[1] == "Carts")
                 {
                     return RedirectToAction("Index", "Home");
                 }
@@ -373,21 +385,28 @@ namespace RentWebProj.Controllers
                 {
                     var action_Pre = url_Pre[2];
                     var id_Pre = url_Pre[3];
+                    var result = $"{controller_Pre}/{action_Pre}/{id_Pre}";
                     if (id_Pre.Length == 3)
                     {
-                        return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { categoryID = id_Pre });
+
+                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { categoryID = id_Pre });
+                        return Redirect(virtualPath + $"{result}");
                     }
                     else
                     {
-                        return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { PID = id_Pre });
+                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { PID = id_Pre });
+                        return Redirect(virtualPath + $"{result}");
                     }
-                    
+
                 }
             }
             else
             {
                 return RedirectToAction("Index", "Home");
             }
+
+
+
         }
 
     }
