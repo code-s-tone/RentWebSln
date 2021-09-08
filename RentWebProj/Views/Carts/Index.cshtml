@@ -257,7 +257,7 @@
                 //以索引值取
                 //目標單價、目標天數欄位、目標小計欄位、目標異動紀錄欄位 目標核取方塊
                 dailyRate = function () {
-                    return document.querySelectorAll(`span.price`)[i].innerText;
+                    return document.querySelectorAll(`span.price`)[i].innerText;//雖然不太妥，但是下一頁會重算
                 };
                 rentDaysTarget = function () {
                     return document.querySelectorAll(`span.dateDiff`)[i];
