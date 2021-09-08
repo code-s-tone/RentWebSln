@@ -50,22 +50,17 @@ namespace RentWebProj.Services
         {
             //回傳所有商品資料含30天內被租過的日期
             var pLists = GetMostPopularProductCardData(30).ToList();
-            int[] dayRange = new int[] {0, 1, 2, 3, 4 };
-
+           
+            int dayRange = 2; //先以3天為星星標準
             pLists.ForEach(p =>
             {
-                for (int i = 0; i < dayRange.Length; i++)
-                {
-                    if (p.CountOfRentedDays >= dayRange[i])
-                    { 
-                        p.StarsForLike = i+1;
-                    }
-                }
+                int stars=(int)p.CountOfRentedDays/dayRange+1;
+                p.StarsForLike = stars > 5 ?  5 : stars;
             });
             return pLists;
         }
 
-        //首頁算30天內被租天數高到低排序
+        //算XX天內被租天數高到低排序
         public IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays)
         {
             var pList = GetAllProductCardData().ToList();
@@ -165,12 +160,6 @@ namespace RentWebProj.Services
                     break;
             }
 
-            string[] keyArray = keywordInput.Split();
-            foreach (var s in keyArray)
-            {
-                
-            }
-
             //依所選條件取出相關產品 AccBg001
             var selectedVMList = (
 
@@ -180,36 +169,42 @@ namespace RentWebProj.Services
                       && (subCategoryOptions == "0" || subCategoryOptions == null || p.SubCategoryID == subCategoryOptions)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate >= minBudget)
                       && (dailyRateBudget == "0" || dailyRateBudget == null || p.DailyRate <= maxBudget)
-                      && (keywordInput == null || p.ProductName.IndexOf(keywordInput,StringComparison.OrdinalIgnoreCase)>=0  || p.CategoryName.ToLower().Contains(keywordInput.ToLower()) || p.SubCategoryName.ToLower().Contains(keywordInput.ToLower()) || p.Description.ToLower().Contains(keywordInput.ToLower()))
+                      && (keywordInput == null || p.ProductName.IndexOf(keywordInput, StringComparison.OrdinalIgnoreCase) >= 0 || p.CategoryName.ToLower().Contains(keywordInput.ToLower()) || p.SubCategoryName.ToLower().Contains(keywordInput.ToLower()) || p.Description.ToLower().Contains(keywordInput.ToLower()))
 
                 select p).ToList();
 
             List<CardsViewModel> orderedVMList = null;
-
-            switch (orderByOptions.ToLower())
+            if (orderByOptions != null)
             {
-                case "relevance":
-                    //var level1 = selectedVMList.Where(x=>x.ProductName.IndexOf(keywordInput)>=0).ToList();
-                    var level1 = selectedVMList.Where(x => x.ProductName.IndexOf(keywordInput, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
-                    var level2 = selectedVMList.Where(x=>x.CategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
-                    var level3 = selectedVMList.Where(x=>x.SubCategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
-                    var level4 = selectedVMList.Where(x=>x.Description.ToLower().Contains(keywordInput.ToLower())).ToList();
-                    orderedVMList = level1.Concat(level2).Concat(level3).Concat(level4).Distinct().ToList();
-                
-                    break;
+                switch (orderByOptions.ToLower())
+                {
+                    case "relevance":
+                        var level1 = selectedVMList.Where(x => x.ProductName.IndexOf(keywordInput, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+                        var level2 = selectedVMList.Where(x => x.CategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
+                        var level3 = selectedVMList.Where(x => x.SubCategoryName.ToLower().Contains(keywordInput.ToLower())).ToList();
+                        var level4 = selectedVMList.Where(x => x.Description.ToLower().Contains(keywordInput.ToLower())).ToList();
+                        orderedVMList = level1.Concat(level2).Concat(level3).Concat(level4).Distinct().ToList();
 
-                case "price":
-                    orderedVMList = selectedVMList.OrderBy(x => x.DailyRate).ToList(); 
-                    break;
+                        break;
 
-                case "stars":
-                    orderedVMList = selectedVMList.OrderByDescending(x => x.StarsForLike).ToList();
-                    break;
+                    case "price":
+                        orderedVMList = selectedVMList.OrderBy(x => x.DailyRate).ToList();
+                        break;
 
-                default:
-                    break;
+                    case "stars":
+                        orderedVMList = selectedVMList.OrderByDescending(x => x.StarsForLike).ToList();
+                        break;
+
+                    default:
+                        break;
+                }
+
             }
-            
+            else
+            {
+                orderedVMList = selectedVMList;
+            }
+
             return orderedVMList;
         }
 
