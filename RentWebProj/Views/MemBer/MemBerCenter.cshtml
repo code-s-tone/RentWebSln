@@ -334,8 +334,6 @@
         let emailCancelEditBtn = document.querySelector('.memberemail-cancel-edit');
         let passwordCancelEditBtn = document.querySelector('.memberpassword-cancel-edit');
 
-        
-
         //儲存
         let personSaveBtn = document.querySelector('.memberperson-button-save');
         let emailSaveBtn = document.querySelector('.memberemail-button-save');
@@ -349,27 +347,19 @@
         let changeMonthContext = document.querySelector('.member-display-month');
         let changeDateContext = document.querySelector('.member-display-date');
 
-        
+        //性別 暫
 
-
-
-
-
-        //性別
-
-        //門市
-
+        //門市  暫
 
         //信箱
         let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
         let emailClear = document.querySelectorAll('.member-email-clear');
             
-        
         //密碼
         let changePasswordDisplay = document.querySelectorAll('.member-changePassword-item');
         let passwordClear = document.querySelectorAll('.member-password-clear');
 
-
+        //網頁載入初始化
         window.onload = function () {
             personCancelEditBtn.classList.add('notDisplay');
             emailCancelEditBtn.classList.add('notDisplay');
@@ -434,7 +424,7 @@
         }
         
 
-        //個資啟動編輯
+        //個資啟動修改
         personEditBtn.addEventListener('click', function () {
             for (let i = 0; i < personNameInp.length; i++) {
                 personNameInp[i].classList.remove('inputDisabled');
@@ -446,7 +436,7 @@
             personSaveBtn.classList.remove('buttonDisabled');
         });
 
-        //取消個資編輯
+        //取消個資修改
         personCancelEditBtn.addEventListener('click', function () {
             personEditBtn.classList.remove('notDisplay');
             personCancelEditBtn.classList.add('notDisplay');
@@ -454,7 +444,6 @@
             personSaveBtn.classList.add('buttonDisabled');
             inputInit();
         });
-
         //個資變更送出
         personSaveBtn.addEventListener('click', function () {
             inputInit();
@@ -467,8 +456,7 @@
         });
 
         
-
-        //信箱啟動編輯
+        //信箱啟動修改
         emailEditBtn.addEventListener('click', function () {
             emailCancelEditBtn.classList.remove('notDisplay');
             emailEditBtn.classList.add('notDisplay');
@@ -477,7 +465,7 @@
             AccountDisplay();
             EmailClear();
         });
-        //取消信箱編輯
+        //取消信箱修改
         emailCancelEditBtn.addEventListener('click', function () {
             emailCancelEditBtn.classList.add('notDisplay');
             emailEditBtn.classList.remove('notDisplay');
@@ -493,10 +481,7 @@
         });
 
 
-
-
-
-        //密碼啟動編輯
+        //密碼啟動修改
         passwordEditBtn.addEventListener('click', function () {
             passwordEditBtn.classList.add('notDisplay');
             passwordCancelEditBtn.classList.remove('notDisplay');
@@ -506,7 +491,7 @@
             PasswordClear();
         });
         
-        //取消密碼編輯
+        //取消密碼修改
         passwordCancelEditBtn.addEventListener('click', function () {
             passwordCancelEditBtn.classList.add('notDisplay');
             passwordEditBtn.classList.remove('notDisplay');
@@ -525,12 +510,6 @@
         });
     </script>
     
-    
-    
-
-
-
-
 }
 
 @* 前端驗證 *@
