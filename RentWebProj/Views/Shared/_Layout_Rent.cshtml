@@ -65,17 +65,18 @@
                                 <button type="submit"></button>
 
                             }
-                            
-
-
                         </div>
 
                         <div class="header-member-box">
 
                             @*<img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon">*@
-                            <a href="@Url.Action("Index", "Carts")">
-                                <i class="fas fa-shopping-cart" title="購物車"></i>
-                            </a>
+
+                            <div class="member-cart">
+                                <a class="position-relative" href="@Url.Action("Index", "Carts")">
+                                    <i class="fas fa-shopping-cart fa-3x" title="購物車"></i>
+                                    <span class="cartQuantity text-white bg-primary">6</span>
+                                </a>
+                            </div>
 
                             <div class="member-dropdown">
                                 <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
