@@ -16,14 +16,22 @@ namespace RentWebProj.Controllers
         {
             ProductService _service = new ProductService();
 
-            Dictionary<string, IEnumerable<CardsViewModel>> VMDictionary = new Dictionary<string, IEnumerable<CardsViewModel>>
+            List<IndexProductView> VMList = new List<IndexProductView>
             {
-                //{ "最高評價", _service.GetMostPopularProductCardData() },
-                //{ "最新上架", _service.GetMostPopularProductCardData() },
-                //{ "30天內最搶手商品", _service.GetMostPopularProductCardData(30).Take(6) } 偉軒原本
-                { "30天內最搶手商品", _service.ProductDataWithStars().Take(6) } //庭安9/7修改 需改成這樣才會帶星星
-
+                new IndexProductView
+                {
+                    Title = "便宜到老闆生無可戀(눈_눈)",
+                    Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Price",
+                    Cards = _service.GetCheapestProductCardData().Take(6)
+                },
+                new IndexProductView
+                {
+                    Title = "30天內最熱門ლ(´ڡ`ლ)",
+                    Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Stars",
+                    Cards = _service.ProductDataWithStars().Take(6)
+                }
             };
+
             //判斷登入之後動態顯示大頭貼跟名子 by _家承
             if (User.Identity.IsAuthenticated)
             {
@@ -32,7 +40,7 @@ namespace RentWebProj.Controllers
                 TempData["name"] = result.Fullname;
             }
 
-            return View(VMDictionary);
+            return View(VMList);
         }
 
         public ActionResult ContactUs()

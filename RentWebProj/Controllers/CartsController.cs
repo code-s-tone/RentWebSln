@@ -28,7 +28,7 @@ namespace RentWebProj.Controllers
         public ActionResult Checkout()
         {
             if(TempData["directCheckout"]!=null)
-                return View();
+                return View(TempData["directCheckout"]);
             else
                 return RedirectToAction("Index", "Carts");
         }
@@ -45,8 +45,14 @@ namespace RentWebProj.Controllers
             new OrderService().Create(PostVM);
             foreach (var PID in PostVM.ListProductID)
             {
-                new CartService().DeleteCart(Int32.Parse(User.Identity.Name), PID);
-                //new CartService().DeleteCart(1, PID);
+                try//軒：為了直接結帳功能(不入車，故可能沒東西刪)
+                {
+                    new CartService().DeleteCart(Int32.Parse(User.Identity.Name), PID);
+                }
+                catch(Exception ex)
+                {
+
+                }
             }
             return RedirectToAction("MemberCenter", "Member");
         }
