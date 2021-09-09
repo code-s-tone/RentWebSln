@@ -13,11 +13,6 @@ using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
-    public class OperationResult
-    {
-        public bool IsSuccessful { get; set; }
-        public Exception Exception { get; set; }
-    }
     public static class Helper
     {
 
@@ -125,6 +120,7 @@ namespace RentWebProj.Services
             return MID;
         }
 
+
         //public static string WriteLog(this OperationResult value) //擴充方法
         //{
         //    if ( value.Exception != null)
@@ -139,4 +135,11 @@ namespace RentWebProj.Services
         //    }
         //}
     }
+
+    public class OperationResult
+    {
+        public bool IsSuccessful { get; set; }
+        public Exception Exception { get; set; }
+    }
+
 }

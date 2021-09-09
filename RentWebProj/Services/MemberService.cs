@@ -266,12 +266,12 @@ namespace RentWebProj.Services
         {
             var Sname = HttpContext.Current.User.Identity.Name;
             var Tname = Int32.Parse(Sname);
-            Account account = new Account(//這些資料從哪來?
+            Account account = new Account(
               "dgaodzamk",
               "192222538187587",
               "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
-            Cloudinary cloudinary = new Cloudinary(account);//需要account物件
+            Cloudinary cloudinary = new Cloudinary(account);
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(blobUrl),//檔案來源
@@ -286,6 +286,38 @@ namespace RentWebProj.Services
             _repository.SaveChanges();//這邊會異動資料庫??
 
             return getResultImgUrl;
+        }
+
+        public void FileUploadProductImage(string PID, int index, string blobUrl )
+        {
+            //初始設定
+            Account account = new Account(//這些資料從哪來?
+              "dgaodzamk",
+              "192222538187587",
+              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+
+            Cloudinary cloudinary = new Cloudinary(account);//需要account物件
+
+
+            string path = $"Ppl/Ft/{PID}{index.ToString().PadLeft(2, '0')}";
+            var uploadParams = new ImageUploadParams()
+            {
+                File = new FileDescription(blobUrl),//檔案來源
+                PublicId = path//目標路徑?
+            };
+            //上傳
+            var uploadResult = cloudinary.Upload(uploadParams);
+
+            //取得圖片網址?
+            var getResultImgUrl = cloudinary.GetResource(path).SecureUrl;
+            //寫入庫
+            var entity = new ProductImage
+            {
+                ProductID = PID,
+                Source = getResultImgUrl
+            };
+            _repository.Create(entity);
+            _repository.SaveChanges();
         }
 
         //抓取 要在首頁 顯示留言的資料<名駿>

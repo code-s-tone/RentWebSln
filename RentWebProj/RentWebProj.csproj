@@ -247,6 +247,7 @@
     <Compile Include="Services\Helper.cs" />
     <Compile Include="ViewModels\ApiViewModels\ApiBase\ApiResult.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -481,6 +482,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Assets\LOL.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="obj\Debug\RentWebProj.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\RentWebProj.dll" />
