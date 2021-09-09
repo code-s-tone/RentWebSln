@@ -36,6 +36,10 @@ let doubleNewEmail = document.querySelector('.member-display-doublecheck-email')
 //密碼
 let changePasswordDisplay = document.querySelectorAll('.member-changePassword-item');
 let passwordClear = document.querySelectorAll('.member-password-clear');
+let newPassword = document.querySelector('.member-display-new-password');
+let doubleNewPassword = document.querySelector('.member-display-doublecheck-password');
+
+
 
 //網頁載入初始化
 window.onload = function () {
@@ -184,11 +188,28 @@ emailSaveBtn.addEventListener('click', function () {
 passwordEditBtn.addEventListener('click', function () {
     passwordEditBtn.classList.add('notDisplay');
     passwordCancelEditBtn.classList.remove('notDisplay');
-    passwordSaveBtn.disabled = false;
-    passwordSaveBtn.classList.remove('buttonDisabled');
+    //passwordSaveBtn.disabled = false;
+    //passwordSaveBtn.classList.remove('buttonDisabled');
     PasswordDisplay();
     PasswordClear();
 });
+
+
+//密碼正規表達式
+function checkPassword() {
+    if (newPassword.value != doubleNewPassword.value) {
+        passwordSaveBtn.disabled = true;
+        passwordSaveBtn.classList.add('buttonDisabled');
+    } else if (newPassword.value === doubleNewPassword.value) {
+        passwordSaveBtn.disabled = true;
+        passwordSaveBtn.classList.remove('buttonDisabled');
+    }
+}
+newPassword.addEventListener('keyup', checkPassword);
+doubleNewPassword.addEventListener('keyup', checkPassword);
+
+
+
 
 //取消密碼修改
 passwordCancelEditBtn.addEventListener('click', function () {
