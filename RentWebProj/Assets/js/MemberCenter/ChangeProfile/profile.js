@@ -14,6 +14,10 @@ let personSaveBtn = document.querySelector('.memberperson-button-save');
 let emailSaveBtn = document.querySelector('.memberemail-button-save');
 let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
 
+passwordSaveBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+});
+
 //姓氏 //生日 //電話
 let personNameInp = document.querySelectorAll('.member-person-input');
 
@@ -40,6 +44,8 @@ let changePasswordDisplay = document.querySelectorAll('.member-changePassword-it
 let passwordClear = document.querySelectorAll('.member-password-clear');
 let newPassword = document.querySelector('.member-display-new-password');
 let doubleNewPassword = document.querySelector('.member-display-doublecheck-password');
+let passwordDanger = document.querySelector('password-danger');
+let changePasswordDanger = document.querySelector('.check-password-danger');
 
 
 
@@ -54,7 +60,6 @@ window.onload = function () {
     emailSaveBtn.classList.add('buttonDisabled');
     passwordSaveBtn.disabled = true;
     passwordSaveBtn.classList.add('buttonDisabled');
-    inputInit();
     AccountInit();
     PasswordInit();
 
@@ -153,11 +158,12 @@ emailEditBtn.addEventListener('click', function () {
 
 //信箱正規表達式
 let regx = /\S+@\S+.\S+/;
+let regxx = /([a-zA-Z0-9]+)([\.{1}])?([a-zA-Z0-9]+)\@gmail([\.])com/;
 function checkEmail() {
     if (newEmail.value != doubleNewEmail.value) {
         emailSaveBtn.disabled = true;
         emailSaveBtn.classList.add('buttonDisabled');
-    } else if (regx.test(doubleNewEmail.value) === false) {
+    } else if (regxx.test(doubleNewEmail.value) === false) {
         emailSaveBtn.disabled = true;
         emailSaveBtn.classList.add('buttonDisabled');
     }
@@ -167,14 +173,34 @@ function checkEmail() {
     }
 }
 
+function notedEmail() {
+    if (newEmail.value === "") {
+        emailDanger.textContent = "電子信箱不得為空";
+    }
 
+    else if (regxx.test(newEmail.value) === false) {
+        emailDanger.textContent = "電子信箱不符合規定";
+    }
+    else{
+        emailDanger.textContent = "";
+    }
+}
+
+function notedCheckEmail() {
+    if (newEmail.value != doubleNewEmail.value) {
+        changeEmailDanger.textContent = "與輸入信箱不符合";
+    }
+    else {
+        changeEmailDanger.textContent = "";
+    }
+}
 
 newEmail.addEventListener('keyup', checkEmail);
+newEmail.addEventListener('keyup', notedEmail);
 doubleNewEmail.addEventListener('keyup', checkEmail);
-//emailDanger.addEventListener('blur', notedEmail);
+doubleNewEmail.addEventListener('keyup', notedCheckEmail);
+//emailDanger.addEventListener('keyup', notedEmail);
 //changeEmailDanger.addEventListener('keyup', notedEmail);
-
-
 
 //取消信箱修改
 emailCancelEditBtn.addEventListener('click', function () {
@@ -182,6 +208,8 @@ emailCancelEditBtn.addEventListener('click', function () {
     emailEditBtn.classList.remove('notDisplay');
     emailSaveBtn.disabled = true;
     emailSaveBtn.classList.add('buttonDisabled');
+    emailDanger.textContent = '';
+    changeEmailDanger.textContent = '';
     AccountInit();
 });
 //信箱變更送出
@@ -208,14 +236,14 @@ function checkPassword() {
     if (newPassword.value != doubleNewPassword.value) {
         passwordSaveBtn.disabled = true;
         passwordSaveBtn.classList.add('buttonDisabled');
-    } else if (newPassword.value === doubleNewPassword.value) {
+    } else if (newPassword.value === doubleNewPassword.value && newPassword.value != "") {
         passwordSaveBtn.disabled = false;
         passwordSaveBtn.classList.remove('buttonDisabled');
     }
 }
+
 newPassword.addEventListener('keyup', checkPassword);
 doubleNewPassword.addEventListener('keyup', checkPassword);
-
 
 
 
@@ -225,6 +253,8 @@ passwordCancelEditBtn.addEventListener('click', function () {
     passwordEditBtn.classList.remove('notDisplay');
     passwordSaveBtn.disabled = true;
     passwordSaveBtn.classList.add('buttonDisabled');
+    passwordDanger.textContent = "";
+    changePasswordDanger.textContent = '';
     PasswordInit();
 });
 
