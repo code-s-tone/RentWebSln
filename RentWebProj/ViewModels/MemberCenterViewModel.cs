@@ -23,6 +23,7 @@ namespace RentWebProj.ViewModels
         public string MemberPhone { get; set; }
         public string MemberBranchName { get; set; }
         [Required]
+        [Display(Name = "電子信箱")]
         [StringLength(30, MinimumLength = 10, ErrorMessage = "信箱至少10個字元,最多30字元")]
         [DataType(DataType.EmailAddress, ErrorMessage = "請輸入正確的電子信箱")]
         public string MemberEmail { get; set; }

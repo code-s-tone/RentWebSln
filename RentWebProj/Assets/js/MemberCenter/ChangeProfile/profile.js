@@ -31,6 +31,8 @@ let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
 let newEmail = document.querySelector('.member-display-new-email');
 let doubleNewEmail = document.querySelector('.member-display-doublecheck-email');
+let emailDanger = document.querySelector('.email-danger');
+let changeEmailDanger = document.querySelector('.checkemail-danger');
 
 
 //密碼
@@ -164,8 +166,14 @@ function checkEmail() {
         emailSaveBtn.classList.remove('buttonDisabled');
     }
 }
+
+
+
 newEmail.addEventListener('keyup', checkEmail);
 doubleNewEmail.addEventListener('keyup', checkEmail);
+//emailDanger.addEventListener('blur', notedEmail);
+//changeEmailDanger.addEventListener('keyup', notedEmail);
+
 
 
 //取消信箱修改
@@ -201,7 +209,7 @@ function checkPassword() {
         passwordSaveBtn.disabled = true;
         passwordSaveBtn.classList.add('buttonDisabled');
     } else if (newPassword.value === doubleNewPassword.value) {
-        passwordSaveBtn.disabled = true;
+        passwordSaveBtn.disabled = false;
         passwordSaveBtn.classList.remove('buttonDisabled');
     }
 }
