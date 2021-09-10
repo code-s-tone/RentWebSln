@@ -51,7 +51,7 @@ namespace RentWebProj.Services
             //回傳所有商品資料含30天內被租過的日期
             var pLists = GetMostPopularProductCardData(30).ToList();
            
-            int dayRange = 2; //先以3天為星星標準
+            int dayRange = 2; //先以2天為星星標準
             pLists.ForEach(p =>
             {
                 int stars=(int)p.CountOfRentedDays/dayRange+1;
@@ -122,7 +122,7 @@ namespace RentWebProj.Services
             }
             else//找該分類
             {
-                selectedVMList = ProductDataWithStars().Where(x => x.CategoryID == categoryID.Substring(0, 3)).ToList();
+                selectedVMList = ProductDataWithStars().Where(x => x.CategoryID.ToLower() == categoryID.Substring(0, 3).ToLower()).ToList();
             }
 
             return selectedVMList;
