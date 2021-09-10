@@ -1,21 +1,12 @@
-﻿@model Dictionary<string, IEnumerable<CardsViewModel>>
+﻿@model List<IndexProductView>
 
 @{
     ViewBag.Title = "首頁";
     var Catgories = new ProductService().GetCategoryData();
-    var AllComments = new MemberService().GetAllComment();
+    var AllComments = new MemberService().GetAllComment().Take(10);
 }
 
-@*這是管理後台，需經驗證授權才能存取
-    <br>
-    User  Name: @User.Identity.Name
-    <br>
-    Is Authentication : @User.Identity.IsAuthenticated
-    <br>
-    Authentication Type : @User.Identity.AuthenticationType
-    <br>*@
 <div class="nav-background"></div>@* 打底 *@
-
 <header class="keyart" id="parallax">
     <div class="keyart_layer parallax" id="keyart-0" data-speed="2" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 00.0 -->
     <div class="keyart_layer parallax" id="keyart-1" data-speed="5" style="transform: translate3d(0px, 0px, 0px)"></div>	<!-- 12.5 -->
@@ -53,8 +44,9 @@
     <article class="container-xl">
         <section id="categories" class="Area">
             <h3>
-                租借種類
-                <a href="">(see all)</a>
+                商品種類
+                @Html.ActionLink("(see all)", "GeneralCategories", "Product")
+                @*<a href="">(see all)</a>*@
             </h3>
             <div class="swiper-container categories-swiper-container">
                 <div class="swiper-wrapper">
@@ -66,14 +58,14 @@
                             @Html.Partial("Partial_CategoryCard", ct)
 
                             @*<div class="imgBox">
-                                    <img class="w-100" src="https://picsum.photos/100/150/?random=1">
+                                <img class="w-100" src="https://picsum.photos/100/150/?random=1">
+                            </div>
+                            <div class="textBox">
+                                <div>
+                                    @item.CategoryName v.s.
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
                                 </div>
-                                <div class="textBox">
-                                    <div>
-                                        @item.CategoryName v.s.
-                                        @Html.DisplayFor(modelItem => item.CategoryName)
-                                    </div>
-                                </div>*@
+                            </div>*@
                         </div>
                     }
                 </div>
@@ -83,8 +75,12 @@
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
         </section>
+        @foreach (var item in Model)
+        {
+            @ShowProductList(item);
+        }
 
-        <section id="stories" class="Area">
+        @*<section id="stories" class="Area">
             <h3>
                 故事
                 <a href="">(see all)</a>
@@ -128,12 +124,12 @@
                 <div class="swiper-button-next"></div>
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
-        </section>
+        </section>*@
 
         <section id="reviews" class="Area">
             <h3>
-                顧客評論
-                <a href="">(see all)</a>
+                最新評價
+                @*<a href="">(see all)</a>*@
             </h3>
             <div class="swiper-container reviews-swiper-container">
                 <div class="swiper-wrapper">
@@ -171,16 +167,11 @@
             </div>
         </section>
 
-        @foreach (var item in Model)
-        {
-            @ShowProductList(item);
-        }
-
 
         <section id="blogPosts" class="Area">
             <h3>
-                部落格po文
-                <a href="">(see all)</a>
+                部落格文章
+                @Html.ActionLink("(see all)","BlogPost","SocialMedia")
             </h3>
             <div class="swiper-container blogPosts-swiper-container">
                 <div class="swiper-wrapper">
@@ -226,18 +217,18 @@
 </div>
 @*<div id="cookiePermission"></div>*@
 
-@helper ShowProductList(KeyValuePair<string, IEnumerable<CardsViewModel>> PListPair)
+@helper ShowProductList(IndexProductView productCards)
 {
     <section class="category-sample">
-        <h3>
-            @PListPair.Key
-            <a href="">(see all)</a>
+        <h3 class="ms-3">
+            @productCards.Title
+            <a href=@productCards.Url>(see all)</a>
         </h3>
         <div class="d-flex flex-wrap">
-            @foreach (CardsViewModel product in PListPair.Value)
+            @foreach (CardsViewModel productCard in productCards.Cards)
             {
                 <div class="col-6 col-md-4 col-xl-2">
-                    @Html.Partial("Partial_ProductCard", product)
+                    @Html.Partial("Partial_ProductCard", productCard)
                 </div>
             }
         </div>

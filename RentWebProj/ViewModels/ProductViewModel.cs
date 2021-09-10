@@ -7,17 +7,11 @@ using System.Web.Mvc;
 
 namespace RentWebProj.ViewModels
 {
-    public class CategoryView
+    public class IndexProductView
     {
-        public string CategoryName { get; set; }
-        public string ImageSrcMain { get; set; }
-        public string ImageSrcSecond { get; set; }
-
-    }
-    public class ProductView
-    {
-        public string ProductName { get; set; }
-        public string CategoryName { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
+        public IEnumerable<CardsViewModel> Cards { get; set; }
     }
 
     public class CardsViewModel
