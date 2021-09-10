@@ -175,13 +175,13 @@ header-top .container-xl {
         position: absolute;
         border-radius: 50%;
         width: 25px;
-        height:25px;
+        height: 25px;
         display: flex;
         justify-content: center;
-        align-items: center;
-        right:10px;
+        line-height: 25px;
+        right: 10px;
         top: -10px;
-        z-index:100;
+        z-index: 100;
     }
 
 /* 會員中心dropdown */
