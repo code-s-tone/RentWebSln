@@ -366,7 +366,8 @@ namespace RentWebProj.Controllers
             
             string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
             FormsAuthentication.SignOut();
-            Thread.Sleep(4000);
+            //戰略性註解
+            //Thread.Sleep(4000);
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
                 var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
