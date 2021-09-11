@@ -32,7 +32,7 @@ namespace RentWebProj.Controllers
         [Authorize]
         // GET: Member
         public ActionResult MemberCenter()
-        {
+        {   
             //已將User.Identity.Name轉成MemberId
             return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
         }
