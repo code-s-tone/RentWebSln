@@ -410,8 +410,13 @@ namespace RentWebProj.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+        }
 
-
+        public ActionResult DeveloperLogin()
+        {
+            string Deve_email = "Code7414@gmail.com";
+            Helper.FormsAuthorization(Deve_email);
+            return RedirectToAction("Index", "Home");
         }
 
     }
