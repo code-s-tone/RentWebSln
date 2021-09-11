@@ -255,16 +255,16 @@
                         <span class="member-display-order-item">建立訂單日期</span>
                         <span class="member-display-order-item">交易狀態</span>
                         <span class="member-display-order-item">連結按鈕</span>
-                        <span class="member-display-order-item">查看明細</span>
+                        @*<span class="member-display-order-item">查看明細</span>*@
 
                         @*<span class="member-display-order-item"></span>*@
                         @*<span class="member-display-order-item member-display-order-item-show">內容</span>*@
                     </div>
-                    @foreach (var item in Model.MemberOrderDetail)
+                    @foreach (var order in Model.MemberOrders)
                     {
                         <div class="member-display-order-detail-container">
                             <div class="member-display-title member-display-order-detail">
-                                <span class="member-display-order-item member-display-order-show">1</span>
+                                <span class="member-display-order-item member-display-order-show">@order.OrderID</span>
 
                                 <span class="member-display-order-item member-display-order-show">110/09/13</span>
 
@@ -276,7 +276,7 @@
                                 </span>
 
                                 <span class="member-display-order-item member-display-order-item-show-dynamic-button">
-                                    +
+                                    查看明細+
                                 </span>
 
                             </div>
@@ -296,58 +296,58 @@
 
 
 
-                            <div class="member-display-order-detail-list">
-                                @* ============================================================================================ *@
+                        <div class="member-display-order-detail-list">
+                            @* ============================================================================================ *@
 
-                                <span class="member-display-order-item member-display-order-picture">圖片</span>
-                                <span class="member-display-order-item member-display-order-name">商品名稱</span>
-                                <span class="member-display-order-item member-display-order-start-day">開始日</span>
-                                <span class="member-display-order-item member-display-order-return-day">歸還日</span>
-                                <span class="member-display-order-item member-display-order-price">單價</span>
-                                <span class="member-display-order-item member-display-order-amount">天數</span>
-                                <span class="member-display-order-item member-display-order-total">小計</span>
+                            <span class="member-display-order-item detail-title">商品圖片</span>
+                            <span class="member-display-order-item detail-title">商品名稱</span>
+                            <span class="member-display-order-item detail-title">開始日</span>
+                            <span class="member-display-order-item detail-title">歸還日</span>
+                            <span class="member-display-order-item detail-title">單價</span>
+                            <span class="member-display-order-item detail-title">天數</span>
+                            <span class="member-display-order-item detail-title">小計</span>
 
-                                @* ============================================================================================ *@
-
-
-                                @*商品1*@
-
-                                <span class="member-display-order-item member-display-order-dynamic-picture">
-                                    商品圖片
+                            @* ============================================================================================ *@
+                            @foreach (var orderDetail in order.OrderDetails)
+                            {
+                                <span class="detail-item">
+                                    圖片URL
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-name">
-                                    柴柴
+                                <span class="detail-item">
+                                    @orderDetail.ProductName
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-start-day">
+                                <span class="detail-item">
                                     110/09/13
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-return-day">
+                                <span class="detail-item">
                                     110/09/15
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-price">
+                                <span class="detail-item">
                                     10
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-amount">
+                                <span class="detail-item">
                                     2
                                 </span>
 
-                                <span class="member-display-order-item member-display-order-dynamic-total">
-                                    小計
+                                <span class="detail-item">
+                                    20
                                 </span>
-
-                                @* ============================================================================================ *@
-
-                                @*商品2*@
-
-                                @* ============================================================================================ *@
+                            }
 
 
-                            </div>
+                            @* ============================================================================================ *@
+
+                            @*商品2*@
+
+                            @* ============================================================================================ *@
+
+
+                        </div>
                         </div>
                     }
                 </div>

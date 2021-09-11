@@ -22,40 +22,31 @@ namespace RentWebProj.Services
             _repository = new CommonRepository(new RentContext());
         }
 
-        public IEnumerable<MemberPersonDataViewModel> GetMemberData(int LoginMemeberId)
+        public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
         {
-            IEnumerable<MemberPersonDataViewModel> MemberCenterVM;
-            IEnumerable<MemberOrderDetailViewModel> MemberOrderDetailVM;
             var MemberDMList = _repository.GetAll<Member>();
-            var BranchDMList = _repository.GetAll<BranchStore>();
             var OrderDMList = _repository.GetAll<Order>();
-            var OrderDetailDMList = _repository.GetAll<OrderDetail>();
-            var ProductDMList = _repository.GetAll<Product>();
+            var BranchDMList = _repository.GetAll<BranchStore>();
 
+            var MemberOrderVM =   
+                (from o in OrderDMList                                
+                join b in BranchDMList
+                on o.StoreID equals b.StoreID
+                where o.MemberID == LoginMemeberId
+                select new MemberOrderViewModel
+                {
+                    OrderID = o.OrderID,
+                    OrderDate = o.OrderDate,
+                    BranchName = b.StoreName,
+                    OrderStatus = o.OrderStatusID,
+                }).ToList();
 
-            MemberOrderDetailVM = from od in OrderDetailDMList
-                                  join o in OrderDMList
-                                  on od.OrderID equals o.OrderID
-                                  join b in BranchDMList
-                                  on o.StoreID equals b.StoreID
-                                  join p in ProductDMList
-                                  on od.ProductID equals p.ProductID
-                                  join m in MemberDMList
-                                  on o.MemberID equals m.MemberID
-                                  where m.MemberID == LoginMemeberId
-                                  select new MemberOrderDetailViewModel
-                                  {
-                                      BranchName = b.StoreName,
-                                      RentDate = (int)DbFunctions.DiffDays((DateTime)od.StartDate, (DateTime)od.ExpirationDate),
-                                      TotalAmount = (int)od.TotalAmount,
-                                      StartDate = (DateTime)od.StartDate,
-                                      ProductName = p.ProductName,
-                                      ExpirationDate = (DateTime)od.ExpirationDate,
-                                      DailyRate = (int)od.DailyRate,
-                                  };
+            MemberOrderVM.ForEach(order =>
+            {
+                order.OrderDetails = GetOrderDetails(order.OrderID);
+            });
 
-
-            MemberCenterVM = from m in MemberDMList
+            MemberPersonDataViewModel MemberCenterVM = (from m in MemberDMList
                              where m.MemberID == LoginMemeberId
                              select new MemberPersonDataViewModel
                              {
@@ -73,12 +64,39 @@ namespace RentWebProj.Services
                                  MemberEmail = m.Email,
                                  MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
                                  //MemberBranchName = b.StoreName,
-                                 //測試中訂單
-                                 MemberOrderDetail = MemberOrderDetailVM,
+                                 //測試中訂單                                 
                                  //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
-                             };
+                             }).FirstOrDefault();
+
+            MemberCenterVM.MemberOrders = MemberOrderVM;
 
             return MemberCenterVM;
+        }
+
+        private List<MemberOrderDetailViewModel> GetOrderDetails(int orderID)
+        {
+            var OrderDetailDMList = _repository.GetAll<OrderDetail>();
+            var ProductDMList = _repository.GetAll<Product>();
+
+            var result = 
+                (from od in OrderDetailDMList
+                 join p in ProductDMList
+                 on od.ProductID equals p.ProductID
+                 where od.OrderID ==  orderID 
+                 select new MemberOrderDetailViewModel
+                 {
+                     ProductName = p.ProductName,
+                     //產品圖?
+                     DailyRate = (int)od.DailyRate,
+                     TotalAmount = (int)od.TotalAmount,
+                     StartDate = od.StartDate,
+                     ExpirationDate = od.ExpirationDate,
+                     RentDate = (int)DbFunctions.DiffDays(od.StartDate, od.ExpirationDate)
+                     //(int)Math.Ceiling((od.ExpirationDate - od.StartDate).TotalDays)
+                 }).ToList();
+
+            return result;
+
         }
 
         public bool getMemberLogintData(string Email, string Password)

@@ -5,13 +5,22 @@
     display: flex;
 }
 
-.member-display-order-detail-list,
+
 .member-display-order-item,
 .member-display-order-item-show-button,
 .member-display-order-item-display {
-    width: 14%;
+    width: 20%;
 }
 
+.detail-title, .detail-item {
+    width: 14.2857%;
+}
+.detail-title{
+    background-color: bisque;
+}
+.detail-item {
+
+}
 .member-display-order-item-show-button,
 .member-display-order-item-display
 {
@@ -53,7 +62,6 @@
     box-shadow: 3px 3px 8px #cccccc;
     /* display: none; */
 }
-
 
 
 @media screen and (min-width:312px) {

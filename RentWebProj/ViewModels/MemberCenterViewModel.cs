@@ -49,23 +49,41 @@ namespace RentWebProj.ViewModels
         public string ComfigMemberPasswordHash { get; set; }
 
         //測試中
-        public IEnumerable<MemberOrderDetailViewModel> MemberOrderDetail { get; set; }
+        public List<MemberOrderViewModel> MemberOrders { get; set; }
     }
 
     //訂單資訊
+    public class MemberOrderViewModel
+    {
+        public int OrderID { get; set; }
+        public DateTime OrderDate { get; set; }
+        public int DeliverID { get; set; }
+        public int OrderStatus { get; set; }
+        public string BranchName { get; set; }
+        public List<MemberOrderDetailViewModel> OrderDetails { get; set; }
+    }
+
+    //public enum OrderStatusName
+    //{
+    //    "","",""
+    //}
+
     public class MemberOrderDetailViewModel
     {
-        public string BranchName { get; set; }
-
-        //ExpirationDate - RentDate = RentDate
-        public int RentDate { get; set; }
+        public string ProductName { get; set; }
+        //public string ProductImgSrc { get; set; }
+        public int DailyRate { get; set; }
         public int TotalAmount { get; set; }
         public DateTime StartDate { get; set; }
-        public string ProductName { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public int DailyRate { get; set; }
-
+        //ExpirationDate - StartDate = RentDate
+        public int RentDate { get; set; }
+        public int GoodsStatus { get; set; }
     }
+    //public enum GoodsStatusName
+    //{
+    //    "","",""
+    //}
 
     //修改密碼驗證使用
     public class CheckPassword
