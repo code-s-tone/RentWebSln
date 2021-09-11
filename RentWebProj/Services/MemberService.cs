@@ -296,7 +296,7 @@ namespace RentWebProj.Services
                 from c in _repository.GetAll<Comment>()
                 join m in _repository.GetAll<Member>()
                 on c.MemberID equals m.MemberID
-                orderby c.Time descending
+                orderby c.CommentID descending
 
                 select new CommentViewModel
                 {

@@ -164,8 +164,27 @@ header-top .container-xl {
     display: flex;
     align-items:center;
 }
-/* 會員中心dropdown */
 
+.member-cart a {
+    display: inline-block;
+    text-decoration: none;
+    top:4px;
+}
+
+    .member-cart a .cartQuantity {
+        position: absolute;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        line-height: 25px;
+        right: 10px;
+        top: -10px;
+        z-index: 100;
+    }
+
+/* 會員中心dropdown */
 .member-dropdown {
     position: relative;
     display: none;

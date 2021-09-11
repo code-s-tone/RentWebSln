@@ -60,7 +60,8 @@ namespace RentWebProj.Controllers
             return View();
         }
 
-        [HttpPost] //前端選了主類選項 出現副類
+        //前端選了主類選項 出現副類
+        [HttpGet]
         public ActionResult GetSubCategoryOptions(string categoryID)
         {
             return Json(_service.GetSubCategoryOptions(categoryID), JsonRequestBehavior.AllowGet);
@@ -98,21 +99,15 @@ namespace RentWebProj.Controllers
         //                  =>IsSuccessful == false => 提示已加入過            
         //                    IsSuccessful == true => 提示加入成功
 
+
+        [HttpPost] //庭安卡片加購物車用 
         public ActionResult ProductToCart(string PID)
         {
             OperationResult result = new OperationResult();
             var cartService = new CartService();
             result = cartService.Create(PID);
-            if (result.IsSuccessful)
-            {
-                //成功代表有寫入
-                return RedirectToAction("ProductList");
-            }
-            else
-            {
-                //失敗代表本來就在車內
-                return RedirectToAction("ProductList");
-            }
+            return Json(result.IsSuccessful); 
+      
         }
 
         //接收路由PID撈產品資料、取當前登入者，傳到View
