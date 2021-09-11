@@ -6,7 +6,7 @@
     position: fixed;
     z-index: 200;
     top: 0;
-    left: -260px;
+    left: -300px;
     box-shadow: 2px 2px 5px rgb(150, 150, 150);
     /* overflow: hidden; */
     overflow-y: auto;
