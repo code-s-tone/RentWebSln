@@ -299,7 +299,7 @@ namespace RentWebProj.Services
             Cloudinary cloudinary = new Cloudinary(account);//需要account物件
 
 
-            string path = $"Ppl/Ft/{PID}{index.ToString().PadLeft(2, '0')}";
+            string path = $"Product/Ppl/Ft/{PID}/{PID}{index.ToString().PadLeft(2, '0')}";
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(blobUrl),//檔案來源
@@ -314,10 +314,16 @@ namespace RentWebProj.Services
             var entity = new ProductImage
             {
                 ProductID = PID,
+                ImageID = index,
                 Source = getResultImgUrl
             };
-            _repository.Create(entity);
-            _repository.SaveChanges();
+            RentContext context = new RentContext();
+            context.ProductImages.Add(entity);
+            //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [ProductImages] ON;");
+            context.SaveChanges();
+            //context.Database.ExecuteSqlCommand("SET IDENTITY_INSERT [ProductImages] OFF;");
+            //_repository.Create(entity);
+            //_repository.SaveChanges();
         }
 
         //抓取 要在首頁 顯示留言的資料<名駿>
