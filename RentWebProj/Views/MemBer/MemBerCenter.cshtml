@@ -2,6 +2,15 @@
 
 @{
     ViewBag.Title = "MemberCenter";
+    var IsNotPassword = "";
+    if (ViewBag.IsNotHasPassword == "Null")
+    {
+        IsNotPassword = "Yes";
+    }
+    else
+    {
+        IsNotPassword = "No";
+    }
 }
 
 <div class="member-center-container-outsidestyle">
