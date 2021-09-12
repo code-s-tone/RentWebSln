@@ -309,7 +309,7 @@ namespace RentWebProj.Services
             Cloudinary cloudinary = new Cloudinary(account);//需要account物件
 
 
-            string path = $"Product/Ppl/{PID}{index.ToString().PadLeft(2, '0')}";
+            string path = $"Product/Ppl/{PID}_{index}";
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(blobUrl),//檔案來源
