@@ -298,41 +298,41 @@ namespace RentWebProj.Services
             return getResultImgUrl;
         }
 
-        public void FileUploadProductImage(string PID, int index, string blobUrl)
-        {
-            //初始設定
-            Account account = new Account(//這些資料從哪來?
-              "dgaodzamk",
-              "192222538187587",
-              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+        //public void FileUploadProductImage(string PID, int index, string blobUrl)
+        //{
+        //    //初始設定
+        //    Account account = new Account(//這些資料從哪來?
+        //      "dgaodzamk",
+        //      "192222538187587",
+        //      "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
-            Cloudinary cloudinary = new Cloudinary(account);//需要account物件
+        //    Cloudinary cloudinary = new Cloudinary(account);//需要account物件
 
 
-            string path = $"Product/Ppl/{PID}{index.ToString().PadLeft(2, '0')}";
-            var uploadParams = new ImageUploadParams()
-            {
-                File = new FileDescription(blobUrl),//檔案來源
-                PublicId = path//目標路徑?
-            };
-            //上傳
-            var uploadResult = cloudinary.Upload(uploadParams);
+        //    string path = $"Product/Ppl/{PID}_{index}";
+        //    var uploadParams = new ImageUploadParams()
+        //    {
+        //        File = new FileDescription(blobUrl),//檔案來源
+        //        PublicId = path//目標路徑?
+        //    };
+        //    //上傳
+        //    var uploadResult = cloudinary.Upload(uploadParams);
 
-            //取得圖片網址?
-            var getResultImgUrl = cloudinary.GetResource(path).SecureUrl;
-            //寫入庫
-            var entity = new ProductImage
-            {
-                ProductID = PID,
-                ImageID = index,
-                Source = getResultImgUrl
-            };
-            RentContext context = new RentContext();
-            context.ProductImages.Add(entity);
-            context.SaveChanges();
-            //_repository.Create(entity);
-            //_repository.SaveChanges();
-        }
+        //    //取得圖片網址?
+        //    var getResultImgUrl = cloudinary.GetResource(path).SecureUrl;
+        //    //寫入庫
+        //    var entity = new ProductImage
+        //    {
+        //        ProductID = PID,
+        //        ImageID = index,
+        //        Source = getResultImgUrl
+        //    };
+        //    RentContext context = new RentContext();
+        //    context.ProductImages.Add(entity);
+        //    context.SaveChanges();
+        //    //_repository.Create(entity);
+        //    //_repository.SaveChanges();
+        //}
 
         //抓取 要在首頁 顯示留言的資料<名駿>
         public IEnumerable<CommentViewModel> GetAllComment()
