@@ -7,6 +7,10 @@ using RentWebProj.Services;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Helpers;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 
 namespace RentWebProj.Controllers
 {
@@ -146,6 +150,65 @@ namespace RentWebProj.Controllers
             VM.OperationType = PostVM.IsExisted? "Update" : "Create";
 
             return View(VM);
+        }
+
+        //偉軒寫庫用
+        public async Task<ActionResult> LoL()
+        {
+            string imgeSrc = "";
+
+            var repository = new RentWebProj.Repositories.CommonRepository(new RentContext());
+            var Mservice = new MemberService();
+            //取資料
+            var LoLList =
+                (from p in repository.GetAll<Product>()
+                 where p.Discontinuation == true
+                 orderby p.ProductName
+                 select p).ToList();
+            int i = 1;
+            HttpClient client = new HttpClient();
+
+            foreach (Product x in LoLList)
+            {
+                var championName = x.ProductName;
+                var PID = "PplFt" + i.ToString().PadLeft(3, '0');
+
+                repository.Delete(x);
+                repository.SaveChanges();
+                //寫庫
+                Product entity = new Product
+                {
+                    ProductID = PID,
+                    ProductName = x.ProductID, //保留中文名字
+                    Description = x.Description,
+                    DailyRate = (decimal)Math.Pow((double)x.DailyRate, 3),
+                    LaunchDate = x.LaunchDate,
+                    WithdrawalDate = x.WithdrawalDate,
+                    Discontinuation = false,
+                    UpdateTime = x.UpdateTime
+                };
+
+                repository.Create(entity);
+                repository.SaveChanges();
+                for (int j = 0; ; j++)
+                {
+                    imgeSrc = $"https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{championName}_{j}.jpg";
+                    //imgeSrc = $"https://cdngarenanow-a.akamaihd.net/webmain/static/pss/lol/items_splash/{championName}_{j}.jpg";
+                    try
+                    {
+                        HttpResponseMessage response = await client.GetAsync(imgeSrc);
+                        response.EnsureSuccessStatusCode();
+                    }
+                    catch (Exception ex)
+                    {
+                        break;
+                    }
+                    //上圖，寫庫
+                    Mservice.FileUploadProductImage(PID, j + 1, imgeSrc);
+                }
+                i++;
+            }
+            return Content("完成");
         }
     }
 }
