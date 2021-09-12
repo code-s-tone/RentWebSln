@@ -21,6 +21,7 @@ function GoogleSigninInit() {
 
 
 function GoogleLogin() {
+    document.querySelector(".Login").classList.add("spinner-1");
     let auth2 = gapi.auth2.getAuthInstance();//取得GoogleAuth物件
     auth2.signIn().then(function (GoogleUser) {
 
@@ -33,9 +34,12 @@ function GoogleLogin() {
             data: { id_token: id_token },
             success: function (msg) {
                 console.log("Google登入成功");
-                
+   
                 window.location.href = `${document.referrer}`;
            /*     window.location.href = "../Home/Index";*/
+            },
+            error: function (msg) {
+                document.querySelector(".Login").classList.remove("spinner-1");
             }
         });//end $.ajax
 
