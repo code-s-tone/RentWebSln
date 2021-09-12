@@ -36,7 +36,8 @@ namespace RentWebProj.Controllers
             //已將User.Identity.Name轉成MemberId
             var isNullPassword = _service.CheckPassword(Int32.Parse(User.Identity.Name));
             ViewBag.IsNotHasPassword = isNullPassword;
-            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            var VM = _service.GetMemberData(Int32.Parse(User.Identity.Name));
+            return View(VM);
         }
 
         //Post: Member
@@ -46,7 +47,7 @@ namespace RentWebProj.Controllers
         {
             ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
             Thread.Sleep(1500);
-            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
         }
 
         [HttpPost]
@@ -56,11 +57,11 @@ namespace RentWebProj.Controllers
             if (ModelState.IsValid)
             {
                 ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
             }
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
             Thread.Sleep(1500);
-            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
 
         }
 
@@ -71,11 +72,11 @@ namespace RentWebProj.Controllers
             if (ModelState.IsValid)
             {
                 ModelState.AddModelError("ComfigMemberPasswordHash", "無效的密碼!");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
             }
             ViewBag.returnEmail = _service.ChangePassword(Int32.Parse(User.Identity.Name), X.MemberPasswordHash);
             Thread.Sleep(1500);
-            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
         }
 
 
