@@ -14,10 +14,11 @@
 
 .detail-title, .detail-item {
     width: 12.5%;
+    margin-bottom: 10px;
 }
-.detail-title{
+.detail-title {
     background-color: bisque;
-    font-size: 16px;
+    font-size: 16px; 
 }
 .detail-item {
 
