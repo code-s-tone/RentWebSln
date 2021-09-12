@@ -266,6 +266,7 @@
     <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
+    <Content Include="Assets\css\Login\spin.css" />
     <Content Include="Assets\css\MemberCenter\memberJS.css" />
     <Content Include="Assets\css\MemberCenter\ProfilePhoto.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
@@ -484,6 +485,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Assets\LOL.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="obj\Debug\RentWebProj.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\RentWebProj.dll" />

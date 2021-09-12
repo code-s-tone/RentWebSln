@@ -1,7 +1,7 @@
 ﻿@model CardsViewModel
 @{
-    var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/ProductDetail/" + Model.ProductID + "_1.jpg";
-
+    string PID = Model.ProductID;
+    string src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/Product/" + PID.Substring(0,3)+"/"+ PID + "_1.jpg";
 }
 <div class="product-card" onmouseover="productCard_Hover(this);"
      onmouseout="productCard_Unhover(this);">
@@ -9,17 +9,17 @@
         <repeat n=@Model.StarsForLike></repeat>
     </div>
     <div class="product-img">
-        <a href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><img src=@src alt=""></a>
+        <a href="@Url.Action("ProductDetail", "Product", new { PID= PID })"><img src=@src alt=""></a>
     </div>
     <div class="product-details">
-        <div class="checkitOut"><a class="d-grid" href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })"><span class="m-auto">查看詳情</span></a> </div>
+        <div class="checkitOut"><a class="d-grid" href="@Url.Action("ProductDetail", "Product", new { PID= PID })"><span class="m-auto">查看詳情</span></a> </div>
         <span class="product-catagory">@Model.CategoryName,@Model.SubCategoryName</span>
-        <p class="product-name"><a href="@Url.Action("ProductDetail", "Product", new { PID=@Model.ProductID })">@Model.ProductName</a></p>
+        <p class="product-name"><a href="@Url.Action("ProductDetail", "Product", new { PID= PID })">@Model.ProductName</a></p>
         <p class="product-description">@Model.Description </p>
         <div class="product-price-cart-box d-flex">
             <div class="product-price flex-grow-1">$@Math.Ceiling(@Model.DailyRate)<span>/日租</span></div>
 
-            <div class="product-cart-icon d-grid" onclick="productIdToCart('@Model.ProductID')">
+            <div class="product-cart-icon d-grid" onclick="productIdToCart('@PID')">
                 <i class="fas fa-cart-plus m-auto"></i>
             </div>
         </div>
