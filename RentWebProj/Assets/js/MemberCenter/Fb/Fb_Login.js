@@ -10,6 +10,7 @@
         } else if (res.status === 'not_authorized' || res.status === "unknown") {
 
             FB.login(function (response) {
+                document.querySelector(".Login").classList.add("spinner-1");
                 if (response.status === 'connected') {
                     let userID = response["authResponse"]["userID"];
                     let access = response["authResponse"]["accessToken"];
@@ -26,6 +27,7 @@
 
                     });
                 } else {
+                    document.querySelector(".Login").classList.remove("spinner-1");
                     // user FB取消授權
                     alert("Facebook帳號無法登入");
                 }

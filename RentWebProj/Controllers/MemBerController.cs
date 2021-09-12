@@ -34,6 +34,9 @@ namespace RentWebProj.Controllers
         public ActionResult MemberCenter()
         {
             //已將User.Identity.Name轉成MemberId
+            var isNullPassword = _service.CheckPassword(Int32.Parse(User.Identity.Name));
+            ViewBag.IsNotHasPassword = isNullPassword;
+            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             var VM = _service.GetMemberData(Int32.Parse(User.Identity.Name));
             return View(VM);
         }
@@ -367,7 +370,8 @@ namespace RentWebProj.Controllers
             
             string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
             FormsAuthentication.SignOut();
-            Thread.Sleep(4000);
+            //戰略性註解
+            //Thread.Sleep(4000);
             if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
             {
                 var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
@@ -410,8 +414,13 @@ namespace RentWebProj.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+        }
 
-
+        public ActionResult DeveloperLogin()
+        {
+            string Deve_email = "Code7414@gmail.com";
+            Helper.FormsAuthorization(Deve_email);
+            return RedirectToAction("Index", "Home");
         }
 
     }

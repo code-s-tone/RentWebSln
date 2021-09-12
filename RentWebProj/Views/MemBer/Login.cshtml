@@ -11,7 +11,7 @@
 
 <div class="back">
 
-    <div class="Login shadow">
+    <div class="Login spinner-1 shadow">
         <div class="Login_Logo my-1">
             <img src="https://soulkey373.github.io/WorkFinalblock/image/rentIcon.svg">
         </div>
@@ -31,14 +31,13 @@
                     @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "w-100  border-0", @placeholder = "密碼" } })
                 </div>
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                <button type="submit" class="btn btn-secondary login my-4 mt-5 text-light w-100 fs-5" id="sign">登入</button>
+                <button type="submit" class="btn btn-secondary login my-4 mt-5 text-light w-100 fs-5" id="sign" onclick="wait()">登入</button>
 
             }
             <a id="btnSignIn"><i class="fab fa-google mx-2"></i></a>
             <a id="btnSignIn" onclick="FBLogin()"><i class="fab fa-facebook mx-2"></i></a>
             <a id="btnLineSignIn" href="@Url.Action("Line", "Member")"><i class="fab fa-line mx-2 "></i></a>
-
-
+            <a class="btn btn-outline-success mb-3" href="@Url.Action("DeveloperLogin","Member")">開發者快速登入</a>
 
 
         </div>
@@ -63,10 +62,15 @@
 
 @section endCSS{
     <link href="~/Assets/css/Login/LoginEnd.css" rel="stylesheet" />
+    <link href="~/Assets/css/Login/spin.css" rel="stylesheet" />
 }
 
 @section endJS{
     <script src="https://apis.google.com/js/platform.js?onload=GoogleSigninInit" async defer></script>
+    <script>
+        document.querySelector(".Login").classList.remove("spinner-1");
+    </script>
+
 }
 
 @section Scripts{

@@ -239,14 +239,24 @@ namespace RentWebProj.Services
                                  where s.MemberID == MemberId
                                  select new CheckPassword
                                  {
-                                     Password = s.PasswordHash
+                                     //Password = s.PasswordHash,
+                                     Password = (String.IsNullOrEmpty(s.PasswordHash)) ? "Null" : s.PasswordHash,
                                  };
             string MemberPasswordString = "";
             //List<CheckInfo> MemberPasswordString = new List<CheckInfo>();
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString
-                MemberPasswordString = item.Password.ToString();
-                //MemberPasswordString.Add;
+                if(item.Password == "Null")
+                {
+                    MemberPasswordString = item.Password.ToString();
+                }
+                else
+                {
+                    MemberPasswordString = item.Password.ToString();
+                    
+                    //MemberPasswordString.Add;
+                }
+
             }
             return MemberPasswordString;
         }
@@ -290,12 +300,12 @@ namespace RentWebProj.Services
         {
             var Sname = HttpContext.Current.User.Identity.Name;
             var Tname = Int32.Parse(Sname);
-            Account account = new Account(//這些資料從哪來?
+            Account account = new Account(
               "dgaodzamk",
               "192222538187587",
               "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
-            Cloudinary cloudinary = new Cloudinary(account);//需要account物件
+            Cloudinary cloudinary = new Cloudinary(account);
             var uploadParams = new ImageUploadParams()
             {
                 File = new FileDescription(blobUrl),//檔案來源
@@ -311,6 +321,42 @@ namespace RentWebProj.Services
 
             return getResultImgUrl;
         }
+
+        //public void FileUploadProductImage(string PID, int index, string blobUrl )
+        //{
+        //    //初始設定
+        //    Account account = new Account(//這些資料從哪來?
+        //      "dgaodzamk",
+        //      "192222538187587",
+        //      "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+
+        //    Cloudinary cloudinary = new Cloudinary(account);//需要account物件
+
+
+        //    string path = $"Product/Ppl/Ft/{PID}/{PID}{index.ToString().PadLeft(2, '0')}";
+        //    var uploadParams = new ImageUploadParams()
+        //    {
+        //        File = new FileDescription(blobUrl),//檔案來源
+        //        PublicId = path//目標路徑?
+        //    };
+        //    //上傳
+        //    var uploadResult = cloudinary.Upload(uploadParams);
+
+        //    //取得圖片網址?
+        //    var getResultImgUrl = cloudinary.GetResource(path).SecureUrl;
+        //    //寫入庫
+        //    var entity = new ProductImage
+        //    {
+        //        ProductID = PID,
+        //        ImageID = index,
+        //        Source = getResultImgUrl
+        //    };
+        //    RentContext context = new RentContext();
+        //    context.ProductImages.Add(entity);
+        //    context.SaveChanges();
+        //    //_repository.Create(entity);
+        //    //_repository.SaveChanges();
+        //}
 
         //抓取 要在首頁 顯示留言的資料<名駿>
         public IEnumerable<CommentViewModel> GetAllComment()

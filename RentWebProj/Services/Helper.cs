@@ -13,11 +13,6 @@ using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
-    public class OperationResult
-    {
-        public bool IsSuccessful { get; set; }
-        public Exception Exception { get; set; }
-    }
     public static class Helper
     {
 
@@ -157,4 +152,11 @@ namespace RentWebProj.Services
         //    }
         //}
     }
+
+    public class OperationResult
+    {
+        public bool IsSuccessful { get; set; }
+        public Exception Exception { get; set; }
+    }
+
 }

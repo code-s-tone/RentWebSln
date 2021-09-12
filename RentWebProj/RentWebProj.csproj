@@ -247,6 +247,7 @@
     <Compile Include="Services\Helper.cs" />
     <Compile Include="ViewModels\ApiViewModels\ApiBase\ApiResult.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
+    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -266,6 +267,7 @@
     <Content Include="Assets\css\Index\parallax.css" />
     <Content Include="Assets\css\Login\Login.css" />
     <Content Include="Assets\css\Login\LoginEnd.css" />
+    <Content Include="Assets\css\Login\spin.css" />
     <Content Include="Assets\css\MemberCenter\memberJS.css" />
     <Content Include="Assets\css\MemberCenter\ProfilePhoto.css" />
     <Content Include="Assets\css\Shared\dateTimePicker.css" />
@@ -300,6 +302,7 @@
     <Content Include="Assets\js\GeneralProductCards\CardToCart.js" />
     <Content Include="Assets\js\GeneralProductCards\CategoriesSelector.js" />
     <Content Include="Assets\js\Cart\AfterDatetimeSetted.js" />
+    <Content Include="Assets\js\MemberCenter\ChangeProfile\profile.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Init.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Login.js" />
     <Content Include="Assets\js\MemberCenter\Fb\Fb_Logout.js" />
@@ -365,7 +368,7 @@
     <Content Include="Assets\js\howtorent.js" />
     <Content Include="Assets\js\index.js" />
     <Content Include="Assets\js\ProductDetail\leaf.js" />
-    <Content Include="Assets\js\MemberCenter\script.js" />
+    <Content Include="Assets\js\MemberCenter\Order\script.js" />
     <Content Include="Assets\js\ProductCategory.js" />
     <Content Include="Assets\js\Contribution\swiperInHtml.js" />
     <Content Include="Assets\js\ProductDetail\Product_Detail.js" />
@@ -483,6 +486,7 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="Assets\LOL.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="obj\Debug\RentWebProj.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\RentWebProj.dll" />
