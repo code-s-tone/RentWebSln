@@ -8,6 +8,8 @@ using RentWebProj.Repositories;
 using System.Web.Mvc;
 using RentWebProj.Helpers;
 using WebGrease.Css.Extensions;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace RentWebProj.Services
 {
@@ -59,7 +61,7 @@ namespace RentWebProj.Services
             });
             return pLists;
         }
-        //算XX天內被租天數高到低排序
+        
         public IEnumerable<CardsViewModel> GetCheapestProductCardData()
         {
             var pList = GetAllProductCardData().ToList();
