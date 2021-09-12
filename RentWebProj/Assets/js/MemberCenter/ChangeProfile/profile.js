@@ -291,6 +291,11 @@ personCancelEditBtn.addEventListener('click', function () {
     personCancelEditBtn.classList.add('notDisplay');
     personSaveBtn.disabled = true;
     personSaveBtn.classList.add('buttonDisabled');
+    nameErrorMsg.textContent = '';
+    yearErrorMsg.textContent = '';
+    monthErrorMsg.textContent = '';
+    dayErrorMsg.textContent = '';
+    phoneErrorMsg.textContent = '';
     inputInit();
 });
 //個資變更送出
