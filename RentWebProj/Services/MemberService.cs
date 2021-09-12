@@ -215,24 +215,14 @@ namespace RentWebProj.Services
                                  where s.MemberID == MemberId
                                  select new CheckPassword
                                  {
-                                     //Password = s.PasswordHash,
-                                     Password = (String.IsNullOrEmpty(s.PasswordHash)) ? "Null" : s.PasswordHash,
+                                     Password = s.PasswordHash
                                  };
             string MemberPasswordString = "";
             //List<CheckInfo> MemberPasswordString = new List<CheckInfo>();
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString
-                if(item.Password == "Null")
-                {
-                    MemberPasswordString = item.Password.ToString();
-                }
-                else
-                {
-                    MemberPasswordString = item.Password.ToString();
-                    
-                    //MemberPasswordString.Add;
-                }
-
+                MemberPasswordString = item.Password.ToString();
+                //MemberPasswordString.Add;
             }
             return MemberPasswordString;
         }
