@@ -36,6 +36,10 @@
 
 </head>
 
+@{
+    var cartCount = Helper.GetCartCount();
+}
+
 <body>
     <!-- overlayMobile為了讓側邊導覽出來時畫面變暗 -->
     <div class="overlayMobile"></div>
@@ -65,17 +69,18 @@
                                 <button type="submit"></button>
 
                             }
-                            
-
-
                         </div>
 
                         <div class="header-member-box">
 
                             @*<img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon">*@
-                            <a href="@Url.Action("Index", "Carts")">
-                                <i class="fas fa-shopping-cart" title="購物車"></i>
-                            </a>
+
+                            <div class="member-cart">
+                                <a class="position-relative" href="@Url.Action("Index", "Carts")">
+                                    <i class="fas fa-shopping-cart fa-3x" title="購物車"></i>
+                                    <span class="cartQuantity text-white bg-primary"> @cartCount </span>
+                                </a>
+                            </div>
 
                             <div class="member-dropdown">
                                 <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
@@ -178,9 +183,6 @@
                                     <a href="@Url.Action("SharingEconomy", "SocialMedia")">
                                         <li>共享經濟</li>
                                     </a>
-                                    <a href="@Url.Action("News", "SocialMedia")">
-                                        <li>上新聞了</li>
-                                    </a>
                                     <a href="@Url.Action("BlogPost", "SocialMedia")">
                                         <li>網紅推推</li>
                                     </a>
@@ -265,7 +267,6 @@
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     @Html.ActionLink("共享經濟", "SharingEconomy", "SocialMedia")
-                    @Html.ActionLink("上新聞了", "News", "SocialMedia")
                     @Html.ActionLink("網紅推推", "BlogPost", "SocialMedia")
                 </div>
             </div>
@@ -356,9 +357,6 @@
                     <div class="">
                         <a href="@Url.Action("SharingEconomy", "SocialMedia")">
                             <li>共享經濟</li>
-                        </a>
-                        <a href="@Url.Action("News", "SocialMedia")">
-                            <li>上新聞了</li>
                         </a>
                         <a href="@Url.Action("BlogPost", "SocialMedia")">
                             <li>網紅推推</li>

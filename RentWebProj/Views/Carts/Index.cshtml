@@ -203,6 +203,14 @@
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
 
     <script>
+        //checkout返回index重整頁面
+        var needRefresh = sessionStorage.getItem("need-refresh");
+        if (needRefresh) {
+            sessionStorage.removeItem("need-refresh");
+            location.reload();
+        }
+
+
         let DateModalLauncher = null;
         let StartDateToPost = null;
         let ExpirationDateToPost = null;

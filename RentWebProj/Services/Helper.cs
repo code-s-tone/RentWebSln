@@ -120,6 +120,23 @@ namespace RentWebProj.Services
             return MID;
         }
 
+        // 查詢:購物車內 物品總數量 
+        public static int? GetCartCount()
+        {
+            int? currentMemberID = null;
+            int cartCount= 0;
+            var identity = HttpContext.Current.User.Identity;
+
+            if (identity.IsAuthenticated)
+            {
+                currentMemberID = ConvertAuthNameToMemberId(identity.Name);
+                cartCount = _repository.GetAll<Cart>().Where(x=>x.MemberID == (int)(currentMemberID)).Count();
+            }
+            else cartCount = 0;
+
+            return cartCount;
+        }
+
 
         //public static string WriteLog(this OperationResult value) //擴充方法
         //{

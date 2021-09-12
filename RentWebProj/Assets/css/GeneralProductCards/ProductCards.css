@@ -201,6 +201,7 @@ repeat {
     color: #cecece;
     transition: 0.3s;
     font-size: 20px;
+    cursor: pointer;
 }
 
 /* 平板以下不應該有hover */

@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "首頁";
     var Catgories = new ProductService().GetCategoryData();
-    var AllComments = new MemberService().GetAllComment();
+    var AllComments = new MemberService().GetAllComment().Take(10);
 }
 
 <div class="nav-background"></div>@* 打底 *@

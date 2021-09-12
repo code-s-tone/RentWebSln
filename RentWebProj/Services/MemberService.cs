@@ -215,14 +215,24 @@ namespace RentWebProj.Services
                                  where s.MemberID == MemberId
                                  select new CheckPassword
                                  {
-                                     Password = s.PasswordHash
+                                     //Password = s.PasswordHash,
+                                     Password = (String.IsNullOrEmpty(s.PasswordHash)) ? "Null" : s.PasswordHash,
                                  };
             string MemberPasswordString = "";
             //List<CheckInfo> MemberPasswordString = new List<CheckInfo>();
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString
-                MemberPasswordString = item.Password.ToString();
-                //MemberPasswordString.Add;
+                if(item.Password == "Null")
+                {
+                    MemberPasswordString = item.Password.ToString();
+                }
+                else
+                {
+                    MemberPasswordString = item.Password.ToString();
+                    
+                    //MemberPasswordString.Add;
+                }
+
             }
             return MemberPasswordString;
         }
@@ -332,7 +342,7 @@ namespace RentWebProj.Services
                 from c in _repository.GetAll<Comment>()
                 join m in _repository.GetAll<Member>()
                 on c.MemberID equals m.MemberID
-                orderby c.Time descending
+                orderby c.CommentID descending
 
                 select new CommentViewModel
                 {
