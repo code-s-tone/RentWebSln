@@ -222,14 +222,14 @@ namespace RentWebProj.Services
             //List<CheckInfo> MemberPasswordString = new List<CheckInfo>();
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString
-                if(item.Password == "Null")
+                if (item.Password == "Null")
                 {
                     MemberPasswordString = item.Password.ToString();
                 }
                 else
                 {
                     MemberPasswordString = item.Password.ToString();
-                    
+
                     //MemberPasswordString.Add;
                 }
 
