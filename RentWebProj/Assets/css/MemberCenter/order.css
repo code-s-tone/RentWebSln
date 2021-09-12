@@ -13,10 +13,11 @@
 }
 
 .detail-title, .detail-item {
-    width: 14.2857%;
+    width: 12.5%;
 }
 .detail-title{
     background-color: bisque;
+    font-size: 16px;
 }
 .detail-item {
 
@@ -49,6 +50,8 @@
     background-color: #fff;
     border-bottom: 1px solid #FFEEDD;
     border-radius: unset;
+    border: 1px solid blue;
+    margin: 25px 0 0 0;
 }
 
 .member-display-order-detail-list {

@@ -58,15 +58,15 @@ namespace RentWebProj.ViewModels
         public int OrderID { get; set; }
         public DateTime OrderDate { get; set; }
         public int DeliverID { get; set; }
-        public int OrderStatus { get; set; }
+        public OrderStatusName OrderStatus { get; set; }
         public string BranchName { get; set; }
         public List<MemberOrderDetailViewModel> OrderDetails { get; set; }
     }
 
-    //public enum OrderStatusName
-    //{
-    //    "","",""
-    //}
+    public enum OrderStatusName
+    {
+        已失效,待付款,付款中,已付款
+    }
 
     public class MemberOrderDetailViewModel
     {
@@ -78,12 +78,12 @@ namespace RentWebProj.ViewModels
         public DateTime ExpirationDate { get; set; }
         //ExpirationDate - StartDate = RentDate
         public int RentDate { get; set; }
-        public int GoodsStatus { get; set; }
+        public GoodsStatusName GoodsStatus { get; set; }
     }
-    //public enum GoodsStatusName
-    //{
-    //    "","",""
-    //}
+    public enum GoodsStatusName
+    {
+        已歸還, 待出貨, 已出貨, 已到貨, 已取貨
+    }
 
     //修改密碼驗證使用
     public class CheckPassword

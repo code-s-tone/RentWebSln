@@ -38,11 +38,12 @@ namespace RentWebProj.Services
                     OrderID = o.OrderID,
                     OrderDate = o.OrderDate,
                     BranchName = b.StoreName,
-                    OrderStatus = o.OrderStatusID,
+                    OrderStatus = (OrderStatusName)o.OrderStatusID,
                 }).ToList();
 
             MemberOrderVM.ForEach(order =>
             {
+
                 order.OrderDetails = GetOrderDetails(order.OrderID);
             });
 
@@ -91,9 +92,14 @@ namespace RentWebProj.Services
                      TotalAmount = (int)od.TotalAmount,
                      StartDate = od.StartDate,
                      ExpirationDate = od.ExpirationDate,
-                     RentDate = (int)DbFunctions.DiffDays(od.StartDate, od.ExpirationDate)
-                     //(int)Math.Ceiling((od.ExpirationDate - od.StartDate).TotalDays)
+                     //RentDate = (int)DbFunctions.DiffDays(od.StartDate, od.ExpirationDate),
+                     GoodsStatus = (GoodsStatusName)od.GoodsStatus
                  }).ToList();
+            result.ForEach(od =>
+            {
+                od.RentDate = (int)Math.Ceiling((od.ExpirationDate - od.StartDate).TotalDays);
+            });
+
 
             return result;
 
