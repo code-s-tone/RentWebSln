@@ -36,7 +36,6 @@ namespace RentWebProj.Controllers
             //已將User.Identity.Name轉成MemberId
             var isNullPassword = _service.CheckPassword(Int32.Parse(User.Identity.Name));
             ViewBag.IsNotHasPassword = isNullPassword;
-            return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
             var VM = _service.GetMemberData(Int32.Parse(User.Identity.Name));
             return View(VM);
         }
