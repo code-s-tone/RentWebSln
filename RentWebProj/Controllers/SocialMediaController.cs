@@ -13,10 +13,7 @@ namespace RentWebProj.Controllers
         {
             return View();
         }
-        public ActionResult News()
-        {
-            return View();
-        }
+
         public ActionResult SharingEconomy()
         {
             return View();
