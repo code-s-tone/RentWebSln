@@ -222,14 +222,14 @@ namespace RentWebProj.Services
             //List<CheckInfo> MemberPasswordString = new List<CheckInfo>();
             foreach (var item in Memberpassword)
             {   //因為IQueryable故需要轉型為ToString
-                if(item.Password == "Null")
+                if (item.Password == "Null")
                 {
                     MemberPasswordString = item.Password.ToString();
                 }
                 else
                 {
                     MemberPasswordString = item.Password.ToString();
-                    
+
                     //MemberPasswordString.Add;
                 }
 
@@ -298,7 +298,7 @@ namespace RentWebProj.Services
             return getResultImgUrl;
         }
 
-        //public void FileUploadProductImage(string PID, int index, string blobUrl )
+        //public void FileUploadProductImage(string PID, int index, string blobUrl)
         //{
         //    //初始設定
         //    Account account = new Account(//這些資料從哪來?
@@ -309,7 +309,7 @@ namespace RentWebProj.Services
         //    Cloudinary cloudinary = new Cloudinary(account);//需要account物件
 
 
-        //    string path = $"Product/Ppl/Ft/{PID}/{PID}{index.ToString().PadLeft(2, '0')}";
+        //    string path = $"Product/Ppl/{PID}_{index}";
         //    var uploadParams = new ImageUploadParams()
         //    {
         //        File = new FileDescription(blobUrl),//檔案來源

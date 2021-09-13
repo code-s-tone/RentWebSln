@@ -31,9 +31,10 @@ namespace RentWebProj.Controllers
 
         [Authorize]
         // GET: Member
-        public ActionResult MemberCenter()
+        public ActionResult MemberCenter(int Index)
         {
             //已將User.Identity.Name轉成MemberId
+            ViewBag.nav = Index;
             var isNullPassword = _service.CheckPassword(Int32.Parse(User.Identity.Name));
             ViewBag.IsNotHasPassword = isNullPassword;
             return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)).FirstOrDefault());
