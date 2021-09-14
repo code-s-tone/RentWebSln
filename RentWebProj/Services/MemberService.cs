@@ -86,6 +86,7 @@ namespace RentWebProj.Services
                  where od.OrderID ==  orderID 
                  select new MemberOrderDetailViewModel
                  {
+                     ProductID = p.ProductID,
                      ProductName = p.ProductName,
                      //產品圖?
                      DailyRate = (int)od.DailyRate,

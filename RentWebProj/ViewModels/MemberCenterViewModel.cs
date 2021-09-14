@@ -80,6 +80,8 @@ namespace RentWebProj.ViewModels
         //ExpirationDate - StartDate = RentDate
         public int RentDate { get; set; }
         public GoodsStatusName GoodsStatus { get; set; }
+
+        public string ProductID { get; set; }
     }
     public enum GoodsStatusName
     {
