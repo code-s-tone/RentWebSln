@@ -296,7 +296,6 @@ personCancelEditBtn.addEventListener('click', function () {
     monthErrorMsg.textContent = '';
     dayErrorMsg.textContent = '';
     phoneErrorMsg.textContent = '';
-
     inputInit();
 });
 //個資變更送出

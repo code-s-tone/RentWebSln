@@ -247,7 +247,6 @@
     <Compile Include="Services\Helper.cs" />
     <Compile Include="ViewModels\ApiViewModels\ApiBase\ApiResult.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
-    <Compile Include="ViewModels\Class1.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
@@ -520,7 +519,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SocialMedia\BlogPost.cshtml" />
-    <Content Include="Views\SocialMedia\News.cshtml" />
     <Content Include="Views\SocialMedia\SharingEconomy.cshtml" />
     <Content Include="Views\Home\HowToRent.cshtml" />
     <Content Include="Views\Home\ContributionProgram.cshtml" />

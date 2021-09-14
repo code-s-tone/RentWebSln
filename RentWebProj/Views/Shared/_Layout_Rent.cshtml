@@ -93,10 +93,10 @@
                                         <li>通知</li>
                                     </a>
 
-                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                    <a href="@Url.Action("MemberCenter", "Member",new { Index=2})">
                                         <li>我的訂單</li>
                                     </a>
-                                    <a href="@Url.Action("MemberCenter", "Member")">
+                                    <a href="@Url.Action("MemberCenter", "Member",new { Index=0})">
                                         <li>修改個人資料</li>
                                     </a>
                                     <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
@@ -213,10 +213,10 @@
             <!-- 登入後秀出名字 -->
             <div class="profileBox">
                 <div class="profileImg d-grid">
-                    <img class="m-auto" src="https://www.upmedia.mg/upload/article/20210801172246069922.jpg" alt="">
+                    <img class="m-auto" src=@TempData["img"] alt="">
                 </div>
                 <div class="profileWelcome">
-                    <span>Hello</span><p class="profile-name">庭安</p>
+                    <span>Hello</span><p class="profile-name">@TempData["name"]</p>
                 </div>
             </div>
 

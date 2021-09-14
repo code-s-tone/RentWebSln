@@ -199,12 +199,12 @@ namespace RentWebProj.Controllers
         //                HttpResponseMessage response = await client.GetAsync(imgeSrc);
         //                response.EnsureSuccessStatusCode();
         //            }
-        //            catch(Exception ex)
+        //            catch (Exception ex)
         //            {
         //                break;
         //            }
         //            //上圖，寫庫
-        //            Mservice.FileUploadProductImage(PID, j+1, imgeSrc);
+        //            Mservice.FileUploadProductImage(PID, j + 1, imgeSrc);
         //        }
         //        i++;
         //    }
