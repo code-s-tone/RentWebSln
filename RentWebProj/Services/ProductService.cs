@@ -293,7 +293,7 @@ namespace RentWebProj.Services
                          //產品圖片
                      }).SingleOrDefault();
 
-            var dateDiff = (e - s).Days; //TotalDays帶小數
+            var dateDiff = (int)Math.Ceiling((e - s).TotalDays); //TotalDays帶小數
             c.DateDiff = dateDiff;
             c.Sub = c.DailyRate * dateDiff;
 
