@@ -31,7 +31,7 @@ namespace RentWebProj.Controllers
 
         [Authorize]
         // GET: Member
-        public ActionResult MemberCenter(int Index)
+        public ActionResult MemberCenter(string Index)
         {
             //已將User.Identity.Name轉成MemberId
             ViewBag.nav = Index;
@@ -84,6 +84,10 @@ namespace RentWebProj.Controllers
         public ActionResult Login()
         {
             string reuslt = Request.UrlReferrer.ToString();
+            if(string.IsNullOrEmpty(reuslt))
+            {
+                TempData["url"] = Request.Url.ToString();
+            }
             TempData["url"]= reuslt;
             return View();
 
