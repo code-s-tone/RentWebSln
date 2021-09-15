@@ -48,6 +48,10 @@
     <Reference Include="CloudinaryDotNet, Version=1.15.2.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
       <HintPath>..\packages\CloudinaryDotNet.1.15.2\lib\net452\CloudinaryDotNet.dll</HintPath>
     </Reference>
+    <Reference Include="ECPay.Payment.Integration, Version=1.0.0.7, Culture=neutral, PublicKeyToken=afb33c1e6a3b1bbd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>WebForm\ECPay.Payment.Integration.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -251,6 +255,20 @@
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
+    <Compile Include="WebForm\AioCheckOut.aspx.cs">
+      <DependentUpon>AioCheckOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\AioCheckOut.aspx.designer.cs">
+      <DependentUpon>AioCheckOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm\CheckOutFeedback.aspx.cs">
+      <DependentUpon>CheckOutFeedback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm\CheckOutFeedback.aspx.designer.cs">
+      <DependentUpon>CheckOutFeedback.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\about.css" />
@@ -485,7 +503,8 @@
     <Content Include="bin\roslyn\vbc.exe.config" />
     <Content Include="bin\roslyn\vbc.rsp" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
-    <Content Include="Assets\LOL.json" />
+    <Content Include="WebForm\AioCheckOut.aspx" />
+    <Content Include="WebForm\CheckOutFeedback.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="obj\Debug\RentWebProj.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\RentWebProj.dll" />

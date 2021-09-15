@@ -60,7 +60,7 @@ namespace RentWebProj.Services
         }
 
         //寫入
-        public void Create(CreateOrder VM)
+        public int Create(CreateOrder VM)
         {
             //要從user.Identity.Name拿，要using
             int MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name);
@@ -97,6 +97,8 @@ namespace RentWebProj.Services
                 _repository.Create(odEntity);
             }
             _repository.SaveChanges();
+
+            return OrderID;
         }
 
         public int GetOrderId(int MemberID, DateTime OrderDate)
