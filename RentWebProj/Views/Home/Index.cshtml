@@ -58,14 +58,14 @@
                             @Html.Partial("Partial_CategoryCard", ct)
 
                             @*<div class="imgBox">
-                                <img class="w-100" src="https://picsum.photos/100/150/?random=1">
-                            </div>
-                            <div class="textBox">
-                                <div>
-                                    @item.CategoryName v.s.
-                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                    <img class="w-100" src="https://picsum.photos/100/150/?random=1">
                                 </div>
-                            </div>*@
+                                <div class="textBox">
+                                    <div>
+                                        @item.CategoryName v.s.
+                                        @Html.DisplayFor(modelItem => item.CategoryName)
+                                    </div>
+                                </div>*@
                         </div>
                     }
                 </div>
@@ -81,50 +81,50 @@
         }
 
         @*<section id="stories" class="Area">
-            <h3>
-                故事
-                <a href="">(see all)</a>
-            </h3>
-            <div class="swiper-container stories-swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="" src="https://picsum.photos/100/100/?random=1">
+                <h3>
+                    故事
+                    <a href="">(see all)</a>
+                </h3>
+                <div class="swiper-container stories-swiper-container">
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img class="" src="https://picsum.photos/100/100/?random=1">
+                            </div>
+                            <div class="textBox">
+                                <h5>組成周。 </h5>
+                                <p class="ellipsis">一張改革只不過，故事十二人氣自主核心能否導演觀念註冊時間斑竹估計長沙，值得全家，很難這個溫暖小子，合同確定線上，大眾習慣你自己技巧利用福建樓上解放分析至今確保學者治理，較大適應，稱為到來，總經理增強一對現象而言由於校園龍岡投入信用創業相關植物本科，打了觀。 </p>
+                                <p>owned by </p>
+                            </div>
                         </div>
-                        <div class="textBox">
-                            <h5>組成周。 </h5>
-                            <p class="ellipsis">一張改革只不過，故事十二人氣自主核心能否導演觀念註冊時間斑竹估計長沙，值得全家，很難這個溫暖小子，合同確定線上，大眾習慣你自己技巧利用福建樓上解放分析至今確保學者治理，較大適應，稱為到來，總經理增強一對現象而言由於校園龍岡投入信用創業相關植物本科，打了觀。 </p>
-                            <p>owned by </p>
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img class="" src="https://picsum.photos/100/100/?random=2">
+                            </div>
+                            <div class="textBox">
+                                <h5>本帖回應，凱文。 </h5>
+                                <p class="ellipsis">操作系統圖象治理提出了春天，把你公里正在具體開了營養地理速度授權然而武器，代理一口氣幾個代表記錄鄉民謝謝韓國，理解看過一些，雖然早。 </p>
+                                <p>owned by </p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img class="" src="https://picsum.photos/100/100/?random=3">
+                            </div>
+                            <div class="textBox">
+                                <h5>苗栗漫畫可憐，費用色彩。 </h5>
+                                <p class="ellipsis">堅持完了，達到資產寂寞，上。 </p>
+                                <p>owned by </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="" src="https://picsum.photos/100/100/?random=2">
-                        </div>
-                        <div class="textBox">
-                            <h5>本帖回應，凱文。 </h5>
-                            <p class="ellipsis">操作系統圖象治理提出了春天，把你公里正在具體開了營養地理速度授權然而武器，代理一口氣幾個代表記錄鄉民謝謝韓國，理解看過一些，雖然早。 </p>
-                            <p>owned by </p>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="" src="https://picsum.photos/100/100/?random=3">
-                        </div>
-                        <div class="textBox">
-                            <h5>苗栗漫畫可憐，費用色彩。 </h5>
-                            <p class="ellipsis">堅持完了，達到資產寂寞，上。 </p>
-                            <p>owned by </p>
-                        </div>
-                    </div>
+                    <!-- <div class="swiper-pagination"></div> -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <!-- <div class="swiper-scrollbar"></div> -->
                 </div>
-                <!-- <div class="swiper-pagination"></div> -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                <!-- <div class="swiper-scrollbar"></div> -->
-            </div>
-        </section>*@
+            </section>*@
 
         <section id="reviews" class="Area">
             <h3>
@@ -171,7 +171,7 @@
         <section id="blogPosts" class="Area">
             <h3>
                 部落格文章
-                @Html.ActionLink("(see all)","BlogPost","SocialMedia")
+                @Html.ActionLink("(see all)", "BlogPost", "SocialMedia")
             </h3>
             <div class="swiper-container blogPosts-swiper-container">
                 <div class="swiper-wrapper">
@@ -253,7 +253,10 @@
     <script src="~/Assets/js/index.js"></script>
     <script src="~/Assets/js/GeneralProductCards/GeneralCategories.js"></script>
     <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
-
+    <script>
+        isAuthenticated_Cards = @Json.Encode(User.Identity.IsAuthenticated);
+    </script>
+    <script src="~/Assets/js/GeneralProductCards/CardToCart.js"></script>
 
 }
 
