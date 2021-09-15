@@ -100,24 +100,6 @@
                                 <div class="text-danger small mb-2 day-error-msg"></div>
                             </div>
 
-                            <!--性別 戰略性暫時移除-->
-                            <!--
-        <div class="member-display-radio-container member-display-item">
-            <div class="member-display-header">性別</div>
-            <div class="member-display-gender-textContent">男</div>
-            <div class="radio-men member-display-person-style">
-                <input type="radio" name="gender" id="gender">
-                <label class="member-display-header" for="text">男</label>
-                <i class="fas fa-male"></i>
-            </div>
-            <div class="radio-women member-display-person-style">
-                <input type="radio" name="gender" id="gender">
-                <label class="member-display-header" for="text">女</label>
-                <i class="fas fa-female"></i>
-            </div>
-        </div>
-        -->
-
                             <!--電話-->
                             <div class="member-display-phone-container member-display-item">
                                 <div class="member-display-header">電話號碼</div>
@@ -193,7 +175,6 @@
                                         <div class="member-display-name-input-box-last">
                                             <div class="member-display-email-container member-email-clear">
                                                 @Html.EditorFor(m => m.MemberEmail, new { @htmlAttributes = new { @class = "member-display-new-email member-email-clear", @placeholder = "新電子信箱" } })
-                                                @*<input v-model="inputData.email" class="member-display-new-email member-email-clear" placeholder="新電子信箱">*@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
@@ -234,8 +215,6 @@
                             @using (Html.BeginForm("MemberPassword", "Member", FormMethod.Post))
                             {
                                 <div class="member-display-name-container member-display-item">
-                                    @*<div class="member-display-header member-display-new-email-context">修改密碼</div>*@
-
                                 </div>
                                 <div class="member-display-name-container member-display-item member-changePassword-item">
                                     <div class="member-display-new-email-context">
@@ -305,7 +284,6 @@
                                         <div class="member-display-name-input-box-last">
                                             <div class="member-display-email-container member-email-clear">
                                                 @Html.EditorFor(m => m.MemberEmail, new { @htmlAttributes = new { @class = "member-display-new-email member-email-clear", @placeholder = "新電子信箱" } })
-                                                @*<input v-model="inputData.email" class="member-display-new-email member-email-clear" placeholder="新電子信箱">*@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
@@ -346,8 +324,6 @@
                             @using (Html.BeginForm("MemberPassword", "Member", FormMethod.Post))
                             {
                                 <div class="member-display-name-container member-display-item">
-                                    @*<div class="member-display-header member-display-new-email-context">修改密碼</div>*@
-
                                 </div>
                                 <div class="member-display-name-container member-display-item member-changePassword-item">
                                     <div class="member-display-new-email-context">
