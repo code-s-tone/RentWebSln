@@ -16,6 +16,11 @@ namespace RentWebProj
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //加上這行可以消除掉XML namespace
+            //config.Formatters.XmlFormatter.UseXmlSerializer = true;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+
         }
     }
 }

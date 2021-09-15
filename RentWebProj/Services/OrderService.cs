@@ -143,7 +143,5 @@ namespace RentWebProj.Services
 
             return result;
         }
-
-
     }
 }
