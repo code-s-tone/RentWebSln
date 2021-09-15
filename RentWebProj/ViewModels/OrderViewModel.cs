@@ -5,9 +5,6 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
-    public class OrderViewModel
-    {
-    }
     public class RentedPeriod
     {
         public DateTime from { get; set; }
@@ -24,14 +21,8 @@ namespace RentWebProj.ViewModels
     }
     public class CreateOrder
     {
-
         public int StoreID { get; set; }
         //DeliverID 應該要傳(運送方式)，目前一種
-
-        
-
-
-
         //從表單來
         public List<string> ListProductID { get; set; }
         public List<string> ListDailyRate { get; set; }
@@ -39,5 +30,16 @@ namespace RentWebProj.ViewModels
         public List<string> ListExpirationDate { get; set; }
         public List<string> ListTotalAmount { get; set; }//小計
 
+    }
+
+    public class SalesAnalytic
+    {
+        //產品,類 , total , 店 ,會員年齡,會員
+        public string PID { get; set; }
+        public string ProductName { get; set; }
+        public int Income { get; set; }
+        public string StoreName { get; set; }
+        public int MID { get; set; }
+        public int? MemberAge { get; set; }
     }
 }
