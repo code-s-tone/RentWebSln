@@ -83,12 +83,12 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-            string reuslt = Request.UrlReferrer.ToString();
-            if(string.IsNullOrEmpty(reuslt))
+         
+            if(string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
             {
                 TempData["url"] = Request.Url.ToString();
             }
-            TempData["url"]= reuslt;
+            TempData["url"]= Request.UrlReferrer.ToString();
             return View();
 
         }
