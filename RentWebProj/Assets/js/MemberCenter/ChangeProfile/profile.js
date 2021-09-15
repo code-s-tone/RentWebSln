@@ -70,11 +70,12 @@ let validateForm = () => {
     let phone = true;
     if (personFullName.value === "") {
         nameErrorMsg.textContent = "姓名不得為空";
-        funllName = false;
+        IsCanNotOpenSaveButton();
+        fullName = false;
     }
     else if (personFullName.value != ""){
         nameErrorMsg.textContent = '';
-        funllName = true;
+        fullName = true;
     }
 
     if (personYear.value === "") {
@@ -131,7 +132,6 @@ let validateForm = () => {
     if (personDate.value === "") {
         dayErrorMsg.textContent = "日期不得為空";
         day = false;
-        //debugger;
         
     }
     else if (personDate.value.length > 2) {
@@ -151,8 +151,6 @@ let validateForm = () => {
     else if (regNum.test(personDate.value) === true) {
         dayErrorMsg.textContent = "";
         day = true;
-
-        //debugger;
     }
 
     if (personPhone.value === "") {
