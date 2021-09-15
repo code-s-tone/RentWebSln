@@ -138,7 +138,7 @@ namespace RentWebProj.Services
                     Income = (int)od.TotalAmount,
                     StoreName = b.StoreName,
                     MID = o.MemberID,
-                    MemberAge = DbFunctions.DiffYears(m.Birthday , new DateTime())
+                    MemberAge = DbFunctions.DiffYears(m.Birthday , DateTime.Now)
                 };
 
             return result;
