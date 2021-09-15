@@ -42,7 +42,7 @@ namespace RentWebProj.Controllers
 
             //軒：我的直接結帳，有可能產品不在購物車中，故刪除時可考慮一下
             //刪除購物車要用郭懿的方法喔，在下面
-            new OrderService().Create(PostVM);
+            int OrderID = new OrderService().Create(PostVM);
             foreach (var PID in PostVM.ListProductID)
             {
                 try//軒：為了直接結帳功能(不入車，故可能沒東西刪)
@@ -54,7 +54,17 @@ namespace RentWebProj.Controllers
 
                 }
             }
-            return RedirectToAction("MemberCenter", "Member");
+
+            int TotalAmount = 0;
+            foreach (var x in PostVM.ListTotalAmount)
+            {
+                TotalAmount += Int32.Parse(x);
+            }
+            Session["TotalAmount"] = TotalAmount;
+            Session["OrderId"] = OrderID;
+
+            return Redirect("../WebForm/AioCheckOut.aspx");
+            //return RedirectToAction("MemberCenter", "Member");
         }
         [Authorize]
         public ActionResult Index()
@@ -110,6 +120,5 @@ namespace RentWebProj.Controllers
             _cartService.DeleteCart(MemberID, ProductID);
             return RedirectToAction("Index");
         }
-
     }
 }

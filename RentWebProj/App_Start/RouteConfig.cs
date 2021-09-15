@@ -43,7 +43,11 @@ namespace RentWebProj
                 defaults: new { controller = "Product", action = "SearchProductCards", id = UrlParameter.Optional }
             );
 
-
+            routes.MapRoute(
+                name: "Member",
+                url: "Member/MemberCenter/{Index}",
+                defaults: new { controller = "Member", action = "MemberCenter", id = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "Default",
