@@ -17,7 +17,7 @@
             let optionIni = document.createElement('option');
             subSelector.innerText = "";
             optionIni.value = "0";
-            optionSelected[0].childNodes[0].nodeValue == "選擇商品種類" ? optionIni.innerText = "選擇子分類" : optionIni.innerText = `從${optionSelected[0].childNodes[0].nodeValue}再細分`;
+            optionIni.innerText =optionSelected[0].childNodes[0].nodeValue == "選擇商品種類" ?  "選擇子分類" : `從${optionSelected[0].childNodes[0].nodeValue}再細分`;
             //改寫成上面那句原因: 如果選了某大類又不要選類別了 選回預設(選擇商品種類)後的子類標題也要回預設
             //optionIni.innerText = `從${optionSelected[0].childNodes[0].nodeValue}再細分`;
             subSelector.appendChild(optionIni);

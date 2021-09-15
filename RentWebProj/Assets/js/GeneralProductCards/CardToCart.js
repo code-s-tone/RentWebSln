@@ -10,6 +10,7 @@ function productIdToCart(id) {
 }
 
 function AjaxPostProductIdToCart(id) {
+    let countProductsInCart = parseInt($(".cartQuantity").text().trim());
     $.ajaxSetup({ cache: false });
 
     $.ajax({
@@ -18,6 +19,8 @@ function AjaxPostProductIdToCart(id) {
         data: { PID: id },
         success: function (response) {
             if (response) {
+                countProductsInCart++;
+                $(".cartQuantity").text(countProductsInCart);
                 alert("已成功加入購物車 結帳前記得選取租借時間喔！");
             }
             else {
