@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-//using System.Data;//要裝Nuget
+using System.Data.Entity;//要裝Nuget
 //using Microsoft.EntityFrameworkCore;
 
 using System.Threading.Tasks;
@@ -17,7 +17,7 @@ namespace Backstage.Services
         private CommonRepository _repository;
         public AnalysisService()
         {
-            //_repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository(new RentContext());//改DI?
         }
 
         public IEnumerable<SalesAnalytic> A()
@@ -41,7 +41,7 @@ namespace Backstage.Services
                     Income = (int)od.TotalAmount,
                     StoreName = b.StoreName,
                     MID = o.MemberID,
-                    //MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
+                    MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
                 };
 
             return result;

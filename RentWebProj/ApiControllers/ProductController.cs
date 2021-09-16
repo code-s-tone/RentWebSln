@@ -26,22 +26,6 @@ namespace RentWebProj.ApiControllers
             }
 
         }
-
-        public ApiResult GetSalesAnalyticData()
-        {
-            string result = "";
-            try
-            {
-                result = "";
-                throw new ApiResult(ApiStatus.Success, string.Empty, result);
-            }
-            catch (Exception ex)
-            {
-                return new ApiResult(ApiStatus.Fail, ex.Message, result);
-            }
-
-            //return Json(Locations, JsonRequestBehavior.AllowGet);
-        }
     }
 
 }
