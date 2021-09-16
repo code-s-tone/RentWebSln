@@ -26,14 +26,13 @@ namespace RentWebProj.ApiControllers
         //    {
         //        return new ApiResult(ApiStatus.Fail, ex.Message, result);
         //    }
-
         //}
 
-        public IHttpActionResult GetSalesAnalyticData()
-        {
-            var result = Ok(new OrderService().A().ToList());
-            return result;
-        }
+        //public IHttpActionResult GetSalesAnalyticData()
+        //{
+        //    var result = Ok(new OrderService().A().ToList());
+        //    return result;
+        //}
     }
 
 }
