@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using System.Data.Entity;
+//using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
