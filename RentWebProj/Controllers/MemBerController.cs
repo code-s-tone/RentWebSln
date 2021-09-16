@@ -31,7 +31,7 @@ namespace RentWebProj.Controllers
 
         [Authorize]
         // GET: Member
-        public ActionResult MemberCenter(int Index)
+        public ActionResult MemberCenter(string Index)
         {
             //已將User.Identity.Name轉成MemberId
             ViewBag.nav = Index;
@@ -83,50 +83,19 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-            var reuslt = Request.UrlReferrer;
-
-            if (Request.UrlReferrer != null && Request.UrlReferrer.LocalPath != "/")
+         
+            if(string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
             {
-
-                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
-                TempData["PreviousController"] = url_Pre[1];
-
-                if (url_Pre[1] == "Carts")
-                {
-                    TempData["PreviousAction"] = "Index";
-                }
-                else if (url_Pre.Length < 4)
-                {
-                    TempData["PreviousAction"] = url_Pre[2];
-                    TempData["PreviousId"] = null;
-                }
-                else
-                {
-                    TempData["PreviousAction"] = url_Pre[2];
-
-                    if (url_Pre.Length == 4)
-                    {
-                        //TempData["PreviousIdOrCa"] = new { categoryID = url_Pre[3] };
-                        //TempData["PreviousIdOrCa"] = $"categoryID = {url_Pre[3]}";
-                        TempData["PreviousIdOrCa"] = url_Pre[3];
-                    }
-                    else
-                    {
-                        //TempData["PreviousIdOrCa"] = $"PID = {url_Pre[3]}";
-                        TempData["PreviousIdOrCa"] = url_Pre[3];
-                    }
-                }
-
+                TempData["url"] = Request.Url.ToString();
             }
-
+            TempData["url"]= Request.UrlReferrer.ToString();
             return View();
-
-
 
         }
         [HttpPost]
         public ActionResult Login(MemberLoginDetailViewModel s)
         {
+            var Url = TempData["url"];
             if (!ModelState.IsValid)
             {
                 return View(s);
@@ -141,16 +110,7 @@ namespace RentWebProj.Controllers
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
-                if (!string.IsNullOrEmpty(Request.UrlReferrer.LocalPath.ToString()))
-                {
-                    //return RedirectToAction($"{TempData["PreviousAction"]}", $"{TempData["PreviousController"]}",TempData["PreviousIdOrCa"]);
-                    return Redirect(virtualPath + $"{result}");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-
+                return Redirect(Url.ToString());
             }
             else
             {
@@ -367,53 +327,12 @@ namespace RentWebProj.Controllers
         }
         public ActionResult SignOut()
         {
-            
-            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
+        
+            var reuslt = Request.UrlReferrer.ToString();
             FormsAuthentication.SignOut();
+            return Redirect(reuslt);
             //戰略性註解
             //Thread.Sleep(4000);
-            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
-            {
-                var url_Pre = Request.UrlReferrer.LocalPath.ToString().Split('/');
-                var controller_Pre = url_Pre[1];
-
-                if (url_Pre[1] == "Carts")
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else if(url_Pre[2] == "MemberCenter")
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else if (url_Pre.Length < 4)
-                {
-                    var action_Pre = url_Pre[2];
-                    return RedirectToAction($"{action_Pre}", $"{controller_Pre}");
-                }
-                else
-                {
-                    var action_Pre = url_Pre[2];
-                    var id_Pre = url_Pre[3];
-                    var result = $"{controller_Pre}/{action_Pre}/{id_Pre}";
-                    if (id_Pre.Length == 3)
-                    {
-
-                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { categoryID = id_Pre });
-                        return Redirect(virtualPath + $"{result}");
-                    }
-                    else
-                    {
-                        //return RedirectToAction($"{action_Pre}", $"{controller_Pre}", new { PID = id_Pre });
-                        return Redirect(virtualPath + $"{result}");
-                    }
-
-                }
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
         }
 
         public ActionResult DeveloperLogin()
