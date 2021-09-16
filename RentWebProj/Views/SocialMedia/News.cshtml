@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "News";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
+}

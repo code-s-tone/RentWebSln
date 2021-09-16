@@ -6,7 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using Newtonsoft.Json;
-
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -30,20 +30,20 @@ namespace RentWebProj.Services
                     @from = (DateTime)od.StartDate,
                     to = (DateTime)od.ExpirationDate
                 };
-            
+
             return RentedPeriods;
         }
-        public double CountRentedDays(string PID,int amongDays)
+        public double CountRentedDays(string PID, int amongDays)
         {
             var now = DateTime.Now.AddDays(-amongDays);
             var RentedDays =
                 GetProductRentPeriods(PID)
-                .Where(x => x.to > now  )
-                .Select(x =>   (x.to - (x.from > now?  x.from : now )  ).TotalDays  )
+                .Where(x => x.to > now)
+                .Select(x => (x.to - (x.from > now ? x.from : now)).TotalDays)
                 .Sum();
             //RentedDatesAmongDays.ForEach(x=>x)
 
-           
+
             return RentedDays;
         }
         //取得禁租日期JSON
@@ -80,7 +80,7 @@ namespace RentWebProj.Services
             _repository.SaveChanges();
 
             int OrderID = GetOrderId(MemberID, OrderDate);
-            
+
             for (int i = 0; i < VM.ListProductID.Count(); i++)
             {
                 //VM->DM
@@ -107,7 +107,7 @@ namespace RentWebProj.Services
             var b = (from o in (_repository.GetAll<Order>())
                      where o.MemberID == MemberID && o.OrderDate == OrderDate
                      select new { o.OrderID });
-            return 
+            return
                   b.SingleOrDefault().OrderID;
         }
         public IQueryable<BranchStore> GetAllStore()
@@ -118,6 +118,31 @@ namespace RentWebProj.Services
             return StoreList;
         }
 
+        public IEnumerable<SalesAnalytic> A(){
+
+            var result = 
+                from od in _repository.GetAll<OrderDetail>()
+                join o in _repository.GetAll<Order>()
+                on od.OrderID equals o.OrderID
+                join b in _repository.GetAll<BranchStore>()
+                on o.StoreID equals b.StoreID
+                join p in _repository.GetAll<Product>()
+                on od.ProductID equals p.ProductID
+                join m in _repository.GetAll<Member>()
+                on o.MemberID equals m.MemberID
+                where o.OrderStatusID == 3 //已付款
+                select new SalesAnalytic
+                {
+                    PID = od.ProductID,
+                    ProductName = p.ProductName,
+                    Income = (int)od.TotalAmount,
+                    StoreName = b.StoreName,
+                    MID = o.MemberID,
+                    MemberAge = DbFunctions.DiffYears(m.Birthday , new DateTime())
+                };
+
+            return result;
+        }
 
 
     }
