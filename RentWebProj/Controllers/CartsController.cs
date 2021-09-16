@@ -60,10 +60,10 @@ namespace RentWebProj.Controllers
             {
                 TotalAmount += Int32.Parse(x);
             }
-            Session["TotalAmount"] = TotalAmount;
-            Session["OrderId"] = OrderID;
+            TempData["TotalAmount"] = TotalAmount;
+            TempData["OrderID"] = OrderID;
 
-            return Redirect("../WebForm/AioCheckOut.aspx");
+            return RedirectToAction("ECPay");
             //return RedirectToAction("MemberCenter", "Member");
         }
         [Authorize]
@@ -119,6 +119,14 @@ namespace RentWebProj.Controllers
         {
             _cartService.DeleteCart(MemberID, ProductID);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ECPay()
+        {
+            Session["TotalAmount"] = TempData["TotalAmount"];
+            Session["OrderID"] = TempData["OrderID"];
+
+            return Redirect("../WebForm/AioCheckOut.aspx");
         }
     }
 }
