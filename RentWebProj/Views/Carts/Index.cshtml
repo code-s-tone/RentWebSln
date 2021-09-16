@@ -48,7 +48,7 @@
                             <td>
                                 <div class="product">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="@i"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
+                                        <input class="form-check-input" type="checkbox" value="@i" name="ch"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
                                         <label class="form-check-label" for="flexCheckDefault">
 
                                         </label>
@@ -131,7 +131,7 @@
 
                             </tr>
                         }
-
+                    <input type="hidden" name="" value="false" />
                     <tr>
                         <td>
                             <div class="order-total">
@@ -151,7 +151,7 @@
                     <div class="checkout">
                         <input type="hidden" class="check" name="name" value="" />
                         @*<a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>*@
-                        <button type="submit" class="btn">進行結帳</button>
+                        <button type="submit" class="btn btn-s">進行結帳</button>
                     </div>
                 </div>
                 <div class="notice">
@@ -279,13 +279,33 @@
 
             });
         });
-
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 
     <script src="~/Assets/js/Cart/AfterDatetimeSetted.js"></script>
 
+    <script>
+        //防呆
+        let btns = document.querySelector('.btn-s');
+
+
+        function CheckAll() {
+            if ($('input[name="ch"]:checked').length == 0) {
+                btns.disabled = true
+            }
+            else if ($('input[name="ch"]:checked').length != 0){
+                btns.disabled = false;
+            }
+        }
+        $('input[name="ch"]').change(function () {
+            CheckAll();
+        });
+
+        window.onload = function () {
+            btns.disabled = true;
+        }
+    </script>
 
 }
 @if (User.Identity.IsAuthenticated)
