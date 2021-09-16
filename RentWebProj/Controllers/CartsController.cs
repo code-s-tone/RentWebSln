@@ -71,7 +71,7 @@ namespace RentWebProj.Controllers
         {
             //要登帳號
             var carts = _cartService.GetCart(Int32.Parse(User.Identity.Name));
-            ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name));
+            ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name)).ToString("C0");
 
             //免登預設1
             //var carts = _cartService.GetCart(1);            
