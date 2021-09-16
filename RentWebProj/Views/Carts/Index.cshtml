@@ -62,19 +62,12 @@
                                         <a href="#">
                                             @*{JavaScript 學習手冊}*@
                                             @Html.DisplayFor(m => item.ProductName)
-                                            @Html.DisplayFor(m => item.ProductID)
                                         </a>
                                     </div>
                                 </div>
                                 <div class="product-stock">
                                     <p>
-                                        @{
-                                            if (item.Available)
-                                            {
-                                            <p>立即出貨</p>}
-                                        else
-                                        {<p>暫時無法租借</p>}
-                                        }
+
                                         </p>
                                         @{
                                             //日期選取器
@@ -96,11 +89,15 @@
                                         }
 
                                     </div>
-                                    <div class="product-price-qty">
+                                    @{
+                                        var DailyRate = item.DailyRate.ToString("#,###.###");
+                                        var Sub = item.Sub.ToString("#,###.###");
+                                    }
+                                    <div class="product-price-qty my-3">
                                         <div class="unitprice">
                                             <span class="title">日租價格 :</span>
                                             <span class="price">
-                                                @Html.DisplayFor(m => item.DailyRate)
+                                                @DailyRate
                                             </span>
                                         </div>
                                         <div class="buyqty">
@@ -118,9 +115,9 @@
                                             <a href="@Url.Action("Delete","Carts",new { Memberid = item.MemberID, Productid = item.ProductID })" class="btn" role="button">刪除</a>
                                         </div>
                                         <div class="product-sub">
-                                            <span class="title">小計 :</span>
+                                            <span class="title">小計：</span>
                                             <span class="subTotal">
-                                                @Html.DisplayFor(m => item.Sub)
+                                                @Sub
                                             </span>
                                         </div>
                                     </div>
@@ -141,7 +138,7 @@
                                 <span>總計：</span>
                                 <span class="currency">TWD$</span> &emsp;
                                 <span class="total">
-                                    @ViewBag.Total
+                                    @ViewBag.Total.ToString("#,###.###")
                                 </span>
                             </div>
                         </td>

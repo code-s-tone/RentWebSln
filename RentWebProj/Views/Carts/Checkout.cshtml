@@ -29,8 +29,7 @@
 
         <div class="order-content">
             <div class="content-nav">
-                <li class="active"><a href="#">購物明細({X})</a></li>
-                <li><a href="#">追蹤清單({X})</a></li>
+                <li class="active"><a href="#">購物明細(@Model.Count())</a></li>
             </div>
             <div class="content">
                 <table class="table">
@@ -63,10 +62,13 @@
                                 <div class="product-stock">
                                     <p></p>
                                 </div>
+                                @{
+                                    var DailyRate = item.DailyRate.ToString("#,###.###");
+                                }
                                 <div class="product-price-qty">
                                     <div class="unitprice">
                                         <span class="title">單日租價 :</span>
-                                        <span class="price">@Html.DisplayFor(M => item.DailyRate)</span>
+                                        <span class="price">@DailyRate</span>
 
                                     </div>
                                     @*顯示起訖日*@
@@ -88,7 +90,7 @@
                                 }
                                 <div class="product-sub">
                                     <span class="title">小計 : </span>&emsp;
-                                    <span class="subTotal"> @subTotal</span>
+                                    <span class="subTotal"> @subTotal.ToString("#,###.###")</span>
                                 </div>
 
                                 @*Post需用欄位*@
@@ -119,7 +121,7 @@
                                 <span>總計：</span>
                                 <span class="currency">TWD$</span> &emsp;
                                 <span class="total">
-                                    @total
+                                    @total.ToString("#,###.###")
                                 </span>
                             </div>
                         </td>
@@ -176,16 +178,16 @@
                 <div class="info-body">
                     <div class="sub">
                         <span>小計 :</span>
-                        <span class="subtotal">NT$@total</span>
+                        <span class="subtotal">NT$@total.ToString("#,###.###")</span>
                     </div>
                     <div class="dis">
                         <span>折扣 :</span>
-                        <span class="discount">- NT$@discount</span>
+                        <span class="discount">- NT$@discount.ToString("0.###")</span>
                     </div>
                     <hr>
                     <div class="tol">
                         <span>合計 :</span>
-                        <span class="total">NT$@(total - discount) </span>
+                        <span class="total">NT$@((total - discount).ToString("#,###.###")) </span>
                     </div>
                     <div class="checkout">
                         <div class="text-danger small mt-1">
