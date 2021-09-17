@@ -83,9 +83,16 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-            TempData["text"] = Request.UrlReferrer.AbsolutePath;
-            TempData["url"] = Request.UrlReferrer.AbsoluteUri;
-            return View();
+            try
+            {
+                TempData["text"] = Request.UrlReferrer.AbsolutePath;
+                TempData["url"] = Request.UrlReferrer.AbsoluteUri;
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
         }
         [HttpPost]
