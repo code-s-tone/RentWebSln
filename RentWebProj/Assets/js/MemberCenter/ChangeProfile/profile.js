@@ -70,7 +70,7 @@ let phoneErrorMsg = document.querySelector('.phone-error-msg');
 
 
 
-
+//取得個資以API回傳資料庫
 personSaveBtn.addEventListener('click', function () {
     let fullName_value = personFullName.value;
     let personYear_value = personYear.value;
@@ -233,7 +233,6 @@ let validateForm = () => {
 
     if (fullName === true && year === true && month === true && day === true && phone === true) {
         IsCanOpenSaveButton();
-        //debugger;
     }
     else {
         IsCanNotOpenSaveButton();
@@ -243,23 +242,14 @@ let validateForm = () => {
 
 //個人資訊
 //member - display - lastname
-
 personFullName.addEventListener('keyup', validateForm);
-
 //member - display - year
-
 personYear.addEventListener('keyup', validateForm);
-
 //member - display - month
-
 personMonth.addEventListener('keyup', validateForm);
-
 //member - display - date
-
 personDate.addEventListener('keyup', validateForm);
-
 //member - display - phone
-
 personPhone.addEventListener('keyup', validateForm);
 
 
@@ -359,7 +349,7 @@ personSaveBtn.addEventListener('click', function () {
     personCancelEditBtn.classList.add('notDisplay');
     personEditBtn.classList.remove('buttonDisabled');
     personSaveBtn.classList.add('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
+    swal("修改成功", '', 'success');
 });
 
 

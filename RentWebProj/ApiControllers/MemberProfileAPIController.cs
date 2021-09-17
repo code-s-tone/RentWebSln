@@ -24,18 +24,16 @@ namespace RentWebProj.ApiControllers
         public ApiResult ChangeProfile([FromBody] MemberPersonDataViewModel X)
         {
             var response = new ApiResult(1, "fail", null);
+            var ChangePersonInfo = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
+
             try
             {
-
-            var ChangePersonInfo= _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
                 response = new ApiResult(0,"success", ChangePersonInfo);
             }
             catch(Exception ex)
             {
                 response = new ApiResult(1, "fail", null);
             }
-
-
             return response;
         }
 
