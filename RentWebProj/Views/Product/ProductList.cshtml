@@ -155,7 +155,6 @@
     <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
     <script src="~/Assets/js/GeneralProductCards/SearchFilter.js"></script>
     <script>
-        @*isAuthenticated_Cards = '@(User.Identity.IsAuthenticated)' === "True" ? true : false;*@
         isAuthenticated_Cards = @Json.Encode(User.Identity.IsAuthenticated);
     </script>
     
