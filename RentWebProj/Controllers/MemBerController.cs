@@ -84,7 +84,7 @@ namespace RentWebProj.Controllers
         public ActionResult Login()
         {
          
-            if(string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
+            if(string.IsNullOrEmpty(Request.UrlReferrer.AbsoluteUri))
             {
                 TempData["url"] = Request.Url.ToString();
             }
