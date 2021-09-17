@@ -105,7 +105,7 @@ repeat {
 .checkitOut {
     display: none;
     position: absolute;
-    width: 110px;
+    width: 100px;
     height: 35px;
     background-color: #fe8b5a;
     opacity: .95;
