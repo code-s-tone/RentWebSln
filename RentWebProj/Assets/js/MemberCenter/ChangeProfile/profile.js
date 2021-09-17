@@ -46,6 +46,66 @@ let emailSaveBtn = document.querySelector('.memberemail-button-save');
 let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
 
 
+//個人資訊
+//member - display - lastname
+let personFullName = document.querySelector('.member-display-lastname');
+let nameErrorMsg = document.querySelector('.name-error-msg');
+
+//member - display - year
+let personYear = document.querySelector('.member-display-year');
+let yearErrorMsg = document.querySelector('.year-error-msg');
+
+//member - display - month
+let personMonth = document.querySelector('.member-display-month');
+let monthErrorMsg = document.querySelector('.month-error-msg');
+
+//member - display - date
+let personDate = document.querySelector('.member-display-date');
+let dayErrorMsg = document.querySelector('.day-error-msg');
+
+//member - display - phone
+let personPhone = document.querySelector('.member-display-num');
+let phoneErrorMsg = document.querySelector('.phone-error-msg');
+
+
+
+
+
+personSaveBtn.addEventListener('click', function () {
+    let fullName_value = personFullName.value;
+    let personYear_value = personYear.value;
+    let personMonth_value = personMonth.value;
+    let personDate_value = personDate.value;
+    let personPhone_value = personPhone.value;
+
+    let data = {
+        MemberName: fullName_value,
+        MemberYear: personYear_value,
+        MemberMonth: personMonth_value,
+        MemberDay: personDate_value,
+        MemberPhone: personPhone_value
+    };
+
+    changeProfileApi(data);
+});
+
+const Urlprofile = "/api/memberprofileapi/changeprofile";
+
+function changeProfileApi(data) {
+    fetch(Urlprofile,
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            console.log(res);
+        });
+}
+
 
 let regNum = /^[0-9]*$/;
 //let regPhone = /(^[0-9]{3,4}\-[0-9]{3,8}$)|(^[0-9]{3,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)/
@@ -183,29 +243,24 @@ let validateForm = () => {
 
 //個人資訊
 //member - display - lastname
-let personFullName = document.querySelector('.member-display-lastname');
-let nameErrorMsg = document.querySelector('.name-error-msg');
+
 personFullName.addEventListener('keyup', validateForm);
 
 //member - display - year
-let personYear = document.querySelector('.member-display-year');
-let yearErrorMsg = document.querySelector('.year-error-msg');
-personYear.addEventListener('keyup', validateForm)
+
+personYear.addEventListener('keyup', validateForm);
 
 //member - display - month
-let personMonth = document.querySelector('.member-display-month');
-let monthErrorMsg = document.querySelector('.month-error-msg');
-personMonth.addEventListener('keyup', validateForm)
+
+personMonth.addEventListener('keyup', validateForm);
 
 //member - display - date
-let personDate = document.querySelector('.member-display-date');
-let dayErrorMsg = document.querySelector('.day-error-msg');
-personDate.addEventListener('keyup', validateForm)
+
+personDate.addEventListener('keyup', validateForm);
 
 //member - display - phone
-let personPhone = document.querySelector('.member-display-num');
-let phoneErrorMsg = document.querySelector('.phone-error-msg');
-personPhone.addEventListener('keyup', validateForm)
+
+personPhone.addEventListener('keyup', validateForm);
 
 
 
