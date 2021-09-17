@@ -8,15 +8,16 @@ using Backstage.Services;
 
 namespace Backstage.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
     {
-        public IActionResult GetSalesAnalyticData()
+        public IActionResult GetSalesAnalysisData()
         {
-            return null;
-            //    Json(Locations, JsonRequestBehavior.AllowGet);
+            //return Json(Locations, JsonRequestBehavior.AllowGet);
             //new AnalysisService().
+
+            return null;
         }
     }
 }
