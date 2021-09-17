@@ -56,6 +56,7 @@
                                     <div class="product-img">
                                         <a href="#">
                                             <img src="~/Assets/images/cart/A451.jpg" />
+                                            @*<img src="@item.ImgSources"/>*@
                                         </a>
                                     </div>
                                     <div class="product-name">
@@ -151,7 +152,7 @@
                     <div class="checkout">
                         <input type="hidden" class="check" name="name" value="" />
                         @*<a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>*@
-                        <button type="submit" class="btn btn-s">進行結帳</button>
+                        <button type="submit" class="btn btn_s">進行結帳</button>
                     </div>
                 </div>
                 <div class="notice">
@@ -287,15 +288,15 @@
 
     <script>
         //防呆
-        let btns = document.querySelector('.btn-s');
+        let btn_s = document.querySelector('.btn_s');
 
 
         function CheckAll() {
             if ($('input[name="ch"]:checked').length == 0) {
-                btns.disabled = true
+                btn_s.disabled = true
             }
             else if ($('input[name="ch"]:checked').length != 0){
-                btns.disabled = false;
+                btn_s.disabled = false;
             }
         }
         $('input[name="ch"]').change(function () {
@@ -303,7 +304,7 @@
         });
 
         window.onload = function () {
-            btns.disabled = true;
+            btn_s.disabled = true;
         }
     </script>
 

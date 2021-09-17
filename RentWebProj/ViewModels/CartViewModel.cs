@@ -58,6 +58,7 @@ namespace RentWebProj.ViewModels
         public string ProductName { get; set; }
 
         //祥聖: 是不是要加產品圖片? >_<
+        public string ImgSources { get; set; }
 
         //禁租日期
         public string DisablePeriodsJSON { get; set; }
