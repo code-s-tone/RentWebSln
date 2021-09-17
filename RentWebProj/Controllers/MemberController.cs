@@ -83,12 +83,8 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-         
-            if(string.IsNullOrEmpty(Request.UrlReferrer.AbsoluteUri))
-            {
-                TempData["url"] = Request.Url.ToString();
-            }
-            TempData["url"]= Request.UrlReferrer.ToString();
+            TempData["text"] = Request.UrlReferrer.AbsolutePath;
+            TempData["url"] = Request.UrlReferrer.AbsoluteUri;
             return View();
 
         }
@@ -103,13 +99,15 @@ namespace RentWebProj.Controllers
 
             string email = HttpUtility.HtmlEncode(s.Email);
             string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
-            var result = $"{TempData["PreviousController"]}/{TempData["PreviousAction"]}/{TempData["PreviousIdOrCa"]}";
-            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
-            //Response.Redirect(virtualPath + "Users/Login", true);
-            var abs = 1;
+;
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
+                if (TempData["text"].ToString()== "/Member/Register")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
                 return Redirect(Url.ToString());
             }
             else
@@ -274,12 +272,6 @@ namespace RentWebProj.Controllers
                 _service.getMemberGoogleData(user_id, picture, email, name);
                 Helper.FormsAuthorization(email);
                 return RedirectToAction("Index", "Home");
-            }
-            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
-            {
-                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
-                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
-                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
             }
             return View();
         }
