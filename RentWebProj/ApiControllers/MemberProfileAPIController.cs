@@ -2,6 +2,7 @@
 using RentWebProj.Repositories;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
+using RentWebProj.ViewModels.ApiViewModels;
 using RentWebProj.ViewModels.APIViewModels.APIBase;
 using System;
 using System.Collections.Generic;
@@ -21,16 +22,15 @@ namespace RentWebProj.ApiControllers
         }
 
         [HttpPost]
-        public ApiResult ChangeProfile([FromBody] MemberPersonDataViewModel X)
+        public ApiResult ChangeProfile([FromBody] MemberProfile VM)
         {
             var response = new ApiResult(1, "fail", null);
-            var ChangePersonInfo = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
-
+            var ChangePersonInfo = _service.ChangeProfile(Int32.Parse(User.Identity.Name), VM.MemberName, VM.MemberYear, VM.MemberMonth, VM.MemberDay, VM.MemberPhone);
             try
             {
-                response = new ApiResult(0,"success", ChangePersonInfo);
+                response = new ApiResult(0, "success", ChangePersonInfo);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response = new ApiResult(1, "fail", null);
             }
