@@ -15,7 +15,7 @@ namespace RentWebProj.Services
         private CommonRepository _repository;
         public OrderService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         //取得歷史租期

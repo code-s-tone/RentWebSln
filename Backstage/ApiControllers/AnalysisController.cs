@@ -5,19 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Backstage.Services;
+using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
-namespace Backstage.Controllers
+namespace Backstage.ApiControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class ApiController : ControllerBase
+    public class AnalysisController : ControllerBase
     {
+        [HttpGet]
+        [Authorize]
         public IActionResult GetSalesAnalysisData()
         {
-            //return Json(Locations, JsonRequestBehavior.AllowGet);
-            //new AnalysisService().
-
-            return Ok("我是商品");
+            //var a = new AnalysisService().A();
+            //JsonConvert.SerializeObject(a)
+            return Ok("a");
         }
     }
 }

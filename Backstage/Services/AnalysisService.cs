@@ -17,7 +17,7 @@ namespace Backstage.Services
         private CommonRepository _repository;
         public AnalysisService()
         {
-            _repository = new CommonRepository(new RentContext());//改DI?
+            _repository = new CommonRepository();//改DI?
         }
 
         public IEnumerable<SalesAnalytic> A()

@@ -18,7 +18,7 @@ namespace RentWebProj.Services
         private readonly CommonRepository _repository;
         public ProductService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         public IEnumerable<CardsViewModel> GetAllProductCardData()

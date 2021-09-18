@@ -19,7 +19,7 @@ namespace RentWebProj.Services
         private readonly CommonRepository _repository;
         public MemberService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
