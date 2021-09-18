@@ -7,31 +7,34 @@ using System.Data.Entity;//Nuget要裝 EF
 using System.Threading.Tasks;
 using RentWebProj.Models;
 //using RentWebProj.Services;
-using RentWebProj.Repositories;
+//using RentWebProj.Repositories;
 using Backstage.ViewModels;
 
 namespace Backstage.Services
 {
     public class AnalysisService
-    {    
-        private CommonRepository _repository;
+    {
+        //readonly CommonRepository _repository;
+        readonly RentContext _ctx;
+
         public AnalysisService()
         {
-            _repository = new CommonRepository();//改DI?
+            //_repository = new CommonRepository();//改DI?
+            _ctx = new RentContext();
         }
 
         public IEnumerable<SalesAnalytic> A()
         {
 
             var result =
-                from od in _repository.GetAll<OrderDetail>()
-                join o in _repository.GetAll<Order>()
+                from od in _ctx.OrderDetails//_repository.GetAll<OrderDetail>()
+                join o in _ctx.Orders//_repository.GetAll<Order>()
                 on od.OrderID equals o.OrderID
-                join b in _repository.GetAll<BranchStore>()
+                join b in _ctx.BranchStores//_repository.GetAll<BranchStore>()
                 on o.StoreID equals b.StoreID
-                join p in _repository.GetAll<Product>()
+                join p in _ctx.Products//_repository.GetAll<Product>()
                 on od.ProductID equals p.ProductID
-                join m in _repository.GetAll<Member>()
+                join m in _ctx.Members//_repository.GetAll<Member>()
                 on o.MemberID equals m.MemberID
                 where o.OrderStatusID == 3 //已付款
                 select new SalesAnalytic
