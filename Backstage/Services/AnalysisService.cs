@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;//要裝Nuget
+using System.Data.Entity;//Nuget要裝 EF
 //using Microsoft.EntityFrameworkCore;
 
 using System.Threading.Tasks;
