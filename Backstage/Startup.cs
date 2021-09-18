@@ -24,6 +24,7 @@ namespace Backstage
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +41,10 @@ namespace Backstage
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles();// 使用靜態檔案，允許程式讀取wwwroot的檔案
+            //啟用Swagger
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 

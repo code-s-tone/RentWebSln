@@ -17,7 +17,7 @@ namespace Backstage.Controllers
             //return Json(Locations, JsonRequestBehavior.AllowGet);
             //new AnalysisService().
 
-            return null;
+            return Ok("我是商品");
         }
     }
 }
