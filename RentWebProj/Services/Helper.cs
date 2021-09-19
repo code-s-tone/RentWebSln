@@ -16,7 +16,7 @@ namespace RentWebProj.Services
     public static class Helper
     {
 
-        private static CommonRepository _repository = new CommonRepository(new RentContext());
+        private static CommonRepository _repository = new CommonRepository();
         public static string SHA1Hash(string rawString)
         {
             if (string.IsNullOrEmpty(rawString))

@@ -17,6 +17,7 @@ window.onload = function () {
 //宣告信箱變數
 let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
+let currentEmail = document.querySelector('.member-display-service-email');
 let newEmail = document.querySelector('.member-display-new-email');
 let doubleNewEmail = document.querySelector('.member-display-doublecheck-email');
 let emailDanger = document.querySelector('.email-danger');
@@ -89,8 +90,7 @@ personSaveBtn.addEventListener('click', function () {
     changeProfileApi(data);
 });
 
-const Urlprofile = "/api/memberprofileapi/changeprofile";
-
+const Urlprofile = "/api/MemberProfileAPI/ChangeProfile";
 function changeProfileApi(data) {
     fetch(Urlprofile,
         {
@@ -101,10 +101,44 @@ function changeProfileApi(data) {
             body: JSON.stringify(data)
         }).then(res => {
             return res.json();
+            swal("修改成功", '', 'success');
         }).then(res => {
             console.log(res);
         });
 }
+
+
+//取得個資信箱以API回傳資料庫
+emailSaveBtn.addEventListener('click', function () {
+    let currentEmail_TextContent = currentEmail.textContent;
+    let doubleNewEmail_value = doubleNewEmail.value;
+
+    let dataEmail = {
+        MemberEmail : currentEmail_TextContent,
+        ComfirMemberEmail: doubleNewEmail_value
+    };
+    changeEmailApi(dataEmail);
+});
+
+const Urlemail = "/api/MemberProfileAPI/ChangeEmail";
+function changeEmailApi(data) {
+    fetch(Urlemail,
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            console.log(res);
+            swal("修改成功", '', 'success');
+            currentEmail_TextContent = doubleNewEmail_value;
+        });
+}
+
+
 
 
 let regNum = /^[0-9]*$/;
@@ -349,7 +383,6 @@ personSaveBtn.addEventListener('click', function () {
     personCancelEditBtn.classList.add('notDisplay');
     personEditBtn.classList.remove('buttonDisabled');
     personSaveBtn.classList.add('buttonDisabled');
-    swal("修改成功", '', 'success');
 });
 
 
@@ -423,7 +456,6 @@ emailCancelEditBtn.addEventListener('click', function () {
 emailSaveBtn.addEventListener('click', function () {
     emailEditBtn.disabled = false;
     emailEditBtn.classList.remove('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
 });
 
 

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using RentWebProj.Models;
 
 namespace RentWebProj.Repositories
 {
     public class CommonRepository
     {
-        private DbContext _context;
-        public CommonRepository(DbContext context)
+        private readonly RentContext _context;
+        public CommonRepository()
         {
-            _context = context;
+            _context = new RentContext();
         }
 
         public void Create<T>(T value) where T : class

@@ -6,7 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using Newtonsoft.Json;
-using System.Data.Entity;
+//using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -15,7 +15,7 @@ namespace RentWebProj.Services
         private CommonRepository _repository;
         public OrderService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         //取得歷史租期
@@ -117,33 +117,6 @@ namespace RentWebProj.Services
                 select s;
             return StoreList;
         }
-
-        public IEnumerable<SalesAnalytic> A(){
-
-            var result = 
-                from od in _repository.GetAll<OrderDetail>()
-                join o in _repository.GetAll<Order>()
-                on od.OrderID equals o.OrderID
-                join b in _repository.GetAll<BranchStore>()
-                on o.StoreID equals b.StoreID
-                join p in _repository.GetAll<Product>()
-                on od.ProductID equals p.ProductID
-                join m in _repository.GetAll<Member>()
-                on o.MemberID equals m.MemberID
-                where o.OrderStatusID == 3 //已付款
-                select new SalesAnalytic
-                {
-                    PID = od.ProductID,
-                    ProductName = p.ProductName,
-                    Income = (int)od.TotalAmount,
-                    StoreName = b.StoreName,
-                    MID = o.MemberID,
-                    MemberAge = DbFunctions.DiffYears(m.Birthday , new DateTime())
-                };
-
-            return result;
-        }
-
 
     }
 }

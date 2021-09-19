@@ -55,11 +55,11 @@ namespace RentWebProj.Controllers
         //回傳信箱資訊
         public ActionResult MemberEmail(MemberPersonDataViewModel X)
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+            //    return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
+            //}
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
             Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
