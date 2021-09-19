@@ -91,7 +91,6 @@ personSaveBtn.addEventListener('click', function () {
 });
 
 const Urlprofile = "/api/MemberProfileAPI/ChangeProfile";
-
 function changeProfileApi(data) {
     fetch(Urlprofile,
         {
@@ -116,13 +115,13 @@ emailSaveBtn.addEventListener('click', function () {
 
     let dataEmail = {
         MemberEmail : currentEmail_TextContent,
-        ComfirMemberEmail : doubleNewEmail_value
+        ComfirMemberEmail: doubleNewEmail_value
     };
-    changeEamilApi(dataEmail);
+    changeEmailApi(dataEmail);
 });
 
-const Urlemail = "/api/memberprofileapi/changeemail";
-function changeEamilApi(data) {
+const Urlemail = "/api/MemberProfileAPI/ChangeEmail";
+function changeEmailApi(data) {
     fetch(Urlemail,
         {
             method: "POST",
@@ -134,6 +133,8 @@ function changeEamilApi(data) {
             return res.json();
         }).then(res => {
             console.log(res);
+            swal("修改成功", '', 'success');
+            currentEmail_TextContent = doubleNewEmail_value;
         });
 }
 
@@ -455,7 +456,6 @@ emailCancelEditBtn.addEventListener('click', function () {
 emailSaveBtn.addEventListener('click', function () {
     emailEditBtn.disabled = false;
     emailEditBtn.classList.remove('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
 });
 
 
