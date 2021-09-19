@@ -31,15 +31,4 @@ namespace RentWebProj.ViewModels
         public List<string> ListTotalAmount { get; set; }//小計
 
     }
-
-    public class SalesAnalytic
-    {
-        //產品,類 , total , 店 ,會員年齡,會員
-        public string PID { get; set; }
-        public string ProductName { get; set; }
-        public int Income { get; set; }
-        public string StoreName { get; set; }
-        public int MID { get; set; }
-        public int? MemberAge { get; set; }
-    }
 }

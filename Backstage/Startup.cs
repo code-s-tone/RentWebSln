@@ -1,12 +1,19 @@
+using Backstage.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Backstage
@@ -24,6 +31,41 @@ namespace Backstage
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<RentContext>(options =>
+                 options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
+            //讓Swagger支援JWT
+            services.AddSwaggerDocument(config =>
+            {
+                var apiScheme = new OpenApiSecurityScheme()
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "請將Token填入 : Bearer {token}"
+                };
+                config.AddSecurity("JWT Token", Enumerable.Empty<string>(), apiScheme);
+                config.OperationProcessors.Add(
+                    new AspNetCoreOperationSecurityScopeProcessor("JWT Token"));
+            });
+
+            //註冊 怎麼檢查token
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+              .AddJwtBearer(
+                  option =>
+                  {
+                      option.IncludeErrorDetails = true;
+
+                      option.TokenValidationParameters = new TokenValidationParameters
+                      {
+                          ValidateIssuer = true, //發行者
+                          ValidIssuer = "RentWeb",  //發行者得和發證時的發行者一樣
+                          ValidateAudience = false,
+                          ValidateLifetime = true, //時間
+                          IssuerSigningKey =    //Signingkey得和金鑰一樣
+                              new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1Zl4h9703IzROidasgfegkK3@f4po1jkd"))
+                      };
+
+                  });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,10 +82,15 @@ namespace Backstage
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles();// 使用靜態檔案，允許程式讀取wwwroot的檔案
+            //啟用Swagger
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseRouting();
 
+            //啟用驗證，必須在授權前
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

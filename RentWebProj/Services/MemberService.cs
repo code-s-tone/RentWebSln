@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using System.Data.Entity;
+//using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -19,7 +19,7 @@ namespace RentWebProj.Services
         private readonly CommonRepository _repository;
         public MemberService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
