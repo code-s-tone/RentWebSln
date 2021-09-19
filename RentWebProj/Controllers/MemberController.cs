@@ -33,6 +33,7 @@ namespace RentWebProj.Controllers
         // GET: Member
         public ActionResult MemberCenter(string Index)
         {
+      
             //已將User.Identity.Name轉成MemberId
             ViewBag.nav = Index;
             var isNullPassword = _service.CheckPassword(Int32.Parse(User.Identity.Name));
@@ -84,7 +85,7 @@ namespace RentWebProj.Controllers
         public ActionResult Login()
         {
          
-            if(string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
+            if(string.IsNullOrEmpty(Request.UrlReferrer.AbsoluteUri))
             {
                 TempData["url"] = Request.Url.ToString();
             }
@@ -300,6 +301,7 @@ namespace RentWebProj.Controllers
                 using (StreamReader sr = new StreamReader(response.GetResponseStream()))
                 {
                     result = sr.ReadToEnd();
+       
                 }
             }
 
@@ -327,7 +329,8 @@ namespace RentWebProj.Controllers
         }
         public ActionResult SignOut()
         {
-        
+
+            var apple = User.Identity.Name;
             var reuslt = Request.UrlReferrer.ToString();
             FormsAuthentication.SignOut();
             return Redirect(reuslt);
