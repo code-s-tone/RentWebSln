@@ -10,6 +10,8 @@ using System.Security.Cryptography;
 using System.Web.Security;
 using System.Web;
 using RentWebProj.ViewModels;
+using System.Security.Claims;
+using Microsoft.Owin.Security.OAuth;
 
 namespace RentWebProj.Services
 {
@@ -55,7 +57,7 @@ namespace RentWebProj.Services
                 isPersistent: true,// 是否要記住我 true or false
                 userData: "", //可以放使用者角色名稱
                 cookiePath: FormsAuthentication.FormsCookiePath);
-
+        
             //2.加密Ticket
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
 
@@ -63,7 +65,9 @@ namespace RentWebProj.Services
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             //4.網頁添加cookie
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket));
-
+            ClaimsIdentity identity = new ClaimsIdentity(OAuthDefaults.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.Name, ConvertEmailToMemberId(Email).ToString()));
+            int abs = 1;
         }
         public static MemberProfileViewModel ConvertMemberIdToMemberProfile(int MemberID) //擴充方法
         {

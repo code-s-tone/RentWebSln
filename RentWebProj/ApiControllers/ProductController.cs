@@ -42,6 +42,7 @@ namespace RentWebProj.ApiControllers
 
             //return Json(Locations, JsonRequestBehavior.AllowGet);
         }
+
     }
 
 }

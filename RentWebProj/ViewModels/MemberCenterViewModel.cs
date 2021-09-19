@@ -197,4 +197,15 @@ namespace RentWebProj.ViewModels
         public string email { get; set; }
     }
 
+    public class NOtify
+    {
+        public int MemberID { get; set; }
+        public int OrderID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductID { get; set; }
+
+        public int GoodsStatus { get; set; }
+        public int Notify { get; set; }
+    }
+
 }
