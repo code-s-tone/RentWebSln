@@ -114,8 +114,14 @@ namespace RentWebProj.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-
-                return Redirect(Url.ToString());
+                try
+                {
+                    return Redirect(Url.ToString());
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
