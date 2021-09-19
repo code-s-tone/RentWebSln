@@ -12,17 +12,18 @@ namespace RentWebProj
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "MemberApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            config.Routes.MapHttpRoute(
-                name: "memberapi",
-                routeTemplate: "api/members/ChangeProfile/${MemberName}${ MemberYear}/${ MemberMonth}/${ MemberDay}/${ MemberPhone}",
-                defaults: new { controller= "MemberProfileAPI", action= "ChangeProfile", MemberName = RouteParameter.Optional, MemberYear = RouteParameter.Optional, MemberMonth = RouteParameter.Optional, MemberDay = RouteParameter.Optional, id = RouteParameter.Optional, MemberPhone = RouteParameter.Optional }
-            );
-            ///
+
         }
     }
 }

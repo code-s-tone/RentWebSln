@@ -37,5 +37,21 @@ namespace RentWebProj.ApiControllers
             return response;
         }
 
+        [HttpPost]
+        public ApiResult ChangeEmail([FromBody] MemberChangeEmail VM)
+        {
+            var response = new ApiResult(1, "fail", null);
+            var ChangeUserEmail= _service.ChangeEmail(Int32.Parse(User.Identity.Name), VM.ComfirMemberEmail);
+            try
+            {
+                response = new ApiResult(0, "success", ChangeUserEmail);
+            }
+            catch (Exception ex)
+            {
+                response = new ApiResult(1, "fail", null);
+            }
+            return response;
+        }
+
     }
 }

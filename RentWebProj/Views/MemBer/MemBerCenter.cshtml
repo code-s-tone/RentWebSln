@@ -151,9 +151,9 @@
                     @if (IsNotPassword == "Yes")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group notDisplay">
-                            @ViewBag.returnEmail
+                            @*@ViewBag.returnEmail
                             @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
-                            {
+                            {*@
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
@@ -202,7 +202,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            @*}信箱結束標籤*@
 
                             <!--變更密碼Form-->
                             @ViewBag.returnPassword
