@@ -5,9 +5,6 @@ using System.Web;
 
 namespace RentWebProj.ViewModels
 {
-    public class OrderViewModel
-    {
-    }
     public class RentedPeriod
     {
         public DateTime from { get; set; }
@@ -24,14 +21,8 @@ namespace RentWebProj.ViewModels
     }
     public class CreateOrder
     {
-
         public int StoreID { get; set; }
         //DeliverID 應該要傳(運送方式)，目前一種
-
-        
-
-
-
         //從表單來
         public List<string> ListProductID { get; set; }
         public List<string> ListDailyRate { get; set; }

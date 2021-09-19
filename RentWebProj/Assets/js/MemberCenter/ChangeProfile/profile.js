@@ -17,6 +17,7 @@ window.onload = function () {
 //宣告信箱變數
 let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
+let currentEmail = document.querySelector('.member-display-service-email');
 let newEmail = document.querySelector('.member-display-new-email');
 let doubleNewEmail = document.querySelector('.member-display-doublecheck-email');
 let emailDanger = document.querySelector('.email-danger');
@@ -46,6 +47,99 @@ let emailSaveBtn = document.querySelector('.memberemail-button-save');
 let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
 
 
+//個人資訊
+//member - display - lastname
+let personFullName = document.querySelector('.member-display-lastname');
+let nameErrorMsg = document.querySelector('.name-error-msg');
+
+//member - display - year
+let personYear = document.querySelector('.member-display-year');
+let yearErrorMsg = document.querySelector('.year-error-msg');
+
+//member - display - month
+let personMonth = document.querySelector('.member-display-month');
+let monthErrorMsg = document.querySelector('.month-error-msg');
+
+//member - display - date
+let personDate = document.querySelector('.member-display-date');
+let dayErrorMsg = document.querySelector('.day-error-msg');
+
+//member - display - phone
+let personPhone = document.querySelector('.member-display-num');
+let phoneErrorMsg = document.querySelector('.phone-error-msg');
+
+
+
+
+//取得個資以API回傳資料庫
+personSaveBtn.addEventListener('click', function () {
+    let fullName_value = personFullName.value;
+    let personYear_value = personYear.value;
+    let personMonth_value = personMonth.value;
+    let personDate_value = personDate.value;
+    let personPhone_value = personPhone.value;
+
+    let data = {
+        MemberName: fullName_value,
+        MemberYear: personYear_value,
+        MemberMonth: personMonth_value,
+        MemberDay: personDate_value,
+        MemberPhone: personPhone_value
+    };
+
+    changeProfileApi(data);
+});
+
+const Urlprofile = "/api/MemberProfileAPI/ChangeProfile";
+function changeProfileApi(data) {
+    fetch(Urlprofile,
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json();
+            swal("修改成功", '', 'success');
+        }).then(res => {
+            console.log(res);
+        });
+}
+
+
+//取得個資信箱以API回傳資料庫
+emailSaveBtn.addEventListener('click', function () {
+    let currentEmail_TextContent = currentEmail.textContent;
+    let doubleNewEmail_value = doubleNewEmail.value;
+
+    let dataEmail = {
+        MemberEmail : currentEmail_TextContent,
+        ComfirMemberEmail: doubleNewEmail_value
+    };
+    changeEmailApi(dataEmail);
+});
+
+const Urlemail = "/api/MemberProfileAPI/ChangeEmail";
+function changeEmailApi(data) {
+    fetch(Urlemail,
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json();
+        }).then(res => {
+            console.log(res);
+            swal("修改成功", '', 'success');
+            currentEmail_TextContent = doubleNewEmail_value;
+        });
+}
+
+
+
 
 let regNum = /^[0-9]*$/;
 //let regPhone = /(^[0-9]{3,4}\-[0-9]{3,8}$)|(^[0-9]{3,8}$)|(^\([0-9]{3,4}\)[0-9]{3,8}$)|(^0{0,1}13[0-9]{9}$)/
@@ -70,11 +164,12 @@ let validateForm = () => {
     let phone = true;
     if (personFullName.value === "") {
         nameErrorMsg.textContent = "姓名不得為空";
-        funllName = false;
+        IsCanNotOpenSaveButton();
+        fullName = false;
     }
     else if (personFullName.value != ""){
         nameErrorMsg.textContent = '';
-        funllName = true;
+        fullName = true;
     }
 
     if (personYear.value === "") {
@@ -131,7 +226,6 @@ let validateForm = () => {
     if (personDate.value === "") {
         dayErrorMsg.textContent = "日期不得為空";
         day = false;
-        //debugger;
         
     }
     else if (personDate.value.length > 2) {
@@ -151,8 +245,6 @@ let validateForm = () => {
     else if (regNum.test(personDate.value) === true) {
         dayErrorMsg.textContent = "";
         day = true;
-
-        //debugger;
     }
 
     if (personPhone.value === "") {
@@ -175,7 +267,6 @@ let validateForm = () => {
 
     if (fullName === true && year === true && month === true && day === true && phone === true) {
         IsCanOpenSaveButton();
-        //debugger;
     }
     else {
         IsCanNotOpenSaveButton();
@@ -185,29 +276,15 @@ let validateForm = () => {
 
 //個人資訊
 //member - display - lastname
-let personFullName = document.querySelector('.member-display-lastname');
-let nameErrorMsg = document.querySelector('.name-error-msg');
 personFullName.addEventListener('keyup', validateForm);
-
 //member - display - year
-let personYear = document.querySelector('.member-display-year');
-let yearErrorMsg = document.querySelector('.year-error-msg');
-personYear.addEventListener('keyup', validateForm)
-
+personYear.addEventListener('keyup', validateForm);
 //member - display - month
-let personMonth = document.querySelector('.member-display-month');
-let monthErrorMsg = document.querySelector('.month-error-msg');
-personMonth.addEventListener('keyup', validateForm)
-
+personMonth.addEventListener('keyup', validateForm);
 //member - display - date
-let personDate = document.querySelector('.member-display-date');
-let dayErrorMsg = document.querySelector('.day-error-msg');
-personDate.addEventListener('keyup', validateForm)
-
+personDate.addEventListener('keyup', validateForm);
 //member - display - phone
-let personPhone = document.querySelector('.member-display-num');
-let phoneErrorMsg = document.querySelector('.phone-error-msg');
-personPhone.addEventListener('keyup', validateForm)
+personPhone.addEventListener('keyup', validateForm);
 
 
 
@@ -306,7 +383,6 @@ personSaveBtn.addEventListener('click', function () {
     personCancelEditBtn.classList.add('notDisplay');
     personEditBtn.classList.remove('buttonDisabled');
     personSaveBtn.classList.add('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
 });
 
 
@@ -380,7 +456,6 @@ emailCancelEditBtn.addEventListener('click', function () {
 emailSaveBtn.addEventListener('click', function () {
     emailEditBtn.disabled = false;
     emailEditBtn.classList.remove('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
 });
 
 

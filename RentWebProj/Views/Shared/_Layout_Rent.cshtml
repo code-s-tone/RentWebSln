@@ -91,10 +91,10 @@
                                         <li>通知</li>
                                     </a>
 
-                                    <a href="@Url.Action("MemberCenter", "Member",new { Index=2})">
+                                    <a href="@Url.Action("MemberCenter", "Member",new { Index="pr"})">
                                         <li>我的訂單</li>
                                     </a>
-                                    <a href="@Url.Action("MemberCenter", "Member",new { Index=0})">
+                                    <a href="@Url.Action("MemberCenter", "Member",new { Index="od"})">
                                         <li>修改個人資料</li>
                                     </a>
                                     <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
@@ -223,10 +223,9 @@
                     <a href="#" class="dropdown-btn"> 會員中心 <i class="fas fa-caret-down"></i></a>
                     <div class="dropdown-container">
                         <a href="#">通知</a>
-                        @Html.ActionLink("我的訂單", "MemberCenter", "Member")
-                        @Html.ActionLink("修改個人資料", "MemberCenter", "Member")
-
-                        <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">登出</a>
+                        @Html.ActionLink("我的訂單", "MemberCenter", "Member", new { Index = "od" })
+                        @Html.ActionLink("修改個人資料", "MemberCenter", "Member", new { Index = "pr" })
+                            <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">登出</a>
                     </div>
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>

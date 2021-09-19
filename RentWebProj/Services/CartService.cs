@@ -15,7 +15,7 @@ namespace RentWebProj.Services
         private CommonRepository _repository;
         public CartService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
         //產品列表頁入車，兩種可能
         public OperationResult Create(string PID)
@@ -160,8 +160,17 @@ namespace RentWebProj.Services
 
             _repository.Delete<Cart>(deleteList);
             _repository.SaveChanges();
-            int i = 0;
         }
   
-}
+        public void ECPayResponse(string MerchantTradeNo)
+        {
+            int TradeNo = Int32.Parse(MerchantTradeNo.Substring(5));
+            var result = _repository.GetAll<Order>()
+                .FirstOrDefault(x => x.OrderID == TradeNo);
+
+            result.OrderStatusID = 3;
+
+            _repository.SaveChanges();
+        }
+    }
 }

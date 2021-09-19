@@ -6,7 +6,7 @@ using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
 using Newtonsoft.Json;
-
+//using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -15,7 +15,7 @@ namespace RentWebProj.Services
         private CommonRepository _repository;
         public OrderService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         //取得歷史租期
@@ -30,20 +30,20 @@ namespace RentWebProj.Services
                     @from = (DateTime)od.StartDate,
                     to = (DateTime)od.ExpirationDate
                 };
-            
+
             return RentedPeriods;
         }
-        public double CountRentedDays(string PID,int amongDays)
+        public double CountRentedDays(string PID, int amongDays)
         {
             var now = DateTime.Now.AddDays(-amongDays);
             var RentedDays =
                 GetProductRentPeriods(PID)
-                .Where(x => x.to > now  )
-                .Select(x =>   (x.to - (x.from > now?  x.from : now )  ).TotalDays  )
+                .Where(x => x.to > now)
+                .Select(x => (x.to - (x.from > now ? x.from : now)).TotalDays)
                 .Sum();
             //RentedDatesAmongDays.ForEach(x=>x)
 
-           
+
             return RentedDays;
         }
         //取得禁租日期JSON
@@ -60,7 +60,7 @@ namespace RentWebProj.Services
         }
 
         //寫入
-        public void Create(CreateOrder VM)
+        public int Create(CreateOrder VM)
         {
             //要從user.Identity.Name拿，要using
             int MemberID = Int32.Parse(HttpContext.Current.User.Identity.Name);
@@ -80,7 +80,7 @@ namespace RentWebProj.Services
             _repository.SaveChanges();
 
             int OrderID = GetOrderId(MemberID, OrderDate);
-            
+
             for (int i = 0; i < VM.ListProductID.Count(); i++)
             {
                 //VM->DM
@@ -97,6 +97,8 @@ namespace RentWebProj.Services
                 _repository.Create(odEntity);
             }
             _repository.SaveChanges();
+
+            return OrderID;
         }
 
         public int GetOrderId(int MemberID, DateTime OrderDate)
@@ -105,7 +107,7 @@ namespace RentWebProj.Services
             var b = (from o in (_repository.GetAll<Order>())
                      where o.MemberID == MemberID && o.OrderDate == OrderDate
                      select new { o.OrderID });
-            return 
+            return
                   b.SingleOrDefault().OrderID;
         }
         public IQueryable<BranchStore> GetAllStore()
@@ -115,8 +117,6 @@ namespace RentWebProj.Services
                 select s;
             return StoreList;
         }
-
-
 
     }
 }

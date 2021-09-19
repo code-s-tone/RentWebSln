@@ -51,7 +51,8 @@
     background-color: #fff;
     border-bottom: 1px solid #FFEEDD;
     border-radius: unset;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
+    border: 1px solid #fc8d61;
     margin: 25px 0 0 0;
 }
 

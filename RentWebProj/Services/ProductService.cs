@@ -18,10 +18,9 @@ namespace RentWebProj.Services
         private readonly CommonRepository _repository;
         public ProductService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
-        //全部商品的資訊 可以從這邊再篩選、轉型
         public IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
@@ -48,21 +47,7 @@ namespace RentWebProj.Services
             return AllProductCardVMList;
         }
 
-        public IEnumerable<CardsViewModel> ProductDataWithStars()
-        {
-            //回傳所有商品資料含30天內被租過的日期
-            var pLists = GetMostPopularProductCardData(30).ToList();
-           
-            int dayRange = 2; //先以2天為星星標準
-            pLists.ForEach(p =>
-            {
-                int stars=(int)p.CountOfRentedDays/dayRange+1;
-                p.StarsForLike = stars > 5 ?  5 : stars;
-            });
-            return pLists;
-        }
-        
-        public IEnumerable<CardsViewModel> GetCheapestProductCardData()
+                public IEnumerable<CardsViewModel> GetCheapestProductCardData()
         {
             var pList = GetAllProductCardData().ToList();
             IEnumerable<CardsViewModel> VMList = pList.OrderBy(x => x.DailyRate);
@@ -80,6 +65,20 @@ namespace RentWebProj.Services
 
             IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
             return VMList;
+        }
+
+        public IEnumerable<CardsViewModel> ProductDataWithStars()
+        {
+            //回傳所有商品資料含30天內被租過的日期
+            var pLists = GetMostPopularProductCardData(30).ToList();
+
+            int dayRange = 2; //先以2天為星星標準
+            pLists.ForEach(p =>
+            {
+                int stars = (int)p.CountOfRentedDays / dayRange + 1;
+                p.StarsForLike = stars > 5 ? 5 : stars;
+            });
+            return pLists;
         }
 
         public IEnumerable<CardsViewModel> GetCategoryData()
@@ -294,12 +293,12 @@ namespace RentWebProj.Services
                          //產品圖片
                      }).SingleOrDefault();
 
-            var dateDiff = (e - s).Days; //TotalDays帶小數
+            var dateDiff = (int)Math.Ceiling((e - s).TotalDays); //TotalDays帶小數
             c.DateDiff = dateDiff;
             c.Sub = c.DailyRate * dateDiff;
 
             return new List<CartIndex>() { c };
-
         }
+
     }
 }

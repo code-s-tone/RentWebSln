@@ -10,7 +10,7 @@ using System.Globalization;
 using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
-using System.Data.Entity;
+//using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -19,7 +19,7 @@ namespace RentWebProj.Services
         private readonly CommonRepository _repository;
         public MemberService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
 
         public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
@@ -180,35 +180,9 @@ namespace RentWebProj.Services
             //先找對應會員
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
 
-            if (ChangeUserName == "")
-            {
-                result.FullName = "";
-            }
-            else
-            {
-                result.FullName = ChangeUserName;
-            }
-
-            if(ChangeUserPhone == "")
-            {
-                result.Phone = "";
-            }
-            else
-            {
-                result.Phone = ChangeUserPhone;
-            }
-
-            if(ChangeYear == "" && ChangeMonth == "" && ChangeDay == "")
-            {
-                var a = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
-                var d = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
-            }
-            else
-            {
-                result.Birthday = DateTime.Parse($"{ChangeYear}-{ChangeMonth}-{ChangeDay}");
-                //result.Birthday = DateTime.Parse(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
-                //result.Birthday = Convert.ToDateTime(ChangeYear + "-" + ChangeMonth + "-" + ChangeDay);
-            }
+            result.FullName = ChangeUserName;
+            result.Phone = ChangeUserPhone;
+            result.Birthday = DateTime.Parse($"{ChangeYear}-{ChangeMonth}-{ChangeDay}");
             _repository.SaveChanges();
             return "";
         }

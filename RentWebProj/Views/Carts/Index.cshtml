@@ -48,7 +48,7 @@
                             <td>
                                 <div class="product">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="@i"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
+                                        <input class="form-check-input" type="checkbox" value="@i" name="ch"> @*id="flexCheckDefault"   因為非唯一ID而報錯，先註解*@
                                         <label class="form-check-label" for="flexCheckDefault">
 
                                         </label>
@@ -62,19 +62,12 @@
                                         <a href="#">
                                             @*{JavaScript 學習手冊}*@
                                             @Html.DisplayFor(m => item.ProductName)
-                                            @Html.DisplayFor(m => item.ProductID)
                                         </a>
                                     </div>
                                 </div>
                                 <div class="product-stock">
                                     <p>
-                                        @{
-                                            if (item.Available)
-                                            {
-                                            <p>立即出貨</p>}
-                                        else
-                                        {<p>暫時無法租借</p>}
-                                        }
+
                                         </p>
                                         @{
                                             //日期選取器
@@ -96,11 +89,15 @@
                                         }
 
                                     </div>
-                                    <div class="product-price-qty">
+                                    @{
+                                        var DailyRate = item.DailyRate.ToString("#,###.###");
+                                        var Sub = item.Sub.ToString("#,###.###");
+                                    }
+                                    <div class="product-price-qty my-3">
                                         <div class="unitprice">
                                             <span class="title">日租價格 :</span>
                                             <span class="price">
-                                                @Html.DisplayFor(m => item.DailyRate)
+                                                @DailyRate
                                             </span>
                                         </div>
                                         <div class="buyqty">
@@ -118,9 +115,9 @@
                                             <a href="@Url.Action("Delete","Carts",new { Memberid = item.MemberID, Productid = item.ProductID })" class="btn" role="button">刪除</a>
                                         </div>
                                         <div class="product-sub">
-                                            <span class="title">小計 :</span>
+                                            <span class="title">小計：</span>
                                             <span class="subTotal">
-                                                @Html.DisplayFor(m => item.Sub)
+                                                @Sub
                                             </span>
                                         </div>
                                     </div>
@@ -134,14 +131,14 @@
 
                             </tr>
                         }
-
+                    <input type="hidden" name="" value="false" />
                     <tr>
                         <td>
                             <div class="order-total">
                                 <span>總計：</span>
                                 <span class="currency">TWD$</span> &emsp;
                                 <span class="total">
-                                    @ViewBag.Total
+                                    @ViewBag.Total.ToString("#,###.###")
                                 </span>
                             </div>
                         </td>
@@ -154,7 +151,7 @@
                     <div class="checkout">
                         <input type="hidden" class="check" name="name" value="" />
                         @*<a href="@Url.Action("Checkout","Carts")" class="btn" role="button" type="submit">進行結帳</a>*@
-                        <button type="submit" class="btn">進行結帳</button>
+                        <button type="submit" class="btn btn-s">進行結帳</button>
                     </div>
                 </div>
                 <div class="notice">
@@ -282,13 +279,33 @@
 
             });
         });
-
     </script>
     <!-- dateTimePicker設定完成引發事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerSettedEvent.js"></script>
 
     <script src="~/Assets/js/Cart/AfterDatetimeSetted.js"></script>
 
+    <script>
+        //防呆
+        let btns = document.querySelector('.btn-s');
+
+
+        function CheckAll() {
+            if ($('input[name="ch"]:checked').length == 0) {
+                btns.disabled = true
+            }
+            else if ($('input[name="ch"]:checked').length != 0){
+                btns.disabled = false;
+            }
+        }
+        $('input[name="ch"]').change(function () {
+            CheckAll();
+        });
+
+        window.onload = function () {
+            btns.disabled = true;
+        }
+    </script>
 
 }
 @if (User.Identity.IsAuthenticated)
