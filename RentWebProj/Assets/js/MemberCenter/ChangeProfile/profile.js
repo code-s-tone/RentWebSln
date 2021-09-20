@@ -101,27 +101,32 @@ function changeProfileApi(data) {
             body: JSON.stringify(data)
         }).then(res => {
             return res.json();
-            swal("修改成功", '', 'success');
         }).then(res => {
             console.log(res);
+            swal("修改成功", '', 'success');
         });
 }
 
 
 //取得個資信箱以API回傳資料庫
 emailSaveBtn.addEventListener('click', function () {
-    let currentEmail_TextContent = currentEmail.textContent;
     let doubleNewEmail_value = doubleNewEmail.value;
 
     let dataEmail = {
-        MemberEmail : currentEmail_TextContent,
         ComfirMemberEmail: doubleNewEmail_value
     };
-    changeEmailApi(dataEmail);
+
+
+    emailEditBtn.classList.remove('notDisplay');
+    emailCancelEditBtn.classList.add('notDisplay');
+    emailSaveBtn.disabled = true;
+    emailSaveBtn.classList.add('buttonDisabled');
+    AccountInit();
+    changeEmailApi(dataEmail, currentEmail);
 });
 
-const Urlemail = "/api/MemberProfileAPI/ChangeEmail";
-function changeEmailApi(data) {
+const Urlemail = "/api/MemberEmailAPI/ChangeUserEmail";
+function changeEmailApi(data, currentEmail) {
     fetch(Urlemail,
         {
             method: "POST",
@@ -129,12 +134,14 @@ function changeEmailApi(data) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        }).then(res => {
-            return res.json();
-        }).then(res => {
-            console.log(res);
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
             swal("修改成功", '', 'success');
-            currentEmail_TextContent = doubleNewEmail_value;
+            currentEmail.innerText = response.Result;
+            
+    
         });
 }
 
@@ -386,10 +393,6 @@ personSaveBtn.addEventListener('click', function () {
 });
 
 
-
-
-
-
 //信箱啟動修改
 emailEditBtn.addEventListener('click', function () {
     emailCancelEditBtn.classList.remove('notDisplay');
@@ -452,11 +455,18 @@ emailCancelEditBtn.addEventListener('click', function () {
     changeEmailDanger.textContent = '';
     AccountInit();
 });
-//信箱變更送出
-emailSaveBtn.addEventListener('click', function () {
-    emailEditBtn.disabled = false;
-    emailEditBtn.classList.remove('buttonDisabled');
-});
+////信箱變更送出
+//emailSaveBtn.addEventListener('click', function () {
+//    //變更欄位隱藏
+    
+//    emailEditBtn.classList.remove('notDisplay');
+//    emailCancelEditBtn.classList.add('notDisplay');
+//    emailSaveBtn.disabled = true;
+//    emailSaveBtn.classList.add('buttonDisabled');
+//    AccountInit();
+//    swal("修改成功", '', 'success');
+    
+//});
 
 
 
