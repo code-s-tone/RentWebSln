@@ -30,7 +30,7 @@
         <div class="col-sm-7 col-12 Product">
             <img src="@Model.ImgSources[0]"
                  data-fancybox="gallery"
-                 data-caption="Optional caption">
+                 >
         </div>
 
         @for (int i = 1; i < Model.ImgSources.Count; i++)
@@ -38,7 +38,7 @@
             <div class="col-sm-5 col-12 Product">
                 <img src="@Model.ImgSources[i]"
                      data-fancybox="gallery"
-                     data-caption="Optional caption">
+                     >
                 <span class="SeeMore">See ALL 2</span>
             </div>
         }
@@ -329,6 +329,8 @@
                 OpModal.toggle();
                 </text>
             }
+
+
     </script>
     <!-- dateTimePicker初始化、Modal事件 -->
     <script src="~/Assets/js/Shared/dateTimePickerPreDef.js"></script>
