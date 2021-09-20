@@ -342,7 +342,7 @@ namespace RentWebProj.Controllers
 
         public ActionResult DeveloperLogin()
         {
-            string Deve_email = "Code7414@gmail.com";
+            string Deve_email = "htc7414@gmail.com";
             Helper.FormsAuthorization(Deve_email);
             return RedirectToAction("Index", "Home");
         }
