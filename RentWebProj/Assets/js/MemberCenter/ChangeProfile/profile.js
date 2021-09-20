@@ -17,7 +17,7 @@ window.onload = function () {
 //宣告信箱變數
 let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
-let currentEmail = document.querySelector('.member-display-service-email');
+let currentEmail = document.querySelector('.current-email');
 let newEmail = document.querySelector('.member-display-new-email');
 let doubleNewEmail = document.querySelector('.member-display-doublecheck-email');
 let emailDanger = document.querySelector('.email-danger');
@@ -101,9 +101,9 @@ function changeProfileApi(data) {
             body: JSON.stringify(data)
         }).then(res => {
             return res.json();
-            swal("修改成功", '', 'success');
         }).then(res => {
             console.log(res);
+            swal("修改成功", '', 'success');
         });
 }
 
@@ -112,7 +112,6 @@ function changeProfileApi(data) {
 emailSaveBtn.addEventListener('click', function () {
     let currentEmail_TextContent = currentEmail.textContent;
     let doubleNewEmail_value = doubleNewEmail.value;
-
     let dataEmail = {
         MemberEmail : currentEmail_TextContent,
         ComfirMemberEmail: doubleNewEmail_value
@@ -120,7 +119,7 @@ emailSaveBtn.addEventListener('click', function () {
     changeEmailApi(dataEmail);
 });
 
-const Urlemail = "/api/MemberProfileAPI/ChangeEmail";
+const Urlemail = "/api/MemberEmailAPI/ChangeUserEmail";
 function changeEmailApi(data) {
     fetch(Urlemail,
         {
@@ -133,8 +132,9 @@ function changeEmailApi(data) {
             return res.json();
         }).then(res => {
             console.log(res);
+            /*currentEmail_TextContent = doubleNewEmail_value;*/
+            AccountInit();
             swal("修改成功", '', 'success');
-            currentEmail_TextContent = doubleNewEmail_value;
         });
 }
 
@@ -386,10 +386,6 @@ personSaveBtn.addEventListener('click', function () {
 });
 
 
-
-
-
-
 //信箱啟動修改
 emailEditBtn.addEventListener('click', function () {
     emailCancelEditBtn.classList.remove('notDisplay');
@@ -454,8 +450,16 @@ emailCancelEditBtn.addEventListener('click', function () {
 });
 //信箱變更送出
 emailSaveBtn.addEventListener('click', function () {
-    emailEditBtn.disabled = false;
-    emailEditBtn.classList.remove('buttonDisabled');
+    //變更欄位隱藏
+    let currentEmail_value = currentEmail.textContent;
+    let doubleNewEmail_value = doubleNewEmail.value;
+    currentEmail_TextContent = doubleNewEmail_value;
+    AccountInit();
+    emailEditBtn.classList.remove('notDisplay');
+    emailCancelEditBtn.classList.add('notDisplay');
+    emailSaveBtn.disabled = true;
+    emailSaveBtn.classList.add('buttonDisabled');
+    
 });
 
 

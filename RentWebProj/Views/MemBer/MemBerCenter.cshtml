@@ -260,13 +260,13 @@
                     else if (IsNotPassword == "No")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group">
-                            @ViewBag.returnEmail
+                            @*@ViewBag.returnEmail
                             @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
-                            {
+                            {*@
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
-                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
+                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded " } })
                                     </div>
                                 </div>
 
@@ -311,7 +311,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            @*}變更信箱結束標籤*@
 
                             <!--變更密碼Form-->
                             @ViewBag.returnPassword
