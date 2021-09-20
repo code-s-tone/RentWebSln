@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiControllers\MemberEmailAPIController.cs" />
     <Compile Include="ApiControllers\MemberProfileAPIController.cs" />
     <Compile Include="ApiControllers\ProductController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
