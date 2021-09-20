@@ -341,6 +341,7 @@
     <Content Include="Assets\images\Index\parallax6.png" />
     <Content Include="Assets\images\Index\parallax7.png" />
     <Content Include="Assets\images\Index\parallax8.png" />
+    <Content Include="Assets\images\loadingdog.gif" />
     <Content Include="Assets\js\GeneralProductCards\CardToCart.js" />
     <Content Include="Assets\js\GeneralProductCards\CategoriesSelector.js" />
     <Content Include="Assets\js\Cart\AfterDatetimeSetted.js" />
