@@ -49,7 +49,7 @@ header-top .container-xl {
     height: 35px;
 }
 
-.header-member-box i, .header-member-box img {
+.header-member-box i {
     margin-right: 20px;
     cursor: pointer;
     z-index: 50;
@@ -375,8 +375,13 @@ nav .navbar .links li:hover .sub-menu {
         z-index: 8;
     }
 
-
-    .hb {
+    .header-member-box i{
+        margin-right: 24px;
+    }
+    .member-cart a .cartQuantity {
+        right: 14px;
+    }
+        .hb {
         display: block;
         width: 45px;
         height: 45px;
@@ -465,11 +470,9 @@ nav .navbar .links li:hover .sub-menu {
         .header-nav {
             flex-wrap: nowrap;
         }
-
-        .header-member-box img {
+        .header-search-box {
             margin-right: 22px;
         }
-
         .header-search input {
             font-size: 14px;
             padding: 4px 10px;
@@ -479,7 +482,9 @@ nav .navbar .links li:hover .sub-menu {
             width: 115px;
             height: 32px;
         }
-
+        .header-member-box i {
+            margin-right: 22px;
+        }
         .hb {
             width: 42px;
             height: 42px;
