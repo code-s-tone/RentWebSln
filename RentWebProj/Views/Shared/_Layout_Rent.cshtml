@@ -73,18 +73,16 @@
                         </div>
 
                         <div class="header-member-box">
-
-                            @*<img src="~/Assets/images/Layout_Rent/cart.png" alt="" id="shoppingCart-icon">*@
-
                             <div class="member-cart">
                                 <a class="position-relative" href="@Url.Action("Index", "Carts")">
                                     <i class="fas fa-shopping-cart fa-3x" title="購物車"></i>
-                                    <span class="cartQuantity text-white bg-primary">@cartCount</span>
+                                    <span class="cartQuantity text-white">@cartCount</span>
                                 </a>
                             </div>
 
                             <div class="member-dropdown">
-                                <img src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
+                                <i class="fas fa-user-cog" id="member-icon" title="會員中心"></i>
+                             
                                 <ul class="member-subMenu">
                                     <div class="profileBox">
                                         <div class="profileImg d-grid"><img class="m-auto Profile" src=@TempData["img"] alt=""></div>

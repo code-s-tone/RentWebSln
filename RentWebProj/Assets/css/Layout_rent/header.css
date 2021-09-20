@@ -15,7 +15,10 @@ header-top .container-xl {
     border-bottom: 1px solid whitesmoke;
     
 }
-
+.header-nav .logo{
+    position:relative;
+    z-index:2;
+}
 
 .header-nav .logo img {
     width: 135px;
@@ -37,6 +40,8 @@ header-top .container-xl {
     justify-content: flex-end;
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
 }
 /* 登入後出現的會員icon */
 .header-member-box img {
@@ -78,17 +83,8 @@ header-top .container-xl {
     color: white;
     background-color: #fc8d61;
     border: 1px solid #fc8d61;
-    /* color: white;
-  background-color: rgb(119, 119, 119);
-  border: 1px solid rgb(119, 119, 119); */
 }
 
-/* .nav-btn .loginBtn:hover,
-.nav-btn .signUpBtn:hover {
-  color: white;
-  background-color: #fc8d61;
-  border: 1px solid #fc8d61;
-} */
 
 #menu-control {
     display: none;
@@ -104,17 +100,16 @@ header-top .container-xl {
 }
 
 .header-search-box {
-    margin-right: 25px;
-    margin-top: -5px;
+    margin-right: 20px;
+    margin-top:-8px;
 }
 
 .header-search {
     display: inline-block;
     position: relative;
-    height: 28px;
-    width: 28px;
+    height: 26px;
+    width: 26px;
     margin: auto;
-    padding: 2px 11px;
     border: 3px solid #fc8d61;
     border-radius: 25px;
     transition: all 200ms ease;
@@ -126,9 +121,9 @@ header-top .container-xl {
         content: "";
         position: absolute;
         width: 3px;
-        height: 16px;
+        height: 15px;
         right: -5px;
-        top: 18px;
+        top: 16px;
         background: #fc8d61;
         border-radius: 3px;
         transform: rotate(-45deg);
@@ -137,8 +132,8 @@ header-top .container-xl {
 
     .header-search.active,
     .header-search:hover {
-        width: 200px;
-        height: 42px;
+        width: 140px;
+        height: 40px;
         margin-right: 0px;
         margin-top: 4px;
     }
@@ -157,7 +152,7 @@ header-top .container-xl {
         color: inherit;
         background: transparent;
         outline-width: 0px;
-        padding: 2px 10px;
+        padding: 4px 10px;
     }
 
 .header-member-box {
@@ -168,10 +163,10 @@ header-top .container-xl {
 .member-cart a {
     display: inline-block;
     text-decoration: none;
-    top:4px;
 }
 
     .member-cart a .cartQuantity {
+        background-color: #5bbdc5 ;
         position: absolute;
         border-radius: 50%;
         width: 25px;
@@ -192,9 +187,9 @@ header-top .container-xl {
 
 .member-subMenu {
     position: absolute;
-    width: 220px;
-    top: 30px;
-    right: 30px;
+    width: 200px;
+    top: 25px;
+    right: 20px;
     line-height: 40px;
     background: white;
     padding-left: 0;
@@ -217,7 +212,7 @@ header-top .container-xl {
 }
 
     .profileBox div:first-child {
-        width: 55%;
+        width: 50%;
     }
 
 .profileImg img {
@@ -232,8 +227,7 @@ header-top .container-xl {
 }
 
     .profileWelcome span {
-        font-size: 26px;
-        font-family: "Nanum Pen Script", cursive;
+        font-size: 20px;
     }
 
     .profileWelcome p {
@@ -275,21 +269,23 @@ header-top .container-xl {
 
 /* 第二塊導覽列 下拉式選單*/
 .dropdown-nav {
-    height: 40px;
-    background: white;
-    /* .sub-menu同色 */
-    display: grid;
+    height: 0px;
+/*    background: white;
+    display: grid;*/
 }
 
 .navbar {
     margin: 0 auto;
     padding: 0;
+    position: relative;
+    top: -60px;
 }
 
 .links {
     display: flex;
+    margin:auto;
     padding: 0 !important;
-    margin-bottom: 10px;
+ /*   margin-bottom: 10px;*/
 }
 
     .links i {
@@ -299,7 +295,7 @@ header-top .container-xl {
     .links li {
         position: relative;
         list-style: none;
-        margin: 5px 40px 0 40px;
+        margin: 5px 25px;
         height:100%;
     }
 
@@ -325,7 +321,7 @@ header-top .container-xl {
 
     .links .sub-menu {
         position: absolute;
-        width: 160px;
+        width: 135px;
         top: 23px;
         left: -30%;
         line-height: 40px;
@@ -344,7 +340,7 @@ nav .navbar .links li:hover .sub-menu {
 .links .sub-menu li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    padding: 0 0 0 32px;
+    padding: 0 0 0 30px;
     margin: 0;
 }
 
@@ -376,20 +372,6 @@ nav .navbar .links li:hover .sub-menu {
     .header-nav {
         height: 70px;
         z-index: 8;
-    }
-
-    .header-search-box {
-        margin-right: 30px;
-        margin-top: -3px;
-    }
-
-    .header-search:after {
-        height: 16px;
-    }
-
-    .header-search.active,
-    .header-search:hover {
-        height: 35px;
     }
 
 
@@ -487,41 +469,23 @@ nav .navbar .links li:hover .sub-menu {
             margin-right: 22px;
         }
 
-        .header-search-box {
-            margin-right: 22px;
-            margin-top: -3px;
+        .header-search input {
+            font-size: 14px;
+            padding: 4px 10px;
         }
-
-        .header-search {
-            height: 25px;
-            width: 25px;
-            margin: auto;
-            padding: 1px 8px;
+        .header-search.active,
+        .header-search:hover {
+            width: 115px;
+            height: 32px;
         }
-
-            .header-search:after {
-                height: 14px;
-                right: -6px;
-                top: 16px;
-            }
-
-            .header-search input {
-                font-size: 14px;
-            }
-
-            .header-search.active,
-            .header-search:hover {
-                width: 135px;
-                height: 32px;
-            }
 
         .hb {
             width: 42px;
             height: 42px;
         }
 
-            .hb span {
-                width: 24px;
-            }
+        .hb span {
+            width: 24px;
+        }
     }
 }
