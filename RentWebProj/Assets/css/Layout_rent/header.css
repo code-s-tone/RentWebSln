@@ -144,15 +144,14 @@ header-top .container-xl {
         }
 
     .header-search input {
-        width: 100%;
+        width: 85%;
         border: none;
         box-sizing: border-box;
-        font-family: Helvetica;
         font-size: 17px;
-        color: inherit;
         background: transparent;
+        padding-left: 10px;
         outline-width: 0px;
-        padding: 4px 10px;
+
     }
 
 .header-member-box {
