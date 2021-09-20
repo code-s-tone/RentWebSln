@@ -41,6 +41,31 @@ namespace RentWebProj.Controllers
             return View(VM);
         }
 
+        //Post: Member
+        [HttpPost]
+        //回傳個人資訊
+        public ActionResult MemberPerson(MemberPersonDataViewModel X)
+        {
+            ViewBag.returnPerson = _service.ChangeProfile(Int32.Parse(User.Identity.Name), X.MemberName, X.MemberYear, X.MemberMonth, X.MemberDay, X.MemberPhone);
+            Thread.Sleep(1500);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
+        }
+
+        [HttpPost]
+        //回傳信箱資訊
+        public ActionResult MemberEmail(MemberPersonDataViewModel X)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+            //    return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
+            //}
+            ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
+            Thread.Sleep(1500);
+            return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
+
+        }
+
         [HttpPost]
         //回傳密碼資訊
         public ActionResult MemberPassword(MemberPersonDataViewModel X)
