@@ -15,6 +15,7 @@ namespace Backstage.ViewModels
         public string PID { get; set; }
         public string ProductName { get; set; }
         public int Income { get; set; }
+        public DateTime startTime { get; set; }
         public string StoreName { get; set; }
         public int MID { get; set; }
         public int? MemberAge { get; set; }

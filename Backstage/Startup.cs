@@ -57,10 +57,12 @@ namespace Backstage
 
                       option.TokenValidationParameters = new TokenValidationParameters
                       {
+                          //Marvin：加這行才取得到identity.name
+                          NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifiers",
                           ValidateIssuer = true, //發行者
                           ValidIssuer = "RentWeb",  //發行者得和發證時的發行者一樣
                           ValidateAudience = false,
-                          ValidateLifetime = true, //時間
+                          ValidateLifetime = true, 
                           IssuerSigningKey =    //Signingkey得和金鑰一樣
                               new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1Zl4h9703IzROidasgfegkK3@f4po1jkd"))
                       };
