@@ -193,7 +193,7 @@ namespace RentWebProj.Services
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
             result.Email = ChangeEmail;
             _repository.SaveChanges();
-            return "";
+            return result.Email;
         }
 
         //回傳密碼資訊
