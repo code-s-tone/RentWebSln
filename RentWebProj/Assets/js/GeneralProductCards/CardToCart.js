@@ -5,7 +5,17 @@ function productIdToCart(id) {
         AjaxPostProductIdToCart(id);
     }
     else {
-        alert("親 請先登入喔");
+        toastr["info"]("登入後擁有專屬購物車更方便!", "親 請先登入^^")
+
+        
+
+        //Swal.fire({
+        //   // title: '親愛的 請先登入喔!',
+        //    text: '親愛的 請先登入喔 ^^',
+        //    icon: 'warning',
+        //    confirmButtonText: '好的'
+        //})
+        //alert("親 請先登入喔");
     }
 }
 
@@ -21,11 +31,30 @@ function AjaxPostProductIdToCart(id) {
             if (response) {
                 countProductsInCart++;
                 $(".cartQuantity").text(countProductsInCart);
-                alert("已成功加入購物車 結帳前記得選取租借時間喔！");
+                toastr['success']('結帳前記得選取租借時間喔！', '已成功加入購物車');
             }
             else {
-                alert("您之前已經加過此商品了喔！很喜歡就趕快租走吧！");
+                toastr['success']('很喜歡就趕快租走吧！', '您之前已經加過此商品了喔！');
+
             }
         }
     });
+}
+
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": ture,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
 }
