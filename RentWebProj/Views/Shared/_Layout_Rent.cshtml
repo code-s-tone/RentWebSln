@@ -90,10 +90,10 @@
                             </div>
 
                             <div class="member-dropdown">
-                                <img class="lazyload" data-src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
+                                <img  src="~/Assets/images/Layout_Rent/member.png" alt="" id="member-icon" title="會員中心">
                                 <ul class="member-subMenu">
                                     <div class="profileBox">
-                                        <div class="profileImg d-grid"><img class="lazyload m-auto Profile" data-src=@TempData["img"] alt=""></div>
+                                        <div class="profileImg d-grid"><img class="m-auto Profile" src=@TempData["img"] ></div>
                                         <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
                                     </div>
 
@@ -391,7 +391,7 @@
 <script src="../Scripts/jquery.signalR-2.2.2.min.js"></script>
 <script src="../signalr/hubs"></script>
 <style>
-    img {
+    .lazyload {
         display: block;
         background-image: url('../../Assets/images/loadingdog.gif');
         background-size: cover;
