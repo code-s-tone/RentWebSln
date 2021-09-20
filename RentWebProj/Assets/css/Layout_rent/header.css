@@ -66,7 +66,7 @@ header-top .container-xl {
 .nav-btn a {
     font-size: 18px;
     text-decoration: none;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border-radius: 5%;
 }
 .nav-btn a:first-child{
@@ -100,7 +100,7 @@ header-top .container-xl {
 }
 
 .header-search-box {
-    margin-right: 20px;
+    margin-right: 24px;
     margin-top:-8px;
 }
 
@@ -169,14 +169,15 @@ header-top .container-xl {
         background-color: #5bbdc5 ;
         position: absolute;
         border-radius: 50%;
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
         display: flex;
         justify-content: center;
-        line-height: 25px;
         right: 10px;
         top: -10px;
         z-index: 100;
+        font-size:13px;
     }
 
 /* 會員中心dropdown */
