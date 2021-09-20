@@ -151,13 +151,10 @@
                     @if (IsNotPassword == "Yes")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group notDisplay">
-                            @*@ViewBag.returnEmail
-                            @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
-                            {*@
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
-                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
+                                        @Model.MemberEmail
                                     </div>
                                 </div>
 
@@ -172,7 +169,6 @@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-name-container member-display-item member-changeEmail-item">
                                         <div class="member-display-new-email-context">
@@ -184,7 +180,6 @@
                                             </div>
                                             <div class="text-danger small mb-2 checkemail-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-button-groups">
                                         <div class="member-display-shop-container">
@@ -202,7 +197,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            @*}信箱結束標籤*@
 
                             <!--變更密碼Form-->
                             @ViewBag.returnPassword
@@ -260,13 +254,13 @@
                     else if (IsNotPassword == "No")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group">
-                            @*@ViewBag.returnEmail
+                            @*舊版Form表單@ViewBag.returnEmail
                             @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
                             {*@
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
-                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded " } })
+                                        @Model.MemberEmail
                                     </div>
                                 </div>
 
@@ -281,7 +275,7 @@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
+                                        @*後臺驗證使用留存@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-name-container member-display-item member-changeEmail-item">
                                         <div class="member-display-new-email-context">
@@ -293,7 +287,7 @@
                                             </div>
                                             <div class="text-danger small mb-2 checkemail-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
+                                        @*後臺驗證使用留存@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-button-groups">
                                         <div class="member-display-shop-container">
