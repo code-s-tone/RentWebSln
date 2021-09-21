@@ -1,8 +1,88 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "DashBoard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h1 class="h3 mb-0 text-gray-800">銷售統計</h1>
+    </div>
+    <p class="mb-4">過去一年?的銷售統計</p>
+    <!-- 篩時間? -->
+    <!-- Content Row id="chartOptions"-->
+    <div id="chartOptions" class="row">
+        <div class="col-12 col-md-4 mb-4">
+            <div class="card shadow mb-4 border-left-info">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3">
+                    <h6 class="mb-2 font-weight-bold text-primary">
+                        以什麼依據分析?
+                    </h6>
+                    <select class="custom-select" v-model="distinguishKey">
+                        <option v-for="(o,idx) in distinguish" :value="idx">{{o.OptionText}}</option>
+                    </select>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- 改RWD height設定 -->
+                    <div class="chart-pie chart-pie-fixHeight pt-4">
+                        <canvas id='chartDistinguish'></canvas>
+                    </div>
+                    <hr>
+                    <!-- <code>/js/demo/chart-pie-demo.js</code> file. -->
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 mb-4">
+            <!-- Bar Chart -->
+            <div class="card shadow mb-4 border-left-info">
+                <div class="card-header py-3">
+                    <h6 class="mb-2 font-weight-bold text-primary">想深入了解哪一項?</h6>
+                    <select class="custom-select" v-model="distinguishItem">
+                        <option v-for="(o,idx) in distinguish[distinguishKey].Labels" :value="idx">{{o}}</option>
+                    </select>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id='chartDetail'></canvas>
+                    </div>
+                    <hr>
+                    <!-- <code>/js/demo/chart-bar-demo.js</code> file. -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+@section endJS{
+    <!-- bootstrap 4.3.1 -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script> -->
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>*@
+
+    @*<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>*@
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <!-- Load Vue followed by BootstrapVue -->
+
+    <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
+
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    @*<script src="js/sb-admin-2.min.js"></script>*@
+
+    <!-- Page level plugins -->
+    @*<script src="vendor/chart.js/Chart.min.js"></script>*@
+    <script src="~/js/index.js"></script>
+
+}
