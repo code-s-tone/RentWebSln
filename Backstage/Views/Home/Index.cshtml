@@ -5,7 +5,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
     <!-- Page Heading -->
-    <div class="mb-4">
+    <div class="mb-2">
         <h1 class="h3 mb-0 text-gray-800">銷售統計</h1>
     </div>
     <p class="mb-4">過去一年?的銷售統計</p>
@@ -17,7 +17,7 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3">
                     <h6 class="mb-2 font-weight-bold text-primary">
-                        以什麼依據分析?
+                        分群依據
                     </h6>
                     <select class="custom-select" v-model="distinguishKey">
                         <option v-for="(o,idx) in distinguish" :value="idx">{{o.OptionText}}</option>
@@ -38,7 +38,7 @@
             <!-- Bar Chart -->
             <div class="card shadow mb-4 border-left-info">
                 <div class="card-header py-3">
-                    <h6 class="mb-2 font-weight-bold text-primary">想深入了解哪一項?</h6>
+                    <h6 class="mb-2 font-weight-bold text-primary">群內產品排行</h6>
                     <select class="custom-select" v-model="distinguishItem">
                         <option v-for="(o,idx) in distinguish[distinguishKey].Labels" :value="idx">{{o}}</option>
                     </select>
@@ -56,8 +56,10 @@
 </div>
 
 
+@section topCSS{
+    <link href="~/css/index.css" rel="stylesheet" />
 
-
+}
 @section endJS{
     <!-- bootstrap 4.3.1 -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

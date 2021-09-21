@@ -1,0 +1,5 @@
+﻿@media screen and (min-width:768px) {
+    .chart-pie.chart-pie-fixHeight {
+        height: 20rem !important;
+    }
+}
