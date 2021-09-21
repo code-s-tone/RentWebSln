@@ -1,19 +1,4 @@
-﻿//網頁載入初始化
-window.onload = function () {
-    personCancelEditBtn.classList.add('notDisplay');
-    emailCancelEditBtn.classList.add('notDisplay');
-    passwordCancelEditBtn.classList.add('notDisplay');
-    personSaveBtn.disabled = true;
-    personSaveBtn.classList.add('buttonDisabled');
-    emailSaveBtn.disabled = true;
-    emailSaveBtn.classList.add('buttonDisabled');
-    passwordSaveBtn.disabled = true;
-    passwordSaveBtn.classList.add('buttonDisabled');
-    AccountInit();
-    PasswordInit();
-    
-};
-
+﻿
 //宣告信箱變數
 let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
@@ -38,14 +23,25 @@ let emailEditBtn = document.querySelector('.memberemail-button-edit');
 let passwordEditBtn = document.querySelector('.memberpassword-button-edit');
 //取消編輯
 let personCancelEditBtn = document.querySelector('.memberperson-cancel-edit');
+personCancelEditBtn.classList.add('notDisplay');
 let emailCancelEditBtn = document.querySelector('.memberemail-cancel-edit');
+emailCancelEditBtn.classList.add('notDisplay');
 let passwordCancelEditBtn = document.querySelector('.memberpassword-cancel-edit');
+passwordCancelEditBtn.classList.add('notDisplay');
 
 //儲存
 let personSaveBtn = document.querySelector('.memberperson-button-save');
+personSaveBtn.disabled = true;
+personSaveBtn.classList.add('buttonDisabled');
 let emailSaveBtn = document.querySelector('.memberemail-button-save');
+emailSaveBtn.disabled = true;
+emailSaveBtn.classList.add('buttonDisabled');
 let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
+passwordSaveBtn.disabled = true;
+passwordSaveBtn.classList.add('buttonDisabled');
 
+AccountInit();
+PasswordInit();
 
 //個人資訊
 //member - display - lastname
