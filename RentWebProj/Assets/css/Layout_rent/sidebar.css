@@ -146,17 +146,15 @@ a.active {
     }
 
     #sidebarContent .profileBox .profileWelcome {
-        margin-top: 5px;
+        margin-top: 15px;
     }
 
         #sidebarContent .profileBox .profileWelcome span {
-            font-size: 26px;
-            font-family: "Nanum Pen Script", cursive;
+            font-size: 20px;
         }
 
         #sidebarContent .profileBox .profileWelcome p {
             font-size: 26px;
-            margin-top: -8px;
         }
 
 .sidebar-member-link {

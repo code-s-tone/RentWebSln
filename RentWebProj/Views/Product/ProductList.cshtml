@@ -69,7 +69,7 @@
                                 new SelectListItem {Text = "$100以下", Value = "1"},
                                 new SelectListItem {Text = "$101~$500", Value = "2"},
                                 new SelectListItem {Text = "$501~$1000", Value = "3"},
-                                new SelectListItem {Text = "$1000以上 $$不是問題", Value = "4"}
+                                new SelectListItem {Text = "$1000↑ $不是問題", Value = "4"}
                             };
                         }
                         @Html.DropDownListFor(m => m.RateBudget, priceList, new { @class = "my-2 w-100" })
@@ -155,7 +155,6 @@
     <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
     <script src="~/Assets/js/GeneralProductCards/SearchFilter.js"></script>
     <script>
-        @*isAuthenticated_Cards = '@(User.Identity.IsAuthenticated)' === "True" ? true : false;*@
         isAuthenticated_Cards = @Json.Encode(User.Identity.IsAuthenticated);
     </script>
     
