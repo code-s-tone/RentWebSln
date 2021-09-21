@@ -28,6 +28,7 @@ namespace RentWebProj.Models
 
         public DateTime ExpirationDate { get; set; }
 
+        public int Notify { get; set; }
         public int GoodsStatus { get; set; }
 
         public virtual Order Order { get; set; }

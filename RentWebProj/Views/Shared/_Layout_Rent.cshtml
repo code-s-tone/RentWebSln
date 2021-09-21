@@ -18,7 +18,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.css" />
-
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
     <script src="~/Assets/js/MemberCenter/Fb/Fb_Init.js"></script>
     <script src="~/Assets/js/MemberCenter/Fb/Fb_Login.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -73,6 +73,8 @@
                         </div>
 
                         <div class="header-member-box">
+                                </ul>
+                            </div>
                             <div class="member-cart">
                                 <a class="position-relative" href="@Url.Action("Index", "Carts")">
                                     <i class="fas fa-shopping-cart fa-3x" title="購物車"></i>
@@ -85,21 +87,19 @@
                              
                                 <ul class="member-subMenu">
                                     <div class="profileBox">
-                                        <div class="profileImg d-grid"><img class="m-auto Profile" src=@TempData["img"] alt=""></div>
+                                        <div class="profileImg d-grid"><img class="m-auto Profile" src=@TempData["img"] ></div>
                                         <div class="profileWelcome"><span>Hello</span><p class="profile-name">@TempData["name"]</p></div>
                                     </div>
-                                    <a href="#">
-                                        <li>通知</li>
-                                    </a>
+
 
                                     <a href="@Url.Action("MemberCenter", "Member",new { Index="od"})">
-                                        <li>我的訂單</li>
+                                    <li>我的訂單</li>
                                     </a>
                                     <a href="@Url.Action("MemberCenter", "Member",new { Index="pr"})">
-                                        <li>修改個人資料</li>
+                                    <li>修改個人資料</li>
                                     </a>
                                     <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">
-                                        <li>登出</li>
+                                    <li>登出</li>
                                     </a>
                                 </ul>
                             </div>
@@ -130,27 +130,27 @@
 
                                 <ul class="sub-menu">
                                     <a href="@Url.Action("GeneralCategories", "Product")">
-                                        <li>種類列表</li>
+                                    <li>種類列表</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "All" })">
-                                        <li>所有商品</li>
+                                    <li>所有商品</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Car" })">
-                                        <li>想租車車</li>
+                                    <li>想租車車</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Acc" })">
-                                        <li>想租配件</li>
+                                    <li>想租配件</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Ppl" })">
-                                        <li>想租人類</li>
+                                    <li>想租人類</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Gam" })">
-                                        <li>想租遊戲</li>
+                                    <li>想租遊戲</li>
                                     </a>
                                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Pet" })">
-                                        <li>想租寵物</li>
+                                    <li>想租寵物</li>
                                     </a>
-                                    
+
 
                                 </ul>
                             </li>
@@ -158,7 +158,7 @@
                                 <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
                                 <ul class="sub-menu">
                                     <a href="@Url.Action("HowToRent", "Home")">
-                                        <li>如何租借</li>
+                                    <li>如何租借</li>
                                     </a>
                                 </ul>
                             </li>
@@ -166,13 +166,13 @@
                                 <a href="#">關於我們<i class="fas fa-chevron-down arrow"></i></a>
                                 <ul class="sub-menu">
                                     <a href="@Url.Action("About", "Home")">
-                                        <li>我們的故事</li>
+                                    <li>我們的故事</li>
                                     </a>
                                     <a href="@Url.Action("ContributionProgram", "Home")">
-                                        <li>回饋計畫</li>
+                                    <li>回饋計畫</li>
                                     </a>
                                     <a href="@Url.Action("ContactUs", "Home")">
-                                        <li>評分與評論</li>
+                                    <li>評分與評論</li>
                                     </a>
                                 </ul>
                             </li>
@@ -180,10 +180,10 @@
                                 <a href="#">業配一下<i class="fas fa-chevron-down arrow"></i></a>
                                 <ul class="sub-menu">
                                     <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                                        <li>共享經濟</li>
+                                    <li>共享經濟</li>
                                     </a>
                                     <a href="@Url.Action("BlogPost", "SocialMedia")">
-                                        <li>網紅推推</li>
+                                    <li>網紅推推</li>
                                     </a>
 
                                 </ul>
@@ -201,7 +201,7 @@
 
             <div class="logoBox">
                 <a href='@Url.Action("Index", "Home")'>
-                    <img src="~/Assets/images/Layout_Rent/logo.png" />
+                    <img class="lazyload" data-src="~/Assets/images/Layout_Rent/logo.png" />
                 </a>
                 <div class="sidebar-btn">
                     <a href="@Url.Action("Login", "Member")" class="loginBtn d-grid"><span class="m-auto">登入</span> </a>
@@ -212,7 +212,7 @@
             <!-- 登入後秀出名字 -->
             <div class="profileBox">
                 <div class="profileImg d-grid">
-                    <img class="m-auto" src=@TempData["img"] alt="">
+                    <img class="lazyload m-auto" data-src=@TempData["img"] alt="">
                 </div>
                 <div class="profileWelcome">
                     <span>Hello</span><p class="profile-name">@TempData["name"]</p>
@@ -226,13 +226,13 @@
                         <a href="#">通知</a>
                         @Html.ActionLink("我的訂單", "MemberCenter", "Member", new { Index = "od" })
                         @Html.ActionLink("修改個人資料", "MemberCenter", "Member", new { Index = "pr" })
-                            <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">登出</a>
+                        <a href="@Url.Action("SignOut", "Member")" class="signOutBtn" onclick="Del_FB_App()">登出</a>
                     </div>
                 </div>
                 <a href="#" class="dropdown-btn"> 商品總覽 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     @Html.ActionLink("種類列表", "GeneralCategories", "Product")
-  
+
                     <a href="@Url.Action("ProductList", "Product",new { categoryID = "Car" })">
                         想租車車
                     </a>
@@ -272,15 +272,15 @@
 
             <p class="text-center mt-3">download the free<br>mobile app</p>
             <div class="appDownload d-flex justify-content-center">
-                <img src="~/Assets/images/Layout_Rent/googlePlay_white.jpg" style="height: 30px;" class="mx-1" alt="">
-                <img src="~/Assets/images/Layout_Rent/appleStore_white.jpg" style="height: 30px;" class="mx-1" alt="">
+                <img data-src="~/Assets/images/Layout_Rent/googlePlay_white.jpg" style="height: 30px;" class="lazyload mx-1" alt="">
+                <img data-src="~/Assets/images/Layout_Rent/appleStore_white.jpg" style="height: 30px;" class="lazyload mx-1" alt="">
             </div>
-            
+
             <div class="social-media d-flex mt-4 justify-content-center">
                 <a href="#" class="my-auto mx-2"><i class="fa fa-facebook"></i></a>
                 <a href="#" class="my-auto mx-2"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="my-auto mx-2"><i class="fa fa-envelope"></i></a>
-                
+
             </div>
         </div>
     </div>
@@ -303,14 +303,14 @@
                         <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
                         <a class="instagram" href="#"><i class="fab fa-instagram"></i></a>
                         <a class="mail" href="#"><i class="fa fa-envelope"></i></a>
-                        
+
                     </div>
                     <p class="footer-copyright">© 2021 All Rights Reserved.</p>
-                   
+
                 </div>
 
                 <div class="col-12 col-md-8  footer-links">
-                   
+
                     <div class="">
                         <a href="@Url.Action("GeneralCategories", "Product")">
                             <li>種類列表</li>
@@ -334,7 +334,7 @@
                             <li>所有商品</li>
                         </a>
                     </div>
-                    
+
                     <div class="">
 
                         <a href="@Url.Action("HowToRent", "Home")">
@@ -351,7 +351,7 @@
                         </a>
 
                     </div>
-                    
+
                     <div class="">
                         <a href="@Url.Action("SharingEconomy", "SocialMedia")">
                             <li>共享經濟</li>
@@ -368,10 +368,10 @@
 
     </footer>
 
-<script src="~/Assets/js/Layout_Rent/header.js"></script>
+    <script src="~/Assets/js/Layout_Rent/header.js"></script>
     <script src="~/Assets/js/Layout_Rent/sidebar.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.umd.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
@@ -381,6 +381,44 @@
 
 </body>
 </html>
+<script src="../Scripts/jquery-3.4.1.min.js"></script>
+<script src="../Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="../signalr/hubs"></script>
+<style>
+    .lazyload {
+        display: block;
+        background-image: url('../../Assets/images/loadingdog.gif');
+        background-size: cover;
+    }
+
+</style>
+<script>
+    window.onload = function () {
+        let images = document.querySelectorAll(".lazyload");
+        lazyload(images);
+    }
+  
+    $(function () {
+        // Declare a proxy to reference the hub.
+        var chat = $.connection.myHub;
+        // Create a function that the hub can call to broadcast messages.
+        chat.client.broadcastMessage = function (name, message) {
+            // Html encode display name and message.
+            console.log(name, message);
+            $('.notify').hide();
+            var encodedName = $('<div />').text(name).html();
+            var encodedMsg = $('<div />').text(message).html();
+
+            $('#dropdown-menutest').append('<li class="m-2"><a href="@Url.Action("MemberCenter", "Member", new { Index = "od" })">'+'您好,目前'+
+                encodedName + '</a>' + '<a href="#">' + '狀態為' + '<strong class="text-danger">' + encodedMsg+'</strong>'+'</a>' + '</li>');
+
+
+        };
+
+        // Start the connection.
+        $.connection.hub.start()
+    });
+</script>
 @if (User.Identity.IsAuthenticated)
 {
     <script src="~/Assets/js/MemberCenter/LoginAndOut/Login.js"></script>
