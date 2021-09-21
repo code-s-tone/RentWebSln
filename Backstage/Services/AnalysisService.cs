@@ -41,8 +41,9 @@ namespace Backstage.Services
                 {
                     PID = od.ProductID,
                     ProductName = p.ProductName,
-                    Income = (int)od.TotalAmount,
+                    SalesAmount = (int)od.TotalAmount,
                     StoreName = b.StoreName,
+                    startTime = od.StartDate,
                     MID = o.MemberID,
                     MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
                 };
