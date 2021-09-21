@@ -20,7 +20,7 @@ namespace RentWebProj.ApiControllers
         }
 
         [HttpPost]
-        public ApiResponse ModifyOrder( int OrderID )
+        public ApiResponse ModifyOrder([FromBody]int OrderID )
         {
             var response = new ApiResponse();
 

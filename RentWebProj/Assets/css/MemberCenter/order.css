@@ -85,6 +85,12 @@
     margin-left: 1060px;
     color: #fc8d61;
 }
+
+/* 訂單狀態:待付款 設定字體顏色:紅色 */
+.NotPay {
+    color: crimson;
+}
+
 @media screen and (min-width:312px) {
     .member-display-order-title, .member-display-order-detail, .member-display-order-detail-list{
         font-size: 20%;

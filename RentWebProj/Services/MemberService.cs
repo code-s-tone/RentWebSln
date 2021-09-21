@@ -403,7 +403,7 @@ namespace RentWebProj.Services
             });
         }
 
-        // [取消訂單]按鈕 (待付款 => 已失效)
+        // [取消訂單]按鈕 (待付款 => 已取消)
         public void Order_Cancel(int OrderID)
         {
             var order = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderID == OrderID);
