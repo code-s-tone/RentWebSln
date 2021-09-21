@@ -1,22 +1,8 @@
-﻿//網頁載入初始化
-window.onload = function () {
-    personCancelEditBtn.classList.add('notDisplay');
-    emailCancelEditBtn.classList.add('notDisplay');
-    passwordCancelEditBtn.classList.add('notDisplay');
-    personSaveBtn.disabled = true;
-    personSaveBtn.classList.add('buttonDisabled');
-    emailSaveBtn.disabled = true;
-    emailSaveBtn.classList.add('buttonDisabled');
-    passwordSaveBtn.disabled = true;
-    passwordSaveBtn.classList.add('buttonDisabled');
-    AccountInit();
-    PasswordInit();
-    
-};
-
+﻿
 //宣告信箱變數
 let changeEmailDisplay = document.querySelectorAll('.member-changeEmail-item');
 let emailClear = document.querySelectorAll('.member-email-clear');
+let currentEmail = document.querySelector('.member-display-service-email');
 let newEmail = document.querySelector('.member-display-new-email');
 let doubleNewEmail = document.querySelector('.member-display-doublecheck-email');
 let emailDanger = document.querySelector('.email-danger');
@@ -37,14 +23,25 @@ let emailEditBtn = document.querySelector('.memberemail-button-edit');
 let passwordEditBtn = document.querySelector('.memberpassword-button-edit');
 //取消編輯
 let personCancelEditBtn = document.querySelector('.memberperson-cancel-edit');
+personCancelEditBtn.classList.add('notDisplay');
 let emailCancelEditBtn = document.querySelector('.memberemail-cancel-edit');
+emailCancelEditBtn.classList.add('notDisplay');
 let passwordCancelEditBtn = document.querySelector('.memberpassword-cancel-edit');
+passwordCancelEditBtn.classList.add('notDisplay');
 
 //儲存
 let personSaveBtn = document.querySelector('.memberperson-button-save');
+personSaveBtn.disabled = true;
+personSaveBtn.classList.add('buttonDisabled');
 let emailSaveBtn = document.querySelector('.memberemail-button-save');
+emailSaveBtn.disabled = true;
+emailSaveBtn.classList.add('buttonDisabled');
 let passwordSaveBtn = document.querySelector('.memberpassword-button-save');
+passwordSaveBtn.disabled = true;
+passwordSaveBtn.classList.add('buttonDisabled');
 
+AccountInit();
+PasswordInit();
 
 //個人資訊
 //member - display - lastname
@@ -89,8 +86,7 @@ personSaveBtn.addEventListener('click', function () {
     changeProfileApi(data);
 });
 
-const Urlprofile = "/api/memberprofileapi/changeprofile";
-
+const Urlprofile = "/api/MemberProfileAPI/ChangeProfile";
 function changeProfileApi(data) {
     fetch(Urlprofile,
         {
@@ -103,8 +99,49 @@ function changeProfileApi(data) {
             return res.json();
         }).then(res => {
             console.log(res);
+            swal("修改成功", '', 'success');
         });
 }
+
+
+//取得個資信箱以API回傳資料庫
+emailSaveBtn.addEventListener('click', function () {
+    let doubleNewEmail_value = doubleNewEmail.value;
+
+    let dataEmail = {
+        ComfirMemberEmail: doubleNewEmail_value
+    };
+
+
+    emailEditBtn.classList.remove('notDisplay');
+    emailCancelEditBtn.classList.add('notDisplay');
+    emailSaveBtn.disabled = true;
+    emailSaveBtn.classList.add('buttonDisabled');
+    AccountInit();
+    changeEmailApi(dataEmail, currentEmail);
+});
+
+const Urlemail = "/api/MemberEmailAPI/ChangeUserEmail";
+function changeEmailApi(data, currentEmail) {
+    fetch(Urlemail,
+        {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => {
+            return response.json();
+        }).then(response => {
+            console.log(response);
+            swal("修改成功", '', 'success');
+            currentEmail.innerText = response.Result;
+            
+    
+        });
+}
+
+
 
 
 let regNum = /^[0-9]*$/;
@@ -349,12 +386,7 @@ personSaveBtn.addEventListener('click', function () {
     personCancelEditBtn.classList.add('notDisplay');
     personEditBtn.classList.remove('buttonDisabled');
     personSaveBtn.classList.add('buttonDisabled');
-    swal("修改成功", '', 'success');
 });
-
-
-
-
 
 
 //信箱啟動修改
@@ -419,12 +451,18 @@ emailCancelEditBtn.addEventListener('click', function () {
     changeEmailDanger.textContent = '';
     AccountInit();
 });
-//信箱變更送出
-emailSaveBtn.addEventListener('click', function () {
-    emailEditBtn.disabled = false;
-    emailEditBtn.classList.remove('buttonDisabled');
-    swal("修改成功", '自動跳轉..', 'success');
-});
+////信箱變更送出
+//emailSaveBtn.addEventListener('click', function () {
+//    //變更欄位隱藏
+    
+//    emailEditBtn.classList.remove('notDisplay');
+//    emailCancelEditBtn.classList.add('notDisplay');
+//    emailSaveBtn.disabled = true;
+//    emailSaveBtn.classList.add('buttonDisabled');
+//    AccountInit();
+//    swal("修改成功", '', 'success');
+    
+//});
 
 
 

@@ -1,0 +1,96 @@
+﻿@{
+    ViewData["Title"] = "Editor";
+}
+
+<form name='form' action='#' method='post'>
+    <textarea name="postContent" id="content" rows="10" cols="80"></textarea>
+    <input class="btn btn-primary mt-3" type='button' value='送出' onclick='processData()'>
+</form>
+
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.editorConfig = function (config) {
+
+        //設定視窗高度及寬度
+        config.width = 600; //也可以這樣寫
+
+        //語言
+        config.language = 'zh-tw';
+
+        //背景顏色
+        config.uiColor = '#FFFFFF';
+
+        //字體
+        config.fontSize_sizes = '12/12px;13/13px;16/16px;15/15px;18/18px;20/20px;22/22px;24/24px;36/36px;48/48px;'
+
+        //字形
+
+        config.font_names = 'Arial;Arial Black;Comic Sans MS;Courier New;Tahoma;Times New Roman;Verdana;新細明體;細明體;標楷體;微軟正黑體';
+
+        config.toolbar = [
+            ['Source', '-'],
+            ['Cut', 'Copy', 'Paste', '-'],
+            ['Undo', 'Redo', '-', 'RemoveFormat'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+            '/',
+            ['Bold', 'Italic', 'Underline', 'Strike', '-'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink', 'Anchor'],
+            '/',
+            ['Styles', 'Format', 'Font', 'FontSize'],
+            ['TextColor', 'BGColor']
+        ];
+
+
+    };
+
+    CKEDITOR.replace('postContent', {
+        uiColor: '#f7d2da',
+        //removeButtons: 'PasteFromWord',
+        format_h1: {
+            element: 'h1',
+            attributes: {
+                'class': 'contentHeader1'
+            }
+        },
+        //toolbarGroups: [{
+        //    "name": "basicstyles",
+        //    "groups": ["basicstyles"]
+        //},
+        //{
+        //    "name": "links",
+        //    "groups": ["links"]
+        //},
+        //{
+        //    "name": "paragraph",
+        //    "groups": ["list", "blocks"]
+        //},
+        //{
+        //    "name": "document",
+        //    "groups": ["mode"]
+        //},
+        //{
+        //    "name": "insert",
+        //    "groups": ["insert"]
+        //},
+        //{
+        //    "name": "styles",
+        //    "groups": ["styles"]
+        //},
+        //{
+        //    "name": "about",
+        //    "groups": ["about"]
+        //}
+        //],
+    });
+
+    
+    function processData() {
+        // getting data
+        var data = CKEDITOR.instances.content.getData()
+        alert(data);
+    }
+
+</script>

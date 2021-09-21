@@ -9,7 +9,7 @@
         <repeat n=@Model.StarsForLike></repeat>
     </div>
     <div class="product-img">
-        <a href="@Url.Action("ProductDetail", "Product", new { PID= PID })"><img src=@src alt=""></a>
+        <a href="@Url.Action("ProductDetail", "Product", new { PID= PID })"><img class="lazyload" data-src=@src alt=""></a>
     </div>
     <div class="product-details">
         <div class="checkitOut"><a class="d-grid" href="@Url.Action("ProductDetail", "Product", new { PID= PID })"><span class="m-auto">查看詳情</span></a> </div>
@@ -17,7 +17,7 @@
         <p class="product-name"><a href="@Url.Action("ProductDetail", "Product", new { PID= PID })">@Model.ProductName</a></p>
         <p class="product-description">@Model.Description </p>
         <div class="product-price-cart-box d-flex">
-            <div class="product-price flex-grow-1">$@Math.Ceiling(@Model.DailyRate)<span>/日租</span></div>
+            <div class="product-price flex-grow-1">@Math.Ceiling(@Model.DailyRate).ToString("C0")<span>/日</span></div>
 
             <div class="product-cart-icon d-grid" onclick="productIdToCart('@PID')">
                 <i class="fas fa-cart-plus m-auto"></i>

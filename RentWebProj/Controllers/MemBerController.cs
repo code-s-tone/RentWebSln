@@ -55,11 +55,11 @@ namespace RentWebProj.Controllers
         //回傳信箱資訊
         public ActionResult MemberEmail(MemberPersonDataViewModel X)
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+            //    return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
+            //}
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
             Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
@@ -114,8 +114,14 @@ namespace RentWebProj.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-
-                return Redirect(Url.ToString());
+                try
+                {
+                    return Redirect(Url.ToString());
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -336,7 +342,7 @@ namespace RentWebProj.Controllers
 
         public ActionResult DeveloperLogin()
         {
-            string Deve_email = "Code7414@gmail.com";
+            string Deve_email = "htc7414@gmail.com";
             Helper.FormsAuthorization(Deve_email);
             return RedirectToAction("Index", "Home");
         }

@@ -5,6 +5,7 @@
 
 body {
     height: 100%;
+    line-height: 1.5;
     /* overflow: auto; */
 }
 /* 聊天按鈕 */
@@ -60,8 +61,11 @@ body {
     list-style: none;
 }
 
-.footer-info li:first-child {
+.footer-info a:first-child {
     font-size: 18px; 
+}
+.footer-info a {
+    font-size: 15px;
 }
 
 .footer-links {

@@ -1,6 +1,7 @@
 ﻿@model MemberPersonDataViewModel
 
 @{
+    
     ViewBag.Title = "MemberCenter";
     var IsNotPassword = "";
     if (ViewBag.IsNotHasPassword == "Null")
@@ -19,7 +20,7 @@
             <!--檔案重新上傳-->
             <!-- BS新版 -->
             <!--欄位區-->
-            <h2 class="member-display-title">訂單查詢</h2>
+            <h2 class="member-display-title">會員中心</h2>
             @if (IsNotPassword == "Yes")
             {
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -151,13 +152,10 @@
                     @if (IsNotPassword == "Yes")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group notDisplay">
-                            @ViewBag.returnEmail
-                            @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
-                            {
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
-                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
+                                        @Model.MemberEmail
                                     </div>
                                 </div>
 
@@ -172,7 +170,6 @@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-name-container member-display-item member-changeEmail-item">
                                         <div class="member-display-new-email-context">
@@ -184,7 +181,6 @@
                                             </div>
                                             <div class="text-danger small mb-2 checkemail-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-button-groups">
                                         <div class="member-display-shop-container">
@@ -202,7 +198,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
 
                             <!--變更密碼Form-->
                             @ViewBag.returnPassword
@@ -260,13 +255,13 @@
                     else if (IsNotPassword == "No")
                     {
                         <div class="member-display-person-detail member-display-account-detail member-display-group">
-                            @ViewBag.returnEmail
+                            @*舊版Form表單@ViewBag.returnEmail
                             @using (Html.BeginForm("MemberEmail", "Member", FormMethod.Post))
-                            {
+                            {*@
                                 <div class="member-display-name-container member-display-item">
                                     <div class="member-display-header member-display-new-email-context">電子信箱地址</div>
                                     <div class="member-display-service-email">
-                                        @Html.DisplayFor(m => m.MemberEmail, new { htmlAttributes = new { @class = "border border-white rounded" } })
+                                        @Model.MemberEmail
                                     </div>
                                 </div>
 
@@ -281,7 +276,7 @@
                                             </div>
                                             <div class="text-danger small mb-2 email-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
+                                        @*後臺驗證使用留存@Html.ValidationMessageFor(m => m.MemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-name-container member-display-item member-changeEmail-item">
                                         <div class="member-display-new-email-context">
@@ -293,7 +288,7 @@
                                             </div>
                                             <div class="text-danger small mb-2 checkemail-danger"></div>
                                         </div>
-                                        @*@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
+                                        @*後臺驗證使用留存@Html.ValidationMessageFor(m => m.ComfirMemberEmail, "", new { @class = "text-danger" })*@
                                     </div>
                                     <div class="member-display-button-groups">
                                         <div class="member-display-shop-container">
@@ -311,7 +306,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            @*}變更信箱結束標籤*@
 
                             <!--變更密碼Form-->
                             @ViewBag.returnPassword
@@ -366,137 +361,61 @@
                     }
                 </div>
 
-                <!-- 歷史訂單 -->
-                @*@using (Html.BeginForm("MemberCenter", "Member", FormMethod.Post))
-                    {
 
-                    }*@
                 <div class="tab-pane fade" id="order-search" role="tabpanel" aria-labelledby="contact-tab">
-                    <div class="member-display-title member-display-order-title">
+                    <div class="member-display-title member-display-order-title text-center">
+                        <span class="member-display-order-item">訂單編號</span>
                         <span class="member-display-order-item">取貨地點</span>
                         <span class="member-display-order-item">建立訂單日期</span>
                         <span class="member-display-order-item">交易狀態</span>
                         <span class="member-display-order-item"> </span>
-                        @*<span class="member-display-order-item">查看明細</span>*@
-
-                        @*<span class="member-display-order-item"></span>*@
-                        @*<span class="member-display-order-item member-display-order-item-show">內容</span>*@
                     </div>
 
                     @foreach (var order in Model.MemberOrders)
                     {
-                        <div class="member-display-order-detail-container">
-                            <div class="member-display-title member-display-order-detail">
+
+                        <div class="member-display-order-detail-container ">
+                            <div class="member-display-title member-display-order-detail text-center position-relative">
+                                <span class="member-display-order-item member-display-order-show">@order.OrderID</span>
                                 <span class="member-display-order-item member-display-order-show">@order.BranchName</span>
-
                                 <span class="member-display-order-item member-display-order-show">@order.OrderDate.ToString("yyyy/MM/dd")</span>
-
                                 <span class="member-display-order-item member-display-order-show">@order.OrderStatus </span>
-
-                                <span class="member-display-order-item member-display-order-item-show-dynamic-button">
-                                    查看明細+
-                                </span>
-
-                                @if (@order.OrderStatus.ToString() == "待付款")
-                                {
-                                    <span class="member-display-order-item member-display-order-show button-area">
-                                        <button class="btn btn-primary">付款</button> &nbsp
-                                        <button class="btn btn-danger">取消訂單</button>
-                                    </span>
-                                }
-
-                                else
-                                {
-                                    <span class="member-display-order-item member-display-order-show button-area">
-                                        <button class="btn btn-primary" style="opacity:0">Null</button>
-                                    </span>
-                                }
-
+                                <span class="member-display-order-item member-display-order-item-show-dynamic-button "> 查看明細+</span>
+                                <div style="margin-left:1050px;margin-top:-12px;" class="dropdown mb-2 position-absolute">
+                                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"> 更多</button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#">再次付款</a></li>
+                                        <li><a class="dropdown-item" href="#">取消訂單</a></li>
+                                    </ul>
+                                </div>
                             </div>
-
-                            @*<span class="member-display-order-itemmember-display-order-day">
-                                    @item.RentDate 天
-                                </span>*@
-
-                            @*<span class="member-display-order-item member-display-order-dynamic-total">
-                                    NT$@item.TotalAmount
-                                </span>*@
-
-                            @*<span class="member-display-order-item member-display-order-day">
-                                    @item.StartDate.AddYears(-1911).ToString("yyy/MM/dd")
-                                </span>*@
-
-                            <div class="member-display-order-detail-list">
-                                @* ============================================================================================ *@
-
-                                <span class="member-display-order-item detail-title">商品圖片</span>
-                                <span class="member-display-order-item detail-title">商品名稱</span>
-                                <span class="member-display-order-item detail-title">開始日</span>
-                                <span class="member-display-order-item detail-title">歸還日</span>
-                                <span class="member-display-order-item detail-title">天數</span>
-                                <span class="member-display-order-item detail-title">單價</span>
-                                <span class="member-display-order-item detail-title">小計</span>
-                                <span class="member-display-order-item detail-title">商品狀態</span>
-
-                                @* ============================================================================================ *@
+                            <div class="member-display-order-detail-list position-relative">
                                 @foreach (var orderDetail in order.OrderDetails)
                                 {
-                                    var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/Product/" + orderDetail.ProductID.Substring(0, 3) + "/" + orderDetail.ProductID + "_1.jpg"; ;
-
-                                    <span class="detail-item">
-                                        <img src=@src style="width:100%;">
-                                    </span>
-
-                                    // 商品名稱
-                                    <span class="detail-item">
-                                        @orderDetail.ProductName
-                                    </span>
-
-                                    //開始日
-                                    <span class="detail-item">
-                                        @orderDetail.StartDate.ToString("yyyy/MM/dd HH:mm")
-                                    </span>
-
-                                    //歸還日
-                                    <span class="detail-item">
-                                        @orderDetail.ExpirationDate.ToString("yyyy/MM/dd HH:mm")
-                                    </span>
-
-                                    //租借天數
-                                    <span class="detail-item">
-                                        @orderDetail.RentDate
-                                    </span>
-
-                                    //單價
-                                    <span class="detail-item">
-                                        @orderDetail.DailyRate.ToString("#,###.###")
-                                    </span>
-
-                                    //小計
-                                    <span class="detail-item">
-                                        @orderDetail.TotalAmount.ToString("#,###.###")
-                                    </span>
-
-                                    //商品狀態
-                                    <span class="detail-item">
-                                        @orderDetail.GoodsStatus
-                                    </span>
-
-                                    <br> <hr />
+                                    var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/Product/" + orderDetail.ProductID.Substring(0, 3) + "/" + orderDetail.ProductID + "_1.jpg";
+                                <div class="border border-2 w-100 d-flex position-relative ">
+                                    <img class="d-block position-relative" src=@src style="width: 120px; height: 100px ">
+                                    <h5 class="position-absolute RentDate">@orderDetail.RentDate 天</h5>
+                                    <span style=" color: Chocolate;font-size:20px;" class="d-block m-3 ProductName">@orderDetail.ProductName</span>
+                                    <div style="" class="d-flex position-absolute orders">
+                                        <div class="d-flex mt-4">
+                                            <h5 class="">@orderDetail.StartDate.ToString("yyyy/MM/dd HH:mm")</h5>
+                                            <h5>&nbsp</h5>
+                                            <h2>~</h2>
+                                            <h5>&nbsp</h5>
+                                            <h5 class="">@orderDetail.ExpirationDate.ToString("yyyy/MM/dd HH:mm")</h5>
+                                        </div>
+                                    </div>
+                                    <h5 class="TotalAmount position-absolute">$ @orderDetail.TotalAmount.ToString("#,###.###")</h5>
+                                    <h5 class=" position-absolute GoodsStatus" style="">@orderDetail.GoodsStatus</h5>
+                                </div>
                                 }
-
-
-                                @* ============================================================================================ *@
-
-                                @*商品2*@
-
-                                @* ============================================================================================ *@
-
 
                             </div>
                         </div>
                     }
-                </div>
+
+                </div>                                    
 
                 <!-- 購物車 -->
                 <div class="tab-pane fade" id="car-order" role="tabpanel" aria-labelledby="car-order">

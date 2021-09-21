@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.AspNet.SignalR;
 //using System.Data.Entity;
 
 namespace RentWebProj.Services
@@ -193,7 +194,7 @@ namespace RentWebProj.Services
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
             result.Email = ChangeEmail;
             _repository.SaveChanges();
-            return "";
+            return result.Email;
         }
 
         //回傳密碼資訊
@@ -369,6 +370,36 @@ namespace RentWebProj.Services
             _repository.Create(entity);
             _repository.SaveChanges();
         }
+        public void OrderNotify(int UserID)
+        {
+            var context = GlobalHost.ConnectionManager.GetHubContext<myHub>();
 
+
+
+            var CheckGoodStatus = from od in _repository.GetAll<OrderDetail>()
+                                  join o in _repository.GetAll<Order>()
+                                  on od.OrderID equals o.OrderID
+                                  join p in _repository.GetAll<Product>()
+                                  on od.ProductID equals p.ProductID
+                                  where o.MemberID == UserID & od.Notify == 0
+                                  select new NOtify
+                                  {
+                                      ProductName = p.ProductName,
+                                      MemberID = o.MemberID,
+                                      ProductID = od.ProductID,
+                                      OrderID = od.OrderID,
+                                      GoodsStatus = od.GoodsStatus,
+                                      Notify = od.Notify
+                                  };
+
+            var temp = CheckGoodStatus.ToList();
+            temp.ForEach(c =>
+            {
+                if (c.GoodsStatus == 1) { context.Clients.All.broadcastMessage($"{c.ProductName}", "待出貨"); }
+                if (c.GoodsStatus == 2) { context.Clients.All.broadcastMessage($"{c.ProductName}", "已出貨"); }
+                if (c.GoodsStatus == 3) { context.Clients.All.broadcastMessage($"{c.ProductName}", "已到貨"); }
+                if (c.GoodsStatus == 4) { context.Clients.All.broadcastMessage($"{c.ProductName}", "已取貨"); }
+            });
+        }
     }
 }
