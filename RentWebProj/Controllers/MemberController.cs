@@ -55,11 +55,11 @@ namespace RentWebProj.Controllers
         //回傳信箱資訊
         public ActionResult MemberEmail(MemberPersonDataViewModel X)
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
-                return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
-            }
+            //if (ModelState.IsValid)
+            //{
+            //    ModelState.AddModelError("ComfirMemberEmail", "無效的電子信箱");
+            //    return View(_service.GetMemberData(Int32.Parse(User.Identity.Name)));
+            //}
             ViewBag.returnEmail = _service.ChangeEmail(Int32.Parse(User.Identity.Name), X.ComfirMemberEmail);
             Thread.Sleep(1500);
             return View("MemberCenter", _service.GetMemberData(Int32.Parse(User.Identity.Name)));
@@ -83,13 +83,16 @@ namespace RentWebProj.Controllers
 
         public ActionResult Login()
         {
-         
-            if(string.IsNullOrEmpty(Request.UrlReferrer.ToString()))
+            try
             {
-                TempData["url"] = Request.Url.ToString();
+                TempData["text"] = Request.UrlReferrer.AbsolutePath;
+                TempData["url"] = Request.UrlReferrer.AbsoluteUri;
+                return View();
             }
-            TempData["url"]= Request.UrlReferrer.ToString();
-            return View();
+            catch
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
         }
         [HttpPost]
@@ -103,14 +106,22 @@ namespace RentWebProj.Controllers
 
             string email = HttpUtility.HtmlEncode(s.Email);
             string password = Helper.SHA1Hash(HttpUtility.HtmlEncode(s.Password));
-            var result = $"{TempData["PreviousController"]}/{TempData["PreviousAction"]}/{TempData["PreviousIdOrCa"]}";
-            string virtualPath = Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath;
-            //Response.Redirect(virtualPath + "Users/Login", true);
-            var abs = 1;
+;
             if (_service.getMemberLogintData(email, password))
             {
                 Helper.FormsAuthorization(s.Email);
-                return Redirect(Url.ToString());
+                if (TempData["text"].ToString()== "/Member/Register")
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                try
+                {
+                    return Redirect(Url.ToString());
+                }
+                catch
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
             else
             {
@@ -275,12 +286,6 @@ namespace RentWebProj.Controllers
                 Helper.FormsAuthorization(email);
                 return RedirectToAction("Index", "Home");
             }
-            if (Request.UrlReferrer.LocalPath != "/" && !string.IsNullOrEmpty(Request.UrlReferrer.LocalPath))
-            {
-                TempData["PreviousUrl"] = Request.UrlReferrer.LocalPath.ToString();
-                TempData["PreviousController"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[1];
-                TempData["PreviousAction"] = Request.UrlReferrer.LocalPath.ToString().Split('/')[2];
-            }
             return View();
         }
 
@@ -337,7 +342,7 @@ namespace RentWebProj.Controllers
 
         public ActionResult DeveloperLogin()
         {
-            string Deve_email = "Code7414@gmail.com";
+            string Deve_email = "htc7414@gmail.com";
             Helper.FormsAuthorization(Deve_email);
             return RedirectToAction("Index", "Home");
         }

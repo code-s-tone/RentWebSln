@@ -15,7 +15,7 @@ namespace RentWebProj.Services
         private CommonRepository _repository;
         public CartService()
         {
-            _repository = new CommonRepository(new RentContext());
+            _repository = new CommonRepository();
         }
         //產品列表頁入車，兩種可能
         public OperationResult Create(string PID)

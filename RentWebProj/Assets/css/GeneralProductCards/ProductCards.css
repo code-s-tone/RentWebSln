@@ -105,7 +105,7 @@ repeat {
 .checkitOut {
     display: none;
     position: absolute;
-    width: 110px;
+    width: 100px;
     height: 35px;
     background-color: #fe8b5a;
     opacity: .95;
@@ -189,6 +189,9 @@ repeat {
     font-size: 18px;
     color: #474747;
     font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
     .product-price span {
@@ -232,6 +235,8 @@ repeat {
         margin-bottom: 20px;
     }
 
+
+
 }
 
 
@@ -256,8 +261,10 @@ repeat {
         height: 50px;
         overflow: hidden;
     }
-
-    .product-description {
+    .product-details {
+        padding: 10px;
+    }
+        .product-description {
         font-size: 14px;
         margin-bottom: 10px !important;
         height: 40px;

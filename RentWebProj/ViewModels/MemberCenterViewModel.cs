@@ -66,7 +66,7 @@ namespace RentWebProj.ViewModels
 
     public enum OrderStatusName
     {
-        已失效,待付款,付款中,已付款
+        已取消,待付款,付款中,已付款
     }
 
     public class MemberOrderDetailViewModel
@@ -196,5 +196,14 @@ namespace RentWebProj.ViewModels
         public string ProfilePhotoUrl { get; set; }
         public string email { get; set; }
     }
+    public class NOtify
+    {
+        public int MemberID { get; set; }
+        public int OrderID { get; set; }
+        public string ProductName { get; set; }
+        public string ProductID { get; set; }
 
+        public int GoodsStatus { get; set; }
+        public int Notify { get; set; }
+    }
 }

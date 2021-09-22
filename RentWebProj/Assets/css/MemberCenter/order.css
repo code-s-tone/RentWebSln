@@ -51,22 +51,45 @@
     background-color: #fff;
     border-bottom: 1px solid #FFEEDD;
     border-radius: unset;
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
+    border: 1px solid #fc8d61;
     margin: 25px 0 0 0;
 }
 
 .member-display-order-detail-list {
     display: flex;
     flex-wrap: wrap;
-    padding: 15px 18px;
     font-size: 15px;
-    font-weight: 600;
-    color: #272727;
-    background-color: #F0F0F0;
-    box-shadow: 3px 3px 8px #cccccc;
-    /* display: none; */
+    color: #272727; 
+    box-shadow: 3px 3px 8px #fc8d61;
+}
+.ProductName{
+    height:50px;
+}
+.orders {
+    margin-top: 50px;
+    margin-left: 550px;
+}
+.RentDate {
+    margin-top: 75px;
+    margin-left: 138px;
+}
+.TotalAmount {
+    margin-top: 75px;
+    margin-left: 1060px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.GoodsStatus {
+    margin-top: 15px;
+    margin-left: 1060px;
+    color: #fc8d61;
 }
 
+/* 訂單狀態:待付款 設定字體顏色:紅色 */
+.NotPay {
+    color: crimson;
+}
 
 @media screen and (min-width:312px) {
     .member-display-order-title, .member-display-order-detail, .member-display-order-detail-list{

@@ -295,7 +295,7 @@
 
 @media screen and (min-width:576px) {
     .member-display-name-container, .member-display-phone-container, .member-display-born-container, .member-display-shop-container{
-        display: flex;
+        /*display: flex;*/
         align-items: center;
     }
 
