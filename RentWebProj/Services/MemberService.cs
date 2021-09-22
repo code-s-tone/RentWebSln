@@ -412,5 +412,30 @@ namespace RentWebProj.Services
             _repository.SaveChanges();
         }
 
+        // [重新付款]按鈕 => 綠界支付訂單
+        public int Get_TotalAmount(int OrderID)
+        {
+            decimal TotalAmount = 0;
+
+            var Order_Details = from od in _repository.GetAll<OrderDetail>()
+                                  join o in _repository.GetAll<Order>()
+                                  on od.OrderID equals o.OrderID
+                                  where od.OrderID == OrderID
+                                  select new OrderDetail_TotalAmount
+                                  {
+                                      OrderID = od.OrderID,
+                                      TotalAmount = od.TotalAmount
+                                  };
+
+            var temp = Order_Details.ToList();
+            temp.ForEach(x =>
+            {
+                TotalAmount += x.TotalAmount;
+            });
+            var total_money = (int)TotalAmount;
+
+            return total_money;
+        }
+
     }
 }
