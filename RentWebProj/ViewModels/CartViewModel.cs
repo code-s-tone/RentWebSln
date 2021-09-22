@@ -48,6 +48,12 @@ namespace RentWebProj.ViewModels
         //        }
     }
 
+    public class OrderDetail_TotalAmount
+    {
+        public int OrderID { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
+
     public class CartIndex
     {
 
