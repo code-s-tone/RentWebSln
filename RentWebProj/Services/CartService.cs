@@ -94,11 +94,13 @@ namespace RentWebProj.Services
             var Member = _repository.GetAll<Member>();
             var Product = _repository.GetAll<Product>();
             var Cart = _repository.GetAll<Cart>();
+            var Img = _repository.GetAll<ProductImage>();
 
             CartIndex = from c in Cart
                         join m in Member on c.MemberID equals m.MemberID
                         join p in Product on c.ProductID equals p.ProductID
-                        where m.MemberID == MemberID
+                        join i in Img on c.ProductID equals i.ProductID
+                        where m.MemberID == MemberID && i.ImageID == 1
                         select new CartIndex
                         {
                             MemberID = c.MemberID,
@@ -108,6 +110,7 @@ namespace RentWebProj.Services
                             ExpirationDate = c.ExpirationDate,
                             DailyRate = p.DailyRate,
                             Qty = 1,
+                            ImgSources = i.Source
                             //DateDiff = (int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate),
                             //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };

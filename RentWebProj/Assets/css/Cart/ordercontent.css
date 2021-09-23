@@ -46,7 +46,7 @@
 
 .product {
     display: flex;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .form-check {
@@ -54,8 +54,8 @@
 }
 
 .product-img {
-    width: 50px;
-    height: 60.42px;
+    width: 100px;
+    /*height: 60.42px;*/
     padding: 0px 0px 2px 7px;
 }
 
