@@ -14,6 +14,10 @@ namespace Backstage.ApiControllers
     [ApiController]
     public class AnalysisController : ControllerBase
     {
+        /// <summary>
+        /// 取得銷售分析用資料
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public IActionResult GetSalesAnalysisData()
