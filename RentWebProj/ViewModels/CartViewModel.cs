@@ -48,6 +48,12 @@ namespace RentWebProj.ViewModels
         //        }
     }
 
+    public class OrderDetail_TotalAmount
+    {
+        public int OrderID { get; set; }
+        public decimal TotalAmount { get; set; }
+    }
+
     public class CartIndex
     {
 
@@ -70,8 +76,6 @@ namespace RentWebProj.ViewModels
         public decimal DailyRate { get; set; }
 
         public int Qty { get; set; }
-
-        public bool Available { get; set; }
 
         public int DateDiff { get; set; }
 

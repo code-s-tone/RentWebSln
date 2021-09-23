@@ -67,9 +67,6 @@
                                     </div>
                                 </div>
                                 <div class="product-stock">
-                                    <p>
-
-                                        </p>
                                         @{
                                             //日期選取器
                                             <button type="button" class="orange d-flex justify-content-evenly align-items-center" data-bs-toggle="modal" data-bs-target="#DateModal">
@@ -90,15 +87,11 @@
                                         }
 
                                     </div>
-                                    @{
-                                        var DailyRate = item.DailyRate.ToString("#,###.###");
-                                        var Sub = item.Sub.ToString("#,###.###");
-                                    }
                                     <div class="product-price-qty my-3">
                                         <div class="unitprice">
                                             <span class="title">日租價格 :</span>
                                             <span class="price">
-                                                @DailyRate
+                                                @item.DailyRate.ToString("C0")
                                             </span>
                                         </div>
                                         <div class="buyqty">
@@ -118,7 +111,7 @@
                                         <div class="product-sub">
                                             <span class="title">小計：</span>
                                             <span class="subTotal">
-                                                @Sub
+                                                @item.Sub.ToString("C0")
                                             </span>
                                         </div>
                                     </div>
@@ -137,9 +130,8 @@
                         <td>
                             <div class="order-total">
                                 <span>總計：</span>
-                                <span class="currency">TWD$</span> &emsp;
                                 <span class="total">
-                                    @ViewBag.Total.ToString("#,###.###")
+                                    @ViewBag.Total
                                 </span>
                             </div>
                         </td>

@@ -16,6 +16,7 @@ namespace RentWebProj.Controllers
     [Authorize]
     public class CartsController : Controller
     {
+        private MemberService _memberService;
         private RentContext db = new RentContext();
         private CartService _cartService;
         // GET: Carts
@@ -23,6 +24,7 @@ namespace RentWebProj.Controllers
         public CartsController()
         {
             _cartService = new CartService();
+            _memberService = new MemberService();
         }
 
         public ActionResult Checkout()
@@ -60,10 +62,10 @@ namespace RentWebProj.Controllers
             {
                 TotalAmount += Int32.Parse(x);
             }
-            Session["TotalAmount"] = TotalAmount;
-            Session["OrderId"] = OrderID;
+            TempData["TotalAmount"] = TotalAmount;
+            TempData["OrderID"] = OrderID;
 
-            return Redirect("../WebForm/AioCheckOut.aspx");
+            return RedirectToAction("ECPay");
             //return RedirectToAction("MemberCenter", "Member");
         }
         [Authorize]
@@ -71,7 +73,7 @@ namespace RentWebProj.Controllers
         {
             //要登帳號
             var carts = _cartService.GetCart(Int32.Parse(User.Identity.Name));
-            ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name));
+            ViewBag.Total = _cartService.GetCartTotal(Int32.Parse(User.Identity.Name)).ToString("C0");
 
             //免登預設1
             //var carts = _cartService.GetCart(1);            
@@ -120,5 +122,24 @@ namespace RentWebProj.Controllers
             _cartService.DeleteCart(MemberID, ProductID);
             return RedirectToAction("Index");
         }
+
+        // 會員中心訂單頁-付款按鈕
+        public ActionResult MemberCenterOrderPay(int OrderID)
+        {   
+            var TotalAmount = _memberService.Get_TotalAmount(OrderID);
+
+            TempData["TotalAmount"] = TotalAmount;
+            TempData["OrderID"] = OrderID;
+            return RedirectToAction("ECPay");
+        }
+
+        public ActionResult ECPay()
+        {
+            Session["TotalAmount"] = TempData["TotalAmount"];
+            Session["OrderID"] = TempData["OrderID"];
+
+            return Redirect("../WebForm/AioCheckOut.aspx");
+        }
+
     }
 }
