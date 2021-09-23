@@ -9,10 +9,11 @@ using RentWebProj.Models;
 //using RentWebProj.Services;
 //using RentWebProj.Repositories;
 using Backstage.ViewModels;
+using Backstage.intetfaces;
 
 namespace Backstage.Services
 {
-    public class AnalysisService
+    public class AnalysisService:IAnalysisService
     {
         //readonly CommonRepository _repository;
         readonly RentContext _ctx;
@@ -23,7 +24,7 @@ namespace Backstage.Services
             _ctx = ctx;
         }
 
-        public IEnumerable<SalesAnalytic> A()
+        public IEnumerable<SalesAnalysis> GetSalesData()
         {
 
             var result =
@@ -37,15 +38,15 @@ namespace Backstage.Services
                 join m in _ctx.Members//_repository.GetAll<Member>()
                 on o.MemberID equals m.MemberID
                 where o.OrderStatusID == 3 //已付款
-                select new SalesAnalytic
+                select new SalesAnalysis
                 {
                     PID = od.ProductID,
                     ProductName = p.ProductName,
                     SalesAmount = (int)od.TotalAmount,
                     StoreName = b.StoreName,
-                    startTime = od.StartDate,
+                    StartTime = od.StartDate,
                     MID = o.MemberID,
-                    MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
+                    //MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
                 };
 
             return result;
