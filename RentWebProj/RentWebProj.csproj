@@ -336,6 +336,7 @@
     <Content Include="Assets\css\SocialMedia\Blog.css" />
     <Content Include="Assets\images\Index\parallax0.png" />
     <Content Include="Assets\images\Index\parallax1.png" />
+    <Content Include="Assets\images\Index\parallax2-fix.png" />
     <Content Include="Assets\images\Index\parallax2.png" />
     <Content Include="Assets\images\Index\parallax3.png" />
     <Content Include="Assets\images\Index\parallax4.png" />

@@ -8,9 +8,9 @@ namespace Backstage.Models
 {
     public partial class RentContext : DbContext//FirstGroup
     {
-        public RentContext()
-        {
-        }
+        //public RentContext()
+        //{
+        //}
 
         public RentContext(DbContextOptions<RentContext> options)
             : base(options)

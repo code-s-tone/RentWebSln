@@ -17,13 +17,13 @@ namespace Backstage.Services
         //readonly CommonRepository _repository;
         readonly RentContext _ctx;
 
-        public AnalysisService()
+        public AnalysisService(RentContext ctx)
         {
             //_repository = new CommonRepository();//改DI?
-            _ctx = new RentContext();
+            _ctx = ctx;
         }
 
-        public IEnumerable<SalesAnalytic> A()
+        public IEnumerable<SalesAnalysis> A()
         {
 
             var result =
@@ -37,13 +37,13 @@ namespace Backstage.Services
                 join m in _ctx.Members//_repository.GetAll<Member>()
                 on o.MemberID equals m.MemberID
                 where o.OrderStatusID == 3 //已付款
-                select new SalesAnalytic
+                select new SalesAnalysis
                 {
                     PID = od.ProductID,
                     ProductName = p.ProductName,
                     SalesAmount = (int)od.TotalAmount,
                     StoreName = b.StoreName,
-                    startTime = od.StartDate,
+                    StartTime = od.StartDate,
                     MID = o.MemberID,
                     MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
                 };
