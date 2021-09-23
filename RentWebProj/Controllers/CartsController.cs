@@ -16,6 +16,7 @@ namespace RentWebProj.Controllers
     [Authorize]
     public class CartsController : Controller
     {
+        private MemberService _memberService;
         private RentContext db = new RentContext();
         private CartService _cartService;
         // GET: Carts
@@ -23,6 +24,7 @@ namespace RentWebProj.Controllers
         public CartsController()
         {
             _cartService = new CartService();
+            _memberService = new MemberService();
         }
 
         public ActionResult Checkout()
@@ -121,6 +123,16 @@ namespace RentWebProj.Controllers
             return RedirectToAction("Index");
         }
 
+        // 會員中心訂單頁-付款按鈕
+        public ActionResult MemberCenterOrderPay(int OrderID)
+        {   
+            var TotalAmount = _memberService.Get_TotalAmount(OrderID);
+
+            TempData["TotalAmount"] = TotalAmount;
+            TempData["OrderID"] = OrderID;
+            return RedirectToAction("ECPay");
+        }
+
         public ActionResult ECPay()
         {
             Session["TotalAmount"] = TempData["TotalAmount"];
@@ -128,5 +140,6 @@ namespace RentWebProj.Controllers
 
             return Redirect("../WebForm/AioCheckOut.aspx");
         }
+
     }
 }
