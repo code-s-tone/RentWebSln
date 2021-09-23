@@ -66,7 +66,7 @@ namespace RentWebProj.ViewModels
 
     public enum OrderStatusName
     {
-        已失效,待付款,付款中,已付款
+        已取消,待付款,付款中,已付款
     }
 
     public class MemberOrderDetailViewModel

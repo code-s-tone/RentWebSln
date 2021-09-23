@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/css/layout/sb-admin-2.min.css" rel="stylesheet" />
+    @await RenderSectionAsync("topJS", required: false)
     @await RenderSectionAsync("topCSS", required: false)
 </head>
 

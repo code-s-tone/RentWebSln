@@ -370,6 +370,7 @@ namespace RentWebProj.Services
             _repository.Create(entity);
             _repository.SaveChanges();
         }
+
         public void OrderNotify(int UserID)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<myHub>();
@@ -401,5 +402,40 @@ namespace RentWebProj.Services
                 if (c.GoodsStatus == 4) { context.Clients.All.broadcastMessage($"{c.ProductName}", "已取貨"); }
             });
         }
+
+        // [取消訂單]按鈕 (待付款 => 已取消)
+        public void Order_Cancel(int OrderID)
+        {
+            var order = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderID == OrderID);
+            order.OrderStatusID = 0;
+            _repository.Update<Order>(order);
+            _repository.SaveChanges();
+        }
+
+        // [重新付款]按鈕 => 綠界支付訂單
+        public int Get_TotalAmount(int OrderID)
+        {
+            decimal TotalAmount = 0;
+
+            var Order_Details = from od in _repository.GetAll<OrderDetail>()
+                                  join o in _repository.GetAll<Order>()
+                                  on od.OrderID equals o.OrderID
+                                  where od.OrderID == OrderID
+                                  select new OrderDetail_TotalAmount
+                                  {
+                                      OrderID = od.OrderID,
+                                      TotalAmount = od.TotalAmount
+                                  };
+
+            var temp = Order_Details.ToList();
+            temp.ForEach(x =>
+            {
+                TotalAmount += x.TotalAmount;
+            });
+            var total_money = (int)TotalAmount;
+
+            return total_money;
+        }
+
     }
 }
