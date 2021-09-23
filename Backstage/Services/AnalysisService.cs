@@ -17,10 +17,10 @@ namespace Backstage.Services
         //readonly CommonRepository _repository;
         readonly RentContext _ctx;
 
-        public AnalysisService()
+        public AnalysisService(RentContext ctx)
         {
             //_repository = new CommonRepository();//改DI?
-            _ctx = new RentContext();
+            _ctx = ctx;
         }
 
         public IEnumerable<SalesAnalytic> A()

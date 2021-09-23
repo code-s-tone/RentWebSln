@@ -14,11 +14,18 @@ namespace Backstage.ApiControllers
     [ApiController]
     public class AnalysisController : ControllerBase
     {
+        private readonly AnalysisService test;
+
+        public AnalysisController(AnalysisService test)
+        {
+            this.test = test;
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult GetSalesAnalysisData()
         {
-            //var a = new AnalysisService().A();
+            //var a =test.A();
             //JsonConvert.SerializeObject(a)
             return Ok("a");
         }
