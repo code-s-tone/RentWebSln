@@ -9,11 +9,10 @@ using RentWebProj.Models;
 //using RentWebProj.Services;
 //using RentWebProj.Repositories;
 using Backstage.ViewModels;
-using Backstage.intetfaces;
 
 namespace Backstage.Services
 {
-    public class AnalysisService:IAnalysisService
+    public class AnalysisService
     {
         //readonly CommonRepository _repository;
         readonly RentContext _ctx;
@@ -24,7 +23,7 @@ namespace Backstage.Services
             _ctx = ctx;
         }
 
-        public IEnumerable<SalesAnalysis> GetSalesData()
+        public IEnumerable<SalesAnalysis> A()
         {
 
             var result =
@@ -46,7 +45,7 @@ namespace Backstage.Services
                     StoreName = b.StoreName,
                     StartTime = od.StartDate,
                     MID = o.MemberID,
-                    //MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
+                    MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
                 };
 
             return result;
