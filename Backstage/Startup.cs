@@ -1,4 +1,5 @@
 using Backstage.Models;
+using Backstage.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,9 @@ namespace Backstage
             services.AddControllersWithViews();
             services.AddDbContext<RentContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
+            
+            //services.AddScoped<AnalysisService, AnalysisService>();
+            
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
             {
