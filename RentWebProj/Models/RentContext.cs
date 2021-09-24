@@ -25,6 +25,7 @@ namespace RentWebProj.Models
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SignWay> SignWays { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
