@@ -1,5 +1,4 @@
-using Backstage.Models;
-using Backstage.Services;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +15,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Backstage.Models;
+using Backstage.Services;
+using Backstage.intetfaces;
 namespace Backstage
 {
     public class Startup
@@ -34,7 +35,8 @@ namespace Backstage
             services.AddControllersWithViews();
             services.AddDbContext<RentContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
-            //services.AddSingleton<AnalysisService, AnalysisService>();
+            //services.AddTransient<IAnalysisService, AnalysisService>();
+            ;
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
             {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Backstage.Services;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
+using Backstage.intetfaces;
 
 namespace Backstage.ApiControllers
 {
@@ -21,6 +22,10 @@ namespace Backstage.ApiControllers
             this.test = test;
         }
 
+        /// <summary>
+        /// 取得銷售分析用資料
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         public IActionResult GetSalesAnalysisData()
