@@ -1,4 +1,4 @@
-﻿
+﻿@model BlogViewModel
 @{
     ViewBag.Title = "BlogPost";
 }
@@ -22,21 +22,18 @@
         <div class="col-12 d-flex my-5">
             <div class="img">
                 <a href="#">
-                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2021/02/30173608/andrey-zvyagintsev-yuovHd6DDGU-unsplash-2048x1365.jpg"
-                         alt="">
+                    <img src=@Model.MainImgUrl
+                         alt=@Model.MainImgTitle>
                 </a>
             </div>
 
             <div class="text px-5">
-                <a href="#">Streamline Your Rental Experience with RuckifyExpress</a>
+                <a href="#">@Model.BlogTitle</a>
 
-                <div>February 11, 2021</div>
-
-                <p>
-                    RuckifyExpress is Ruckify’s delivery service that connects you with
-                    drivers to facilitate the
-                    exchange and delivery of rental items. When checking out as a Renter, you
-                </p>
+                <div>@Model.PostDate.ToString("yyyy/MM/dd")</div>
+                
+                @Html.Raw(Model.BlogContent)
+                
             </div>
         </div>
         <div class="col-12 d-flex mb-5">
@@ -122,7 +119,7 @@
 
     </div>
 
-    <div class="row sign-img right">
+    @*<div class="row sign-img right">
         <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/12/30173640/Ruckify_BlogAds_V1_Ad2.jpg" alt=""
              style="width: 400px; height: 600px;">
 
@@ -176,7 +173,7 @@
 
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
 
 

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RentWebProj.Services;
+using RentWebProj.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +10,16 @@ namespace RentWebProj.Controllers
 {
     public class SocialMediaController : Controller
     {
-        // GET: SocialMedia
+        private BlogService _service;
+        public SocialMediaController()
+        {
+            _service = new BlogService();
+        }
+        
         public ActionResult BlogPost()
         {
-            return View();
+            var b = _service.Get1Blog();
+            return View(b);
         }
         public ActionResult News()
         {

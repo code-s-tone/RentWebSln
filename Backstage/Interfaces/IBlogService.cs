@@ -10,10 +10,16 @@ namespace Backstage.Interfaces
 {
     public interface IBlogService
     {
-        public async Task<int> Create(BlogViewModel blogVM)
+        public int Create(BlogViewModel blogVM)
         {
             int num =0;
             return num;
+        }
+
+        public async Task<IEnumerable<BlogViewModel>> GetBlogs()
+        {
+            List<BlogViewModel> list = new List<BlogViewModel>();
+            return list;
         }
 
         public void UpdataBlog()

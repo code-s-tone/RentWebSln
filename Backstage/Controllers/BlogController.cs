@@ -31,21 +31,18 @@ namespace Backstage.Controllers
 
         //編輯器頁面送出後 內容處理
         [HttpPost]
-        public IActionResult SaveBlog(BlogViewModel blogVM)
+        public IActionResult SaveBlogAsync(BlogViewModel blogVM)
         {
-            Task<int> numDone = _service.Create(blogVM);
+            int numDone =  _service.Create(blogVM);
+            
+            return RedirectToAction("BlogList");
 
-            //return RedirectToAction("BlogList");
-            return Ok();
         }
-        public IActionResult BlogList()
+        public async Task<IActionResult> BlogList()
         {
-            //讀資料
-            var list = new List<BlogViewModel>
-            {
-                //blogVM
-            };
-            return View();
+            //讀所有文章資料
+            var list = await _service.GetBlogs();
+            return View(list);
         }
     }
 }
