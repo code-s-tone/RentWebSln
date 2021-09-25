@@ -19,6 +19,8 @@ namespace Backstage.ApiControllers
         {
             _rentContext = rentContext;
         }
+
+
         // GET: api/<OrderController>
         [HttpGet]
         public ActionResult<IEnumerable<Order>> Get()
