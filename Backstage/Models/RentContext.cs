@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Backstage.ViewModels;
 
 #nullable disable
 
@@ -66,15 +65,11 @@ namespace Backstage.Models
 
             modelBuilder.Entity<Blog>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("Blog");
 
-                entity.Property(e => e.BlogContent).IsRequired();
+                entity.Property(e => e.BlogId).HasColumnName("BlogID");
 
-                entity.Property(e => e.BlogId)
-                    .IsRequired()
-                    .HasColumnName("BlogID");
+                entity.Property(e => e.BlogContent).IsRequired();
 
                 entity.Property(e => e.BlogTitle).IsRequired();
 
@@ -419,7 +414,5 @@ namespace Backstage.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<Backstage.ViewModels.BlogViewModel> BlogViewModel { get; set; }
     }
 }

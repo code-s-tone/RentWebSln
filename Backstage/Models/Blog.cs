@@ -7,7 +7,7 @@ namespace Backstage.Models
 {
     public partial class Blog
     {
-        public string BlogId { get; set; }
+        public int BlogId { get; set; }
         public string BlogTitle { get; set; }
         public DateTime PostDate { get; set; }
         public string MainImgUrl { get; set; }
