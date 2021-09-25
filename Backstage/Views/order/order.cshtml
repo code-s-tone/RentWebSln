@@ -1,13 +1,11 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 
 <div id="app">
     <b-container fluid>
         <!-- User Interface controls -->
         <b-row>
             <b-col lg="6" class="my-1">
-                <b-form-group label="Sort"
+                <b-form-group label="分類"
                               label-for="sort-by-select"
                               label-cols-sm="3"
                               label-align-sm="right"
@@ -30,15 +28,15 @@
                                        :aria-describedby="ariaDescribedby"
                                        size="sm"
                                        class="w-25">
-                            <option :value="false">Asc</option>
-                            <option :value="true">Desc</option>
+                            <option :value="false">升序</option>
+                            <option :value="true">降序</option>
                         </b-form-select>
                     </b-input-group>
                 </b-form-group>
             </b-col>
 
             <b-col lg="6" class="my-1">
-                <b-form-group label="Initial sort"
+                <b-form-group label="初始分類"
                               label-for="initial-sort-select"
                               label-cols-sm="3"
                               label-align-sm="right"
@@ -52,7 +50,7 @@
             </b-col>
 
             <b-col lg="6" class="my-1">
-                <b-form-group label="Filter"
+                <b-form-group label="搜尋"
                               label-for="filter-input"
                               label-cols-sm="3"
                               label-align-sm="right"
@@ -62,10 +60,10 @@
                         <b-form-input id="filter-input"
                                       v-model="filter"
                                       type="search"
-                                      placeholder="Type to Search"></b-form-input>
+                                      placeholder="請輸入關鍵字"></b-form-input>
 
                         <b-input-group-append>
-                            <b-button :disabled="!filter" @@click="filter = ''">Clear</b-button>
+                            <b-button :disabled="!filter" @@click="filter = ''">清空</b-button>
                         </b-input-group-append>
                     </b-input-group>
                 </b-form-group>
@@ -73,8 +71,7 @@
 
             <b-col lg="6" class="my-1">
                 <b-form-group v-model="sortDirection"
-                              label="Filter On"
-                              description="Leave all unchecked to filter on all data"
+                              label="過濾條件"
                               label-cols-sm="3"
                               label-align-sm="right"
                               label-size="sm"
@@ -91,7 +88,7 @@
             </b-col>
 
             <b-col sm="5" md="6" class="my-1">
-                <b-form-group label="Per page"
+                <b-form-group label="每頁顯示筆數"
                               label-for="per-page-select"
                               label-cols-sm="6"
                               label-cols-md="4"
@@ -190,8 +187,19 @@
                     { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
                 ],
                 fields: [
-                    { key: 'name', label: 'Person full name', sortable: true, sortDirection: 'desc' },
-                    { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
+                    { key: 'OrderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'MemberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'FullName', label: '訂單人姓名', sortable: false, sortDirection: 'desc' },
+                    { key: 'StoreName', label: '分店', sortable: false, sortDirection: 'desc' },
+                    { key: 'Phone', label: '聯絡電話', sortable: false, sortDirection: 'desc' },
+                    { key: 'Email', label: '聯絡信箱', sortable: false, sortDirection: 'desc' },
+                    { key: 'TotalAmount', label: '訂單總額', sortable: true, sortDirection: 'desc' },
+                    { key: 'OrderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc' },
+                    { key: 'GoodsStatusID', label: '出貨狀態', sortable: true, sortDirection: 'desc' },
+                    { key: 'OrderDate', label: '成立時間', sortable: true, sortDirection: 'desc' },
+
+                    //{ key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
+
                     {
                         key: 'isActive',
                         label: 'Is Active',
@@ -202,7 +210,7 @@
                         sortByFormatted: true,
                         filterByFormatted: true
                     },
-                    { key: 'actions', label: '動作' }
+                    { key: 'actions', label: '管理' }
                 ],
                 totalRows: 1,
                 currentPage: 1,
