@@ -9,6 +9,8 @@ using RentWebProj.Models;
 //using RentWebProj.Services;
 //using RentWebProj.Repositories;
 using Backstage.ViewModels;
+using Backstage.Interfaces;
+
 
 namespace Backstage.Services
 {

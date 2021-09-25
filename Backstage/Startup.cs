@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Backstage.Models;
 using Backstage.Services;
-using Backstage.Intetfaces;
+using Backstage.Interfaces;
 
 namespace Backstage
 {
@@ -33,12 +33,13 @@ namespace Backstage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddControllersWithViews();
-            services.AddDbContext<RentContext>(options =>
-                 options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
+            services.AddDbContext<RentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
+            services.AddTransient<IAnalysisService, AnalysisService>();
             services.AddTransient<IBlogService, BlogService>();
-            //services.AddTransient<IAnalysisService, AnalysisService>();
-            ;
+
+
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
             {
