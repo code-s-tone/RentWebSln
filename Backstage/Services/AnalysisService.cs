@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;//Nuget要裝 EF
+using Microsoft.EntityFrameworkCore;
 
 using System.Threading.Tasks;
 using Backstage.Models;
@@ -39,16 +39,19 @@ namespace Backstage.Services
                 where o.OrderStatusId == 3 //已付款
                 select new SalesAnalysis
                 {
-                    ProductName = p.ProductName,
-
-                    PID = od.ProductId,
+                    //種類區分
                     CateName = c.CategoryName,
-                    SalesAmount = (int)od.TotalAmount,
-                    StartTime = od.StartDate,
-
+                    //分店區分
                     StoreName = b.StoreName,
-                    MID = o.MemberId,
-                    //MemberAge = DbFunctions.DiffYears(m.Birthday, new DateTime())
+                    //月分區分
+                    StartMonth = $"{od.StartDate.Month+1}月",
+                    //年齡層區分
+                    //MID = o.MemberId,
+                    MemberAge = EF.Functions.DateDiffYear(m.Birthday, new DateTime())/10,
+
+                    ProductName = p.ProductName,
+                    PID = od.ProductId,
+                    SalesAmount = (int)od.TotalAmount,
                 };
 
             return result;
