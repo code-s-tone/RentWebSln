@@ -259,4 +259,22 @@
             }
         }
     });
+
+    function LoadData() {
+        $.ajax({
+            type: "Get",
+            url: "/Employee",
+            data: "",
+            dataType: "json",
+            success: function (response) {
+                //alert(JSON.stringify(response));
+                //theread
+                console.log(response);
+                json.items = response; //蓋掉假資料
+                Binding(); // binding
+                ButtonClickSetup(); //設定按鈕功能
+            }
+
+        });
+    }
 </script>
