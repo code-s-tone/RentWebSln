@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Backstage.Models
 {
-    public partial class RentContext : DbContext//FirstGroup
+    public partial class RentContext : DbContext
     {
-        //public RentContext()
-        //{
-        //}
+        public RentContext()
+        {
+        }
 
         public RentContext(DbContextOptions<RentContext> options)
             : base(options)
@@ -18,6 +18,7 @@ namespace Backstage.Models
         }
 
         public virtual DbSet<Administer> Administers { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<BranchStore> BranchStores { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
@@ -60,6 +61,29 @@ namespace Backstage.Models
                     .IsRequired()
                     .HasMaxLength(50)
                     .HasComment("密碼");
+            });
+
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("Blog");
+
+                entity.Property(e => e.BlogContent).IsRequired();
+
+                entity.Property(e => e.BlogId)
+                    .IsRequired()
+                    .HasColumnName("BlogID");
+
+                entity.Property(e => e.BlogTitle).IsRequired();
+
+                entity.Property(e => e.MainImgTitle).IsRequired();
+
+                entity.Property(e => e.MainImgUrl).IsRequired();
+
+                entity.Property(e => e.PostDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Preview).IsRequired();
             });
 
             modelBuilder.Entity<BranchStore>(entity =>

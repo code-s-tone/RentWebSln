@@ -250,6 +250,7 @@
     </Compile>
     <Compile Include="Helpers\RouteHelper.cs" />
     <Compile Include="Models\Administer.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
