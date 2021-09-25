@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "BlogEditor";
+}
+@model BlogViewModel
+
+<h2 class="text-center mt-4">前台文章編輯</h2>
+<div id="blogEditorApp" class="container">
+    <form name='form' id="blogForm" class="row py-4 px-5" asp-controller="Blog" asp-action="SaveBlog" method="POST" onsubmit="return checkContent()">
+        <div class="col-12 col-md-6 mb-3 px-3">
+            <label asp-for="BlogTitle">文章標題</label>
+            <input v-model="inputData.title" class="form-control" type="text" asp-for="BlogTitle"
+                   :class="{'is-invalid':inputDataCheck.titleError}"  />
+            <div class="text-danger small mt-1">
+                {{ inputDataCheck.titleErrMsg }}
+            </div>
+        </div>
+
+
+        <div class="col-12 col-md-6 mb-3 px-3">
+            <label asp-for="PostDate">發文日期</label>
+            <input v-model="inputData.date" type="date" :class="{'is-invalid':inputDataCheck.dateError}" asp-for="PostDate"
+                   class="form-control" />
+            <div class="text-danger small mt-1">
+                {{ inputDataCheck.dateErrMsg }}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-3 px-3">
+            <label asp-for="MainImgUrl">主圖網址</label>
+            <input v-model="inputData.imgUrl" class="form-control" type="text" asp-for="MainImgUrl"
+                   :class="{'is-invalid':inputDataCheck.imgUrlError}"  />
+            <div class="text-danger small mt-1">
+                {{ inputDataCheck.imgUrlErrMsg }}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 mb-3 px-3">
+            <label asp-for="MainImgTitle">主圖名稱</label>
+            <input v-model="inputData.imgTitle" type="text" :class="{'is-invalid':inputDataCheck.imgTitleError}"
+                   class="form-control"  asp-for="MainImgTitle" />
+            <div class="text-danger small mt-1">
+                {{ inputDataCheck.imgTitleErrMsg }}
+            </div>
+        </div>
+
+        <div class="col-12 mb-3 px-3">
+            <label asp-for="Preview">引言預覽（100字內無須分段）</label>
+            <textarea v-model="inputData.preview" class="form-control" type="text"
+                      :class="{'is-invalid':inputDataCheck.previewError}" asp-for="Preview"></textarea>
+            <div class="text-danger small mt-1">
+                {{ inputDataCheck.previewErrMsg }}
+            </div>
+        </div>
+
+        <div class="col-12 mb-3 px-3">
+            <label asp-for="BlogContent">文章內容</label>
+            <textarea rows="10" cols="100" asp-for="BlogContent"></textarea>
+            <div class="text-danger small mt-1">
+            </div>
+        </div>
+
+        <input :disabled="!dataAvailable" class="btn btn-primary mx-auto mt-3 w-25" type="submit">
+    </form>
+
+</div>
+
+
+@section topCSS{
+
+
+}
+@section topJS{
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
+}
+@section endJS{
+    <script src="~/js/blogEditor.js"></script>
+}

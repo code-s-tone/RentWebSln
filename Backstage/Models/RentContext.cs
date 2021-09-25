@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Backstage.ViewModels;
 
 #nullable disable
 
@@ -394,5 +395,7 @@ namespace Backstage.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<Backstage.ViewModels.BlogViewModel> BlogViewModel { get; set; }
     }
 }
