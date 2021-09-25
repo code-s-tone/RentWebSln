@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
-using Backstage.intetfaces;
+using Backstage.Interfaces;
 
 namespace Backstage.ApiControllers
 {
