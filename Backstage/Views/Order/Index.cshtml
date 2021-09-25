@@ -46,7 +46,7 @@
                               class="mb-0">
                     <b-form-select id="initial-sort-select"
                                    v-model="sortDirection"
-                                   :options="['升序', '降序', '最後']"
+                                   :options="['asc', 'desc', 'last']"
                                    size="sm"></b-form-select>
                 </b-form-group>
             </b-col>
@@ -189,8 +189,18 @@
                     { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
                 ],
                 fields: [
-                    { key: 'name', label: 'Person full name', sortable: true, sortDirection: 'desc' },
-                    { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
+                    { key: 'OrderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'MemberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'name', label: '訂單人姓名', sortable: false, sortDirection: 'desc' },
+                    { key: 'StoreID', label: '分店', sortable: false, sortDirection: 'desc' },
+                    { key: 'Phone', label: '聯絡電話', sortable: false, sortDirection: 'desc' },
+                    { key: 'Email', label: '聯絡信箱', sortable: false, sortDirection: 'desc' },
+                    { key: 'TotalAmount', label: '訂單總額', sortable: true, sortDirection: 'desc' },
+                    { key: 'OrderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc' },
+                    { key: 'OrderDate', label: '成立時間', sortable: true, sortDirection: 'desc' },
+
+                    //{ key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
+
                     {
                         key: 'isActive',
                         label: 'Is Active',
@@ -201,7 +211,7 @@
                         sortByFormatted: true,
                         filterByFormatted: true
                     },
-                    { key: 'actions', label: '動作' }
+                    { key: 'actions', label: '管理' }
                 ],
                 totalRows: 1,
                 currentPage: 1,
