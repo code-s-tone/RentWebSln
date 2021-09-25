@@ -80,9 +80,9 @@
                     <b-form-checkbox-group v-model="filterOn"
                                            :aria-describedby="ariaDescribedby"
                                            class="mt-1">
-                        <b-form-checkbox value="name">Name</b-form-checkbox>
-                        <b-form-checkbox value="age">Age</b-form-checkbox>
-                        <b-form-checkbox value="isActive">Active</b-form-checkbox>
+                        <b-form-checkbox value="orderID">訂單編號</b-form-checkbox>
+                        <b-form-checkbox value="fullName">會員名稱</b-form-checkbox>
+                        <b-form-checkbox value="orderStatusID">付款狀態</b-form-checkbox>
                     </b-form-checkbox-group>
                 </b-form-group>
             </b-col>
@@ -132,11 +132,11 @@
             </template>
 
             <template #cell(actions)="row">
-                <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1">
-                    Info modal
+                <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1" variant="primary">
+                    修改
                 </b-button>
-                <b-button size="sm" @@click="row.toggleDetails">
-                    {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+                <b-button size="sm" @@click="row.toggleDetails" variant="success ">
+                    {{ row.detailsShowing ? '關閉' : '詳細' }}
                 </b-button>
             </template>
 
@@ -156,8 +156,11 @@
     </b-container>
 </div>
 
+
+
 <script>
     let vm;
+    let item;
     const Url = "/api/OrderApi"
     function LoadData() {
         fetch(Url,
@@ -170,26 +173,18 @@
             }).then(res => res.json())
             .then(result => {
                 item = result;
-                vm.$data.items = item;
+                Binding();
             })
             .catch(ex => {
                 console.log("錯了");
             })
     };
-    window.onload = function () {
-        LoadData();
-        Binding();
-    }
-</script>
 
-<script>
     function Binding() {
     vm =  new Vue({
         el: "#app",
         data: {
-                items: [
-                    
-                ],
+                items:item,
                 fields: [
                     { key: 'orderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
                     { key: 'memberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
@@ -262,6 +257,9 @@
             }
         }
     });
+    }
+    window.onload = function () {
+        LoadData();
     }
 
         //$(document).ready(function () {
