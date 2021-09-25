@@ -22,16 +22,17 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RentWebProj\RentWebProj.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RentWebProj\RentWebProj.csproj" />
   </ItemGroup>
 
 </Project>

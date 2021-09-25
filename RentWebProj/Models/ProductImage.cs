@@ -10,12 +10,13 @@ namespace RentWebProj.Models
     {
         [Key]
         [Column(Order = 0)]
-        public int ImageID { get; set; }
+        [StringLength(8)]
+        public string ProductID { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        [StringLength(8)]
-        public string ProductID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ImageID { get; set; }
 
         public string Source { get; set; }
 

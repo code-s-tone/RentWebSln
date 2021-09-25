@@ -4,6 +4,12 @@
         <name>Backstage</name>
     </assembly>
     <members>
+        <member name="M:Backstage.ApiControllers.AnalysisController.GetSalesAnalysisData">
+            <summary>
+            取得銷售分析用資料
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Backstage.ApiControllers.LoginController.Login(System.String)">
             <summary>
             登入

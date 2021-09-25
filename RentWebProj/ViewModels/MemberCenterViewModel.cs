@@ -204,6 +204,7 @@ namespace RentWebProj.ViewModels
         public string ProductID { get; set; }
 
         public int GoodsStatus { get; set; }
-        public int Notify { get; set; }
+        //軒：暫時加nullable 已通過編譯
+        public int? Notify { get; set; }
     }
 }

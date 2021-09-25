@@ -250,6 +250,7 @@
     </Compile>
     <Compile Include="Helpers\RouteHelper.cs" />
     <Compile Include="Models\Administer.cs" />
+    <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\BranchStore.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Category.cs" />
@@ -336,6 +337,7 @@
     <Content Include="Assets\css\SocialMedia\Blog.css" />
     <Content Include="Assets\images\Index\parallax0.png" />
     <Content Include="Assets\images\Index\parallax1.png" />
+    <Content Include="Assets\images\Index\parallax2-fix.png" />
     <Content Include="Assets\images\Index\parallax2.png" />
     <Content Include="Assets\images\Index\parallax3.png" />
     <Content Include="Assets\images\Index\parallax4.png" />

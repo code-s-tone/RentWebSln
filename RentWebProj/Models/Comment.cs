@@ -14,11 +14,12 @@ namespace RentWebProj.Models
 
         public int Score { get; set; }
 
-        public DateTime Time { get; set; }
-
         [Required]
         [StringLength(100)]
         public string Message { get; set; }
+
+        [Column(TypeName = "datetime2")]
+        public DateTime Time { get; set; }
 
         public virtual Member Member { get; set; }
     }

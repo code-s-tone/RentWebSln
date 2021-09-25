@@ -193,7 +193,7 @@
                     <div class="checkout">
                         <div class="text-danger small mt-1">
                         </div>
-                        <button type="submit" class="btn btn_sub">進行結帳</button>
+                        <button type="submit" class="btn btn_sub"disabled="disabled">進行結帳</button>
                     </div>
                 </div>
             </div>
@@ -230,7 +230,7 @@
         function selectCheck() {
             if (user.value == "" || sel.value == 0) {
                 btn.disabled = true;
-                small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
+                //small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
             }
             else if (user.value != "" && sel.value != 0) {
                 small.innerHTML = "";
@@ -242,7 +242,7 @@
 
         window.onload = function () {
             btn.disabled = true;
-            small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
+            //small.innerHTML = "填寫資訊即可解鎖按鈕喔!";
             //selectCheck();
         }
     </script>
