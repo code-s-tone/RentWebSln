@@ -10,10 +10,10 @@ namespace Backstage.ApiControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class testController : ControllerBase
+    public class OrderApiController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        public testController(IOrderService orderService)
+        public OrderApiController(IOrderService orderService)
         {
             _orderService = orderService;
         }
