@@ -12,11 +12,11 @@ namespace Backstage.ViewModels
         public int MemberID { get; set; }
         public string FullName { get; set; }
         public string StoreName { get; set; }
-        public int Phone { get; set; }
+        public string Phone { get; set; }
         public string Email { get; set; }
         public decimal TotalAmount { get; set; }
-        public int OrderStatusID { get; set; }
-        public int GoodsStatusID { get; set; }
+        public string OrderStatusID { get; set; }
+        public string GoodsStatusID { get; set; }
         public DateTime OrderDate { get; set; }
     }
 }
