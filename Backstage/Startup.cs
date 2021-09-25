@@ -34,6 +34,10 @@ namespace Backstage
             services.AddControllersWithViews();
             services.AddDbContext<RentContext>(options =>
                  options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
+
+
+            services.AddTransient<IProductDataService, ProductData>();
+
             //services.AddSingleton<AnalysisService, AnalysisService>();
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
