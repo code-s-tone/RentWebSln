@@ -16,16 +16,12 @@ namespace Backstage.ApiControllers
     [ApiController]
     public class OrderApiController : ControllerBase
     {
-        private readonly RentContext _ctx;
         private readonly IOrderService _orderService;
-        //public OrderApiController(IOrderService orderService)
-        //{
-        //    _orderService = orderService;
-        //}
-        public OrderApiController(RentContext ctx)
+        public OrderApiController(IOrderService orderService)
         {
-            _ctx = ctx;
+            _orderService = orderService;
         }
+
 
         //[HttpGet]
         //public IEnumerable<OrderViewModel> Get()
@@ -35,16 +31,16 @@ namespace Backstage.ApiControllers
         //    var emps = result;
         //    return emps;
         //}
-        [HttpGet]
-        public ActionResult<IEnumerable<Order>> Get()
-        {
-            return _ctx.Orders;
-        }
-        
-        //public ActionResult<IEnumerable<OrderViewModel>> Get()
+        //[HttpGet]
+        //public ActionResult<IEnumerable<Order>> Get()
         //{
-        //    var result = _orderService.GetOrderData();
-        //    return result.ToList();
+        //    return _ctx.Orders;
         //}
+
+        public ActionResult<IEnumerable<OrderViewModel>> Get()
+        {
+            var result = _orderService.GetOrderData();
+            return result.ToList();
+        }
     }
 }
