@@ -1,34 +1,160 @@
-﻿//fake data
-let api = [
-    {
-        PID: 'PplPg001',
-        CateID: 'Ppl',
-        ProductName: 'PplPg001',
-        SalesAmount: 5000,
-        StoreName: 'A店',
+﻿let apiAnalysisData;
+let dataManager = new Vue({
+    el: '#chartOptions',
+    data: {
+        distinguish: [1],
+        distinguishKey: 0,
+        distinguishItem: 0,
     },
-    {
-        PID: 'PplPg002',
-        CateID: 'Ppl',
-        ProductName: 'PplPg002',
-        SalesAmount: 3000,
-        StoreName: 'B店',
+    watch: {
+        distinguishKey: function () {
+            refreshChartDistinguish();
+        },
+        distinguishItem: function () {
+            refreshChartDetail();
+        },
     },
-    {
-        PID: 'PetDg001',
-        CateID: 'Pet',
-        ProductName: 'PetDg001',
-        SalesAmount: 500,
-        StoreName: 'A店',
-    },
-    {
-        PID: 'PetDg002',
-        CateID: 'Pet',
-        ProductName: 'PetDg002',
-        SalesAmount: 300,
-        StoreName: 'B店',
-    },
-];
+});
+
+let ctxDistinguish = document.getElementById("chartDistinguish");
+let ctxDetail = document.getElementById("chartDetail");
+let chartDistinguish;
+let chartDetail;
+
+
+$(document).ready(function () {
+    loadData();
+});
+
+//非同步取得資料
+function loadData() {
+    $.ajax({
+        type: "Get",
+        url: "/api/Analysis/GetSalesAnalysisData",
+        data: "",
+        dataType: "json",
+        success: function (response) {
+            apiAnalysisData = response;
+            insertData();
+            initializeCharts();
+            refreshChartDistinguish(dataManager, chartDistinguish);
+        }
+    });
+}
+
+function insertData() {
+    dataManager.distinguish = [];
+    dataManager.distinguish.push(makeDistinguishGroup('以分店區分', 'StoreName'));
+    dataManager.distinguish.push(makeDistinguishGroup('以種類區分', 'CateName'));
+}
+
+function initializeCharts() {
+    chartDistinguish = new Chart(ctxDistinguish, {
+        type: 'doughnut',
+        data: {
+            labels: [],//dataManager.distinguish[dataManager.distinguishKey].Labels,
+            datasets: [{
+                data: [],//dataManager.distinguish[dataManager.distinguishKey].Values,
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretSize: 8, //尖端
+
+                //tips內字樣
+                callbacks: {
+                    label: function (tooltipItem, chart) {//context
+                        let idx = tooltipItem.index;
+                        let label = chart.labels[idx] || '';
+                        let value = chart.datasets[0].data[idx] || '';
+                        return label + ':' +
+                            value.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+                    }
+                }
+            },
+            legend: {
+                position: 'bottom',
+                labels: {
+                    usePointStyle: 'true',
+                    padding: 30,
+                }
+            },
+            cutoutPercentage: 55,
+        },
+    });
+    chartDetail = new Chart(ctxDetail, {
+        type: 'bar',
+        data: {
+            labels: [],//dataManager.distinguish[dataManager.distinguishKey].DetailsLabels[dataManager.distinguishItem],
+            datasets: [{
+                label: '銷售額',
+                data: [],//dataManager.distinguish[dataManager.distinguishKey].DetailsValues[dataManager.distinguishItem],
+                borderWidth: 3,
+                hoverBorderColor: "rgb(33, 33, 33)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            scales: {
+                // xAxes: [{
+                //     ticks: {
+                //         maxTicksLimit: 6
+                //     },
+                //     maxBarThickness: 25,
+                // }],
+                yAxes: [{
+                    ticks: {
+                        min: 0,
+                        maxTicksLimit: 6,
+                        //貨幣格式
+                        callback: function (value, index, values) {
+                            return value.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+                        }
+                    },
+                }],
+            },
+            tooltips: {
+                backgroundColor: "rgb(255,255,255)",
+                // borderColor
+                bodyFontColor: "#858796",
+                borderColor: '#dddfeb',
+                borderWidth: 1,
+                xPadding: 15,
+                yPadding: 15,
+                displayColors: false,
+                caretSize: 6, //尖端
+                caretPadding: 10,
+
+                titleMarginBottom: 10,
+                titleFontColor: '#6e707e',
+                titleFontSize: 14,
+                //tips內字樣 > 貨幣格式
+                callbacks: {
+                    label: function (tooltipItem, chart) {
+                        //console.log(tooltipItem)
+                        var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
+                        return datasetLabel + ':' + tooltipItem.yLabel.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
+                    }
+                }
+
+            },
+            legend: {
+                display: false,
+                //sort
+                //filter
+            },
+        },
+    });
+}
+
 
 //groupBy原型方法
 Array.prototype.groupBy = function (prop) {
@@ -42,7 +168,7 @@ Array.prototype.groupBy = function (prop) {
 
 function makeDistinguishGroup(optionText, groupingProp) {
     //1.api groupBy => { groupingKey:[group的ApiArray] , ... }
-    let distinguishGroups = api.groupBy(groupingProp);
+    let distinguishGroups = apiAnalysisData.groupBy(groupingProp);
     let labels = Object.keys(distinguishGroups);
     let values = [];
     let detailsLabels = [];// [[],[]]
@@ -82,7 +208,7 @@ function makeDistinguishGroup(optionText, groupingProp) {
 
         detailsLabels.push(PID_Items.map(x => x.PID));
         detailsValues.push(PID_Items.map(x => x.SalesAmount));
-        RGBs.push(randomDeepColor(33, 222));
+        RGBs.push(randomColor(33, 222));
     }
     //類key 陣列
     //類總額 陣列
@@ -90,198 +216,66 @@ function makeDistinguishGroup(optionText, groupingProp) {
     //類>PID 總額 二維陣列
     return {
         OptionText: optionText,
-        RGBs: RGBs,
         Labels: labels,
         Values: values,
+        RGBs: RGBs,
         DetailsLabels: detailsLabels,
         DetailsValues: detailsValues,
     };
+
+    function randomColor(m, M) {
+        let result = [];
+        for (let i = 0; i < 3; i++) {
+            result.push(Math.floor(Math.random() * (M - m)) + m);
+        }
+        return result;
+    }
 }
 
-function randomDeepColor(m, M) {
-    let result = [];
-    for (let i = 0; i < 3; i++) {
-        result.push(Math.floor(Math.random() * (M - m)) + m);
-    }
-    return result;
-}
+function refreshChartDistinguish() {
+    let tmp = dataManager.distinguish[dataManager.distinguishKey];
+    //橫軸標籤、值
+    chartDistinguish.config.data.labels = tmp.Labels;
+    chartDistinguish.config.data.datasets[0].data = tmp.Values;
+    //亂數色
+    chartDistinguish.config.data.datasets[0].backgroundColor =
+        tmp.RGBs.map(x => `rgb(${x[0]},${x[1]},${x[2]} )`);
+    //hover半透明
+    chartDistinguish.config.data.datasets[0].hoverBackgroundColor =
+        tmp.RGBs.map(x => `rgba(${x[0]},${x[1]},${x[2]},0.6)`);
 
-//V-model雙向綁定 下拉選單，並watch
-let dataManager = new Vue({
-    el: '#chartOptions',
-    data: {
-        distinguish: [
-            //將資料組好填入
-            makeDistinguishGroup('以分店區分', 'StoreName'),
-            makeDistinguishGroup('以種類區分', 'CateID'),
-        ],
-        distinguishKey: 1,
-        distinguishItem: 1,
-    },
-    watch: {
-        distinguishKey: {
-            //immediate: true,
-            handler: function () {
-                this.$options.method.refreshChartDistinguish();
-                //重置distinguishItem
-                this.distinguishItem = 0;
-            }
-        },
-        distinguishItem: function () {
-            this.$options.method.refreshChartDetail();
-        },
-    },
-    method: {
-        refreshChartDistinguish() {
-            let tmp = dataManager.distinguish[dataManager.distinguishKey];
-            //橫軸標籤、值
-            chartDistinguish.config.data.labels = tmp.Labels;
-            chartDistinguish.config.data.datasets[0].data = tmp.Values;
-            //亂數色
-            chartDistinguish.config.data.datasets[0].backgroundColor =
-                tmp.RGBs.map(x => `rgb(${x[0]},${x[1]},${x[2]} )`);
-            //hover半透明
-            chartDistinguish.config.data.datasets[0].hoverBackgroundColor =
-                tmp.RGBs.map(x => `rgba(${x[0]},${x[1]},${x[2]},0.6)`);
+    chartDistinguish.update();
+    refreshChartDetail();
+};
 
-            chartDistinguish.update();
-        },
-        refreshChartDetail() {
-            //前十名產品?
-            let tmp = dataManager.distinguish[dataManager.distinguishKey];
-            let idx = dataManager.distinguishItem;
-            //標籤、值
-            chartDetail.config.data.labels = tmp.DetailsLabels[idx];
-            let target = chartDetail.config.data.datasets[0];
-            target.data = tmp.DetailsValues[idx];
-            let [R, G, B] = tmp.RGBs[idx];
-            //底色 = 漸層色
-            target.backgroundColor = this.setLinearColors(R, G, B, tmp.DetailsLabels.length);
-            //框色 = 基底色
-            target.borderColor = `rgb(${R},${G},${B})`
-            //hover底色 = 互補色
-            target.hoverBackgroundColor = `rgb(${255 - R},${255 - G},${255 - B})`
+function refreshChartDetail() {
+    //前十名產品?
+    let tmp = dataManager.distinguish[dataManager.distinguishKey];
+    let idx = dataManager.distinguishItem;
+    //標籤、值
+    chartDetail.config.data.labels = tmp.DetailsLabels[idx];
+    let target = chartDetail.config.data.datasets[0];
+    target.data = tmp.DetailsValues[idx];
+    let [R, G, B] = tmp.RGBs[idx];
+    //底色 = 漸層色
+    target.backgroundColor = setLinearColors(R, G, B, tmp.DetailsLabels.length);
+    //框色 = 基底色
+    target.borderColor = `rgb(${R},${G},${B})`
+    //hover底色 = 互補色
+    target.hoverBackgroundColor = `rgb(${255 - R},${255 - G},${255 - B})`
 
-            chartDetail.update();
-        },
-        setLinearColors(R, G, B, length) {
-            let ColorArray = [];
-            for (let i = length; i > 0; i--) {
-                let color = `rgba(${R},${G},${B},${i / length} )`
-                ColorArray.push(color);
-            }
-            return ColorArray;
-        },
-    }
-});
+    chartDetail.update();
 
-let ctxDistinguish = document.getElementById("chartDistinguish");
-let chartDistinguish = new Chart(ctxDistinguish, {
-    type: 'doughnut',
-    data: {
-        labels: [],
-        datasets: [{
-            data: [],
-        }],
-    },
-    options: {
-        maintainAspectRatio: false,
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretSize: 8, //尖端
+    function setLinearColors(R, G, B, length) {
+        let ColorArray = [];
+        for (let i = length; i > 0; i--) {
+            let color = `rgba(${R},${G},${B},${i / length} )`
+            ColorArray.push(color);
+        }
+        return ColorArray;
+    };
+};
 
-            //tips內字樣
-            callbacks: {
-                label: function (tooltipItem, chart) {//context
-                    let idx = tooltipItem.index;
-                    let label = chart.labels[idx] || '';
-                    let value = chart.datasets[0].data[idx] || '';
-                    return label + ':' +
-                        value.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-                }
-            }
-        },
-        legend: {
-            position: 'bottom',
-            labels: {
-                usePointStyle: 'true',
-                padding: 30,
-            }
-        },
-        cutoutPercentage: 55,
-    },
-});
-let ctxDetail = document.getElementById("chartDetail");
-let chartDetail = new Chart(ctxDetail, {
-    type: 'bar',
-    data: {
-        labels: [],
-        datasets: [{
-            label: '銷售額',
-            data: [],
-            borderWidth: 3,
-            hoverBorderColor: "rgb(33, 33, 33)",
-        }],
-    },
-    options: {
-        maintainAspectRatio: false,
-        scales: {
-            // xAxes: [{
-            //     ticks: {
-            //         maxTicksLimit: 6
-            //     },
-            //     maxBarThickness: 25,
-            // }],
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                    maxTicksLimit: 6,
-                    //貨幣格式
-                    callback: function (value, index, values) {
-                        return value.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-                    }
-                },
-            }],
-        },
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            // borderColor
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 1,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: false,
-            caretSize: 6, //尖端
-            caretPadding: 10,
 
-            titleMarginBottom: 10,
-            titleFontColor: '#6e707e',
-            titleFontSize: 14,
-            //tips內字樣 > 貨幣格式
-            callbacks: {
-                label: function (tooltipItem, chart) {
-                    //console.log(tooltipItem)
-                    var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-                    return datasetLabel + ':' + tooltipItem.yLabel.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD', minimumFractionDigits: 0 });
-                }
-            }
 
-        },
-        legend: {
-            display: false,
-            //sort
-            //filter
-        },
-    },
-});
-
-//觸發watch
-dataManager.distinguishKey = 0;
 
