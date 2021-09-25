@@ -1,4 +1,7 @@
-﻿using Backstage.ViewModels;
+﻿using Backstage.Interfaces;
+using Backstage.Models;
+using Backstage.Services;
+using Backstage.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,10 +15,12 @@ namespace Backstage.Controllers
     public class BlogController : Controller
     {
         private readonly ILogger<BlogController> _logger;
+        private readonly IBlogService _service;
 
-        public BlogController(ILogger<BlogController> logger)
+        public BlogController(ILogger<BlogController> logger, IBlogService service)
         {
             _logger = logger;
+            _service = service;
         }
 
         //文章編輯器頁面
@@ -28,12 +33,19 @@ namespace Backstage.Controllers
         [HttpPost]
         public IActionResult SaveBlog(BlogViewModel blogVM)
         {
-            TempData["content"] = blogVM.BlogContent;
+            Task<int> numDone = _service.Create(blogVM);
+
+            //return RedirectToAction("BlogList");
+            return Ok();
+        }
+        public IActionResult BlogList()
+        {
+            //讀資料
             var list = new List<BlogViewModel>
             {
-                blogVM
+                //blogVM
             };
-            return View("Editor", blogVM);
+            return View();
         }
     }
 }

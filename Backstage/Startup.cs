@@ -38,7 +38,6 @@ namespace Backstage
             services.AddTransient<IAnalysisService, AnalysisService>();
             services.AddTransient<IBlogService, BlogService>();
 
-
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
             {

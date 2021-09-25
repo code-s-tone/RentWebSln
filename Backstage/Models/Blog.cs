@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -7,6 +8,7 @@ namespace Backstage.Models
 {
     public partial class Blog
     {
+        [Key]
         public string BlogId { get; set; }
         public string BlogTitle { get; set; }
         public DateTime PostDate { get; set; }
