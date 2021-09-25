@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Backstage.ViewModels
 {
+    [Keyless]
     public class BlogViewModel
     {
         public string BlogID { get; set; }
