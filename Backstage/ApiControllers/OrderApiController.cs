@@ -22,25 +22,19 @@ namespace Backstage.ApiControllers
             _orderService = orderService;
         }
 
-
-        //[HttpGet]
-        //public IEnumerable<OrderViewModel> Get()
-        //{
-        //    var result = _orderService.GetOrderData();
-        //    //var emps = JsonConvert.SerializeObject(result);
-        //    var emps = result;
-        //    return emps;
-        //}
-        //[HttpGet]
-        //public ActionResult<IEnumerable<Order>> Get()
-        //{
-        //    return _ctx.Orders;
-        //}
-
-        public ActionResult<IEnumerable<OrderViewModel>> Get()
+        [HttpGet]
+        public IActionResult GetOrder()
         {
             var result = _orderService.GetOrderData();
-            return result.ToList();
+            return Ok(result);
         }
+
+
+        //public ActionResult<IEnumerable<OrderViewModel>> Get()
+        //{
+        //    var result = _orderService.GetOrderData();
+        //    return result.ToList();
+        //}
+
     }
 }
