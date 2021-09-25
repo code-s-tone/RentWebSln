@@ -157,7 +157,7 @@
 </div>
 
 <script>
-    let tom;
+    let vm;
     const Url = "/api/OrderApi"
     function LoadData() {
         fetch(Url,
@@ -169,9 +169,8 @@
 
             }).then(res => res.json())
             .then(result => {
-                tom = result;
-                items = result;
-                console.log(tom);
+                item = result;
+                vm.$data.items = item;
             })
             .catch(ex => {
                 console.log("錯了");
@@ -179,43 +178,42 @@
     };
     window.onload = function () {
         LoadData();
+        Binding();
     }
 </script>
 
 <script>
-
-
-    new Vue({
+    function Binding() {
+    vm =  new Vue({
         el: "#app",
-        data() {
-            return {
+        data: {
                 items: [
                     
                 ],
                 fields: [
-                    { key: 'OrderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
-                    { key: 'MemberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
-                    { key: 'FullName', label: '訂單人姓名', sortable: false, sortDirection: 'desc' },
-                    { key: 'StoreName', label: '分店', sortable: false, sortDirection: 'desc' },
-                    { key: 'Phone', label: '聯絡電話', sortable: false, sortDirection: 'desc' },
-                    { key: 'Email', label: '聯絡信箱', sortable: false, sortDirection: 'desc' },
+                    { key: 'orderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'memberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
+                    { key: 'fullName', label: '訂單人姓名', sortable: false, sortDirection: 'desc' },
+                    { key: 'storeName', label: '分店', sortable: false, sortDirection: 'desc' },
+                    { key: 'phone', label: '聯絡電話', sortable: false, sortDirection: 'desc' },
+                    { key: 'email', label: '聯絡信箱', sortable: false, sortDirection: 'desc' },
                     //{ key: 'TotalAmount', label: '訂單總額', sortable: true, sortDirection: 'desc' },
-                    { key: 'OrderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc' },
-                    { key: 'GoodsStatusID', label: '出貨狀態', sortable: true, sortDirection: 'desc' },
-                    { key: 'OrderDate', label: '成立時間', sortable: true, sortDirection: 'desc' },
+                    { key: 'orderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc' },
+                    { key: 'goodsStatusID', label: '出貨狀態', sortable: true, sortDirection: 'desc' },
+                    { key: 'orderDate', label: '成立時間', sortable: true, sortDirection: 'desc' },
 
                     //{ key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
 
-                    {
-                        key: 'isActive',
-                        label: 'Is Active',
-                        formatter: (value, key, item) => {
-                            return value ? 'Yes' : 'No'
-                        },
-                        sortable: true,
-                        sortByFormatted: true,
-                        filterByFormatted: true
-                    },
+                    //{
+                    //    key: 'isActive',
+                    //    label: 'Is Active',
+                    //    formatter: (value, key, item) => {
+                    //        return value ? 'Yes' : 'No'
+                    //    },
+                    //    sortable: true,
+                    //    sortByFormatted: true,
+                    //    filterByFormatted: true
+                    //},
                     { key: 'actions', label: '管理' }
                 ],
                 totalRows: 1,
@@ -232,7 +230,6 @@
                     title: '',
                     content: ''
                 }
-            }
         },
         computed: {
             sortOptions() {
@@ -265,7 +262,7 @@
             }
         }
     });
-
+    }
 
         //$(document).ready(function () {
         //    LoadData();
