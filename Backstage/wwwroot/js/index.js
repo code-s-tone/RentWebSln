@@ -8,10 +8,10 @@ let dataManager = new Vue({
     },
     watch: {
         distinguishKey: function () {
-            refreshChartDistinguish(this, chartDistinguish);
+            refreshChartDistinguish();
         },
         distinguishItem: function () {
-            refreshChartDetail(this, chartDetail);
+            refreshChartDetail();
         },
     },
 });
@@ -36,7 +36,6 @@ function loadData() {
         success: function (response) {
             apiAnalysisData = response;
             insertData();
-            console.log(dataManager.distinguish)
             initializeCharts();
             refreshChartDistinguish(dataManager, chartDistinguish);
         }
@@ -233,9 +232,7 @@ function makeDistinguishGroup(optionText, groupingProp) {
     }
 }
 
-function refreshChartDistinguish(dataManager, chartDistinguish) {
-    console.log('refreshChartDistinguish 1');
-
+function refreshChartDistinguish() {
     let tmp = dataManager.distinguish[dataManager.distinguishKey];
     //橫軸標籤、值
     chartDistinguish.config.data.labels = tmp.Labels;
@@ -248,14 +245,10 @@ function refreshChartDistinguish(dataManager, chartDistinguish) {
         tmp.RGBs.map(x => `rgba(${x[0]},${x[1]},${x[2]},0.6)`);
 
     chartDistinguish.update();
-    console.log('refreshChartDistinguish 2');
-
-    refreshChartDetail(dataManager, chartDetail);
+    refreshChartDetail();
 };
 
-function refreshChartDetail(dataManager, chartDetail) {
-    console.log('refreshChartDetail 1');
-
+function refreshChartDetail() {
     //前十名產品?
     let tmp = dataManager.distinguish[dataManager.distinguishKey];
     let idx = dataManager.distinguishItem;
@@ -272,7 +265,6 @@ function refreshChartDetail(dataManager, chartDetail) {
     target.hoverBackgroundColor = `rgb(${255 - R},${255 - G},${255 - B})`
 
     chartDetail.update();
-    console.log('refreshChartDetail 2');
 
     function setLinearColors(R, G, B, length) {
         let ColorArray = [];
