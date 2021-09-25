@@ -5,12 +5,9 @@ using System.Data.Entity;//Nuget要裝 EF
 //using Microsoft.EntityFrameworkCore;
 
 using System.Threading.Tasks;
-using RentWebProj.Models;
-//using RentWebProj.Services;
-//using RentWebProj.Repositories;
+using Backstage.Models;
 using Backstage.ViewModels;
 using Backstage.Interfaces;
-
 
 namespace Backstage.Services
 {
