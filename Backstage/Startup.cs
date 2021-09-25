@@ -17,7 +17,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Backstage.Models;
 using Backstage.Services;
-using Backstage.intetfaces;
+using Backstage.Interfaces;
+
 namespace Backstage
 {
     public class Startup
@@ -35,6 +36,8 @@ namespace Backstage
             services.AddControllersWithViews();
             services.AddDbContext<RentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
             services.AddTransient<IAnalysisService, AnalysisService>();
+            services.AddTransient<IBlogService, BlogService>();
+
 
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
