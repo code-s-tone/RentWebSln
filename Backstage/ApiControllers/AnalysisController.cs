@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Backstage.Services;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json;
 using Backstage.Interfaces;
@@ -13,13 +12,15 @@ namespace Backstage.ApiControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [AllowAnonymous]
     public class AnalysisController : ControllerBase
     {
-        private readonly AnalysisService test;
 
-        public AnalysisController(AnalysisService test)
+        private readonly IAnalysisService service;
+
+        public AnalysisController(IAnalysisService service)
         {
-            this.test = test;
+            this.service = service;
         }
 
         /// <summary>
@@ -27,12 +28,11 @@ namespace Backstage.ApiControllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetSalesAnalysisData()
         {
-            //var a =test.A();
-            //JsonConvert.SerializeObject(a)
-            return Ok("a");
+            var salesData = service.GetSalesData();
+            return Ok(JsonConvert.SerializeObject(salesData));
         }
     }
 }

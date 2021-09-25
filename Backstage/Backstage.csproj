@@ -28,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RentWebProj\RentWebProj.csproj" />
   </ItemGroup>
 
