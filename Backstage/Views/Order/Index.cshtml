@@ -125,16 +125,17 @@
                  :sort-desc.sync="sortDesc"
                  :sort-direction="sortDirection"
                  stacked="md"
+                 :busy="isBusy"
                  show-empty
                  small
                  @@filtered="onFiltered">
 
-            @*<template #table-busy>
+            <template #table-busy>
                     <div class="text-center text-danger my-2">
                         <b-spinner class="align-middle"></b-spinner>
                         <strong>加載中...</strong>
                     </div>
-                </template>*@
+                </template>
 
             <template #cell(name)="row">
                 {{ row.value.first }} {{ row.value.last }}
@@ -254,11 +255,11 @@
                     this.currentPage = 1
                 }
             },
-            //watch: {
-            //    items: function () {
-            //        this.isBusy = false;
-            //    }
-            //},
+            watch: {
+                items: function () {
+                    this.isBusy = false;
+                }
+            },
         });
 
         const Url = "/api/OrderApi"
