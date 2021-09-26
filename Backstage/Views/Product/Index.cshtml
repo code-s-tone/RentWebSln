@@ -106,6 +106,7 @@
              stacked="md"
              show-empty
              small
+             hover
              @@filtered="onFiltered">
         <template #table-busy>
             <div class="text-center text-danger my-2">
@@ -113,16 +114,21 @@
                 <strong>加載中...</strong>
             </div>
         </template>
-
-        <template #cell(name)="row">
-            {{ row.value.first }} {{ row.value.last }}
+        <template v-slot:cell(WithdrawalDate)="row">
+            {{ row.value.WithdrawalDate|dateFormat }}
+        </template>
+        <template v-slot:cell(LaunchDate)="row">
+            {{ row.value.LaunchDate|dateFormat }}
+        </template>
+        <template v-slot:cell(UpdateTime)="row">
+            {{ row.value.WithdrawalDate|UpdateTime }}
         </template>
 
         <template #cell(actions)="row">
-            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1">
+            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1 my-1" variant="primary">
                 修改
             </b-button>
-            <b-button size="sm" @@click="row.toggleDetails">
+            <b-button size="sm" @@click="row.toggleDetails" variant="success ">
                 {{ row.detailsShowing ? '隱藏' : '產品細節' }}
             </b-button>
         </template>
@@ -131,19 +137,20 @@
             <b-card>
                 <ul class="d-flex flex-wrap justify-content-center">
                     @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
-                    <b-col sm="6"><h5 class="text-left"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate|dateFormat }}</h5></b-col>
                     @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
                     @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
                     <b-col sm="1" v-for="result in row.item.ProductImages"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
-                    
+
                 </ul>
             </b-card>
         </template>
+
     </b-table>
     <b-row>
         <b-col sm="5" md="6" class="my-1">
@@ -175,13 +182,15 @@
     <!-- Info modal -->
     <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
         <pre>{{ infoModal.content }}</pre>
+
     </b-modal>
 </b-container>
 
 
 
 @section topJS{
-
+    <script src="~/js/Product/moment.js"></script>
+    <script src="~/js/Product/momentTW.js"></script>
 }
 @section topCSS{
 
@@ -251,16 +260,25 @@
                     // Trigger pagination to update the number of buttons/pages due to filtering
                     this.totalRows = filteredItems.length
                     this.currentPage = 1
-                }
+                },
+
+
             },
             watch: {
                 items: function () {
                     this.isBusy = false
                 }
             },
-
+            filters: {
+                dateFormat: function (value) {
+                    console.log(`dateformat :`, value);
+                    let result = new moment(value).format('LLLL');
+                    return result;
+                }
+            },
 
         })
+
         function LoadData() {
 
             const Url = "/api/Product"
@@ -279,10 +297,6 @@
                     console.log("資料撈失敗@@");
                 })
         };
-
-
-
-
 
 
         $(document).ready(function () {

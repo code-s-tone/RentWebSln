@@ -21,11 +21,12 @@ namespace Backstage.ApiControllers
 
         }
 
-        public string GetProduct()
+        public IActionResult GetProduct()
         {
             var result = _ProductDataService.GetProduct();
             var emps = JsonConvert.SerializeObject(result);
-            return emps;
+   
+            return Ok(emps);
         }
 
     }
