@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-#nullable disable
-
-namespace Backstage.Models
+namespace RentWebProj.ViewModels
 {
-    public partial class Blog
+    public class BlogViewModel
     {
         public int BlogId { get; set; }
         public string BlogTitle { get; set; }

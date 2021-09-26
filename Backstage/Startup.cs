@@ -39,7 +39,8 @@ namespace Backstage
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
-      
+
+
             //ÅýSwagger¤ä´©JWT
             services.AddSwaggerDocument(config =>
             {

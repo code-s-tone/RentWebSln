@@ -12,7 +12,6 @@
                           label-cols-sm="3"
                           label-align-sm="center"
                           label-size="sm"
-                      
                           class="mb-0 text-center"
                           v-slot="{ ariaDescribedby }">
                 <b-input-group size="sm">
@@ -75,7 +74,6 @@
         <b-col lg="6" class="my-1">
             <b-form-group v-model="sortDirection"
                           label="過濾開啟"
-                          description="保留所有未選中以過濾所有數據"
                           label-cols-sm="3"
                           label-align-sm="center"
                           label-size="sm"
@@ -84,38 +82,14 @@
                 <b-form-checkbox-group v-model="filterOn"
                                        :aria-describedby="ariaDescribedby"
                                        class="mt-1 d-flex">
-                    <b-form-checkbox class="mx-1" value="name">姓名</b-form-checkbox>
-                    <b-form-checkbox class="mx-1" value="age">年紀</b-form-checkbox>
-                    <b-form-checkbox class="mx-1" value="isActive">是否啟用</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="ProductName">產品名稱</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="ProductId">產品編號</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="DailyRate">產品單價</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
         </b-col>
 
-        <b-col sm="5" md="6" class="my-1">
-            <b-form-group label="筆數"
-                          label-for="per-page-select"
-                          label-cols-sm="6"
-                          label-cols-md="4"
-                          label-cols-lg="3"
-                          label-align-sm="center"
-                          label-size="sm"
-                          class="mb-0">
-                <b-form-select id="per-page-select"
-                               v-model="perPage"
-                               :options="pageOptions"
-                               size="sm"
-                               class="w-100"></b-form-select>
-            </b-form-group>
-        </b-col>
 
-        <b-col sm="7" md="6" class="my-1">
-            <b-pagination v-model="currentPage"
-                          :total-rows="totalRows"
-                          :per-page="perPage"
-                          align="fill"
-                          size="sm"
-                          class="my-0"></b-pagination>
-        </b-col>
     </b-row>
 
     <!-- Main table element -->
@@ -155,15 +129,51 @@
 
         <template #row-details="row">
             <b-card>
-                <ul>
-                    <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
+                <ul class="d-flex flex-wrap justify-content-center">
+                    @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
+                    <b-col sm="6"><h5 class="text-left"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate }}</h5></b-col>
+                    @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
+                    @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
+                    <b-col sm="1" v-for="result in row.item.ProductImages"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
+                    
                 </ul>
             </b-card>
         </template>
     </b-table>
+    <b-row>
+        <b-col sm="5" md="6" class="my-1">
+            <b-form-group label="筆數"
+                          label-for="per-page-select"
+                          label-cols-sm="6"
+                          label-cols-md="4"
+                          label-cols-lg="3"
+                          label-align-sm="center"
+                          label-size="sm"
+                          class="mb-0">
+                <b-form-select id="per-page-select"
+                               v-model="perPage"
+                               :options="pageOptions"
+                               size="sm"
+                               class="w-100"></b-form-select>
+            </b-form-group>
+        </b-col>
 
+        <b-col sm="7" md="6" class="my-1">
+            <b-pagination v-model="currentPage"
+                          :total-rows="totalRows"
+                          :per-page="perPage"
+                          align="fill"
+                          size="sm"
+                          class="my-0"></b-pagination>
+        </b-col>
+    </b-row>
     <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @@hide="resetInfoModal">
+    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
         <pre>{{ infoModal.content }}</pre>
     </b-modal>
 </b-container>
@@ -177,7 +187,11 @@
 
 }
 @section endJS{
-
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            // Your options go here
+        });
+        </script>
     <script>
         var item;
         let vm;
@@ -189,17 +203,16 @@
                 fields: [
                     { key: 'ProductId', label: '產品編號', class: 'text-center' },
                     { key: 'ProductName', label: '產品名子', class: 'text-center' },
-                    { key: 'Description', label: '描述', class: 'text-center', },
-                    { key: 'Discontinuation', label: '是否停用', class: 'text-center' },
                     { key: 'DailyRate', label: '單價', class: 'text-center' },
                     { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
                     { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
                     { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                    { key: 'actions', label: '動作' }
                 ],
                 totalRows: 1,
                 currentPage: 1,
                 perPage: 5,
-                pageOptions: [5, 10, 15, { value: 100, text: "全部" }],
+                pageOptions: [5, 10, 15, { value: 1000, text: "全部" }],
                 sortBy: '',
                 sortDesc: false,
                 sortDirection: 'asc',
@@ -242,11 +255,11 @@
             },
             watch: {
                 items: function () {
-                    this.isBusy = !this.isBusy
+                    this.isBusy = false
                 }
             },
 
- 
+
         })
         function LoadData() {
 

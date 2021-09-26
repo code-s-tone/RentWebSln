@@ -1,6 +1,7 @@
 ﻿using Backstage.Interfaces;
 using Backstage.Models;
 using Backstage.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Backstage.Services
 
                                         let resutk = (from pi in _ctx.ProductImages
                                                       where pi.ProductId == p.ProductId
-                                                      select pi).ToList()
+                                                      select new ImageViewModel { SourceImages = pi.Source }).ToList()
                                         select new ProductViewModel
                                         {
                                             ProductId = p.ProductId,

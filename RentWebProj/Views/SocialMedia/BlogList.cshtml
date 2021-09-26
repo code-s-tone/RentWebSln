@@ -1,6 +1,6 @@
-﻿
+﻿@model IEnumerable<BlogViewModel>
 @{
-    ViewBag.Title = "BlogPost";
+    ViewBag.Title = "BlogList";
 }
 
 
@@ -19,26 +19,28 @@
         <div class="col-12 d-flex title">
             <h3>Latest Posts From Ruckify</h3>
         </div>
-        <div class="col-12 d-flex my-5">
-            <div class="img">
-                <a href="#">
-                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2021/02/30173608/andrey-zvyagintsev-yuovHd6DDGU-unsplash-2048x1365.jpg"
-                         alt="">
-                </a>
+        @foreach (var b in Model)
+        {
+            <div class="col-12 d-flex my-3">
+                <div class="img">
+                    <a href="@Url.Action("SocialMedia", "SocialMedia", new { Id= b.BlogId})">
+                        <img src=@b.MainImgUrl
+                             alt=@b.MainImgTitle>
+                    </a>
+                </div>
+
+                <div class="text px-5">
+                    <a href="#">@b.BlogTitle</a>
+
+                    <div>@b.PostDate.ToString("yyyy/MM/dd")</div>
+                    <p>@b.Preview</p>
+
+                </div>
             </div>
+        }
 
-            <div class="text px-5">
-                <a href="#">Streamline Your Rental Experience with RuckifyExpress</a>
 
-                <div>February 11, 2021</div>
 
-                <p>
-                    RuckifyExpress is Ruckify’s delivery service that connects you with
-                    drivers to facilitate the
-                    exchange and delivery of rental items. When checking out as a Renter, you
-                </p>
-            </div>
-        </div>
         <div class="col-12 d-flex mb-5">
             <div class="img">
                 <a href="#">
@@ -122,61 +124,61 @@
 
     </div>
 
-    <div class="row sign-img right">
-        <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/12/30173640/Ruckify_BlogAds_V1_Ad2.jpg" alt=""
-             style="width: 400px; height: 600px;">
+    @*<div class="row sign-img right">
+            <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/12/30173640/Ruckify_BlogAds_V1_Ad2.jpg" alt=""
+                 style="width: 400px; height: 600px;">
 
-        <h3 style="margin: 40px 0;">Most Popular Blogs</h3>
+            <h3 style="margin: 40px 0;">Most Popular Blogs</h3>
 
-        <div class="col-12 d-flex mb-4">
-            <div class="img">
-                <a href="#">
-                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/11/30173708/shutterstock_534008512-2048x958.jpg"
-                         alt="" style="width: 160px;height: 100px;">
-                </a>
+            <div class="col-12 d-flex mb-4">
+                <div class="img">
+                    <a href="#">
+                        <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/11/30173708/shutterstock_534008512-2048x958.jpg"
+                             alt="" style="width: 160px;height: 100px;">
+                    </a>
+                </div>
+
+                <div class="text" style="padding-left: 20px;">
+                    <a href="#" style="font-size: 15px;">Common Questions</a>
+
+                    <div style="font-size: 12px;">February 11, 2021</div>
+
+
+                </div>
             </div>
+            <div class="col-12 d-flex mb-4">
+                <div class="img">
+                    <a href="#">
+                        <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2019/09/30174048/tree-39.jpg"
+                             alt="" style="width: 160px;height: 100px;">
+                    </a>
+                </div>
 
-            <div class="text" style="padding-left: 20px;">
-                <a href="#" style="font-size: 15px;">Common Questions</a>
+                <div class="text" style="padding-left: 20px;">
+                    <a href="#" style="font-size: 15px;">Working at Ruckify</a>
 
-                <div style="font-size: 12px;">February 11, 2021</div>
+                    <div style="font-size: 12px;">November 16, 2020</div>
 
 
+                </div>
             </div>
-        </div>
-        <div class="col-12 d-flex mb-4">
-            <div class="img">
-                <a href="#">
-                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2019/09/30174048/tree-39.jpg"
-                         alt="" style="width: 160px;height: 100px;">
-                </a>
+            <div class="col-12 d-flex mb-4">
+                <div class="img">
+                    <a href="#">
+                        <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/04/30173934/IMG_4101-2-1.jpg"
+                             alt="" style="width: 160px;height: 100px;">
+                    </a>
+                </div>
+
+                <div class="text" style="padding-left: 20px;">
+                    <a href="#" style="font-size: 15px;">Everyone!</a>
+
+                    <div style="font-size: 12px;">October 21, 2020</div>
+
+
+                </div>
             </div>
-
-            <div class="text" style="padding-left: 20px;">
-                <a href="#" style="font-size: 15px;">Working at Ruckify</a>
-
-                <div style="font-size: 12px;">November 16, 2020</div>
-
-
-            </div>
-        </div>
-        <div class="col-12 d-flex mb-4">
-            <div class="img">
-                <a href="#">
-                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/04/30173934/IMG_4101-2-1.jpg"
-                         alt="" style="width: 160px;height: 100px;">
-                </a>
-            </div>
-
-            <div class="text" style="padding-left: 20px;">
-                <a href="#" style="font-size: 15px;">Everyone!</a>
-
-                <div style="font-size: 12px;">October 21, 2020</div>
-
-
-            </div>
-        </div>
-    </div>
+        </div>*@
 </div>
 
 

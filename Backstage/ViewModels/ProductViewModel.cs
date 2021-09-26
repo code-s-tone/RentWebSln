@@ -17,6 +17,11 @@ namespace Backstage.ViewModels
         public bool? Discontinuation { get; set; }
         public DateTime UpdateTime { get; set; }
 
-        public virtual List<ProductImage> ProductImages { get; set; }
+        public virtual List<ImageViewModel> ProductImages { get; set; }
+    }
+
+    public class ImageViewModel
+    {
+        public string SourceImages { get; set; }
     }
 }

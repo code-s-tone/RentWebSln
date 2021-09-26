@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Backstage.ViewModels.BlogViewModel>
+
+@{
+    ViewData["Title"] = "BlogList";
+}
+
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+    table th, table td {
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+
+    table tr {
+        overflow: hidden;
+        max-height: 150px !important;
+    }
+</style>
+<div class="container">
+    <h1>所有文章列表</h1>
+
+    <table class="table table-bordered table-striped" >
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BlogTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PostDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MainImgUrl)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MainImgTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Preview)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BlogContent)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BlogTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PostDate.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MainImgUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MainImgTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Preview)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BlogContent)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
