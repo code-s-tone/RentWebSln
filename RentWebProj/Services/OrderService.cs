@@ -39,10 +39,8 @@ namespace RentWebProj.Services
             var RentedDays =
                 GetProductRentPeriods(PID)
                 .Where(x => x.to > now)
-                .Select(x => (x.to - (x.from > now ? x.from : now)).TotalDays)
-                .Sum();
-            //RentedDatesAmongDays.ForEach(x=>x)
-
+                //.Select()
+                .Sum(x => (x.to - (x.from > now ? x.from : now)).TotalDays);
 
             return RentedDays;
         }
@@ -103,7 +101,6 @@ namespace RentWebProj.Services
 
         public int GetOrderId(int MemberID, DateTime OrderDate)
         {
-            //string dateTimeFormat = "yyyy/MM/dd HH:mm:ss";
             var b = (from o in (_repository.GetAll<Order>())
                      where o.MemberID == MemberID && o.OrderDate == OrderDate
                      select new { o.OrderID });

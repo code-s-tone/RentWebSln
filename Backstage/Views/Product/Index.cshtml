@@ -74,7 +74,6 @@
         <b-col lg="6" class="my-1">
             <b-form-group v-model="sortDirection"
                           label="過濾開啟"
-                          description="保留所有未選中以過濾所有數據"
                           label-cols-sm="3"
                           label-align-sm="center"
                           label-size="sm"
@@ -83,13 +82,70 @@
                 <b-form-checkbox-group v-model="filterOn"
                                        :aria-describedby="ariaDescribedby"
                                        class="mt-1 d-flex">
-                    <b-form-checkbox class="mx-1" value="name">姓名</b-form-checkbox>
-                    <b-form-checkbox class="mx-1" value="age">年紀</b-form-checkbox>
-                    <b-form-checkbox class="mx-1" value="isActive">是否啟用</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="ProductName">產品名稱</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="ProductId">產品編號</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="DailyRate">產品單價</b-form-checkbox>
                 </b-form-checkbox-group>
             </b-form-group>
         </b-col>
 
+
+    </b-row>
+
+    <!-- Main table element -->
+    <b-table :items="items"
+             :fields="fields"
+             :current-page="currentPage"
+             :per-page="perPage"
+             :filter="filter"
+             :filter-included-fields="filterOn"
+             :sort-by.sync="sortBy"
+             :sort-desc.sync="sortDesc"
+             :sort-direction="sortDirection"
+             :busy="isBusy"
+             stacked="md"
+             show-empty
+             small
+             @@filtered="onFiltered">
+        <template #table-busy>
+            <div class="text-center text-danger my-2">
+                <b-spinner class="align-middle"></b-spinner>
+                <strong>加載中...</strong>
+            </div>
+        </template>
+
+        <template #cell(name)="row">
+            {{ row.value.first }} {{ row.value.last }}
+        </template>
+
+        <template #cell(actions)="row">
+            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1">
+                修改
+            </b-button>
+            <b-button size="sm" @@click="row.toggleDetails">
+                {{ row.detailsShowing ? '隱藏' : '產品細節' }}
+            </b-button>
+        </template>
+
+        <template #row-details="row">
+            <b-card>
+                <ul class="d-flex flex-wrap justify-content-center">
+                    @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
+                    <b-col sm="6"><h5 class="text-left"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate }}</h5></b-col>
+                    @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
+                    @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
+                    <b-col sm="1" v-for="result in row.item.ProductImages"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
+                    
+                </ul>
+            </b-card>
+        </template>
+    </b-table>
+    <b-row>
         <b-col sm="5" md="6" class="my-1">
             <b-form-group label="筆數"
                           label-for="per-page-select"
@@ -116,45 +172,8 @@
                           class="my-0"></b-pagination>
         </b-col>
     </b-row>
-
-    <!-- Main table element -->
-    <b-table :items="items"
-             :fields="fields"
-             :current-page="currentPage"
-             :per-page="perPage"
-             :filter="filter"
-             :filter-included-fields="filterOn"
-             :sort-by.sync="sortBy"
-             :sort-desc.sync="sortDesc"
-             :sort-direction="sortDirection"
-             stacked="md"
-             show-empty
-             small
-             @@filtered="onFiltered">
-        <template #cell(name)="row">
-            {{ row.value.first }} {{ row.value.last }}
-        </template>
-
-        <template #cell(actions)="row">
-            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1">
-                修改
-            </b-button>
-            <b-button size="sm" @@click="row.toggleDetails">
-                {{ row.detailsShowing ? '隱藏' : '產品細節' }}
-            </b-button>
-        </template>
-
-        <template #row-details="row">
-            <b-card>
-                <ul>
-                    <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-                </ul>
-            </b-card>
-        </template>
-    </b-table>
-
     <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @@hide="resetInfoModal">
+    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
         <pre>{{ infoModal.content }}</pre>
     </b-modal>
 </b-container>
@@ -169,64 +188,42 @@
 }
 @section endJS{
     <script>
-        new Vue({
+        Fancybox.bind("[data-fancybox]", {
+            // Your options go here
+        });
+        </script>
+    <script>
+        var item;
+        let vm;
+        vm = new Vue({
             el: "#app",
-            data() {
-                return {
-                    items: [
-                        { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
-                        { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-                        {
-                            isActive: false,
-                            age: 9,
-                            name: { first: 'Mini', last: 'Navarro' }
-
-                        },
-                        { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-                        { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-                        { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-                        { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-                        {
-                            isActive: true,
-                            age: 87,
-                            name: { first: 'Larsen', last: 'Shaw' },
-                            _cellVariants: { age: 'danger', isActive: 'warning' }
-                        },
-                        { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-                        { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-                        { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-                        { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
-                    ],
-                    fields: [
-                        { key: 'name', label: '姓名', class: 'text-center' },
-                        { key: 'age', label: '年紀', class: 'text-center' },
-
-                        {
-                            key: 'isActive',
-                            label: '是否啟用',
-                            class: 'text-center',
-                            formatter: (value, key, item) => {
-                                return value ? 'Yes' : 'No'
-                            },
-
-                        },
-                        { key: 'actions', label: '動作', class: 'text-center', }
-                    ],
-                    totalRows: 1,
-                    currentPage: 1,
-                    perPage: 5,
-                    pageOptions: [5, 10, 15, { value: 100, text: "全部" }],
-                    sortBy: '',
-                    sortDesc: false,
-                    sortDirection: 'asc',
-                    filter: null,
-                    filterOn: [],
-                    infoModal: {
-                        id: 'info-modal',
-                        title: '',
-                        content: ''
-                    }
+            data: {
+                isBusy: true,
+                items: [],
+                fields: [
+                    { key: 'ProductId', label: '產品編號', class: 'text-center' },
+                    { key: 'ProductName', label: '產品名子', class: 'text-center' },
+                    { key: 'DailyRate', label: '單價', class: 'text-center' },
+                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
+                    { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
+                    { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                    { key: 'actions', label: '動作' }
+                ],
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 5,
+                pageOptions: [5, 10, 15, { value: 1000, text: "全部" }],
+                sortBy: '',
+                sortDesc: false,
+                sortDirection: 'asc',
+                filter: null,
+                filterOn: [],
+                infoModal: {
+                    id: 'info-modal',
+                    title: '',
+                    content: ''
                 }
+
             },
             computed: {
                 sortOptions() {
@@ -255,11 +252,47 @@
                     this.totalRows = filteredItems.length
                     this.currentPage = 1
                 }
-            }
+            },
+            watch: {
+                items: function () {
+                    this.isBusy = false
+                }
+            },
+
+
         })
+        function LoadData() {
+
+            const Url = "/api/Product"
+
+            fetch(Url,
+                {
+                    method: "Get",
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                .then(res => res.json())
+                .then(result => {
+                    vm.$data.items = result;
+
+                })
+                .catch(ex => {
+                    console.log("資料撈失敗@@");
+                })
+        };
+
+
+
+
+
+
+        $(document).ready(function () {
+            LoadData()
+
+        });
 
 
     </script>
+
 
 
 }
