@@ -12,6 +12,7 @@
                           label-cols-sm="3"
                           label-align-sm="center"
                           label-size="sm"
+                      
                           class="mb-0 text-center"
                           v-slot="{ ariaDescribedby }">
                 <b-input-group size="sm">
@@ -127,10 +128,18 @@
              :sort-by.sync="sortBy"
              :sort-desc.sync="sortDesc"
              :sort-direction="sortDirection"
+             :busy="isBusy"
              stacked="md"
              show-empty
              small
              @@filtered="onFiltered">
+        <template #table-busy>
+            <div class="text-center text-danger my-2">
+                <b-spinner class="align-middle"></b-spinner>
+                <strong>加載中...</strong>
+            </div>
+        </template>
+
         <template #cell(name)="row">
             {{ row.value.first }} {{ row.value.last }}
         </template>
@@ -168,65 +177,40 @@
 
 }
 @section endJS{
+
     <script>
-        new Vue({
+        var item;
+        let vm;
+        vm = new Vue({
             el: "#app",
-            data() {
-                return {
-                    items: [
-                        { isActive: true, age: 40, name: { first: 'Dickerson', last: 'Macdonald' } },
-                        { isActive: false, age: 21, name: { first: 'Larsen', last: 'Shaw' } },
-                        {
-                            isActive: false,
-                            age: 9,
-                            name: { first: 'Mini', last: 'Navarro' }
-
-                        },
-                        { isActive: false, age: 89, name: { first: 'Geneva', last: 'Wilson' } },
-                        { isActive: true, age: 38, name: { first: 'Jami', last: 'Carney' } },
-                        { isActive: false, age: 27, name: { first: 'Essie', last: 'Dunlap' } },
-                        { isActive: true, age: 40, name: { first: 'Thor', last: 'Macdonald' } },
-                        {
-                            isActive: true,
-                            age: 87,
-                            name: { first: 'Larsen', last: 'Shaw' },
-                            _cellVariants: { age: 'danger', isActive: 'warning' }
-                        },
-                        { isActive: false, age: 26, name: { first: 'Mitzi', last: 'Navarro' } },
-                        { isActive: false, age: 22, name: { first: 'Genevieve', last: 'Wilson' } },
-                        { isActive: true, age: 38, name: { first: 'John', last: 'Carney' } },
-                        { isActive: false, age: 29, name: { first: 'Dick', last: 'Dunlap' } }
-                    ],
-                    fields: [
-                        { key: 'name', label: '姓名', class: 'text-center' },
-                        { key: 'age', label: '年紀', class: 'text-center' },
-
-                        {
-                            key: 'isActive',
-                            label: '是否啟用',
-                            class: 'text-center',
-                            formatter: (value, key, item) => {
-                                return value ? 'Yes' : 'No'
-                            },
-
-                        },
-                        { key: 'actions', label: '動作', class: 'text-center', }
-                    ],
-                    totalRows: 1,
-                    currentPage: 1,
-                    perPage: 5,
-                    pageOptions: [5, 10, 15, { value: 100, text: "全部" }],
-                    sortBy: '',
-                    sortDesc: false,
-                    sortDirection: 'asc',
-                    filter: null,
-                    filterOn: [],
-                    infoModal: {
-                        id: 'info-modal',
-                        title: '',
-                        content: ''
-                    }
+            data: {
+                isBusy: true,
+                items: [],
+                fields: [
+                    { key: 'ProductId', label: '產品編號', class: 'text-center' },
+                    { key: 'ProductName', label: '產品名子', class: 'text-center' },
+                    { key: 'Description', label: '描述', class: 'text-center', },
+                    { key: 'Discontinuation', label: '是否停用', class: 'text-center' },
+                    { key: 'DailyRate', label: '單價', class: 'text-center' },
+                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
+                    { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
+                    { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                ],
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 5,
+                pageOptions: [5, 10, 15, { value: 100, text: "全部" }],
+                sortBy: '',
+                sortDesc: false,
+                sortDirection: 'asc',
+                filter: null,
+                filterOn: [],
+                infoModal: {
+                    id: 'info-modal',
+                    title: '',
+                    content: ''
                 }
+
             },
             computed: {
                 sortOptions() {
@@ -255,11 +239,47 @@
                     this.totalRows = filteredItems.length
                     this.currentPage = 1
                 }
-            }
+            },
+            watch: {
+                items: function () {
+                    this.isBusy = !this.isBusy
+                }
+            },
+
+ 
         })
+        function LoadData() {
+
+            const Url = "/api/Product"
+
+            fetch(Url,
+                {
+                    method: "Get",
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                .then(res => res.json())
+                .then(result => {
+                    vm.$data.items = result;
+
+                })
+                .catch(ex => {
+                    console.log("資料撈失敗@@");
+                })
+        };
+
+
+
+
+
+
+        $(document).ready(function () {
+            LoadData()
+
+        });
 
 
     </script>
+
 
 
 }

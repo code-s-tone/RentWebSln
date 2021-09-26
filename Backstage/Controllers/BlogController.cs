@@ -26,14 +26,10 @@ namespace Backstage.Controllers
 
         //編輯器頁面送出後 內容處理
         [HttpPost]
-        public IActionResult SaveBlog(BlogViewModel blogVM)
+        public IActionResult SaveBlog()
         {
-            TempData["content"] = blogVM.BlogContent;
-            var list = new List<BlogViewModel>
-            {
-                blogVM
-            };
-            return View("Editor", blogVM);
+
+            return View();
         }
     }
 }
