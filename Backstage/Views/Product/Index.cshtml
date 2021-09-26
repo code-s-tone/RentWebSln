@@ -88,8 +88,6 @@
                 </b-form-checkbox-group>
             </b-form-group>
         </b-col>
-
-
     </b-row>
 
     <!-- Main table element -->
@@ -104,11 +102,10 @@
              :sort-direction="sortDirection"
              :busy="isBusy"
              stacked="md"
-             class="">
-        show-empty
-        small
-        hover
-        @@filtered="onFiltered">
+             show-empty
+             small
+             hover
+             @@filtered="onFiltered">
         <template #table-busy>
             <div class="text-center text-danger my-2">
                 <b-spinner class="align-middle"></b-spinner>
@@ -160,23 +157,21 @@
                 </ul>
             </b-card>
         </template>
-
     </b-table>
     <b-row>
         <b-col sm="5" md="6" class="my-1">
-            <b-form-group label="筆數"
+            <b-form-group label="每頁顯示筆數"
                           label-for="per-page-select"
                           label-cols-sm="6"
                           label-cols-md="4"
                           label-cols-lg="3"
-                          label-align-sm="center"
+                          label-align-sm="right"
                           label-size="sm"
                           class="mb-0">
                 <b-form-select id="per-page-select"
                                v-model="perPage"
                                :options="pageOptions"
-                               size="sm"
-                               class="w-100"></b-form-select>
+                               size="sm"></b-form-select>
             </b-form-group>
         </b-col>
 
@@ -188,12 +183,12 @@
                           size="sm"
                           class="my-0"></b-pagination>
         </b-col>
-    </b-row>
-    <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
-        <pre>{{ infoModal.content }}</pre>
+    <b-row>
+            <!-- Info modal -->
+            <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
+                <pre>{{ infoModal.content }}</pre>
 
-    </b-modal>
+            </b-modal>
 </b-container>
 
 
@@ -210,7 +205,7 @@
         Fancybox.bind("[data-fancybox]", {
             // Your options go here
         });
-        </script>
+    </script>
     <script>
         var item;
         let vm;
@@ -281,7 +276,6 @@
             },
             filters: {
                 dateFormat: function (value) {
-                    console.log(`dateformat :`, value);
                     let result = new moment(value).format('LLLL');
                     return result;
                 }
