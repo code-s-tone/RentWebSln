@@ -115,13 +115,13 @@
             </div>
         </template>
         <template v-slot:cell(WithdrawalDate)="row">
-            {{ row.value.WithdrawalDate|dateFormat }}
+            {{ row.item.WithdrawalDate|dateFormat }}
         </template>
         <template v-slot:cell(LaunchDate)="row">
-            {{ row.value.LaunchDate|dateFormat }}
+            {{ row.item.LaunchDate|dateFormat }}
         </template>
         <template v-slot:cell(UpdateTime)="row">
-            {{ row.value.WithdrawalDate|UpdateTime }}
+            {{ row.item.UpdateTime|dateFormat }}
         </template>
 
         <template #cell(actions)="row">
@@ -213,9 +213,9 @@
                     { key: 'ProductId', label: '產品編號', class: 'text-center' },
                     { key: 'ProductName', label: '產品名子', class: 'text-center' },
                     { key: 'DailyRate', label: '單價', class: 'text-center' },
-                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
                     { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
                     { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
                     { key: 'actions', label: '動作' }
                 ],
                 totalRows: 1,
