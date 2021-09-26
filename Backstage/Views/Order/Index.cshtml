@@ -123,10 +123,18 @@
                  :sort-by.sync="sortBy"
                  :sort-desc.sync="sortDesc"
                  :sort-direction="sortDirection"
+                 :busy="isBusy"
                  stacked="md"
                  show-empty
                  small
                  @@filtered="onFiltered">
+            <template #table-busy>
+                <div class="text-center text-danger my-2">
+                    <b-spinner class="align-middle"></b-spinner>
+                    <strong>加載中...</strong>
+                </div>
+            </template>
+
             <template #cell(name)="row">
                 {{ row.value.first }} {{ row.value.last }}
             </template>
@@ -157,34 +165,15 @@
 </div>
 
 
-
-<script>
-    let vm;
-    let item;
-    const Url = "/api/OrderApi"
-    function LoadData() {
-        fetch(Url,
-            {
-                method: "Get",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-
-            }).then(res => res.json())
-            .then(result => {
-                item = result;
-                Binding();
-            })
-            .catch(ex => {
-                console.log("錯了");
-            })
-    };
-
-    function Binding() {
-    vm =  new Vue({
-        el: "#app",
-        data: {
-                items:item,
+@section endJS{
+    <script>
+        let vm;
+        let item;
+        vm = new Vue({
+            el: "#app",
+            data: {
+                isBusy: true,
+                items: [],
                 fields: [
                     { key: 'orderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
                     { key: 'memberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
@@ -225,45 +214,64 @@
                     title: '',
                     content: ''
                 }
-        },
-        computed: {
-            sortOptions() {
-                // Create an options list from our fields
-                return this.fields
-                    .filter(f => f.sortable)
-                    .map(f => {
-                        return { text: f.label, value: f.key }
-                    })
-            }
-        },
-        mounted() {
-            // Set the initial number of items
-            this.totalRows = this.items.length
-        },
-        methods: {
-            info(item, index, button) {
-                this.infoModal.title = `Row index: ${index}`
-                this.infoModal.content = JSON.stringify(item, null, 2)
-                this.$root.$emit('bv::show::modal', this.infoModal.id, button)
             },
-            resetInfoModal() {
-                this.infoModal.title = ''
-                this.infoModal.content = ''
+            computed: {
+                sortOptions() {
+                    // Create an options list from our fields
+                    return this.fields
+                        .filter(f => f.sortable)
+                        .map(f => {
+                            return { text: f.label, value: f.key }
+                        })
+                }
             },
-            onFiltered(filteredItems) {
-                // Trigger pagination to update the number of buttons/pages due to filtering
-                this.totalRows = filteredItems.length
-                this.currentPage = 1
-            }
-        }
-    });
-    }
-    window.onload = function () {
-        LoadData();
-    }
+            mounted() {
+                // Set the initial number of items
+                this.totalRows = this.items.length
+            },
+            methods: {
+                info(item, index, button) {
+                    this.infoModal.title = `Row index: ${index}`
+                    this.infoModal.content = JSON.stringify(item, null, 2)
+                    this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+                },
+                resetInfoModal() {
+                    this.infoModal.title = ''
+                    this.infoModal.content = ''
+                },
+                onFiltered(filteredItems) {
+                    // Trigger pagination to update the number of buttons/pages due to filtering
+                    this.totalRows = filteredItems.length
+                    this.currentPage = 1
+                }
+            },
+            watch: {
+                items: function () {
+                    this.isBusy = !this.isBusy
+                }
+            },
+        });
 
-        //$(document).ready(function () {
-        //    LoadData();
-        //});
-</script>
+        const Url = "/api/OrderApi"
+        function LoadData() {
+            fetch(Url,
+                {
+                    method: "Get",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
 
+                }).then(res => res.json())
+                .then(result => {
+                    vm.$data.items = result;
+                })
+                .catch(ex => {
+                    console.log("錯了");
+                })
+        };
+
+        $(document).ready(function () {
+            LoadData();
+        });
+    </script>
+}
