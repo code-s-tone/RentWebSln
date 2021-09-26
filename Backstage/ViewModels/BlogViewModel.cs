@@ -9,6 +9,7 @@ namespace Backstage.ViewModels
     [Keyless]
     public class BlogViewModel
     {
+        
         public string BlogID { get; set; }
         public string BlogTitle { get; set; }
         public DateTime PostDate { get; set; }

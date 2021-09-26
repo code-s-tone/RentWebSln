@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
+using WebGrease.Css.Extensions;
+using System.Data.Entity;
 using RentWebProj.ViewModels;
 using RentWebProj.Models;
 using RentWebProj.Repositories;
-using System.Web.Mvc;
 using RentWebProj.Helpers;
-using WebGrease.Css.Extensions;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace RentWebProj.Services
 {
@@ -47,7 +48,7 @@ namespace RentWebProj.Services
             return AllProductCardVMList;
         }
 
-                public IEnumerable<CardsViewModel> GetCheapestProductCardData()
+        public IEnumerable<CardsViewModel> GetCheapestProductCardData()
         {
             var pList = GetAllProductCardData().ToList();
             IEnumerable<CardsViewModel> VMList = pList.OrderBy(x => x.DailyRate);
@@ -279,7 +280,7 @@ namespace RentWebProj.Services
             DateTime s = Convert.ToDateTime(startDate);
             DateTime e = Convert.ToDateTime(expirationDate);
 
-            var c = (from p in _repository.GetAll<Product>()
+            var cList = (from p in _repository.GetAll<Product>()
                      where p.ProductID == PID
                      select new CartIndex()
                      {
@@ -290,14 +291,13 @@ namespace RentWebProj.Services
                          //Qty = 1,//無作用
                          StartDate = s,
                          ExpirationDate = e,
+                         DateDiff = 1 + ((int)DbFunctions.DiffMinutes(s, e) - 1) / 1440
                          //產品圖片
-                     }).SingleOrDefault();
+                     }).ToList();
 
-            var dateDiff = (int)Math.Ceiling((e - s).TotalDays); //TotalDays帶小數
-            c.DateDiff = dateDiff;
-            c.Sub = c.DailyRate * dateDiff;
+            cList.ForEach(c => c.Sub = c.DailyRate * c.DateDiff);
 
-            return new List<CartIndex>() { c };
+            return cList;
         }
 
     }

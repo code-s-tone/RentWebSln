@@ -115,8 +115,8 @@ namespace RentWebProj.Services
                             //Sub = (decimal)p.DailyRate * ((int)DbFunctions.DiffDays((DateTime)c.StartDate, (DateTime)c.ExpirationDate))
                         };
 
-            var odSV = new OrderService();//軒
             //軒：每筆產品加入禁租日期，用select和foreach都失敗，所以才用這麼繞的方法
+            var odSV = new OrderService();
             var temp = CartIndex.ToList();
             temp.ForEach(c =>
             {
@@ -129,14 +129,14 @@ namespace RentWebProj.Services
                 c.Sub = c.DailyRate * dateDiff;
                 c.DisablePeriodsJSON = odSV.GetDisablePeriodJSON(c.ProductID);
             });
-            CartIndex = temp.AsEnumerable();
 
             //foreach (var item in CartIndex)
             //{
             //    //item.Sub = item.DailyRate * item.DateDiff;
             //}
 
-            return CartIndex;
+            //CartIndex = temp.AsEnumerable();
+            return temp;// CartIndex;
         }
 
         public decimal GetCartTotal(int MemberID)
