@@ -114,6 +114,7 @@
         </b-row>
 
         <!-- Main table element -->
+        @*:busy="isBusy"*@
         <b-table :items="items"
                  :fields="fields"
                  :current-page="currentPage"
@@ -123,17 +124,17 @@
                  :sort-by.sync="sortBy"
                  :sort-desc.sync="sortDesc"
                  :sort-direction="sortDirection"
-                 :busy="isBusy"
                  stacked="md"
                  show-empty
                  small
                  @@filtered="onFiltered">
-            <template #table-busy>
-                <div class="text-center text-danger my-2">
-                    <b-spinner class="align-middle"></b-spinner>
-                    <strong>加載中...</strong>
-                </div>
-            </template>
+
+            @*<template #table-busy>
+                    <div class="text-center text-danger my-2">
+                        <b-spinner class="align-middle"></b-spinner>
+                        <strong>加載中...</strong>
+                    </div>
+                </template>*@
 
             <template #cell(name)="row">
                 {{ row.value.first }} {{ row.value.last }}
@@ -151,10 +152,18 @@
             <template #row-details="row">
                 <b-card>
                     <ul>
-                        <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
+                        @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
+                        <li><b-col sm="3"><span>訂單編號:{{row.item.orderID}}</span></b-col></li>
+                        <li><b-col sm="3"><span>會員編號:{{row.item.memberID}}</span></b-col></li>
+                        <li><b-col sm="3"><span>產品名稱:{{row.item.productName}}</span></b-col></li>
+                        <li><b-col sm="3"><span>單日租價:{{row.item.dailyRate}}</span></b-col></li>
+                        <li><b-col sm="3"><span>起日:{{row.item.startDate}}</span></b-col></li>
+                        <li><b-col sm="3"><span>訖日:{{row.item.expirationDate}}</span></b-col></li>
+                        <li><b-col sm="3"><span>總價:{{row.item.totalAmount}}</span></b-col></li>
                     </ul>
                 </b-card>
             </template>
+
         </b-table>
 
         <!-- Info modal -->
@@ -175,16 +184,16 @@
                 isBusy: true,
                 items: [],
                 fields: [
-                    { key: 'orderID', label: '訂單編號', sortable: true, sortDirection: 'desc' },
-                    { key: 'memberID', label: '會員編號', sortable: true, sortDirection: 'desc' },
-                    { key: 'fullName', label: '訂單人姓名', sortable: false, sortDirection: 'desc' },
-                    { key: 'storeName', label: '分店', sortable: false, sortDirection: 'desc' },
-                    { key: 'phone', label: '聯絡電話', sortable: false, sortDirection: 'desc' },
-                    { key: 'email', label: '聯絡信箱', sortable: false, sortDirection: 'desc' },
+                    { key: 'orderID', label: '訂單編號', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'memberID', label: '會員編號', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'fullName', label: '訂單人姓名', sortable: false, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'storeName', label: '分店', sortable: false, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'phone', label: '聯絡電話', sortable: false, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'email', label: '聯絡信箱', sortable: false, sortDirection: 'desc', class: 'text-center' },
                     //{ key: 'TotalAmount', label: '訂單總額', sortable: true, sortDirection: 'desc' },
-                    { key: 'orderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc' },
-                    { key: 'goodsStatusID', label: '出貨狀態', sortable: true, sortDirection: 'desc' },
-                    { key: 'orderDate', label: '成立時間', sortable: true, sortDirection: 'desc' },
+                    { key: 'orderStatusID', label: '付款狀態', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'goodsStatusID', label: '出貨狀態', sortable: true, sortDirection: 'desc', class: 'text-center' },
+                    { key: 'orderDate', label: '成立時間', sortable: true, sortDirection: 'desc', class: 'text-center' },
 
                     //{ key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
 
@@ -245,11 +254,11 @@
                     this.currentPage = 1
                 }
             },
-            watch: {
-                items: function () {
-                    this.isBusy = !this.isBusy
-                }
-            },
+            //watch: {
+            //    items: function () {
+            //        this.isBusy = false;
+            //    }
+            //},
         });
 
         const Url = "/api/OrderApi"
