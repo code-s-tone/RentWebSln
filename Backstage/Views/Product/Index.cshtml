@@ -104,24 +104,34 @@
              :sort-direction="sortDirection"
              :busy="isBusy"
              stacked="md"
-             show-empty
-             small
-             hover
-             @@filtered="onFiltered">
+             class="">
+        show-empty
+        small
+        hover
+        @@filtered="onFiltered">
         <template #table-busy>
             <div class="text-center text-danger my-2">
                 <b-spinner class="align-middle"></b-spinner>
                 <strong>加載中...</strong>
             </div>
         </template>
+        <template v-slot:cell(ProductId)="row">
+            <div class="mt-2">{{ row.item.ProductId }}</div>
+        </template>
+        <template v-slot:cell(ProductName)="row">
+            <div class="mt-2">{{ row.item.ProductName }}</div>
+        </template>
+        <template v-slot:cell(DailyRate)="row">
+            <div class="mt-2">{{ row.item.DailyRate }}</div>
+        </template>
         <template v-slot:cell(WithdrawalDate)="row">
-            {{ row.item.WithdrawalDate|dateFormat }}
+            <div class="mt-2">{{ row.item.WithdrawalDate|dateFormat }}</div>
         </template>
         <template v-slot:cell(LaunchDate)="row">
-            {{ row.item.LaunchDate|dateFormat }}
+            <div class="mt-2">{{ row.item.LaunchDate|dateFormat }}</div>
         </template>
         <template v-slot:cell(UpdateTime)="row">
-            {{ row.item.UpdateTime|dateFormat }}
+            <div class="mt-2">{{ row.item.UpdateTime|dateFormat }}</div>
         </template>
 
         <template #cell(actions)="row">
