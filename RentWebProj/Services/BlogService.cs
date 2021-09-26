@@ -15,9 +15,9 @@ namespace RentWebProj.Services
         {
             _repository = new CommonRepository();
         }
-        public BlogViewModel Get1Blog()
+        public List<BlogViewModel> GetAllBlogs()
         {
-            var bl = (from x in _repository.GetAll<Blog>()
+            var blogVM = (from x in _repository.GetAll<Blog>()
                      select new BlogViewModel()
                      {
                          BlogTitle = x.BlogTitle,
@@ -27,8 +27,22 @@ namespace RentWebProj.Services
                          Preview = x.Preview,
                          BlogContent = x.BlogContent,
                      }).ToList();
-            return bl.FirstOrDefault();
+            return blogVM;
 
+        }
+        public BlogViewModel FindBlogById(int Id)
+        {
+            var bl = (from x in _repository.GetAll<Blog>()
+                      select new BlogViewModel()
+                      {
+                          BlogTitle = x.BlogTitle,
+                          PostDate = x.PostDate,
+                          MainImgUrl = x.MainImgUrl,
+                          MainImgTitle = x.MainImgTitle,
+                          Preview = x.Preview,
+                          BlogContent = x.BlogContent,
+                      }).ToList();
+            return bl.FirstOrDefault();
         }
     }
 }

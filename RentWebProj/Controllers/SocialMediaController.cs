@@ -16,10 +16,15 @@ namespace RentWebProj.Controllers
             _service = new BlogService();
         }
         
-        public ActionResult BlogPost()
+        public ActionResult BlogList()
         {
-            var b = _service.Get1Blog();
-            return View(b);
+            var blogList = _service.GetAllBlogs();
+            return View(blogList);
+        }
+        public ActionResult BlogPage(int Id)
+        {
+             _service.FindBlogById(Id);
+            return View();
         }
         public ActionResult News()
         {
