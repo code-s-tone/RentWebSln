@@ -152,7 +152,7 @@
                     <b-col sm="6"><h5 class="text-left border-bottom"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate|dateFormat }}</h5></b-col>
                     @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
                     @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
-                    <b-col sm="1" v-for="result in row.item.ProductImages" class="d-flex flex-wrap justify-content-center"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
+                    <b-col v-for="result in row.item.ProductImages" class="d-flex flex-wrap justify-content-center"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
 
                 </ul>
             </b-card>
