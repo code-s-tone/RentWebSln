@@ -186,7 +186,61 @@
         <b-row>
             <!-- Info modal -->
             <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
-                <pre>{{ infoModal.content }}</pre>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品編號:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductId"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品名稱:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductName"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品描述:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.Description"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品單價:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.DailyRate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">上架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.LaunchDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">下架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.WithdrawalDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+
+
+                <b-form-group>
+                    <b-form-checkbox v-model="infoModal.content.Discontinuation" name="check-button" switch class="text-center">
+                        是否停用產品<b>{{infoModal.content.Discontinuation}}</b>
+                    </b-form-checkbox>
+                </b-form-group>
 
             </b-modal>
 </b-container>
@@ -253,8 +307,8 @@
             },
             methods: {
                 info(item, index, button) {
-                    this.infoModal.title = `Row index: ${index}`
-                    this.infoModal.content = JSON.stringify(item, null, 2)
+                    this.infoModal.title = `${item.ProductName}`
+                    this.infoModal.content = item
                     this.$root.$emit('bv::show::modal', this.infoModal.id, button)
                 },
                 resetInfoModal() {
