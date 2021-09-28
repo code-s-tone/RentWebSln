@@ -1,6 +1,6 @@
 ﻿@model FilterSearchViewModel
 @{
-    ViewBag.Title = "ProductCards";
+    ViewBag.Title = ViewBag.ContainerTitle;
 }
 @using System.Text.RegularExpressions;
 @using System.Web.UI.WebControls
@@ -24,7 +24,7 @@
                         <br>
                         @{
                             List<SelectListItem> categoryList = new List<SelectListItem>()
-                                        {
+                                                    {
                                 new SelectListItem {Text = "選擇商品種類", Value = "0"}
                             };
                             foreach (var ct in ViewBag.categoryOptions)
@@ -40,7 +40,7 @@
                         @* 副類下拉 *@
                         @{
                             List<SelectListItem> subcategoryList = new List<SelectListItem>()
-                                                                                        {
+                                                                                                    {
                                 new SelectListItem {Text = "選擇子分類", Value = "0"}
                             };
 
@@ -64,7 +64,7 @@
                         <br>
                         @{
                             List<SelectListItem> priceList = new List<SelectListItem>()
-                                                                                        {
+                                                                                                    {
                                 new SelectListItem {Text = "日租費預算範圍", Value = "0"},
                                 new SelectListItem {Text = "$100以下", Value = "1"},
                                 new SelectListItem {Text = "$101~$500", Value = "2"},
@@ -157,7 +157,7 @@
     <script>
         isAuthenticated_Cards = @Json.Encode(User.Identity.IsAuthenticated);
     </script>
-    
+
     <script src="~/Assets/js/GeneralProductCards/CardToCart.js"></script>
     <script src="~/Assets/js/GeneralProductCards/CategoriesSelector.js"></script>
 

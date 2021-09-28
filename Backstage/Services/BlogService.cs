@@ -17,22 +17,7 @@ namespace Backstage.Services
         {
             _ctx = ctx;
         }
-        public int Create(BlogViewModel blogVM)
-        {
-            var blog = new Blog()
-            {
-                BlogTitle = blogVM.BlogTitle,
-                PostDate = blogVM.PostDate.Date,
-                MainImgUrl = blogVM.MainImgUrl,
-                MainImgTitle = blogVM.MainImgTitle,
-                Preview = blogVM.Preview,
-                BlogContent = blogVM.BlogContent,
-            };
-            _ctx.Add(blog);
-            int num = _ctx.SaveChanges();
-            return num;
-        }
-        //public async Task<int> Create(BlogViewModel blogVM)
+        //public int Create(BlogViewModel blogVM)
         //{
         //    var blog = new Blog()
         //    {
@@ -44,23 +29,27 @@ namespace Backstage.Services
         //        BlogContent = blogVM.BlogContent,
         //    };
         //    _ctx.Add(blog);
-        //    int num = await _ctx.SaveChangesAsync();
+        //    int num = _ctx.SaveChanges();
         //    return num;
         //}
-
-        public async Task<IEnumerable<BlogViewModel>> GetBlogs()
+        public async Task<int> Create(BlogViewModel blogVM)
         {
-            //var blogList = await _ctx.Blogs.Select 
-            //    ( x=>new BlogViewModel { 
-            //        BlogId=x.BlogId, 
-            //        BlogTitle=x.BlogTitle,
-            //        PostDate=x.PostDate,
-            //        Preview=x.Preview,
-            //        MainImgTitle=x.MainImgTitle,
-            //        MainImgUrl=x.MainImgUrl,
-            //        BlogContent=x.BlogContent,
-            //    }).ToListAsync();
+            var blog = new Blog()
+            {
+                BlogTitle = blogVM.BlogTitle,
+                PostDate = blogVM.PostDate.Date,
+                MainImgUrl = blogVM.MainImgUrl,
+                MainImgTitle = blogVM.MainImgTitle,
+                Preview = blogVM.Preview,
+                BlogContent = blogVM.BlogContent,
+            };
+            _ctx.Add(blog);
+            int num = await _ctx.SaveChangesAsync();
+            return num;
+        }
 
+        public async Task<IEnumerable<BlogViewModel>> GetAllBlogs()
+        {
             var blogList = await (
                 from x in _ctx.Blogs
                 select new BlogViewModel
@@ -77,6 +66,13 @@ namespace Backstage.Services
 
             return blogList;
         }
+        public async Task<BlogViewModel> FindBlogById(int id)
+        {
+            var bloglist = await GetAllBlogs();
+            var blog = bloglist.Select(x => x.BlogId == id);
+            return (BlogViewModel)blog;
+        }
+            
         public void UpdataBlog()
         {
 

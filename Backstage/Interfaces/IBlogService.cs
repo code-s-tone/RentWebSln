@@ -16,12 +16,16 @@ namespace Backstage.Interfaces
             return num;
         }
 
-        public async Task<IEnumerable<BlogViewModel>> GetBlogs()
+        public async Task<IEnumerable<BlogViewModel>> GetAllBlogs()
         {
-            List<BlogViewModel> list = new List<BlogViewModel>();
+            List<BlogViewModel> list =  new List<BlogViewModel>();
             return list;
         }
-
+        public async Task<BlogViewModel> FindBlogById(int blogid)
+        {
+            var blog = new BlogViewModel();
+            return blog;
+        }
         public void UpdataBlog()
         {
 

@@ -25,7 +25,7 @@
   
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <title>知租網</title>
+    <title>知租網 - @ViewBag.Title</title>
 
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("topCSS", required: false)
@@ -153,7 +153,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">想租看這<i class="fas fa-chevron-down arrow"></i></a>
+                                <a href="#">租借方式<i class="fas fa-chevron-down arrow"></i></a>
                                 <ul class="sub-menu">
                                     <a href="@Url.Action("HowToRent", "Home")">
                                     <li>如何租借</li>
@@ -175,15 +175,10 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">業配一下<i class="fas fa-chevron-down arrow"></i></a>
+                                <a href="#">共享好文<i class="fas fa-chevron-down arrow"></i></a>
                                 <ul class="sub-menu">
-                                    <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                                    <li>共享經濟</li>
-                                    </a>
-                                    <a href="@Url.Action("BlogList", "SocialMedia")">
-                                    <li>網紅推推</li>
-                                    </a>
-
+                                    <a href="@Url.Action("BlogList", "SocialMedia")"><li>所有好文</li></a>
+                                    <a href="@Url.Action("SharingEconomy", "SocialMedia")"><li>共享經濟</li></a>
                                 </ul>
                             </li>
 
@@ -250,7 +245,7 @@
                         所有商品
                     </a>
                 </div>
-                <a href="#" class="dropdown-btn"> 想租看這 <i class="fas fa-caret-down"></i></a>
+                <a href="#" class="dropdown-btn"> 租借方式 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
                     @Html.ActionLink("如何租借", "HowToRent", "Home")
                 </div>
@@ -262,8 +257,8 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
+                    @Html.ActionLink("所有好文", "BlogList", "SocialMedia")
                     @Html.ActionLink("共享經濟", "SharingEconomy", "SocialMedia")
-                    @Html.ActionLink("網紅推推", "BlogList", "SocialMedia")
                 </div>
             </div>
             <hr>
@@ -351,13 +346,8 @@
                     </div>
 
                     <div class="">
-                        <a href="@Url.Action("SharingEconomy", "SocialMedia")">
-                            <li>共享經濟</li>
-                        </a>
-                        <a href="@Url.Action("BlogList", "SocialMedia")">
-                            <li>網紅推推</li>
-                        </a>
-
+                        <a href="@Url.Action("BlogList", "SocialMedia")"><li>所有好文</li></a>
+                        <a href="@Url.Action("SharingEconomy", "SocialMedia")"><li>共享經濟</li></a>       
                     </div>
 
                 </div>

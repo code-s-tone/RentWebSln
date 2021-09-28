@@ -21,10 +21,10 @@ namespace RentWebProj.Controllers
             var blogList = _service.GetAllBlogs();
             return View(blogList);
         }
-        public ActionResult BlogPage(int Id)
+        public ActionResult BlogPage(int id)
         {
-             _service.FindBlogById(Id);
-            return View();
+             var blog = _service.FindBlogById(id);
+            return View(blog);
         }
         public ActionResult News()
         {

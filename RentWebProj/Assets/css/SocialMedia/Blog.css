@@ -1,14 +1,23 @@
 ﻿.banner {
     background-image: url(https://ruckifyblog.ruckify.com/wp-content/uploads/2020/12/iStock-906360442-scaled.jpg);
-    height: 800px;
+    height: 700px;
     /* 設置背景混和模式為相乘模式 */
     background-blend-mode: multiply;
     background-size: cover;
     background-position: 50%;
     transition: 0.5s;
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 }
 
+.welcome{
+    text-decoration:none;
+    font-size:22px;
+    color:white;
+}
+    .welcome:hover {
+        color: #fc8d61;
+        transition: .2s;
+    }
     .banner img {
         width: 100%;
     }
@@ -51,7 +60,7 @@
     }
 
 .mid .row:first-child {
-    width: 70%;
+    width: 80%;
 }
 
 .mid .row:nth-child(2) {
@@ -60,33 +69,34 @@
     height: 700px;
 }
 
-.mid .img img {
-    width: 250px;
-    height: 220px;
-    object-fit: cover;
-}
 
 
-.mid .text a {
-    text-decoration: none;
-    color: black;
-    font-size: 17px;
-}
-
-    .mid .text a:hover {
-        color: #fc8d61;
-        transition: 0.5s;
+    .mid .img img {
+        width: 250px;
+        height: 100%;
+        object-fit: cover;
     }
 
-.mid .text div {
-    margin-top: 10px;
+.mid .text a {
+    color: black;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.mid .text a:hover {
     color: #fc8d61;
-    font-size: 15px;
+    transition: .2s;
+}
+
+.mid .text div {
+    margin: 10px 0px;
+    color: cadetblue;
+    font-size: 16px;
 }
 
 .mid .text p {
-    margin-top: 15px;
-    font-size: 14px;
+    font-size: 16px;
     color: gray;
 }
 
@@ -147,9 +157,8 @@
 
 
 @media screen and (max-width:1023px) {
-
-    .mid .text p {
-        font-size: 13px;
+    .mid .blogBox {
+        padding:0 30px;
     }
 
     .mid .row:first-child {
@@ -173,7 +182,7 @@
 
 @media screen and (max-width:767px) {
     .banner {
-        height: 500px;
+        height: 450px;
     }
 
         .banner h1 {
@@ -203,9 +212,12 @@
     .sign-img {
         display: none;
     }
-
-
-
+    .welcome {
+        font-size: 18px;
+    }
+    .mid .blogBox {
+        padding: 0 25px;
+    }
     .mid .row:first-child {
         width: 100%;
     }
@@ -223,11 +235,15 @@
     }
 
         .mid .text p {
-            font-size: 10px;
+            font-size: 14px;
         }
 
         .mid .text a {
-            font-size: 14px;
+            font-size: 16px;
+        }
+        .mid .text div {
+            margin: 8px 0px;
+            font-size: 12px;
         }
 
     .mid .row:nth-child(2) {
