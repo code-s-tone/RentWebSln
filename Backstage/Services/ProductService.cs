@@ -4,6 +4,7 @@ using Backstage.ViewModels;
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -36,8 +37,10 @@ namespace Backstage.Services
                                             WithdrawalDate = p.WithdrawalDate,
                                             UpdateTime = p.UpdateTime,
                                             ProductImages = resutk
-
                                         };
+
+
+           
             return result;
         }
     }
