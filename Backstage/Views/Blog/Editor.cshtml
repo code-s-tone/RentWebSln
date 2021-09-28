@@ -1,9 +1,9 @@
 ﻿@{
-    ViewData["Title"] = "BlogEditor";
+    ViewData["Title"] = "發文系統";
 }
 @model BlogViewModel
 
-<h2 class="text-center mt-4">前台文章編輯</h2>
+<h2 class="text-center mt-4">前台文章發佈</h2>
 <div id="blogEditorApp" class="container">
     <form name='form' id="blogForm" class="row py-4 px-5" asp-controller="Blog" asp-action="SaveBlog" method="POST" onsubmit="return checkContent()">
         <div class="col-12 col-md-6 mb-3 px-3">
