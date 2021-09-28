@@ -5,11 +5,10 @@
     display: flex;
 }
 
-
 .member-display-order-item,
 .member-display-order-item-show-button,
 .member-display-order-item-display {
-    width: 20%;
+    width: 16.6666%;
 }
 
 .detail-title, .detail-item {
@@ -20,9 +19,7 @@
     background-color: bisque;
     font-size: 16px; 
 }
-.detail-item {
 
-}
 .member-display-order-item-show-button,
 .member-display-order-item-display
 {
@@ -53,46 +50,69 @@
     border-radius: unset;
     /*border: 1px solid blue;*/
     border: 1px solid #fc8d61;
-    margin: 25px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 .member-display-order-detail-list {
     display: flex;
     flex-wrap: wrap;
     font-size: 15px;
-    color: #272727; 
-    box-shadow: 3px 3px 8px #fc8d61;
+    color: #272727;
+    /*box-shadow: 3px 3px 8px #fc8d61;*/
 }
 .ProductName{
     height:50px;
 }
-.orders {
-    margin-top: 50px;
-    margin-left: 550px;
-}
-.RentDate {
-    margin-top: 75px;
-    margin-left: 138px;
-}
-.TotalAmount {
-    margin-top: 75px;
-    margin-left: 1060px;
-    font-size: 20px;
-    font-weight: bold;
-}
-.GoodsStatus {
-    margin-top: 15px;
-    margin-left: 1060px;
-    color: #fc8d61;
+.order-during {
+    align-items: end;
 }
 
+.order-name {
+    display: flex;
+    align-items: center;
+    color: Chocolate;
+    font-size: 15px;
+}
+
+.order-rentday {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+.order-price {
+    align-items: center;
+    justify-content: end;
+}
+.order-status {
+    align-items: center;
+    justify-content: end;
+}
+
+.order-during,
+.order-name,
+.order-rentday,
+.order-price,
+.order-status{
+    font-weight:700;
+}
+
+.member-order-info-item {
+    width: 14%;
+}
+
+.member-order-info-item-more{
+    width:42%;
+}
 /* 訂單狀態:待付款 設定字體顏色:紅色 */
 .NotPay {
     color: crimson;
 }
 
 @media screen and (min-width:312px) {
-    .member-display-order-title, .member-display-order-detail, .member-display-order-detail-list{
+    .member-display-order-title,
+    .member-display-order-detail,
+    .member-display-order-detail-list,
+    .member-btn-style {
         font-size: 20%;
     }
 }
@@ -100,7 +120,8 @@
 @media screen and (min-width:414px) {
     .member-display-order-title,
     .member-display-order-detail,
-    .member-display-order-detail-list{
+    .member-display-order-detail-list,
+    .member-btn-style {
         transition: 1s;
         font-size: 20%;
     }
@@ -109,7 +130,8 @@
 @media screen and (min-width:568px ) {
     .member-display-order-title,
     .member-display-order-detail,
-    .member-display-order-detail-list{
+    .member-display-order-detail-list,
+    .member-btn-style {
         transition: 1s;
         font-size: 50%;
     }
@@ -119,7 +141,8 @@
 @media screen and (min-width:768px ) {
     .member-display-order-title,
     .member-display-order-detail,
-    .member-display-order-detail-list{
+    .member-display-order-detail-list,
+    .member-btn-style {
         transition: 1s;
         font-size: 80%;
     }
@@ -128,9 +151,30 @@
 @media screen and (min-width:992px ) {
     .member-display-order-title,
     .member-display-order-detail,
-    .member-display-order-detail-list{
+    .member-display-order-detail-list,
+    .member-btn-style {
         transition: 1s;
         font-size: 100%;
     }
+}
+
+@media screen and (min-width:996px) {
+    .member-order-info-item {
+        width: 14%;
+    }
+
+    .member-order-info-item-more{
+        width: 42%;
+    }
+
+    .order-during,
+    .order-name,
+    .order-rentday,
+    .order-price,
+    .order-status {
+        font-weight: 700;
+    }
+
+
 }
 
