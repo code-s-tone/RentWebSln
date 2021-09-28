@@ -401,11 +401,34 @@
                                     </div>
                                 }
                             </div>
-                            <div class="member-display-order-detail-list position-relative">
+                            <div class="member-display-order-detail-list position-relative order-detail-style">
                                 @foreach (var orderDetail in order.OrderDetails)
                                 {
                                     var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/Product/" + orderDetail.ProductID.Substring(0, 3) + "/" + orderDetail.ProductID + "_1.jpg";
-                                    <div class="border border-1 w-100 d-flex position-relative order-detail-style">
+                                    //新明細
+                                    <div class="member-order-img">
+                                        <img class="d-block position-relative" src=@src style="height: 100px">
+                                    </div>
+                                    <div class="member-order-info">
+                                        <div style="" class="d-flex member-order-info-item-more order-during">
+                                            <div class="d-flex">
+                                                <h5 class="">@orderDetail.StartDate.ToString("yyyy/MM/dd HH:mm")</h5>
+                                                <h5>&nbsp</h5>
+                                                <h2>~</h2>
+                                                <h5>&nbsp</h5>
+                                                <h5 class="">@orderDetail.ExpirationDate.ToString("yyyy/MM/dd HH:mm")</h5>
+                                            </div>
+                                        </div>
+
+                                        <div class="member-order-info-item order-name">@orderDetail.ProductName</div>
+                                        <h5 class="member-order-info-item d-flex order-rentday">@orderDetail.RentDate 天</h5>
+                                        <h5 class="member-order-info-item d-flex order-status">@orderDetail.GoodsStatus</h5>
+                                        <h5 class="member-order-info-item d-flex order-price">$ @orderDetail.TotalAmount.ToString("#,###.###")</h5>
+                                    </div>
+
+                                    <div class="border border-1 w-100 d-flex position-relative ">
+                                    </div>
+                                    @*<div class="border border-1 w-100 d-flex position-relative order-detail-style">
                                         <img class="d-block position-relative" src=@src style="width: 120px; height: 100px ">
                                         <h5 class="position-absolute RentDate">@orderDetail.RentDate 天</h5>
                                         <span style=" color: Chocolate;font-size:20px;" class="d-block m-3 ProductName">@orderDetail.ProductName</span>
@@ -420,7 +443,7 @@
                                         </div>
                                         <h5 class="TotalAmount position-absolute">$ @orderDetail.TotalAmount.ToString("#,###.###")</h5>
                                         <h5 class=" position-absolute GoodsStatus" style="">@orderDetail.GoodsStatus</h5>
-                                    </div>
+                                    </div>*@
                                 }
 
                             </div>
