@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>RentWeb Admin - Dashboard</title>
+    <title>KnowrentgeAdmin</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/css/layout/all.min.css" rel="stylesheet" type="text/css" />
@@ -24,10 +24,10 @@
           href="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.css" />
     <!-- Custom styles for this template-->
     <link href="~/css/layout/sb-admin-2.min.css" rel="stylesheet" />
+
     <!--Bootstarp Css-->
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-
     <!--因需求把Bootsratp Vue上Head-->
     <!--Bootstarp Vue-->
     <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
@@ -50,9 +50,10 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Home")">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    @*<i class="fas fa-laugh-wink"></i>*@
+                    <img src="~/images/layout/spider-web.png" />
                 </div>
-                <div class="sidebar-brand-text mx-3">RentWeb BackStage</div>
+                <div class="sidebar-brand-text mx-3">Knowrentge Admin</div>
             </a>
 
                 <!-- Divider -->
@@ -61,7 +62,7 @@
                 <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="@Url.Action("Index", "Home")">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-chart-bar"></i>
                     <span>銷售總表</span>
                 </a>
             </li>
@@ -70,7 +71,7 @@
             <li class="nav-item">
                 <!--<a class="nav-link" href="charts.html">-->
                 <a class="nav-link" href="@Url.Action("Index", "Product" )">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fab fa-product-hunt"></i>
                     <span>產品管理</span>
                 </a>
             </li>
@@ -78,16 +79,16 @@
             <!-- Nav Item - 訂單管理 -->
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index", "Order" )">
-                    <i class="fas fa-file-invoice-dollar"></i>
+                    <i class="fas fa-sort-amount-down"></i>
                     <span>訂單管理</span>
                 </a>
             </li>
 
             <!-- Nav Item - 文本管理 -->
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Editor")">
+                <a class="nav-link" href="@Url.Action("Editor", "Blog")">
                     <!--<a class="nav-link" href="tables.html">-->
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-blog"></i>
                     <span>文本管理</span>
                 </a>
             </li>
@@ -215,7 +216,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin <i class="fas fa-user-shield"></i></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin <i class="text-warning fas fa-user-shield"></i></span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -255,7 +256,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; KnowrentgeAdmin 2021</span>
                     </div>
                 </div>
             </footer>

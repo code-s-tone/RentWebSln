@@ -88,8 +88,6 @@
                 </b-form-checkbox-group>
             </b-form-group>
         </b-col>
-
-
     </b-row>
 
     <!-- Main table element -->
@@ -106,6 +104,7 @@
              stacked="md"
              show-empty
              small
+             hover
              @@filtered="onFiltered">
         <template #table-busy>
             <div class="text-center text-danger my-2">
@@ -113,17 +112,31 @@
                 <strong>加載中...</strong>
             </div>
         </template>
-
-        <template #cell(name)="row">
-            {{ row.value.first }} {{ row.value.last }}
+        <template v-slot:cell(ProductId)="row">
+            <div class="mt-2">{{ row.item.ProductId }}</div>
+        </template>
+        <template v-slot:cell(ProductName)="row">
+            <div class="mt-2">{{ row.item.ProductName }}</div>
+        </template>
+        <template v-slot:cell(DailyRate)="row">
+            <div class="mt-2">{{ row.item.DailyRate }}</div>
+        </template>
+        <template v-slot:cell(WithdrawalDate)="row">
+            <div class="mt-2">{{ row.item.WithdrawalDate|dateFormat }}</div>
+        </template>
+        <template v-slot:cell(LaunchDate)="row">
+            <div class="mt-2">{{ row.item.LaunchDate|dateFormat }}</div>
+        </template>
+        <template v-slot:cell(UpdateTime)="row">
+            <div class="mt-2">{{ row.item.UpdateTime|dateFormat }}</div>
         </template>
 
         <template #cell(actions)="row">
-            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1">
+            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1 my-1" variant="primary">
                 修改
             </b-button>
-            <b-button size="sm" @@click="row.toggleDetails">
-                {{ row.detailsShowing ? '隱藏' : '產品細節' }}
+            <b-button size="sm" @@click="row.toggleDetails" variant="success ">
+                {{ row.detailsShowing ? '隱藏' : '細項' }}
             </b-button>
         </template>
 
@@ -131,35 +144,34 @@
             <b-card>
                 <ul class="d-flex flex-wrap justify-content-center">
                     @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
-                    <b-col sm="6"><h5 class="text-left"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate }}</h5></b-col>
-                    <b-col sm="6"><h5 class="text-left"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate|dateFormat }}</h5></b-col>
                     @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
                     @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
-                    <b-col sm="1" v-for="result in row.item.ProductImages"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
-                    
+                    <b-col v-for="result in row.item.ProductImages" class="d-flex flex-wrap justify-content-center"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
+
                 </ul>
             </b-card>
         </template>
     </b-table>
     <b-row>
         <b-col sm="5" md="6" class="my-1">
-            <b-form-group label="筆數"
+            <b-form-group label="每頁顯示筆數"
                           label-for="per-page-select"
                           label-cols-sm="6"
                           label-cols-md="4"
                           label-cols-lg="3"
-                          label-align-sm="center"
+                          label-align-sm="right"
                           label-size="sm"
                           class="mb-0">
                 <b-form-select id="per-page-select"
                                v-model="perPage"
                                :options="pageOptions"
-                               size="sm"
-                               class="w-100"></b-form-select>
+                               size="sm"></b-form-select>
             </b-form-group>
         </b-col>
 
@@ -171,17 +183,73 @@
                           size="sm"
                           class="my-0"></b-pagination>
         </b-col>
-    </b-row>
-    <!-- Info modal -->
-    <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
-        <pre>{{ infoModal.content }}</pre>
-    </b-modal>
+        <b-row>
+            <!-- Info modal -->
+            <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品編號:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductId"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品名稱:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductName"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品描述:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.Description"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品單價:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.DailyRate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">上架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.LaunchDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">下架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.WithdrawalDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+
+
+                <b-form-group>
+                    <b-form-checkbox v-model="infoModal.content.Discontinuation" name="check-button" switch class="text-center">
+                        是否停用產品<b>{{infoModal.content.Discontinuation}}</b>
+                    </b-form-checkbox>
+                </b-form-group>
+
+            </b-modal>
 </b-container>
 
 
 
 @section topJS{
-
+    <script src="~/js/Product/moment.js"></script>
+    <script src="~/js/Product/momentTW.js"></script>
 }
 @section topCSS{
 
@@ -191,7 +259,7 @@
         Fancybox.bind("[data-fancybox]", {
             // Your options go here
         });
-        </script>
+    </script>
     <script>
         var item;
         let vm;
@@ -204,9 +272,9 @@
                     { key: 'ProductId', label: '產品編號', class: 'text-center' },
                     { key: 'ProductName', label: '產品名子', class: 'text-center' },
                     { key: 'DailyRate', label: '單價', class: 'text-center' },
-                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
                     { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
                     { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
                     { key: 'actions', label: '動作' }
                 ],
                 totalRows: 1,
@@ -239,8 +307,8 @@
             },
             methods: {
                 info(item, index, button) {
-                    this.infoModal.title = `Row index: ${index}`
-                    this.infoModal.content = JSON.stringify(item, null, 2)
+                    this.infoModal.title = `${item.ProductName}`
+                    this.infoModal.content = item
                     this.$root.$emit('bv::show::modal', this.infoModal.id, button)
                 },
                 resetInfoModal() {
@@ -251,16 +319,24 @@
                     // Trigger pagination to update the number of buttons/pages due to filtering
                     this.totalRows = filteredItems.length
                     this.currentPage = 1
-                }
+                },
+
+
             },
             watch: {
                 items: function () {
                     this.isBusy = false
                 }
             },
-
+            filters: {
+                dateFormat: function (value) {
+                    let result = new moment(value).format('LLLL');
+                    return result;
+                }
+            },
 
         })
+
         function LoadData() {
 
             const Url = "/api/Product"
@@ -279,10 +355,6 @@
                     console.log("資料撈失敗@@");
                 })
         };
-
-
-
-
 
 
         $(document).ready(function () {
