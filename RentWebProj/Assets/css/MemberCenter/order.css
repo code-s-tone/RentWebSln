@@ -88,7 +88,15 @@
     justify-content: end;
 }
 
-.member-order-info-item{
+.order-during,
+.order-name,
+.order-rentday,
+.order-price,
+.order-status{
+    font-weight:700;
+}
+
+.member-order-info-item {
     width: 14%;
 }
 
@@ -157,6 +165,14 @@
 
     .member-order-info-item-more{
         width: 42%;
+    }
+
+    .order-during,
+    .order-name,
+    .order-rentday,
+    .order-price,
+    .order-status {
+        font-weight: 700;
     }
 
 
