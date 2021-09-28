@@ -391,9 +391,9 @@
                                 <span class="member-display-order-item member-display-order-item-show-dynamic-button "> 查看明細+</span>
 
                                 @if (order.OrderStatus.ToString() == "待付款")
-                                {
-                                    <div style="margin-left:1050px;margin-top:-12px;" class="dropdown mb-2 position-absolute">
-                                        <button class="btn btn-info dropdown-toggle btn-area" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">更多</button>
+                                {   /*style="margin-left:1050px;margin-top:-12px;"*/
+                                    <div class="member-display-order-item dropdown mb-2">
+                                        <button class="btn btn-warning  btn-area member-btn-style" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">更多</button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="dropdown-item btn-pay" data-id="@order.OrderID" href="@Url.Action("MemberCenterOrderPay","Carts", new {OrderID = @order.OrderID})">重新付款</a></li>
                                             <li><a class="dropdown-item btn-cancel" data-id="@order.OrderID" href="#">取消訂單</a></li>
@@ -405,7 +405,7 @@
                                 @foreach (var orderDetail in order.OrderDetails)
                                 {
                                     var src = "https://res.cloudinary.com/dgaodzamk/image/upload/v1630733432/Product/" + orderDetail.ProductID.Substring(0, 3) + "/" + orderDetail.ProductID + "_1.jpg";
-                                    <div class="border border-2 w-100 d-flex position-relative ">
+                                    <div class="border border-1 w-100 d-flex position-relative order-detail-style">
                                         <img class="d-block position-relative" src=@src style="width: 120px; height: 100px ">
                                         <h5 class="position-absolute RentDate">@orderDetail.RentDate 天</h5>
                                         <span style=" color: Chocolate;font-size:20px;" class="d-block m-3 ProductName">@orderDetail.ProductName</span>
