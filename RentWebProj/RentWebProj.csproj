@@ -339,14 +339,13 @@
     <Content Include="Assets\css\SocialMedia\Blog.css" />
     <Content Include="Assets\images\Index\parallax0.png" />
     <Content Include="Assets\images\Index\parallax1.png" />
-    <Content Include="Assets\images\Index\parallax2-fix.png" />
-    <Content Include="Assets\images\Index\parallax2.png" />
     <Content Include="Assets\images\Index\parallax3.png" />
     <Content Include="Assets\images\Index\parallax4.png" />
     <Content Include="Assets\images\Index\parallax5.png" />
     <Content Include="Assets\images\Index\parallax6.png" />
     <Content Include="Assets\images\Index\parallax7.png" />
     <Content Include="Assets\images\Index\parallax8.png" />
+    <Content Include="Assets\images\Layout_Rent\RentLOGO-17.svg" />
     <Content Include="Assets\images\loadingdog.gif" />
     <Content Include="Assets\js\GeneralProductCards\CardToCart.js" />
     <Content Include="Assets\js\GeneralProductCards\CategoriesSelector.js" />
