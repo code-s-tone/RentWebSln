@@ -21,6 +21,9 @@ namespace Backstage.Services
 
         public IEnumerable<SalesAnalysis> GetSalesData()
         {
+            var now = DateTime.Now;
+            var begin = now.AddYears(-1);
+            //var end = now;
 
             var result =
                 from od in _ctx.OrderDetails//_repository.GetAll<OrderDetail>()
@@ -36,7 +39,8 @@ namespace Backstage.Services
 
                 join m in _ctx.Members//_repository.GetAll<Member>()
                 on o.MemberId equals m.MemberId
-                where o.OrderStatusId == 3 //已付款
+                where o.OrderStatusId == 3 //已付款 
+                    && od.StartDate > begin
                 select new SalesAnalysis
                 {
                     //種類區分
@@ -47,7 +51,8 @@ namespace Backstage.Services
                     StartMonth = $"{od.StartDate.Month+1}月",
                     //年齡層區分
                     //MID = o.MemberId,
-                    MemberAge = EF.Functions.DateDiffYear(m.Birthday, new DateTime())/10,
+                    //Member
+                    AgeLabel = $"<{EF.Functions.DateDiffYear(m.Birthday, DateTime.Now) / 10 + 1}0",
 
                     ProductName = p.ProductName,
                     PID = od.ProductId,

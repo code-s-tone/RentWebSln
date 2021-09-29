@@ -18,7 +18,7 @@
     "Backstage": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "Product",
+      "launchUrl": "",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
