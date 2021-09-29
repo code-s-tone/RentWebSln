@@ -26,8 +26,4 @@
     <PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\RentWebProj\RentWebProj.csproj" />
-  </ItemGroup>
-
 </Project>
