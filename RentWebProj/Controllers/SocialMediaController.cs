@@ -26,10 +26,7 @@ namespace RentWebProj.Controllers
              var blog = _service.FindBlogById(id);
             return View(blog);
         }
-        public ActionResult News()
-        {
-            return View();
-        }
+
         public ActionResult SharingEconomy()
         {
             return View();

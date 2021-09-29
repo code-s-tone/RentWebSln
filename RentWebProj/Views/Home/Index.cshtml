@@ -1,7 +1,7 @@
 ﻿@model List<IndexProductView>
 
 @{
-    ViewBag.Title = "首頁";
+    ViewBag.Title = "網羅你的租借需求🕸";
     var Catgories = new ProductService().GetCategoryData();
     var AllComments = new MemberService().GetAllComment().Take(10);
 }
@@ -17,7 +17,7 @@
     <div class="keyart_layer parallax" id="keyart-6" data-speed="49" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 75.0 -->
     <div class="keyart_layer" id="keyart-scrim"></div>
     <div class="keyart_layer parallax" id="keyart-7" data-speed="69" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 87.5 -->
-    <div class="keyart_layer" id="keyart-8" data-speed="100"></div>		<!-- 100. -->
+    <div class="keyart_layer" id="keyart-8" data-speed="100"></div>
 </header>
 
 @*<header>
@@ -166,46 +166,32 @@
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
         </section>
-
+        @{ 
+            var blogList = new BlogService().GetAllBlogs().OrderByDescending(x=>x.PostDate).Take(5);
+        }
 
         <section id="blogPosts" class="Area">
             <h3>
-                部落格文章
+                最新BLOG
                 @Html.ActionLink("(see all)", "BlogList", "SocialMedia")
             </h3>
             <div class="swiper-container blogPosts-swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="w-100" src="https://picsum.photos/300/500/?random=1">
+                    @foreach (var blog in blogList)
+                    {
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img class="w-100" src=@blog.MainImgUrl>
+                            </div>
+                            <div class="textBox">
+                                <h5 class="ellipsis">@blog.BlogTitle</h5>
+                                <p class="ellipsis">@blog.Preview</p>
+                                <a class="btn" href="@Url.Action("BlogPage", "SocialMedia", new { id=@blog.BlogId})">查看更多</a>
+                                @*<button class="btn">查看更多</button>*@                                
+                            </div>
                         </div>
-                        <div class="textBox">
-                            <h5 class="ellipsis">緊急時刻，男子模仿google小姐大喊：「RRRRRRURRRRRR」 </h5>
-                            <p class="ellipsis">隨着台中空調女孩子，它們細節超過類似工廠，不然雜誌總體答應深深將軍互相先進教育，好像政治精靈師傅明白，女朋友另一真實性見面終於一遍眼睛遺憾突破宣傳福州點擊女性，看不到這些有意博士動物效益領先我就西方瀏覽次數幫助是由資料庫，感覺傳播，春節任務群發查找施工他。 </p>
-                            <button class="btn">查看更多</button>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="w-100" src="https://picsum.photos/300/500/?random=2">
-                        </div>
-                        <div class="textBox">
-                            <h5 class="ellipsis">報導標題八十億人都震驚了 </h5>
-                            <p class="ellipsis">施工更大一家部門豐富小心加速說著房價員工，精英也在資料上下大師一大區域對不起衝突經濟發展獨特，信號選單感興趣，改造線路不太優化拿出。 </p>
-                            <button class="btn">查看更多</button>
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="imgBox">
-                            <img class="w-100" src="https://picsum.photos/300/500/?random=3">
-                        </div>
-                        <div class="textBox">
-                            <h5 class="ellipsis">驚，他竟然.. </h5>
-                            <p class="ellipsis">唯一相當私服比賽官員，進步房屋。</p>
-                            <button class="btn">查看更多</button>
-                        </div>
-                    </div>
+                    }
                 </div>
                 <!-- <div class="swiper-pagination"></div> -->
                 <div class="swiper-button-prev"></div>

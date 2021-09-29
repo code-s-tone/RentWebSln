@@ -339,9 +339,12 @@
     <Content Include="Assets\css\SocialMedia\Blog.css" />
     <Content Include="Assets\images\Index\parallax0.png" />
     <Content Include="Assets\images\Index\parallax1.png" />
+    <Content Include="Assets\images\Index\parallax2-fix.png" />
     <Content Include="Assets\images\Index\parallax3.png" />
     <Content Include="Assets\images\Index\parallax4.png" />
+    <Content Include="Assets\images\Index\parallax5-k.png" />
     <Content Include="Assets\images\Index\parallax5.png" />
+    <Content Include="Assets\images\Index\parallax6-c.png" />
     <Content Include="Assets\images\Index\parallax6.png" />
     <Content Include="Assets\images\Index\parallax7.png" />
     <Content Include="Assets\images\Index\parallax8.png" />
@@ -571,7 +574,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SocialMedia\BlogList.cshtml" />
-    <Content Include="Views\SocialMedia\News.cshtml" />
     <Content Include="Views\SocialMedia\SharingEconomy.cshtml" />
     <Content Include="Views\Home\HowToRent.cshtml" />
     <Content Include="Views\Home\ContributionProgram.cshtml" />
