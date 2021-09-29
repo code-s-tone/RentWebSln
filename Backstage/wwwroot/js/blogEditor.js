@@ -90,14 +90,14 @@
         "inputData.preview": {
             immediate: true,
             handler: function () {
-                let limitRegexp = /^[^\s]{1,100}$/;
+                let limitRegexp = /^[^\s]{1,150}$/;
                 if (this.inputData.preview == "") {
                     this.inputDataCheck.previewError = true;
                     this.inputDataCheck.previewErrMsg = "內容不得為空";
                 }
                 else if (!limitRegexp.test(this.inputData.preview)) {
                     this.inputDataCheck.previewError = true;
-                    this.inputDataCheck.previewErrMsg = "預覽內容勿超過100字";
+                    this.inputDataCheck.previewErrMsg = "預覽內容勿超過150字";
                 }
                 else {
                     this.inputDataCheck.previewError = false;
@@ -119,6 +119,7 @@
             this.dataAvailable = true;
         },
     },
+ 
 },
 
 )
@@ -128,11 +129,56 @@ CKEDITOR.replace('BlogContent', {
     uiColor: '#ff9388',
 });
 
+var saveResult = $('#myHiddenResult').val()
+$(document).ready(function () {
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    if (saveResult == "Save") {
+        toastr['success']("趕快再發一篇或是去管理文章，不要當薪水小偷喔！",'儲存成功！' )
+    }
+    else if (saveResult != "Save" && saveResult.length != 0) {
+        toastr['error'](`原因：${saveResult}... 再發一次吧`,'儲存失敗！')
+    }
+})
+
 //confirm if users type something on editor before post data to backend
 function checkContent() {
-    var data = CKEDITOR.instances.BlogContent.getData()
-    if (data.length == 0) {
-        alert("請補上文章內容再送出")
+    var content = CKEDITOR.instances.BlogContent.getData()
+    if (content.length == 0) {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr['error']("請補上文章內容再送出", '無法發文！')
+
         return false;
     }
     else {

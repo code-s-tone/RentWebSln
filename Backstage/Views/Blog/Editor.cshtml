@@ -1,15 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "發文系統";
+    ViewData["Title"] = "文章發佈";
 }
 @model BlogViewModel
 
-<h2 class="text-center mt-4">前台文章發佈</h2>
+<h2 class="text-center mt-4">知租部落格發文</h2>
 <div id="blogEditorApp" class="container">
     <form name='form' id="blogForm" class="row py-4 px-5" asp-controller="Blog" asp-action="SaveBlog" method="POST" onsubmit="return checkContent()">
         <div class="col-12 col-md-6 mb-3 px-3">
             <label asp-for="BlogTitle">文章標題</label>
             <input v-model="inputData.title" class="form-control" type="text" asp-for="BlogTitle"
-                   :class="{'is-invalid':inputDataCheck.titleError}"  />
+                   :class="{'is-invalid':inputDataCheck.titleError}" />
             <div class="text-danger small mt-1">
                 {{ inputDataCheck.titleErrMsg }}
             </div>
@@ -28,7 +28,7 @@
         <div class="col-12 col-md-6 mb-3 px-3">
             <label asp-for="MainImgUrl">主圖網址</label>
             <input v-model="inputData.imgUrl" class="form-control" type="text" asp-for="MainImgUrl"
-                   :class="{'is-invalid':inputDataCheck.imgUrlError}"  />
+                   :class="{'is-invalid':inputDataCheck.imgUrlError}" />
             <div class="text-danger small mt-1">
                 {{ inputDataCheck.imgUrlErrMsg }}
             </div>
@@ -37,7 +37,7 @@
         <div class="col-12 col-md-6 mb-3 px-3">
             <label asp-for="MainImgTitle">主圖名稱</label>
             <input v-model="inputData.imgTitle" type="text" :class="{'is-invalid':inputDataCheck.imgTitleError}"
-                   class="form-control"  asp-for="MainImgTitle" />
+                   class="form-control" asp-for="MainImgTitle" />
             <div class="text-danger small mt-1">
                 {{ inputDataCheck.imgTitleErrMsg }}
             </div>
@@ -63,15 +63,10 @@
     </form>
 
 </div>
+<input type="hidden" value= @TempData["SaveResult"] id="myHiddenResult" />
 
-
-@section topCSS{
-
-
-}
 @section topJS{
     <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
-
 }
 @section endJS{
     <script src="~/js/blogEditor.js"></script>

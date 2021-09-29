@@ -10,42 +10,44 @@ using System.Threading.Tasks;
 
 namespace Backstage.Services
 {
-    public class BlogService: IBlogService
+    public class BlogService : IBlogService
     {
         private RentContext _ctx;
         public BlogService(RentContext ctx)
         {
             _ctx = ctx;
         }
-        //public int Create(BlogViewModel blogVM)
-        //{
-        //    var blog = new Blog()
-        //    {
-        //        BlogTitle = blogVM.BlogTitle,
-        //        PostDate = blogVM.PostDate.Date,
-        //        MainImgUrl = blogVM.MainImgUrl,
-        //        MainImgTitle = blogVM.MainImgTitle,
-        //        Preview = blogVM.Preview,
-        //        BlogContent = blogVM.BlogContent,
-        //    };
-        //    _ctx.Add(blog);
-        //    int num = _ctx.SaveChanges();
-        //    return num;
-        //}
-        public async Task<int> Create(BlogViewModel blogVM)
+
+        //存檔
+        public string SaveBlog(BlogViewModel blogVM)
         {
-            var blog = new Blog()
+            //用transaction寫進資料庫
+            using (var transcation = _ctx.Database.BeginTransaction())
             {
-                BlogTitle = blogVM.BlogTitle,
-                PostDate = blogVM.PostDate.Date,
-                MainImgUrl = blogVM.MainImgUrl,
-                MainImgTitle = blogVM.MainImgTitle,
-                Preview = blogVM.Preview,
-                BlogContent = blogVM.BlogContent,
-            };
-            _ctx.Add(blog);
-            int num = await _ctx.SaveChangesAsync();
-            return num;
+                try
+                {
+                    var blog = new Blog()
+                    {
+                        BlogTitle = blogVM.BlogTitle,
+                        PostDate = blogVM.PostDate.Date,
+                        MainImgUrl = blogVM.MainImgUrl,
+                        MainImgTitle = blogVM.MainImgTitle,
+                        Preview = blogVM.Preview,
+                        BlogContent = blogVM.BlogContent,
+                    };
+                    _ctx.Add(blog);
+                    _ctx.SaveChanges();
+                    transcation.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transcation.Rollback();
+                    return ($"Failed : {ex}");
+                }
+            }
+            return("Save");
+
+            //int num = await _ctx.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<BlogViewModel>> GetAllBlogs()
@@ -72,8 +74,8 @@ namespace Backstage.Services
             var blog = bloglist.Select(x => x.BlogId == id);
             return (BlogViewModel)blog;
         }
-            
-        public void UpdataBlog()
+
+        public void UpdateBlog()
         {
 
         }
