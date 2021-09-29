@@ -139,7 +139,7 @@
                 </div>
             </template>
 
-            <template #cell(name)="row">
+            <template #cell(name)="row" striped hover>
                 {{ row.value.first }} {{ row.value.last }}
             </template>
 
@@ -170,8 +170,47 @@
         </b-table>
 
         <!-- Info modal -->
-        <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @@hide="resetInfoModal">
-            <pre>{{ infoModal.content }}</pre>
+        <b-modal :id="infoModal.id" :title="infoModal.title" ok-title="修改" cancel-title="取消">
+            <b-form-group>
+                <b-col>
+                    <label for="input-small">訂單人姓名:</label>
+                </b-col>
+                <b-col>
+                    <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.fullName"></b-form-input>
+                </b-col>
+            </b-form-group>
+            <b-form-group>
+                <b-col>
+                    <label for="input-small">分店地址:</label>
+                </b-col>
+                <b-col>
+                    <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.storeName"></b-form-input>
+                </b-col>
+            </b-form-group>
+            <b-form-group>
+                <b-col>
+                    <label for="input-small">聯絡電話:</label>
+                </b-col>
+                <b-col>
+                    <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.phone"></b-form-input>
+                </b-col>
+            </b-form-group>
+            <b-form-group>
+                <b-col>
+                    <label for="input-small">聯絡信箱:</label>
+                </b-col>
+                <b-col>
+                    <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.email"></b-form-input>
+                </b-col>
+            </b-form-group>
+            <b-form-group>
+                <b-col>
+                    <label for="input-small">出貨狀態:</label>
+                </b-col>
+                <b-col>
+                    <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.goodsStatusID"></b-form-input>
+                </b-col>
+            </b-form-group>
         </b-modal>
     </b-container>
 </div>
@@ -224,7 +263,7 @@
                 infoModal: {
                     id: 'info-modal',
                     title: '',
-                    content: ''
+                    content: '',
                 }
             },
             computed: {
@@ -243,9 +282,9 @@
             },
             methods: {
                 info(item, index, button) {
-                    this.infoModal.title = `Row index: ${index}`
-                    this.infoModal.content = JSON.stringify(item, null, 2)
-                    this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+                    this.infoModal.title = `訂單編號 : ${item.orderID}`
+                    this.infoModal.content = item;
+                    this.$root.$emit('bv::show::modal', this.infoModal.id, button);
                 },
                 resetInfoModal() {
                     this.infoModal.title = ''
