@@ -38,14 +38,8 @@ namespace Backstage.ApiControllers
             public string Message { get; set; }
         }
 
-        public class AAA
-        {
-            public int OrderId { get; set; }
-            public string FullName { get; set; }
-        }
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public EditOrderListResponseModel EditOrderList([FromBody] OrderViewModel vm)
         {
             EditOrderListResponseModel result = new EditOrderListResponseModel()
@@ -64,22 +58,23 @@ namespace Backstage.ApiControllers
                     select m
                 ).FirstOrDefault();
 
-                if (memberQuery != null )
-                {                    
-                    memberQuery.FullName = vm.FullName;                    
-                }
+                //if (memberQuery != null )
+                //{                    
+                //    memberQuery.FullName = vm.FullName;                    
+                //}
 
-                var XXXX = (
-                    from od in _ctx.OrderDetails
-                    where od.OrderId == vm.OrderID
-                    join o in _ctx.Orders on od.OrderId equals o.OrderId
-                    join m in _ctx.Members on o.MemberId equals m.MemberId
-                    select m
-                ).FirstOrDefault();
+                //var memberQuery = (
+                //    from od in _ctx.OrderDetails
+                //    where od.OrderId == vm.OrderID
+                //    join o in _ctx.Orders on od.OrderId equals o.OrderId
+                //    join m in _ctx.Members on o.MemberId equals m.MemberId
+                //    select m
+                //).FirstOrDefault();
 
                 if (memberQuery != null)
                 {
                     memberQuery.FullName = vm.FullName;
+                    //_ctx.SaveChanges();
                 }
                 else
                 {
