@@ -11,7 +11,7 @@ using System.Windows;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.SignalR;
-//using System.Data.Entity;
+using System.Data.Entity;
 
 namespace RentWebProj.Services
 {
@@ -95,16 +95,12 @@ namespace RentWebProj.Services
                      StartDate = od.StartDate,
                      ExpirationDate = od.ExpirationDate,
                      //RentDate = (int)DbFunctions.DiffDays(od.StartDate, od.ExpirationDate),
+                     //RentDate = (int)((od.ExpirationDate - od.StartDate).Days),
+                     RentDate = 1+((int)DbFunctions.DiffMinutes(od.StartDate, od.ExpirationDate)-1)/1440,
                      GoodsStatus = (GoodsStatusName)od.GoodsStatus
                  }).ToList();
-            result.ForEach(od =>
-            {
-                od.RentDate = (int)Math.Ceiling((od.ExpirationDate - od.StartDate).TotalDays);
-            });
-
 
             return result;
-
         }
 
         public bool getMemberLogintData(string Email, string Password)

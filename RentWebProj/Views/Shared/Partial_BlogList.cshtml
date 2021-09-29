@@ -1,0 +1,17 @@
+﻿@model BlogViewModel
+<div class="img">
+    <a href="@Url.Action("BlogPage", "SocialMedia", new { id= @Model.BlogId})">
+        <img src=@Model.MainImgUrl
+             alt=@Model.MainImgTitle>
+    </a>
+</div>
+
+<div class="text px-5">
+    <a href="@Url.Action("BlogPage", "SocialMedia", new { id= @Model.BlogId})">
+        @Model.BlogTitle
+    </a>
+
+    <div>@Model.PostDate.ToString("yyyy-MM-dd")</div>
+    <p>@Model.Preview ...</p>
+
+</div>

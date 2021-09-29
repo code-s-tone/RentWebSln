@@ -20,7 +20,7 @@ function initMap() {
 // 初始化地圖
 let map = L.map('mapId', {
     center: [24.7609326, 120.952988],
-    zoom: 15
+    zoom: 12
 });
 
 // 設定圖資來源

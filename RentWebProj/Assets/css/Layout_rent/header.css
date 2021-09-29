@@ -21,7 +21,7 @@ header-top .container-xl {
 }
 
 .header-nav .logo img {
-    width: 135px;
+    width: /*135*/ 200px;
 }
 
 .header-nav {
@@ -323,7 +323,7 @@ header-top .container-xl {
         position: absolute;
         width: 135px;
         top: 23px;
-        left: -30%;
+        left: -26%;
         line-height: 40px;
         background: white;
         padding-left: 0;
@@ -366,7 +366,7 @@ nav .navbar .links li:hover .sub-menu {
     }
 
     .header-nav .logo img {
-        width: 120px;
+        width: /*120*/ 200px;
     }
 
     .header-nav {

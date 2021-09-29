@@ -282,17 +282,17 @@ article {
                     padding: 0 22px;
                     margin: 22px 0;
 
-                    > button {
+                    > h5.ellipsis {
+                        font-size: 22px;
+                        -webkit-line-clamp: 1;
+                    }
+                    > a {
                         border: 1px solid $themeColor;
                         border-radius: .25em;
                         line-height: 1.5;
                         color: $themeColor;
                     }
 
-                    > h5.ellipsis {
-                        font-size: 22px;
-                        -webkit-line-clamp: 1;
-                    }
                 }
             }
         }
@@ -308,7 +308,7 @@ article {
 }
 
 @media screen and (max-width:555px){
-    .stories-swiper-container{
+/*    .stories-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
                 padding:0 20px;
@@ -331,7 +331,7 @@ article {
             }
         }
     }
-    .reviews-swiper-container{
+*/    .reviews-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
                 padding-left: 20px;
@@ -358,7 +358,7 @@ article {
 
 
 @media screen and (min-width:556px){
-    .stories-swiper-container{
+/*    .stories-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{
                 flex-direction: row;
@@ -382,7 +382,7 @@ article {
             }
         }
     }
-
+*/
     .reviews-swiper-container{
         >.swiper-wrapper{
             >.swiper-slide{

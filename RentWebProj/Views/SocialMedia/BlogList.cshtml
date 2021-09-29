@@ -1,0 +1,135 @@
+﻿@model IEnumerable<BlogViewModel>
+@{
+    ViewBag.Title = "最新好文";
+}
+
+
+<div class="banner d-flex flex-column justify-content-center">
+    <a href="mailto:codestone@gmail.com" class="mx-auto welcome"><p>喜歡哪系列的文章？歡迎來信告訴我們 <i class="far fa-envelope"></i></p></a>
+    <h1>Knowrentge's Blog</h1>
+</div>
+
+
+
+<!-- 中間 -->
+<div class="container mid d-flex" style="max-width: 1200px;">
+
+    <div class="row left m-auto">
+        <div class="col-12 d-flex">
+            <h3 class="mb-5">最新好文</h3>
+        </div>
+        @foreach (var blog in Model)
+        {
+            <div class="col-12 d-flex mb-5 blogBox">
+                @Html.Partial("Partial_BlogList", blog)
+            </div>
+        }
+
+
+
+        <div class="col-12 d-flex mb-5">
+            <div class="img">
+                <a href="#">
+                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/07/30173901/iStock-940640396.jpg"
+                         alt="">
+                </a>
+            </div>
+
+            <div class="text px-5">
+                <a href="#">You Can Make Money With Your Cardio Equipment</a>
+
+                <div>February 11, 2021</div>
+
+                <p>
+                    RuckifyExpress is Ruckify’s delivery service that connects you with
+                    drivers to facilitate the
+                    exchange and delivery of rental items. When checking out as a Renter, you
+                </p>
+            </div>
+        </div>
+        <div class="col-12 d-flex mb-5">
+            <div class="img">
+                <a href="#">
+                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/12/30173617/iStock-1271515578-2048x1365.jpg"
+                         alt="">
+                </a>
+            </div>
+
+            <div class="text px-5">
+                <a href="#">Rent Strength Training Equipment to Save Money</a>
+
+                <div>February 11, 2021</div>
+
+                <p>
+                    RuckifyExpress is Ruckify’s delivery service that connects you with
+                    drivers to facilitate the
+                    exchange and delivery of rental items. When checking out as a Renter, you
+                </p>
+            </div>
+        </div>
+        <div class="col-12 d-flex mb-5">
+            <div class="img">
+                <a href="#">
+                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/07/30173847/jessica-lewis-DeyfdybVQhA-unsplash-2048x1363.jpg"
+                         alt="">
+                </a>
+            </div>
+
+            <div class="text px-5">
+                <a href="#">Earn Money with Your Under Used Electronics</a>
+
+                <div>February 11, 2021</div>
+
+                <p>
+                    RuckifyExpress is Ruckify’s delivery service that connects you with
+                    drivers to facilitate the
+                    exchange and delivery of rental items. When checking out as a Renter, you
+                </p>
+            </div>
+        </div>
+        <div class="col-12 d-flex mb-5">
+            <div class="img">
+                <a href="#">
+                    <img src="https://cdn.ruckify.com/ruckifyblog/uploads/2020/07/30173757/shutterstock_1036013497-2048x1365.jpg"
+                         alt="">
+                </a>
+            </div>
+
+            <div class="text px-5">
+                <a href="#">Epic Winter Adventure? Rent What You Need on Ruckify!</a>
+
+                <div>February 11, 2021</div>
+
+                <p>
+                    RuckifyExpress is Ruckify’s delivery service that connects you with
+                    drivers to facilitate the
+                    exchange and delivery of rental items. When checking out as a Renter, you
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    
+</div>
+
+
+
+
+
+@section topCSS{
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+          integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+
+    <link href="~/Assets/css/SocialMedia/Blog.css" rel="stylesheet" />
+}
+@section endJS{
+
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+    TempData["img"] = result.ProfilePhotoUrl;
+    TempData["name"] = result.Fullname;
+}

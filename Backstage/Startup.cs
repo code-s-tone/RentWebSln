@@ -37,6 +37,7 @@ namespace Backstage
             services.AddDbContext<RentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
             services.AddTransient<IAnalysisService, AnalysisService>();
             services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
 
 

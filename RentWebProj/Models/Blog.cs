@@ -11,7 +11,7 @@ namespace RentWebProj.Models
     {
         [Key]
         [Column(Order = 0)]
-        public string BlogID { get; set; }
+        public int BlogID { get; set; }
 
         [Key]
         [Column(Order = 1)]

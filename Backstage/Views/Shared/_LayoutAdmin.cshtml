@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>RentWeb Admin - Dashboard</title>
+    <title>KnowrentgeAdmin-@ViewData["Title"]</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/css/layout/all.min.css" rel="stylesheet" type="text/css" />
@@ -16,14 +16,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
-
-
+    @*//家承需要jq，所以放上面*@
+    <script src="~/js/layout/jquery.min.js"></script>
+    @*fancybox的引用*@
+    <script src="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@('@')fancyapps/ui/dist/fancybox.css" />
     <!-- Custom styles for this template-->
     <link href="~/css/layout/sb-admin-2.min.css" rel="stylesheet" />
+
     <!--Bootstarp Css-->
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
-
     <!--因需求把Bootsratp Vue上Head-->
     <!--Bootstarp Vue-->
     <script src="//polyfill.io/v3/polyfill.min.js?features=es2015%2CIntersectionObserver" crossorigin="anonymous"></script>
@@ -46,18 +50,19 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Home")">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    @*<i class="fas fa-laugh-wink"></i>*@
+                    <img src="~/images/layout/spider-web.png" />
                 </div>
-                <div class="sidebar-brand-text mx-3">RentWeb BackStage</div>
+                <div class="sidebar-brand-text mx-3">Knowrentge Admin</div>
             </a>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
 
-                <!-- Nav Item - Dashboard -->
+            <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="@Url.Action("Index", "Home")">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-chart-bar"></i>
                     <span>銷售總表</span>
                 </a>
             </li>
@@ -66,7 +71,7 @@
             <li class="nav-item">
                 <!--<a class="nav-link" href="charts.html">-->
                 <a class="nav-link" href="@Url.Action("Index", "Product" )">
-                    <i class="fas fa-shopping-cart"></i>
+                    <i class="fab fa-product-hunt"></i>
                     <span>產品管理</span>
                 </a>
             </li>
@@ -74,17 +79,26 @@
             <!-- Nav Item - 訂單管理 -->
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index", "Order" )">
-                    <i class="fas fa-file-invoice-dollar"></i>
+                    <i class="fas fa-sort-amount-down"></i>
                     <span>訂單管理</span>
                 </a>
             </li>
 
-            <!-- Nav Item - 文本管理 -->
+            <!-- Nav Item - 發文區 -->
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Editor")">
+                <a class="nav-link" href="@Url.Action("Editor", "Blog")">
                     <!--<a class="nav-link" href="tables.html">-->
-                    <i class="fas fa-file-alt"></i>
-                    <span>文本管理</span>
+                    <i class="fas fa-blog"></i>
+                    <span>發文系統</span>
+                </a>
+            </li>
+
+            <!-- Nav Item - 文章管理 -->
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("BlogList", "Blog")">
+                    <!--<a class="nav-link" href="tables.html">-->
+                    <i class="fab fa-wordpress-simple"></i>
+                    <span>文章管理</span>
                 </a>
             </li>
 
@@ -211,7 +225,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin <i class="fas fa-user-shield"></i></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin <i class="text-warning fas fa-user-shield"></i></span>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -242,83 +256,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
-                    </div>
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Content Row -->
-
-                    <div class="row"></div>
-
-                    <!-- Content Row -->
-                    <div class="row"></div>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -328,7 +265,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; KnowrentgeAdmin 2021</span>
                     </div>
                 </div>
             </footer>
