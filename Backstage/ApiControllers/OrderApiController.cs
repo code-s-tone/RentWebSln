@@ -61,18 +61,6 @@ namespace Backstage.ApiControllers
                     select m
                 ).FirstOrDefault();
 
-                //if (memberQuery != null )
-                //{                    
-                //    memberQuery.FullName = vm.FullName;                    
-                //}
-
-                //var memberQuery = (
-                //    from od in _ctx.OrderDetails
-                //    where od.OrderId == vm.OrderID
-                //    join o in _ctx.Orders on od.OrderId equals o.OrderId
-                //    join m in _ctx.Members on o.MemberId equals m.MemberId
-                //    select m
-                //).FirstOrDefault();
 
                 if (memberQuery != null)
                 {
@@ -91,11 +79,6 @@ namespace Backstage.ApiControllers
             }
             return result;
         }
-        //public ActionResult<IEnumerable<OrderViewModel>> Get()
-        //{
-        //    var result = _orderService.GetOrderData();
-        //    return result.ToList();
-        //}
 
     }
 }
