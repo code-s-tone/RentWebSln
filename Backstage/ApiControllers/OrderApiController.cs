@@ -24,7 +24,7 @@ namespace Backstage.ApiControllers
             //_ctx = ctx;
         }
 
-        [Route("api/Order/GetOrder")]
+        [Route("api/OrderApi/GetOrder")]
         [HttpGet]
         //[ValidateAntiForgeryToken]
         public IActionResult GetOrder()
@@ -36,7 +36,7 @@ namespace Backstage.ApiControllers
 
 
 
-        [Route("api/Order/UpdateOrder")]
+        [Route("api/OrderApi/UpdateOrder")]
         [HttpPost]
         public async Task<IActionResult> UpdateOrder(OrderViewModel Od)
         {

@@ -349,13 +349,15 @@
             fetch(PUrl,
                 {
                     method: "Post",
-                    body: JSON.stringify(this.$data.items[0]),
+                    //body: JSON.stringify(this.$data.items[0]),
                     headers: {
                         //'RequestVerificationToken':@GetAntiXsrfRequestToken(),
                         'Content-Type': 'application/json'
                     },
                 })
                 .then(res => {
+                   
+                    this.$data.items = res;
                     console.log(res);
                     console.log(res.ok);
                     console.log(res.status);
