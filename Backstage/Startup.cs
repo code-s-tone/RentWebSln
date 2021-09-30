@@ -39,7 +39,17 @@ namespace Backstage
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
-
+            services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                             .AllowAnyMethod()
+                 .AllowAnyHeader();
+                });
+            });
 
             //讓Swagger支援JWT
             services.AddSwaggerDocument(config =>
@@ -91,6 +101,12 @@ namespace Backstage
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseRouting();
+            app.UseCors();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();// 使用靜態檔案，允許程式讀取wwwroot的檔案
             //啟用Swagger

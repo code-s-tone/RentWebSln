@@ -285,7 +285,8 @@ namespace RentWebProj.Services
             };
 
             var uploadResult = cloudinary.Upload(uploadParams);//上傳
-
+            //var uploadResult = cloudinary.DeleteResources("")  //刪除
+            //var uploadResult = cloudinary.DeleteResources //刪除
             var getResultImgUrl = cloudinary.GetResource($"MemberProfilePhoto/{Sname}").SecureUrl;
             var result = _repository.GetAll<Member>();
             result.ToList().Find(x => x.MemberID == Tname).ProfilePhotoUrl = getResultImgUrl; ;
@@ -293,7 +294,21 @@ namespace RentWebProj.Services
 
             return getResultImgUrl;
         }
+        public string DeleteImage(string Url)
+        {
 
+            Account account = new Account(
+              "dgaodzamk",
+              "192222538187587",
+              "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            //var uploadResult = cloudinary.DeleteResources(Url);  //刪除
+            var uploadResult = cloudinary.DeleteStreamingProfile(Url);
+
+
+            return "刪除ok";
+        }
         //public void FileUploadProductImage(string PID, int index, string blobUrl)
         //{
         //    //初始設定

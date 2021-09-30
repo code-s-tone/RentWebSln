@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "ProductDetail";
+}
+<h1>產品訊息</h1>
+<b-container fluid id="app" class="m-2">
+    <form>
+
+        <b-col>
+            <label for="input-small">產品編號:</label>
+        </b-col>
+        <b-col>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].ProductId" name="ProductId" class="_ProductId" v-model="items[0].ProductId"></b-form-input>
+        </b-col>
+
+        <b-col>
+            <label for="input-small" class="mt-3">產品名稱:</label>
+        </b-col>
+        <b-col>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].ProductName" name="ProductName" class="_ProductName"v-model="items[0].ProductName"></b-form-input>
+        </b-col>
+
+        <b-col>
+            <label for="input-small" class="mt-3">產品描述:</label>
+        </b-col>
+        <b-col>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].Description" name="Description" class="_Description" v-model="items[0].Description"></b-form-input>
+        </b-col>
+
+        <b-col>
+            <label for="input-small" class="mt-3">產品單價:</label>
+        </b-col>
+        <b-col>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].DailyRate" name="DailyRate" class="_DailyRate" v-model="items[0].DailyRate"></b-form-input>
+        </b-col>
+        <div class="text-center">
+            <b-spinner variant="primary" label="Text Centered" class="spinner-border spinner d-none"></b-spinner>
+        </div>
+        <b-col>
+            <label for="input-small" class="mt-3">上架時間:</label>
+            <vuejs-datepicker v-model="items[0].LaunchDate"></vuejs-datepicker>
+        </b-col>
+
+
+        <b-col>
+            <label for="input-small" class="mt-3">下架時間:</label>
+        </b-col>
+        <b-col>
+            <vuejs-datepicker v-model="items[0].WithdrawalDate"></vuejs-datepicker>
+        </b-col>
+
+        <b-col>
+            <label for="input-small" class="mt-3">產品圖片:</label>
+
+            <div id="upload" class="btn btn-primary"><i class="fas fa-arrow-circle-up"></i></div>
+
+            <input id="file" type="file" multiple style="display:none">
+            <div class="gallery" id="gallery"></div>
+
+        </b-col>
+
+        <b-form-checkbox v-model="items[0].Discontinuation" name="check-button" switch class="text-center mt-3 _Discontinuation">
+            是否停用產品
+        </b-form-checkbox>
+
+        <b-col class="text-center mt-3">
+            <input type="text" @@click="fetchx()" class="btn btn-primary _summit" value="送出修改">
+        </b-col>
+    </form>
+
+</b-container>
+
+
+@section topJS{
+    <script src="~/js/Product/moment.js"></script>
+    <script src="~/js/Product/momentTW.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+    <script src="~/js/Product/ProductDetail_BaseImg.js"></script>
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+
+
+}
+@section topCSS{
+    <link href="~/css/PhotoProduct.css" rel="stylesheet" />
+}
+@section endJS{
+    <script src="~/js/Product/ProductDetail.js"></script>
+
+}
