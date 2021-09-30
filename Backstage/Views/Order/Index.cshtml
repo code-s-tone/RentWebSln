@@ -220,7 +220,7 @@
                     <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.goodsStatusID"></b-form-input>
                 </b-col>
             </b-form-group>
-            <b-button class="mt-3" block @@click="EditData">Close Me</b-button>
+            <b-button class="mt-3" block @@click="EditData">test</b-button>
         </b-modal>
     </b-container>
 </div>
@@ -319,7 +319,7 @@
                 {
                     method: "Get",
                     headers: {
-                        'RequestVerificationToken':'@GetAntiXsrfRequestToken()',
+                        //'RequestVerificationToken':'@GetAntiXsrfRequestToken()',
                         'Content-Type': 'application/json'
                     },
 
@@ -342,7 +342,7 @@
                 {
                     method: "Post",
                     headers: {
-                        'RequestVerificationToken':@GetAntiXsrfRequestToken(),
+                        //'RequestVerificationToken':@GetAntiXsrfRequestToken(),
                         'Content-Type': 'application/json'
                     },
                     data
