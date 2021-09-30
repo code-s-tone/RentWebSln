@@ -12,18 +12,19 @@ using System.Threading.Tasks;
 
 namespace Backstage.ApiControllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class OrderApiController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        private readonly RentContext _ctx;
+        //private readonly RentContext _ctx;
         public OrderApiController(IOrderService orderService, RentContext ctx)
         {
             _orderService = orderService;
-            _ctx = ctx;
+            //_ctx = ctx;
         }
 
+        [Route("api/Order/GetOrder")]
         [HttpGet]
         //[ValidateAntiForgeryToken]
         public IActionResult GetOrder()
@@ -35,49 +36,15 @@ namespace Backstage.ApiControllers
 
 
 
-        public class EditOrderListResponseModel
-        {
-            public bool Status { get; set; }
-            public string Message { get; set; }
-        }
-
+        [Route("api/Order/UpdateOrder")]
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public EditOrderListResponseModel EditOrderList([FromBody] OrderViewModel vm)
+        public async Task<IActionResult> UpdateOrder(OrderViewModel Od)
         {
-            EditOrderListResponseModel result = new EditOrderListResponseModel()
-            {
-                Status = true,
-                Message = string.Empty
-            };
 
-            try
-            {
-                var memberQuery = (
-                    from od in _ctx.OrderDetails
-                    where od.OrderId == vm.OrderID
-                    join o in _ctx.Orders on od.OrderId equals o.OrderId
-                    join m in _ctx.Members on o.MemberId equals m.MemberId
-                    select m
-                ).FirstOrDefault();
+            var result = await _orderService.UpdateOrder(Od);
+            string success = "請求成功！";
+            return Ok(success);
 
-
-                if (memberQuery != null)
-                {
-                    memberQuery.FullName = vm.FullName;
-                    //_ctx.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception("XXXX query is null");
-                }
-            }
-            catch (Exception ex)
-            {
-                result.Status = false;
-                result.Message = "EditOrderList Error !";  //ex.Message + ex.StackTrace;                
-            }
-            return result;
         }
 
     }

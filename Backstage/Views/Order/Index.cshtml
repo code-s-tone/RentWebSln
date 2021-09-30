@@ -179,7 +179,7 @@
         </b-table>
 
         <!-- Info modal -->
-        <b-modal :id="infoModal.id" :title="infoModal.title" ok-title="修改" cancel-title="取消">
+        <b-modal :id="infoModal.id" :title="infoModal.title">
             <b-form-group>
                 <b-col>
                     <label for="input-small">訂單人姓名:</label>
@@ -220,13 +220,24 @@
                     <b-form-input id="input-small" size="sm" placeholder="" v-model="infoModal.content.goodsStatusID"></b-form-input>
                 </b-col>
             </b-form-group>
-            <b-button class="mt-3" block @@click="EditData">test</b-button>
+
+            <template #modal-footer="{ ok, cancel, hide }">
+                <!-- Emulate built in modal footer ok and cancel button actions -->
+                <b-button size="sm" @@click="cancel()">
+                    取消
+                </b-button>
+                <b-button size="sm" variant="primary" @@click="EditData()">
+                    修改
+                </b-button>
+              
+            </template>
         </b-modal>
     </b-container>
 </div>
 
 
 @section endJS{
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         let vm;
         let item;
@@ -313,9 +324,10 @@
             },
         });
 
-        const Url = "/api/OrderApi"
+        const GUrl = "/api/OrderApi/GetOrder";
+        const PUrl = "/api/OrderApi/UpdateOrder";
         function LoadData() {
-            fetch(Url,
+            fetch(GUrl,
                 {
                     method: "Get",
                     headers: {
@@ -334,26 +346,25 @@
 
         function EditData() {
 
-            let data = {
-                "OrderID": 7,
-                "FullName" : "BBB"
-            };
-            fetch(Url,
+            fetch(PUrl,
                 {
                     method: "Post",
+                    body: JSON.stringify(this.$data.items[0]),
                     headers: {
                         //'RequestVerificationToken':@GetAntiXsrfRequestToken(),
                         'Content-Type': 'application/json'
                     },
-                    data
-                }).then(res => res.json())
+                })
+                .then(res => {
+                    console.log(res);
+                    console.log(res.ok);
+                    console.log(res.status);
+                    swal("修改成功", {
+                        icon: 'success',
+                    })
+                })
                 .then(result => {
-                    if (result.status) {
-
-                    } else {
-                        alert(result.message);
-                    }
-                    vm.$data.items = result;
+                    console.log(result);
                 })
                 .catch(ex => {
                     console.log("錯了");

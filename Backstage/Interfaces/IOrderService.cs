@@ -9,5 +9,7 @@ namespace Backstage.Interfaces
     public interface IOrderService
     {
         public IEnumerable<OrderViewModel> GetOrderData();
+
+        public Task<IEnumerable<OrderViewModel>> UpdateOrder(OrderViewModel EditOrder);
     }
 }
