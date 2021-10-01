@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Backstage.Interfaces
 {
-    public interface IAnalysisService
+    public interface ISalesService
     {
-        public IEnumerable<SalesAnalysis> GetSalesData();
+        public List<SalesViewModel> GetSalesData();
 
     }
 }

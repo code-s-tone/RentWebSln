@@ -81,23 +81,21 @@ a.active {
 }
 
     .logoBox img {
-        margin: 10px;
-        width: 90px;
+        margin-left: 13px;
+        width: 140px;
     }
 
 .sidebar-btn {
     display: flex;
     background-color: white;
-    margin-left: 10px;
-    width: 130px;
+    margin-left: 11px;
 }
 
     .sidebar-btn a {
-        width: 50%;
         text-decoration: none;
         color: white;
         font-size: 17px;
-        padding: 0px 15px;
+        padding: 0px 12px;
         color: #fc8d61;
         box-sizing: border-box;
     }
@@ -165,5 +163,11 @@ a.active {
 @media screen and (max-width: 767px) {
     .sidenav {
         width: 265px;
+    }
+    .logoBox img {
+        width: 120px;
+    }
+    .sidebar-btn {
+        margin-left: 8px;
     }
 }

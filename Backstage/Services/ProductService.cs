@@ -1,10 +1,8 @@
 ﻿using Backstage.Interfaces;
 using Backstage.Models;
 using Backstage.ViewModels;
-
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 

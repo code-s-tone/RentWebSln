@@ -3,7 +3,7 @@
     data: {
         inputData: {
             title: "",
-            date: "",
+            poster: "",
             imgUrl: "",
             imgTitle: "",
             preview: "",
@@ -11,8 +11,8 @@
         inputDataCheck: {
             titleError: false,
             titleErrMsg: "",
-            dateError: false,
-            dateErrMsg: "",
+            posterError: false,
+            posterErrMsg: "",
             imgUrlError: false,
             imgUrlErrMsg: "",
             imgTitleError: false,
@@ -38,16 +38,16 @@
                 this.checkDataAvailable();
             }
         },
-        "inputData.date": {
+        "inputData.poster": {
             immediate: true,
             handler: function () {
-                if (this.inputData.date == "") {
-                    this.inputDataCheck.dateError = true;
-                    this.inputDataCheck.dateErrMsg = "日期不得為空";
+                if (this.inputData.poster == "") {
+                    this.inputDataCheck.posterError = true;
+                    this.inputDataCheck.posterErrMsg = "發文者不得為空";
                 }
                 else {
-                    this.inputDataCheck.dateError = false;
-                    this.inputDataCheck.dateErrMsg = "";
+                    this.inputDataCheck.posterError = false;
+                    this.inputDataCheck.posterErrMsg = "";
                 }
                 this.checkDataAvailable();
             }
@@ -76,7 +76,7 @@
                 }
                 else if (!urlRegexp.test(this.inputData.imgUrl)) {
                     this.inputDataCheck.imgUrlError = true;
-                    this.inputDataCheck.imgUrlErrMsg = "非正確網址格式";
+                    this.inputDataCheck.imgUrlErrMsg = "非正確圖片網址格式";
                 }
                 else {
                     this.inputDataCheck.imgUrlError = false;
@@ -90,14 +90,14 @@
         "inputData.preview": {
             immediate: true,
             handler: function () {
-                let limitRegexp = /^[^\s]{1,100}$/;
+                let limitRegexp = /^[^\s]{1,150}$/;
                 if (this.inputData.preview == "") {
                     this.inputDataCheck.previewError = true;
                     this.inputDataCheck.previewErrMsg = "內容不得為空";
                 }
                 else if (!limitRegexp.test(this.inputData.preview)) {
                     this.inputDataCheck.previewError = true;
-                    this.inputDataCheck.previewErrMsg = "預覽內容勿超過100字";
+                    this.inputDataCheck.previewErrMsg = "預覽內容勿超過150字";
                 }
                 else {
                     this.inputDataCheck.previewError = false;
@@ -119,6 +119,7 @@
             this.dataAvailable = true;
         },
     },
+ 
 },
 
 )
@@ -127,12 +128,42 @@ CKEDITOR.replace('BlogContent', {
     //uiColor: '#fc8d61',
     uiColor: '#ff9388',
 });
+var toastrOptions = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+var saveResult = $('#myHiddenResult').val()
+$(document).ready(function () {
+    toastr.options = toastrOptions;
+    if (saveResult == "Done") {
+        toastr['success']("趕快再發一篇或是去管理文章，不要當薪水小偷喔！",'儲存成功！' )
+    }
+    else if (saveResult != "Done" && saveResult.length != 0) {
+        toastr['error'](`原因：${saveResult}... 再發一次吧`,'儲存失敗！')
+    }
+})
 
 //confirm if users type something on editor before post data to backend
 function checkContent() {
-    var data = CKEDITOR.instances.BlogContent.getData()
-    if (data.length == 0) {
-        alert("請補上文章內容再送出")
+
+    var content = CKEDITOR.instances.BlogContent.getData()
+    if (content.length == 0) {
+        toastr.options = toastrOptions;
+        toastr['error']("請補上文章內容再送出", '無法發文！')
+
         return false;
     }
     else {

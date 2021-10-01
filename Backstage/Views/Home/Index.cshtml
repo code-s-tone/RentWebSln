@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "銷售總表";
+    ViewData["Title"] = "銷售統計";
 }
 
 <!-- Begin Page Content -->
@@ -8,7 +8,7 @@
     <div class="mb-2">
         <h1 class="h3 mb-0 text-gray-800">銷售統計</h1>
     </div>
-    <p class="mb-4">過去一年?的銷售統計</p>
+    <p class="mb-4">查詢時間內的銷售狀況</p>
     <!-- 篩時間? -->
     <!-- Content Row id="chartOptions"-->
     <div id="chartOptions" class="row">
@@ -26,14 +26,19 @@
                 <!-- Card Body -->
                 <div class="card-body">
                     <!-- 改RWD height設定 -->
-                    <div class="chart-pie chart-pie-fixHeight pt-4">
-                        <canvas id='chartDistinguish'></canvas>
+                    <div class="chart-pie chart-pie-fixHeight pt-4 d-flex flex-column justify-content-center align-items-center">
+                        <div v-if="isLoading">
+                            <b-spinner variant="danger"></b-spinner>
+                            載入中...
+                        </div>
+                        <canvas id="chartDistinguish" :class="{'d-none':isLoading}"></canvas>
                     </div>
                     <hr>
-                    <!-- <code>/js/demo/chart-pie-demo.js</code> file. -->
+                    <!--<code></code>-->
                 </div>
             </div>
         </div>
+
         <div class="col-12 col-md-8 mb-4">
             <!-- Bar Chart -->
             <div class="card shadow mb-4 border-left-info">
@@ -44,11 +49,15 @@
                     </select>
                 </div>
                 <div class="card-body">
-                    <div class="chart-bar">
-                        <canvas id='chartDetail'></canvas>
+                    <div class="chart-bar d-flex flex-column justify-content-center align-items-center ">
+                        <div v-if="isLoading">
+                            <b-spinner variant="danger"></b-spinner>
+                            載入中...
+                        </div>
+                        <canvas id="chartDetail" :class="{'d-none':isLoading}"></canvas>
                     </div>
                     <hr>
-                    <!-- <code>/js/demo/chart-bar-demo.js</code> file. -->
+                    <!--<code></code>-->
                 </div>
             </div>
         </div>
