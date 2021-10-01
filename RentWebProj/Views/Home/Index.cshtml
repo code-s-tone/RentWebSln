@@ -4,6 +4,7 @@
     ViewBag.Title = "網羅你的租借需求🕸";
     var Catgories = new ProductService().GetCategoryData();
     var AllComments = new MemberService().GetAllComment().Take(10);
+    var blogList = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate).Take(5);
 }
 
 <div class="nav-background"></div>@* 打底 *@
@@ -21,24 +22,24 @@
 </header>
 
 @*<header>
-        <div>
-            <h2>標題文字</h2>
-            <div id="search">
-                <div class="inputGroup">
-                    <i class="far fa-question-circle"></i>
-                    <input type="text" id="keyword" placeholder="想租點什麼?">
-                </div>
-                <div class="inputGroup">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" id="position" placeholder="新竹市香山區">
-                </div>
-                <button class="btnSearch">查 詢</button>
-                <button class="btnSearch">
-                    <i class="fas fa-search"></i>
-                </button>
+    <div>
+        <h2>標題文字</h2>
+        <div id="search">
+            <div class="inputGroup">
+                <i class="far fa-question-circle"></i>
+                <input type="text" id="keyword" placeholder="想租點什麼?">
             </div>
+            <div class="inputGroup">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="position" placeholder="新竹市香山區">
+            </div>
+            <button class="btnSearch">查 詢</button>
+            <button class="btnSearch">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-    </header>*@
+    </div>
+</header>*@
 <div id="maincontain">
 
     <article class="container-xl">
@@ -166,9 +167,7 @@
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
         </section>
-        @{ 
-            var blogList = new BlogService().GetAllBlogs().OrderByDescending(x=>x.PostDate).Take(5);
-        }
+
 
         <section id="blogPosts" class="Area">
             <h3>
@@ -188,7 +187,7 @@
                                 <h5 class="ellipsis">@blog.BlogTitle</h5>
                                 <p class="ellipsis">@blog.Preview</p>
                                 <a class="btn" href="@Url.Action("BlogPage", "SocialMedia", new { id=@blog.BlogId})">查看更多</a>
-                                @*<button class="btn">查看更多</button>*@                                
+                                @*<button class="btn">查看更多</button>*@
                             </div>
                         </div>
                     }
