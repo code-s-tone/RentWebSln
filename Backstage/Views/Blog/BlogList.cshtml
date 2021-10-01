@@ -4,67 +4,436 @@
     ViewData["Title"] = "文章管理";
 }
 
-<style>
-    table {
-        table-layout: fixed;
-    }
-</style>
-<div class="container">
-    <h1>文章管理</h1>
+<b-container fluid id="app">
+    <!-- User Interface controls -->
+    <b-row>
+        <b-col lg="6" class="my-1">
+            <b-form-group label="排序"
+                          label-for="sort-by-select"
+                          label-cols-sm="3"
+                          label-align-sm="center"
+                          label-size="sm"
+                          class="mb-0 text-center"
+                          v-slot="{ ariaDescribedby }">
+                <b-input-group size="sm">
+                    <b-form-select id="sort-by-select"
+                                   v-model="sortBy"
+                                   :options="sortOptions"
+                                   :aria-describedby="ariaDescribedby"
+                                   class="w-75">
+                        <template #first>
+                            <option value="">-- 無 --</option>
+                        </template>
+                    </b-form-select>
 
-    <table class="table table-bordered" >
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.BlogTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PostDate)
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.MainImgUrl)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MainImgTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Preview)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BlogContent)
-                </th>*@
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+                    <b-form-select v-model="sortDesc"
+                                   :disabled="!sortBy"
+                                   :aria-describedby="ariaDescribedby"
+                                   size="sm"
+                                   class="w-25">
+                        <option :value="false">升序</option>
+                        <option :value="true">降序</option>
+                    </b-form-select>
+                </b-input-group>
+            </b-form-group>
+        </b-col>
+
+        <b-col lg="6" class="my-1">
+            <b-form-group label="初始排序"
+                          label-for="initial-sort-select"
+                          label-cols-sm="3"
+                          label-align-sm="center"
+                          label-size="sm"
+                          class="mb-0">
+                <b-form-select id="initial-sort-select"
+                               v-model="sortDirection"
+                               :options="['asc', 'desc', 'last']"
+                               size="sm"></b-form-select>
+            </b-form-group>
+        </b-col>
+
+        <b-col lg="6" class="my-1">
+            <b-form-group label="篩選"
+                          label-for="filter-input"
+                          label-cols-sm="3"
+                          label-align-sm="center"
+                          label-size="sm"
+                          class="mb-0">
+                <b-input-group size="sm">
+                    <b-form-input id="filter-input"
+                                  v-model="filter"
+                                  type="search"
+                                  placeholder="輸入以搜尋"></b-form-input>
+
+                    <b-input-group-append>
+                        <b-button :disabled="!filter" @@click="filter = ''">清除</b-button>
+                    </b-input-group-append>
+                </b-input-group>
+            </b-form-group>
+        </b-col>
+
+        <b-col lg="6" class="my-1">
+            <b-form-group v-model="sortDirection"
+                          label="過濾開啟"
+                          label-cols-sm="3"
+                          label-align-sm="center"
+                          label-size="sm"
+                          class="mb-0"
+                          v-slot="{ ariaDescribedby }">
+                <b-form-checkbox-group v-model="filterOn"
+                                       :aria-describedby="ariaDescribedby"
+                                       class="mt-1 d-flex">
+                    <b-form-checkbox class="mx-1" value="ProductName">產品名稱</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="ProductId">產品編號</b-form-checkbox>
+                    <b-form-checkbox class="mx-1" value="DailyRate">產品單價</b-form-checkbox>
+                </b-form-checkbox-group>
+            </b-form-group>
+        </b-col>
+    </b-row>
+
+    <!-- Main table element -->
+    <b-table :items="items"
+             :fields="fields"
+             :current-page="currentPage"
+             :per-page="perPage"
+             :filter="filter"
+             :filter-included-fields="filterOn"
+             :sort-by.sync="sortBy"
+             :sort-desc.sync="sortDesc"
+             :sort-direction="sortDirection"
+             :busy="isBusy"
+             stacked="md"
+             show-empty
+             small
+             hover
+             @@filtered="onFiltered">
+        <template #table-busy>
+            <div class="text-center text-danger my-2">
+                <b-spinner class="align-middle"></b-spinner>
+                <strong>加載中...</strong>
+            </div>
+        </template>
+        <template v-slot:cell(ProductId)="row">
+            <div class="mt-2">{{ row.item.ProductId }}</div>
+        </template>
+        <template v-slot:cell(ProductName)="row">
+            <div class="mt-2">{{ row.item.ProductName }}</div>
+        </template>
+        <template v-slot:cell(DailyRate)="row">
+            <div class="mt-2">{{ row.item.DailyRate }}</div>
+        </template>
+        <template v-slot:cell(WithdrawalDate)="row">
+            <div class="mt-2">{{ row.item.WithdrawalDate|dateFormat }}</div>
+        </template>
+        <template v-slot:cell(LaunchDate)="row">
+            <div class="mt-2">{{ row.item.LaunchDate|dateFormat }}</div>
+        </template>
+        <template v-slot:cell(UpdateTime)="row">
+            <div class="mt-2">{{ row.item.UpdateTime|dateFormat }}</div>
+        </template>
+
+        <template #cell(actions)="row">
+            <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1 my-1" variant="primary">
+                修改
+            </b-button>
+            <b-button size="sm" @@click="row.toggleDetails" variant="success ">
+                {{ row.detailsShowing ? '隱藏' : '細項' }}
+            </b-button>
+        </template>
+
+        <template #row-details="row">
+            <b-card>
+                <ul class="d-flex flex-wrap justify-content-center">
+                    @*<li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>*@
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品編號:</strong>&nbsp;{{ row.item.ProductId }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品名稱:</strong>&nbsp;{{ row.item.ProductName }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>產品單價:</strong>&nbsp;{{ row.item.DailyRate }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>更新時間:</strong>&nbsp;{{ row.item.UpdateTime|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>上架日期:</strong>&nbsp;{{ row.item.LaunchDate|dateFormat }}</h5></b-col>
+                    <b-col sm="6"><h5 class="text-left border-bottom"><strong>下架日期:</strong>&nbsp;{{ row.item.WithdrawalDate|dateFormat }}</h5></b-col>
+                    @*<b-col sm="6"><h5 class="text-center">{{ row.item.ProductImages[0].SourceImages }}</h5></b-col>*@
+                    @*<b-col sm="6"><h5 class="text-center"><img v-bind:src="row.item.ProductImages[0].SourceImages"   class="img-thumbnail"></h5></b-col>*@
+                    <b-col v-for="result in row.item.ProductImages" class="d-flex flex-wrap justify-content-center"><b-img-lazy thumbnail rounded class="mt-4" style="width:100px;height:100px;" data-fancybox="gallery" v-bind:src="result.SourceImages" alt="Center image"></b-img-lazy></b-col>
+
+                </ul>
+            </b-card>
+        </template>
+    </b-table>
+    <b-row>
+        <b-col sm="5" md="6" class="my-1">
+            <b-form-group label="每頁顯示筆數"
+                          label-for="per-page-select"
+                          label-cols-sm="6"
+                          label-cols-md="4"
+                          label-cols-lg="3"
+                          label-align-sm="right"
+                          label-size="sm"
+                          class="mb-0">
+                <b-form-select id="per-page-select"
+                               v-model="perPage"
+                               :options="pageOptions"
+                               size="sm"></b-form-select>
+            </b-form-group>
+        </b-col>
+
+        <b-col sm="7" md="6" class="my-1">
+            <b-pagination v-model="currentPage"
+                          :total-rows="totalRows"
+                          :per-page="perPage"
+                          align="fill"
+                          size="sm"
+                          class="my-0"></b-pagination>
+        </b-col>
+        <b-row>
+            <!-- Info modal -->
+            <b-modal :id="infoModal.id" :title="infoModal.title" ok-only>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品編號:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductId"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品名稱:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.ProductName"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品描述:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.Description"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">產品單價:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.DailyRate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">上架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.LaunchDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+                <b-form-group>
+                    <b-col>
+                        <label for="input-small">下架時間:</label>
+                    </b-col>
+                    <b-col>
+                        <b-form-input id="input-small" size="sm" placeholder="Enter your name" v-model="infoModal.content.WithdrawalDate"></b-form-input>
+                    </b-col>
+                </b-form-group>
+
+
+                <b-form-group>
+                    <b-form-checkbox v-model="infoModal.content.Discontinuation" name="check-button" switch class="text-center">
+                        是否停用產品<b>{{infoModal.content.Discontinuation}}</b>
+                    </b-form-checkbox>
+                </b-form-group>
+
+            </b-modal>
+</b-container>
+
+
+
+@section topJS{
+    <script src="~/js/Product/moment.js"></script>
+    <script src="~/js/Product/momentTW.js"></script>
+}
+@section topCSS{
+
+}
+@section endJS{
+    <script>
+        Fancybox.bind("[data-fancybox]", {
+            // Your options go here
+        });
+    </script>
+    <script>
+        var item;
+        let vm;
+        vm = new Vue({
+            el: "#app",
+            data: {
+                isBusy: true,
+                items: [],
+                fields: [
+                    { key: 'ProductId', label: '產品編號', class: 'text-center' },
+                    { key: 'ProductName', label: '產品名子', class: 'text-center' },
+                    { key: 'DailyRate', label: '單價', class: 'text-center' },
+                    { key: 'LaunchDate', label: '上架日期', class: 'text-center' },
+                    { key: 'WithdrawalDate', label: '下架時間', class: 'text-center', },
+                    { key: 'UpdateTime', label: '更新時間', class: 'text-center', },
+                    { key: 'actions', label: '動作' }
+                ],
+                totalRows: 1,
+                currentPage: 1,
+                perPage: 5,
+                pageOptions: [5, 10, 15, { value: 1000, text: "全部" }],
+                sortBy: '',
+                sortDesc: false,
+                sortDirection: 'asc',
+                filter: null,
+                filterOn: [],
+                infoModal: {
+                    id: 'info-modal',
+                    title: '',
+                    content: ''
+                }
+
+            },
+            computed: {
+                sortOptions() {
+                    return this.fields
+                        .map(f => {
+                            return { text: f.label, value: f.key }
+                        })
+                }
+            },
+            mounted() {
+                // Set the initial number of items
+                this.totalRows = this.items.length
+            },
+            methods: {
+                info(item, index, button) {
+                    this.infoModal.title = `${item.ProductName}`
+                    this.infoModal.content = item
+                    this.$root.$emit('bv::show::modal', this.infoModal.id, button)
+                },
+                resetInfoModal() {
+                    this.infoModal.title = ''
+                    this.infoModal.content = ''
+                },
+                onFiltered(filteredItems) {
+                    // Trigger pagination to update the number of buttons/pages due to filtering
+                    this.totalRows = filteredItems.length
+                    this.currentPage = 1
+                },
+
+
+            },
+            watch: {
+                items: function () {
+                    this.isBusy = false
+                }
+            },
+            filters: {
+                dateFormat: function (value) {
+                    let result = new moment(value).format('LLLL');
+                    return result;
+                }
+            },
+
+        })
+
+        function LoadData() {
+
+            const Url = "/Blog/BlogList"
+
+            fetch(Url,
+                {
+                    method: "Get",
+                    headers: { 'Content-Type': 'application/json' },
+                })
+                .then(res => res.json())
+                .then(result => {
+                    vm.$data.items = result;
+
+                })
+                .catch(ex => {
+                    console.log("資料撈失敗@@");
+                })
+        };
+
+
+        $(document).ready(function () {
+            LoadData()
+
+        });
+
+
+    </script>
+
+
+
+}
+
+
+
+
+@*<style>
+        table {
+            table-layout: fixed;
+        }
+    </style>
+    <div class="container">
+        <h1>文章管理</h1>
+
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BlogTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PostDate.Date)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.MainImgUrl)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MainImgTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Preview)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BlogContent)
-                    </td>*@
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BlogTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PostDate)
+                    </th>
+                    <th>
+                            @Html.DisplayNameFor(model => model.MainImgUrl)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MainImgTitle)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Preview)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BlogContent)
+                        </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BlogTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PostDate.Date)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelItem => item.MainImgUrl)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MainImgTitle)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Preview)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BlogContent)
+                            </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.BlogId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.BlogId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.BlogId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@

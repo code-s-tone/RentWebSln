@@ -68,14 +68,16 @@
     width: 30%;
     height: 700px;
 }
+.mid .blogBox {
+    height: 190px;
+}
 
 
-
-    .mid .img img {
-        width: 250px;
-        height: 100%;
-        object-fit: cover;
-    }
+.mid .img img {
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+}
 
 .mid .text a {
     color: black;
@@ -158,7 +160,9 @@
 
 @media screen and (max-width:1023px) {
     .mid .blogBox {
-        padding:0 30px;
+        padding: 0 30px;
+        height: 210px;
+        overflow: hidden;
     }
 
     .mid .row:first-child {
@@ -217,6 +221,7 @@
     }
     .mid .blogBox {
         padding: 0 25px;
+        height:100%;
     }
     .mid .row:first-child {
         width: 100%;

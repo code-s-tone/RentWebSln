@@ -13,12 +13,11 @@ namespace Backstage.Services
     public class SalesService : ISalesService
     {
         private readonly RentContext _ctx;
-        private readonly IRedisRepository _iRedisRepository;
-
+        private readonly IRedisRepository _iRedisRepository;//Redis介面欄位
         public SalesService(RentContext ctx , IRedisRepository iRedisRepository)
         {
             _ctx = ctx;
-            _iRedisRepository = iRedisRepository;
+            _iRedisRepository = iRedisRepository;//注入redis相依性
         }
 
         //須到ViewModel補[Serializable]
