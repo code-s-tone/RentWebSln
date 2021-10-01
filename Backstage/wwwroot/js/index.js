@@ -2,6 +2,7 @@
 let dataManager = new Vue({
     el: '#chartOptions',
     data: {
+        isLoading:true,
         distinguish: [1],
         distinguishKey: 0,
         distinguishItem: 0,
@@ -48,7 +49,7 @@ function insertData() {
     dataManager.distinguish.push(makeDistinguishGroup('以種類區分', 'CateName'));
     dataManager.distinguish.push(makeDistinguishGroup('以月份區分', 'StartMonth'));
     dataManager.distinguish.push(makeDistinguishGroup('以年齡層分', 'AgeLabel'));
-
+    dataManager.isLoading = false;
 }
 
 function initializeCharts() {
