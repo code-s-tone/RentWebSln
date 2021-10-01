@@ -17,5 +17,27 @@
             <param name="username">使用者名稱</param>
             <returns></returns>
         </member>
+        <member name="M:Backstage.Interfaces.IRedisRepository.Set``1(System.String,``0)">
+            <summary>
+            將資料存入MemoryCache(Redis)，對應資料庫Create、Update
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Backstage.Interfaces.IRedisRepository.Get``1(System.String)">
+            <summary>
+            取得MemoryCache(Redis)，對應資料庫Read
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Backstage.Interfaces.IRedisRepository.Remove(System.String)">
+            <summary>
+            移除MemoryCache(Redis)，對應資料庫Delete
+            </summary>
+            <param name="key"></param>
+        </member>
     </members>
 </doc>

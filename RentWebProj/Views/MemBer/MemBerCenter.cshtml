@@ -392,7 +392,7 @@
 
                                 @if (order.OrderStatus.ToString() == "待付款")
                                 {   /*style="margin-left:1050px;margin-top:-12px;"*/
-                                    <div class="member-display-order-item dropdown mb-2">
+                                    <div class="member-display-order-item member-order-btn dropdow">
                                         <button class="btn btn-warning  btn-area member-btn-style" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">更多</button>
                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                             <li><a class="dropdown-item btn-pay" data-id="@order.OrderID" href="@Url.Action("MemberCenterOrderPay","Carts", new {OrderID = @order.OrderID})">重新付款</a></li>

@@ -21,7 +21,7 @@ header-top .container-xl {
 }
 
 .header-nav .logo img {
-    width: 135px;
+    width: /*135*/ 200px;
 }
 
 .header-nav {
@@ -365,9 +365,9 @@ nav .navbar .links li:hover .sub-menu {
             display: none !important;
         }
 
-        .header-nav .logo img {
-            width: 120px;
-        }
+    .header-nav .logo img {
+        width: /*120*/ 200px;
+    }
 
         .header-nav {
             height: 70px;

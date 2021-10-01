@@ -46,6 +46,9 @@ function insertData() {
     dataManager.distinguish = [];
     dataManager.distinguish.push(makeDistinguishGroup('以分店區分', 'StoreName'));
     dataManager.distinguish.push(makeDistinguishGroup('以種類區分', 'CateName'));
+    dataManager.distinguish.push(makeDistinguishGroup('以月份區分', 'StartMonth'));
+    dataManager.distinguish.push(makeDistinguishGroup('以年齡層分', 'AgeLabel'));
+
 }
 
 function initializeCharts() {
@@ -168,7 +171,11 @@ Array.prototype.groupBy = function (prop) {
 
 function makeDistinguishGroup(optionText, groupingProp) {
     //1.api groupBy => { groupingKey:[group的ApiArray] , ... }
-    let distinguishGroups = apiAnalysisData.groupBy(groupingProp);
+    //先升序排序再分組
+    let distinguishGroups = apiAnalysisData.sort(function (a, b) {
+        return a[groupingProp] > b[groupingProp] ? 1 : -1; //正=>交換  , 負=>不換
+        }).groupBy(groupingProp);
+
     let labels = Object.keys(distinguishGroups);
     let values = [];
     let detailsLabels = [];// [[],[]]
@@ -198,7 +205,7 @@ function makeDistinguishGroup(optionText, groupingProp) {
 
             TotalSalesAmount += ProductTotalSalesAmount;//區分銷售額
         }
-        //排序
+        //降序排序
         PID_Items.sort(function (a, b) {
             return a.SalesAmount < b.SalesAmount ? 1 : -1; //正=>交換  , 負=>不換
         });
