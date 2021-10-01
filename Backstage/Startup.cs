@@ -49,6 +49,17 @@ namespace Backstage
             services.AddSingleton<IRedisRepository, RedisRepository>();
 
             services.AddControllersWithViews();
+            //跨域資源共用設定
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });
             //讓Swagger支援JWT
             services.AddSwaggerDocument(config =>
             {
@@ -106,7 +117,8 @@ namespace Backstage
             app.UseSwaggerUi3();
 
             app.UseRouting();
-
+            //跨域資源共用
+            app.UseCors();
             //啟用驗證，必須在授權前
             app.UseAuthentication();
             app.UseAuthorization();
