@@ -6,29 +6,35 @@ using System.Web.Mvc;
 using RentWebProj.ViewModels;
 using RentWebProj.Services;
 using RentWebProj.Models;
+using RentWebProj.Interfaces;
 
 namespace RentWebProj.Controllers
 {
     
     public class HomeController : Controller
     {
+        readonly IProductService _service;
+        //ProductService _service = new ProductService();
+        public HomeController(IProductService iProductService)
+        {
+            this._service = iProductService;
+        }
+
         public ActionResult Index()
         {
-            ProductService _service = new ProductService();
-
             List<IndexProductView> VMList = new List<IndexProductView>
             {
                 new IndexProductView
                 {
                     Title = "便宜到老闆生無可戀(눈_눈)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Price",
-                    Cards = _service.GetCheapestProductCardData().Take(6)
+                    Cards = _service.GetCheapestProductCardData()
                 },
                 new IndexProductView
                 {
                     Title = "30天內最熱門ლ(´ڡ`ლ)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Stars",
-                    Cards = _service.ProductDataWithStars().Take(6)
+                    Cards = _service.ProductDataWithStars()
                 }
             };
 

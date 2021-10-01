@@ -5,24 +5,26 @@ using System.Web;
 using System.Web.Mvc;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WebGrease.Css.Extensions;
+//using WebGrease.Css.Extensions;
 using System.Data.Entity;
-using RentWebProj.ViewModels;
-using RentWebProj.Models;
+using RentWebProj.Interfaces;
 using RentWebProj.Repositories;
-using RentWebProj.Helpers;
+using RentWebProj.Models;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
         private readonly CommonRepository _repository;
-        public ProductService()
+        private readonly IRedisRepository _iRedisRepository;
+        public ProductService(IRedisRepository iRedisRepository)
         {
             _repository = new CommonRepository();
+            _iRedisRepository = iRedisRepository;//注入redis相依性
         }
 
-        public IEnumerable<CardsViewModel> GetAllProductCardData()
+        private IEnumerable<CardsViewModel> GetAllProductCardData()
         {
             IEnumerable<CardsViewModel> AllProductCardVMList;
 
@@ -50,8 +52,14 @@ namespace RentWebProj.Services
 
         public IEnumerable<CardsViewModel> GetCheapestProductCardData()
         {
-            var pList = GetAllProductCardData().ToList();
-            IEnumerable<CardsViewModel> VMList = pList.OrderBy(x => x.DailyRate);
+            var VMList = _iRedisRepository.Get<List<CardsViewModel>>
+                ("Product.CheapestProducCard6Data");
+            if (VMList != null) return VMList;
+
+            VMList = GetAllProductCardData()
+                    .OrderBy(x => x.DailyRate)
+                    .Take(6)
+                    .ToList();
             return VMList;
         }
         //算XX天內被租天數高到低排序
@@ -64,22 +72,29 @@ namespace RentWebProj.Services
                 p.CountOfRentedDays = days;
             });
 
-            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
             return VMList;
         }
 
         public IEnumerable<CardsViewModel> ProductDataWithStars()
         {
+            List<CardsViewModel> VMList = _iRedisRepository.Get<List<CardsViewModel>>
+                ("Product.30DayStarCard6Data");
+            if (VMList != null) return VMList;
+
             //回傳所有商品資料含30天內被租過的日期
-            var pLists = GetMostPopularProductCardData(30).ToList();
+            VMList = GetMostPopularProductCardData(30).ToList();
 
             int dayRange = 2; //先以2天為星星標準
-            pLists.ForEach(p =>
+            VMList.ForEach(p =>
             {
                 int stars = (int)p.CountOfRentedDays / dayRange + 1;
                 p.StarsForLike = stars > 5 ? 5 : stars;
             });
-            return pLists;
+
+            _iRedisRepository.Set("Product.30DayStarCard6Data", VMList);
+
+            return VMList;
         }
 
         public IEnumerable<CardsViewModel> GetCategoryData()
@@ -281,19 +296,19 @@ namespace RentWebProj.Services
             DateTime e = Convert.ToDateTime(expirationDate);
 
             var cList = (from p in _repository.GetAll<Product>()
-                     where p.ProductID == PID
-                     select new CartIndex()
-                     {
-                         //MemberID = 1,
-                         ProductID = PID,
-                         ProductName = p.ProductName,
-                         DailyRate = p.DailyRate,
-                         //Qty = 1,//無作用
-                         StartDate = s,
-                         ExpirationDate = e,
-                         DateDiff = 1 + ((int)DbFunctions.DiffMinutes(s, e) - 1) / 1440
-                         //產品圖片
-                     }).ToList();
+                         where p.ProductID == PID
+                         select new CartIndex()
+                         {
+                             //MemberID = 1,
+                             ProductID = PID,
+                             ProductName = p.ProductName,
+                             DailyRate = p.DailyRate,
+                             //Qty = 1,//無作用
+                             StartDate = s,
+                             ExpirationDate = e,
+                             DateDiff = 1 + ((int)DbFunctions.DiffMinutes(s, e) - 1) / 1440
+                             //產品圖片
+                         }).ToList();
 
             cList.ForEach(c => c.Sub = c.DailyRate * c.DateDiff);
 

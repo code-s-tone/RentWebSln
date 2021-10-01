@@ -332,6 +332,7 @@
     <Compile Include="Repositories\RedisRepository.cs" />
     <Compile Include="Services\BlogService.cs" />
     <Compile Include="Services\CartService.cs" />
+    <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Services\MemberService.cs" />
     <Compile Include="Services\OrderService.cs" />
     <Compile Include="Services\ProductService.cs" />
