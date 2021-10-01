@@ -15,7 +15,6 @@
             </div>
         </div>
 
-
         <div class="col-12 col-md-6 mb-3 px-3">
             <label asp-for="PostDate">發文日期</label>
             <input v-model="inputData.date" type="date" :class="{'is-invalid':inputDataCheck.dateError}" asp-for="PostDate"
@@ -69,5 +68,5 @@
     <script src="https://cdn.ckeditor.com/4.16.2/full-all/ckeditor.js"></script>
 }
 @section endJS{
-    <script src="~/js/blogEditor.js"></script>
+    <script src="~/js/Blog/blogEditor.js"></script>
 }
