@@ -10,6 +10,7 @@ namespace RentWebProj.ViewModels
         public int BlogId { get; set; }
         public string BlogTitle { get; set; }
         public DateTime PostDate { get; set; }
+        public string Poster { get; set; }
         public string MainImgUrl { get; set; }
         public string MainImgTitle { get; set; }
         public string Preview { get; set; }

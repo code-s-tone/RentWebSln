@@ -15,5 +15,6 @@ namespace Backstage.Models
         public string MainImgTitle { get; set; }
         public string Preview { get; set; }
         public string BlogContent { get; set; }
+        public string Poster { get; set; }
     }
 }

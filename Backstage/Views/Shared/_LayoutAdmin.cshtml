@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>KnowrentgeAdmin-@ViewData["Title"]</title>
+    <title>KnowrentgeAdmin - @ViewData["Title"]</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/css/layout/all.min.css" rel="stylesheet" type="text/css" />
@@ -34,6 +34,9 @@
     <!-- Load Vue followed by BootstrapVue -->
     <script src="//unpkg.com/vue@latest/dist/vue.min.js"></script>
     <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+    <!--toastr提示-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
     @await RenderSectionAsync("topCSS", required: false)
     @await RenderSectionAsync("topJS", required: false)
@@ -89,7 +92,7 @@
                 <a class="nav-link" href="@Url.Action("Editor", "Blog")">
                     <!--<a class="nav-link" href="tables.html">-->
                     <i class="fas fa-blog"></i>
-                    <span>發文系統</span>
+                    <span>文章發佈</span>
                 </a>
             </li>
 
