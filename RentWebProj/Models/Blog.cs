@@ -36,5 +36,9 @@ namespace RentWebProj.Models
         [Key]
         [Column(Order = 6)]
         public string BlogContent { get; set; }
+
+        [Key]
+        [Column(Order = 7)]
+        public string Poster { get; set; }
     }
 }

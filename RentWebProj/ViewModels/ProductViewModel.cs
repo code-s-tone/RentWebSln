@@ -34,7 +34,7 @@ namespace RentWebProj.ViewModels
 
     }
 
-    public class FilterSearchViewModel:CardsViewModel
+    public class FilterSearchViewModel : CardsViewModel
     {
         public List<CardsViewModel> SelectedProductList { get; set; }
         [Display(Name = "關鍵字搜尋")]

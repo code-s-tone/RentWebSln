@@ -18,16 +18,18 @@ namespace RentWebProj.Services
         public List<BlogViewModel> GetAllBlogs()
         {
             var blogVM = (from x in _repository.GetAll<Blog>()
-                     select new BlogViewModel()
-                     {
-                         BlogId = x.BlogID,
-                         BlogTitle = x.BlogTitle,
-                         PostDate = x.PostDate,
-                         MainImgUrl = x.MainImgUrl,
-                         MainImgTitle = x.MainImgTitle,
-                         Preview = x.Preview,
-                         BlogContent = x.BlogContent,
-                     }).ToList();
+                          orderby x.BlogID descending
+                          select new BlogViewModel()
+                          {
+                              BlogId = x.BlogID,
+                              BlogTitle = x.BlogTitle,
+                              PostDate = x.PostDate,
+                              MainImgUrl = x.MainImgUrl,
+                              MainImgTitle = x.MainImgTitle,
+                              Preview = x.Preview,
+                              BlogContent = x.BlogContent,
+                              Poster = x.Poster
+                          }).ToList();
             return blogVM;
 
         }

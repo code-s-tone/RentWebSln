@@ -31,16 +31,14 @@ namespace Backstage.Controllers
 
         //編輯器頁面送出後 內容處理
         [HttpPost]
-        public IActionResult SaveBlogAsync(BlogViewModel blogVM) //1. 方法名稱後加async跟下方寫法有啥不一樣 2. 不這樣寫無法用int接
+        public IActionResult SaveBlogAsync(BlogViewModel blogVM) 
         {
-            int numDone = _service.Create(blogVM);
-            
-            return RedirectToAction("BlogList");
-
+            TempData["SaveResult"] = _service.SaveBlog(blogVM);
+            return RedirectToAction("Editor");
         }
+
         public async Task<IActionResult> BlogPage(int blogid)
         {
-            //讀所有文章資料
             var blog = await _service.FindBlogById(blogid);
             return View(blog);
         }
