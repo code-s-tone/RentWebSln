@@ -28,6 +28,7 @@ namespace RentWebProj.Services
                               MainImgTitle = x.MainImgTitle,
                               Preview = x.Preview,
                               BlogContent = x.BlogContent,
+                              Poster = x.Poster
                           }).ToList();
             return blogVM;
 

@@ -3,7 +3,7 @@
     data: {
         inputData: {
             title: "",
-            date: "",
+            poster: "",
             imgUrl: "",
             imgTitle: "",
             preview: "",
@@ -11,8 +11,8 @@
         inputDataCheck: {
             titleError: false,
             titleErrMsg: "",
-            dateError: false,
-            dateErrMsg: "",
+            posterError: false,
+            posterErrMsg: "",
             imgUrlError: false,
             imgUrlErrMsg: "",
             imgTitleError: false,
@@ -38,16 +38,16 @@
                 this.checkDataAvailable();
             }
         },
-        "inputData.date": {
+        "inputData.poster": {
             immediate: true,
             handler: function () {
-                if (this.inputData.date == "") {
-                    this.inputDataCheck.dateError = true;
-                    this.inputDataCheck.dateErrMsg = "日期不得為空";
+                if (this.inputData.poster == "") {
+                    this.inputDataCheck.posterError = true;
+                    this.inputDataCheck.posterErrMsg = "發文者不得為空";
                 }
                 else {
-                    this.inputDataCheck.dateError = false;
-                    this.inputDataCheck.dateErrMsg = "";
+                    this.inputDataCheck.posterError = false;
+                    this.inputDataCheck.posterErrMsg = "";
                 }
                 this.checkDataAvailable();
             }

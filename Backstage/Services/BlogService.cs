@@ -29,11 +29,12 @@ namespace Backstage.Services
                     var blog = new Blog()
                     {
                         BlogTitle = blogVM.BlogTitle,
-                        PostDate = blogVM.PostDate.Date,
+                        PostDate = DateTime.Now,
                         MainImgUrl = blogVM.MainImgUrl,
                         MainImgTitle = blogVM.MainImgTitle,
                         Preview = blogVM.Preview,
                         BlogContent = blogVM.BlogContent,
+                        Poster= blogVM.Poster
                     };
                     _ctx.Add(blog);
                     _ctx.SaveChanges();

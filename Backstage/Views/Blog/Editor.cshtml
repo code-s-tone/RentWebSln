@@ -16,11 +16,11 @@
         </div>
 
         <div class="col-12 col-md-6 mb-3 px-3">
-            <label asp-for="PostDate">發文日期</label>
-            <input v-model="inputData.date" type="date" :class="{'is-invalid':inputDataCheck.dateError}" asp-for="PostDate"
+            <label asp-for="Poster">發文者</label>
+            <input v-model="inputData.poster" type="text" :class="{'is-invalid':inputDataCheck.posterError}" asp-for="Poster"
                    class="form-control" />
             <div class="text-danger small mt-1">
-                {{ inputDataCheck.dateErrMsg }}
+                {{ inputDataCheck.posterErrMsg }}
             </div>
         </div>
 
@@ -43,7 +43,7 @@
         </div>
 
         <div class="col-12 mb-3 px-3">
-            <label asp-for="Preview">引言預覽（100字內無須分段）</label>
+            <label asp-for="Preview">引言預覽（150字內無須分段）</label>
             <textarea v-model="inputData.preview" class="form-control" type="text"
                       :class="{'is-invalid':inputDataCheck.previewError}" asp-for="Preview"></textarea>
             <div class="text-danger small mt-1">
