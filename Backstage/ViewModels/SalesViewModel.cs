@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace Backstage.ViewModels
 {
-    public class AnalysisViewModel
-    {
-    }
-
-    public class SalesAnalysis
+    [Serializable]
+    public class SalesViewModel
     {
         //產品,類 , total , 店 ,會員年齡,
         public string PID { get; set; }

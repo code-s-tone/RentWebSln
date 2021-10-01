@@ -16,8 +16,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Backstage.Models;
+using Backstage.Repositories;
 using Backstage.Services;
 using Backstage.Interfaces;
+using Microsoft.Extensions.Caching.StackExchangeRedis;
 
 namespace Backstage
 {
@@ -33,14 +35,20 @@ namespace Backstage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddDbContext<RentContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RentContext")));
-            services.AddTransient<IAnalysisService, AnalysisService>();
+            //註冊redis資料庫
+            services.AddStackExchangeRedisCache(options => options.Configuration = Configuration["RedisConfig:Cache"]);
+            
+            //注入Service
+            services.AddTransient<ISalesService, SalesService>();
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderService, OrderService>();
 
+            //注入Repository
+            services.AddSingleton<IRedisRepository, RedisRepository>();
 
+            services.AddControllersWithViews();
             //讓Swagger支援JWT
             services.AddSwaggerDocument(config =>
             {

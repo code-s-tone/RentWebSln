@@ -16,9 +16,9 @@ namespace Backstage.ApiControllers
     public class AnalysisController : ControllerBase
     {
 
-        private readonly IAnalysisService service;
+        private readonly ISalesService service;
 
-        public AnalysisController(IAnalysisService service)
+        public AnalysisController(ISalesService service)
         {
             this.service = service;
         }

@@ -10,23 +10,29 @@ using Backstage.Interfaces;
 
 namespace Backstage.Services
 {
-    public class AnalysisService : IAnalysisService
+    public class SalesService : ISalesService
     {
         private readonly RentContext _ctx;
-
-        public AnalysisService(RentContext ctx)
+        private readonly IRedisRepository _iRedisRepository;//Redis介面欄位
+        public SalesService(RentContext ctx , IRedisRepository iRedisRepository)
         {
             _ctx = ctx;
+            _iRedisRepository = iRedisRepository;//注入redis相依性
         }
 
-        public IEnumerable<SalesAnalysis> GetSalesData()
+        //須到ViewModel補[Serializable]
+        public List<SalesViewModel> GetSalesData()
         {
+            //Redis中key的名稱自己取，不要和他人重複
+            var result = _iRedisRepository.Get<List<SalesViewModel>>("Sales.GetSalesData");
+            if (result != null) return result;
+
             var now = DateTime.Now;
             var begin = now.AddYears(-1);
             //var end = now;
 
-            var result =
-                from od in _ctx.OrderDetails//_repository.GetAll<OrderDetail>()
+            result =
+                (from od in _ctx.OrderDetails//_repository.GetAll<OrderDetail>()
                 join p in _ctx.Products//_repository.GetAll<Product>()
                 on od.ProductId equals p.ProductId
                 join c in _ctx.Categories//_repository.GetAll<>()
@@ -41,7 +47,7 @@ namespace Backstage.Services
                 on o.MemberId equals m.MemberId
                 where o.OrderStatusId == 3 //已付款 
                     && od.StartDate > begin
-                select new SalesAnalysis
+                select new SalesViewModel
                 {
                     //種類區分
                     CateName = c.CategoryName,
@@ -50,16 +56,17 @@ namespace Backstage.Services
                     //月分區分
                     StartMonth = $"{od.StartDate.Month+1}月",
                     //年齡層區分
-                    //MID = o.MemberId,
-                    //Member
                     AgeLabel = $"<{EF.Functions.DateDiffYear(m.Birthday, DateTime.Now) / 10 + 1}0",
 
                     ProductName = p.ProductName,
                     PID = od.ProductId,
                     SalesAmount = (int)od.TotalAmount,
-                };
+                }).ToList();
 
+            //Redis中key的名稱自己取，不要和他人重複
+            _iRedisRepository.Set("Sales.GetSalesData", result);
             return result;
+
         }
     }
 }
