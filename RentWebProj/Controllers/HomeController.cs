@@ -31,6 +31,8 @@ namespace RentWebProj.Controllers
                     Cards = _service.ProductDataWithStars().Take(6)
                 }
             };
+            ViewBag.CategoryData = new ProductService().GetCategoryData();
+            ViewBag.NewComments = new MemberService().GetAllComment().Take(10);
 
             //判斷登入之後動態顯示大頭貼跟名子 by _家承
             if (User.Identity.IsAuthenticated)
