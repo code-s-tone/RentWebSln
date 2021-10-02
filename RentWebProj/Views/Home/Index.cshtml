@@ -2,9 +2,9 @@
 
 @{
     ViewBag.Title = "網羅你的租借需求🕸";
-    var Catgories = new ProductService().GetCategoryData();
-    var AllComments = new MemberService().GetAllComment().Take(10);
-    var blogList = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate).Take(5);
+    IEnumerable<CardsViewModel> Catgories = ViewBag.Categories;
+    IEnumerable<CommentViewModel> AllComments = ViewBag.NewComments;
+    IEnumerable<BlogViewModel> blogList = ViewBag.Blogs;
 }
 
 <div class="nav-background"></div>@* 打底 *@

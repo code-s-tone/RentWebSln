@@ -22,6 +22,14 @@ namespace RentWebProj.Controllers
 
         public ActionResult Index()
         {
+            //判斷登入之後動態顯示大頭貼跟名子 by _家承
+            if (User.Identity.IsAuthenticated)
+            {
+                var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
+                TempData["img"] = result.ProfilePhotoUrl;
+                TempData["name"] = result.Fullname;
+            }
+
             List<IndexProductView> VMList = new List<IndexProductView>
             {
                 new IndexProductView
@@ -37,14 +45,9 @@ namespace RentWebProj.Controllers
                     Cards = _service.ProductDataWithStars()
                 }
             };
-
-            //判斷登入之後動態顯示大頭貼跟名子 by _家承
-            if (User.Identity.IsAuthenticated)
-            {
-                var result = Helper.ConvertMemberIdToMemberProfile(Int32.Parse(User.Identity.Name));
-                TempData["img"] = result.ProfilePhotoUrl;
-                TempData["name"] = result.Fullname;
-            }
+            ViewBag.Categories = _service.GetCategoryData();
+            ViewBag.NewComments = new MemberService().GetAllComment().Take(10);
+            ViewBag.Blogs = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate).Take(5);
 
             return View(VMList);
         }
