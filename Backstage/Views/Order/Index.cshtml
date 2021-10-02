@@ -153,7 +153,7 @@
             </template>
 
             <template #cell(actions)="row">
-                <b-button size="sm" @@click="info(row.item, row.index, $event.target)" class="mr-1" variant="primary">
+                <b-button size="sm" @@click="link(row.item.orderID)" class="mr-1" variant="primary">
                     修改
                 </b-button>
                 <b-button size="sm" @@click="row.toggleDetails" variant="success ">
@@ -315,6 +315,9 @@
                     // Trigger pagination to update the number of buttons/pages due to filtering
                     this.totalRows = filteredItems.length
                     this.currentPage = 1
+                },
+                link(orderID) {
+                    window.onload.href = `../Order/OrderDetail/${orderID}`;
                 }
             },
             watch: {
@@ -325,7 +328,7 @@
         });
 
         const GUrl = "/api/OrderApi/GetOrder";
-        const PUrl = "/api/OrderApi/UpdateOrder";
+
         function LoadData() {
             fetch(GUrl,
                 {
@@ -338,35 +341,6 @@
                 }).then(res => res.json())
                 .then(result => {
                     vm.$data.items = result;
-                })
-                .catch(ex => {
-                    console.log("錯了");
-                })
-        };
-
-        function EditData() {
-
-            fetch(PUrl,
-                {
-                    method: "Post",
-                    //body: JSON.stringify(this.$data.items[0]),
-                    headers: {
-                        //'RequestVerificationToken':@GetAntiXsrfRequestToken(),
-                        'Content-Type': 'application/json'
-                    },
-                })
-                .then(res => {
-                   
-                    this.$data.items = res;
-                    console.log(res);
-                    console.log(res.ok);
-                    console.log(res.status);
-                    swal("修改成功", {
-                        icon: 'success',
-                    })
-                })
-                .then(result => {
-                    console.log(result);
                 })
                 .catch(ex => {
                     console.log("錯了");
