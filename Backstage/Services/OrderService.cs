@@ -62,7 +62,7 @@ namespace Backstage.Services
                          where o.OrderId == orderID
                          select new OrderViewModel
                          {
-                             OrderID = o.OrderId,
+                             //OrderID = o.OrderId,
                              MemberID = o.MemberId,
                              FullName = m.FullName,
                              StoreName = b.StoreName,
@@ -89,9 +89,27 @@ namespace Backstage.Services
                     where od.OrderId == UpdateOrder.OrderID
                     join o in _ctx.Orders on od.OrderId equals o.OrderId
                     join m in _ctx.Members on o.MemberId equals m.MemberId
-                    select m
-                ).FirstOrDefault();
+                    join b in _ctx.BranchStores on o.StoreId equals b.StoreId
+                    select new OrderViewModel
+                    {
+                        //OrderID = o.OrderId,
+                        //MemberID = o.MemberId,
+                        FullName = UpdateOrder.FullName,
+                        StoreName = UpdateOrder.StoreName,
+                        Phone = UpdateOrder.Phone,
+                        Email = UpdateOrder.Email,
+                        //OrderStatusID = o.OrderStatusId == 0 ? "已作廢" : o.OrderStatusId == 1 ? "待付款" : o.OrderStatusId == 2 ? "付款中" : o.OrderStatusId == 3 ? "付款中" : "沒有狀態",
+                        //GoodsStatusID = UpdateOrder.GoodsStatusID == "已歸還" ? 0 : od.GoodsStatus == 1 ? "待出貨" : od.GoodsStatus == 2 ? "已出貨" : od.GoodsStatus == 3 ? "已到貨" : od.GoodsStatus == 4 ? "已取貨" : "沒有狀態",
+                        //OrderDate = o.OrderDate,
+                        //ProductName = p.ProductName,
+                        //DailyRate = od.DailyRate,
+                        //StartDate = od.StartDate,
+                        //ExpirationDate = od.ExpirationDate,
+                        //TotalAmount = od.TotalAmount
 
+                    }
+                ).FirstOrDefault();
+            
             if (UpdateOrder.GoodsStatusID == "已歸還")
             {
                 order.GoodsStatus = 0;
