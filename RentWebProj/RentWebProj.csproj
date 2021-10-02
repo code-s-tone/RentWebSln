@@ -310,7 +310,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CacheHelper.cs" />
     <Compile Include="Helpers\RouteHelper.cs" />
     <Compile Include="Interfaces\IRedisRepository.cs" />
     <Compile Include="Models\Administer.cs" />
