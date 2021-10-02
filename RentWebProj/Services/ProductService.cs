@@ -53,13 +53,16 @@ namespace RentWebProj.Services
         public IEnumerable<CardsViewModel> GetCheapestProductCardData()
         {
             var VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.CheapestProducCard6Data");
+                ("Product.CheapestProductCard6Data");
             if (VMList != null) return VMList;
 
             VMList = GetAllProductCardData()
                     .OrderBy(x => x.DailyRate)
                     .Take(6)
                     .ToList();
+
+            _iRedisRepository.Set("Product.CheapestProductCard6Data", VMList);
+
             return VMList;
         }
         //算XX天內被租天數高到低排序

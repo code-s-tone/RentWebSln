@@ -7,7 +7,6 @@ using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
 
-
 namespace RentWebProj.Repositories
 {
     public static class RedisConnectionFactory
@@ -22,16 +21,16 @@ namespace RentWebProj.Repositories
         public static ConnectionMultiplexer GetConnection() => Connection.Value;
     }
 
-    public class RedisRepository: IRedisRepository
+    public class RedisRepository : IRedisRepository
     {
         //readonly IDistributedCache _iDistributedCache;
         //public RedisRepository(IDistributedCache distributedCache)
         //{
         //    _iDistributedCache = distributedCache;
         //}
-        private static ConnectionMultiplexer _conn;
-        private static IDatabase _db;
-        static RedisRepository()
+        private ConnectionMultiplexer _conn;
+        private IDatabase _db;
+        public RedisRepository()
         {
             _conn = RedisConnectionFactory.GetConnection();
             _db = _conn.GetDatabase();
@@ -52,7 +51,6 @@ namespace RentWebProj.Repositories
             //});
             TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 9, 0);
             _db.StringSet(key, ObjectToByteArray(value), cacheItemPolicy);
-
         }
 
         public void Remove(string key)

@@ -9,7 +9,7 @@ using RentWebProj.Services;
 
 namespace RentWebProj.Helpers
 {
-    public static class RedisCacheHelper//CacheHelper
+    public static class CacheHelper
     {
         private static MemoryCache _cache = MemoryCache.Default;
 
@@ -37,7 +37,7 @@ namespace RentWebProj.Helpers
             _cache.Remove("TableData");
 
             //存取資料
-            var listAgency = new ProductService().GetCheapestProductCardData();
+            var listAgency = "";// new ProductService().GetCheapestProductCardData();
 
             //設定 cache 過期時間
             CacheItemPolicy cacheItemPolicy = new CacheItemPolicy() { AbsoluteExpiration = DateTime.Now.AddMinutes(9) };
