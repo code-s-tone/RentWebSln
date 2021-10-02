@@ -48,6 +48,39 @@ namespace Backstage.Services
             return result;
         }
 
+        public IEnumerable<OrderViewModel> GetOrderDetailData(int orderID)
+        {
+            var result = from o in _ctx.Orders
+                         join m in _ctx.Members
+                         on o.MemberId equals m.MemberId
+                         join b in _ctx.BranchStores
+                         on o.StoreId equals b.StoreId
+                         join od in _ctx.OrderDetails
+                         on o.OrderId equals od.OrderId
+                         join p in _ctx.Products
+                         on od.ProductId equals p.ProductId
+                         where o.OrderId == orderID
+                         select new OrderViewModel
+                         {
+                             OrderID = o.OrderId,
+                             MemberID = o.MemberId,
+                             FullName = m.FullName,
+                             StoreName = b.StoreName,
+                             Phone = m.Phone,
+                             Email = m.Email,
+                             OrderStatusID = o.OrderStatusId == 0 ? "已作廢" : o.OrderStatusId == 1 ? "待付款" : o.OrderStatusId == 2 ? "付款中" : o.OrderStatusId == 3 ? "付款中" : "沒有狀態",
+                             GoodsStatusID = od.GoodsStatus == 0 ? "已歸還" : od.GoodsStatus == 1 ? "待出貨" : od.GoodsStatus == 2 ? "已出貨" : od.GoodsStatus == 3 ? "已到貨" : od.GoodsStatus == 4 ? "已取貨" : "沒有狀態",
+                             OrderDate = o.OrderDate,
+                             ProductName = p.ProductName,
+                             DailyRate = od.DailyRate,
+                             StartDate = od.StartDate,
+                             ExpirationDate = od.ExpirationDate,
+                             TotalAmount = od.TotalAmount
+
+                         };
+            return result;
+        }
+
         public Task<IEnumerable<OrderViewModel>> UpdateOrder(OrderViewModel UpdateOrder)
         {
             var order = _ctx.OrderDetails.Where(x => x.OrderId == UpdateOrder.OrderID).FirstOrDefault();
