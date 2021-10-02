@@ -5,36 +5,60 @@ using System.Web;
 using RentWebProj.Interfaces;
 using System.Text.Json;
 using Microsoft.Extensions.Caching.Distributed;
+using StackExchange.Redis;
 
 
 namespace RentWebProj.Repositories
 {
+    public static class RedisConnectionFactory
+    {
+        private static readonly Lazy<ConnectionMultiplexer> Connection;
+        static RedisConnectionFactory()
+        {
+            var connStr = System.Configuration.ConfigurationManager.AppSettings["RedisConnection"];
+            var options = ConfigurationOptions.Parse(connStr);
+            Connection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(options));
+        }
+        public static ConnectionMultiplexer GetConnection() => Connection.Value;
+    }
+
     public class RedisRepository: IRedisRepository
     {
-        readonly IDistributedCache _iDistributedCache;
-
-        public RedisRepository(IDistributedCache distributedCache)
+        //readonly IDistributedCache _iDistributedCache;
+        //public RedisRepository(IDistributedCache distributedCache)
+        //{
+        //    _iDistributedCache = distributedCache;
+        //}
+        private static ConnectionMultiplexer _conn;
+        private static IDatabase _db;
+        static RedisRepository()
         {
-            _iDistributedCache = distributedCache;
+            _conn = RedisConnectionFactory.GetConnection();
+            _db = _conn.GetDatabase();
+        }
+        public T Get<T>(string key) where T : class
+        {
+            //return ByteArrayToObject<T>(_iDistributedCache.Get(key));
+            var a = _db.StringGet(key);
+            return ByteArrayToObject<T>(a);
         }
 
         public void Set<T>(string key, T value) where T : class
         {
-            _iDistributedCache.Set(key, ObjectToByteArray(value), new DistributedCacheEntryOptions()
-            {
-                //快取存續時間暫定9分鐘
-                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
-            });
-        }
+            //_iDistributedCache.Set(key, ObjectToByteArray(value), new DistributedCacheEntryOptions()
+            //{
+            //    //快取存續時間暫定9分鐘
+            //    AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
+            //});
+            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 9, 0);
+            _db.StringSet(key, ObjectToByteArray(value), cacheItemPolicy);
 
-        public T Get<T>(string key) where T : class
-        {
-            return ByteArrayToObject<T>(_iDistributedCache.Get(key));
         }
 
         public void Remove(string key)
         {
-            _iDistributedCache.Remove(key);
+            //_iDistributedCache.Remove(key);
+            _db.KeyDelete(key);
         }
 
 
