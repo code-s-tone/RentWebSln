@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentWebProj", "RentWebProj\RentWebProj.csproj", "{9148646C-6DE2-4F34-97B2-E674EB3FD06C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Backstage", "Backstage\Backstage.csproj", "{18375FE7-4C73-4F2E-BF06-C82F32EF50F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backstage", "Backstage\Backstage.csproj", "{18375FE7-4C73-4F2E-BF06-C82F32EF50F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,9 +19,10 @@ namespace Backstage.Controllers
         }
         public IActionResult Index()
         {
-            //var order = _orderService.GetOrderData();
-            
-
+            return View();
+        }
+        public IActionResult OrderDetail()
+        {
             return View();
         }
     }
