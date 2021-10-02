@@ -6,61 +6,35 @@
     <form>
 
         <b-col>
-            <label for="input-small">產品編號:</label>
+            <label for="input-small">訂單人姓名:</label>
         </b-col>
         <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].ProductId" name="ProductId" class="_ProductId" v-model="items[0].ProductId"></b-form-input>
-        </b-col>
-
-        <b-col>
-            <label for="input-small" class="mt-3">產品名稱:</label>
-        </b-col>
-        <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].ProductName" name="ProductName" class="_ProductName" v-model="items[0].ProductName"></b-form-input>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].fullName" name="ProductId" class="_ProductId" v-model="items[0].fullName"></b-form-input>
         </b-col>
 
         <b-col>
-            <label for="input-small" class="mt-3">產品描述:</label>
+            <label for="input-small" class="mt-3">分店地址:</label>
         </b-col>
         <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].Description" name="Description" class="_Description" v-model="items[0].Description"></b-form-input>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].storeName" name="storeName" class="_storeName" v-model="items[0].storeName"></b-form-input>
         </b-col>
 
         <b-col>
-            <label for="input-small" class="mt-3">產品單價:</label>
+            <label for="input-small" class="mt-3">聯絡電話:</label>
         </b-col>
         <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].DailyRate" name="DailyRate" class="_DailyRate" v-model="items[0].DailyRate"></b-form-input>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].phone" name="Description" class="_Description" v-model="items[0].phone"></b-form-input>
+        </b-col>
+
+        <b-col>
+            <label for="input-small" class="mt-3">出貨狀態:</label>
+        </b-col>
+        <b-col>
+            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].goodsStatusID" name="goodsStatusID" class="_goodsStatusID" v-model="items[0].goodsStatusID"></b-form-input>
         </b-col>
         <div class="text-center">
             <b-spinner variant="primary" label="Text Centered" class="spinner-border spinner d-none"></b-spinner>
         </div>
-        <b-col>
-            <label for="input-small" class="mt-3">上架時間:</label>
-            <vuejs-datepicker v-model="items[0].LaunchDate"></vuejs-datepicker>
-        </b-col>
-
-
-        <b-col>
-            <label for="input-small" class="mt-3">下架時間:</label>
-        </b-col>
-        <b-col>
-            <vuejs-datepicker v-model="items[0].WithdrawalDate"></vuejs-datepicker>
-        </b-col>
-
-        <b-col>
-            <label for="input-small" class="mt-3">產品圖片:</label>
-
-            <div id="upload" class="btn btn-primary"><i class="fas fa-arrow-circle-up"></i></div>
-
-            <input id="file" type="file" multiple style="display:none">
-            <div class="gallery" id="gallery"></div>
-
-        </b-col>
-
-        <b-form-checkbox v-model="items[0].Discontinuation" name="check-button" switch class="text-center mt-3 _Discontinuation">
-            是否停用產品
-        </b-form-checkbox>
 
         <b-col class="text-center mt-3">
             <input type="text" @@click="fetchx()" class="btn btn-primary _summit" value="送出修改">
@@ -89,7 +63,7 @@
             }
         });
 
-        const Url = "/api/OrderApi/GetOrder";
+        const GUrl = `/api/OrderApi/GetOrderDetail/${orderID}`;
 
         function LoadData() {
             fetch(GUrl,

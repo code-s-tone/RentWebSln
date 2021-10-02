@@ -33,6 +33,15 @@ namespace Backstage.ApiControllers
             return Ok(result);
         }
 
+        [Route("api/OrderApi/GetOrderDetail/{orderID}")]
+        [HttpGet]
+        public IActionResult GetOrderDetail(int orderID)
+        {
+            var result = _orderService.GetOrderData();
+            var emps = JsonConvert.SerializeObject(result);
+
+            return Ok(emps);
+        }
 
 
 
