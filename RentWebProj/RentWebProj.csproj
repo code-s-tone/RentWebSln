@@ -516,7 +516,8 @@
     <Content Include="WebForm\AioCheckOut.aspx" />
     <Content Include="WebForm\CheckOutFeedback.aspx" />
     <None Include="Properties\PublishProfiles\knownrentge - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\knownrentge - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\knowrentge - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\knowrentge - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\knowrrentge - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\rentAnyThing - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
