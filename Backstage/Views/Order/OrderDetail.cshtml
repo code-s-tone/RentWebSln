@@ -68,9 +68,39 @@
                             goodsStatusID: "",
                         }
                     ]
+            },
+            method: {
+                EditData() {
+                    let PUrl = "/api/OrderApi/UpdateOrder";
+                    fetch(PUrl,
+                        {
+                            method: "Post",
+                            body: JSON.stringify(this.$data.items[0]),
+                            headers: {
+
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                        .then(res => {
+
+                            this.$data.items = res;
+                            console.log(res);
+                            console.log(res.ok);
+                            console.log(res.status);
+                            swal("修改成功", {
+                                icon: 'success',
+                            })
+                        })
+                        .then(result => {
+                            console.log(result);
+                        })
+                        .catch(ex => {
+                            console.log("錯了");
+                        })
+                }
             }
         });
-
+                
         function LoadData() {
             let orderID = url.split("/")[5]
             let GUrl = `/api/OrderApi/GetOrderDetail/${orderID}`;
@@ -94,35 +124,7 @@
 
 
 
-        let PUrl = "/api/OrderApi/UpdateOrder";
-        function EditData() {
-
-            fetch(PUrl,
-                {
-                    method: "Post",
-                    body: JSON.stringify(this.$data.items[0]),
-                    headers: {
-
-                        'Content-Type': 'application/json'
-                    },
-                })
-                .then(res => {
-
-                    this.$data.items = res;
-                    console.log(res);
-                    console.log(res.ok);
-                    console.log(res.status);
-                    swal("修改成功", {
-                        icon: 'success',
-                    })
-                })
-                .then(result => {
-                    console.log(result);
-                })
-                .catch(ex => {
-                    console.log("錯了");
-                })
-        };
+        
 
         $(document).ready(function () {
             LoadData();
