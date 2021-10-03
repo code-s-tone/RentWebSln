@@ -14,7 +14,7 @@ header {
 
 
 .keyart, .keyart_layer {
-    height: 1000px;
+    height: 850px;
 }
 
 .keyart {
@@ -29,7 +29,7 @@ header {
 
 .keyart_layer {
     background-position: bottom center;
-    background-size: auto 1038px;
+    background-size: auto 850px;
     background-repeat: repeat-x;
     width: 100%;
     position: absolute;

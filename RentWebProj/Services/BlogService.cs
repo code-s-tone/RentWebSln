@@ -9,18 +9,20 @@ using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
-    public class BlogService
+    public class BlogService : IBlogService
     {
         private readonly CommonRepository _repository;
         private readonly IRedisRepository _iRedisRepository;
 
-        public BlogService()//IRedisRepository iRedisRepository
+        public BlogService(IRedisRepository iRedisRepository)
         {
             _repository = new CommonRepository();
-            //_iRedisRepository = iRedisRepository;//注入redis相依性
+            _iRedisRepository = iRedisRepository;//注入redis相依性
         }
         public List<BlogViewModel> GetAllBlogs()
         {
+            var VMList = _iRedisRepository.Get<List<CardsViewModel>>
+                ("Blog.AllBlogs");
             var blogVM = (from x in _repository.GetAll<Blog>()
                           orderby x.BlogID descending
                           select new BlogViewModel()
@@ -34,8 +36,9 @@ namespace RentWebProj.Services
                               BlogContent = x.BlogContent,
                               Poster = x.Poster
                           }).ToList();
-            return blogVM;
+            _iRedisRepository.Set("Blog.AllBlogs", VMList);
 
+            return blogVM;
         }
         public BlogViewModel FindBlogById(int id)
         {

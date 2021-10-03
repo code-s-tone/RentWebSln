@@ -10,20 +10,21 @@ namespace RentWebProj.Controllers
 {
     public class SocialMediaController : Controller
     {
-        private BlogService _service;
-        public SocialMediaController()
+        readonly IBlogService _iBlogService;
+
+        public SocialMediaController(IBlogService iBlogService)
         {
-            _service = new BlogService();
+            this._iBlogService = iBlogService;
         }
-        
+
         public ActionResult BlogList()
         {
-            var blogList = _service.GetAllBlogs();
+            var blogList = _iBlogService.GetAllBlogs();
             return View(blogList);
         }
         public ActionResult BlogPage(int id)
         {
-             var blog = _service.FindBlogById(id);
+             var blog = _iBlogService.FindBlogById(id);
             return View(blog);
         }
 

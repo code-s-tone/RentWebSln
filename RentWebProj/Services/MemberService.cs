@@ -20,12 +20,9 @@ namespace RentWebProj.Services
     public class MemberService
     {
         private readonly CommonRepository _repository;
-        private readonly IRedisRepository _iRedisRepository;
-
-        public MemberService()//IRedisRepository iRedisRepository
+        public MemberService()
         {
             _repository = new CommonRepository();
-            //_iRedisRepository = iRedisRepository;//注入redis相依性
         }
 
         public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
@@ -34,46 +31,45 @@ namespace RentWebProj.Services
             var OrderDMList = _repository.GetAll<Order>();
             var BranchDMList = _repository.GetAll<BranchStore>();
 
-            var MemberOrderVM =   
-                (from o in OrderDMList                                
-                join b in BranchDMList
-                on o.StoreID equals b.StoreID
-                where o.MemberID == LoginMemeberId
-                select new MemberOrderViewModel
-                {
-                    OrderID = o.OrderID,
-                    OrderDate = o.OrderDate,
-                    BranchName = b.StoreName,
-                    OrderStatus = (OrderStatusName)o.OrderStatusID,
-                }).ToList();
+            var MemberOrderVM =
+                (from o in OrderDMList
+                 join b in BranchDMList
+                 on o.StoreID equals b.StoreID
+                 where o.MemberID == LoginMemeberId
+                 select new MemberOrderViewModel
+                 {
+                     OrderID = o.OrderID,
+                     OrderDate = o.OrderDate,
+                     BranchName = b.StoreName,
+                     OrderStatus = (OrderStatusName)o.OrderStatusID,
+                 }).ToList();
 
             MemberOrderVM.ForEach(order =>
             {
-
                 order.OrderDetails = GetOrderDetails(order.OrderID);
             });
 
             MemberPersonDataViewModel MemberCenterVM = (from m in MemberDMList
-                             where m.MemberID == LoginMemeberId
-                             select new MemberPersonDataViewModel
-                             {
-                                 //系統自動產生
-                                 MemberId = m.MemberID,
-                                 MemberName = (String.IsNullOrEmpty(m.FullName)) ? null : m.FullName,
-                                 //MemberName = m.FullName,
-                                 //會員生日判斷如果為"null"則給預設值
-                                 MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
-                                 MemberYear = ((DateTime)m.Birthday).Year.ToString(),
-                                 MemberMonth = ((DateTime)m.Birthday).Month.ToString(),
-                                 MemberDay = ((DateTime)m.Birthday).Day.ToString(),
-                                 MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
-                                 //Email為必有欄位
-                                 MemberEmail = m.Email,
-                                 MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
-                                 //MemberBranchName = b.StoreName,
-                                 //測試中訂單                                 
-                                 //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
-                             }).FirstOrDefault();
+                                                        where m.MemberID == LoginMemeberId
+                                                        select new MemberPersonDataViewModel
+                                                        {
+                                                            //系統自動產生
+                                                            MemberId = m.MemberID,
+                                                            MemberName = (String.IsNullOrEmpty(m.FullName)) ? null : m.FullName,
+                                                            //MemberName = m.FullName,
+                                                            //會員生日判斷如果為"null"則給預設值
+                                                            MemBerBirthday = (DateTime)(((DateTime)m.Birthday == null) ? DateTime.MinValue : m.Birthday),
+                                                            MemberYear = ((DateTime)m.Birthday).Year.ToString(),
+                                                            MemberMonth = ((DateTime)m.Birthday).Month.ToString(),
+                                                            MemberDay = ((DateTime)m.Birthday).Day.ToString(),
+                                                            MemberPhone = (String.IsNullOrEmpty(m.Phone)) ? null : m.Phone,
+                                                            //Email為必有欄位
+                                                            MemberEmail = m.Email,
+                                                            MemberPasswordHash = (String.IsNullOrEmpty(m.PasswordHash)) ? null : m.PasswordHash,
+                                                            //MemberBranchName = b.StoreName,
+                                                            //測試中訂單                                 
+                                                            //MemberOrderDetail = (MemberOrderDetailVM == null) ? null : MemberOrderDetailVM,
+                                                        }).FirstOrDefault();
 
             MemberCenterVM.MemberOrders = MemberOrderVM;
 
@@ -85,11 +81,11 @@ namespace RentWebProj.Services
             var OrderDetailDMList = _repository.GetAll<OrderDetail>();
             var ProductDMList = _repository.GetAll<Product>();
 
-            var result = 
+            var result =
                 (from od in OrderDetailDMList
                  join p in ProductDMList
                  on od.ProductID equals p.ProductID
-                 where od.OrderID ==  orderID 
+                 where od.OrderID == orderID
                  select new MemberOrderDetailViewModel
                  {
                      ProductID = p.ProductID,
@@ -101,7 +97,7 @@ namespace RentWebProj.Services
                      ExpirationDate = od.ExpirationDate,
                      //RentDate = (int)DbFunctions.DiffDays(od.StartDate, od.ExpirationDate),
                      //RentDate = (int)((od.ExpirationDate - od.StartDate).Days),
-                     RentDate = 1+((int)DbFunctions.DiffMinutes(od.StartDate, od.ExpirationDate)-1)/1440,
+                     RentDate = 1 + ((int)DbFunctions.DiffMinutes(od.StartDate, od.ExpirationDate) - 1) / 1440,
                      GoodsStatus = (GoodsStatusName)od.GoodsStatus
                  }).ToList();
 
@@ -118,7 +114,7 @@ namespace RentWebProj.Services
             return result;
 
         }
-        public bool getMemberRegistertData(string Email,string Password)
+        public bool getMemberRegistertData(string Email, string Password)
         {
             var pDMList = _repository.GetAll<Member>();
             string email = HttpUtility.HtmlEncode(Email);
@@ -126,7 +122,7 @@ namespace RentWebProj.Services
             var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, PasswordHash = password, SignWayID = 1 ,FullName="未設定",ProfilePhotoUrl= "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
+                var entity = new Member { Email = email, PasswordHash = password, SignWayID = 1, FullName = "未設定", ProfilePhotoUrl = "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
                 _repository.Create(entity);
                 _repository.SaveChanges();
                 return true;
@@ -175,10 +171,10 @@ namespace RentWebProj.Services
             }
 
         }
-        
+
         //回傳個人資訊
-        public string ChangeProfile(int UserMemberId , string ChangeUserName , string ChangeYear , string ChangeMonth , string ChangeDay, string ChangeUserPhone)
-        {   
+        public string ChangeProfile(int UserMemberId, string ChangeUserName, string ChangeYear, string ChangeMonth, string ChangeDay, string ChangeUserPhone)
+        {
             //先找對應會員
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
 
@@ -190,7 +186,7 @@ namespace RentWebProj.Services
         }
 
         //回傳信箱資訊
-        public string ChangeEmail(int UserMemberId , string ChangeEmail)
+        public string ChangeEmail(int UserMemberId, string ChangeEmail)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
             result.Email = ChangeEmail;
@@ -199,7 +195,7 @@ namespace RentWebProj.Services
         }
 
         //回傳密碼資訊
-        public string ChangePassword(int UserMemberId , string ChangePassword)
+        public string ChangePassword(int UserMemberId, string ChangePassword)
         {
             var result = _repository.GetAll<Member>().FirstOrDefault(x => x.MemberID == UserMemberId);
             result.PasswordHash = Helper.SHA1Hash(ChangePassword);
@@ -261,11 +257,11 @@ namespace RentWebProj.Services
         {
             var result = _repository.GetAll<Member>();
             var MemberPhone = from s in result
-                                 where s.Email == UserEmail
-                                 select new CheckPhone
-                                 {
-                                    Phone  = s.Phone
-                                 };
+                              where s.Email == UserEmail
+                              select new CheckPhone
+                              {
+                                  Phone = s.Phone
+                              };
             string MemberPhoneString = "";
             foreach (var item in MemberPhone)
             {   //因為IQueryable故需要轉型為ToString
@@ -407,7 +403,7 @@ namespace RentWebProj.Services
         // [取消訂單]按鈕 (待付款 => 已取消)
         public void Order_Cancel(int OrderID)
         {
-            var order = _repository.GetAll<Order>().FirstOrDefault(x=>x.OrderID == OrderID);
+            var order = _repository.GetAll<Order>().FirstOrDefault(x => x.OrderID == OrderID);
             order.OrderStatusID = 0;
             _repository.Update<Order>(order);
             _repository.SaveChanges();
@@ -419,14 +415,14 @@ namespace RentWebProj.Services
             decimal TotalAmount = 0;
 
             var Order_Details = from od in _repository.GetAll<OrderDetail>()
-                                  join o in _repository.GetAll<Order>()
-                                  on od.OrderID equals o.OrderID
-                                  where od.OrderID == OrderID
-                                  select new OrderDetail_TotalAmount
-                                  {
-                                      OrderID = od.OrderID,
-                                      TotalAmount = od.TotalAmount
-                                  };
+                                join o in _repository.GetAll<Order>()
+                                on od.OrderID equals o.OrderID
+                                where od.OrderID == OrderID
+                                select new OrderDetail_TotalAmount
+                                {
+                                    OrderID = od.OrderID,
+                                    TotalAmount = od.TotalAmount
+                                };
 
             var temp = Order_Details.ToList();
             temp.ForEach(x =>
