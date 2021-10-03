@@ -24,7 +24,7 @@ namespace Backstage.Services
         public List<SalesViewModel> GetSalesData()
         {
             //Redis中key的名稱自己取，不要和他人重複
-            var result = _iRedisRepository.Get<List<SalesViewModel>>("Sales.GetSalesData");
+            var result = _iRedisRepository.Get<List<SalesViewModel>>("Sales.SalesData");
             if (result != null) return result;
 
             var now = DateTime.Now;
@@ -64,7 +64,7 @@ namespace Backstage.Services
                 }).ToList();
 
             //Redis中key的名稱自己取，不要和他人重複
-            _iRedisRepository.Set("Sales.GetSalesData", result);
+            _iRedisRepository.Set("Sales.SalesData", result);
             return result;
 
         }

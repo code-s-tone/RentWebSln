@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using RentWebProj.Interfaces;
+using RentWebProj.Models;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
-using RentWebProj.Models;
 using RentWebProj.Helpers;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -16,11 +17,12 @@ namespace RentWebProj.Controllers
 {
     public class ProductController : Controller
     {
-        private ProductService _service;
+        //private ProductService _service;
+        readonly IProductService _service;
         private RouteHelper _rhelper;
-        public ProductController()
+        public ProductController(IProductService iProductService)
         {
-            _service = new ProductService();
+            _service = iProductService;//new ProductService()
             _rhelper = new RouteHelper();
         }
 

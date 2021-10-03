@@ -2,8 +2,9 @@
 
 @{
     ViewBag.Title = "網羅你的租借需求🕸";
-    var Catgories = new ProductService().GetCategoryData();
-    var AllComments = new MemberService().GetAllComment().Take(10);
+    IEnumerable<CardsViewModel> Catgories = ViewBag.Categories;
+    IEnumerable<CommentViewModel> AllComments = ViewBag.NewComments;
+    IEnumerable<BlogViewModel> blogList = ViewBag.Blogs;
 }
 
 <div class="nav-background"></div>@* 打底 *@
@@ -15,33 +16,68 @@
     <div class="keyart_layer parallax" id="keyart-4" data-speed="26" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 50.0 -->
     <div class="keyart_layer parallax" id="keyart-5" data-speed="36" style="transform: translate3d(0px, 0px, 0px)"></div>	<!-- 62.5 -->
     <div class="keyart_layer parallax" id="keyart-6" data-speed="49" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 75.0 -->
-    <div class="keyart_layer" id="keyart-scrim"></div>
+    @*<div class="keyart_layer" id="keyart-scrim"></div>*@
     <div class="keyart_layer parallax" id="keyart-7" data-speed="69" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 87.5 -->
-    <div class="keyart_layer" id="keyart-8" data-speed="100"></div>
+    <div class="keyart_layer" id="keyart-8"@*data-speed="100"*@></div> 
 </header>
 
 @*<header>
-        <div>
-            <h2>標題文字</h2>
-            <div id="search">
-                <div class="inputGroup">
-                    <i class="far fa-question-circle"></i>
-                    <input type="text" id="keyword" placeholder="想租點什麼?">
-                </div>
-                <div class="inputGroup">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" id="position" placeholder="新竹市香山區">
-                </div>
-                <button class="btnSearch">查 詢</button>
-                <button class="btnSearch">
-                    <i class="fas fa-search"></i>
-                </button>
+    <div>
+        <h2>標題文字</h2>
+        <div id="search">
+            <div class="inputGroup">
+                <i class="far fa-question-circle"></i>
+                <input type="text" id="keyword" placeholder="想租點什麼?">
             </div>
+            <div class="inputGroup">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="position" placeholder="新竹市香山區">
+            </div>
+            <button class="btnSearch">查 詢</button>
+            <button class="btnSearch">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-    </header>*@
+    </div>
+</header>*@
 <div id="maincontain">
-
+    <div class="extend-background"></div>@* 打底 *@
     <article class="container-xl">
+        <section id="blogPosts" class="Area">
+            <h3>
+                最新BLOG
+                @Html.ActionLink("(see all)", "BlogList", "SocialMedia")
+            </h3>
+            <div class="swiper-container blogPosts-swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    @foreach (var blog in blogList)
+                    {
+                        <div class="swiper-slide">
+                            <div class="imgBox">
+                                <img src=@blog.MainImgUrl>
+                            </div>
+                            <div class="textBox">
+                                <h5 class="ellipsis">@blog.BlogTitle</h5>
+                                <p class="ellipsis">@blog.Preview</p>
+                                <a class="btn" href="@Url.Action("BlogPage", "SocialMedia", new { id=@blog.BlogId})">查看更多</a>
+                                @*<button class="btn">查看更多</button>*@
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- <div class="swiper-pagination"></div> -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <!-- <div class="swiper-scrollbar"></div> -->
+            </div>
+        </section>
+
+        @foreach (var item in Model)
+        {
+            @ShowProductList(item);
+        }
+
         <section id="categories" class="Area">
             <h3>
                 商品種類
@@ -75,10 +111,6 @@
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
         </section>
-        @foreach (var item in Model)
-        {
-            @ShowProductList(item);
-        }
 
         @*<section id="stories" class="Area">
                 <h3>
@@ -166,42 +198,8 @@
                 <!-- <div class="swiper-scrollbar"></div> -->
             </div>
         </section>
-        @{ 
-            var blogList = new BlogService().GetAllBlogs().OrderByDescending(x=>x.PostDate).Take(5);
-        }
-
-        <section id="blogPosts" class="Area">
-            <h3>
-                最新BLOG
-                @Html.ActionLink("(see all)", "BlogList", "SocialMedia")
-            </h3>
-            <div class="swiper-container blogPosts-swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    @foreach (var blog in blogList)
-                    {
-                        <div class="swiper-slide">
-                            <div class="imgBox">
-                                <img class="w-100" src=@blog.MainImgUrl>
-                            </div>
-                            <div class="textBox">
-                                <h5 class="ellipsis">@blog.BlogTitle</h5>
-                                <p class="ellipsis">@blog.Preview</p>
-                                <a class="btn" href="@Url.Action("BlogPage", "SocialMedia", new { id=@blog.BlogId})">查看更多</a>
-                                @*<button class="btn">查看更多</button>*@                                
-                            </div>
-                        </div>
-                    }
-                </div>
-                <!-- <div class="swiper-pagination"></div> -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-                <!-- <div class="swiper-scrollbar"></div> -->
-            </div>
-        </section>
     </article>
 </div>
-@*<div id="cookiePermission"></div>*@
 
 @helper ShowProductList(IndexProductView productCards)
 {
