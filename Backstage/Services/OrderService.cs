@@ -92,21 +92,10 @@ namespace Backstage.Services
                     join b in _ctx.BranchStores on o.StoreId equals b.StoreId
                     select new OrderViewModel
                     {
-                        //OrderID = o.OrderId,
-                        //MemberID = o.MemberId,
                         FullName = UpdateOrder.FullName,
                         StoreName = UpdateOrder.StoreName,
                         Phone = UpdateOrder.Phone,
-                        Email = UpdateOrder.Email,
-                        //OrderStatusID = o.OrderStatusId == 0 ? "已作廢" : o.OrderStatusId == 1 ? "待付款" : o.OrderStatusId == 2 ? "付款中" : o.OrderStatusId == 3 ? "付款中" : "沒有狀態",
-                        //GoodsStatusID = UpdateOrder.GoodsStatusID == "已歸還" ? 0 : od.GoodsStatus == 1 ? "待出貨" : od.GoodsStatus == 2 ? "已出貨" : od.GoodsStatus == 3 ? "已到貨" : od.GoodsStatus == 4 ? "已取貨" : "沒有狀態",
-                        //OrderDate = o.OrderDate,
-                        //ProductName = p.ProductName,
-                        //DailyRate = od.DailyRate,
-                        //StartDate = od.StartDate,
-                        //ExpirationDate = od.ExpirationDate,
-                        //TotalAmount = od.TotalAmount
-
+                        //Email = UpdateOrder.Email,
                     }
                 ).FirstOrDefault();
             
@@ -132,38 +121,38 @@ namespace Backstage.Services
             }
 
 
-            //_ctx.SaveChanges();
-            return null;
-        }
-
-        public async Task<IEnumerable<ProductViewModel>> UpdateProduct(ProductViewModel UpdateProduct)
-        {
-            //不含圖的修改部分
-            DateTime date1 = DateTime.Now;//修改當天的日期
-            var product = _ctx.Products.Where(x => x.ProductId == UpdateProduct.ProductId).FirstOrDefault();
-            product.ProductName = UpdateProduct.ProductName;
-            product.Description = UpdateProduct.Description;
-            product.DailyRate = UpdateProduct.DailyRate;
-            product.LaunchDate = UpdateProduct.LaunchDate;
-            product.WithdrawalDate = UpdateProduct.WithdrawalDate;
-            product.Discontinuation = UpdateProduct.Discontinuation;
-            product.UpdateTime = date1;
-            //圖片刪除部分
-            //1.這邊是先刪除資料庫的圖片
-            var productImages = _ctx.ProductImages.Where(x => x.ProductId == UpdateProduct.ProductId).ToList();//先刪掉所有在資料庫的圖片
-            _ctx.RemoveRange(productImages);//利用RemoveRange可以刪除集合的特性一次刪除
             _ctx.SaveChanges();
-            //2.再來刪除圖庫的存檔地點
-            var cloudImg = UpdateProduct.ProductImages.Where(x => !x.SourceImages.Contains("data")).ToList();//取的DataUrl的圖源的
-            var cloudImgLength = cloudImg.Count;//取的有幾張圖
-            var cloudName = UpdateProduct.ProductId;//取的public ID
-            var CloudFolder = UpdateProduct.ProductId.Substring(0, 3);//取的在哪個大類資料夾
-            //DeleteImg(CloudFolder, cloudName, cloudImgLength);
-            //3.新增AllImg把所有圖片放進取(包含dataUrl)
-            var AllImg = UpdateProduct.ProductImages.ToList();
-
             return null;
         }
+
+        //public async Task<IEnumerable<ProductViewModel>> UpdateProduct(ProductViewModel UpdateProduct)
+        //{
+        //    //不含圖的修改部分
+        //    DateTime date1 = DateTime.Now;//修改當天的日期
+        //    var product = _ctx.Products.Where(x => x.ProductId == UpdateProduct.ProductId).FirstOrDefault();
+        //    product.ProductName = UpdateProduct.ProductName;
+        //    product.Description = UpdateProduct.Description;
+        //    product.DailyRate = UpdateProduct.DailyRate;
+        //    product.LaunchDate = UpdateProduct.LaunchDate;
+        //    product.WithdrawalDate = UpdateProduct.WithdrawalDate;
+        //    product.Discontinuation = UpdateProduct.Discontinuation;
+        //    product.UpdateTime = date1;
+        //    //圖片刪除部分
+        //    //1.這邊是先刪除資料庫的圖片
+        //    var productImages = _ctx.ProductImages.Where(x => x.ProductId == UpdateProduct.ProductId).ToList();//先刪掉所有在資料庫的圖片
+        //    _ctx.RemoveRange(productImages);//利用RemoveRange可以刪除集合的特性一次刪除
+        //    _ctx.SaveChanges();
+        //    //2.再來刪除圖庫的存檔地點
+        //    var cloudImg = UpdateProduct.ProductImages.Where(x => !x.SourceImages.Contains("data")).ToList();//取的DataUrl的圖源的
+        //    var cloudImgLength = cloudImg.Count;//取的有幾張圖
+        //    var cloudName = UpdateProduct.ProductId;//取的public ID
+        //    var CloudFolder = UpdateProduct.ProductId.Substring(0, 3);//取的在哪個大類資料夾
+        //    //DeleteImg(CloudFolder, cloudName, cloudImgLength);
+        //    //3.新增AllImg把所有圖片放進取(包含dataUrl)
+        //    var AllImg = UpdateProduct.ProductImages.ToList();
+
+        //    return null;
+        //}
 
 
 

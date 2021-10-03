@@ -34,7 +34,7 @@
         </b-col>
 
         <b-col class="text-center mt-3">
-            <input type="text" @@click="" class="btn btn-primary _summit" value="送出修改">
+            <input type="text" @@click="EditData()" class="btn btn-primary _summit" value="送出修改">
         </b-col>
     </form>
 
@@ -53,11 +53,19 @@
     <script>
         var item
         let vm;
-        let url = location.href;        
+        let url = location.href;
         vm = new Vue({
             el: "#app",
             data: {
-                items: [] 
+                items:
+                    [
+                        {
+                            fullName: "",
+                            storeName: "",
+                            phone: "",
+                            goodsStatusID: "",
+                        }
+                    ]
             }
         });
 
@@ -75,6 +83,7 @@
                 .then(result => {
                     vm.$data.items = result;
                     console.log(result);
+                    console.log("有進來了");
                 })
                 .catch(ex => {
                     console.log("錯了");
@@ -89,7 +98,7 @@
             fetch(PUrl,
                 {
                     method: "Post",
-                    //body: JSON.stringify(this.$data.items[0]),
+                    body: JSON.stringify(this.$data.items[0]),
                     headers: {
 
                         'Content-Type': 'application/json'

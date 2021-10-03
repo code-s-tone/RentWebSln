@@ -38,9 +38,9 @@ namespace Backstage.ApiControllers
         public IActionResult GetOrderDetail(int orderID)
         {
             var result = _orderService.GetOrderDetailData(orderID);
-            var emps = JsonConvert.SerializeObject(result);
+            //var emps = JsonConvert.SerializeObject(result);
 
-            return Ok(emps);
+            return Ok(result);
         }
 
 
