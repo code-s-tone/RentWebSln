@@ -62,7 +62,7 @@ namespace Backstage.Services
                          where o.OrderId == orderID
                          select new OrderViewModel
                          {
-                             //OrderID = o.OrderId,
+                             OrderID = o.OrderId,
                              MemberID = o.MemberId,
                              FullName = m.FullName,
                              StoreName = b.StoreName,

@@ -51,6 +51,8 @@ namespace Backstage.ApiControllers
         {
 
             var result = await _orderService.UpdateOrder(Od);
+            
+            //return RedirectToAction("Index", "Order");
             string success = "請求成功！";
             return Ok(success);
 

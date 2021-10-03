@@ -3,47 +3,47 @@
 }
 <h1>訂單資料</h1>
 <b-container fluid id="app" class="m-2">
-    <form>
+    @*<form>*@
 
-        <b-col>
-            <label for="input-small">訂單人姓名:</label>
-        </b-col>
-        <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].fullName" v-model="items[0].fullName"></b-form-input>
-        </b-col>
+    <b-col>
+        <label for="input-small">訂單人姓名:</label>
+    </b-col>
+    <b-col>
+        <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].fullName" v-model="items[0].fullName"></b-form-input>
+    </b-col>
 
-        <b-col>
-            <label for="input-small" class="mt-3">分店地址:</label>
-        </b-col>
-        <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].storeName" v-model="items[0].storeName"></b-form-input>
-        </b-col>
+    <b-col>
+        <label for="input-small" class="mt-3">分店地址:</label>
+    </b-col>
+    <b-col>
+        <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].storeName" v-model="items[0].storeName"></b-form-input>
+    </b-col>
 
-        <b-col>
-            <label for="input-small" class="mt-3">聯絡電話:</label>
-        </b-col>
-        <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].phone" v-model="items[0].phone"></b-form-input>
-        </b-col>
+    <b-col>
+        <label for="input-small" class="mt-3">聯絡電話:</label>
+    </b-col>
+    <b-col>
+        <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].phone" v-model="items[0].phone"></b-form-input>
+    </b-col>
 
-        <b-col>
-            <label for="input-small" class="mt-3">出貨狀態:</label>
-        </b-col>
-        <b-col>
-            <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].goodsStatusID" v-model="items[0].goodsStatusID"></b-form-input>
-        </b-col>
+    <b-col>
+        <label for="input-small" class="mt-3">出貨狀態:</label>
+    </b-col>
+    <b-col>
+        <b-form-input id="input-small" size="sm" placeholder="請輸入" :value="items[0].goodsStatusID" v-model="items[0].goodsStatusID"></b-form-input>
+    </b-col>
 
-        <b-col class="text-center mt-3">
-            <b-button type="summit" @@click="EditData()" variant="primary">送出修改</b-button>
-            <b-button @@click="history.go(-1)">取消</b-button>
-        </b-col>
-    </form>
+    <b-col class="text-center mt-3">
+        <b-button @@click="EditData()" variant="primary">送出修改</b-button>
+        <b-button @@click="history.go(-1)">取消</b-button>
+    </b-col>
+    @*</form>*@
 
 </b-container>
 
 
 @section topJS{
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -61,7 +61,7 @@
                 items:
                     [
                         {
-                            orderID:"",
+                            orderID: "",
                             fullName: "",
                             storeName: "",
                             phone: "",
@@ -69,7 +69,7 @@
                         }
                     ]
             },
-            method: {
+            methods: {
                 EditData() {
                     let PUrl = "/api/OrderApi/UpdateOrder";
                     fetch(PUrl,
@@ -90,6 +90,8 @@
                             swal("修改成功", {
                                 icon: 'success',
                             })
+                            window.location.href = `/Order/Index/`;
+
                         })
                         .then(result => {
                             console.log(result);
@@ -97,10 +99,17 @@
                         .catch(ex => {
                             console.log("錯了");
                         })
+                },
+                test() {
+                    swal("修改成功", {
+                        icon: 'success',
+                    });
+
+                    window.location.href = `/Order/Index/`;
                 }
-            }
+            },
         });
-                
+
         function LoadData() {
             let orderID = url.split("/")[5]
             let GUrl = `/api/OrderApi/GetOrderDetail/${orderID}`;
@@ -124,7 +133,7 @@
 
 
 
-        
+
 
         $(document).ready(function () {
             LoadData();
