@@ -26,4 +26,12 @@ namespace Backstage.ViewModels
         public DateTime ExpirationDate { get; set; }
         public decimal TotalAmount { get; set; }
     }
+
+
+    //錯誤訊息model 暫放
+    public class EditOrderListResponseModel
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+    }
 }

@@ -11,6 +11,6 @@ namespace Backstage.Interfaces
         public IEnumerable<OrderViewModel> GetOrderData();
         public IEnumerable<OrderViewModel> GetOrderDetailData(int orderID);
 
-        public Task<IEnumerable<OrderViewModel>> UpdateOrder(OrderViewModel EditOrder);
+        public EditOrderListResponseModel UpdateOrder(OrderViewModel EditOrder);
     }
 }

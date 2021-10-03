@@ -47,10 +47,9 @@ namespace Backstage.ApiControllers
 
         [Route("api/OrderApi/UpdateOrder")]
         [HttpPost]
-        public async Task<IActionResult> UpdateOrder(OrderViewModel Od)
+        public IActionResult UpdateOrder(OrderViewModel Od)
         {
-
-            var result = await _orderService.UpdateOrder(Od);
+            var result =_orderService.UpdateOrder(Od);
             
             //return RedirectToAction("Index", "Order");
             string success = "請求成功！";

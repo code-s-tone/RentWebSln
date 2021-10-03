@@ -89,12 +89,14 @@
                             console.log(res.status);
                             swal("修改成功", {
                                 icon: 'success',
+                                timer: 2000,
                             })
-                            window.location.href = `/Order/Index/`;
+                            
 
                         })
                         .then(result => {
                             console.log(result);
+                            window.location.href = `/Order/Index/`;
                         })
                         .catch(ex => {
                             console.log("錯了");
