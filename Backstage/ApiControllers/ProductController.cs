@@ -1,4 +1,5 @@
 ﻿using Backstage.Interfaces;
+using Backstage.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 namespace Backstage.ApiControllers
 
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -20,13 +20,34 @@ namespace Backstage.ApiControllers
             _ProductDataService = ProductDataService;
 
         }
-
-        public IActionResult GetProduct()
+        [Route("api/Product/GetProduct")]
+        [HttpGet]
+        public IActionResult GetProduct(string ProductId)
         {
-            var result = _ProductDataService.GetProduct();
+            var result = _ProductDataService.GetProduct(ProductId);
             var emps = JsonConvert.SerializeObject(result);
-   
+
             return Ok(emps);
+        }
+        [Route("api/Product/GetProductDetail/{ProductId}")]
+        [HttpGet]
+        public IActionResult GetProductDetail(string ProductId)
+        {
+            var result = _ProductDataService.GetProduct(ProductId);
+            var emps = JsonConvert.SerializeObject(result);
+
+            return Ok(emps);
+        }
+
+        [Route("api/Product/UpdateProduct")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateProduct(ProductViewModel detail)
+        {
+            var response = new ApiResponse();
+            var result = await _ProductDataService.UpdateProduct(detail);
+
+            return Ok(result);
+
         }
 
     }

@@ -1,0 +1,6 @@
+﻿.fancybox__content, .fancybox__image {
+    width: 600px;
+    height: 600px;
+    max-width: none;
+    max-height: none;
+}
