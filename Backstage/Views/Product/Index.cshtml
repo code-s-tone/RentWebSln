@@ -6,8 +6,8 @@
 
 
     <div>
-        <b-jumbotron header="啟用產品區">
-
+        <b-jumbotron class="jumbotron " header="">
+            <h1 class="cyberpunk glitched product">啟用產品區</h1>
         </b-jumbotron>
         <b-button variant="outline-primary" @@click="CloseIndex(true)">前往停用產品區</b-button>
     </div>
@@ -201,6 +201,17 @@
 @section topCSS
 {
     <link href="~/css/Product/fancybox.css" rel="stylesheet" />
+    <link href="~/css/Product/Cyberpunk.css" rel="stylesheet" />
+    <style>
+        .product {
+            font-size: 200px;
+            font-weight: bold;
+           
+        }
+        .jumbotron {
+            background-color: #f9f002;
+        }
+    </style>
 }
 @section topJS
 {

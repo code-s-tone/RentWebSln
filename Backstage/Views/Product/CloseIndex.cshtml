@@ -4,8 +4,8 @@
 
 <b-container fluid id="app" class="mt-5">
     <div>
-        <b-jumbotron header="停用產品區">
-
+        <b-jumbotron header="">
+            <h1 class="cyberpunk glitched product">停用產品區</h1>
         </b-jumbotron>
         <b-button variant="outline-primary" @@click="Index(false)">前往啟用產品區</b-button>
     </div>
@@ -196,7 +196,18 @@
 
 @section topCSS
 {
+    <link href="~/css/Product/Cyberpunk.css" rel="stylesheet" />
     <link href="~/css/Product/fancybox.css" rel="stylesheet" />
+    <style>
+        .product {
+            font-size: 200px;
+            font-weight: bold;
+        }
+
+        .jumbotron {
+            background-color: #f9f002;
+        }
+    </style>
 }
 @section topJS
 {
