@@ -3,6 +3,7 @@ using Backstage.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RentWebProj.ViewModels.ApiViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,10 +45,10 @@ namespace Backstage.ApiControllers
         [HttpPost]
         public async Task<IActionResult> UpdateProduct(ProductViewModel detail)
         {
+            var response = new ApiResponse();
+            var result = await _ProductDataService.UpdateProduct(detail);
 
-            var result= await _ProductDataService.UpdateProduct(detail);
-                string success = "請求成功！";
-                return Ok(success);
+            return Ok(result);
 
         }
     }

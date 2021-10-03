@@ -1,4 +1,5 @@
 ﻿using Backstage.ViewModels;
+using RentWebProj.ViewModels.ApiViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Backstage.Interfaces
     public interface IProductService
     {
         public IEnumerable<ProductViewModel> GetProduct(string ProductId);
-        public Task<IEnumerable<ProductViewModel>> UpdateProduct(ProductViewModel EditProduct);
+        public Task<ApiResponse> UpdateProduct(ProductViewModel UpdateProduct);
     }
 }
