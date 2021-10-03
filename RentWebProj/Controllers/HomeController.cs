@@ -13,11 +13,19 @@ namespace RentWebProj.Controllers
     
     public class HomeController : Controller
     {
-        readonly IProductService _service;
-        //ProductService _service = new ProductService();
-        public HomeController(IProductService iProductService)
+        readonly IProductService _iProductService;
+        readonly MemberService _iMemberService;
+        readonly IBlogService _iBlogService;
+
+        public HomeController(
+            IProductService iProductService,
+            //IMemberService iMemberService,
+            IBlogService iBlogService
+        )
         {
-            this._service = iProductService;
+            this._iProductService = iProductService;
+            this._iMemberService = new MemberService();//iMemberService;
+            this._iBlogService = iBlogService;
         }
 
         public ActionResult Index()
@@ -36,18 +44,18 @@ namespace RentWebProj.Controllers
                 {
                     Title = "便宜到老闆生無可戀(눈_눈)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Price",
-                    Cards = _service.GetCheapestProductCardData()
+                    Cards = _iProductService.GetCheapestProductCardData()
                 },
                 new IndexProductView
                 {
                     Title = "30天內最熱門ლ(´ڡ`ლ)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Stars",
-                    Cards = _service.ProductDataWithStars()
+                    Cards = _iProductService.ProductDataWithStars()
                 }
             };
-            ViewBag.Categories = _service.GetCategoryData();
-            ViewBag.NewComments = new MemberService().GetAllComment().Take(10);
-            ViewBag.Blogs = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate).Take(5);
+            ViewBag.Categories = _iProductService.GetCategoryData();
+            ViewBag.NewComments = _iMemberService.GetNewComments();
+            ViewBag.Blogs = _iBlogService.GetAllBlogs().OrderByDescending(x => x.PostDate);//.Take(5)
 
             return View(VMList);
         }
@@ -60,8 +68,7 @@ namespace RentWebProj.Controllers
         [HttpPost]
         public ActionResult ContactUs(string comment,int star)
         {
-                MemberService memberService = new MemberService();
-                memberService.Create(comment, star);
+            _iMemberService.Create(comment, star);
 
             return RedirectToAction("Index", "Home");
         }

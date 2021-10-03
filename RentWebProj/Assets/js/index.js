@@ -106,7 +106,7 @@ const blogPostsSwiper = new Swiper('.blogPosts-swiper-container', {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
-    spaceBetween: 12,
+    spaceBetween: 25,
     centeredSlides: true,
     slidesPerView: 1.2,
     breakpoints: {

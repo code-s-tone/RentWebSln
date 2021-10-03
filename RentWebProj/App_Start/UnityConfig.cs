@@ -19,6 +19,7 @@ namespace RentWebProj
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IRedisRepository, RedisRepository>();
             container.RegisterType<IProductService, ProductService>();
+            container.RegisterType<IBlogService, BlogService>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

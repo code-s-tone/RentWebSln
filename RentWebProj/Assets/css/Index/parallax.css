@@ -1,20 +1,10 @@
-﻿
-.nav-background {
-    height: 1000px;
-/*原高度1130 庭安改成1000 因為margin-top要拿掉*/
-    /*margin-top: -130px;*/
-    margin-bottom: -1000px;
-    background-color: #ffaf00;
-}
-
-header {
+﻿header {
     box-sizing: border-box;
     width: 100%;
 }
 
-
 .keyart, .keyart_layer {
-    height: 1000px;
+    height: 700px;
 }
 
 .keyart {
@@ -26,10 +16,9 @@ header {
     overflow:hidden;
 }
 
-
 .keyart_layer {
     background-position: bottom center;
-    background-size: auto 1038px;
+    background-size: auto 700px;
     background-repeat: repeat-x;
     width: 100%;
     position: absolute;
@@ -76,9 +65,23 @@ header {
     background-image: url('../../images/Index/parallax8.png');
 }
 
-#keyart-scrim {
-    background-color: #f00; /*#ffaf00*/
-    opacity: 0;
+/*#keyart-scrim {
+    background-color: #f00;*/ /*#ffaf00*/
+    /*opacity: 0;
+}*/
+
+.nav-background {
+    height: 700px;
+    margin-bottom: -700px;
+    background-color: #ffaf00;
+}
+
+.extend-background {
+    width: 100%;
+    margin-top:-50px;
+    height: 600px;
+    margin-bottom: -445px;
+    background-color: #210002;
 }
 
 
