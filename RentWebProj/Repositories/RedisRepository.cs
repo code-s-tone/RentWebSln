@@ -46,10 +46,10 @@ namespace RentWebProj.Repositories
         {
             //_iDistributedCache.Set(key, ObjectToByteArray(value), new DistributedCacheEntryOptions()
             //{
-            //    //快取存續時間暫定9分鐘
             //    AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
             //});
-            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 9, 0);
+            //快取存續時間暫定33分鐘
+            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 11, 0);
             _db.StringSet(key, ObjectToByteArray(value), cacheItemPolicy);
         }
 
