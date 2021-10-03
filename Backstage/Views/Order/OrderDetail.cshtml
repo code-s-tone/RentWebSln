@@ -34,8 +34,8 @@
         </b-col>
 
         <b-col class="text-center mt-3">
-            <b-button type="summit" @@click="EditData()" class="btn btn-primary summit">送出修改</b-button>
-            <b-button @@click="cancel()">取消</b-button>
+            <b-button type="summit" @@click="EditData()" variant="primary">送出修改</b-button>
+            <b-button @@click="history.go(-1)">取消</b-button>
         </b-col>
     </form>
 
@@ -61,6 +61,7 @@
                 items:
                     [
                         {
+                            orderID:"",
                             fullName: "",
                             storeName: "",
                             phone: "",
@@ -93,7 +94,7 @@
 
 
 
-        const PUrl = "/api/OrderApi/UpdateOrder";
+        let PUrl = "/api/OrderApi/UpdateOrder";
         function EditData() {
 
             fetch(PUrl,
