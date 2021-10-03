@@ -1,5 +1,7 @@
 ﻿var item;
 let vm;
+let TrueResult;
+let FalseResult;
 vm = new Vue({
     el: "#app",
     data: {
@@ -47,10 +49,16 @@ vm = new Vue({
             this.currentPage = 1
         },
         link(ProductId) {
-            window.location.href = `../Product/ProductDetail/${ProductId}`
+            window.location.href = `/Product/ProductDetail/?id=${ProductId}`
         },
         Creat() {
-            window.location.href = `../Product/ProductDetail`
+            window.location.href = `/Product/ProductDetail`
+        },
+        Index(Discontinuation) {
+            window.location.href = `/Product/Index/`
+        },
+        CloseIndex(Discontinuation) {
+            window.location.href = `/Product/CloseIndex/?id=${Discontinuation}`
         },
     },
     watch: {
@@ -68,9 +76,11 @@ vm = new Vue({
 })
 
 function LoadData() {
-
+    var getUrlString = location.href;
+    var url = new URL(getUrlString);
+    var DisconTrueOrNot = Boolean(url.searchParams.get('id'));
     const Url = "/api/Product/GetProduct"
-
+    console.log(DisconTrueOrNot);
     fetch(Url,
         {
             method: "Get",
@@ -78,7 +88,15 @@ function LoadData() {
         })
         .then(res => res.json())
         .then(result => {
-            vm.$data.items = result;
+
+            if (DisconTrueOrNot != null)
+            {
+                vm.$data.items = result.filter(x => x.Discontinuation == DisconTrueOrNot);
+            }
+            else
+            {
+                vm.$data.items = result.filter(x => x.Discontinuation == true);
+            }
         })
         .catch(ex => {
             console.log("資料撈失敗@@");

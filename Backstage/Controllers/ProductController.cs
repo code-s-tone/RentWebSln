@@ -12,6 +12,10 @@ namespace Backstage.Controllers
         {
             return View();
         }
+        public IActionResult CloseIndex()
+        {
+            return View();
+        }
         public IActionResult ProductDetail()
         {
             return View();

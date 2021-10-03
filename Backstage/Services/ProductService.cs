@@ -77,7 +77,7 @@ namespace Backstage.Services
             DateTime date1 = DateTime.Now;//修改當天的日期
             var product = _ctx.Products.Where(x => x.ProductId == UpdateProduct.ProductId).FirstOrDefault();//判斷編輯或新增與否
 
-            if (product != null && UpdateProduct.NewProduct == false)//如果查詢後的資料不等於null和新建模式是False(NewProduct)=修改資料
+            if (UpdateProduct.NewProduct == false && product != null )//如果查詢後的資料不等於null和新建模式是False(NewProduct)=修改資料
             {
                 try
                 {
@@ -113,7 +113,7 @@ namespace Backstage.Services
 
 
             }
-            else if (product == null && UpdateProduct.NewProduct == true)//如果查詢後的資料等於null和新建模式是True(NewProduct)=新增資料
+            else if (UpdateProduct.NewProduct == true && product == null  )//如果查詢後的資料等於null和新建模式是True(NewProduct)=新增資料
             {
                 try
                 {
@@ -130,7 +130,9 @@ namespace Backstage.Services
                         DailyRate = UpdateProduct.DailyRate,
                         LaunchDate = UpdateProduct.LaunchDate,
                         WithdrawalDate = UpdateProduct.WithdrawalDate,
-                        UpdateTime = UpdateProduct.UpdateTime
+                        UpdateTime = UpdateProduct.UpdateTime,
+                        Discontinuation=UpdateProduct.Discontinuation
+                        
                     });
                     _ctx.SaveChanges();//存檔
                     apipesponse.Result = "新增產品成功";

@@ -6,7 +6,7 @@
     "dailyRate": 0,
     "launchDate": "2021-10-01T13:20:52.783Z",
     "withdrawalDate": "2021-10-01T13:20:52.783Z",
-    "discontinuation": true,
+    "discontinuation": false,
     "updateTime": "2021-10-01T13:20:52.783Z",
     "newProduct": true,
     "productImages": [
@@ -56,9 +56,9 @@ function Binding() {
                 }
             },
             'items.ProductName': function () {
-                if (this.items.ProductName.length > 30) {
+                if (this.items.ProductName.length > 50) {
                     this.ProductNameError = true;
-                    this.ProductNameErrMsg = '請勿超過30個字';
+                    this.ProductNameErrMsg = '請勿超過50個字';
                 }
                 else {
                     this.ProductNameError = false;
@@ -109,8 +109,6 @@ function Binding() {
             },
 
         },
-
-
         methods: {
             fetchx() {
                 document.querySelector(".spinner").classList.remove("d-none")
@@ -195,9 +193,10 @@ function BaseImg() {
 
 
 function LoadData() {
-    var url = location.href;
-    var id = url.split("/")[5]
-    const Url = `/api/Product/GetProductDetail/${id}`;
+    var getUrlString = location.href;
+    var url = new URL(getUrlString);
+    var result = url.searchParams.get('id');
+    const Url = `/api/Product/GetProductDetail/${result}`;
 
     fetch(Url,
         {
