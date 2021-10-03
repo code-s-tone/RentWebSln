@@ -14,7 +14,9 @@ namespace RentWebProj.Controllers
     public class HomeController : Controller
     {
         readonly IProductService _service;
-        //ProductService _service = new ProductService();
+        //readonly IProductService _service;
+        //readonly IProductService _service;
+
         public HomeController(IProductService iProductService)
         {
             this._service = iProductService;
@@ -46,8 +48,8 @@ namespace RentWebProj.Controllers
                 }
             };
             ViewBag.Categories = _service.GetCategoryData();
-            ViewBag.NewComments = new MemberService().GetAllComment().Take(10);
-            ViewBag.Blogs = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate).Take(5);
+            ViewBag.NewComments = new MemberService().GetNewComments().Take(10);
+            ViewBag.Blogs = new BlogService().GetAllBlogs().OrderByDescending(x => x.PostDate);//.Take(5)
 
             return View(VMList);
         }

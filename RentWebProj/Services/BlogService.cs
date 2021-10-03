@@ -1,19 +1,23 @@
-﻿using RentWebProj.Models;
-using RentWebProj.Repositories;
-using RentWebProj.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using RentWebProj.Interfaces;
+using RentWebProj.Repositories;
+using RentWebProj.Models;
+using RentWebProj.ViewModels;
 
 namespace RentWebProj.Services
 {
     public class BlogService
     {
         private readonly CommonRepository _repository;
-        public BlogService()
+        private readonly IRedisRepository _iRedisRepository;
+
+        public BlogService()//IRedisRepository iRedisRepository
         {
             _repository = new CommonRepository();
+            //_iRedisRepository = iRedisRepository;//注入redis相依性
         }
         public List<BlogViewModel> GetAllBlogs()
         {

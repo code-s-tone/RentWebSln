@@ -64,17 +64,12 @@ namespace RentWebProj.Repositories
         private byte[] ObjectToByteArray(object obj)
         {
             return JsonSerializer.SerializeToUtf8Bytes(obj);
-            //var json = JsonConvert.SerializeObject(obj);
-            //return Encoding.UTF8.GetBytes(json);
         }
 
         //回傳反序列化泛型物件
         private T ByteArrayToObject<T>(byte[] bytes) where T : class
         {
             return bytes is null ? null : JsonSerializer.Deserialize<T>(bytes);
-            //var obj = JsonConvert.DeserializeObject(bytes);
-            //return bytes is null ? null : obj;
-            //return null;
         }
     }
 }

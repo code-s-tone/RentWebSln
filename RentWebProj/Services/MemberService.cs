@@ -1,10 +1,7 @@
-﻿using RentWebProj.Models;
-using RentWebProj.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RentWebProj.ViewModels;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Windows;
@@ -12,15 +9,23 @@ using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNet.SignalR;
 using System.Data.Entity;
+using RentWebProj.Interfaces;
+using RentWebProj.Repositories;
+using RentWebProj.Models;
+using RentWebProj.ViewModels;
+
 
 namespace RentWebProj.Services
 {
     public class MemberService
     {
         private readonly CommonRepository _repository;
-        public MemberService()
+        private readonly IRedisRepository _iRedisRepository;
+
+        public MemberService()//IRedisRepository iRedisRepository
         {
             _repository = new CommonRepository();
+            //_iRedisRepository = iRedisRepository;//注入redis相依性
         }
 
         public MemberPersonDataViewModel GetMemberData(int LoginMemeberId)
@@ -331,7 +336,7 @@ namespace RentWebProj.Services
         //}
 
         //抓取 要在首頁 顯示留言的資料<名駿>
-        public IEnumerable<CommentViewModel> GetAllComment()
+        public IEnumerable<CommentViewModel> GetNewComments()
         {
             IEnumerable<CommentViewModel> AllCommentVMList;
             AllCommentVMList =
@@ -350,7 +355,7 @@ namespace RentWebProj.Services
                     PhotoUrl = m.ProfilePhotoUrl
                 };
 
-            return AllCommentVMList;
+            return AllCommentVMList.Take(10);
         }
 
         // 將顧客留言 Create一筆新的 之後存入資料庫
