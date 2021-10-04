@@ -570,7 +570,6 @@
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Shared\Partial_DateTimeModal.cshtml" />
-    <Content Include="Views\Shared\PC.cshtml" />
     <Content Include="Views\SocialMedia\BlogPage.cshtml" />
     <Content Include="Views\Shared\Partial_BlogList.cshtml" />
   </ItemGroup>
