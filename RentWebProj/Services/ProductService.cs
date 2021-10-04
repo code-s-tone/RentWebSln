@@ -238,6 +238,13 @@ namespace RentWebProj.Services
 
         public ProductDetailToCart GetProductDetail(string PID)
         {
+            //判斷下架
+            var DM = (from p in (_repository.GetAll<Product>())
+                     where p.ProductID == PID && p.Discontinuation == false
+                     select p).SingleOrDefault();
+            if (DM == null) return null;
+
+            //----------------------------------------------------
             int? currentMemberID = Helper.GetMemberId();
             ProductDetailToCart VM = new ProductDetailToCart();
 
@@ -245,7 +252,6 @@ namespace RentWebProj.Services
             string startDate = null;
             string expirationDate = null;
 
-            //有登入 //User.Identity.
             if (currentMemberID.HasValue)
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
@@ -273,23 +279,21 @@ namespace RentWebProj.Services
             //禁用日期
             string disablePeriodJSON = new OrderService().GetDisablePeriodJSON(PID);
 
-            VM = (from p in (_repository.GetAll<Product>())
-                  where p.ProductID == PID
-                  select new ProductDetailToCart
-                  {
-                      //ProductID = PID,
-                      ProductName = p.ProductName,
-                      Description = p.Description,
-                      DailyRate = p.DailyRate,
-                      ImgSources = ImgSources,
-                      DisablePeriodsJSON = disablePeriodJSON,
-                      //購物車
-                      IsExisted = isExisted,
-                      StartDate = startDate,
-                      ExpirationDate = expirationDate,
-                      //操作
-                      OperationType = null
-                  }).SingleOrDefault();
+            VM = new ProductDetailToCart
+                {
+                    //ProductID = PID,
+                    ProductName = DM.ProductName,
+                    Description = DM.Description,
+                    DailyRate = DM.DailyRate,
+                    ImgSources = ImgSources,
+                    DisablePeriodsJSON = disablePeriodJSON,
+                    //購物車
+                    IsExisted = isExisted,
+                    StartDate = startDate,
+                    ExpirationDate = expirationDate,
+                    //操作
+                    OperationType = null
+                };
 
             return VM;
         }
