@@ -16,7 +16,7 @@ namespace Backstage.ViewModels
         public DateTime? WithdrawalDate { get; set; }
         public bool? Discontinuation { get; set; }
         public DateTime UpdateTime { get; set; }
-
+        public bool NewProduct { get; set; }
         public virtual List<ImageViewModel> ProductImages { get; set; }
     }
 
