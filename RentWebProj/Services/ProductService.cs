@@ -53,15 +53,15 @@ namespace RentWebProj.Services
         public IEnumerable<CardsViewModel> GetNewestProductCardData()
         {
             var VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.NewestProductCard6Data");
+                ("Product.Newest6ProductCardData");
             if (VMList != null) return VMList;
 
-            VMList = GetAllProductCardData()
+            VMList = ProductDataWithStars()
                     .OrderByDescending(x => x.LaunchDate)
                     .Take(6)
                     .ToList();
 
-            _iRedisRepository.Set("Product.NewestProductCard6Data", VMList);
+            _iRedisRepository.Set("Product.Newest6ProductCardData", VMList);
 
             return VMList;
         }
@@ -75,14 +75,14 @@ namespace RentWebProj.Services
                 p.CountOfRentedDays = days;
             });
 
-            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
             return VMList;
         }
 
         public IEnumerable<CardsViewModel> ProductDataWithStars()
         {
             List<CardsViewModel> VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.30DayStarCard6Data");
+                ("Product.30DayStarCardData");
             if (VMList != null) return VMList;
 
             //回傳所有商品資料含30天內被租過的日期
@@ -95,7 +95,7 @@ namespace RentWebProj.Services
                 p.StarsForLike = stars > 5 ? 5 : stars;
             });
 
-            _iRedisRepository.Set("Product.30DayStarCard6Data", VMList);
+            _iRedisRepository.Set("Product.30DayStarCardData", VMList);
 
             return VMList;
         }

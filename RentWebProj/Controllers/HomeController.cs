@@ -50,12 +50,12 @@ namespace RentWebProj.Controllers
                 {
                     Title = "30天內最熱門ლ(´ڡ`ლ)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Stars",
-                    Cards = _iProductService.ProductDataWithStars()
+                    Cards = _iProductService.ProductDataWithStars().Take(6)
                 }
             };
             ViewBag.Categories = _iProductService.GetCategoryData();
             ViewBag.NewComments = _iMemberService.GetNewComments();
-            ViewBag.Blogs = _iBlogService.GetAllBlogs().OrderByDescending(x => x.PostDate);//.Take(5)
+            ViewBag.Blogs = _iBlogService.GetAllBlogs().OrderByDescending(x => x.PostDate).Take(9);
 
             return View(VMList);
         }
