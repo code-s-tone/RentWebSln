@@ -107,7 +107,6 @@ function Binding() {
                     vm.$data.disabled = true
                 }
             },
-
         },
         methods: {
             fetchx() {
