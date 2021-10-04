@@ -30,11 +30,11 @@ namespace RentWebProj.Models
         [Column(TypeName = "money")]
         public decimal DailyRate { get; set; }
 
-        public DateTime? LaunchDate { get; set; }
+        public DateTime LaunchDate { get; set; }
 
-        public DateTime? WithdrawalDate { get; set; }
+        public DateTime WithdrawalDate { get; set; }
 
-        public bool? Discontinuation { get; set; }
+        public bool Discontinuation { get; set; }
 
         public DateTime UpdateTime { get; set; }
 

@@ -34,7 +34,7 @@ namespace RentWebProj.Services
                 on p.ProductID.Substring(0, 3) equals c.CategoryID
                 join s in _repository.GetAll<SubCategory>()
                 on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-
+                where p.Discontinuation == false
                 select new CardsViewModel
                 {
                     ProductID = p.ProductID,
@@ -50,18 +50,18 @@ namespace RentWebProj.Services
             return AllProductCardVMList;
         }
 
-        public IEnumerable<CardsViewModel> GetCheapestProductCardData()
+        public IEnumerable<CardsViewModel> GetNewestProductCardData()
         {
             var VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.CheapestProductCard6Data");
+                ("Product.Newest6ProductCardData");
             if (VMList != null) return VMList;
 
-            VMList = GetAllProductCardData()
-                    .OrderBy(x => x.DailyRate)
+            VMList = ProductDataWithStars()
+                    .OrderByDescending(x => x.LaunchDate)
                     .Take(6)
                     .ToList();
 
-            _iRedisRepository.Set("Product.CheapestProductCard6Data", VMList);
+            _iRedisRepository.Set("Product.Newest6ProductCardData", VMList);
 
             return VMList;
         }
@@ -75,14 +75,14 @@ namespace RentWebProj.Services
                 p.CountOfRentedDays = days;
             });
 
-            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays).Take(6);
+            IEnumerable<CardsViewModel> VMList = pList.OrderByDescending(x => x.CountOfRentedDays);
             return VMList;
         }
 
         public IEnumerable<CardsViewModel> ProductDataWithStars()
         {
             List<CardsViewModel> VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.30DayStarCard6Data");
+                ("Product.30DayStarCardData");
             if (VMList != null) return VMList;
 
             //回傳所有商品資料含30天內被租過的日期
@@ -95,26 +95,28 @@ namespace RentWebProj.Services
                 p.StarsForLike = stars > 5 ? 5 : stars;
             });
 
-            _iRedisRepository.Set("Product.30DayStarCard6Data", VMList);
+            _iRedisRepository.Set("Product.30DayStarCardData", VMList);
 
             return VMList;
         }
 
         public IEnumerable<CardsViewModel> GetCategoryData()
         {
-            IEnumerable<CardsViewModel> ctVMList;
+            List<CardsViewModel> ctVMList = _iRedisRepository.Get<List<CardsViewModel>>
+                ("Product.30DayStarCard6Data");
+            if (ctVMList != null) return ctVMList;
 
             var ctDMList = _repository.GetAll<Category>();
-
-            ctVMList = from ct in ctDMList
+            ctVMList = (from ct in ctDMList
                        select new CardsViewModel
                        {
                            CategoryName = ct.CategoryName,
                            CategoryID = ct.CategoryID,
                            ImageSrcMain = ct.ImageSrcMain,
                            ImageSrcSecond = ct.ImageSrcSecond
-                       };
+                       }).ToList();
 
+            _iRedisRepository.Set("Product.30DayStarCard6Data", ctVMList);
             return ctVMList;
         }
 
@@ -236,6 +238,13 @@ namespace RentWebProj.Services
 
         public ProductDetailToCart GetProductDetail(string PID)
         {
+            //判斷下架
+            var DM = (from p in (_repository.GetAll<Product>())
+                     where p.ProductID == PID && p.Discontinuation == false
+                     select p).SingleOrDefault();
+            if (DM == null) return null;
+
+            //----------------------------------------------------
             int? currentMemberID = Helper.GetMemberId();
             ProductDetailToCart VM = new ProductDetailToCart();
 
@@ -243,7 +252,6 @@ namespace RentWebProj.Services
             string startDate = null;
             string expirationDate = null;
 
-            //有登入 //User.Identity.
             if (currentMemberID.HasValue)
             {
                 Cart cart = (from c in (_repository.GetAll<Cart>())
@@ -271,23 +279,21 @@ namespace RentWebProj.Services
             //禁用日期
             string disablePeriodJSON = new OrderService().GetDisablePeriodJSON(PID);
 
-            VM = (from p in (_repository.GetAll<Product>())
-                  where p.ProductID == PID
-                  select new ProductDetailToCart
-                  {
-                      //ProductID = PID,
-                      ProductName = p.ProductName,
-                      Description = p.Description,
-                      DailyRate = p.DailyRate,
-                      ImgSources = ImgSources,
-                      DisablePeriodsJSON = disablePeriodJSON,
-                      //購物車
-                      IsExisted = isExisted,
-                      StartDate = startDate,
-                      ExpirationDate = expirationDate,
-                      //操作
-                      OperationType = null
-                  }).SingleOrDefault();
+            VM = new ProductDetailToCart
+                {
+                    //ProductID = PID,
+                    ProductName = DM.ProductName,
+                    Description = DM.Description,
+                    DailyRate = DM.DailyRate,
+                    ImgSources = ImgSources,
+                    DisablePeriodsJSON = disablePeriodJSON,
+                    //購物車
+                    IsExisted = isExisted,
+                    StartDate = startDate,
+                    ExpirationDate = expirationDate,
+                    //操作
+                    OperationType = null
+                };
 
             return VM;
         }

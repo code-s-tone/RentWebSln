@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
 using RentWebProj.Interfaces;
-using RentWebProj.Models;
 using RentWebProj.Services;
 using RentWebProj.ViewModels;
 using RentWebProj.Helpers;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 
 namespace RentWebProj.Controllers
@@ -120,6 +118,10 @@ namespace RentWebProj.Controllers
         public ActionResult ProductDetail(string PID)
         {
             ProductDetailToCart VM = _service.GetProductDetail(PID);
+            if (VM == null) {
+                return View("Error",new ErrorViewModel { 
+                    Title ="不存在" , Message="此產品已下架"});
+            }
             return View(VM);
         }
 

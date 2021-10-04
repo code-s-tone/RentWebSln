@@ -325,7 +325,6 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\RentContext.cs" />
-    <Compile Include="Models\SignWay.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="myHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -347,6 +346,7 @@
     <Compile Include="ViewModels\BlogViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
+    <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\MemberCenterViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -570,7 +570,6 @@
     <Content Include="Views\Shared\Partial_ProductCard.cshtml" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
     <Content Include="Views\Shared\Partial_DateTimeModal.cshtml" />
-    <Content Include="Views\Shared\PC.cshtml" />
     <Content Include="Views\SocialMedia\BlogPage.cshtml" />
     <Content Include="Views\Shared\Partial_BlogList.cshtml" />
   </ItemGroup>

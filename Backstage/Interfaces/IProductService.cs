@@ -8,6 +8,7 @@ namespace Backstage.Interfaces
 {
     public interface IProductService
     {
-        public IEnumerable<ProductViewModel> GetProduct();
+        public IEnumerable<ProductViewModel> GetProduct(string ProductId);
+        public Task<ApiResponse> UpdateProduct(ProductViewModel UpdateProduct);
     }
 }

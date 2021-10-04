@@ -30,7 +30,6 @@ namespace Backstage.Models
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<SignWay> SignWays { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -78,6 +77,8 @@ namespace Backstage.Models
                 entity.Property(e => e.MainImgUrl).IsRequired();
 
                 entity.Property(e => e.PostDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Poster).IsRequired();
 
                 entity.Property(e => e.Preview).IsRequired();
             });
@@ -207,16 +208,6 @@ namespace Backstage.Models
                 entity.Property(e => e.ProfilePhotoUrl)
                     .HasMaxLength(100)
                     .HasComment("頭像的來源");
-
-                entity.Property(e => e.SignWayId)
-                    .HasColumnName("SignWayID")
-                    .HasComment("登入方式");
-
-                entity.HasOne(d => d.SignWay)
-                    .WithMany(p => p.Members)
-                    .HasForeignKey(d => d.SignWayId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Members_SignWay");
             });
 
             modelBuilder.Entity<MigrationHistory>(entity =>
@@ -374,15 +365,6 @@ namespace Backstage.Models
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ProductImages_Products");
-            });
-
-            modelBuilder.Entity<SignWay>(entity =>
-            {
-                entity.ToTable("SignWay");
-
-                entity.Property(e => e.SignWayId).HasColumnName("SignWayID");
-
-                entity.Property(e => e.Description).HasMaxLength(50);
             });
 
             modelBuilder.Entity<SubCategory>(entity =>

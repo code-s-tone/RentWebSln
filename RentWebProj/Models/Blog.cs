@@ -9,36 +9,26 @@ namespace RentWebProj.Models
     [Table("Blog")]
     public partial class Blog
     {
-        [Key]
-        [Column(Order = 0)]
         public int BlogID { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
+        [Required]
         public string BlogTitle { get; set; }
 
-        [Key]
-        [Column(Order = 2)]
         public DateTime PostDate { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Required]
         public string MainImgUrl { get; set; }
 
-        [Key]
-        [Column(Order = 4)]
+        [Required]
         public string MainImgTitle { get; set; }
 
-        [Key]
-        [Column(Order = 5)]
+        [Required]
         public string Preview { get; set; }
 
-        [Key]
-        [Column(Order = 6)]
+        [Required]
         public string BlogContent { get; set; }
 
-        [Key]
-        [Column(Order = 7)]
+        [Required]
         public string Poster { get; set; }
     }
 }

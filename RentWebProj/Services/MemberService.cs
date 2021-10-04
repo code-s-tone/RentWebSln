@@ -122,7 +122,7 @@ namespace RentWebProj.Services
             var result = pDMList.Where(x => x.Email == email && x.PasswordHash == password).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, PasswordHash = password, SignWayID = 1, FullName = "未設定", ProfilePhotoUrl = "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
+                var entity = new Member { Email = email, PasswordHash = password, FullName = "未設定", ProfilePhotoUrl = "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
                 _repository.Create(entity);
                 _repository.SaveChanges();
                 return true;
@@ -140,7 +140,7 @@ namespace RentWebProj.Services
             var result = pDMList.Where(x => x.Email == email && x.FullName == name && x.Account == id).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, SignWayID = 1, FullName = name, Account = id, ProfilePhotoUrl = picture };
+                var entity = new Member { Email = email,  FullName = name, Account = id, ProfilePhotoUrl = picture };
                 _repository.Create(entity);
                 _repository.SaveChanges();
             }
@@ -152,7 +152,7 @@ namespace RentWebProj.Services
             var result = pDMList.Where(x => x.Email == email && x.FullName == name || x.Email == email).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, SignWayID = 1, FullName = name, ProfilePhotoUrl = picture };
+                var entity = new Member { Email = email,  FullName = name, ProfilePhotoUrl = picture };
                 _repository.Create(entity);
                 _repository.SaveChanges();
             }
@@ -165,7 +165,7 @@ namespace RentWebProj.Services
             var result = pDMList.Where(x => x.Email == email && x.FullName == name || x.Email == email).FirstOrDefault();
             if (result == null)
             {
-                var entity = new Member { Email = email, SignWayID = 1, FullName = name, ProfilePhotoUrl = "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
+                var entity = new Member { Email = email, FullName = name, ProfilePhotoUrl = "https://res.cloudinary.com/dgaodzamk/image/upload/v1629979251/%E9%BC%BB%E6%B6%95%E8%B2%93.png" };
                 _repository.Create(entity);
                 _repository.SaveChanges();
             }
