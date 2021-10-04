@@ -6,7 +6,7 @@
     background-size: cover;
     background-position: 50%;
     transition: 0.5s;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
 }
 
 .welcome{
@@ -58,6 +58,7 @@
     .nav-item:hover {
         border-bottom: 3px solid black;
     }
+
 
 .mid .row:first-child {
     width: 80%;
@@ -164,7 +165,9 @@
         height: 210px;
         overflow: hidden;
     }
-
+    .mid h2 {
+        margin: auto;
+    }
     .mid .row:first-child {
         width: 100%;
     }
@@ -219,6 +222,7 @@
     .welcome {
         font-size: 18px;
     }
+    
     .mid .blogBox {
         padding: 0 25px;
         height:100%;

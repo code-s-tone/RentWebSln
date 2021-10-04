@@ -149,9 +149,8 @@ header-top .container-xl {
         box-sizing: border-box;
         font-size: 15px;
         background: transparent;
-        padding-left: 11px;
+        padding-left: 14px;
         outline-width: 0px;
-
     }
 
 .header-member-box {
@@ -366,7 +365,7 @@ nav .navbar .links li:hover .sub-menu {
         }
 
     .header-nav .logo img {
-        width: /*120*/ 200px;
+        width: 200px;
     }
 
         .header-nav {
@@ -475,19 +474,21 @@ nav .navbar .links li:hover .sub-menu {
             .header-nav {
                 flex-wrap: nowrap;
             }
-
+            .header-nav .logo img {
+                width: 170px;
+            }
             .header-search-box {
                 margin-right: 22px;
             }
 
             .header-search input {
                 font-size: 14px;
-                padding: 4px 10px;
+                
             }
 
             .header-search.active,
             .header-search:hover {
-                width: 115px;
+                width: 105px;
                 height: 32px;
             }
 

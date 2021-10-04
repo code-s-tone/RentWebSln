@@ -65,7 +65,7 @@
                             @using (Html.BeginForm("SearchProductCards", "Product", FormMethod.Get, new { @class = "m-auto" }))
                             {
                                 <label class="header-search d-grid" for="header-search-input">
-                                    <input id="header-search-input" class="m-auto" type="text" name="keyword" placeholder=" 想租什麼呢?" />
+                                    <input id="header-search-input" class="m-auto" type="text" name="keyword" placeholder="想租什麼?" />
                                 </label>
                                 <button type="submit"></button>
 
@@ -251,9 +251,9 @@
                 </div>
                 <a href="#" class="dropdown-btn"> 關於我們 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
-                    <a href="#">我們的故事</a>
+                    @Html.ActionLink("我們的故事", "About", "Home")
                     @Html.ActionLink("回饋計畫", "ContributionProgram", "Home")
-                    <a href="#">聯繫我們</a>
+                    @Html.ActionLink("評分與評論", "ContactUs", "Home")
                 </div>
                 <a href="#" class="dropdown-btn"> 共享好文 <i class="fas fa-caret-down"></i></a>
                 <div class="dropdown-container">
@@ -340,7 +340,7 @@
                             <li>回饋計畫</li>
                         </a>
                         <a href="@Url.Action("ContactUs", "Home")">
-                            <li>聯繫我們</li>
+                            <li>評分與評論</li>
                         </a>
 
                     </div>
