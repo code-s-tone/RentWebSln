@@ -11,6 +11,7 @@ namespace Backstage.ViewModels
         public int OrderID { get; set; }
         public int MemberID { get; set; }
         public string FullName { get; set; }
+        public int StoreID { get; set; }
         public string StoreName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

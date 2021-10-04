@@ -2,40 +2,51 @@
     ViewData["Title"] = "ProductDetail";
 }
 <h1>訂單資料</h1>
-<b-container fluid id="app" class="m-2">
+<b-container fluid id="app" class="m-2 w-50 m-auto">
     @*<form>*@
 
     <b-col>
         <label for="input-small">訂單人姓名:</label>
     </b-col>
     <b-col>
-        <b-form-input id="input-small" class="w-25" placeholder="請輸入" v-model="items[0].fullName" v-bind:class="{ 'is-invalid': usernameError }"></b-form-input>
+        <b-form-input id="input-small" placeholder="請輸入" v-model="items.fullName" v-bind:class="{ 'is-invalid': usernameError }"></b-form-input>
         <div class=" text-danger">
-            {{ userErrMsg }}555555555
+            {{ userErrMsg }}
         </div>
     </b-col>
 
     <b-col>
-        <label for="input-small" class="mt-3">分店地址:</label>
+        <label for="input-small" class="mt-3">分店地址: </label>
     </b-col>
     <b-col>
-        <b-form-input id="input-small" class="w-25" placeholder="請輸入" v-model="items[0].storeName"></b-form-input>
+        <b-form-input id="input-small" placeholder="例如 : 1中華大學新竹總店、2新竹站前分店、3新竹高鐵站分店" v-model="items.storeID" v-bind:class="{ 'is-invalid': storeError }" ></b-form-input>
+        <div class=" text-danger">
+            {{ storeErrMsg }}
+        </div>
     </b-col>
 
     <b-col>
         <label for="input-small" class="mt-3">聯絡電話:</label>
     </b-col>
     <b-col>
-        <b-form-input id="input-small" class="w-25" placeholder="請輸入" v-model="items[0].phone"></b-form-input>
+        <b-form-input id="input-small" placeholder="請輸入" v-model="items.phone" v-bind:class="{ 'is-invalid': phoneError }"></b-form-input>
+        <div class=" text-danger">
+            {{ phoneErrMsg }}
+        </div>
     </b-col>
 
     <b-col>
-        <label for="input-small" class="mt-3">出貨狀態:</label>
+        <label for="input-small" class="mt-3">出貨狀態: </label>
     </b-col>
     <b-col>
-        <b-form-input id="input-small" class="w-25" placeholder="請輸入" v-model="items[0].goodsStatusID"></b-form-input>
+        <b-form-input id="input-small" placeholder="例如 : 已歸還、待出貨、已出貨、已到貨、已取貨" v-model="items.goodsStatusID" v-bind:class="{ 'is-invalid': goodsError }"></b-form-input>
+        <div class=" text-danger">
+            {{ goodsErrMsg }}
+        </div>
     </b-col>
-    <b-col class="text-center mt-3">
+
+
+    <b-col class="text-center mt-5">
         <b-button @@click="EditData()" variant="primary">送出修改</b-button>
         <b-button @@click="history.go(-1)">取消</b-button>
     </b-col>
@@ -54,16 +65,31 @@
 
 @section endJS{
     <script>
-        var item
+        let Json =
+        {
+            "orderID": "",
+            "fullName": "",
+            "storeName": "",
+            "phone": "",
+            "goodsStatusID": "",
+            "storeID":"",
+
+        }
         let vm;
         let url = location.href;
         vm = new Vue({
             el: "#app",
             data: {
-                items:[],
-                username: '',
+                items: Json,
                 usernameError: false,
-                userErrMsg: ''
+                userErrMsg: '',
+                storeError: false,
+                storeErrMsg: '',
+                phoneError: false,
+                phoneErrMsg: '',
+                goodsError: false,
+                goodsErrMsg: '',
+
             },
             methods: {
                 EditData() {
@@ -71,7 +97,7 @@
                     fetch(PUrl,
                         {
                             method: "Post",
-                            body: JSON.stringify(this.$data.items[0]),
+                            body: JSON.stringify(this.$data.items),
                             headers: {
 
                                 'Content-Type': 'application/json'
@@ -79,7 +105,7 @@
                         })
                         .then(res => {
 
-                            this.$data.items = res;
+                            this.$data.items = res[0];
                             console.log(res);
                             console.log(res.ok);
                             console.log(res.status);
@@ -96,23 +122,76 @@
                 },
             },
             watch: {
-                'items[0].fullName': function () {
+                'items.fullName': function () {
                     var isText = /^[a-zA-Z0-9]+$/;
-                    if (this.items[0].fullName == '') {
+                    if (this.items.fullName == '') {
                         this.usernameError = true;
                         this.userErrMsg = '姓名不得為空';
-                        console.log(1);
                     }
-                    else if (!isText.test(this.items[0].fullName)) {
-                        this.usernameError = true;
-                        this.userErrMsg = '請勿包含特殊字元';
-                        console.log(2);
+                    //else if (!isText.test(this.items.fullName)) {
+                    //    this.usernameError = true;
+                    //    this.userErrMsg = '請勿包含特殊字元';
 
-                    }
+                    //}
                     else {
                         this.usernameError = false;
+                        this.userErrMsg = '';
+
                     }
-                }
+                },
+                'items.storeID': function () {
+                    var isText = /^[123]{1}$/;
+                    if (this.items.storeID == '') {
+                        this.storeError = true;
+                        this.storeErrMsg = '分店不得為空';
+                    }
+                    else if (!isText.test(this.items.storeID)) {
+                        this.storeError = true;
+                        this.storeErrMsg = '請輸入正確的分店格式 EX : 1、2、3';
+                    }
+                    else {
+                        this.storeError = false;
+                        this.storeErrMsg = '';
+                    }
+                },
+                'items.phone': function () {
+                    var isText = /^[0-9]+$/;
+                    if (this.items.phone == '') {
+                        this.phoneError = true;
+                        this.phoneErrMsg = '電話不得為空';
+                    }
+                    else if (!isText.test(this.items.phone)) {
+                        this.phoneError = true;
+                        this.phoneErrMsg = '請勿包含數字以外的特殊字元';
+
+                    }
+                    else if (this.items.phone.length != 10) {
+                        this.phoneError = true;
+                        this.phoneErrMsg = '請輸入正確的手機格式';
+                    }
+                    else {
+                        this.phoneError = false;
+                        this.phoneErrMsg = '';
+
+                    }
+                },
+                'items.goodsStatusID': function () {
+                    var isText = /[\u4e00-\u9fa5]{3}$/;
+                    if (this.items.goodsStatusID == '') {
+                        this.goodsError = true;
+                        this.goodsErrMsg = '貨物狀態不得為空';
+                    }
+                    else if (!isText.test(this.items.goodsStatusID)) {
+                        this.goodsError = true;
+                        this.goodsErrMsg = '請輸入正確的貨物狀態格式';
+                    }
+                    else {
+                        this.goodsError = false;
+                        this.goodsErrMsg = '';
+
+                    }
+                },
+
             }
         });
 
@@ -128,7 +207,7 @@
 
                 }).then(res => res.json())
                 .then(result => {
-                    vm.$data.items = result;
+                    vm.$data.items = result[0];
                     console.log(result);
                     console.log("有進來了");
                 })
@@ -136,10 +215,6 @@
                     console.log("錯了");
                 })
         };
-
-
-
-
 
         $(document).ready(function () {
             LoadData();

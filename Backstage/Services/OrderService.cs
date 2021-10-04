@@ -42,7 +42,8 @@ namespace Backstage.Services
                              DailyRate = od.DailyRate,
                              StartDate = od.StartDate,
                              ExpirationDate = od.ExpirationDate,
-                             TotalAmount = od.TotalAmount
+                             TotalAmount = od.TotalAmount,
+                             StoreID = o.StoreId
                              
                          };
             return result;
@@ -62,6 +63,7 @@ namespace Backstage.Services
                          where o.OrderId == orderID
                          select new OrderViewModel
                          {
+                             
                              OrderID = o.OrderId,
                              MemberID = o.MemberId,
                              FullName = m.FullName,
@@ -75,7 +77,8 @@ namespace Backstage.Services
                              DailyRate = od.DailyRate,
                              StartDate = od.StartDate,
                              ExpirationDate = od.ExpirationDate,
-                             TotalAmount = od.TotalAmount
+                             TotalAmount = od.TotalAmount,
+                             StoreID = o.StoreId
 
                          };
             return result;
@@ -93,27 +96,27 @@ namespace Backstage.Services
             try
             {
                 //出貨狀態
-                var order = _ctx.OrderDetails.Where(x => x.OrderId == UpdateOrder.OrderID).FirstOrDefault();
+                var OD = _ctx.OrderDetails.Where(x => x.OrderId == UpdateOrder.OrderID).FirstOrDefault();
 
                 if (UpdateOrder.GoodsStatusID == "已歸還")
                 {
-                    order.GoodsStatus = 0;
+                    OD.GoodsStatus = 0;
                 }
                 else if (UpdateOrder.GoodsStatusID == "待出貨")
                 {
-                    order.GoodsStatus = 1;
+                    OD.GoodsStatus = 1;
                 }
                 else if (UpdateOrder.GoodsStatusID == "已出貨")
                 {
-                    order.GoodsStatus = 2;
+                    OD.GoodsStatus = 2;
                 }
                 else if (UpdateOrder.GoodsStatusID == "已到貨")
                 {
-                    order.GoodsStatus = 3;
+                    OD.GoodsStatus = 3;
                 }
                 else if (UpdateOrder.GoodsStatusID == "已取貨")
                 {
-                    order.GoodsStatus = 4;
+                    OD.GoodsStatus = 4;
                 }
 
                 //姓名、電話
@@ -128,16 +131,14 @@ namespace Backstage.Services
                 member.Phone = UpdateOrder.Phone;
 
                 //分店
-                var store = (
-                        from od in _ctx.OrderDetails
-                        where od.OrderId == UpdateOrder.OrderID
-                        join o in _ctx.Orders on od.OrderId equals o.OrderId
-                        join m in _ctx.Members on o.MemberId equals m.MemberId
-                        join b in _ctx.BranchStores on o.StoreId equals b.StoreId
-                        select b
-                    ).FirstOrDefault();
-                store.StoreName = UpdateOrder.StoreName;
+                var order = _ctx.Orders.Where(x => x.OrderId == UpdateOrder.OrderID).FirstOrDefault();
+
+                order.StoreId = UpdateOrder.StoreID;
                 var a = 1;
+                
+
+
+                
                 _ctx.SaveChanges();
             }
             catch (Exception ex)
