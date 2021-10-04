@@ -18,28 +18,28 @@
     <div class="keyart_layer parallax" id="keyart-6" data-speed="49" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 75.0 -->
     @*<div class="keyart_layer" id="keyart-scrim"></div>*@
     <div class="keyart_layer parallax" id="keyart-7" data-speed="69" style="transform: translate3d(0px, 0px, 0px)"></div>		<!-- 87.5 -->
-    <div class="keyart_layer" id="keyart-8"@*data-speed="100"*@></div> 
+    <div class="keyart_layer" id="keyart-8" @*data-speed="100"*@></div>
 </header>
 
 @*<header>
-    <div>
-        <h2>標題文字</h2>
-        <div id="search">
-            <div class="inputGroup">
-                <i class="far fa-question-circle"></i>
-                <input type="text" id="keyword" placeholder="想租點什麼?">
+        <div>
+            <h2>標題文字</h2>
+            <div id="search">
+                <div class="inputGroup">
+                    <i class="far fa-question-circle"></i>
+                    <input type="text" id="keyword" placeholder="想租點什麼?">
+                </div>
+                <div class="inputGroup">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="position" placeholder="新竹市香山區">
+                </div>
+                <button class="btnSearch">查 詢</button>
+                <button class="btnSearch">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-            <div class="inputGroup">
-                <i class="fas fa-map-marker-alt"></i>
-                <input type="text" id="position" placeholder="新竹市香山區">
-            </div>
-            <button class="btnSearch">查 詢</button>
-            <button class="btnSearch">
-                <i class="fas fa-search"></i>
-            </button>
         </div>
-    </div>
-</header>*@
+    </header>*@
 <div id="maincontain">
     <div class="extend-background"></div>@* 打底 *@
     <article class="container-xl">
@@ -235,12 +235,13 @@
     <!-- swiper -->
     <script src="~/Scripts/swiper-bundle.min.js"></script>
     <script src="~/Assets/js/index.js"></script>
-    <script src="~/Assets/js/GeneralProductCards/GeneralCategories.js"></script>
     <script src="~/Assets/js/GeneralProductCards/ProductCards.js"></script>
     <script>
         isAuthenticated_Cards = @Json.Encode(User.Identity.IsAuthenticated);
     </script>
     <script src="~/Assets/js/GeneralProductCards/CardToCart.js"></script>
+    <script src="~/Assets/js/GeneralProductCards/CategoriesSelector.js"></script>
+
 
 }
 
