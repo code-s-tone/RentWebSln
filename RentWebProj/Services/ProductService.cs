@@ -34,7 +34,7 @@ namespace RentWebProj.Services
                 on p.ProductID.Substring(0, 3) equals c.CategoryID
                 join s in _repository.GetAll<SubCategory>()
                 on p.ProductID.Substring(3, 2) equals s.SubCategoryID
-
+                where p.Discontinuation == false
                 select new CardsViewModel
                 {
                     ProductID = p.ProductID,
@@ -50,18 +50,18 @@ namespace RentWebProj.Services
             return AllProductCardVMList;
         }
 
-        public IEnumerable<CardsViewModel> GetCheapestProductCardData()
+        public IEnumerable<CardsViewModel> GetNewestProductCardData()
         {
             var VMList = _iRedisRepository.Get<List<CardsViewModel>>
-                ("Product.CheapestProductCard6Data");
+                ("Product.NewestProductCard6Data");
             if (VMList != null) return VMList;
 
             VMList = GetAllProductCardData()
-                    .OrderBy(x => x.DailyRate)
+                    .OrderByDescending(x => x.LaunchDate)
                     .Take(6)
                     .ToList();
 
-            _iRedisRepository.Set("Product.CheapestProductCard6Data", VMList);
+            _iRedisRepository.Set("Product.NewestProductCard6Data", VMList);
 
             return VMList;
         }
@@ -102,19 +102,21 @@ namespace RentWebProj.Services
 
         public IEnumerable<CardsViewModel> GetCategoryData()
         {
-            IEnumerable<CardsViewModel> ctVMList;
+            List<CardsViewModel> ctVMList = _iRedisRepository.Get<List<CardsViewModel>>
+                ("Product.30DayStarCard6Data");
+            if (ctVMList != null) return ctVMList;
 
             var ctDMList = _repository.GetAll<Category>();
-
-            ctVMList = from ct in ctDMList
+            ctVMList = (from ct in ctDMList
                        select new CardsViewModel
                        {
                            CategoryName = ct.CategoryName,
                            CategoryID = ct.CategoryID,
                            ImageSrcMain = ct.ImageSrcMain,
                            ImageSrcSecond = ct.ImageSrcSecond
-                       };
+                       }).ToList();
 
+            _iRedisRepository.Set("Product.30DayStarCard6Data", ctVMList);
             return ctVMList;
         }
 

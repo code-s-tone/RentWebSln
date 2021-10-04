@@ -26,11 +26,10 @@ namespace RentWebProj.ViewModels
         public string SubCategoryID { get; set; }
         public string Description { get; set; }
         public decimal DailyRate { get; set; }
-        public int StarsForLike { get; set; }  
+        public int StarsForLike { get; set; }
 
-        //偉軒用
+        public DateTime LaunchDate { get; set; }
         public double CountOfRentedDays { get; set; }
-        //public bool IsExisted { get; set; }
 
     }
 

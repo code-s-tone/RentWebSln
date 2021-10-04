@@ -42,9 +42,9 @@ namespace RentWebProj.Controllers
             {
                 new IndexProductView
                 {
-                    Title = "便宜到老闆生無可戀(눈_눈)",
+                    Title = "最新上架商品(눈_눈)",
                     Url = "Product/Search?Keyword=&Category=0&SubCategory=0&RateBudget=0&OrderBy=Price",
-                    Cards = _iProductService.GetCheapestProductCardData()
+                    Cards = _iProductService.GetNewestProductCardData()
                 },
                 new IndexProductView
                 {

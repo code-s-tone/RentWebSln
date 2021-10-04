@@ -7,7 +7,7 @@ namespace RentWebProj.Interfaces
     {
         IEnumerable<CardsViewModel> GetCategoryData();
         string GetCategoryName(string categoryID);
-        IEnumerable<CardsViewModel> GetCheapestProductCardData();
+        IEnumerable<CardsViewModel> GetNewestProductCardData();
         IEnumerable<CardsViewModel> GetMostPopularProductCardData(int amongDays);
         ProductDetailToCart GetProductDetail(string PID);
         List<CardsViewModel> GetSelectedProductData(string categoryID);
