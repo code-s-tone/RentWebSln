@@ -325,7 +325,6 @@
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\RentContext.cs" />
-    <Compile Include="Models\SignWay.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="myHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -22,11 +22,9 @@ namespace Backstage.Models
         public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime? Birthday { get; set; }
-        public int SignWayId { get; set; }
         public bool? Active { get; set; }
         public string ProfilePhotoUrl { get; set; }
 
-        public virtual SignWay SignWay { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }

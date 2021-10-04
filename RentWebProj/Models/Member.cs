@@ -42,8 +42,6 @@ namespace RentWebProj.Models
         [Column(TypeName = "date")]
         public DateTime? Birthday { get; set; }
 
-        public int SignWayID { get; set; }
-
         public bool? active { get; set; }
 
         [StringLength(100)]
@@ -54,8 +52,6 @@ namespace RentWebProj.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comment> Comments { get; set; }
-
-        public virtual SignWay SignWay { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
