@@ -94,11 +94,16 @@ namespace Backstage.Services
                     _ctx.RemoveRange(productImages);//利用RemoveRange可以刪除集合的特性一次刪除
                     _ctx.SaveChanges();//存檔
 
-                    //2.去圖庫創建檔案，以覆蓋圖庫的存檔地點(Cloudinay的特性是，同名字會覆蓋住原檔案)
+                    //2.去圖庫創建檔案，以覆蓋圖庫的存檔地點
                     var cloudName = UpdateProduct.ProductId;//取的public ID
                     var CloudFolder = UpdateProduct.ProductId.Substring(0, 3);//取的在哪個大類資料夾
-                    var AllImg = UpdateProduct.ProductImages.ToList(); //新增AllImg把所有圖片放進取(包含dataUrl                                                    
+                    var AllImg = UpdateProduct.ProductImages.ToList(); //新增AllImg把所有圖片放進取(包含dataUrl)    
+                    ;
+                    //刪除同ProductID的圖片(最多十張所以設10)
+                    DeleteImg(CloudFolder, cloudName, 10);
+                    //新增圖庫圖片      
                     CreatImg(CloudFolder, cloudName, AllImg);
+        
                     apipesponse.IsSuccessful = true;
                     apipesponse.Result = "編輯產品成功";
                     return apipesponse;
@@ -190,7 +195,7 @@ namespace Backstage.Services
 
 
         }
-        //刪除暫時用不到;原因是假設能覆蓋同樣PublicId檔案的話，其實多出來的照片不管也沒差(資料庫只會存取最後新增的數量)。
+        //刪除雲端的照片
         public void DeleteImg(string CloudFolder, string ImgName, int QuantityImg)
         {
             Account account = new Account(
@@ -202,9 +207,10 @@ namespace Backstage.Services
             {
                 var result = $"Product/{CloudFolder}/{ImgName}_{i}";
                 var uploadResult = cloudinary.DeleteResources(result);  //刪除
-
+                ;
             }
         }
+
 
     }
 }
