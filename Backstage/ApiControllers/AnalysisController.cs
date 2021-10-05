@@ -12,7 +12,7 @@ namespace Backstage.ApiControllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class AnalysisController : ControllerBase
     {
 

@@ -87,7 +87,7 @@ namespace Backstage
                           //Marvin：加這行才取得到identity.name
                           NameClaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifiers",
                           ValidateIssuer = true, //發行者
-                          ValidIssuer = "RentWeb",  //發行者得和發證時的發行者一樣
+                          ValidIssuer = "Knowrentge",  //發行者得和發證時的發行者一樣
                           ValidateAudience = false,
                           ValidateLifetime = true, 
                           IssuerSigningKey =    //Signingkey得和金鑰一樣
