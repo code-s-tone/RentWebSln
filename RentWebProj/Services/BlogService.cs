@@ -23,7 +23,7 @@ namespace RentWebProj.Services
         {
             var blogVM = _iRedisRepository.Get<List<BlogViewModel>>("Blog.AllBlogs");
             blogVM = (from x in _repository.GetAll<Blog>()
-                          orderby x.BlogID descending
+                          orderby x.PostDate descending
                           select new BlogViewModel()
                           {
                               BlogId = x.BlogID,
