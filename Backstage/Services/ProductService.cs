@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Backstage.Services
 {
 
-    public class ProductService: IProductService
+    public class ProductService : IProductService
     {
         readonly RentContext _ctx;
         public ProductService(RentContext ctx)
@@ -77,7 +77,7 @@ namespace Backstage.Services
             DateTime date1 = DateTime.Now;//修改當天的日期
             var product = _ctx.Products.Where(x => x.ProductId == UpdateProduct.ProductId).FirstOrDefault();//判斷編輯或新增與否
 
-            if (UpdateProduct.NewProduct == false && product != null )//如果查詢後的資料不等於null和新建模式是False(NewProduct)=修改資料
+            if (UpdateProduct.NewProduct == false && product != null)//如果查詢後的資料不等於null和新建模式是False(NewProduct)=修改資料
             {
                 try
                 {
@@ -103,7 +103,7 @@ namespace Backstage.Services
                     DeleteImg(CloudFolder, cloudName, 10);
                     //新增圖庫圖片      
                     CreatImg(CloudFolder, cloudName, AllImg);
-        
+
                     apipesponse.IsSuccessful = true;
                     apipesponse.Result = "編輯產品成功";
                     return apipesponse;
@@ -118,7 +118,7 @@ namespace Backstage.Services
 
 
             }
-            else if (UpdateProduct.NewProduct == true && product == null  )//如果查詢後的資料等於null和新建模式是True(NewProduct)=新增資料
+            else if (UpdateProduct.NewProduct == true && product == null)//如果查詢後的資料等於null和新建模式是True(NewProduct)=新增資料
             {
                 try
                 {
@@ -136,8 +136,8 @@ namespace Backstage.Services
                         LaunchDate = UpdateProduct.LaunchDate,
                         WithdrawalDate = UpdateProduct.WithdrawalDate,
                         UpdateTime = UpdateProduct.UpdateTime,
-                        Discontinuation=UpdateProduct.Discontinuation
-                        
+                        Discontinuation = UpdateProduct.Discontinuation
+
                     });
                     _ctx.SaveChanges();//存檔
                     apipesponse.Result = "新增產品成功";
@@ -164,15 +164,30 @@ namespace Backstage.Services
 
         public void CreatImg(string CloudFolder, string ImgName, List<ImageViewModel> Allimg)
         {
-            try
+            Account account = new Account(
+                    "dgaodzamk",
+                    "192222538187587",
+                    "OG8h1MXpd4lG1N0blyuNA4lETsQ");
+            Cloudinary cloudinary = new Cloudinary(account);
+
+            //如果沒圖片的話就設定預設圖
+            if (Allimg.Count == 0)
             {
-                Account account = new Account(
-                  "dgaodzamk",
-                  "192222538187587",
-                  "OG8h1MXpd4lG1N0blyuNA4lETsQ");
 
-                Cloudinary cloudinary = new Cloudinary(account);
 
+                for (int i = 0; i < 2; i++)
+                {
+                    var uploadParams = new ImageUploadParams()
+                    {
+                        File = new FileDescription("https://res.cloudinary.com/dgaodzamk/image/upload/v1630055261/Product/default.jpg"),//檔案來源
+                        PublicId = $"Product/{CloudFolder}/{ImgName}_{i + 1}"//目標路徑
+                    };
+                    var uploadResult = cloudinary.Upload(uploadParams);  //上傳
+                    _ctx.Add(new ProductImage { ProductId = ImgName, ImageId = i + 1, Source = uploadResult.SecureUrl.ToString() }); //利用上傳成功的callbal組成ProductImga的資料型態
+                }
+            }
+            else
+            {
                 for (int i = 0; i < Allimg.Count; i++)
                 {
                     var uploadParams = new ImageUploadParams()
@@ -186,14 +201,8 @@ namespace Backstage.Services
 
 
                 }
+            }
                 _ctx.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                ;
-            }
-
-
         }
         //刪除雲端的照片
         public void DeleteImg(string CloudFolder, string ImgName, int QuantityImg)
