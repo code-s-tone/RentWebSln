@@ -21,9 +21,10 @@ namespace RentWebProj.Services
         }
         public List<BlogViewModel> GetAllBlogs()
         {
-            var blogVM = _iRedisRepository.Get<List<BlogViewModel>>("Blog.AllBlogs");
+            var //blogVM = _iRedisRepository.Get<List<BlogViewModel>>("Blog.AllBlogs");
+            //if (blogVM  != null) return blogVM ;
             blogVM = (from x in _repository.GetAll<Blog>()
-                          orderby x.PostDate descending
+                      orderby x.PostDate descending
                           select new BlogViewModel()
                           {
                               BlogId = x.BlogID,
@@ -35,7 +36,7 @@ namespace RentWebProj.Services
                               BlogContent = x.BlogContent,
                               Poster = x.Poster
                           }).ToList();
-            _iRedisRepository.Set("Blog.AllBlogs", blogVM);
+            //_iRedisRepository.Set("Blog.AllBlogs", blogVM);
 
             return blogVM;
         }
