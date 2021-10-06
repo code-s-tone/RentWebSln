@@ -27,11 +27,36 @@ $(document).ready(function () {
     loadData();
 });
 
+let token = "";
+let url = "/api/Analysis/GetSalesAnalysisData"
 //非同步取得資料
 function loadData() {
-    $.ajax({
+    //fetch(url, {
+    //    method: 'get',
+    //    headers: {
+    //        'Accept': 'application/json, text/plain, */*',
+    //        'Content-Type': 'application/json',
+    //        //'Authorization': 'Bearer '+token
+    //    },
+    //    body:""
+    //        //JSON.stringify(
+    //        //    {
+    //        //        "begin":"2020-01-01"
+    //        //        "end":"2021-11-11"
+    //        //    }
+    //        //)
+    //})
+    //    .then(res => res.json())
+    //    .then(res => {
+    //        console.log(res);
+    //        apiAnalysisData = response;
+    //        insertData();
+    //        initializeCharts();
+    //        refreshChartDistinguish(dataManager, chartDistinguish);
+    //    });
+     $.ajax({
         type: "Get",
-        url: "/api/Analysis/GetSalesAnalysisData",
+        url: url,
         data: "",
         dataType: "json",
         success: function (response) {
@@ -41,6 +66,7 @@ function loadData() {
             refreshChartDistinguish(dataManager, chartDistinguish);
         }
     });
+
 }
 
 function insertData() {

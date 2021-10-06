@@ -14,7 +14,7 @@ namespace Backstage.Helpers
         public string GenerateToken(string username)
         {
             //可放在組態
-            var issuer = "RentWeb"; //發行者
+            var issuer = "Knowrentge"; //發行者
             var signKey = "1Zl4h9703IzROidasgfegkK3@f4po1jkd"; //加密金鑰  自己可亂打，但長度有規定?搭配演算法，16位以上
 
             var claims = new List<Claim>();
