@@ -7,7 +7,7 @@ function productCard_Hover(element) {
     FirstSrc = element.querySelector('img').getAttribute('src');
     SecondSrc = FirstSrc.replace('_1', '_2');
     element.querySelector('img').setAttribute('src', SecondSrc);
-console.log(FirstSrc);
+//console.log(FirstSrc);
 }
 
 function productCard_Unhover(element) {

@@ -55,7 +55,7 @@ namespace RentWebProj.Repositories
             //    AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
             //});
             //快取存續時間暫定33分鐘
-            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 11, 0);
+            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 30, 0);
             _db.StringSet(key, ObjectToByteArray(value), cacheItemPolicy);
         }
 
