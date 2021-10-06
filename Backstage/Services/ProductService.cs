@@ -202,6 +202,7 @@ namespace Backstage.Services
 
                 }
             }
+            //這裡出例外
                 _ctx.SaveChanges();
         }
         //刪除雲端的照片
@@ -215,7 +216,7 @@ namespace Backstage.Services
             for (int i = 1; i <= QuantityImg; i++)
             {
                 var result = $"Product/{CloudFolder}/{ImgName}_{i}";
-                var uploadResult = cloudinary.DeleteResources(result);  //刪除
+                var uploadResult = cloudinary.DeleteResources(result);//刪除
                 ;
             }
         }
