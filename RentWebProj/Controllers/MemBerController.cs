@@ -165,7 +165,7 @@ namespace RentWebProj.Controllers
         }
         string response_type = "code";
         string client_id = "1656366912";
-        string redirect_uri = HttpUtility.UrlEncode("https://localhost:44399/Member/LineCallback");
+        string redirect_uri = HttpUtility.UrlEncode("https://knowrentge.azurewebsites.net/Member/LineCallback");
         string state = "success";
         public ActionResult Line()
         {

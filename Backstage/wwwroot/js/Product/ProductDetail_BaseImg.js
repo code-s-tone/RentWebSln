@@ -25,7 +25,7 @@
                 //產生Div元素
                 var imgBox = document.createElement("div");
                 imgBox.style.display = 'inline-block';
-                imgBox.className = 'img-item';
+                imgBox.className = 'img-item box3';
                 //產生Img頭上的XX
                 var deleteIcon = document.createElement("span");
                 deleteIcon.className = 'delete';

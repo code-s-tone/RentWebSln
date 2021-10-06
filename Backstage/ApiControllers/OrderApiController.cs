@@ -12,29 +12,50 @@ using System.Threading.Tasks;
 
 namespace Backstage.ApiControllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class OrderApiController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        public OrderApiController(IOrderService orderService)
+        //private readonly RentContext _ctx;
+        public OrderApiController(IOrderService orderService, RentContext ctx)
         {
             _orderService = orderService;
+            //_ctx = ctx;
         }
 
+        [Route("api/OrderApi/GetOrder")]
         [HttpGet]
+        //[ValidateAntiForgeryToken]
         public IActionResult GetOrder()
         {
             var result = _orderService.GetOrderData();
             return Ok(result);
         }
 
+        [Route("api/OrderApi/GetOrderDetail/{orderID}")]
+        [HttpGet]
+        public IActionResult GetOrderDetail(int orderID)
+        {
+            var result = _orderService.GetOrderDetailData(orderID);
+            //var emps = JsonConvert.SerializeObject(result);
 
-        //public ActionResult<IEnumerable<OrderViewModel>> Get()
-        //{
-        //    var result = _orderService.GetOrderData();
-        //    return result.ToList();
-        //}
+            return Ok(result);
+        }
+
+
+
+        [Route("api/OrderApi/UpdateOrder")]
+        [HttpPost]
+        public IActionResult UpdateOrder(OrderViewModel Od)
+        {
+            var result =_orderService.UpdateOrder(Od);
+            
+            //return RedirectToAction("Index", "Order");
+            string success = "請求成功！";
+            return Ok(success);
+
+        }
 
     }
 }
