@@ -48,7 +48,6 @@ namespace Backstage.Services
             }
             return("Done");
 
-            //int num = await _ctx.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<BlogViewModel>> GetAllBlogs()
