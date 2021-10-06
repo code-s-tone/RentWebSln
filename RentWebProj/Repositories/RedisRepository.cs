@@ -38,8 +38,14 @@ namespace RentWebProj.Repositories
         public T Get<T>(string key) where T : class
         {
             //return ByteArrayToObject<T>(_iDistributedCache.Get(key));
-            var a = _db.StringGet(key);
-            return ByteArrayToObject<T>(a);
+            try{
+                var a = _db.StringGet(key);
+                return ByteArrayToObject<T>(a);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public void Set<T>(string key, T value) where T : class
