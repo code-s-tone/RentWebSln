@@ -91,7 +91,7 @@ namespace RentWebProj.Services
             int dayRange = 2; //先以2天為星星標準
             VMList.ForEach(p =>
             {
-                int stars = (int)p.CountOfRentedDays / dayRange + 1;
+                int stars = (int)p.CountOfRentedDays / dayRange + 3;
                 p.StarsForLike = stars > 5 ? 5 : stars;
             });
 
