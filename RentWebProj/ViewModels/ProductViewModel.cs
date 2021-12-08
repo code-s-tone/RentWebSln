@@ -46,7 +46,7 @@ namespace RentWebProj.ViewModels
         [Display(Name = "排序方式")]
         public string OrderBy{ get; set; }
 
-        [Display(Name = "錢錢決定一切")]
+        [Display(Name = "預算範圍")]
         public string RateBudget { get; set; }
 
     }
