@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using RentWebProj.Interfaces;
 using System.Text.Json;
-using Microsoft.Extensions.Caching.Distributed;
 using StackExchange.Redis;
 
 namespace RentWebProj.Repositories
@@ -23,11 +22,6 @@ namespace RentWebProj.Repositories
 
     public class RedisRepository : IRedisRepository
     {
-        //readonly IDistributedCache _iDistributedCache;
-        //public RedisRepository(IDistributedCache distributedCache)
-        //{
-        //    _iDistributedCache = distributedCache;
-        //}
         private ConnectionMultiplexer _conn;
         private IDatabase _db;
         public RedisRepository()
@@ -37,10 +31,9 @@ namespace RentWebProj.Repositories
         }
         public T Get<T>(string key) where T : class
         {
-            //return ByteArrayToObject<T>(_iDistributedCache.Get(key));
             try{
-                var a = _db.StringGet(key);
-                return ByteArrayToObject<T>(a);
+                var data = _db.StringGet(key);
+                return ByteArrayToObject<T>(data);
             }
             catch
             {
@@ -50,21 +43,14 @@ namespace RentWebProj.Repositories
 
         public void Set<T>(string key, T value) where T : class
         {
-            //_iDistributedCache.Set(key, ObjectToByteArray(value), new DistributedCacheEntryOptions()
-            //{
-            //    AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
-            //});
-            //快取存續時間暫定33分鐘
-            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 11, 0);
+            TimeSpan cacheItemPolicy = new TimeSpan(0, 0, 30, 0);
             _db.StringSet(key, ObjectToByteArray(value), cacheItemPolicy);
         }
 
         public void Remove(string key)
         {
-            //_iDistributedCache.Remove(key);
             _db.KeyDelete(key);
         }
-
 
         //object序列化成byte陣列
         private byte[] ObjectToByteArray(object obj)

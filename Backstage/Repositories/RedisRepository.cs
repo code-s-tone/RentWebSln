@@ -21,8 +21,7 @@ namespace Backstage.Repositories
         {
             _iDistributedCache.Set(key, ObjectToByteArray(value), new DistributedCacheEntryOptions()
             {
-                //快取存續時間暫定9分鐘
-                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(9)
+                AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(30)
             });
         }
 

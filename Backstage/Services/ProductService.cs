@@ -114,9 +114,6 @@ namespace Backstage.Services
                     apipesponse.Result = "編輯產品失敗";
                     return apipesponse;
                 }
-
-
-
             }
             else if (UpdateProduct.NewProduct == true && product == null)//如果查詢後的資料等於null和新建模式是True(NewProduct)=新增資料
             {
@@ -125,7 +122,7 @@ namespace Backstage.Services
                     var cloudName = UpdateProduct.ProductId;//取的public ID
                     var CloudFolder = UpdateProduct.ProductId.Substring(0, 3);//取的在哪個大類資料夾
                     var AllImg = UpdateProduct.ProductImages.ToList(); //新增AllImg把所有圖片放進取(包含dataUrl   
-                    CreatImg(CloudFolder, cloudName, AllImg);
+
                     //新增資料的部分
                     _ctx.Add(new Product
                     {
@@ -139,7 +136,8 @@ namespace Backstage.Services
                         Discontinuation = UpdateProduct.Discontinuation
 
                     });
-                    _ctx.SaveChanges();//存檔
+                    _ctx.SaveChanges();//先存檔Product，之後才能跑
+                    CreatImg(CloudFolder, cloudName, AllImg);
                     apipesponse.Result = "新增產品成功";
                     return apipesponse;
                 }
@@ -202,6 +200,7 @@ namespace Backstage.Services
 
                 }
             }
+            //這裡出例外
                 _ctx.SaveChanges();
         }
         //刪除雲端的照片
@@ -215,7 +214,7 @@ namespace Backstage.Services
             for (int i = 1; i <= QuantityImg; i++)
             {
                 var result = $"Product/{CloudFolder}/{ImgName}_{i}";
-                var uploadResult = cloudinary.DeleteResources(result);  //刪除
+                var uploadResult = cloudinary.DeleteResources(result);//刪除
                 ;
             }
         }
