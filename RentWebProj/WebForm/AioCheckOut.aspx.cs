@@ -28,9 +28,9 @@ namespace AioCheckOut
                     oPayment.MerchantID = "2000132";//ECPay提供的特店編號
 
                     /* 基本參數 */
-                    oPayment.Send.ReturnURL = "https://localhost:44399/";//付款完成通知回傳的網址
-                    oPayment.Send.ClientBackURL = "https://localhost:44399/";//瀏覽器端返回的廠商網址
-                    oPayment.Send.OrderResultURL = "https://localhost:44399/WebForm/CheckOutFeedback.aspx";//瀏覽器端回傳付款結果網址
+                    oPayment.Send.ReturnURL = "https://knowrentgeweb.azurewebsites.net/";//付款完成通知回傳的網址
+                    oPayment.Send.ClientBackURL = "https://knowrentgeweb.azurewebsites.net/";//瀏覽器端返回的廠商網址
+                    oPayment.Send.OrderResultURL = "https://knowrentgeweb.azurewebsites.net/WebForm/CheckOutFeedback.aspx";//瀏覽器端回傳付款結果網址
                     oPayment.Send.MerchantTradeNo = new Random().Next(0, 99999).ToString("00000")+Session["OrderID"];//廠商的交易編號
                     oPayment.Send.MerchantTradeDate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");//廠商的交易時間
                     oPayment.Send.TotalAmount = Decimal.Parse(Session["TotalAmount"].ToString()); //交易總金額
