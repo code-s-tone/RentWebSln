@@ -197,7 +197,7 @@ namespace RentWebProj.Controllers
                     string ApiUrl_Token = "https://api.line.me/oauth2/v2.1/token";
                     nvc.Add("grant_type", "authorization_code");
                     nvc.Add("code", code);
-                    nvc.Add("redirect_uri", "https://localhost:44399/Member/LineCallback");
+                    nvc.Add("redirect_uri", "https://knowrentgeweb.azurewebsites.net/Member/LineCallback");
                     nvc.Add("client_id", "1656366912");
                     nvc.Add("client_secret", "fbde31cf195d309ad7cffc633840b557");
                     string JsonStr = Encoding.UTF8.GetString(wc.UploadValues(ApiUrl_Token, "POST", nvc));
