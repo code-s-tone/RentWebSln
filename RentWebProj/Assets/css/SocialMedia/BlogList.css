@@ -1,5 +1,5 @@
 ﻿.banner {
-    background-image: url(https://ruckifyblog.ruckify.com/wp-content/uploads/2020/12/iStock-906360442-scaled.jpg);
+    background-image: url(https://cdn.unwire.pro/wp-content/uploads/2017/05/sharing-economy.jpg);
     height: 700px;
     /* 設置背景混和模式為相乘模式 */
     background-blend-mode: multiply;
@@ -7,6 +7,7 @@
     background-position: 50%;
     transition: 0.5s;
     margin-bottom: 50px;
+    opacity:.8;
 }
 
 .welcome{

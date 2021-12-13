@@ -85,7 +85,7 @@ namespace CheckOutFeedback
                     //this.Response.Write("1|OK");
                     CartService _cartService = new CartService();
                     _cartService.ECPayResponse(TradeNo);
-                    this.Response.Redirect("https://localhost:44399/");
+                    this.Response.Redirect("https://knowrentgeweb.azurewebsites.net");
                 }
                 // 回覆錯誤訊息。
                 else { 
